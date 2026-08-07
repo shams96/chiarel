@@ -1,0 +1,197 @@
+[
+  {
+    "slug": "cellular-cleanser",
+    "sku": "01",
+    "name": "Cellular Cleanser™",
+    "descriptor": "Adaptive Purifying Cleanser",
+    "step": "Cleanse",
+    "ritualOrder": 1,
+    "family": "CHIAREL Cloud™",
+    "color": {
+      "name": "Cloud Dancer",
+      "hex": "#F0F2EB"
+    },
+    "complex": "The Cascata Complex™",
+    "line": "Adapt™",
+    "size": "120 ml / 4.0 fl. oz.",
+    "price": {
+      "subscription": 88,
+      "oneTime": 98
+    },
+    "image": "/assets/products/cellular-cleanser.png",
+    "blurb": "A gentle daily cleanser that supports the skin barrier while lifting away impurities — the first gesture of the ritual.",
+    "icon": true
+  },
+  {
+    "slug": "cellular-mist",
+    "sku": "02",
+    "name": "Cellular Mist™",
+    "descriptor": "Conditioning Preparation Mist",
+    "step": "Tone",
+    "ritualOrder": 2,
+    "family": "CHIAREL Cloud™",
+    "color": {
+      "name": "Cloud Dancer",
+      "hex": "#F0F2EB"
+    },
+    "complex": "Terra Shield Complex™",
+    "line": "Adapt™",
+    "size": "120 ml / 4.0 fl. oz.",
+    "price": {
+      "subscription": 79,
+      "oneTime": 88
+    },
+    "image": "/assets/products/cellular-mist.png",
+    "blurb": "A conditioning mist that optimizes skin receptivity, preparing the complexion for treatment.",
+    "icon": false
+  },
+  {
+    "slug": "chiarel-essence",
+    "sku": "03",
+    "name": "CHIAREL Essence™",
+    "descriptor": "Cellular Clarity Concentrate",
+    "step": "Serum",
+    "ritualOrder": 3,
+    "family": "CHIAREL Rose™",
+    "color": {
+      "name": "Peach Dust",
+      "hex": "#FAD6C9"
+    },
+    "complex": "Cellular Intelligence Complex™",
+    "line": "Restore™",
+    "size": "30 ml / 1.0 fl. oz.",
+    "price": {
+      "subscription": 130,
+      "oneTime": 145
+    },
+    "image": "/assets/products/chiarel-essence.png",
+    "blurb": "The Signature Serum of the House. A concentrated treatment that supports Cellular Clarity™ at the heart of the ritual.",
+    "role": "Signature Serum of the House",
+    "badge": "Signature Serum",
+    "icon": true
+  },
+  {
+    "slug": "terra-radiance-creme",
+    "sku": "04",
+    "name": "Terra Radiance Crème™",
+    "descriptor": "Daily Radiance Treatment",
+    "step": "Moisturize AM",
+    "ritualOrder": 4,
+    "family": "CHIAREL Terra™",
+    "color": {
+      "name": "Red Ochre",
+      "hex": "#9B4722"
+    },
+    "complex": "Dermal Support Complex™",
+    "line": "Restore™",
+    "size": "50 g / 1.7 fl. oz.",
+    "price": {
+      "subscription": 142,
+      "oneTime": 158
+    },
+    "image": "/assets/products/terra-radiance-creme.png",
+    "blurb": "The Icon Product of the House. A daily crème that supports radiance and resilience against Modern Biological Stress™.",
+    "role": "Icon Product",
+    "badge": "Icon of the House",
+    "icon": true
+  },
+  {
+    "slug": "recovery-masque",
+    "sku": "04N",
+    "name": "Recovery Masque™",
+    "descriptor": "Overnight Recovery Treatment",
+    "step": "Moisturize PM",
+    "ritualOrder": 5,
+    "family": "CHIAREL Verde™",
+    "color": {
+      "name": "Formal Garden",
+      "hex": "#1F5129"
+    },
+    "complex": "Contour Renewal Complex™",
+    "line": "Strengthen™",
+    "size": "50 g / 1.7 fl. oz.",
+    "price": {
+      "subscription": 133,
+      "oneTime": 148
+    },
+    "image": "/assets/products/recovery-masque.png",
+    "blurb": "An overnight masque that strengthens and supports recovery while you rest — the ritual's closing gesture.",
+    "role": "Night Recovery Hero",
+    "badge": "Night Icon",
+    "icon": true
+  },
+  {
+    "slug": "lip-concentrate",
+    "sku": "05",
+    "name": "CHIAREL Lip Concentrate™",
+    "descriptor": "Dual-Action Volumizing & Radiance Lip Treatment",
+    "step": "Standalone",
+    "ritualOrder": null,
+    "family": "CHIAREL Rose™",
+    "color": {
+      "name": "Peach Dust",
+      "hex": "#FAD6C9"
+    },
+    "complex": "Contour Renewal Complex™",
+    "line": "Restore™",
+    "size": "5 ml / 0.17 fl. oz.",
+    "price": {
+      "subscription": 52,
+      "oneTime": 58
+    },
+    "image": "/assets/products/lip-concentrate.png",
+    "blurb": "A dual-action treatment that supports volume and radiance. Standalone — beyond the face ritual.",
+    "badge": "New",
+    "icon": true
+  },
+  {
+    "slug": "the-founding-pair",
+    "sku": "SET-02",
+    "name": "The Founding Pair",
+    "descriptor": "The Signature Serum & The Icon — CHIAREL Essence™ + Terra Radiance Crème™",
+    "step": "Founding Pair",
+    "ritualOrder": null,
+    "family": "The House",
+    "color": {
+      "name": "Champagne Gold",
+      "hex": "#D6C5A0"
+    },
+    "complex": "",
+    "line": "",
+    "size": "Two full-size treatments",
+    "price": {
+      "subscription": 240,
+      "oneTime": 303
+    },
+    "image": "/assets/products/founding-pair.png",
+    "blurb": "The Signature Serum of the House paired with its Icon — CHIAREL Essence™ and Terra Radiance Crème™, delivered together every 45 days. The essential ritual, in two gestures.",
+    "badge": "Founding Pair",
+    "set": true,
+    "icon": false
+  },
+  {
+    "slug": "the-ritual-set",
+    "sku": "SET-01",
+    "name": "The Ritual Set",
+    "descriptor": "The Complete Daily Ritual — Cleanse · Tone · Serum · Moisturize",
+    "step": "Complete Ritual",
+    "ritualOrder": null,
+    "family": "The House",
+    "color": {
+      "name": "Champagne Gold",
+      "hex": "#D6C5A0"
+    },
+    "complex": "",
+    "line": "",
+    "size": "Four full-size treatments",
+    "price": {
+      "subscription": 390,
+      "oneTime": 489
+    },
+    "image": "/assets/products/ritual-set.png",
+    "blurb": "Every step of the daily ritual, delivered together on your rhythm. The complete practice of the House — Cellular Cleanser™, Cellular Mist™, CHIAREL Essence™, and Terra Radiance Crème™.",
+    "badge": "The Ritual, Complete",
+    "set": true,
+    "icon": false
+  }
+]
