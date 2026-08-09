@@ -10,20 +10,27 @@ export default function ComingSoonPackshot({
   productName: string;
   color: string;
 }) {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [social, setSocial] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">(
     "idle"
   );
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!email) return;
+    if (!name || !email) return;
     setStatus("loading");
     try {
       const res = await fetch("/api/founding-list", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, source: `${productName} — Coming Soon` }),
+        body: JSON.stringify({
+          name,
+          email,
+          social,
+          source: `${productName} — Coming Soon`,
+        }),
       });
       setStatus(res.ok ? "done" : "error");
     } catch {
@@ -59,11 +66,26 @@ export default function ComingSoonPackshot({
           className="mt-4 flex w-full max-w-[240px] flex-col gap-2"
         >
           <input
+            type="text"
+            required
+            placeholder="First name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="border border-ink/20 bg-white/80 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
+          />
+          <input
             type="email"
             required
             placeholder="Your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="border border-ink/20 bg-white/80 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
+          />
+          <input
+            type="text"
+            placeholder="Instagram or TikTok (optional)"
+            value={social}
+            onChange={(e) => setSocial(e.target.value)}
             className="border border-ink/20 bg-white/80 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
           />
           <button

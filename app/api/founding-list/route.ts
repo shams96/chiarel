@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const { email, source } = await req.json();
+  const { name, email, social, source } = await req.json();
 
+  if (!name || typeof name !== "string") {
+    return NextResponse.json({ error: "Name is required" }, { status: 400 });
+  }
   if (!email || typeof email !== "string" || !email.includes("@")) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
   }
@@ -21,7 +24,9 @@ export async function POST(req: NextRequest) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        name,
         email,
+        social: social || "",
         source: source ?? "Unknown",
         timestamp: new Date().toISOString(),
       }),
