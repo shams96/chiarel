@@ -13,24 +13,16 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero — Luxury Editorial (Photography Tier 1) */}
-      <section className="relative h-[85vh] min-h-[560px] w-full overflow-hidden bg-ink">
-        <Image
-          src="/assets/editorial/hero-night.png"
-          alt="Recovery Masque™ at dusk"
-          fill
-          priority
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/15 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 mx-auto max-w-6xl px-6 pb-16 text-ivory">
+      {/* Hero — Luxury Editorial (Photography Tier 1) — split layout so text never overlaps the product */}
+      <section className="grid min-h-[560px] w-full grid-cols-1 bg-ink md:grid-cols-2 md:h-[85vh]">
+        <div className="flex flex-col justify-center px-6 py-16 text-ivory md:px-14 md:py-0">
           <p className="text-[12px] uppercase tracking-[0.3em] text-champagne">
             House of Skin Intelligence™
           </p>
-          <h1 className="mt-3 max-w-2xl font-serif text-5xl leading-tight md:text-6xl">
+          <h1 className="mt-3 max-w-lg font-serif text-4xl leading-tight md:text-5xl">
             Advancing Cellular Clarity™
           </h1>
-          <p className="mt-4 max-w-xl text-sm text-ivory/80">
+          <p className="mt-4 max-w-md text-sm text-ivory/80">
             The Signature Serum. The Nightly Recovery. Born at Isola del Liri,
             Italy — intelligent formulations that support the skin against
             Modern Biological Stress™.
@@ -49,6 +41,15 @@ export default function Home() {
               Not sure where to start? Take the Skin Assessment™
             </Link>
           </div>
+        </div>
+        <div className="relative h-[50vh] min-h-[360px] md:h-auto">
+          <Image
+            src="/assets/editorial/hero-night.png"
+            alt="Recovery Masque™ at dusk"
+            fill
+            priority
+            className="object-cover"
+          />
         </div>
       </section>
 
