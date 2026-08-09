@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const { name, email, phone, social, referral, source } = await req.json();
+  const { name, email, phone, social, referredBy, source } = await req.json();
 
   if (!name || typeof name !== "string") {
     return NextResponse.json({ error: "Name is required" }, { status: 400 });
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
         email,
         phone: phone || "",
         social: social || "",
-        referral: referral || "",
+        referredBy: referredBy || "",
         source: source ?? "Unknown",
         timestamp: new Date().toISOString(),
       }),

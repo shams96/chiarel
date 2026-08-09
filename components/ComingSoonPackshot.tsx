@@ -1,23 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-export default function ComingSoonPackshot({
+export default function ComingSoonPackshot(props: {
+  productName: string;
+  color: string;
+}) {
+  return (
+    <Suspense fallback={<ComingSoonPackshotInner {...props} referredBy="" />}>
+      <ComingSoonPackshotWithReferral {...props} />
+    </Suspense>
+  );
+}
+
+function ComingSoonPackshotWithReferral(props: {
+  productName: string;
+  color: string;
+}) {
+  const searchParams = useSearchParams();
+  const referredBy = searchParams.get("ref") || "";
+  return <ComingSoonPackshotInner {...props} referredBy={referredBy} />;
+}
+
+function ComingSoonPackshotInner({
   productName,
   color,
+  referredBy,
 }: {
   productName: string;
   color: string;
+  referredBy: string;
 }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [social, setSocial] = useState("");
-  const [referral, setReferral] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">(
     "idle"
   );
+  const [shareCopied, setShareCopied] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -32,7 +55,7 @@ export default function ComingSoonPackshot({
           email,
           phone,
           social,
-          referral,
+          referredBy,
           source: `${productName} — Coming Soon`,
         }),
       });
@@ -40,6 +63,29 @@ export default function ComingSoonPackshot({
     } catch {
       setStatus("error");
     }
+  }
+
+  const shareUrl =
+    typeof window !== "undefined"
+      ? `${window.location.origin}/founding-100?ref=${encodeURIComponent(name || "a-friend")}`
+      : "";
+
+  async function handleShare() {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "The Founding 100 — CHIAREL",
+          text: "Half price, full refund when you share your result. Only 100 places.",
+          url: shareUrl,
+        });
+        return;
+      } catch {
+        // user cancelled or share failed — fall through to copy
+      }
+    }
+    await navigator.clipboard.writeText(shareUrl);
+    setShareCopied(true);
+    setTimeout(() => setShareCopied(false), 2500);
   }
 
   return (
@@ -61,14 +107,32 @@ export default function ComingSoonPackshot({
       </p>
 
       {status === "done" ? (
-        <p className="mt-4 text-[12px] text-ochre">
-          You&rsquo;re on the list — welcome to the House.
-        </p>
+        <div className="mt-4 flex w-full max-w-[240px] flex-col items-center gap-3">
+          <p className="text-[12px] text-ochre">
+            You&rsquo;re on the list — welcome to the House.
+          </p>
+          <p className="text-[11px] leading-relaxed text-ink/60">
+            Know someone who&rsquo;d love this? Send them your link — if
+            they join, it helps both of you stand out as founding voices of
+            the House.
+          </p>
+          <button
+            onClick={handleShare}
+            className="w-full border border-ochre px-3 py-2 text-[11px] uppercase tracking-[0.16em] text-ochre transition hover:bg-ochre hover:text-white"
+          >
+            {shareCopied ? "Link copied" : "Share with a friend"}
+          </button>
+        </div>
       ) : (
         <form
           onSubmit={handleSubmit}
           className="mt-4 flex w-full max-w-[240px] flex-col gap-2"
         >
+          {referredBy && (
+            <p className="text-[11px] text-ink/50">
+              Referred by <span className="text-ochre">{referredBy}</span>
+            </p>
+          )}
           <input
             type="text"
             required
@@ -97,13 +161,6 @@ export default function ComingSoonPackshot({
             placeholder="Instagram or TikTok (optional)"
             value={social}
             onChange={(e) => setSocial(e.target.value)}
-            className="border border-ink/20 bg-white/80 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
-          />
-          <input
-            type="email"
-            placeholder="Recommend a friend's email (optional)"
-            value={referral}
-            onChange={(e) => setReferral(e.target.value)}
             className="border border-ink/20 bg-white/80 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
           />
           <button
