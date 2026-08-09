@@ -6,6 +6,7 @@ import Link from "next/link";
 import { QUESTIONS, scoreAxes, recommend } from "@/lib/skin-assessment";
 import { getProduct } from "@/lib/products";
 import { useCart } from "@/lib/cart-context";
+import { productTint } from "@/lib/color";
 
 export default function AssessmentPage() {
   const [step, setStep] = useState(0);
@@ -54,7 +55,7 @@ export default function AssessmentPage() {
               <div key={r.slug} className="flex flex-col gap-5 sm:flex-row sm:items-center">
                 <div
                   className="relative h-32 w-32 shrink-0 overflow-hidden rounded-sm"
-                  style={{ backgroundColor: `${p.color.hex}55` }}
+                  style={{ backgroundColor: productTint(p.color.hex) }}
                 >
                   <Image src={p.image} alt={p.name} fill sizes="128px" className="object-cover" />
                 </div>

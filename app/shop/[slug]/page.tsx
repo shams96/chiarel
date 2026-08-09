@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { getProduct, products, ritualProducts } from "@/lib/products";
 import PurchaseOptions from "@/components/PurchaseOptions";
 import { productJsonLd } from "@/lib/seo";
+import { productTint } from "@/lib/color";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -42,7 +43,7 @@ export default function ProductPage({
       <div className="grid gap-12 md:grid-cols-2">
         <div
           className="relative aspect-square overflow-hidden rounded-sm"
-          style={{ backgroundColor: `${p.color.hex}55` }}
+          style={{ backgroundColor: productTint(p.color.hex) }}
         >
           <Image
             src={p.image}
@@ -194,7 +195,7 @@ function CompleteYourRitual({ currentSlug }: { currentSlug: string }) {
       >
         <div
           className="relative h-24 w-24 shrink-0 overflow-hidden rounded-sm"
-          style={{ backgroundColor: `${next.color.hex}55` }}
+          style={{ backgroundColor: productTint(next.color.hex) }}
         >
           <Image src={next.image} alt={next.name} fill sizes="96px" className="object-cover" />
         </div>

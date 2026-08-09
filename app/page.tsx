@@ -3,6 +3,7 @@ import Link from "next/link";
 import { products, ritualProducts, getProduct } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import ComingSoonPackshot from "@/components/ComingSoonPackshot";
+import { productTint } from "@/lib/color";
 
 export default function Home() {
   const icons = products.filter((p) => p.icon);
@@ -94,7 +95,7 @@ export default function Home() {
                 <Link key={p.slug} href={`/shop/${p.slug}`} className="group">
                   <div
                     className="relative aspect-square overflow-hidden rounded-sm"
-                    style={{ backgroundColor: `${p.color.hex}55` }}
+                    style={{ backgroundColor: productTint(p.color.hex) }}
                   >
                     <Image
                       src={p.image}
@@ -154,7 +155,7 @@ export default function Home() {
             <Link key={p.slug} href={`/shop/${p.slug}`} className="group">
               <div
                 className="relative aspect-square overflow-hidden rounded-sm"
-                style={{ backgroundColor: `${p.color.hex}66` }}
+                style={{ backgroundColor: productTint(p.color.hex) }}
               >
                 <Image
                   src={p.image}

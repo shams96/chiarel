@@ -3,6 +3,7 @@
 import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { productTint, isDarkTint } from "@/lib/color";
 
 export default function ComingSoonPackshot(props: {
   productName: string;
@@ -65,6 +66,8 @@ function ComingSoonPackshotInner({
     }
   }
 
+  const dark = isDarkTint(color);
+
   const shareUrl =
     typeof window !== "undefined"
       ? `${window.location.origin}/founding-100?ref=${encodeURIComponent(name || "a-friend")}`
@@ -91,16 +94,25 @@ function ComingSoonPackshotInner({
   return (
     <div
       className="relative flex aspect-square flex-col items-center justify-center overflow-hidden rounded-sm px-6 text-center"
-      style={{ backgroundColor: `${color}55` }}
+      style={{ backgroundColor: productTint(color) }}
     >
-      <p className="text-[10px] uppercase tracking-[0.22em] text-ink/50">
+      <p
+        className={`text-[10px] uppercase tracking-[0.22em] ${dark ? "text-ivory/70" : "text-ink/50"}`}
+      >
         The Full Portrait
       </p>
-      <p className="mt-1 font-serif text-2xl text-ink/80">Coming Soon</p>
-      <p className="mt-3 max-w-[220px] text-[12px] leading-relaxed text-ink/60">
+      <p className={`mt-1 font-serif text-2xl ${dark ? "text-ivory" : "text-ink/80"}`}>
+        Coming Soon
+      </p>
+      <p
+        className={`mt-3 max-w-[220px] text-[12px] leading-relaxed ${dark ? "text-ivory/80" : "text-ink/60"}`}
+      >
         Be one of the first 100 Founding Members: {productName} at half its
         price. Share your result, and we return the rest.{" "}
-        <Link href="/founding-100" className="border-b border-ochre text-ochre">
+        <Link
+          href="/founding-100"
+          className={`border-b ${dark ? "border-champagne text-champagne" : "border-ochre text-ochre"}`}
+        >
           See the terms
         </Link>
         .
@@ -108,17 +120,21 @@ function ComingSoonPackshotInner({
 
       {status === "done" ? (
         <div className="mt-4 flex w-full max-w-[240px] flex-col items-center gap-3">
-          <p className="text-[12px] text-ochre">
+          <p className={`text-[12px] ${dark ? "text-champagne" : "text-ochre"}`}>
             You&rsquo;re on the list — welcome to the House.
           </p>
-          <p className="text-[11px] leading-relaxed text-ink/60">
+          <p className={`text-[11px] leading-relaxed ${dark ? "text-ivory/80" : "text-ink/60"}`}>
             Know someone who&rsquo;d love this? Send them your link — if
             they join, it helps both of you stand out as founding voices of
             the House.
           </p>
           <button
             onClick={handleShare}
-            className="w-full border border-ochre px-3 py-2 text-[11px] uppercase tracking-[0.16em] text-ochre transition hover:bg-ochre hover:text-white"
+            className={`w-full border px-3 py-2 text-[11px] uppercase tracking-[0.16em] transition ${
+              dark
+                ? "border-champagne text-champagne hover:bg-champagne hover:text-ink"
+                : "border-ochre text-ochre hover:bg-ochre hover:text-white"
+            }`}
           >
             {shareCopied ? "Link copied" : "Share with a friend"}
           </button>
@@ -129,8 +145,9 @@ function ComingSoonPackshotInner({
           className="mt-4 flex w-full max-w-[240px] flex-col gap-2"
         >
           {referredBy && (
-            <p className="text-[11px] text-ink/50">
-              Referred by <span className="text-ochre">{referredBy}</span>
+            <p className={`text-[11px] ${dark ? "text-ivory/70" : "text-ink/50"}`}>
+              Referred by{" "}
+              <span className={dark ? "text-champagne" : "text-ochre"}>{referredBy}</span>
             </p>
           )}
           <input
@@ -139,7 +156,7 @@ function ComingSoonPackshotInner({
             placeholder="First name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="border border-ink/20 bg-white/80 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
+            className="border border-ink/20 bg-white/90 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
           />
           <input
             type="email"
@@ -147,21 +164,21 @@ function ComingSoonPackshotInner({
             placeholder="Your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="border border-ink/20 bg-white/80 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
+            className="border border-ink/20 bg-white/90 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
           />
           <input
             type="tel"
             placeholder="Phone (optional)"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="border border-ink/20 bg-white/80 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
+            className="border border-ink/20 bg-white/90 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
           />
           <input
             type="text"
             placeholder="Instagram or TikTok (optional)"
             value={social}
             onChange={(e) => setSocial(e.target.value)}
-            className="border border-ink/20 bg-white/80 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
+            className="border border-ink/20 bg-white/90 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
           />
           <button
             type="submit"

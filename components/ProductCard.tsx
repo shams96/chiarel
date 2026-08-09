@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/lib/products";
+import { productTint } from "@/lib/color";
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
     <Link href={`/shop/${product.slug}`} className="group block">
       <div
         className="relative aspect-square overflow-hidden rounded-sm"
-        style={{ backgroundColor: `${product.color.hex}55` }}
+        style={{ backgroundColor: productTint(product.color.hex) }}
       >
         <Image
           src={product.image}

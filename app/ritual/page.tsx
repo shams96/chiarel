@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ritualProducts, products } from "@/lib/products";
+import { productTint } from "@/lib/color";
 
 export const metadata = { title: "The Ritual — CHIAREL™" };
 
@@ -33,7 +34,7 @@ export default function RitualPage() {
           >
             <div
               className="relative aspect-square w-full overflow-hidden rounded-sm md:w-1/2"
-              style={{ backgroundColor: `${p.color.hex}55` }}
+              style={{ backgroundColor: productTint(p.color.hex) }}
             >
               <Image
                 src={p.image}
@@ -74,7 +75,7 @@ export default function RitualPage() {
         <div className="mt-6 flex flex-col items-center gap-10 md:flex-row">
           <div
             className="relative aspect-square w-full overflow-hidden rounded-sm md:w-1/3"
-            style={{ backgroundColor: `${lip.color.hex}66` }}
+            style={{ backgroundColor: productTint(lip.color.hex) }}
           >
             <Image src={lip.image} alt={lip.name} fill sizes="33vw" className="object-cover" />
           </div>
