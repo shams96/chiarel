@@ -2,24 +2,28 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "The Synergy: Extremolyte + Postbiotic + Amino Acid — CHIAREL™",
+  title: "Presence Complex™: Extremolyte + Postbiotic + Amino Acid — CHIAREL™",
   description:
-    "How Ectoine, Bifida Ferment Lysate, and L-Ornithine work together inside CHIAREL's occlusive delivery system to produce sustained barrier, hydration, and resilience outcomes.",
+    "Presence Complex™ is CHIAREL's name for its lipid/occlusive delivery system — how Ectoine, Bifida Ferment Lysate, and L-Ornithine work together to produce sustained barrier, hydration, and resilience outcomes.",
   alternates: { canonical: "/science/synergy" },
 };
 
 const faqs = [
+  {
+    q: "What is Presence Complex™?",
+    a: "Presence Complex™ is CHIAREL's name for its formulation and delivery system — the lipid/occlusive vehicle that combines Ectoine, Bifida Ferment Lysate, and L-Ornithine for sustained release. It names our formulation approach, not any individual ingredient.",
+  },
   {
     q: "Why formulate with three actives instead of one 'hero' ingredient?",
     a: "Barrier resilience, hydration, and reactivity are three related but distinct functions. CHIAREL formulates for each mechanism separately — cellular water organization, barrier-protein support, NMF-level nourishment — then combines them inside one delivery vehicle rather than relying on a single ingredient to do everything.",
   },
   {
     q: "What is 'Presence'?",
-    a: "Presence is CHIAREL's term for the felt and measurable result of this combination: a cushioned, resilient, sustained finish rather than an immediate effect that fades. It describes an experience, not a proprietary ingredient.",
+    a: "Presence is the felt and measurable result of Presence Complex™: a cushioned, resilient, sustained finish rather than an immediate effect that fades. It describes an experience produced by the formulation system, not a proprietary ingredient.",
   },
   {
-    q: "Is this combination unique to CHIAREL?",
-    a: "The individual ingredients are established INCI ingredients used across the industry. What CHIAREL describes and stands behind is our specific formulation approach — the ratio, dosing, and lipid/occlusive delivery vehicle that combines them.",
+    q: "Does CHIAREL claim exclusive rights to Ectoine, Bifida Ferment Lysate, or L-Ornithine?",
+    a: "No. These are established INCI ingredients used across the industry. Presence Complex™ names CHIAREL's specific formulation approach — the ratio, dosing, and lipid/occlusive delivery vehicle — not the ingredients themselves.",
   },
 ];
 
@@ -41,14 +45,15 @@ export default function SynergyPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <p className="eyebrow">The Science</p>
+      <p className="eyebrow">The Science · CHIAREL Intelligence™</p>
       <h1 className="mt-2 font-serif text-4xl leading-tight">
-        The Synergy
+        Presence Complex™
       </h1>
       <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/75">
-        Three mechanisms, one delivery vehicle. This is the combination
-        CHIAREL formulates for — and the reason the result is more than the
-        sum of its parts.
+        Three mechanisms, one delivery vehicle. Presence Complex™ is
+        CHIAREL&rsquo;s name for this formulation system — the combination we
+        formulate for, and the reason the result is more than the sum of its
+        parts.
       </p>
 
       <section className="mt-12 space-y-6">
@@ -113,11 +118,14 @@ export default function SynergyPage() {
       </div>
 
       <p className="mt-14 max-w-2xl text-[11px] leading-relaxed text-ink/45">
-        Ectoine, Bifida Ferment Lysate, and L-Ornithine are established INCI
-        ingredient names, not CHIAREL trademarks. This page describes
-        CHIAREL&rsquo;s formulation approach and reflects published
-        cosmetic-science understanding — not a guarantee of individual
-        results.
+        Presence Complex™ is CHIAREL&rsquo;s name for its formulation and
+        delivery approach, pending trademark clearance. Ectoine, Bifida
+        Ferment Lysate, and L-Ornithine are established INCI ingredient
+        names, not CHIAREL trademarks, and CHIAREL claims no exclusive
+        rights over them. This page reflects published cosmetic-science
+        understanding and is not a guarantee of individual results. Current
+        product availability of individual actives is disclosed per SKU on
+        each product page.
       </p>
 
       <div className="mt-8 flex flex-wrap gap-6 border-t border-ink/10 pt-8 text-[12px] uppercase tracking-[0.16em]">
