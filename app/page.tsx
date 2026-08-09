@@ -21,8 +21,7 @@ export default function Home() {
           alt="Recovery Masque™ at dusk"
           fill
           priority
-          className="object-cover"
-          style={{ objectPosition: "140% center" }}
+          className="object-cover object-[100%_center] md:object-[140%_center]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/15 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 mx-auto max-w-6xl px-6 pb-16 text-ivory">
