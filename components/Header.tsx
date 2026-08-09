@@ -13,19 +13,21 @@ const nav = [
 ];
 
 const tickerMessages = [
-  "Hurry — the Founding 100 is closing fast",
+  <>
+    <span className="text-ochre">Hurry</span> — the Founding 100 is closing fast
+  </>,
   "Half price, full refund when you share your result",
   "Only 100 places, then it’s gone",
-  "See the terms →",
+  <span className="text-ochre">See the terms →</span>,
 ];
 
 function TickerHalf() {
   return (
-    <span className="flex shrink-0 items-center text-[11px] uppercase tracking-[0.16em]">
+    <span className="flex shrink-0 items-center text-[11px] font-medium uppercase tracking-[0.16em]">
       {tickerMessages.map((msg, i) => (
         <span key={i} className="flex items-center gap-3 px-3">
           {msg}
-          <span className="text-ivory/50">·</span>
+          <span className="text-champagne/40">·</span>
         </span>
       ))}
     </span>
@@ -39,8 +41,14 @@ export default function Header() {
       <Link
         href="/founding-100"
         aria-label="The Founding 100 is open — half price, full refund when you share your result. See the terms."
-        className="block overflow-hidden whitespace-nowrap bg-ochre py-2 text-ivory transition hover:opacity-90"
+        className="relative flex items-center gap-2 overflow-hidden whitespace-nowrap border-b border-champagne/30 bg-ink py-2.5 text-champagne transition hover:bg-ink/90"
       >
+        <span className="ml-4 flex shrink-0 items-center gap-1.5">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ochre opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-ochre" />
+          </span>
+        </span>
         <div className="marquee-track flex w-max">
           <TickerHalf />
           <TickerHalf />
