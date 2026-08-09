@@ -19,6 +19,7 @@ export type Product = {
   badge?: string;
   set?: boolean;
   icon: boolean;
+  actives?: { name: string; percent: string | null }[];
 };
 
 export const products = data as Product[];

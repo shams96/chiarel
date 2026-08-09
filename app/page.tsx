@@ -7,6 +7,8 @@ export default function Home() {
   const icons = products.filter((p) => p.icon);
   const essence = getProduct("chiarel-essence")!;
   const masque = getProduct("recovery-masque")!;
+  const foundingPair = getProduct("the-founding-pair")!;
+  const ritualSet = getProduct("the-ritual-set")!;
 
   return (
     <>
@@ -165,15 +167,18 @@ export default function Home() {
               ritual in two gestures, delivered together every 45 days.
             </p>
             <p className="mt-4 text-sm">
-              <span className="font-serif text-2xl">$240</span>
+              <span className="font-serif text-2xl">
+                ${foundingPair.price.subscription}
+              </span>
               <span className="ml-2 text-[12px] text-ink/50">
-                every 45 days with subscription · $303 one-time
+                every 45 days with subscription · ${foundingPair.price.oneTime}{" "}
+                one-time
               </span>
             </p>
             <div className="mt-6 flex items-center gap-6">
               <Link
                 href="/shop/the-founding-pair"
-                className="inline-block border border-ink px-8 py-3 text-[12px] uppercase tracking-[0.25em] transition hover:border-ochre hover:text-ochre"
+                className="btn-press inline-block border border-ink px-8 py-3 text-[12px] uppercase tracking-[0.25em] transition hover:border-ochre hover:text-ochre"
               >
                 Begin the Ritual
               </Link>
@@ -181,7 +186,7 @@ export default function Home() {
                 href="/shop/the-ritual-set"
                 className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
               >
-                The complete set — $390
+                The complete set — ${ritualSet.price.subscription}
               </Link>
             </div>
           </div>

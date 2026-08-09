@@ -4,8 +4,63 @@
 
 body {
   @apply bg-ivory text-ink font-sans antialiased;
+  /* Deliberate, isolated 17px body base (one step above the 16px web default) —
+     apple-design skill precedent: a considered legibility choice for an editorial
+     luxury site, applied on top of the ratified Jost/Libre Bodoni pairing, not a
+     wholesale adoption of Apple's numeric scale. */
+  font-size: 17px;
 }
 
 .eyebrow {
   @apply text-[11px] uppercase tracking-widest2 text-ochre;
+}
+
+/* Sticky header "glass" chrome — see .site-header reduced-transparency override below */
+.site-header {
+  background-color: rgb(248 246 241 / 0.9);
+  backdrop-filter: blur(12px);
+}
+
+/* Primary CTA press feedback — respond on pointer-down, not release */
+.btn-press {
+  transition: transform 100ms ease-out;
+}
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+/* Cart drawer slide-in: critically-damped, slight-bounce spring approximation */
+.cart-panel {
+  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-duration: 400ms;
+}
+
+/* Keyboard focus visibility — consistent ochre ring across all interactive elements */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  @apply outline-none ring-2 ring-ochre ring-offset-2 ring-offset-ivory;
+}
+
+/* Reduced transparency: raise background opacity, drop blur on floating chrome */
+@media (prefers-reduced-transparency: reduce) {
+  .site-header {
+    background-color: #f8f6f1;
+    backdrop-filter: none;
+  }
+}
+
+/* Reduced motion: cross-fade instead of slide/spring/parallax; disable transforms.
+   Standard global reset (A11y Project / MDN pattern) — collapses all CSS
+   transitions/animations to effectively instant so hover/press/slide effects
+   still communicate state changes without animated motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

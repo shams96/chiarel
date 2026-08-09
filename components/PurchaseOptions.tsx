@@ -7,10 +7,13 @@ export default function PurchaseOptions({
   slug,
   subscription,
   oneTime,
+  perDayCadenceDays,
 }: {
   slug: string;
   subscription: number;
   oneTime: number;
+  /** If set, shows subscription price framed as a cost-per-day over this many days. */
+  perDayCadenceDays?: number;
 }) {
   const [mode, setMode] = useState<"subscription" | "oneTime">("subscription");
   const { add } = useCart();
@@ -34,7 +37,14 @@ export default function PurchaseOptions({
             advantages reserved for subscribers
           </span>
         </span>
-        <span className="font-serif text-2xl">${subscription}</span>
+        <span className="text-right">
+          <span className="block font-serif text-2xl">${subscription}</span>
+          {perDayCadenceDays && (
+            <span className="block text-[11px] text-ink/45">
+              ${(subscription / perDayCadenceDays).toFixed(2)}/day
+            </span>
+          )}
+        </span>
       </button>
 
       <button
@@ -51,12 +61,16 @@ export default function PurchaseOptions({
 
       <button
         onClick={() => add(slug, mode)}
-        className="mt-6 w-full bg-ink py-4 text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre"
+        className="btn-press mt-6 w-full bg-ink py-4 text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre"
       >
         {mode === "subscription" ? "Begin the Ritual" : "Add to Bag"}
       </button>
       <p className="mt-3 text-center text-[11px] text-ink/50">
         Two complimentary samples with every order.
+      </p>
+      <p className="mt-1 text-center text-[11px] text-ink/40">
+        Formulated under pharmacist guidance at Natural You Srl, Isola del
+        Liri.
       </p>
     </div>
   );

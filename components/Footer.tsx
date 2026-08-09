@@ -24,6 +24,7 @@ export default function Footer() {
               <Link href="/house">The House</Link>
               <Link href="/journal">Journal</Link>
               <Link href="/account">Account</Link>
+              <Link href="/press">Press</Link>
             </div>
           </div>
         </div>

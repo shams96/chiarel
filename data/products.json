@@ -15,12 +15,22 @@
     "line": "Adapt™",
     "size": "120 ml / 4.0 fl. oz.",
     "price": {
-      "subscription": 88,
+      "subscription": 78,
       "oneTime": 98
     },
     "image": "/assets/products/cellular-cleanser.png",
     "blurb": "A gentle daily cleanser that supports the skin barrier while lifting away impurities — the first gesture of the ritual.",
-    "icon": true
+    "icon": true,
+    "actives": [
+      {
+        "name": "Bioactive Ferment Lysate (BFL)",
+        "percent": "0.30%"
+      },
+      {
+        "name": "Prebiotic Complex",
+        "percent": null
+      }
+    ]
   },
   {
     "slug": "cellular-mist",
@@ -38,12 +48,18 @@
     "line": "Adapt™",
     "size": "120 ml / 4.0 fl. oz.",
     "price": {
-      "subscription": 79,
+      "subscription": 70,
       "oneTime": 88
     },
     "image": "/assets/products/cellular-mist.png",
     "blurb": "A conditioning mist that optimizes skin receptivity, preparing the complexion for treatment.",
-    "icon": false
+    "icon": false,
+    "actives": [
+      {
+        "name": "Hyaluronic Acid (Low Molecular Weight)",
+        "percent": "0.3%"
+      }
+    ]
   },
   {
     "slug": "chiarel-essence",
@@ -61,14 +77,24 @@
     "line": "Restore™",
     "size": "30 ml / 1.0 fl. oz.",
     "price": {
-      "subscription": 130,
+      "subscription": 116,
       "oneTime": 145
     },
     "image": "/assets/products/chiarel-essence.png",
     "blurb": "The Signature Serum of the House. A concentrated treatment that supports Cellular Clarity™ at the heart of the ritual.",
     "role": "Signature Serum of the House",
     "badge": "Signature Serum",
-    "icon": true
+    "icon": true,
+    "actives": [
+      {
+        "name": "Palmitoyl Pentapeptide-4",
+        "percent": "3%"
+      },
+      {
+        "name": "Bioactive Ferment Lysate (BFL)",
+        "percent": "0.30%"
+      }
+    ]
   },
   {
     "slug": "terra-radiance-creme",
@@ -86,14 +112,24 @@
     "line": "Restore™",
     "size": "50 g / 1.7 fl. oz.",
     "price": {
-      "subscription": 142,
+      "subscription": 126,
       "oneTime": 158
     },
     "image": "/assets/products/terra-radiance-creme.png",
     "blurb": "The Icon Product of the House. A daily crème that supports radiance and resilience against Modern Biological Stress™.",
     "role": "Icon Product",
     "badge": "Icon of the House",
-    "icon": true
+    "icon": true,
+    "actives": [
+      {
+        "name": "Ceramide NP",
+        "percent": "0.8%"
+      },
+      {
+        "name": "Niacinamide",
+        "percent": "3.0%"
+      }
+    ]
   },
   {
     "slug": "recovery-masque",
@@ -111,14 +147,24 @@
     "line": "Strengthen™",
     "size": "50 g / 1.7 fl. oz.",
     "price": {
-      "subscription": 133,
+      "subscription": 118,
       "oneTime": 148
     },
     "image": "/assets/products/recovery-masque.png",
     "blurb": "An overnight masque that strengthens and supports recovery while you rest — the ritual's closing gesture.",
     "role": "Night Recovery Hero",
     "badge": "Night Icon",
-    "icon": true
+    "icon": true,
+    "actives": [
+      {
+        "name": "L-Ornithine",
+        "percent": "1.0%"
+      },
+      {
+        "name": "Panthenol",
+        "percent": "2.0%"
+      }
+    ]
   },
   {
     "slug": "lip-concentrate",
@@ -136,7 +182,7 @@
     "line": "Restore™",
     "size": "5 ml / 0.17 fl. oz.",
     "price": {
-      "subscription": 52,
+      "subscription": 46,
       "oneTime": 58
     },
     "image": "/assets/products/lip-concentrate.png",
@@ -160,7 +206,7 @@
     "line": "",
     "size": "Two full-size treatments",
     "price": {
-      "subscription": 240,
+      "subscription": 212,
       "oneTime": 303
     },
     "image": "/assets/products/founding-pair.png",
@@ -185,7 +231,7 @@
     "line": "",
     "size": "Four full-size treatments",
     "price": {
-      "subscription": 390,
+      "subscription": 342,
       "oneTime": 489
     },
     "image": "/assets/products/ritual-set.png",

@@ -45,6 +45,27 @@ export default function HousePage() {
             performance.
           </p>
         </section>
+        <section className="border-t border-ink/10 pt-10">
+          <h2 className="font-serif text-2xl text-ink">Formulated By</h2>
+          <p className="mt-2 max-w-2xl">
+            Natural You Srl is guided by Grazia Savoriti, a pharmacist with
+            deep expertise in cosmetic and nutraceutical research and
+            development. It is under her guidance that every CHIAREL™
+            formulation is developed and produced, in Isola del Liri.
+          </p>
+        </section>
+        <section className="border-t border-ink/10 pt-10">
+          <h2 className="font-serif text-2xl text-ink">A Considered Practice</h2>
+          <p className="mt-2 max-w-2xl">
+            Every formulation is produced in small, fresh batches — made to
+            order rather than held in standing inventory, reducing
+            overproduction by design. Packaging is glass, chosen for
+            recyclability and to preserve the formulation properly; delivery
+            systems are airless, protecting the actives inside and
+            minimizing waste. Ingredients are vegan-friendly and
+            cruelty-free.
+          </p>
+        </section>
       </div>
     </div>
   );

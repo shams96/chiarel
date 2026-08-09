@@ -93,7 +93,7 @@ export default function AssessmentPage() {
                 href="/shop/the-founding-pair"
                 className="mt-3 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
               >
-                View The Founding Pair — $240
+                View The Founding Pair — ${getProduct("the-founding-pair")!.price.subscription}
               </Link>
             </div>
           )}

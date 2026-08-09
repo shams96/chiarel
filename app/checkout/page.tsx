@@ -128,7 +128,7 @@ export default function CheckoutPage() {
               type="submit"
               disabled
               title="Payment processing arrives with the CHIAREL Shopify boutique"
-              className="mt-2 w-full cursor-not-allowed bg-ink/40 py-4 text-[12px] uppercase tracking-[0.25em] text-ivory"
+              className="btn-press mt-2 w-full cursor-not-allowed bg-ink/40 py-4 text-[12px] uppercase tracking-[0.25em] text-ivory"
             >
               Place Order — ${total}
             </button>

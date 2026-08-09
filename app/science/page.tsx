@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export const metadata = { title: "The Science — CHIAREL™" };
 
 const complexes = [
@@ -49,6 +51,33 @@ export default function SciencePage() {
         CHIAREL™ uses outcome language — our formulations support and optimize;
         they do not promise miracles.
       </p>
+
+      <div className="mt-8 flex flex-wrap gap-6 border-t border-ink/10 pt-8 text-[12px] uppercase tracking-[0.16em]">
+        <Link href="/science/barrier-resilience" className="border-b border-ochre pb-0.5 text-ochre">
+          Barrier Resilience →
+        </Link>
+        <Link href="/science/lasting-hydration" className="border-b border-ochre pb-0.5 text-ochre">
+          Lasting Hydration →
+        </Link>
+        <Link href="/science/synergy" className="border-b border-ochre pb-0.5 text-ochre">
+          The Synergy →
+        </Link>
+        <Link href="/science/application" className="border-b border-ink/30 pb-0.5 text-ink/60">
+          Application Guide
+        </Link>
+        <Link href="/science/ectoine" className="border-b border-ink/30 pb-0.5 text-ink/60">
+          Ectoine
+        </Link>
+        <Link href="/science/bifida-ferment-lysate" className="border-b border-ink/30 pb-0.5 text-ink/60">
+          Bifida Ferment Lysate
+        </Link>
+        <Link href="/science/l-ornithine" className="border-b border-ink/30 pb-0.5 text-ink/60">
+          L-Ornithine
+        </Link>
+        <Link href="/science/comparison" className="border-b border-ink/30 pb-0.5 text-ink/60">
+          How CHIAREL Compares
+        </Link>
+      </div>
     </div>
   );
 }
