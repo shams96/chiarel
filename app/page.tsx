@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { products, ritualProducts, getProduct } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
+import ComingSoonPackshot from "@/components/ComingSoonPackshot";
 
 export default function Home() {
   const icons = products.filter((p) => p.icon);
@@ -59,38 +60,68 @@ export default function Home() {
             The Serum. The Night.
           </h2>
           <div className="mt-10 grid gap-10 sm:grid-cols-2">
-            {[essence, masque].map((p) => (
-              <Link key={p.slug} href={`/shop/${p.slug}`} className="group">
-                <div
-                  className="relative aspect-square overflow-hidden rounded-sm"
-                  style={{ backgroundColor: `${p.color.hex}55` }}
-                >
-                  <Image
-                    src={p.image}
-                    alt={p.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover transition duration-700 group-hover:scale-[1.03]"
-                  />
-                  {p.badge && (
-                    <span className="absolute left-3 top-3 bg-ivory/90 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-ochre">
-                      {p.badge}
+            {[essence, masque].map((p) => {
+              const isComingSoonImage = p.slug === "recovery-masque";
+              const meta = (
+                <>
+                  <Link href={`/shop/${p.slug}`}>
+                    <p className="mt-4 text-[11px] uppercase tracking-[0.18em] text-ink/50">
+                      {p.step}
+                    </p>
+                    <p className="font-serif text-2xl">{p.name}</p>
+                    <p className="text-[13px] text-ink/60">{p.descriptor}</p>
+                    <p className="mt-2 text-sm">
+                      <span className="font-medium">${p.price.subscription}</span>
+                      <span className="ml-1 text-[12px] text-ink/50">
+                        with subscription
+                      </span>
+                    </p>
+                  </Link>
+                </>
+              );
+
+              if (isComingSoonImage) {
+                return (
+                  <div key={p.slug}>
+                    <ComingSoonPackshot productName={p.name} color={p.color.hex} />
+                    {meta}
+                  </div>
+                );
+              }
+
+              return (
+                <Link key={p.slug} href={`/shop/${p.slug}`} className="group">
+                  <div
+                    className="relative aspect-square overflow-hidden rounded-sm"
+                    style={{ backgroundColor: `${p.color.hex}55` }}
+                  >
+                    <Image
+                      src={p.image}
+                      alt={p.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover transition duration-700 group-hover:scale-[1.03]"
+                    />
+                    {p.badge && (
+                      <span className="absolute left-3 top-3 bg-ivory/90 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-ochre">
+                        {p.badge}
+                      </span>
+                    )}
+                  </div>
+                  <p className="mt-4 text-[11px] uppercase tracking-[0.18em] text-ink/50">
+                    {p.step}
+                  </p>
+                  <p className="font-serif text-2xl">{p.name}</p>
+                  <p className="text-[13px] text-ink/60">{p.descriptor}</p>
+                  <p className="mt-2 text-sm">
+                    <span className="font-medium">${p.price.subscription}</span>
+                    <span className="ml-1 text-[12px] text-ink/50">
+                      with subscription
                     </span>
-                  )}
-                </div>
-                <p className="mt-4 text-[11px] uppercase tracking-[0.18em] text-ink/50">
-                  {p.step}
-                </p>
-                <p className="font-serif text-2xl">{p.name}</p>
-                <p className="text-[13px] text-ink/60">{p.descriptor}</p>
-                <p className="mt-2 text-sm">
-                  <span className="font-medium">${p.price.subscription}</span>
-                  <span className="ml-1 text-[12px] text-ink/50">
-                    with subscription
-                  </span>
-                </p>
-              </Link>
-            ))}
+                  </p>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

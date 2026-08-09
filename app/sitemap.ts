@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/journal/reading-a-label",
     "/assessment",
     "/press",
+    "/founding-100",
   ].map((route) => ({
     url: `${SITE_URL}${route}`,
     lastModified: new Date(),
