@@ -7,6 +7,13 @@ import CartDrawer from "@/components/CartDrawer";
 import { CartProvider } from "@/lib/cart-context";
 import { SITE_URL, SITE_NAME, organizationJsonLd } from "@/lib/seo";
 
+// Next's default static-page cache header (s-maxage=31536000, one year) is
+// safe on Vercel because deploys auto-purge that cache. On Hostinger's CDN
+// (hcdn) there is no deploy-triggered purge, so a year-long cache turns
+// every future deploy invisible until someone manually flushes the CDN.
+// Revalidating hourly bounds the damage without losing CDN caching entirely.
+export const revalidate = 3600;
+
 const serif = Libre_Bodoni({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
