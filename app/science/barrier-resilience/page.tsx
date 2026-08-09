@@ -70,8 +70,8 @@ export default function BarrierResiliencePage() {
             Bifida Ferment Lysate is a postbiotic lysate studied for its role
             in upregulating barrier proteins — filaggrin, involucrin,
             tight-junction components — and supporting a balanced surface
-            microbiome. The result researchers describe: a more cohesive
-            barrier and reduced sensitivity over time.
+            microbiome. Researchers describe the associated result as a more
+            cohesive barrier and reduced sensitivity over time.
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">

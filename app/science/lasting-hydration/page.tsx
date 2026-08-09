@@ -76,8 +76,7 @@ export default function LastingHydrationPage() {
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             CHIAREL&rsquo;s lipid/occlusive vehicle slows evaporation at the
             surface while Ectoine organizes water beneath it — the pairing
-            is designed to produce more stable, longer-lasting hydration than
-            either mechanism alone.
+            is designed to support more stable, longer-lasting hydration.
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
