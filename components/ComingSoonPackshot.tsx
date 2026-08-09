@@ -12,7 +12,9 @@ export default function ComingSoonPackshot({
 }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [social, setSocial] = useState("");
+  const [referral, setReferral] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">(
     "idle"
   );
@@ -28,7 +30,9 @@ export default function ComingSoonPackshot({
         body: JSON.stringify({
           name,
           email,
+          phone,
           social,
+          referral,
           source: `${productName} — Coming Soon`,
         }),
       });
@@ -82,10 +86,24 @@ export default function ComingSoonPackshot({
             className="border border-ink/20 bg-white/80 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
           />
           <input
+            type="tel"
+            placeholder="Phone (optional)"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            className="border border-ink/20 bg-white/80 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
+          />
+          <input
             type="text"
             placeholder="Instagram or TikTok (optional)"
             value={social}
             onChange={(e) => setSocial(e.target.value)}
+            className="border border-ink/20 bg-white/80 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
+          />
+          <input
+            type="email"
+            placeholder="Recommend a friend's email (optional)"
+            value={referral}
+            onChange={(e) => setReferral(e.target.value)}
             className="border border-ink/20 bg-white/80 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
           />
           <button
