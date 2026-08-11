@@ -17,7 +17,7 @@ const tickerMessages = [
   <>
     <span className="text-ochre">Hurry</span> — the Founding 100 is closing fast
   </>,
-  "Half price, full refund when you share your result",
+  "The 90-Day Ritual, half price. We return the rest.",
   "Only 100 places, then it’s gone",
   <span className="text-ochre">See the terms →</span>,
 ];
