@@ -137,9 +137,12 @@ export default function AccountSubscriptions() {
                   <p className="font-serif text-lg leading-tight">
                     {product.name}
                   </p>
-                  <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/50">
-                    Every {CADENCE_DAYS} days · ${product.price.subscription}
-                    /delivery
+                  <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ochre">
+                    90-Day Ritual
+                  </p>
+                  <p className="mt-0.5 text-[12px] text-ink/50">
+                    Delivered every {CADENCE_DAYS} days · $
+                    {product.price.subscription}/delivery
                   </p>
                   {sub.paused ? (
                     <p className="mt-2 text-[13px] text-ink/60">

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "How to Apply for Maximum Presence & Results — CHIAREL™",
+  title: "How to Apply for Maximum Presence & Results",
   description:
     "Application technique matters as much as formulation. How to apply CHIAREL Essence™ and Terra Radiance Crème™ or Recovery Masque™ to get the full sustained-delivery effect.",
   alternates: { canonical: "/science/application" },

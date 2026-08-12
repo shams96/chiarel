@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "How CHIAREL Compares — CHIAREL™",
+  title: "How CHIAREL Compares",
   description:
     "A factual comparison of CHIAREL™ against La Mer, Augustinus Bader, Dr. Barbara Sturm, SkinCeuticals, and La Prairie on price, dosage transparency, provenance, and subscription policy.",
   alternates: { canonical: "/science/comparison" },

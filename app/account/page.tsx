@@ -1,6 +1,6 @@
 import AccountSubscriptions from "@/components/AccountSubscriptions";
 
-export const metadata = { title: "Account — CHIAREL™" };
+export const metadata = { title: "Account" };
 
 export default function AccountPage() {
   return (

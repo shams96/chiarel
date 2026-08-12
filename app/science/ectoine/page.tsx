@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Ectoine, Explained — CHIAREL™",
+  title: "Ectoine, Explained",
   description:
     "What Ectoine is, how it works, and why CHIAREL formulates with it inside a lipid/occlusive delivery system. A transparent, third-person explainer — no exclusivity claims.",
   alternates: { canonical: "/science/ectoine" },

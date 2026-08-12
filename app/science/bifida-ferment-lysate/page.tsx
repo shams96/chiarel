@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Bifida Ferment Lysate, Explained — CHIAREL™",
+  title: "Bifida Ferment Lysate, Explained",
   description:
     "What Bifida Ferment Lysate is, how it supports barrier proteins and microbiome balance, and how CHIAREL formulates with it. A transparent, third-person explainer.",
   alternates: { canonical: "/science/bifida-ferment-lysate" },

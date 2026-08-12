@@ -42,7 +42,7 @@ export default function Header() {
     <header className="site-header sticky top-0 z-50 border-b border-ink/10">
       <Link
         href="/founding-100"
-        aria-label="The Founding 100 is open — half price, full refund when you share your result. See the terms."
+        aria-label="The Founding 100 is open — the 90-Day Ritual at half price. Complete it and we return the rest. See the terms."
         className="relative flex items-center gap-2 overflow-hidden whitespace-nowrap border-b border-champagne/30 bg-ink py-2.5 text-champagne transition hover:bg-ink/90"
       >
         <span className="ml-4 flex shrink-0 items-center gap-1.5">

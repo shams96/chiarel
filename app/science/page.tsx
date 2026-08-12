@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const metadata = { title: "The Science — CHIAREL™" };
+export const metadata = { title: "The Science" };
 
 const complexes = [
   {

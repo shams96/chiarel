@@ -1,7 +1,7 @@
 import { products } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 
-export const metadata = { title: "Shop — CHIAREL™" };
+export const metadata = { title: "Shop" };
 
 export default function ShopPage() {
   return (

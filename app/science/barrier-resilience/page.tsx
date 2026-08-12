@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Building a More Resilient Skin Barrier — CHIAREL™",
+  title: "Building a More Resilient Skin Barrier",
   description:
     "How preferential hydration, postbiotic barrier-protein support, and amino acid nourishment work inside CHIAREL's occlusive delivery system to support barrier resilience.",
   alternates: { canonical: "/science/barrier-resilience" },

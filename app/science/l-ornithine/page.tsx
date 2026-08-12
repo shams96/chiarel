@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "L-Ornithine, Explained — CHIAREL™",
+  title: "L-Ornithine, Explained",
   description:
     "What L-Ornithine is, its role in the skin's Natural Moisturizing Factor, and how CHIAREL formulates with it. A transparent, third-person explainer.",
   alternates: { canonical: "/science/l-ornithine" },

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Beyond Surface Moisture: Controlled, Long-Lasting Hydration — CHIAREL™",
+  title: "Beyond Surface Moisture: Controlled, Long-Lasting Hydration",
   description:
     "Why CHIAREL formulates for stable, sustained hydration — preferential hydration plus occlusion — instead of surface-level moisture that fades within the hour.",
   alternates: { canonical: "/science/lasting-hydration" },

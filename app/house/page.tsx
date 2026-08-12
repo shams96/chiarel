@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export const metadata = { title: "The House — CHIAREL™" };
+export const metadata = { title: "The House" };
 
 export default function HousePage() {
   return (

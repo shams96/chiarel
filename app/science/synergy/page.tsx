@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Presence Complex™: Extremolyte + Postbiotic + Amino Acid — CHIAREL™",
+  title: "Presence Complex™: Extremolyte + Postbiotic + Amino Acid",
   description:
     "Presence Complex™ is CHIAREL's name for its lipid/occlusive delivery system — how Ectoine, Bifida Ferment Lysate, and L-Ornithine work together to produce sustained barrier, hydration, and resilience outcomes.",
   alternates: { canonical: "/science/synergy" },
