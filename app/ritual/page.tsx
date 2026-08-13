@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ritualProducts, products } from "@/lib/products";
 import { productTint } from "@/lib/color";
 
-export const metadata = { title: "The Ritual" };
+export const metadata = { title: "The Ritual", alternates: { canonical: "/ritual" } };
 
 export default function RitualPage() {
   const lip = products.find((p) => p.slug === "lip-concentrate")!;

@@ -1,7 +1,7 @@
 import { products } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 
-export const metadata = { title: "Shop" };
+export const metadata = { title: "Shop", alternates: { canonical: "/shop" } };
 
 export default function ShopPage() {
   return (

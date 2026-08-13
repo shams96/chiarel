@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "CHIAREL Ritual Guide: Day vs. Night Texture Explained",
   description:
     "Learn the official CHIAREL daily ritual. Discover why Terra Radiance Crème feels light for day and Recovery Masque feels richer at night — intentional barrier support, formulated by design.",
+  alternates: { canonical: "/journal/chiarel-ritual-guide" },
 };
 
 const faqs = [

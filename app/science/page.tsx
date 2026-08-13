@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const metadata = { title: "The Science" };
+export const metadata = { title: "The Science", alternates: { canonical: "/science" } };
 
 const complexes = [
   {

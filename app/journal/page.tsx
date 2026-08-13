@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const metadata = { title: "Journal" };
+export const metadata = { title: "Journal", alternates: { canonical: "/journal" } };
 
 const entries = [
   {

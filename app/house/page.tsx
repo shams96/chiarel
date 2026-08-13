@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export const metadata = { title: "The House" };
+export const metadata = { title: "The House", alternates: { canonical: "/house" } };
 
 export default function HousePage() {
   return (
