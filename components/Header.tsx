@@ -2,7 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCart } from "@/lib/cart-context";
+
+const FOUNDING_100_PAGES = ["/", "/founding-100", "/shop/recovery-masque"];
 
 const nav = [
   { href: "/ritual", label: "The Ritual" },
@@ -38,24 +41,28 @@ function TickerHalf() {
 export default function Header() {
   const { count, open } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const showFounding100Ticker = FOUNDING_100_PAGES.includes(pathname ?? "");
   return (
     <header className="site-header sticky top-0 z-50 border-b border-ink/10">
-      <Link
-        href="/founding-100"
-        aria-label="The Founding 100 is open — the 90-Day Ritual at half price. Complete it and we return the rest. See the terms."
-        className="relative flex items-center gap-2 overflow-hidden whitespace-nowrap border-b border-champagne/30 bg-ink py-2.5 text-champagne transition hover:bg-ink/90"
-      >
-        <span className="ml-4 flex shrink-0 items-center gap-1.5">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ochre opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-ochre" />
+      {showFounding100Ticker && (
+        <Link
+          href="/founding-100"
+          aria-label="The Founding 100 is open — the 90-Day Ritual at half price. Complete it and we return the rest. See the terms."
+          className="relative flex items-center gap-2 overflow-hidden whitespace-nowrap border-b border-champagne/30 bg-ink py-2.5 text-champagne transition hover:bg-ink/90"
+        >
+          <span className="ml-4 flex shrink-0 items-center gap-1.5">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ochre opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-ochre" />
+            </span>
           </span>
-        </span>
-        <div className="marquee-track flex w-max">
-          <TickerHalf />
-          <TickerHalf />
-        </div>
-      </Link>
+          <div className="marquee-track flex w-max">
+            <TickerHalf />
+            <TickerHalf />
+          </div>
+        </Link>
+      )}
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex flex-col leading-none">
           <span className="font-serif text-2xl tracking-[0.35em] text-ink">

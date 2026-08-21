@@ -34,7 +34,7 @@ export default function Home() {
           <p className="mt-4 max-w-xl text-sm text-ivory/80">
             The Signature Serum. The Nightly Recovery. Born at Isola del Liri,
             Italy — intelligent formulations that support the skin against
-            Modern Biological Stress™.
+            Modern Biological Stress.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-6">
             <Link
@@ -47,7 +47,7 @@ export default function Home() {
               href="/assessment"
               className="text-[12px] uppercase tracking-[0.2em] text-ivory/90 underline decoration-champagne/60 underline-offset-4 hover:text-champagne"
             >
-              Not sure where to start? Take the Skin Assessment™
+              Not sure where to start? Take the Skin Assessment
             </Link>
           </div>
         </div>
@@ -64,21 +64,19 @@ export default function Home() {
             {[essence, masque].map((p) => {
               const isComingSoonImage = p.slug === "recovery-masque";
               const meta = (
-                <>
-                  <Link href={`/shop/${p.slug}`}>
-                    <p className="mt-4 text-[11px] uppercase tracking-[0.18em] text-ink/50">
-                      {p.step}
-                    </p>
-                    <p className="font-serif text-2xl">{p.name}</p>
-                    <p className="text-[13px] text-ink/60">{p.descriptor}</p>
-                    <p className="mt-2 text-sm">
-                      <span className="font-medium">${p.price.subscription}</span>
-                      <span className="ml-1 text-[12px] text-ink/50">
-                        with subscription
-                      </span>
-                    </p>
-                  </Link>
-                </>
+                <Link href={`/shop/${p.slug}`}>
+                  <p className="mt-4 text-[11px] uppercase tracking-[0.18em] text-ink/50">
+                    {p.step}
+                  </p>
+                  <p className="font-serif text-2xl">{p.name}</p>
+                  <p className="text-[13px] text-ink/60">{p.descriptor}</p>
+                  <p className="mt-2 text-sm">
+                    <span className="font-medium">${p.price.subscription}</span>
+                    <span className="ml-1 text-[12px] text-ink/50">
+                      with subscription · ${p.price.oneTime} one-time
+                    </span>
+                  </p>
+                </Link>
               );
 
               if (isComingSoonImage) {
@@ -91,36 +89,28 @@ export default function Home() {
               }
 
               return (
-                <Link key={p.slug} href={`/shop/${p.slug}`} className="group">
-                  <div
-                    className="relative aspect-square overflow-hidden rounded-sm"
-                    style={{ backgroundColor: productTint(p.color.hex) }}
-                  >
-                    <Image
-                      src={p.image}
-                      alt={p.name}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover transition duration-700 group-hover:scale-[1.03]"
-                    />
-                    {p.badge && (
-                      <span className="absolute left-3 top-3 bg-ivory/90 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-ochre">
-                        {p.badge}
-                      </span>
-                    )}
-                  </div>
-                  <p className="mt-4 text-[11px] uppercase tracking-[0.18em] text-ink/50">
-                    {p.step}
-                  </p>
-                  <p className="font-serif text-2xl">{p.name}</p>
-                  <p className="text-[13px] text-ink/60">{p.descriptor}</p>
-                  <p className="mt-2 text-sm">
-                    <span className="font-medium">${p.price.subscription}</span>
-                    <span className="ml-1 text-[12px] text-ink/50">
-                      with subscription
-                    </span>
-                  </p>
-                </Link>
+                <div key={p.slug}>
+                  <Link href={`/shop/${p.slug}`} className="group block">
+                    <div
+                      className="relative aspect-square overflow-hidden rounded-sm"
+                      style={{ backgroundColor: productTint(p.color.hex) }}
+                    >
+                      <Image
+                        src={p.image}
+                        alt={p.name}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover transition duration-700 group-hover:scale-[1.03]"
+                      />
+                      {p.badge && (
+                        <span className="absolute left-3 top-3 bg-ivory/90 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-ochre">
+                          {p.badge}
+                        </span>
+                      )}
+                    </div>
+                  </Link>
+                  {meta}
+                </div>
               );
             })}
           </div>
@@ -195,7 +185,7 @@ export default function Home() {
               The Signature Serum &amp; The Icon
             </h2>
             <p className="mt-3 max-w-md text-sm text-ink/70">
-              CHIAREL Essence™ and Terra Radiance Crème™ — the essential
+              CHIAREL Essence and Terra Radiance Crème — the essential
               ritual in two gestures, delivered together every 45 days.
             </p>
             <p className="mt-4 text-sm">

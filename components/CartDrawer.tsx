@@ -2,8 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCart } from "@/lib/cart-context";
+import { unitPrice, useCart } from "@/lib/cart-context";
 import { getProduct } from "@/lib/products";
+
+const modeLabel: Record<string, string> = {
+  ninetyDay: "The Ritual Plan · two deliveries",
+  subscription: "Subscription · every 45 days",
+  oneTime: "One-time purchase",
+};
 
 const FREE_SHIP_THRESHOLD = 150;
 
@@ -62,10 +68,7 @@ export default function CartDrawer() {
                 {lines.map((line) => {
                   const p = getProduct(line.slug);
                   if (!p) return null;
-                  const unit =
-                    line.mode === "subscription"
-                      ? p.price.subscription
-                      : p.price.oneTime;
+                  const unit = unitPrice(p, line.mode);
                   return (
                     <li key={line.slug} className="flex gap-4">
                       <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-sm bg-cloud/50">
@@ -82,9 +85,7 @@ export default function CartDrawer() {
                           {p.name}
                         </p>
                         <p className="mt-0.5 text-[11px] uppercase tracking-[0.14em] text-ink/50">
-                          {line.mode === "subscription"
-                            ? "Subscription · every 45 days"
-                            : "One-time purchase"}
+                          {modeLabel[line.mode]}
                         </p>
                         <div className="mt-2 flex items-center justify-between">
                           <span className="text-sm">

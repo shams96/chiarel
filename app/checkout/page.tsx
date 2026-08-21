@@ -2,14 +2,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCart } from "@/lib/cart-context";
+import { unitPrice, useCart } from "@/lib/cart-context";
 import { getProduct } from "@/lib/products";
 
 const FREE_SHIP_THRESHOLD = 150;
+const modeLabel: Record<string, string> = {
+  ninetyDay: "The Ritual Plan",
+  subscription: "Subscription",
+  oneTime: "One-time",
+};
 
 export default function CheckoutPage() {
   const { lines, subtotal, savings } = useCart();
-  const hasSubscription = lines.some((l) => l.mode === "subscription");
+  const hasSubscription = lines.some((l) => l.mode !== "oneTime");
   const shipping = subtotal >= FREE_SHIP_THRESHOLD || subtotal === 0 ? 0 : 12;
   const total = subtotal + shipping;
 
@@ -148,10 +153,7 @@ export default function CheckoutPage() {
             {lines.map((line) => {
               const p = getProduct(line.slug);
               if (!p) return null;
-              const unit =
-                line.mode === "subscription"
-                  ? p.price.subscription
-                  : p.price.oneTime;
+              const unit = unitPrice(p, line.mode);
               return (
                 <li key={line.slug} className="flex gap-3">
                   <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-sm bg-cloud/50">
@@ -166,7 +168,7 @@ export default function CheckoutPage() {
                   <div className="flex-1 text-sm">
                     <p className="leading-tight">{p.name}</p>
                     <p className="text-[11px] text-ink/50">
-                      {line.mode === "subscription" ? "Subscription" : "One-time"} · Qty {line.qty}
+                      {modeLabel[line.mode]} · Qty {line.qty}
                     </p>
                   </div>
                   <p className="text-sm">${unit * line.qty}</p>

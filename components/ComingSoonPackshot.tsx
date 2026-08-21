@@ -99,7 +99,7 @@ function ComingSoonPackshotInner({
       <p
         className={`text-[10px] uppercase tracking-[0.22em] ${dark ? "text-ivory/70" : "text-ink/50"}`}
       >
-        The Full Portrait
+        {productName} — The Full Portrait
       </p>
       <p className={`mt-1 font-serif text-2xl ${dark ? "text-ivory" : "text-ink/80"}`}>
         Coming Soon

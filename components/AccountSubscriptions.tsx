@@ -138,7 +138,7 @@ export default function AccountSubscriptions() {
                     {product.name}
                   </p>
                   <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ochre">
-                    90-Day Ritual
+                    Ritual Plan
                   </p>
                   <p className="mt-0.5 text-[12px] text-ink/50">
                     Delivered every {CADENCE_DAYS} days · $

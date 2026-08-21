@@ -11,13 +11,23 @@ import { getProduct } from "@/lib/products";
 
 export type CartLine = {
   slug: string;
-  mode: "subscription" | "oneTime";
+  mode: "ninetyDay" | "subscription" | "oneTime";
   qty: number;
 };
 
+export function unitPrice(
+  product: { price: { subscription: number; oneTime: number } },
+  mode: CartLine["mode"]
+): number {
+  if (mode === "ninetyDay") return product.price.subscription * 2;
+  return mode === "subscription"
+    ? product.price.subscription
+    : product.price.oneTime;
+}
+
 type CartContextValue = {
   lines: CartLine[];
-  add: (slug: string, mode: "subscription" | "oneTime") => void;
+  add: (slug: string, mode: CartLine["mode"]) => void;
   remove: (slug: string) => void;
   isOpen: boolean;
   open: () => void;
@@ -69,10 +79,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
   for (const line of lines) {
     const p = getProduct(line.slug);
     if (!p) continue;
-    const unit =
-      line.mode === "subscription" ? p.price.subscription : p.price.oneTime;
+    const unit = unitPrice(p, line.mode);
+    const oneTimeEquivalent =
+      line.mode === "ninetyDay" ? p.price.oneTime * 2 : p.price.oneTime;
     subtotal += unit * line.qty;
-    savings += (p.price.oneTime - unit) * line.qty;
+    savings += (oneTimeEquivalent - unit) * line.qty;
   }
 
   return (

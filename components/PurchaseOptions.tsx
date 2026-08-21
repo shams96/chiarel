@@ -21,8 +21,6 @@ export default function PurchaseOptions({
   const { add } = useCart();
 
   const ninetyDayTotal = subscription * 2;
-  const mode: "subscription" | "oneTime" =
-    tier === "oneTime" ? "oneTime" : "subscription";
 
   return (
     <div className="mt-8">
@@ -36,7 +34,7 @@ export default function PurchaseOptions({
       >
         <span>
           <span className="block text-[12px] uppercase tracking-[0.18em] text-ochre">
-            The 90-Day Ritual
+            The Ritual Plan
           </span>
           <span className="mt-1 block text-sm text-ink/70">
             Two deliveries, 45 days apart · pause or adjust anytime · member
@@ -83,7 +81,7 @@ export default function PurchaseOptions({
       </button>
 
       <button
-        onClick={() => add(slug, mode)}
+        onClick={() => add(slug, tier === "single" ? "subscription" : tier)}
         className="btn-press mt-6 w-full bg-ink py-4 text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre"
       >
         {tier === "oneTime" ? "Add to Bag" : "Begin the Ritual"}
