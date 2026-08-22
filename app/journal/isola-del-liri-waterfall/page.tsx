@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "A Town Built Around a Waterfall",
   description:
-    "Isola del Liri, the Cascata Grande, and why CHIAREL's provenance shapes how every formulation is made.",
+    "Isola del Liri, the karst-spring confluence behind The Cascata Complex™, and why CHIAREL's provenance shapes how every formulation is made.",
   alternates: { canonical: "/journal/isola-del-liri-waterfall" },
 };
 
@@ -27,15 +27,28 @@ export default function WaterfallPage() {
           sits a town almost no other in Europe can claim to resemble: Isola
           del Liri, named for the island formed where two arms of the Liri
           river split around its historic center — and fall, together, as
-          the Cascata Grande, a waterfall roughly thirty meters high that
-          drops through the middle of daily life, beside the
-          Boncompagni-Viscogliosi castle.
+          the Cascata Grande, a 27-meter waterfall that drops through the
+          middle of daily life, beside the Boncompagni-Viscogliosi castle.
         </p>
         <p>
-          It is not a landmark visited from a distance. It is the town's
-          center of gravity — water that once powered the paper mills the
-          valley was known for, still falling through the same streets
-          today.
+          The height is not what makes the water here worth naming a
+          formulation after. Just before the Liri reaches the town, it is
+          joined by the Fibreno — a river with no surface source of its
+          own, fed entirely by limestone karst springs a few kilometers
+          upstream. Water that arrives newly filtered through stone, not
+          run off the surface. That confluence, not the drop, is what The
+          Cascata Complex™ is named for.
+        </p>
+        <p>
+          The town&rsquo;s relationship with that water goes back further
+          than the waterfall&rsquo;s current form: Isola del Liri was
+          Volscian before it was Roman, its position on the river making it
+          a strategic crossing point on the route toward Rome — one reason
+          the Romans took it in 305 BC. Centuries later, the same water that
+          once carried Roman trade turned the wheels of the valley&rsquo;s
+          water-powered mills, and by the 18th and 19th centuries, some of
+          Italy&rsquo;s finest paper mills — precision and craft, running on
+          the same current that still falls through the town today.
         </p>
         <p>
           This is where Natural You Srl, CHIAREL&rsquo;s manufacturing

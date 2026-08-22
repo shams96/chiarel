@@ -80,11 +80,13 @@ export default function Home() {
             CHIAREL™ Is Made at the Water&rsquo;s Source
           </h2>
           <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-ivory/75">
-            Every CHIAREL™ formulation is made in one place: alongside the
-            Cascata Grande, the waterfall that runs through the center of
-            Isola del Liri, Italy, with our manufacturing partner Natural
-            You Srl — water, craft, and proximity to the people making the
-            decisions, rather than formulation outsourced to distance.
+            Before the Liri falls through Isola del Liri as the Cascata
+            Grande, it is met by the Fibreno — a river fed entirely by
+            limestone karst springs, with no surface tributaries of its
+            own. That confluence, water arriving newly filtered rather than
+            run off the surface, is what gives The Cascata Complex™ its
+            name and its place: formulated here, with our manufacturing
+            partner Natural You Srl, rather than sourced from a distance.
           </p>
           <Link
             href="/journal/isola-del-liri-waterfall"
