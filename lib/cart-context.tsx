@@ -2,22 +2,28 @@
 
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useState,
   type ReactNode,
 } from "react";
-import { getProduct } from "@/lib/products";
+
+export type CartMode = "ninetyDay" | "subscription" | "oneTime";
 
 export type CartLine = {
+  id: string;
   slug: string;
-  mode: "ninetyDay" | "subscription" | "oneTime";
+  mode: CartMode;
   qty: number;
+  unitPrice: number;
+  product: { name: string; image: string; descriptor: string };
 };
 
+/** Kept for callers that price a product client-side before it's in the cart (e.g. PDP tier previews). */
 export function unitPrice(
   product: { price: { subscription: number; oneTime: number } },
-  mode: CartLine["mode"]
+  mode: CartMode
 ): number {
   if (mode === "ninetyDay") return product.price.subscription * 2;
   return mode === "subscription"
@@ -25,79 +31,77 @@ export function unitPrice(
     : product.price.oneTime;
 }
 
+type CartApiResponse = {
+  lines: CartLine[];
+  count: number;
+  subtotal: number;
+  savings: number;
+};
+
 type CartContextValue = {
   lines: CartLine[];
-  add: (slug: string, mode: CartLine["mode"]) => void;
-  remove: (slug: string) => void;
+  add: (slug: string, mode: CartMode) => Promise<void>;
+  remove: (slug: string) => Promise<void>;
   isOpen: boolean;
   open: () => void;
   close: () => void;
   count: number;
   subtotal: number;
   savings: number;
+  loading: boolean;
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
-const STORAGE_KEY = "chiarel-cart";
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [lines, setLines] = useState<CartLine[]>([]);
+  const [data, setData] = useState<CartApiResponse>({
+    lines: [],
+    count: 0,
+    subtotal: 0,
+    savings: 0,
+  });
   const [isOpen, setIsOpen] = useState(false);
-  const [hydrated, setHydrated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) setLines(JSON.parse(raw));
-    } catch {}
-    setHydrated(true);
+  const refresh = useCallback(async () => {
+    const res = await fetch("/api/cart");
+    if (res.ok) setData(await res.json());
   }, []);
 
   useEffect(() => {
-    if (hydrated) localStorage.setItem(STORAGE_KEY, JSON.stringify(lines));
-  }, [lines, hydrated]);
+    refresh().finally(() => setLoading(false));
+  }, [refresh]);
 
-  const add: CartContextValue["add"] = (slug, mode) => {
-    setLines((prev) => {
-      const existing = prev.find((l) => l.slug === slug);
-      if (existing) {
-        return prev.map((l) =>
-          l.slug === slug ? { ...l, mode, qty: l.qty + 1 } : l
-        );
-      }
-      return [...prev, { slug, mode, qty: 1 }];
+  const add: CartContextValue["add"] = async (slug, mode) => {
+    const res = await fetch("/api/cart", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ slug, mode }),
     });
+    if (res.ok) setData(await res.json());
     setIsOpen(true);
   };
 
-  const remove: CartContextValue["remove"] = (slug) => {
-    setLines((prev) => prev.filter((l) => l.slug !== slug));
+  const remove: CartContextValue["remove"] = async (slug) => {
+    const line = data.lines.find((l) => l.slug === slug);
+    if (!line) return;
+    const res = await fetch(`/api/cart/${line.id}`, { method: "DELETE" });
+    if (res.ok) setData(await res.json());
   };
-
-  let subtotal = 0;
-  let savings = 0;
-  for (const line of lines) {
-    const p = getProduct(line.slug);
-    if (!p) continue;
-    const unit = unitPrice(p, line.mode);
-    const oneTimeEquivalent =
-      line.mode === "ninetyDay" ? p.price.oneTime * 2 : p.price.oneTime;
-    subtotal += unit * line.qty;
-    savings += (oneTimeEquivalent - unit) * line.qty;
-  }
 
   return (
     <CartContext.Provider
       value={{
-        lines,
+        lines: data.lines,
         add,
         remove,
         isOpen,
         open: () => setIsOpen(true),
         close: () => setIsOpen(false),
-        count: lines.reduce((n, l) => n + l.qty, 0),
-        subtotal,
-        savings,
+        count: data.count,
+        subtotal: data.subtotal,
+        savings: data.savings,
+        loading,
       }}
     >
       {children}

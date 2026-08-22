@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { unitPrice, useCart } from "@/lib/cart-context";
-import { getProduct } from "@/lib/products";
+import { useCart } from "@/lib/cart-context";
 
 const modeLabel: Record<string, string> = {
   ninetyDay: "The Ritual Plan · two deliveries",
@@ -65,43 +64,38 @@ export default function CartDrawer() {
                 </p>
               )}
               <ul className="space-y-5">
-                {lines.map((line) => {
-                  const p = getProduct(line.slug);
-                  if (!p) return null;
-                  const unit = unitPrice(p, line.mode);
-                  return (
-                    <li key={line.slug} className="flex gap-4">
-                      <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-sm bg-cloud/50">
-                        <Image
-                          src={p.image}
-                          alt={p.name}
-                          fill
-                          sizes="80px"
-                          className="object-cover"
-                        />
+                {lines.map((line) => (
+                  <li key={line.slug} className="flex gap-4">
+                    <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-sm bg-cloud/50">
+                      <Image
+                        src={line.product.image}
+                        alt={line.product.name}
+                        fill
+                        sizes="80px"
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium leading-tight">
+                        {line.product.name}
+                      </p>
+                      <p className="mt-0.5 text-[11px] uppercase tracking-[0.14em] text-ink/50">
+                        {modeLabel[line.mode]}
+                      </p>
+                      <div className="mt-2 flex items-center justify-between">
+                        <span className="text-sm">
+                          {line.qty} × ${line.unitPrice}
+                        </span>
+                        <button
+                          onClick={() => remove(line.slug)}
+                          className="text-[11px] uppercase tracking-[0.14em] text-ink/40 hover:text-ochre"
+                        >
+                          Remove
+                        </button>
                       </div>
-                      <div className="flex-1">
-                        <p className="text-sm font-medium leading-tight">
-                          {p.name}
-                        </p>
-                        <p className="mt-0.5 text-[11px] uppercase tracking-[0.14em] text-ink/50">
-                          {modeLabel[line.mode]}
-                        </p>
-                        <div className="mt-2 flex items-center justify-between">
-                          <span className="text-sm">
-                            {line.qty} × ${unit}
-                          </span>
-                          <button
-                            onClick={() => remove(line.slug)}
-                            className="text-[11px] uppercase tracking-[0.14em] text-ink/40 hover:text-ochre"
-                          >
-                            Remove
-                          </button>
-                        </div>
-                      </div>
-                    </li>
-                  );
-                })}
+                    </div>
+                  </li>
+                ))}
               </ul>
             </div>
 
