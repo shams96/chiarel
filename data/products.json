@@ -20,6 +20,11 @@
     },
     "image": "/assets/products/cellular-cleanser.png",
     "blurb": "A gentle daily cleanser that supports the skin barrier while lifting away impurities — the first gesture of the ritual.",
+    "benefits": [
+      "Cleanses without disrupting the skin's natural barrier",
+      "Supports the skin's microbiome with a prebiotic complex",
+      "Leaves skin feeling calm — never tight or stripped"
+    ],
     "icon": true,
     "actives": [
       {
@@ -53,6 +58,11 @@
     },
     "image": "/assets/products/cellular-mist.png",
     "blurb": "A conditioning mist that optimizes skin receptivity, preparing the complexion for treatment.",
+    "benefits": [
+      "Delivers a fine, fast-absorbing layer of hydration",
+      "Prepares skin to receive the treatment steps that follow",
+      "Refreshes throughout the day without residue"
+    ],
     "icon": false,
     "actives": [
       {
@@ -84,6 +94,11 @@
     "blurb": "The Signature Serum of the House. A concentrated treatment that supports Cellular Clarity™ at the heart of the ritual.",
     "role": "Signature Serum of the House",
     "badge": "Signature Serum",
+    "benefits": [
+      "Supports the skin's visible firmness and texture",
+      "Reinforces barrier function with a postbiotic complex",
+      "The concentrated treatment layer at the heart of the ritual"
+    ],
     "icon": true,
     "actives": [
       {
@@ -119,6 +134,11 @@
     "blurb": "The Icon Product of the House. A daily crème that supports radiance and resilience against Modern Biological Stress™.",
     "role": "Icon Product",
     "badge": "Icon of the House",
+    "benefits": [
+      "Supports the skin barrier with ceramide and niacinamide",
+      "Helps defend against everyday environmental stress",
+      "Leaves skin feeling comfortable through the day"
+    ],
     "icon": true,
     "actives": [
       {
@@ -154,6 +174,11 @@
     "blurb": "An overnight masque that strengthens and supports recovery while you rest — the ritual's closing gesture.",
     "role": "Night Recovery Hero",
     "badge": "Night Icon",
+    "benefits": [
+      "Supports overnight recovery while you rest",
+      "Panthenol helps soothe and replenish moisture",
+      "The ritual's closing gesture, formulated for night"
+    ],
     "icon": true,
     "actives": [
       {
@@ -187,6 +212,11 @@
     },
     "image": "/assets/products/lip-concentrate.png",
     "blurb": "A dual-action treatment that supports volume and radiance. Standalone — beyond the face ritual.",
+    "benefits": [
+      "Dual-action treatment for volume and radiance",
+      "Lightweight, non-sticky wear",
+      "Complements the facial ritual, used any time"
+    ],
     "badge": "New",
     "icon": true
   },

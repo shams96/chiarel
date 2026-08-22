@@ -3,8 +3,9 @@ import Link from "next/link";
 import { products, ritualProducts, getProduct } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import RitualCarousel from "@/components/RitualCarousel";
-import { productTint } from "@/lib/color";
+import EvidenceGrid from "@/components/EvidenceGrid";
 import Reveal from "@/components/Reveal";
+import { productTint } from "@/lib/color";
 
 export default function Home() {
   const essence = getProduct("chiarel-essence")!;
@@ -14,50 +15,105 @@ export default function Home() {
   const featuredIcons = products.filter((p) =>
     ["cellular-cleanser", "lip-concentrate"].includes(p.slug)
   );
+  const evidenceProducts = products.filter((p) =>
+    ["chiarel-essence", "terra-radiance-creme", "recovery-masque"].includes(p.slug)
+  );
 
   return (
     <>
-      {/* Hero — Luxury Editorial (Photography Tier 1) */}
-      <section className="relative h-[85vh] min-h-[560px] w-full overflow-hidden bg-ink">
+      {/* Hero — full viewport, centered, minimal. One statement, one CTA. */}
+      <section className="relative flex h-screen min-h-[640px] w-full items-center justify-center overflow-hidden bg-ink">
         <Image
           src="/assets/editorial/hero-shore-duo.png"
           alt="CHIAREL Essence™ and Recovery Masque™ at the shore"
           fill
           priority
-          className="object-cover object-[95%_55%]"
+          className="object-cover object-[80%_50%] opacity-90"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/15 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 mx-auto max-w-6xl px-6 pb-16 text-ivory">
-          <p className="text-[12px] uppercase tracking-[0.3em] text-champagne">
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/25 to-ink/60" />
+        <div className="relative z-10 mx-auto max-w-3xl px-6 text-center text-ivory">
+          <p className="text-[12px] uppercase tracking-[0.4em] text-champagne">
             House of Skin Intelligence™
           </p>
-          <h1 className="mt-3 max-w-xs font-serif text-5xl leading-tight md:max-w-sm md:text-6xl">
-            Advancing Cellular Clarity™
+          <h1 className="mt-6 font-serif text-6xl leading-[1.05] md:text-7xl">
+            Advancing
+            <br />
+            Cellular Clarity™
           </h1>
-          <p className="mt-4 max-w-xl text-sm text-ivory/80">
-            The Signature Serum. The Nightly Recovery. Born at Isola del Liri,
-            Italy — intelligent formulations that support the skin against
-            Modern Biological Stress.
+          <p className="mx-auto mt-6 max-w-lg text-[15px] leading-relaxed text-ivory/80">
+            Intelligent formulations, born at Isola del Liri, Italy — made to
+            support the skin against Modern Biological Stress.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-6">
+          <div className="mt-10 flex flex-col items-center gap-4">
             <Link
               href="/ritual"
-              className="inline-block border border-champagne px-8 py-3 text-[12px] uppercase tracking-[0.25em] text-champagne transition hover:bg-champagne hover:text-ink"
+              className="inline-block border border-champagne px-10 py-4 text-[12px] uppercase tracking-[0.3em] text-champagne transition hover:bg-champagne hover:text-ink"
             >
               Enter the Ritual
             </Link>
             <Link
               href="/assessment"
-              className="text-[12px] uppercase tracking-[0.2em] text-ivory/90 underline decoration-champagne/60 underline-offset-4 hover:text-champagne"
+              className="text-[11px] uppercase tracking-[0.2em] text-ivory/70 underline decoration-champagne/50 underline-offset-4 hover:text-champagne"
             >
               Not sure where to start? Take the Skin Assessment
             </Link>
           </div>
         </div>
+        <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[10px] uppercase tracking-[0.3em] text-ivory/50">
+          Scroll
+        </div>
+      </section>
+
+      {/* Campaign banner — full-bleed editorial moment, not a two-column layout */}
+      <section className="relative flex h-[70vh] min-h-[480px] w-full items-end overflow-hidden bg-ink">
+        <Image
+          src="/assets/editorial/hero-bright.png"
+          alt="Isola del Liri, Italy — where CHIAREL formulations are made"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/20 to-transparent" />
+        <Reveal className="relative z-10 mx-auto max-w-6xl px-6 pb-16 text-ivory">
+          <p className="text-[11px] uppercase tracking-[0.3em] text-champagne">
+            Provenance
+          </p>
+          <h2 className="mt-3 max-w-xl font-serif text-4xl leading-tight md:text-5xl">
+            A Town Built Around a Waterfall
+          </h2>
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-ivory/75">
+            An hour and a half from Rome, the Cascata Grande falls through
+            the center of Isola del Liri itself — where every CHIAREL™
+            formulation is made with our manufacturing partner, Natural You
+            Srl.
+          </p>
+          <Link
+            href="/journal/isola-del-liri-waterfall"
+            className="mt-6 inline-block border-b border-champagne pb-0.5 text-[12px] uppercase tracking-[0.18em] text-champagne"
+          >
+            Read the Journal
+          </Link>
+        </Reveal>
+      </section>
+
+      {/* Evidence — the honest counterpart to a clinical-trial stat grid */}
+      <section className="bg-ivory py-28">
+        <div className="mx-auto max-w-6xl px-6">
+          <Reveal className="mx-auto max-w-xl text-center">
+            <p className="eyebrow">Clinically Dosed. No Hidden Blends.</p>
+            <h2 className="mt-3 font-serif text-3xl leading-snug">
+              Every Active, Stated. Not a Marketing Claim — a Matter of
+              Record.
+            </h2>
+          </Reveal>
+          <div className="mt-14">
+            <EvidenceGrid products={evidenceProducts} />
+          </div>
+        </div>
       </section>
 
       {/* Signature Duo — the two hero treatments, no price (story, not shelf) */}
-      <section className="border-b border-ink/10 bg-ivory py-24">
+      <section className="border-y border-ink/10 bg-white py-24">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal className="text-center">
             <p className="eyebrow">The Signature Duo</p>
@@ -112,83 +168,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Editorial — Provenance */}
-      <section className="bg-white">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-12 px-6 py-24 md:flex-row">
-          <Reveal className="relative aspect-[4/3] w-full overflow-hidden rounded-sm md:w-1/2">
-            <Image
-              src="/assets/editorial/hero-bright.png"
-              alt="Isola del Liri, Italy — where CHIAREL formulations are made"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover"
-            />
-          </Reveal>
-          <Reveal delay={0.15} className="w-full md:w-1/2">
-            <p className="eyebrow">Provenance</p>
-            <h2 className="mt-2 font-serif text-3xl leading-snug">
-              A Town Built Around a Waterfall
-            </h2>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-ink/70">
-              An hour and a half from Rome, in the Liri valley, the Cascata
-              Grande falls through the center of Isola del Liri itself. It is
-              here, with our manufacturing partner Natural You Srl, that
-              every CHIAREL™ formulation is made — water, craft, and
-              proximity to the people making the decisions, rather than
-              formulation outsourced to distance.
-            </p>
-            <Link
-              href="/journal/isola-del-liri-waterfall"
-              className="mt-6 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
-            >
-              Read the Journal
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Value props */}
-      <section className="border-y border-ink/10 bg-cloud/40">
-        <div className="mx-auto grid max-w-6xl gap-8 px-6 py-14 text-center sm:grid-cols-3">
-          {[
-            ["The Ritual, Delivered", "Subscriptions arrive on your rhythm — pause or adjust anytime"],
-            ["Complimentary Shipping", "On every ritual order, with considered packaging"],
-            ["Samples With Every Order", "Two treatments to discover, chosen by the House"],
-          ].map(([t, d], i) => (
-            <Reveal key={t} delay={i * 0.1}>
-              <p className="text-[11px] uppercase tracking-[0.22em] text-ochre">{t}</p>
-              <p className="mt-1 text-[12px] text-ink/60">{d}</p>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* Editorial — Ritual philosophy */}
-      <Reveal className="mx-auto max-w-3xl px-6 py-28 text-center">
-        <section>
-          <p className="eyebrow">The Philosophy</p>
-          <p className="mt-5 font-serif text-3xl leading-relaxed text-ink">
-            &ldquo;Skin is not one thing. A house built to serve it should not
-            pretend otherwise.&rdquo;
+      {/* Formulated By — enlarged founder/formulator credibility block */}
+      <section className="bg-ink py-28 text-ivory">
+        <Reveal className="mx-auto max-w-2xl px-6 text-center">
+          <p className="eyebrow text-champagne">Formulated By</p>
+          <h2 className="mt-3 font-serif text-4xl leading-snug">
+            Grazia Savoriti
+          </h2>
+          <p className="mt-2 text-[12px] uppercase tracking-[0.2em] text-ivory/50">
+            Pharmacist · Cosmetic &amp; Nutraceutical Research
           </p>
-          <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-ink/70">
-            CHIAREL Intelligence™ began at a table, not a laboratory bench —
-            the working method still holds: begin with the biology in front
-            of you, not the biology the industry assumes. It is the same
-            discipline behind La Bella Figura — presenting one&rsquo;s best
-            self, quietly, without announcement.
+          <p className="mx-auto mt-6 max-w-lg text-sm leading-relaxed text-ivory/75">
+            Every CHIAREL™ formulation is developed under her guidance and
+            produced in small, fresh batches in Isola del Liri — made to
+            order rather than held in standing inventory. The Cellular
+            Intelligence Complex™ at the heart of CHIAREL Essence™ is
+            formulated to support the skin&rsquo;s own regulatory processes.
           </p>
           <Link
-            href="/journal/three-skins-one-house"
-            className="mt-6 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
+            href="/science"
+            className="mt-8 inline-block border-b border-champagne pb-0.5 text-[12px] uppercase tracking-[0.18em] text-champagne"
           >
-            Read the Origin Story
+            Explore the Science
           </Link>
-        </section>
-      </Reveal>
+        </Reveal>
+      </section>
 
       {/* Ritual carousel — paced, not a shelf */}
-      <section className="border-t border-ink/10 bg-ivory py-24">
+      <section className="bg-ivory py-24">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <p className="eyebrow">The Ritual</p>
@@ -201,42 +208,6 @@ export default function Home() {
             </p>
           </Reveal>
           <RitualCarousel products={ritualProducts} />
-        </div>
-      </section>
-
-      {/* Editorial — Formulation */}
-      <section className="bg-white">
-        <div className="mx-auto flex max-w-6xl flex-col-reverse items-center gap-12 px-6 py-24 md:flex-row">
-          <Reveal className="w-full md:w-1/2">
-            <p className="eyebrow">Formulated By</p>
-            <h2 className="mt-2 font-serif text-3xl leading-snug">
-              A Considered Practice
-            </h2>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-ink/70">
-              Every CHIAREL™ formulation is developed under the guidance of
-              Grazia Savoriti, a pharmacist with deep expertise in cosmetic
-              and nutraceutical research, and produced in small, fresh
-              batches in Isola del Liri — made to order rather than held in
-              standing inventory. The Cellular Intelligence Complex™ at the
-              heart of CHIAREL Essence™ is formulated to support the
-              skin&rsquo;s own regulatory processes.
-            </p>
-            <Link
-              href="/science"
-              className="mt-6 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
-            >
-              Explore the Science
-            </Link>
-          </Reveal>
-          <Reveal delay={0.15} className="relative aspect-[4/3] w-full overflow-hidden rounded-sm md:w-1/2">
-            <Image
-              src="/assets/editorial/hero.png"
-              alt="CHIAREL™ at Isola del Liri"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover"
-            />
-          </Reveal>
         </div>
       </section>
 
@@ -312,8 +283,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* House note */}
+      {/* Editorial — Ritual philosophy */}
       <Reveal className="mx-auto max-w-3xl px-6 py-28 text-center">
+        <section>
+          <p className="eyebrow">The Philosophy</p>
+          <p className="mt-5 font-serif text-3xl leading-relaxed text-ink">
+            &ldquo;Skin is not one thing. A house built to serve it should not
+            pretend otherwise.&rdquo;
+          </p>
+          <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-ink/70">
+            CHIAREL Intelligence™ began at a table, not a laboratory bench —
+            the working method still holds: begin with the biology in front
+            of you, not the biology the industry assumes. It is the same
+            discipline behind La Bella Figura — presenting one&rsquo;s best
+            self, quietly, without announcement.
+          </p>
+          <Link
+            href="/journal/three-skins-one-house"
+            className="mt-6 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
+          >
+            Read the Origin Story
+          </Link>
+        </section>
+      </Reveal>
+
+      {/* House note */}
+      <Reveal className="mx-auto max-w-3xl px-6 pb-28 text-center">
         <section>
           <p className="eyebrow">The House</p>
           <p className="mt-4 font-serif text-2xl leading-relaxed">
