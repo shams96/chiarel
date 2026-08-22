@@ -13,7 +13,7 @@ export default function ProductCard({
   return (
     <Link href={`/shop/${product.slug}`} className="group block">
       <div
-        className="relative aspect-square overflow-hidden rounded-sm"
+        className="product-frame aspect-square"
         style={{ backgroundColor: productTint(product.color.hex) }}
       >
         <Image
@@ -21,7 +21,7 @@ export default function ProductCard({
           alt={product.name}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
-          className="object-cover transition duration-700 group-hover:scale-[1.03]"
+          className="transition duration-700 group-hover:scale-[1.03]"
         />
         {product.badge && (
           <span className="absolute left-3 top-3 bg-ivory/90 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-ochre">

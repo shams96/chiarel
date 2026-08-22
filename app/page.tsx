@@ -12,6 +12,7 @@ export default function Home() {
   const masque = getProduct("recovery-masque")!;
   const foundingPair = getProduct("the-founding-pair")!;
   const ritualSet = getProduct("the-ritual-set")!;
+  const terraCreme = getProduct("terra-radiance-creme")!;
   const featuredIcons = products.filter((p) =>
     ["cellular-cleanser", "lip-concentrate"].includes(p.slug)
   );
@@ -70,8 +71,8 @@ export default function Home() {
           the asset library yet (the only "editorial" images on hand are mislabeled "CHIAREL Rome"
           product-jar mockups, not location photography) — deliberately not forcing a mismatched
           image here rather than paper over that gap. Swap in a real place photo when one exists. */}
-      <section className="border-y border-ink/10 bg-garden py-24 text-ivory">
-        <Reveal className="mx-auto max-w-2xl px-6 text-center">
+      <section className="section-y border-y border-ink/10 bg-garden text-ivory">
+        <Reveal className="section-x-narrow text-center">
           <p className="text-[11px] uppercase tracking-[0.3em] text-champagne">
             Provenance
           </p>
@@ -94,8 +95,8 @@ export default function Home() {
       </section>
 
       {/* Evidence — the honest counterpart to a clinical-trial stat grid */}
-      <section className="bg-ivory py-28">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="section-y-lg bg-ivory">
+        <div className="section-x">
           <Reveal className="mx-auto max-w-xl text-center">
             <p className="eyebrow">Clinically Dosed. No Hidden Blends.</p>
             <h2 className="mt-3 font-serif text-3xl leading-snug">
@@ -110,8 +111,8 @@ export default function Home() {
       </section>
 
       {/* Signature Duo — the two hero treatments, no price (story, not shelf) */}
-      <section className="border-y border-ink/10 bg-white py-24">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="section-y border-y border-ink/10 bg-white">
+        <div className="section-x">
           <Reveal className="text-center">
             <p className="eyebrow">The Signature Duo</p>
             <h2 className="mt-2 font-serif text-3xl">
@@ -119,10 +120,7 @@ export default function Home() {
             </h2>
           </Reveal>
           <div className="mt-12 grid gap-10 sm:grid-cols-2">
-            {[
-              { ...essence, image: "/assets/products/essence-shore.png" },
-              { ...masque, image: "/assets/products/masque-shore.png" },
-            ].map((p, i) => {
+            {[essence, masque].map((p, i) => {
               const meta = (
                 <Link href={`/shop/${p.slug}`}>
                   <p className="mt-4 text-[11px] uppercase tracking-[0.18em] text-ink/50">
@@ -140,7 +138,7 @@ export default function Home() {
                 <Reveal key={p.slug} delay={i * 0.12}>
                   <Link href={`/shop/${p.slug}`} className="group block">
                     <div
-                      className="relative aspect-square overflow-hidden rounded-sm"
+                      className="product-frame aspect-square"
                       style={{ backgroundColor: productTint(p.color.hex) }}
                     >
                       <Image
@@ -148,7 +146,7 @@ export default function Home() {
                         alt={p.name}
                         fill
                         sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover transition duration-700 group-hover:scale-[1.03]"
+                        className="transition duration-700 group-hover:scale-[1.03]"
                       />
                       {p.badge && (
                         <span className="absolute left-3 top-3 bg-ivory/90 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-ochre">
@@ -166,8 +164,8 @@ export default function Home() {
       </section>
 
       {/* Formulated By — enlarged founder/formulator credibility block */}
-      <section className="bg-ink py-28 text-ivory">
-        <Reveal className="mx-auto max-w-2xl px-6 text-center">
+      <section className="section-y-lg bg-ink text-ivory">
+        <Reveal className="section-x-narrow text-center">
           <p className="eyebrow text-champagne">Formulated By</p>
           <h2 className="mt-3 font-serif text-4xl leading-snug">
             Grazia Savoriti
@@ -192,8 +190,8 @@ export default function Home() {
       </section>
 
       {/* Ritual carousel — paced, not a shelf */}
-      <section className="bg-ivory py-24">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="section-y bg-ivory">
+        <div className="section-x">
           <Reveal>
             <p className="eyebrow">The Ritual</p>
             <h2 className="mt-2 font-serif text-3xl">
@@ -209,16 +207,21 @@ export default function Home() {
       </section>
 
       {/* Founding Pair — the featured purchase, price shown once here */}
-      <section className="bg-champagne/25">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 px-6 py-24 md:flex-row">
-          <Reveal className="relative aspect-[4/3] w-full overflow-hidden rounded-sm md:w-1/2">
-            <Image
-              src="/assets/products/founding-pair.png"
-              alt="The Founding Pair — CHIAREL Essence™ and Terra Radiance Crème™"
-              fill
-              sizes="50vw"
-              className="object-cover"
-            />
+      <section className="section-y bg-champagne/25">
+        <div className="section-x flex flex-col items-center gap-10 md:flex-row">
+          <Reveal className="grid w-full grid-cols-2 gap-3 md:w-1/2">
+            <div
+              className="product-frame aspect-square"
+              style={{ backgroundColor: productTint(essence.color.hex) }}
+            >
+              <Image src={essence.image} alt={essence.name} fill sizes="25vw" />
+            </div>
+            <div
+              className="product-frame aspect-square"
+              style={{ backgroundColor: productTint(terraCreme.color.hex) }}
+            >
+              <Image src={terraCreme.image} alt={terraCreme.name} fill sizes="25vw" />
+            </div>
           </Reveal>
           <Reveal delay={0.15} className="w-full md:w-1/2">
             <p className="eyebrow">The Founding Pair</p>
@@ -257,8 +260,8 @@ export default function Home() {
       </section>
 
       {/* Icon Products — curated selection, not the full shelf */}
-      <section className="bg-cloud/60 py-24">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="section-y bg-cloud/60">
+        <div className="section-x">
           <Reveal>
             <p className="eyebrow">Icon Products of the House</p>
           </Reveal>
@@ -281,7 +284,7 @@ export default function Home() {
       </section>
 
       {/* Editorial — Ritual philosophy */}
-      <Reveal className="mx-auto max-w-3xl px-6 py-28 text-center">
+      <Reveal className="section-y-lg mx-auto max-w-3xl px-6 text-center">
         <section>
           <p className="eyebrow">The Philosophy</p>
           <p className="mt-5 font-serif text-3xl leading-relaxed text-ink">
@@ -304,8 +307,8 @@ export default function Home() {
         </section>
       </Reveal>
 
-      {/* House note */}
-      <Reveal className="mx-auto max-w-3xl px-6 pb-28 text-center">
+      {/* House note — no top padding: intentionally reads as one closing pair with Philosophy above */}
+      <Reveal className="mx-auto max-w-3xl px-6 pb-24 text-center md:pb-32">
         <section>
           <p className="eyebrow">The House</p>
           <p className="mt-4 font-serif text-2xl leading-relaxed">

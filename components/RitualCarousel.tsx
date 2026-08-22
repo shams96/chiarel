@@ -18,7 +18,7 @@ export default function RitualCarousel({ products }: { products: Product[] }) {
           className="group w-[72vw] flex-none snap-start sm:w-[42vw] md:w-[30vw] lg:w-[24vw]"
         >
           <div
-            className="relative aspect-[4/5] overflow-hidden rounded-sm"
+            className="product-frame aspect-[4/5]"
             style={{ backgroundColor: productTint(p.color.hex) }}
           >
             <Image
@@ -26,7 +26,7 @@ export default function RitualCarousel({ products }: { products: Product[] }) {
               alt={p.name}
               fill
               sizes="(max-width: 640px) 72vw, 30vw"
-              className="object-cover transition duration-700 group-hover:scale-[1.03]"
+              className="transition duration-700 group-hover:scale-[1.03]"
             />
           </div>
           <p className="mt-4 text-[11px] uppercase tracking-[0.2em] text-ink/50">

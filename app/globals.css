@@ -15,6 +15,37 @@ body {
   @apply text-[11px] uppercase tracking-widest2 text-ochre;
 }
 
+/* Global section-spacing scale — one source of truth for vertical rhythm,
+   so sections don't drift to ad hoc py-14/py-16/py-24/py-28 one at a time.
+   .section-y   = standard content section
+   .section-y-lg = full-bleed / hero-scale editorial moment
+   .section-x   = standard horizontal gutter + max content width */
+.section-y {
+  @apply py-20 md:py-24;
+}
+.section-y-lg {
+  @apply py-24 md:py-32;
+}
+.section-x {
+  @apply mx-auto max-w-6xl px-6;
+}
+.section-x-narrow {
+  @apply mx-auto max-w-2xl px-6;
+}
+
+/* Product image frame — consistent presentation regardless of how tightly
+   or loosely a given source packshot is cropped. object-contain + fixed
+   padding means every product reads at the same visual scale inside the
+   same frame, instead of object-cover exaggerating whatever margin the
+   source photo happens to have baked in. */
+.product-frame {
+  @apply relative overflow-hidden rounded-sm;
+}
+.product-frame img {
+  object-fit: contain !important;
+  padding: 10%;
+}
+
 /* Sticky header "glass" chrome — see .site-header reduced-transparency override below */
 .site-header {
   background-color: rgb(248 246 241 / 0.9);
