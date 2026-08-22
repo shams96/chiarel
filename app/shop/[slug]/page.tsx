@@ -4,6 +4,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getProduct, products, ritualProducts } from "@/lib/products";
 import PurchaseOptions from "@/components/PurchaseOptions";
+import StickyPurchaseBar from "@/components/StickyPurchaseBar";
+import Reveal from "@/components/Reveal";
 import { productJsonLd } from "@/lib/seo";
 import { productTint } from "@/lib/color";
 
@@ -111,9 +113,23 @@ export default function ProductPage({
         </div>
       </div>
 
-      {p.actives && <ClinicallyDosed actives={p.actives} />}
+      {p.actives && (
+        <Reveal>
+          <ClinicallyDosed actives={p.actives} />
+        </Reveal>
+      )}
       <ScienceLinks slug={p.slug} />
-      {p.ritualOrder !== null && <CompleteYourRitual currentSlug={p.slug} />}
+      {p.ritualOrder !== null && (
+        <Reveal>
+          <CompleteYourRitual currentSlug={p.slug} />
+        </Reveal>
+      )}
+      <StickyPurchaseBar
+        slug={p.slug}
+        name={p.name}
+        image={p.image}
+        subscriptionPrice={p.price.subscription}
+      />
     </div>
   );
 }

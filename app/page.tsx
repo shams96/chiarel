@@ -4,6 +4,7 @@ import { products, ritualProducts, getProduct } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import RitualCarousel from "@/components/RitualCarousel";
 import { productTint } from "@/lib/color";
+import Reveal from "@/components/Reveal";
 
 export default function Home() {
   const essence = getProduct("chiarel-essence")!;
@@ -58,15 +59,17 @@ export default function Home() {
       {/* Signature Duo — the two hero treatments, no price (story, not shelf) */}
       <section className="border-b border-ink/10 bg-ivory py-24">
         <div className="mx-auto max-w-6xl px-6">
-          <p className="eyebrow text-center">The Signature Duo</p>
-          <h2 className="mt-2 text-center font-serif text-3xl">
-            The Signature Serum. The Nightly Recovery.
-          </h2>
+          <Reveal className="text-center">
+            <p className="eyebrow">The Signature Duo</p>
+            <h2 className="mt-2 font-serif text-3xl">
+              The Signature Serum. The Nightly Recovery.
+            </h2>
+          </Reveal>
           <div className="mt-12 grid gap-10 sm:grid-cols-2">
             {[
               { ...essence, image: "/assets/products/essence-shore.png" },
               { ...masque, image: "/assets/products/masque-shore.png" },
-            ].map((p) => {
+            ].map((p, i) => {
               const meta = (
                 <Link href={`/shop/${p.slug}`}>
                   <p className="mt-4 text-[11px] uppercase tracking-[0.18em] text-ink/50">
@@ -81,7 +84,7 @@ export default function Home() {
               );
 
               return (
-                <div key={p.slug}>
+                <Reveal key={p.slug} delay={i * 0.12}>
                   <Link href={`/shop/${p.slug}`} className="group block">
                     <div
                       className="relative aspect-square overflow-hidden rounded-sm"
@@ -102,7 +105,7 @@ export default function Home() {
                     </div>
                   </Link>
                   {meta}
-                </div>
+                </Reveal>
               );
             })}
           </div>
@@ -112,7 +115,7 @@ export default function Home() {
       {/* Editorial — Provenance */}
       <section className="bg-white">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-12 px-6 py-24 md:flex-row">
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm md:w-1/2">
+          <Reveal className="relative aspect-[4/3] w-full overflow-hidden rounded-sm md:w-1/2">
             <Image
               src="/assets/editorial/hero-bright.png"
               alt="Isola del Liri, Italy — where CHIAREL formulations are made"
@@ -120,8 +123,8 @@ export default function Home() {
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
             />
-          </div>
-          <div className="w-full md:w-1/2">
+          </Reveal>
+          <Reveal delay={0.15} className="w-full md:w-1/2">
             <p className="eyebrow">Provenance</p>
             <h2 className="mt-2 font-serif text-3xl leading-snug">
               A Town Built Around a Waterfall
@@ -140,7 +143,7 @@ export default function Home() {
             >
               Read the Journal
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -151,48 +154,52 @@ export default function Home() {
             ["The Ritual, Delivered", "Subscriptions arrive on your rhythm — pause or adjust anytime"],
             ["Complimentary Shipping", "On every ritual order, with considered packaging"],
             ["Samples With Every Order", "Two treatments to discover, chosen by the House"],
-          ].map(([t, d]) => (
-            <div key={t}>
+          ].map(([t, d], i) => (
+            <Reveal key={t} delay={i * 0.1}>
               <p className="text-[11px] uppercase tracking-[0.22em] text-ochre">{t}</p>
               <p className="mt-1 text-[12px] text-ink/60">{d}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
 
       {/* Editorial — Ritual philosophy */}
-      <section className="mx-auto max-w-3xl px-6 py-28 text-center">
-        <p className="eyebrow">The Philosophy</p>
-        <p className="mt-5 font-serif text-3xl leading-relaxed text-ink">
-          &ldquo;Skin is not one thing. A house built to serve it should not
-          pretend otherwise.&rdquo;
-        </p>
-        <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-ink/70">
-          CHIAREL Intelligence™ began at a table, not a laboratory bench — the
-          working method still holds: begin with the biology in front of you,
-          not the biology the industry assumes. It is the same discipline
-          behind La Bella Figura — presenting one&rsquo;s best self, quietly,
-          without announcement.
-        </p>
-        <Link
-          href="/journal/three-skins-one-house"
-          className="mt-6 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
-        >
-          Read the Origin Story
-        </Link>
-      </section>
+      <Reveal className="mx-auto max-w-3xl px-6 py-28 text-center">
+        <section>
+          <p className="eyebrow">The Philosophy</p>
+          <p className="mt-5 font-serif text-3xl leading-relaxed text-ink">
+            &ldquo;Skin is not one thing. A house built to serve it should not
+            pretend otherwise.&rdquo;
+          </p>
+          <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-ink/70">
+            CHIAREL Intelligence™ began at a table, not a laboratory bench —
+            the working method still holds: begin with the biology in front
+            of you, not the biology the industry assumes. It is the same
+            discipline behind La Bella Figura — presenting one&rsquo;s best
+            self, quietly, without announcement.
+          </p>
+          <Link
+            href="/journal/three-skins-one-house"
+            className="mt-6 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
+          >
+            Read the Origin Story
+          </Link>
+        </section>
+      </Reveal>
 
       {/* Ritual carousel — paced, not a shelf */}
       <section className="border-t border-ink/10 bg-ivory py-24">
         <div className="mx-auto max-w-6xl px-6">
-          <p className="eyebrow">The Ritual</p>
-          <h2 className="mt-2 font-serif text-3xl">
-            Cleanse · Tone · Serum · Moisturize
-          </h2>
-          <p className="mt-4 max-w-2xl text-sm text-ink/70">
-            The ritual, delivered. A subscription keeps every step arriving
-            on your rhythm — the consistency the skin recognises.
-          </p>
+          <Reveal>
+            <p className="eyebrow">The Ritual</p>
+            <h2 className="mt-2 font-serif text-3xl">
+              Cleanse · Tone · Serum · Moisturize
+            </h2>
+            <p className="mt-4 max-w-2xl text-sm text-ink/70">
+              The ritual, delivered. A subscription keeps every step arriving
+              on your rhythm — the consistency the skin recognises.
+            </p>
+          </Reveal>
           <RitualCarousel products={ritualProducts} />
         </div>
       </section>
@@ -200,7 +207,7 @@ export default function Home() {
       {/* Editorial — Formulation */}
       <section className="bg-white">
         <div className="mx-auto flex max-w-6xl flex-col-reverse items-center gap-12 px-6 py-24 md:flex-row">
-          <div className="w-full md:w-1/2">
+          <Reveal className="w-full md:w-1/2">
             <p className="eyebrow">Formulated By</p>
             <h2 className="mt-2 font-serif text-3xl leading-snug">
               A Considered Practice
@@ -220,8 +227,8 @@ export default function Home() {
             >
               Explore the Science
             </Link>
-          </div>
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm md:w-1/2">
+          </Reveal>
+          <Reveal delay={0.15} className="relative aspect-[4/3] w-full overflow-hidden rounded-sm md:w-1/2">
             <Image
               src="/assets/editorial/hero.png"
               alt="CHIAREL™ at Isola del Liri"
@@ -229,14 +236,14 @@ export default function Home() {
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
             />
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Founding Pair — the featured purchase, price shown once here */}
       <section className="bg-champagne/25">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 px-6 py-24 md:flex-row">
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm md:w-1/2">
+          <Reveal className="relative aspect-[4/3] w-full overflow-hidden rounded-sm md:w-1/2">
             <Image
               src="/assets/products/founding-pair.png"
               alt="The Founding Pair — CHIAREL Essence™ and Terra Radiance Crème™"
@@ -244,8 +251,8 @@ export default function Home() {
               sizes="50vw"
               className="object-cover"
             />
-          </div>
-          <div className="w-full md:w-1/2">
+          </Reveal>
+          <Reveal delay={0.15} className="w-full md:w-1/2">
             <p className="eyebrow">The Founding Pair</p>
             <h2 className="mt-2 font-serif text-3xl">
               The Signature Serum &amp; The Icon
@@ -277,17 +284,21 @@ export default function Home() {
                 The complete set — ${ritualSet.price.subscription}
               </Link>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Icon Products — curated selection, not the full shelf */}
       <section className="bg-cloud/60 py-24">
         <div className="mx-auto max-w-6xl px-6">
-          <p className="eyebrow">Icon Products of the House</p>
+          <Reveal>
+            <p className="eyebrow">Icon Products of the House</p>
+          </Reveal>
           <div className="mt-10 grid gap-10 sm:grid-cols-2">
-            {featuredIcons.map((p) => (
-              <ProductCard key={p.slug} product={p} hidePrice />
+            {featuredIcons.map((p, i) => (
+              <Reveal key={p.slug} delay={i * 0.12}>
+                <ProductCard product={p} hidePrice />
+              </Reveal>
             ))}
           </div>
           <div className="mt-10 text-center">
@@ -302,20 +313,23 @@ export default function Home() {
       </section>
 
       {/* House note */}
-      <section className="mx-auto max-w-3xl px-6 py-28 text-center">
-        <p className="eyebrow">The House</p>
-        <p className="mt-4 font-serif text-2xl leading-relaxed">
-          From the waters of Isola del Liri — where the Cascata Grande falls
-          through the town itself — CHIAREL™ practices La Bella Figura: the
-          discipline of presenting one&rsquo;s best self, quietly.
-        </p>
-        <Link
-          href="/house"
-          className="mt-8 inline-block border-b border-ochre pb-1 text-[12px] uppercase tracking-[0.2em] text-ochre"
-        >
-          Discover the House
-        </Link>
-      </section>
+      <Reveal className="mx-auto max-w-3xl px-6 py-28 text-center">
+        <section>
+          <p className="eyebrow">The House</p>
+          <p className="mt-4 font-serif text-2xl leading-relaxed">
+            From the waters of Isola del Liri — where the Cascata Grande
+            falls through the town itself — CHIAREL™ practices La Bella
+            Figura: the discipline of presenting one&rsquo;s best self,
+            quietly.
+          </p>
+          <Link
+            href="/house"
+            className="mt-8 inline-block border-b border-ochre pb-1 text-[12px] uppercase tracking-[0.2em] text-ochre"
+          >
+            Discover the House
+          </Link>
+        </section>
+      </Reveal>
     </>
   );
 }
