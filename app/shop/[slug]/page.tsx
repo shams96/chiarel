@@ -116,6 +116,7 @@ export default function ProductPage({
       </div>
 
       {p.benefits && <KeyBenefits benefits={p.benefits} />}
+      {p.slug === "recovery-masque" && <IncludedSpatula />}
       {p.actives && (
         <Reveal>
           <ClinicallyDosed actives={p.actives} />
@@ -155,6 +156,32 @@ function KeyBenefits({ benefits }: { benefits: string[] }) {
             </li>
           ))}
         </ul>
+      </div>
+    </Reveal>
+  );
+}
+
+function IncludedSpatula() {
+  return (
+    <Reveal className="border-t border-ink/10 bg-white py-16">
+      <div className="mx-auto flex max-w-2xl flex-col items-center gap-8 px-6 text-center md:flex-row md:text-left">
+        <div className="relative aspect-square w-40 shrink-0 overflow-hidden rounded-sm bg-champagne/20">
+          <Image
+            src="/assets/products/applicator-spatula.png"
+            alt="CHIAREL Spatula, Champagne Gold"
+            fill
+            sizes="160px"
+            className="object-contain p-4"
+          />
+        </div>
+        <div>
+          <p className="eyebrow">The Application</p>
+          <h3 className="mt-1 font-serif text-2xl">The CHIAREL Spatula</h3>
+          <p className="mt-2 text-sm leading-relaxed text-ink/70">
+            A Champagne Gold spatula for a hygienic, precise application —
+            the ritual&rsquo;s closing gesture, done properly.
+          </p>
+        </div>
       </div>
     </Reveal>
   );
