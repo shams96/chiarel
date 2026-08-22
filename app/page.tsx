@@ -66,24 +66,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Campaign banner — full-bleed editorial moment, not a two-column layout */}
-      <section className="relative flex h-[70vh] min-h-[480px] w-full items-end overflow-hidden bg-ink">
-        <Image
-          src="/assets/editorial/hero-bright.png"
-          alt="Isola del Liri, Italy — where CHIAREL formulations are made"
-          fill
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/20 to-transparent" />
-        <Reveal className="relative z-10 mx-auto max-w-6xl px-6 pb-16 text-ivory">
+      {/* Campaign banner — text-only editorial moment. No real photo of Isola del Liri exists in
+          the asset library yet (the only "editorial" images on hand are mislabeled "CHIAREL Rome"
+          product-jar mockups, not location photography) — deliberately not forcing a mismatched
+          image here rather than paper over that gap. Swap in a real place photo when one exists. */}
+      <section className="border-y border-ink/10 bg-garden py-24 text-ivory">
+        <Reveal className="mx-auto max-w-2xl px-6 text-center">
           <p className="text-[11px] uppercase tracking-[0.3em] text-champagne">
             Provenance
           </p>
-          <h2 className="mt-3 max-w-xl font-serif text-4xl leading-tight md:text-5xl">
+          <h2 className="mt-3 font-serif text-4xl leading-tight md:text-5xl">
             A Town Built Around a Waterfall
           </h2>
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-ivory/75">
+          <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-ivory/75">
             An hour and a half from Rome, the Cascata Grande falls through
             the center of Isola del Liri itself — where every CHIAREL™
             formulation is made with our manufacturing partner, Natural You
