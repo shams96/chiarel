@@ -2,26 +2,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { products, ritualProducts, getProduct } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
-import ComingSoonPackshot from "@/components/ComingSoonPackshot";
+import RitualCarousel from "@/components/RitualCarousel";
 import { productTint } from "@/lib/color";
 
 export default function Home() {
-  const icons = products.filter((p) => p.icon);
   const essence = getProduct("chiarel-essence")!;
   const masque = getProduct("recovery-masque")!;
   const foundingPair = getProduct("the-founding-pair")!;
   const ritualSet = getProduct("the-ritual-set")!;
+  const featuredIcons = products.filter((p) =>
+    ["cellular-cleanser", "lip-concentrate"].includes(p.slug)
+  );
 
   return (
     <>
       {/* Hero — Luxury Editorial (Photography Tier 1) */}
       <section className="relative h-[85vh] min-h-[560px] w-full overflow-hidden bg-ink">
         <Image
-          src="/assets/editorial/hero-night.png"
-          alt="Recovery Masque™ at dusk"
+          src="/assets/editorial/hero-shore-duo.png"
+          alt="CHIAREL Essence™ and Recovery Masque™ at the shore"
           fill
           priority
-          className="object-cover object-[100%_center] md:object-[140%_center]"
+          className="object-cover object-[95%_55%]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/15 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 mx-auto max-w-6xl px-6 pb-16 text-ivory">
@@ -53,16 +55,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Signature Duo — the two hero treatments */}
-      <section className="border-b border-ink/10 bg-ivory py-16">
+      {/* Signature Duo — the two hero treatments, no price (story, not shelf) */}
+      <section className="border-b border-ink/10 bg-ivory py-24">
         <div className="mx-auto max-w-6xl px-6">
           <p className="eyebrow text-center">The Signature Duo</p>
           <h2 className="mt-2 text-center font-serif text-3xl">
-            The Serum. The Night.
+            The Signature Serum. The Nightly Recovery.
           </h2>
-          <div className="mt-10 grid gap-10 sm:grid-cols-2">
-            {[essence, masque].map((p) => {
-              const isComingSoonImage = p.slug === "recovery-masque";
+          <div className="mt-12 grid gap-10 sm:grid-cols-2">
+            {[
+              { ...essence, image: "/assets/products/essence-shore.png" },
+              { ...masque, image: "/assets/products/masque-shore.png" },
+            ].map((p) => {
               const meta = (
                 <Link href={`/shop/${p.slug}`}>
                   <p className="mt-4 text-[11px] uppercase tracking-[0.18em] text-ink/50">
@@ -70,23 +74,11 @@ export default function Home() {
                   </p>
                   <p className="font-serif text-2xl">{p.name}</p>
                   <p className="text-[13px] text-ink/60">{p.descriptor}</p>
-                  <p className="mt-2 text-sm">
-                    <span className="font-medium">${p.price.subscription}</span>
-                    <span className="ml-1 text-[12px] text-ink/50">
-                      with subscription · ${p.price.oneTime} one-time
-                    </span>
-                  </p>
+                  <span className="mt-2 inline-block border-b border-ochre/60 pb-0.5 text-[11px] uppercase tracking-[0.18em] text-ochre">
+                    Discover
+                  </span>
                 </Link>
               );
-
-              if (isComingSoonImage) {
-                return (
-                  <div key={p.slug}>
-                    <ComingSoonPackshot productName={p.name} color={p.color.hex} />
-                    {meta}
-                  </div>
-                );
-              }
 
               return (
                 <div key={p.slug}>
@@ -117,9 +109,44 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Editorial — Provenance */}
+      <section className="bg-white">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-12 px-6 py-24 md:flex-row">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm md:w-1/2">
+            <Image
+              src="/assets/editorial/hero-bright.png"
+              alt="Isola del Liri, Italy — where CHIAREL formulations are made"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="w-full md:w-1/2">
+            <p className="eyebrow">Provenance</p>
+            <h2 className="mt-2 font-serif text-3xl leading-snug">
+              A Town Built Around a Waterfall
+            </h2>
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-ink/70">
+              An hour and a half from Rome, in the Liri valley, the Cascata
+              Grande falls through the center of Isola del Liri itself. It is
+              here, with our manufacturing partner Natural You Srl, that
+              every CHIAREL™ formulation is made — water, craft, and
+              proximity to the people making the decisions, rather than
+              formulation outsourced to distance.
+            </p>
+            <Link
+              href="/journal/isola-del-liri-waterfall"
+              className="mt-6 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
+            >
+              Read the Journal
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Value props */}
-      <section className="border-b border-ink/10 bg-white/60">
-        <div className="mx-auto grid max-w-6xl gap-6 px-6 py-8 text-center sm:grid-cols-3">
+      <section className="border-y border-ink/10 bg-cloud/40">
+        <div className="mx-auto grid max-w-6xl gap-8 px-6 py-14 text-center sm:grid-cols-3">
           {[
             ["The Ritual, Delivered", "Subscriptions arrive on your rhythm — pause or adjust anytime"],
             ["Complimentary Shipping", "On every ritual order, with considered packaging"],
@@ -133,43 +160,82 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Ritual strip */}
-      <section className="mx-auto max-w-6xl px-6 py-20">
-        <p className="eyebrow">The Ritual</p>
-        <h2 className="mt-2 font-serif text-3xl">
-          Cleanse · Tone · Serum · Moisturize
-        </h2>
-        <div className="mt-10 grid gap-8 md:grid-cols-5">
-          {ritualProducts.map((p) => (
-            <Link key={p.slug} href={`/shop/${p.slug}`} className="group">
-              <div
-                className="relative aspect-square overflow-hidden rounded-sm"
-                style={{ backgroundColor: productTint(p.color.hex) }}
-              >
-                <Image
-                  src={p.image}
-                  alt={p.name}
-                  fill
-                  sizes="20vw"
-                  className="object-cover transition duration-700 group-hover:scale-105"
-                />
-              </div>
-              <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-ink/50">
-                {p.step}
-              </p>
-              <p className="font-serif text-lg leading-tight">{p.name}</p>
-            </Link>
-          ))}
-        </div>
-        <p className="mt-10 max-w-2xl text-sm text-ink/70">
-          The ritual, delivered. A subscription keeps every step arriving on
-          your rhythm — the consistency the skin recognises.
+      {/* Editorial — Ritual philosophy */}
+      <section className="mx-auto max-w-3xl px-6 py-28 text-center">
+        <p className="eyebrow">The Philosophy</p>
+        <p className="mt-5 font-serif text-3xl leading-relaxed text-ink">
+          &ldquo;Skin is not one thing. A house built to serve it should not
+          pretend otherwise.&rdquo;
         </p>
+        <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-ink/70">
+          CHIAREL Intelligence™ began at a table, not a laboratory bench — the
+          working method still holds: begin with the biology in front of you,
+          not the biology the industry assumes. It is the same discipline
+          behind La Bella Figura — presenting one&rsquo;s best self, quietly,
+          without announcement.
+        </p>
+        <Link
+          href="/journal/three-skins-one-house"
+          className="mt-6 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
+        >
+          Read the Origin Story
+        </Link>
       </section>
 
-      {/* Ritual Set */}
+      {/* Ritual carousel — paced, not a shelf */}
+      <section className="border-t border-ink/10 bg-ivory py-24">
+        <div className="mx-auto max-w-6xl px-6">
+          <p className="eyebrow">The Ritual</p>
+          <h2 className="mt-2 font-serif text-3xl">
+            Cleanse · Tone · Serum · Moisturize
+          </h2>
+          <p className="mt-4 max-w-2xl text-sm text-ink/70">
+            The ritual, delivered. A subscription keeps every step arriving
+            on your rhythm — the consistency the skin recognises.
+          </p>
+          <RitualCarousel products={ritualProducts} />
+        </div>
+      </section>
+
+      {/* Editorial — Formulation */}
+      <section className="bg-white">
+        <div className="mx-auto flex max-w-6xl flex-col-reverse items-center gap-12 px-6 py-24 md:flex-row">
+          <div className="w-full md:w-1/2">
+            <p className="eyebrow">Formulated By</p>
+            <h2 className="mt-2 font-serif text-3xl leading-snug">
+              A Considered Practice
+            </h2>
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-ink/70">
+              Every CHIAREL™ formulation is developed under the guidance of
+              Grazia Savoriti, a pharmacist with deep expertise in cosmetic
+              and nutraceutical research, and produced in small, fresh
+              batches in Isola del Liri — made to order rather than held in
+              standing inventory. The Cellular Intelligence Complex™ at the
+              heart of CHIAREL Essence™ is formulated to support the
+              skin&rsquo;s own regulatory processes.
+            </p>
+            <Link
+              href="/science"
+              className="mt-6 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
+            >
+              Explore the Science
+            </Link>
+          </div>
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm md:w-1/2">
+            <Image
+              src="/assets/editorial/hero.png"
+              alt="CHIAREL™ at Isola del Liri"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Founding Pair — the featured purchase, price shown once here */}
       <section className="bg-champagne/25">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 px-6 py-16 md:flex-row">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 px-6 py-24 md:flex-row">
           <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm md:w-1/2">
             <Image
               src="/assets/products/founding-pair.png"
@@ -215,20 +281,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Icon Products */}
-      <section className="bg-cloud/60 py-20">
+      {/* Icon Products — curated selection, not the full shelf */}
+      <section className="bg-cloud/60 py-24">
         <div className="mx-auto max-w-6xl px-6">
           <p className="eyebrow">Icon Products of the House</p>
-          <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {icons.map((p) => (
-              <ProductCard key={p.slug} product={p} />
+          <div className="mt-10 grid gap-10 sm:grid-cols-2">
+            {featuredIcons.map((p) => (
+              <ProductCard key={p.slug} product={p} hidePrice />
             ))}
+          </div>
+          <div className="mt-10 text-center">
+            <Link
+              href="/shop"
+              className="inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
+            >
+              See the Full House
+            </Link>
           </div>
         </div>
       </section>
 
       {/* House note */}
-      <section className="mx-auto max-w-3xl px-6 py-24 text-center">
+      <section className="mx-auto max-w-3xl px-6 py-28 text-center">
         <p className="eyebrow">The House</p>
         <p className="mt-4 font-serif text-2xl leading-relaxed">
           From the waters of Isola del Liri — where the Cascata Grande falls
