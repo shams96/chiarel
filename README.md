@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+CHIAREL™ — Next.js storefront with a Prisma/SQLite backend.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
+npm run db:migrate   # creates prisma/dev.db and applies the schema
+npm run db:seed      # loads data/products.json into the database
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Backend
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Database**: SQLite via Prisma (`prisma/schema.prisma`). Product, Cart, CartItem, Order, and OrderItem models.
+- **Middleware** (`middleware.ts`): assigns a `chiarel_cart_id` session cookie on first visit and sets baseline security headers.
+- **API routes**:
+  - `GET/POST /api/products` — product catalog
+  - `GET/POST /api/cart`, `PATCH/DELETE /api/cart/[itemId]` — server-persisted cart, scoped to the session cookie
+  - `POST /api/checkout` — creates an `Order` from the current cart (no live payment processing — see below)
+- `npm run db:studio` opens Prisma Studio to inspect data directly.
+
+Checkout intentionally stops short of charging a card: it records a real `Order` row and clears the cart, but actual payment processing is deferred to the CHIAREL Shopify boutique (Decision 021), matching the on-site copy.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Prisma Documentation](https://www.prisma.io/docs)
