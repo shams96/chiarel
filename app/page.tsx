@@ -21,42 +21,44 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero — full viewport, centered, minimal. One statement, one CTA. */}
-      <section className="relative flex h-screen min-h-[640px] w-full items-center justify-center overflow-hidden bg-ink">
+      {/* Hero — capped height so this photo's crop doesn't over-zoom on tall viewports; text anchored left, clear of the products on the right. */}
+      <section className="relative flex h-[82vh] max-h-[760px] min-h-[560px] w-full items-center overflow-hidden bg-ink">
         <Image
           src="/assets/editorial/hero-shore-duo.png"
           alt="CHIAREL Essence™ and Recovery Masque™ at the shore"
           fill
           priority
-          className="object-cover object-[80%_50%] opacity-90"
+          className="object-cover object-[88%_50%]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/25 to-ink/60" />
-        <div className="relative z-10 mx-auto max-w-3xl px-6 text-center text-ivory">
-          <p className="text-[12px] uppercase tracking-[0.4em] text-champagne">
-            House of Skin Intelligence™
-          </p>
-          <h1 className="mt-6 font-serif text-6xl leading-[1.05] md:text-7xl">
-            Advancing
-            <br />
-            Cellular Clarity™
-          </h1>
-          <p className="mx-auto mt-6 max-w-lg text-[15px] leading-relaxed text-ivory/80">
-            Intelligent formulations, born at Isola del Liri, Italy — made to
-            support the skin against Modern Biological Stress.
-          </p>
-          <div className="mt-10 flex flex-col items-center gap-4">
-            <Link
-              href="/ritual"
-              className="inline-block border border-champagne px-10 py-4 text-[12px] uppercase tracking-[0.3em] text-champagne transition hover:bg-champagne hover:text-ink"
-            >
-              Enter the Ritual
-            </Link>
-            <Link
-              href="/assessment"
-              className="text-[11px] uppercase tracking-[0.2em] text-ivory/70 underline decoration-champagne/50 underline-offset-4 hover:text-champagne"
-            >
-              Not sure where to start? Take the Skin Assessment
-            </Link>
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/70 via-ink/25 to-transparent" />
+        <div className="relative z-10 mx-auto w-full max-w-6xl px-6">
+          <div className="max-w-md text-ivory">
+            <p className="text-[12px] uppercase tracking-[0.4em] text-champagne">
+              House of Skin Intelligence™
+            </p>
+            <h1 className="mt-6 font-serif text-5xl leading-[1.05] md:text-6xl">
+              Advancing
+              <br />
+              Cellular Clarity™
+            </h1>
+            <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-ivory/80">
+              Intelligent formulations, born at Isola del Liri, Italy — made
+              to support the skin against Modern Biological Stress.
+            </p>
+            <div className="mt-10 flex flex-col items-start gap-4">
+              <Link
+                href="/ritual"
+                className="inline-block border border-champagne px-10 py-4 text-[12px] uppercase tracking-[0.3em] text-champagne transition hover:bg-champagne hover:text-ink"
+              >
+                Enter the Ritual
+              </Link>
+              <Link
+                href="/assessment"
+                className="text-[11px] uppercase tracking-[0.2em] text-ivory/70 underline decoration-champagne/50 underline-offset-4 hover:text-champagne"
+              >
+                Not sure where to start? Take the Skin Assessment
+              </Link>
+            </div>
           </div>
         </div>
         <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[10px] uppercase tracking-[0.3em] text-ivory/50">
