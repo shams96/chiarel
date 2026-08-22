@@ -77,13 +77,14 @@ export default function Home() {
             Provenance
           </p>
           <h2 className="mt-3 font-serif text-4xl leading-tight md:text-5xl">
-            A Town Built Around a Waterfall
+            CHIAREL™ Is Made at the Water&rsquo;s Source
           </h2>
           <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-ivory/75">
-            An hour and a half from Rome, the Cascata Grande falls through
-            the center of Isola del Liri itself — where every CHIAREL™
-            formulation is made with our manufacturing partner, Natural You
-            Srl.
+            Every CHIAREL™ formulation is made in one place: alongside the
+            Cascata Grande, the waterfall that runs through the center of
+            Isola del Liri, Italy, with our manufacturing partner Natural
+            You Srl — water, craft, and proximity to the people making the
+            decisions, rather than formulation outsourced to distance.
           </p>
           <Link
             href="/journal/isola-del-liri-waterfall"
