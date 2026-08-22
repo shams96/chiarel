@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -17,15 +16,10 @@ export default function WaterfallPage() {
         A Town Built Around a Waterfall
       </h1>
 
-      <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-sm">
-        <Image
-          src="/assets/editorial/hero-bright.png"
-          alt="Isola del Liri, Italy"
-          fill
-          sizes="100vw"
-          className="object-cover"
-        />
-      </div>
+      {/* No real photo of Isola del Liri exists in the asset library — the prior
+          image here ("hero-bright.png") was a mislabeled product-jar mockup, not
+          a place photo. Deliberately text-only until real location photography
+          exists — the article ironically deserves better than a fake jar. */}
 
       <div className="mt-10 space-y-6 text-sm leading-relaxed text-ink/80">
         <p>

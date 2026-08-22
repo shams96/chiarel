@@ -42,13 +42,13 @@ export const metadata: Metadata = {
     title: `${SITE_NAME} — House of Skin Intelligence™`,
     description,
     url: SITE_URL,
-    images: [{ url: "/assets/editorial/hero-night.png", width: 1264, height: 842 }],
+    images: [{ url: "/assets/editorial/hero-shore-duo.png", width: 1536, height: 934 }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE_NAME} — House of Skin Intelligence™`,
     description,
-    images: ["/assets/editorial/hero-night.png"],
+    images: ["/assets/editorial/hero-shore-duo.png"],
   },
   robots: { index: true, follow: true },
 };

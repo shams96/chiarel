@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export const metadata = { title: "The House", alternates: { canonical: "/house" } };
 
 export default function HousePage() {
@@ -8,15 +6,9 @@ export default function HousePage() {
       <p className="eyebrow">Provenance</p>
       <h1 className="mt-2 font-serif text-4xl">The House</h1>
 
-      <div className="relative mt-10 aspect-[21/9] overflow-hidden rounded-sm">
-        <Image
-          src="/assets/editorial/hero.png"
-          alt="CHIAREL™ at Isola del Liri"
-          fill
-          sizes="100vw"
-          className="object-cover"
-        />
-      </div>
+      {/* No real photo of Isola del Liri exists in the asset library — the prior
+          image here ("hero.png") was a mislabeled product-jar mockup, not a place
+          photo. Deliberately text-only until real location photography exists. */}
 
       <div className="mt-12 space-y-10 text-sm leading-relaxed text-ink/80">
         <section>
