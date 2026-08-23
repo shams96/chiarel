@@ -27,8 +27,7 @@ export default function AssessmentPage() {
 
     return (
       <div className="mx-auto max-w-3xl px-6 py-16">
-        <p className="eyebrow">CHIAREL Skin Assessment™</p>
-        <h1 className="mt-2 font-serif text-4xl">Your Results</h1>
+        <h1 className="font-serif text-4xl">Your Results</h1>
         <p className="mt-3 max-w-xl text-sm text-ink/70">
           Based on a four-axis dermatological framework (barrier &amp; sebum,
           reactivity, pigment tendency, structural resilience), here is what
@@ -37,7 +36,7 @@ export default function AssessmentPage() {
 
         <dl className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
           {axisScores.map((a) => (
-            <div key={a.axis} className="border border-ink/10 p-3 text-center">
+            <div key={a.axis} className="card-elevated rounded-md bg-white p-3 text-center">
               <dt className="text-[10px] uppercase tracking-[0.14em] text-ink/50">
                 {a.axis}
               </dt>
@@ -47,7 +46,7 @@ export default function AssessmentPage() {
         </dl>
 
         <div className="mt-12 space-y-8">
-          <p className="eyebrow">Recommended For You</p>
+          <h2 className="font-serif text-xl">Recommended for you</h2>
           {recommendations.map((r) => {
             const p = getProduct(r.slug);
             if (!p) return null;
@@ -65,7 +64,7 @@ export default function AssessmentPage() {
                   <div className="mt-3 flex items-center gap-4">
                     <Link
                       href={`/shop/${p.slug}`}
-                      className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
+                      className="tabular-nums border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
                     >
                       View — ${p.price.subscription} with subscription
                     </Link>
@@ -121,7 +120,7 @@ export default function AssessmentPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-16">
-      <p className="eyebrow">CHIAREL Skin Assessment™</p>
+      <p className="text-sm text-ink/50">CHIAREL Skin Assessment™</p>
       <div className="mt-2 flex items-center gap-3">
         <div className="h-px flex-1 bg-ink/10">
           <div

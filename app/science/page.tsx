@@ -28,8 +28,10 @@ const complexes = [
 export default function SciencePage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-16">
-      <p className="eyebrow">CHIAREL Intelligence™</p>
-      <h1 className="mt-2 font-serif text-4xl">The Science</h1>
+      <h1 className="font-serif text-4xl">The Science</h1>
+      <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/40">
+        CHIAREL Intelligence™
+      </p>
       <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/75">
         CHIAREL™ formulations are built to one purpose: Advancing Cellular
         Clarity™ — supporting the skin&rsquo;s intelligence against Modern

@@ -2,13 +2,14 @@
 
 import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
-import { productTint, isDarkTint } from "@/lib/color";
 
-export default function ComingSoonPackshot(props: {
-  productName: string;
-  color: string;
-}) {
+/**
+ * The Founding 100 capture card. Deliberately plain — no product color tint,
+ * no restated "Coming Soon" heading — because it now sits inside a hero that
+ * already carries the headline and imagery; this card's only job is to be
+ * the fastest possible path from "I want in" to a saved signup.
+ */
+export default function ComingSoonPackshot(props: { source: string }) {
   return (
     <Suspense fallback={<ComingSoonPackshotInner {...props} referredBy="" />}>
       <ComingSoonPackshotWithReferral {...props} />
@@ -16,22 +17,17 @@ export default function ComingSoonPackshot(props: {
   );
 }
 
-function ComingSoonPackshotWithReferral(props: {
-  productName: string;
-  color: string;
-}) {
+function ComingSoonPackshotWithReferral(props: { source: string }) {
   const searchParams = useSearchParams();
   const referredBy = searchParams.get("ref") || "";
   return <ComingSoonPackshotInner {...props} referredBy={referredBy} />;
 }
 
 function ComingSoonPackshotInner({
-  productName,
-  color,
+  source,
   referredBy,
 }: {
-  productName: string;
-  color: string;
+  source: string;
   referredBy: string;
 }) {
   const [name, setName] = useState("");
@@ -51,22 +47,13 @@ function ComingSoonPackshotInner({
       const res = await fetch("/api/founding-list", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          phone,
-          social,
-          referredBy,
-          source: `${productName} — Coming Soon`,
-        }),
+        body: JSON.stringify({ name, email, phone, social, referredBy, source }),
       });
       setStatus(res.ok ? "done" : "error");
     } catch {
       setStatus("error");
     }
   }
-
-  const dark = isDarkTint(color);
 
   const shareUrl =
     typeof window !== "undefined"
@@ -91,109 +78,81 @@ function ComingSoonPackshotInner({
     setTimeout(() => setShareCopied(false), 2500);
   }
 
-  return (
-    <div
-      className="relative flex aspect-square flex-col items-center justify-center overflow-hidden rounded-sm px-6 text-center"
-      style={{ backgroundColor: productTint(color) }}
-    >
-      <p
-        className={`text-[10px] uppercase tracking-[0.22em] ${dark ? "text-ivory/70" : "text-ink/50"}`}
-      >
-        {productName} — The Full Portrait
-      </p>
-      <p className={`mt-1 font-serif text-2xl ${dark ? "text-ivory" : "text-ink/80"}`}>
-        Coming Soon
-      </p>
-      <p
-        className={`mt-3 max-w-[220px] text-[12px] leading-relaxed ${dark ? "text-ivory/80" : "text-ink/60"}`}
-      >
-        Be one of the first 100 Founding Members: {productName} at half its
-        price. Share your result, and we return the rest.{" "}
-        <Link
-          href="/founding-100"
-          className={`border-b ${dark ? "border-champagne text-champagne" : "border-ochre text-ochre"}`}
+  if (status === "done") {
+    return (
+      <div className="card-elevated flex w-full flex-col items-center gap-4 rounded-md bg-white p-8 text-center">
+        <p className="font-serif text-xl text-ink">
+          You&rsquo;re on the list — welcome to the House.
+        </p>
+        <p className="max-w-xs text-[13px] leading-relaxed text-ink/60">
+          Know someone who&rsquo;d love this? Send them your link — if they
+          join, it helps both of you stand out as founding voices of the
+          House.
+        </p>
+        <button
+          onClick={handleShare}
+          className="btn-press w-full max-w-xs border border-ochre px-4 py-3 text-[12px] uppercase tracking-[0.2em] text-ochre transition hover:bg-ochre hover:text-white"
         >
-          See the terms
-        </Link>
-        .
-      </p>
+          {shareCopied ? "Link copied" : "Share with a friend"}
+        </button>
+      </div>
+    );
+  }
 
-      {status === "done" ? (
-        <div className="mt-4 flex w-full max-w-[240px] flex-col items-center gap-3">
-          <p className={`text-[12px] ${dark ? "text-champagne" : "text-ochre"}`}>
-            You&rsquo;re on the list — welcome to the House.
-          </p>
-          <p className={`text-[11px] leading-relaxed ${dark ? "text-ivory/80" : "text-ink/60"}`}>
-            Know someone who&rsquo;d love this? Send them your link — if
-            they join, it helps both of you stand out as founding voices of
-            the House.
-          </p>
-          <button
-            onClick={handleShare}
-            className={`w-full border px-3 py-2 text-[11px] uppercase tracking-[0.16em] transition ${
-              dark
-                ? "border-champagne text-champagne hover:bg-champagne hover:text-ink"
-                : "border-ochre text-ochre hover:bg-ochre hover:text-white"
-            }`}
-          >
-            {shareCopied ? "Link copied" : "Share with a friend"}
-          </button>
-        </div>
-      ) : (
-        <form
-          onSubmit={handleSubmit}
-          className="mt-4 flex w-full max-w-[240px] flex-col gap-2"
-        >
-          {referredBy && (
-            <p className={`text-[11px] ${dark ? "text-ivory/70" : "text-ink/50"}`}>
-              Referred by{" "}
-              <span className={dark ? "text-champagne" : "text-ochre"}>{referredBy}</span>
-            </p>
-          )}
-          <input
-            type="text"
-            required
-            placeholder="First name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="border border-ink/20 bg-white/90 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
-          />
-          <input
-            type="email"
-            required
-            placeholder="Your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="border border-ink/20 bg-white/90 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
-          />
-          <input
-            type="tel"
-            placeholder="Phone (optional)"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className="border border-ink/20 bg-white/90 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
-          />
-          <input
-            type="text"
-            placeholder="Instagram or TikTok (optional)"
-            value={social}
-            onChange={(e) => setSocial(e.target.value)}
-            className="border border-ink/20 bg-white/90 px-3 py-2 text-[13px] text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
-          />
-          <button
-            type="submit"
-            disabled={status === "loading"}
-            className="border border-ochre bg-ochre px-3 py-2 text-[11px] uppercase tracking-[0.16em] text-white transition hover:opacity-90 disabled:opacity-50"
-          >
-            {status === "loading" ? "Joining…" : "Join the Founding 100"}
-          </button>
-          {status === "error" && (
-            <p className="text-[11px] text-red-700">
-              Something went wrong — please try again.
-            </p>
-          )}
-        </form>
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="card-elevated w-full rounded-md bg-white p-8"
+    >
+      {referredBy && (
+        <p className="mb-4 text-[12px] text-ink/50">
+          Referred by <span className="text-ochre">{referredBy}</span>
+        </p>
       )}
-    </div>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <input
+          type="text"
+          required
+          placeholder="First name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
+        />
+        <input
+          type="email"
+          required
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
+        />
+        <input
+          type="tel"
+          placeholder="Phone (optional)"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
+        />
+        <input
+          type="text"
+          placeholder="Instagram or TikTok (optional)"
+          value={social}
+          onChange={(e) => setSocial(e.target.value)}
+          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
+        />
+      </div>
+      <button
+        type="submit"
+        disabled={status === "loading"}
+        className="btn-press mt-3 w-full bg-ink py-4 text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre disabled:cursor-wait disabled:opacity-60"
+      >
+        {status === "loading" ? "Claiming your place…" : "Claim your place"}
+      </button>
+      {status === "error" && (
+        <p className="mt-2 text-[12px] text-ochre" role="alert">
+          Something went wrong — please try again.
+        </p>
+      )}
+    </form>
   );
 }

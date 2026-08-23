@@ -18,8 +18,13 @@
       "subscription": 78,
       "oneTime": 98
     },
-    "image": "/assets/products/cellular-cleanser.png",
+    "image": "/assets/products/cellular-cleanser-shore.png",
     "blurb": "A gentle daily cleanser that supports the skin barrier while lifting away impurities — the first gesture of the ritual.",
+    "benefits": [
+      "Cleanses without disrupting the skin's natural barrier",
+      "Supports the skin's microbiome with a prebiotic complex",
+      "Leaves skin feeling calm — never tight or stripped"
+    ],
     "icon": true,
     "actives": [
       {
@@ -51,8 +56,13 @@
       "subscription": 70,
       "oneTime": 88
     },
-    "image": "/assets/products/cellular-mist.png",
+    "image": "/assets/products/cellular-mist-shore.png",
     "blurb": "A conditioning mist that optimizes skin receptivity, preparing the complexion for treatment.",
+    "benefits": [
+      "Delivers a fine, fast-absorbing layer of hydration",
+      "Prepares skin to receive the treatment steps that follow",
+      "Refreshes throughout the day without residue"
+    ],
     "icon": false,
     "actives": [
       {
@@ -77,13 +87,18 @@
     "line": "Restore™",
     "size": "30 ml / 1.0 fl. oz.",
     "price": {
-      "subscription": 116,
-      "oneTime": 145
+      "subscription": 151,
+      "oneTime": 189
     },
-    "image": "/assets/products/chiarel-essence.png",
+    "image": "/assets/products/essence-shore.png",
     "blurb": "The Signature Serum of the House. A concentrated treatment that supports Cellular Clarity™ at the heart of the ritual.",
     "role": "Signature Serum of the House",
     "badge": "Signature Serum",
+    "benefits": [
+      "Supports the skin's visible firmness and texture",
+      "Reinforces barrier function with a postbiotic complex",
+      "The concentrated treatment layer at the heart of the ritual"
+    ],
     "icon": true,
     "actives": [
       {
@@ -115,10 +130,15 @@
       "subscription": 126,
       "oneTime": 158
     },
-    "image": "/assets/products/terra-radiance-creme.png",
+    "image": "/assets/products/terra-radiance-creme-shore.png",
     "blurb": "The Icon Product of the House. A daily crème that supports radiance and resilience against Modern Biological Stress™.",
     "role": "Icon Product",
     "badge": "Icon of the House",
+    "benefits": [
+      "Supports the skin barrier with ceramide and niacinamide",
+      "Helps defend against everyday environmental stress",
+      "Leaves skin feeling comfortable through the day"
+    ],
     "icon": true,
     "actives": [
       {
@@ -150,10 +170,15 @@
       "subscription": 118,
       "oneTime": 148
     },
-    "image": "/assets/products/recovery-masque.png",
+    "image": "/assets/products/masque-shore.png",
     "blurb": "An overnight masque that strengthens and supports recovery while you rest — the ritual's closing gesture.",
     "role": "Night Recovery Hero",
     "badge": "Night Icon",
+    "benefits": [
+      "Supports overnight recovery while you rest",
+      "Panthenol helps soothe and replenish moisture",
+      "The ritual's closing gesture, formulated for night"
+    ],
     "icon": true,
     "actives": [
       {
@@ -185,8 +210,13 @@
       "subscription": 46,
       "oneTime": 58
     },
-    "image": "/assets/products/lip-concentrate.png",
+    "image": "/assets/products/lip-concentrate-shore.png",
     "blurb": "A dual-action treatment that supports volume and radiance. Standalone — beyond the face ritual.",
+    "benefits": [
+      "Dual-action treatment for volume and radiance",
+      "Lightweight, non-sticky wear",
+      "Complements the facial ritual, used any time"
+    ],
     "badge": "New",
     "icon": true
   },
@@ -206,10 +236,10 @@
     "line": "",
     "size": "Two full-size treatments",
     "price": {
-      "subscription": 212,
-      "oneTime": 303
+      "subscription": 243,
+      "oneTime": 347
     },
-    "image": "/assets/products/founding-pair.png",
+    "image": "/assets/products/founding-pair-shore.png",
     "blurb": "The Signature Serum of the House paired with its Icon — CHIAREL Essence™ and Terra Radiance Crème™, delivered together every 45 days. The essential ritual, in two gestures.",
     "badge": "Founding Pair",
     "set": true,
@@ -231,10 +261,10 @@
     "line": "",
     "size": "Four full-size treatments",
     "price": {
-      "subscription": 342,
-      "oneTime": 489
+      "subscription": 372,
+      "oneTime": 533
     },
-    "image": "/assets/products/ritual-set.png",
+    "image": "/assets/products/ritual-set-shore.png",
     "blurb": "Every step of the daily ritual, delivered together on your rhythm. The complete practice of the House — Cellular Cleanser™, Cellular Mist™, CHIAREL Essence™, and Terra Radiance Crème™.",
     "badge": "The Ritual, Complete",
     "set": true,

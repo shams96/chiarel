@@ -36,8 +36,7 @@ const entries = [
 export default function JournalPage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-16">
-      <p className="eyebrow">Journal</p>
-      <h1 className="mt-2 font-serif text-4xl">Notes from the House</h1>
+      <h1 className="font-serif text-4xl">Notes from the House</h1>
       <div className="mt-10 divide-y divide-ink/10">
         {entries.map((e) => (
           <article key={e.slug} className="py-8">

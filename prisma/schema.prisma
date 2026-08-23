@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  slug        String   @id
+  sku         String   @unique
+  name        String
+  descriptor  String
+  step        String
+  ritualOrder Int?
+  family      String
+  colorName   String
+  colorHex    String
+  complex     String
+  line        String
+  size        String
+  priceSub    Int
+  priceOneTime Int
+  image       String
+  blurb       String
+  role        String?
+  badge       String?
+  isSet       Boolean  @default(false)
+  isIcon      Boolean  @default(false)
+  actives     Json?
+
+  cartItems   CartItem[]
+  orderItems  OrderItem[]
+}
+
+model Cart {
+  id        String     @id @default(cuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  items     CartItem[]
+}
+
+model CartItem {
+  id          String  @id @default(cuid())
+  cart        Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  cartId      String
+  product     Product @relation(fields: [productSlug], references: [slug])
+  productSlug String
+  mode        String
+  qty         Int     @default(1)
+
+  @@unique([cartId, productSlug])
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  createdAt     DateTime    @default(now())
+  status        String      @default("pending")
+  email         String
+  firstName     String
+  lastName      String
+  address       String
+  city          String
+  state         String
+  zip           String
+  subtotal      Int
+  savings       Int
+  shipping      Int
+  total         Int
+  items         OrderItem[]
+}
+
+model OrderItem {
+  id          String  @id @default(cuid())
+  order       Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId     String
+  product     Product @relation(fields: [productSlug], references: [slug])
+  productSlug String
+  mode        String
+  qty         Int
+  unitPrice   Int
+}
+
+model FoundingSignup {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  name       String
+  email      String
+  phone      String?
+  social     String?
+  referredBy String?
+  source     String?
+}

@@ -20,6 +20,7 @@ export type Product = {
   set?: boolean;
   icon: boolean;
   actives?: { name: string; percent: string | null }[];
+  benefits?: string[];
 };
 
 export const products = data as Product[];

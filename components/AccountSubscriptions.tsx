@@ -106,7 +106,7 @@ export default function AccountSubscriptions() {
     <>
       <div className="mt-12 space-y-5">
         {subscriptions.length === 0 && (
-          <div className="border border-ink/10 bg-white/60 p-8 text-center text-sm text-ink/60">
+          <div className="card-elevated rounded-md bg-white p-8 text-center text-sm text-ink/60">
             No active subscriptions.
           </div>
         )}
@@ -118,7 +118,7 @@ export default function AccountSubscriptions() {
           return (
             <div
               key={sub.id}
-              className={`border border-ink/10 bg-white/60 p-6 transition-opacity ${
+              className={`card-elevated rounded-md bg-white p-6 transition-opacity ${
                 sub.paused ? "opacity-55" : "opacity-100"
               }`}
             >
@@ -140,7 +140,7 @@ export default function AccountSubscriptions() {
                   <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ochre">
                     Ritual Plan
                   </p>
-                  <p className="mt-0.5 text-[12px] text-ink/50">
+                  <p className="tabular-nums mt-0.5 text-[12px] text-ink/50">
                     Delivered every {CADENCE_DAYS} days · $
                     {product.price.subscription}/delivery
                   </p>
