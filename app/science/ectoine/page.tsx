@@ -77,6 +77,17 @@ export default function EctoinePage() {
             UV exposure, and pollution-related stress. It does not penetrate
             deeply and is not classified as a traditional antioxidant.
           </p>
+          <p className="mt-3 text-[12px] text-ink/50">
+            Source:{" "}
+            <a
+              href="https://pubmed.ncbi.nlm.nih.gov/?term=ectoine+skin+hydration"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-b border-ink/30 hover:border-ochre hover:text-ochre"
+            >
+              Published research on Ectoine and skin hydration, PubMed (NIH)
+            </a>
+          </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-2xl">Associated outcomes</h2>

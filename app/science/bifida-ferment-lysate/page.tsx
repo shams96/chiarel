@@ -70,6 +70,17 @@ export default function BifidaPage() {
             filaggrin, involucrin, and tight-junction components — and
             modulating inflammatory signaling associated with reactivity.
           </p>
+          <p className="mt-3 text-[12px] text-ink/50">
+            Source:{" "}
+            <a
+              href="https://pubmed.ncbi.nlm.nih.gov/?term=bifidobacterium+ferment+lysate+skin"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-b border-ink/30 hover:border-ochre hover:text-ochre"
+            >
+              Published research on Bifidobacterium ferment lysate and skin barrier proteins, PubMed (NIH)
+            </a>
+          </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-2xl">Associated outcomes</h2>

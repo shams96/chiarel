@@ -6,6 +6,40 @@ import RitualCarousel from "@/components/RitualCarousel";
 import EvidenceGrid from "@/components/EvidenceGrid";
 import Reveal from "@/components/Reveal";
 import { productTint } from "@/lib/color";
+import { faqJsonLd } from "@/lib/seo";
+
+const faqs = [
+  {
+    question: "How much does CHIAREL cost?",
+    answer:
+      "CHIAREL Essence™, the Signature Serum, is $151 with a 45-day subscription or $189 one-time. The Founding Pair (Essence + Terra Radiance Crème) is $243 subscription or $347 one-time, and individual products range from $46 for the Lip Concentrate to $372 for the complete five-step Ritual Set. Subscription pricing sets a recurring 45-day delivery cadence; one-time purchase carries no commitment.",
+  },
+  {
+    question: "What is CHIAREL made of?",
+    answer:
+      "Every formula lists its actives and concentrations plainly — nothing is held back as an undisclosed \"proprietary blend.\" CHIAREL Essence™ is built around Palmitoyl Pentapeptide-4 (3%) and Bioactive Ferment Lysate (0.30%); Terra Radiance Crème™ carries Ceramide NP (0.8%) and Niacinamide. Each product page states its complete active ingredient list and percentage where applicable.",
+  },
+  {
+    question: "Who formulates CHIAREL?",
+    answer:
+      "CHIAREL is formulated by Grazia Savoriti, CHIAREL's pharmacist specializing in cosmetic and nutraceutical research. Every formulation is developed under her guidance and produced in small, fresh batches in Isola del Liri, Italy — made to order rather than held in standing inventory.",
+  },
+  {
+    question: "Where can I buy CHIAREL?",
+    answer:
+      "CHIAREL is sold exclusively at chiarel.com. Products are made to order in Isola del Liri, Italy and shipped directly — CHIAREL is not currently distributed through third-party retailers.",
+  },
+  {
+    question: "How does the CHIAREL subscription work?",
+    answer:
+      "Choosing subscription pricing on any product sets a recurring 45-day delivery at the discounted subscription rate. Every product is also available as a one-time purchase at full price, with no recurring commitment.",
+  },
+  {
+    question: "Where is CHIAREL made?",
+    answer:
+      "CHIAREL formulas are produced in Isola del Liri, Italy, with manufacturing partner Natural You Srl, using water drawn where the Liri meets the Fibreno — a river fed entirely by limestone karst springs, with no surface tributaries of its own.",
+  },
+];
 
 export default function Home() {
   const essence = getProduct("chiarel-essence")!;
@@ -22,6 +56,11 @@ export default function Home() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faqs)) }}
+      />
+
       {/* Hero — capped height so this photo's crop doesn't over-zoom on tall viewports; text anchored left, clear of the products on the right. */}
       <section className="relative flex h-[86dvh] max-h-[840px] min-h-[660px] w-full items-center overflow-hidden bg-ink">
         <Image
@@ -82,7 +121,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-garden/85" />
         <Reveal className="section-x-narrow relative text-center">
           <h2 className="font-serif text-4xl leading-tight md:text-5xl">
-            CHIAREL™ Is Made at the Water&rsquo;s Source
+            Where Is CHIAREL™ Made?
           </h2>
           <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-ivory/75">
             Before the Liri falls through Isola del Liri as the Cascata
@@ -108,11 +147,11 @@ export default function Home() {
         <div className="section-x grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-16">
           <Reveal>
             <h2 className="font-serif text-3xl leading-snug">
-              Clinically Dosed. No Hidden Blends.
+              What&rsquo;s Actually in CHIAREL™ Formulas?
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-ink/70">
-              Every active, stated — not a marketing claim, a matter of
-              record.
+              Clinically dosed, no hidden blends — every active, stated. Not a
+              marketing claim, a matter of record.
             </p>
           </Reveal>
           <EvidenceGrid products={evidenceProducts} />
@@ -182,8 +221,11 @@ export default function Home() {
         />
         <Reveal className="section-x-narrow relative text-center">
           <h2 className="font-serif text-4xl leading-snug">
-            Grazia Savoriti
+            Who Formulates CHIAREL™?
           </h2>
+          <p className="mt-3 font-serif text-xl text-champagne">
+            Grazia Savoriti
+          </p>
           <p className="mt-2 text-[12px] uppercase tracking-[0.2em] text-ivory/50">
             Formulated by CHIAREL&rsquo;s Pharmacist · Cosmetic &amp;
             Nutraceutical Research
@@ -209,11 +251,12 @@ export default function Home() {
         <div className="section-x">
           <Reveal>
             <h2 className="font-serif text-3xl">
-              Cleanse · Tone · Serum · Moisturize
+              How Does the CHIAREL™ Ritual Work?
             </h2>
             <p className="mt-4 max-w-2xl text-sm text-ink/70">
-              The ritual, delivered. A subscription keeps every step arriving
-              on your rhythm — the consistency the skin recognises.
+              Cleanse · Tone · Serum · Moisturize — delivered. A subscription
+              keeps every step arriving on your rhythm, the consistency the
+              skin recognises.
             </p>
           </Reveal>
           <RitualCarousel products={ritualProducts} />
@@ -279,7 +322,9 @@ export default function Home() {
       <section className="section-y bg-cloud/60">
         <div className="section-x">
           <Reveal className="flex flex-wrap items-end justify-between gap-4">
-            <h2 className="font-serif text-2xl">Icon products of the House</h2>
+            <h2 className="font-serif text-2xl">
+              Which CHIAREL™ Products Are Best-Sellers?
+            </h2>
             <Link
               href="/shop"
               className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
@@ -294,6 +339,31 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* FAQ — direct-answer content for pricing, formulation, and availability questions */}
+      <section className="section-y bg-ivory">
+        <div className="section-x-narrow">
+          <Reveal>
+            <h2 className="text-center font-serif text-3xl">
+              Frequently Asked Questions
+            </h2>
+          </Reveal>
+          <dl className="mt-12 divide-y divide-ink/10">
+            {faqs.map((faq, i) => (
+              <Reveal key={faq.question} delay={i * 0.06} className="py-6">
+                <dt>
+                  <h3 className="font-serif text-lg leading-snug">
+                    {faq.question}
+                  </h3>
+                </dt>
+                <dd className="mt-2 text-sm leading-relaxed text-ink/70">
+                  {faq.answer}
+                </dd>
+              </Reveal>
+            ))}
+          </dl>
         </div>
       </section>
 
