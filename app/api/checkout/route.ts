@@ -74,7 +74,7 @@ export async function POST(req: NextRequest) {
     price_data: {
       currency: string;
       unit_amount: number;
-      product_data: { name: string; description: string };
+      product_data: { name: string; description?: string };
     };
     quantity: number;
   }> = cart.lines.map((line) => ({
@@ -94,7 +94,7 @@ export async function POST(req: NextRequest) {
       price_data: {
         currency: "usd",
         unit_amount: shipping * 100,
-        product_data: { name: "Shipping", description: "" },
+        product_data: { name: "Shipping" },
       },
       quantity: 1,
     });
