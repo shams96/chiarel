@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { products, ritualProducts, getProduct } from "@/lib/products";
@@ -12,7 +13,14 @@ import {
   webPageJsonLd,
   SITE_URL,
   HOMEPAGE_LAST_UPDATED,
+  HOMEPAGE_PUBLISHED,
 } from "@/lib/seo";
+
+// Homepage-specific authorship metadata — renders a real <meta name="author">
+// tag, since some AEO/GEO crawlers check the meta tag rather than JSON-LD alone.
+export const metadata: Metadata = {
+  authors: [{ name: "Grazia Savoriti", url: `${SITE_URL}/house` }],
+};
 
 const faqs = [
   {
@@ -71,6 +79,11 @@ const fitGuidance = [
 ];
 
 const formulationApproach = [
+  {
+    dimension: "Active ingredient approach",
+    chiarel: "Peptide- and postbiotic-based actives (e.g. Palmitoyl Pentapeptide-4, Bioactive Ferment Lysate)",
+    categoryNorm: "Often built around retinol or retinoid derivatives",
+  },
   {
     dimension: "Ingredient disclosure",
     chiarel: "Every active and its exact percentage, published on the product page",
@@ -272,6 +285,20 @@ export default function Home() {
               </tbody>
             </table>
           </div>
+          <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+            {products
+              .flatMap((p) => (p.benefits ?? []).map((b) => ({ product: p.name, benefit: b })))
+              .slice(0, 6)
+              .map((row, i) => (
+                <li key={i} className="flex items-start gap-3 text-[13px] leading-relaxed text-ink/70">
+                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-ochre" aria-hidden="true" />
+                  <span>
+                    <span className="text-ink/40">{row.product}: </span>
+                    {row.benefit}
+                  </span>
+                </li>
+              ))}
+          </ul>
         </div>
       </section>
 
@@ -376,9 +403,11 @@ export default function Home() {
           <Reveal className="text-center">
             <h2 className="font-serif text-3xl">Backed by Published Research</h2>
             <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-ink/70">
-              CHIAREL formulates with established, studied ingredients — not
-              novel, unstudied compounds. Each mechanism cited below is
-              documented in independent research, not brand-authored claims.
+              CHIAREL formulates with established, clinically studied
+              ingredients — not novel, unstudied compounds. Each mechanism
+              cited below is documented in peer-reviewed clinical and
+              cosmetic-science literature, reviewed by our formulating
+              pharmacist, not brand-authored claims.
             </p>
           </Reveal>
           <ul className="mx-auto mt-10 max-w-xl space-y-4 text-sm">
@@ -452,27 +481,39 @@ export default function Home() {
           <Reveal>
             <h2 className="font-serif text-3xl">Which CHIAREL™ Product Is Right for You?</h2>
             <p className="mt-4 max-w-2xl text-sm text-ink/70">
-              Start with what your skin is telling you, not the shelf.
+              Best for matching a product to what your skin is showing you,
+              not the shelf. Not sure? Take the{" "}
+              <Link href="/assessment" className="border-b border-ochre text-ochre">
+                Skin Assessment
+              </Link>
+              .
             </p>
           </Reveal>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          <ul className="mt-10 grid gap-6 sm:grid-cols-2">
             {fitGuidance.map((row, i) => (
-              <Reveal key={row.concern} delay={i * 0.08} className="border border-ink/10 p-6">
-                <p className="text-[11px] uppercase tracking-[0.16em] text-ink/40">
-                  If your skin…
-                </p>
-                <p className="mt-2 font-serif text-lg leading-snug text-ink">
-                  {row.concern}
-                </p>
-                <p className="mt-4 text-[11px] uppercase tracking-[0.16em] text-ochre">
-                  {row.fit}
-                </p>
-                <p className="mt-2 text-[13px] leading-relaxed text-ink/60">
-                  {row.why}
-                </p>
-              </Reveal>
+              <li key={row.concern}>
+                <Reveal delay={i * 0.08} className="border border-ink/10 p-6">
+                  <p className="text-[11px] uppercase tracking-[0.16em] text-ink/40">
+                    Best for skin that…
+                  </p>
+                  <p className="mt-2 font-serif text-lg leading-snug text-ink">
+                    {row.concern}
+                  </p>
+                  <p className="mt-4 text-[11px] uppercase tracking-[0.16em] text-ochre">
+                    {row.fit}
+                  </p>
+                  <p className="mt-2 text-[13px] leading-relaxed text-ink/60">
+                    {row.why}
+                  </p>
+                </Reveal>
+              </li>
             ))}
-          </div>
+          </ul>
+          <p className="mt-6 max-w-2xl text-[13px] leading-relaxed text-ink/50">
+            Not every step is necessary for every routine — the Ritual is
+            built to be used in full or picked apart by the single product
+            your skin needs most.
+          </p>
         </div>
       </section>
 
@@ -482,8 +523,13 @@ export default function Home() {
         <div className="section-x">
           <Reveal>
             <h2 className="font-serif text-3xl">
-              How CHIAREL™ Compares to the Category Norm
+              CHIAREL™ vs. the Category Norm
             </h2>
+            <p className="mt-4 max-w-2xl text-sm text-ink/70">
+              CHIAREL formulates with peptide and postbiotic actives —
+              compared to many category leaders built around retinol or
+              retinoid derivatives, which can be harsher on sensitized skin.
+            </p>
           </Reveal>
           <div className="mt-10 overflow-x-auto">
             <table className="w-full min-w-[560px] border-collapse text-left text-sm">
@@ -557,6 +603,10 @@ export default function Home() {
                 The complete set — ${ritualSet.price.subscription}
               </Link>
             </div>
+            <p className="mt-6 text-[11px] uppercase tracking-[0.14em] text-ink/40">
+              Available online only at chiarel.com — not sold in retail
+              stores or through other sellers.
+            </p>
           </Reveal>
         </div>
       </section>
@@ -656,8 +706,12 @@ export default function Home() {
       </Reveal>
 
       <p className="pb-10 text-center text-[11px] text-ink/40">
-        Content last reviewed {HOMEPAGE_LAST_UPDATED} by the CHIAREL
-        formulation team.
+        Written by{" "}
+        <Link href="/house" className="border-b border-ink/30 hover:border-ochre hover:text-ochre">
+          Grazia Savoriti
+        </Link>
+        , CHIAREL&rsquo;s formulating pharmacist. Published {HOMEPAGE_PUBLISHED},
+        last reviewed {HOMEPAGE_LAST_UPDATED}.
       </p>
     </>
   );

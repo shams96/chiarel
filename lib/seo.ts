@@ -12,6 +12,9 @@ export const PRESS_EMAIL = "press@chiarel.com";
 // in webPageJsonLd and the visible "content last reviewed" line, both of
 // which are freshness signals AI systems weight for citation.
 export const HOMEPAGE_LAST_UPDATED = "2026-08-23";
+// The site's actual launch date (first substantive build commit) — used as
+// datePublished, distinct from the dateModified value above.
+export const HOMEPAGE_PUBLISHED = "2026-08-07";
 
 export const organizationJsonLd = {
   "@context": "https://schema.org",
@@ -48,6 +51,7 @@ export function webPageJsonLd(opts: {
   name: string;
   description: string;
   dateModified?: string;
+  datePublished?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -55,8 +59,14 @@ export function webPageJsonLd(opts: {
     url: opts.url,
     name: opts.name,
     description: opts.description,
+    datePublished: opts.datePublished ?? HOMEPAGE_PUBLISHED,
     dateModified: opts.dateModified ?? HOMEPAGE_LAST_UPDATED,
-    author: { "@type": "Person", name: "Grazia Savoriti" },
+    author: {
+      "@type": "Person",
+      name: "Grazia Savoriti",
+      url: `${SITE_URL}/house`,
+      jobTitle: "Pharmacist · Cosmetic & Nutraceutical Research",
+    },
     publisher: { "@type": "Organization", name: "CHIAREL" },
   };
 }
