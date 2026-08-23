@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
+import { stripe } from "@/lib/stripe";
+import { getOrCreateCart } from "@/lib/cart-server";
 
 const modeLabel: Record<string, string> = {
   ninetyDay: "The Ritual Plan",
@@ -11,26 +13,57 @@ const modeLabel: Record<string, string> = {
 
 export default async function OrderConfirmationPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ session_id?: string }>;
 }) {
   const { id } = await params;
-  const order = await db.order.findUnique({
+  const { session_id } = await searchParams;
+
+  let order = await db.order.findUnique({
     where: { id },
     include: { items: { include: { product: true } } },
   });
 
   if (!order) notFound();
 
+  // Never trust the redirect itself as proof of payment — re-verify the
+  // session with Stripe server-side before marking an order paid, and empty
+  // the cart only once we know a charge actually succeeded.
+  if (order.status === "pending" && session_id && session_id === order.stripeSessionId) {
+    const session = await stripe.checkout.sessions.retrieve(session_id);
+    if (session.payment_status === "paid") {
+      order = await db.order.update({
+        where: { id: order.id },
+        data: { status: "paid" },
+        include: { items: { include: { product: true } } },
+      });
+      const cart = await getOrCreateCart();
+      await db.cartItem.deleteMany({ where: { cartId: cart.id } });
+    }
+  }
+
+  const isPaid = order.status === "paid";
+
   return (
     <div className="mx-auto max-w-2xl px-6 py-24 text-center">
       <h1 className="font-serif text-3xl">Thank you, {order.firstName}.</h1>
-      <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink/70">
-        Your ritual has been recorded. Order{" "}
-        <span className="font-medium text-ink">#{order.id.slice(-8).toUpperCase()}</span>{" "}
-        will be confirmed by email at {order.email} once card processing is
-        live with our Shopify boutique — no charge has been made today.
-      </p>
+      {isPaid ? (
+        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink/70">
+          Payment received. Order{" "}
+          <span className="font-medium text-ink">#{order.id.slice(-8).toUpperCase()}</span>{" "}
+          is confirmed — a receipt has been sent to {order.email}.
+        </p>
+      ) : (
+        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink/70">
+          We couldn&rsquo;t confirm payment for order{" "}
+          <span className="font-medium text-ink">#{order.id.slice(-8).toUpperCase()}</span>{" "}
+          yet. If you completed checkout, please{" "}
+          <Link href="/" className="underline">contact us</Link> — otherwise no
+          charge has been made.
+        </p>
+      )}
 
       <ul className="mt-10 space-y-4 border-t border-ink/10 pt-8 text-left">
         {order.items.map((item) => (

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/cart-context";
 
 const FREE_SHIP_THRESHOLD = 150;
@@ -14,8 +13,7 @@ const modeLabel: Record<string, string> = {
 };
 
 export default function CheckoutPage() {
-  const { lines, subtotal, savings, refresh } = useCart();
-  const router = useRouter();
+  const { lines, subtotal, savings } = useCart();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -51,8 +49,7 @@ export default function CheckoutPage() {
         setSubmitting(false);
         return;
       }
-      await refresh();
-      router.push(`/order/${json.orderId}`);
+      window.location.href = json.checkoutUrl;
     } catch {
       setError("Something went wrong. Please try again.");
       setSubmitting(false);
@@ -86,7 +83,7 @@ export default function CheckoutPage() {
                 key={m}
                 type="button"
                 disabled
-                title="Payment processing arrives with the CHIAREL Shopify boutique"
+                title="Arriving with our Shopify boutique — pay by card below for now"
                 className="cursor-not-allowed border border-ink/20 py-3 text-[12px] uppercase tracking-[0.14em] text-ink/40"
               >
                 {m}
@@ -95,7 +92,7 @@ export default function CheckoutPage() {
           </div>
           <div className="my-8 flex items-center gap-4 text-[11px] uppercase tracking-[0.18em] text-ink/40">
             <span className="h-px flex-1 bg-ink/10" />
-            Or continue with email
+            Or pay by card
             <span className="h-px flex-1 bg-ink/10" />
           </div>
 
@@ -188,11 +185,11 @@ export default function CheckoutPage() {
               disabled={submitting}
               className="btn-press mt-2 w-full bg-ink py-4 text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre disabled:cursor-wait disabled:opacity-60"
             >
-              {submitting ? "Placing Order…" : `Place Order — $${total}`}
+              {submitting ? "Continuing to payment…" : `Continue to Payment — $${total}`}
             </button>
             <p className="text-center text-[11px] text-ink/45">
-              This records your order for the House. Card payment processing
-              arrives with our Shopify boutique — no charge is made today.
+              You&rsquo;ll enter your card details securely on the next
+              screen, processed by Stripe.
             </p>
           </form>
         </div>
