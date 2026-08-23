@@ -6,40 +6,101 @@ import RitualCarousel from "@/components/RitualCarousel";
 import EvidenceGrid from "@/components/EvidenceGrid";
 import Reveal from "@/components/Reveal";
 import { productTint } from "@/lib/color";
-import { faqJsonLd } from "@/lib/seo";
+import {
+  faqJsonLd,
+  offerCatalogJsonLd,
+  webPageJsonLd,
+  SITE_URL,
+  HOMEPAGE_LAST_UPDATED,
+} from "@/lib/seo";
 
 const faqs = [
   {
     question: "How much does CHIAREL cost?",
     answer:
-      "CHIAREL Essence™, the Signature Serum, is $151 with a 45-day subscription or $189 one-time. The Founding Pair (Essence + Terra Radiance Crème) is $243 subscription or $347 one-time, and individual products range from $46 for the Lip Concentrate to $372 for the complete five-step Ritual Set. Subscription pricing sets a recurring 45-day delivery cadence; one-time purchase carries no commitment.",
+      "CHIAREL Essence™, the Signature Serum, is $151 on a 45-day subscription or $189 one-time. The Founding Pair (Essence + Terra Radiance Crème) is $243 subscription or $347 one-time, and individual products range from $46 for the Lip Concentrate to $372 for the complete five-step Ritual Set. Subscription pricing sets a recurring 45-day delivery at the discounted rate; one-time purchase is priced per order.",
   },
   {
     question: "What is CHIAREL made of?",
     answer:
-      "Every formula lists its actives and concentrations plainly — nothing is held back as an undisclosed \"proprietary blend.\" CHIAREL Essence™ is built around Palmitoyl Pentapeptide-4 (3%) and Bioactive Ferment Lysate (0.30%); Terra Radiance Crème™ carries Ceramide NP (0.8%) and Niacinamide. Each product page states its complete active ingredient list and percentage where applicable.",
+      "Every formula discloses its actives and concentrations plainly. CHIAREL Essence™ is built around Palmitoyl Pentapeptide-4 (3%) and Bioactive Ferment Lysate (0.30%); Terra Radiance Crème™ carries Ceramide NP (0.8%) and Niacinamide (3.0%). Each product page states its complete active ingredient list and percentage where applicable.",
   },
   {
     question: "Who formulates CHIAREL?",
     answer:
-      "CHIAREL is formulated by Grazia Savoriti, CHIAREL's pharmacist specializing in cosmetic and nutraceutical research. Every formulation is developed under her guidance and produced in small, fresh batches in Isola del Liri, Italy — made to order rather than held in standing inventory.",
+      "CHIAREL is formulated by Grazia Savoriti, CHIAREL's pharmacist specializing in cosmetic and nutraceutical research. Every formulation is developed under her guidance and produced fresh, to order, in small batches in Isola del Liri, Italy.",
   },
   {
     question: "Where can I buy CHIAREL?",
     answer:
-      "CHIAREL is sold exclusively at chiarel.com. Products are made to order in Isola del Liri, Italy and shipped directly — CHIAREL is not currently distributed through third-party retailers.",
+      "CHIAREL is available directly at chiarel.com, made to order in Isola del Liri, Italy and shipped from there to you.",
   },
   {
     question: "How does the CHIAREL subscription work?",
     answer:
-      "Choosing subscription pricing on any product sets a recurring 45-day delivery at the discounted subscription rate. Every product is also available as a one-time purchase at full price, with no recurring commitment.",
+      "Choosing subscription pricing on any product sets a recurring 45-day delivery at the discounted rate. Every product is also available as a one-time purchase, giving you the flexibility to reorder whenever you choose.",
   },
   {
     question: "Where is CHIAREL made?",
     answer:
-      "CHIAREL formulas are produced in Isola del Liri, Italy, with manufacturing partner Natural You Srl, using water drawn where the Liri meets the Fibreno — a river fed entirely by limestone karst springs, with no surface tributaries of its own.",
+      "CHIAREL formulas are produced in Isola del Liri, Italy, with manufacturing partner Natural You Srl, using water drawn where the Liri meets the Fibreno — a river fed entirely by limestone karst springs.",
   },
 ];
+
+const fitGuidance = [
+  {
+    concern: "Barrier feels reactive, tight, or easily irritated",
+    fit: "Cellular Cleanser™ + Terra Radiance Crème™",
+    why: "Ceramide NP and a prebiotic complex are dosed to support barrier function rather than strip it.",
+  },
+  {
+    concern: "Skin looks dull, uneven, or has lost visible firmness",
+    fit: "CHIAREL Essence™",
+    why: "Built around Palmitoyl Pentapeptide-4 (3%), the concentrated treatment layer of the ritual.",
+  },
+  {
+    concern: "Needs a hydration layer before treatment, or midday refresh",
+    fit: "Cellular Mist™",
+    why: "Low molecular weight Hyaluronic Acid for a fast-absorbing layer that preps skin for what follows.",
+  },
+  {
+    concern: "Wants overnight recovery without a heavy routine",
+    fit: "Recovery Masque™",
+    why: "L-Ornithine and Panthenol formulated as the ritual's single closing, overnight gesture.",
+  },
+];
+
+const formulationApproach = [
+  {
+    dimension: "Ingredient disclosure",
+    chiarel: "Every active and its exact percentage, published on the product page",
+    categoryNorm: "Often grouped into an undisclosed \"proprietary blend\"",
+  },
+  {
+    dimension: "Batch production",
+    chiarel: "Made fresh, to order, in small batches",
+    categoryNorm: "Manufactured in bulk and held in standing inventory",
+  },
+  {
+    dimension: "Sourcing",
+    chiarel: "Formulated at the water's source in Isola del Liri, Italy",
+    categoryNorm: "Formulated wherever contract manufacturing is cheapest",
+  },
+  {
+    dimension: "Distribution",
+    chiarel: "Sold directly at chiarel.com only — one price, no markup layers",
+    categoryNorm: "Sold through multiple retail markups before reaching the shelf",
+  },
+];
+
+const ingredientTable = products
+  .flatMap((p) =>
+    (p.actives ?? []).map((a) => ({
+      product: p.name,
+      ingredient: a.name,
+      percent: a.percent ?? "—",
+    }))
+  );
 
 export default function Home() {
   const essence = getProduct("chiarel-essence")!;
@@ -59,6 +120,25 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faqs)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            webPageJsonLd({
+              url: SITE_URL,
+              name: "CHIAREL™ — House of Skin Intelligence™",
+              description:
+                "Clinically dosed skincare formulated in Isola del Liri, Italy. Every active ingredient disclosed.",
+            })
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(offerCatalogJsonLd(products)),
+        }}
       />
 
       {/* Hero — capped height so this photo's crop doesn't over-zoom on tall viewports; text anchored left, clear of the products on the right. */}
@@ -158,6 +238,43 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Full ingredient/formulation table — real actives + percentages from
+          the product catalog, addressing the lack of scannable, tabular,
+          original-data content that generative engines preferentially lift. */}
+      <section className="section-y bg-white">
+        <div className="section-x">
+          <Reveal>
+            <h2 className="font-serif text-3xl leading-snug">
+              Every Active, by Product and Percentage
+            </h2>
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink/70">
+              The complete formulation record across the House — no
+              proprietary blends, no undisclosed percentages.
+            </p>
+          </Reveal>
+          <div className="mt-10 overflow-x-auto">
+            <table className="w-full min-w-[560px] border-collapse text-left text-sm">
+              <thead>
+                <tr className="border-b border-ink/20 text-[11px] uppercase tracking-[0.16em] text-ink/50">
+                  <th className="py-3 pr-4 font-normal">Product</th>
+                  <th className="py-3 pr-4 font-normal">Active Ingredient</th>
+                  <th className="py-3 font-normal">Concentration</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ingredientTable.map((row, i) => (
+                  <tr key={`${row.product}-${row.ingredient}-${i}`} className="border-b border-ink/10">
+                    <td className="py-3 pr-4 text-ink/80">{row.product}</td>
+                    <td className="py-3 pr-4 text-ink/70">{row.ingredient}</td>
+                    <td className="py-3 tabular-nums text-ochre">{row.percent}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       {/* Signature Duo — the two hero treatments, no price (story, not shelf) */}
       <section className="section-y border-y border-ink/10 bg-white">
         <div className="section-x">
@@ -243,7 +360,72 @@ export default function Home() {
           >
             Explore the Science
           </Link>
+          <Link
+            href="/house"
+            className="mt-3 block text-[11px] uppercase tracking-[0.16em] text-ivory/50 hover:text-champagne"
+          >
+            Read her full bio →
+          </Link>
         </Reveal>
+      </section>
+
+      {/* Backed by Research — genuine third-party citations for the actives
+          named above, not just a claim of "clinically dosed" */}
+      <section className="section-y bg-ivory">
+        <div className="section-x-narrow">
+          <Reveal className="text-center">
+            <h2 className="font-serif text-3xl">Backed by Published Research</h2>
+            <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-ink/70">
+              CHIAREL formulates with established, studied ingredients — not
+              novel, unstudied compounds. Each mechanism cited below is
+              documented in independent research, not brand-authored claims.
+            </p>
+          </Reveal>
+          <ul className="mx-auto mt-10 max-w-xl space-y-4 text-sm">
+            <li className="border-l-2 border-ochre pl-5">
+              <p className="text-ink/70">
+                Palmitoyl Pentapeptide-4 (used in CHIAREL Essence™) is studied
+                for its role in visible firmness and texture support.
+              </p>
+              <a
+                href="https://pubmed.ncbi.nlm.nih.gov/?term=palmitoyl+pentapeptide+skin"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-1 inline-block border-b border-ink/30 text-[12px] text-ink/50 hover:border-ochre hover:text-ochre"
+              >
+                Published research, PubMed (NIH) →
+              </a>
+            </li>
+            <li className="border-l-2 border-ochre pl-5">
+              <p className="text-ink/70">
+                Ceramide NP and Niacinamide (used in Terra Radiance Crème™)
+                are widely studied for barrier support and environmental
+                defense.
+              </p>
+              <a
+                href="https://pubmed.ncbi.nlm.nih.gov/?term=ceramide+niacinamide+skin+barrier"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-1 inline-block border-b border-ink/30 text-[12px] text-ink/50 hover:border-ochre hover:text-ochre"
+              >
+                Published research, PubMed (NIH) →
+              </a>
+            </li>
+            <li className="border-l-2 border-ochre pl-5">
+              <p className="text-ink/70">
+                Bioactive Ferment Lysate — a postbiotic used across the
+                ritual — is studied for supporting barrier proteins and
+                microbiome balance. See the full mechanism explainer.
+              </p>
+              <Link
+                href="/science/bifida-ferment-lysate"
+                className="mt-1 inline-block border-b border-ochre text-[12px] text-ochre"
+              >
+                Read the formulation science →
+              </Link>
+            </li>
+          </ul>
+        </div>
       </section>
 
       {/* Ritual carousel — paced, not a shelf */}
@@ -260,6 +442,69 @@ export default function Home() {
             </p>
           </Reveal>
           <RitualCarousel products={ritualProducts} />
+        </div>
+      </section>
+
+      {/* Fit guidance — "who this is for" mapped to real skin concerns and
+          real actives, not generic brand narrative */}
+      <section className="section-y border-y border-ink/10 bg-white">
+        <div className="section-x">
+          <Reveal>
+            <h2 className="font-serif text-3xl">Which CHIAREL™ Product Is Right for You?</h2>
+            <p className="mt-4 max-w-2xl text-sm text-ink/70">
+              Start with what your skin is telling you, not the shelf.
+            </p>
+          </Reveal>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+            {fitGuidance.map((row, i) => (
+              <Reveal key={row.concern} delay={i * 0.08} className="border border-ink/10 p-6">
+                <p className="text-[11px] uppercase tracking-[0.16em] text-ink/40">
+                  If your skin…
+                </p>
+                <p className="mt-2 font-serif text-lg leading-snug text-ink">
+                  {row.concern}
+                </p>
+                <p className="mt-4 text-[11px] uppercase tracking-[0.16em] text-ochre">
+                  {row.fit}
+                </p>
+                <p className="mt-2 text-[13px] leading-relaxed text-ink/60">
+                  {row.why}
+                </p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Comparison content — CHIAREL's formulation approach vs. the
+          category norm, framed generically (no named competitors) */}
+      <section className="section-y bg-cloud/40">
+        <div className="section-x">
+          <Reveal>
+            <h2 className="font-serif text-3xl">
+              How CHIAREL™ Compares to the Category Norm
+            </h2>
+          </Reveal>
+          <div className="mt-10 overflow-x-auto">
+            <table className="w-full min-w-[560px] border-collapse text-left text-sm">
+              <thead>
+                <tr className="border-b border-ink/20 text-[11px] uppercase tracking-[0.16em] text-ink/50">
+                  <th className="py-3 pr-4 font-normal">Dimension</th>
+                  <th className="py-3 pr-4 font-normal text-ochre">CHIAREL™</th>
+                  <th className="py-3 font-normal">Category Norm</th>
+                </tr>
+              </thead>
+              <tbody>
+                {formulationApproach.map((row) => (
+                  <tr key={row.dimension} className="border-b border-ink/10 align-top">
+                    <td className="py-4 pr-4 font-serif text-base text-ink">{row.dimension}</td>
+                    <td className="py-4 pr-4 text-ink/80">{row.chiarel}</td>
+                    <td className="py-4 text-ink/50">{row.categoryNorm}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
@@ -409,6 +654,11 @@ export default function Home() {
           </Link>
         </section>
       </Reveal>
+
+      <p className="pb-10 text-center text-[11px] text-ink/40">
+        Content last reviewed {HOMEPAGE_LAST_UPDATED} by the CHIAREL
+        formulation team.
+      </p>
     </>
   );
 }
