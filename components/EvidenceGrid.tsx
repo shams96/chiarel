@@ -22,14 +22,14 @@ export default function EvidenceGrid({ products }: { products: Product[] }) {
     .slice(0, 3);
 
   return (
-    <div className="grid gap-10 sm:grid-cols-3">
+    <div className="grid gap-6 sm:grid-cols-3">
       {entries.map((e) => (
         <Link
           key={`${e.productSlug}-${e.activeName}`}
           href={`/shop/${e.productSlug}`}
-          className="group block text-center"
+          className="card-elevated group block rounded-md bg-white p-6 text-center transition hover:-translate-y-0.5"
         >
-          <p className="font-serif text-5xl text-ochre transition group-hover:text-ink">
+          <p className="tabular-nums font-serif text-5xl text-ochre transition group-hover:text-ink">
             {e.percent}
           </p>
           <p className="mt-3 text-sm text-ink/80">{e.activeName}</p>

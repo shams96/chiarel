@@ -5,8 +5,7 @@ export const metadata = { title: "Account", robots: { index: false, follow: fals
 export default function AccountPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-16 md:py-24">
-      <p className="eyebrow">Account</p>
-      <h1 className="mt-2 font-serif text-4xl">Your Ritual</h1>
+      <h1 className="font-serif text-4xl">Your Ritual</h1>
       <p className="mt-5 text-sm leading-relaxed text-ink/70">
         Subscription management arrives with the CHIAREL™ boutique on
         Shopify — pause, skip, or cancel your ritual with no customer

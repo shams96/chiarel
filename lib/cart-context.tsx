@@ -42,6 +42,7 @@ type CartContextValue = {
   lines: CartLine[];
   add: (slug: string, mode: CartMode) => Promise<void>;
   remove: (slug: string) => Promise<void>;
+  setQty: (lineId: string, qty: number) => Promise<void>;
   isOpen: boolean;
   open: () => void;
   close: () => void;
@@ -49,6 +50,10 @@ type CartContextValue = {
   subtotal: number;
   savings: number;
   loading: boolean;
+  /** Re-syncs client state with the server cart — call after any change the
+      add/remove helpers didn't make directly, e.g. after checkout clears the
+      cart server-side, so the header/drawer don't keep showing stale counts. */
+  refresh: () => Promise<void>;
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -89,12 +94,23 @@ export function CartProvider({ children }: { children: ReactNode }) {
     if (res.ok) setData(await res.json());
   };
 
+  const setQty: CartContextValue["setQty"] = async (lineId, qty) => {
+    if (qty < 1) return;
+    const res = await fetch(`/api/cart/${lineId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ qty }),
+    });
+    if (res.ok) setData(await res.json());
+  };
+
   return (
     <CartContext.Provider
       value={{
         lines: data.lines,
         add,
         remove,
+        setQty,
         isOpen,
         open: () => setIsOpen(true),
         close: () => setIsOpen(false),
@@ -102,6 +118,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         subtotal: data.subtotal,
         savings: data.savings,
         loading,
+        refresh,
       }}
     >
       {children}

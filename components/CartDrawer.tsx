@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 
 const modeLabel: Record<string, string> = {
-  ninetyDay: "The Ritual Plan · two deliveries",
+  ninetyDay: "The Ritual Plan · 90-day supply, one delivery",
   subscription: "Subscription · every 45 days",
   oneTime: "One-time purchase",
 };
@@ -13,7 +13,7 @@ const modeLabel: Record<string, string> = {
 const FREE_SHIP_THRESHOLD = 150;
 
 export default function CartDrawer() {
-  const { lines, remove, isOpen, close, subtotal, savings } = useCart();
+  const { lines, remove, setQty, isOpen, close, subtotal, savings } = useCart();
   const remaining = Math.max(0, FREE_SHIP_THRESHOLD - subtotal);
 
   return (
@@ -83,9 +83,31 @@ export default function CartDrawer() {
                         {modeLabel[line.mode]}
                       </p>
                       <div className="mt-2 flex items-center justify-between">
-                        <span className="text-sm">
-                          {line.qty} × ${line.unitPrice}
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <div className="flex items-center rounded-sm border border-ink/15">
+                            <button
+                              onClick={() => setQty(line.id, line.qty - 1)}
+                              disabled={line.qty <= 1}
+                              aria-label={`Decrease quantity of ${line.product.name}`}
+                              className="btn-press flex h-7 w-7 items-center justify-center text-sm text-ink/60 transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-ink/60"
+                            >
+                              −
+                            </button>
+                            <span className="tabular-nums w-6 text-center text-[13px]">
+                              {line.qty}
+                            </span>
+                            <button
+                              onClick={() => setQty(line.id, line.qty + 1)}
+                              aria-label={`Increase quantity of ${line.product.name}`}
+                              className="btn-press flex h-7 w-7 items-center justify-center text-sm text-ink/60 transition hover:text-ochre"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <span className="tabular-nums text-sm text-ink/50">
+                            × ${line.unitPrice}
+                          </span>
+                        </div>
                         <button
                           onClick={() => remove(line.slug)}
                           className="text-[11px] uppercase tracking-[0.14em] text-ink/40 hover:text-ochre"
@@ -101,12 +123,12 @@ export default function CartDrawer() {
 
             <div className="border-t border-ink/10 px-6 py-5">
               {savings > 0 && (
-                <p className="mb-2 flex justify-between text-[12px] text-ochre">
+                <p className="tabular-nums mb-2 flex justify-between text-[12px] text-ochre">
                   <span>Ritual savings</span>
                   <span>−${savings}</span>
                 </p>
               )}
-              <p className="mb-4 flex justify-between text-base">
+              <p className="tabular-nums mb-4 flex justify-between text-base">
                 <span>Subtotal</span>
                 <span className="font-serif text-xl">${subtotal}</span>
               </p>

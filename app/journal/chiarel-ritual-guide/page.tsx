@@ -45,7 +45,9 @@ export default function RitualGuidePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <p className="eyebrow">Journal · The Ritual</p>
+      <Link href="/journal" className="text-[12px] text-ink/50 hover:text-ochre">
+        ← Journal
+      </Link>
       <h1 className="mt-2 font-serif text-4xl leading-tight">
         How to Use the CHIAREL Daily Ritual
       </h1>
@@ -57,7 +59,7 @@ export default function RitualGuidePage() {
 
       <section className="mt-12 grid gap-10 sm:grid-cols-2">
         <div>
-          <p className="eyebrow">Morning Ritual</p>
+          <h3 className="font-serif text-lg">Morning ritual</h3>
           <ol className="mt-3 space-y-2 text-sm text-ink/80">
             <li>1. Cellular Cleanser™ — adaptive purifying cleanser</li>
             <li>2. Cellular Mist™ — conditioning preparation mist</li>
@@ -66,7 +68,7 @@ export default function RitualGuidePage() {
           </ol>
         </div>
         <div>
-          <p className="eyebrow">Evening Ritual</p>
+          <h3 className="font-serif text-lg">Evening ritual</h3>
           <ol className="mt-3 space-y-2 text-sm text-ink/80">
             <li>1. Cellular Cleanser™</li>
             <li>2. Cellular Mist™</li>

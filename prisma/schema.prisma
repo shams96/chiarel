@@ -81,3 +81,14 @@ model OrderItem {
   qty         Int
   unitPrice   Int
 }
+
+model FoundingSignup {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  name       String
+  email      String
+  phone      String?
+  social     String?
+  referredBy String?
+  source     String?
+}

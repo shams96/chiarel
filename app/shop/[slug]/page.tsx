@@ -57,10 +57,7 @@ export default function ProductPage({
       </div>
 
       <div className="mx-auto max-w-3xl px-6 py-14 text-center">
-        <p className="eyebrow">
-          {p.step} · {p.family}
-        </p>
-        <h1 className="mt-2 font-serif text-5xl">{p.name}</h1>
+        <h1 className="font-serif text-5xl">{p.name}</h1>
         <p className="mt-1 text-sm text-ink/60">{p.descriptor}</p>
         {p.role && (
           <p className="mt-4 inline-block border border-champagne px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ochre">
@@ -80,6 +77,14 @@ export default function ProductPage({
           perDayCadenceDays={p.set ? 45 : undefined}
         />
         <dl className="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-2 border-t border-ink/10 pt-6 text-[12px] text-ink/60">
+          <div className="flex gap-1.5">
+            <dt className="text-ink/40">Step:</dt>
+            <dd>{p.step}</dd>
+          </div>
+          <div className="flex gap-1.5">
+            <dt className="text-ink/40">Family:</dt>
+            <dd>{p.family}</dd>
+          </div>
           {p.complex && (
             <div className="flex gap-1.5">
               <dt className="text-ink/40">Complex:</dt>
@@ -146,16 +151,21 @@ export default function ProductPage({
 function KeyBenefits({ benefits }: { benefits: string[] }) {
   return (
     <Reveal className="border-t border-ink/10 bg-cloud/40 py-16">
-      <div className="mx-auto max-w-2xl px-6">
-        <p className="eyebrow text-center">Key Benefits</p>
-        <ul className="mt-8 space-y-4">
-          {benefits.map((b) => (
-            <li key={b} className="flex items-start gap-3 text-sm text-ink/75">
-              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ochre" />
-              {b}
-            </li>
+      <div className="mx-auto max-w-3xl px-6">
+        <h2 className="text-center font-serif text-2xl">Key benefits</h2>
+        <div className="mt-8 grid gap-5 sm:grid-cols-3">
+          {benefits.map((b, i) => (
+            <div
+              key={b}
+              className="card-elevated rounded-md bg-white p-6 text-sm leading-relaxed text-ink/75"
+            >
+              <span className="font-serif text-3xl text-ochre/80">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <p className="mt-3">{b}</p>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </Reveal>
   );
@@ -175,8 +185,7 @@ function IncludedSpatula() {
           />
         </div>
         <div>
-          <p className="eyebrow">The Application</p>
-          <h3 className="mt-1 font-serif text-2xl">The CHIAREL Spatula</h3>
+          <h3 className="font-serif text-2xl">The CHIAREL Spatula</h3>
           <p className="mt-2 text-sm leading-relaxed text-ink/70">
             A Champagne Gold spatula for a hygienic, precise application —
             the ritual&rsquo;s closing gesture, done properly.
@@ -193,23 +202,29 @@ function ClinicallyDosed({
   actives: { name: string; percent: string | null }[];
 }) {
   return (
-    <div className="mx-auto max-w-3xl border-t border-ink/10 px-6 py-16 text-center">
-      <p className="eyebrow">Clinically Dosed. No Hidden Blends.</p>
-      <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-ink/70">
-        Most formulations name an ingredient without saying how much of it is
-        actually in the bottle. CHIAREL™ states the concentration of every
-        active that governs performance — not as a marketing claim, but as a
-        matter of record.
-      </p>
-      <div className="mt-10 grid gap-8 sm:grid-cols-2">
-        {actives.map((a) => (
-          <div key={a.name}>
-            <p className="font-serif text-5xl text-ochre">
-              {a.percent ?? "Complex"}
-            </p>
-            <p className="mt-2 text-sm text-ink/70">{a.name}</p>
-          </div>
-        ))}
+    <div className="mx-auto max-w-4xl border-t border-ink/10 px-6 py-16">
+      <div className="grid gap-10 md:grid-cols-[1fr_1.2fr] md:items-start md:gap-14">
+        <div>
+          <h2 className="font-serif text-2xl leading-snug">
+            Clinically Dosed. No Hidden Blends.
+          </h2>
+          <p className="mt-3 text-sm leading-relaxed text-ink/70">
+            Most formulations name an ingredient without saying how much of
+            it is actually in the bottle. CHIAREL™ states the concentration
+            of every active that governs performance — not as a marketing
+            claim, but as a matter of record.
+          </p>
+        </div>
+        <div className="grid gap-8 sm:grid-cols-2">
+          {actives.map((a) => (
+            <div key={a.name}>
+              <p className="font-serif text-5xl text-ochre">
+                {a.percent ?? "Complex"}
+              </p>
+              <p className="mt-2 text-sm text-ink/70">{a.name}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -244,13 +259,15 @@ function TheScience({ complex, slug }: { complex: string; slug: string }) {
   return (
     <div className="border-t border-ink/10 bg-ink py-20 text-ivory">
       <div className="mx-auto max-w-2xl px-6">
-        <p className="eyebrow text-center text-champagne">
-          The Science of {complex}
-        </p>
-        <div className="mt-10 space-y-8">
-          {steps.map((s) => (
-            <div key={s.step} className="flex gap-5">
-              <span className="font-serif text-2xl text-champagne">{s.step}</span>
+        <h2 className="text-center font-serif text-2xl text-champagne">
+          The science of {complex}
+        </h2>
+        <div className="relative mt-12 space-y-10 border-l border-champagne/25 pl-8">
+          {steps.map((s, i) => (
+            <div key={s.step} className="relative">
+              <span className="absolute -left-[41px] top-0 flex h-6 w-6 items-center justify-center rounded-full border border-champagne/40 bg-ink text-[11px] text-champagne">
+                {i + 1}
+              </span>
               <p className="text-sm leading-relaxed text-ivory/75">{s.text}</p>
             </div>
           ))}
@@ -299,7 +316,7 @@ function CompleteYourRitual({ currentSlug }: { currentSlug: string }) {
   if (!next) return null;
   return (
     <div className="mx-auto mt-4 max-w-3xl border-t border-ink/10 px-6 pb-20 pt-14">
-      <p className="eyebrow text-center">Complete Your Ritual</p>
+      <h2 className="text-center font-serif text-2xl">Complete your ritual</h2>
       <Link
         href={`/shop/${next.slug}`}
         className="mt-6 flex items-center gap-6 rounded-sm border border-ink/10 p-4 transition hover:border-ochre"
@@ -311,10 +328,10 @@ function CompleteYourRitual({ currentSlug }: { currentSlug: string }) {
           <Image src={next.image} alt={next.name} fill sizes="96px" className="object-cover" />
         </div>
         <div>
-          <p className="text-[11px] uppercase tracking-[0.18em] text-ink/50">
+          <p className="font-serif text-lg">{next.name}</p>
+          <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-ink/40">
             {next.step}
           </p>
-          <p className="font-serif text-lg">{next.name}</p>
           <p className="text-[12px] text-ink/50">
             ${next.price.subscription} with subscription
           </p>

@@ -14,7 +14,7 @@ const modeLabel: Record<string, string> = {
 };
 
 export default function CheckoutPage() {
-  const { lines, subtotal, savings } = useCart();
+  const { lines, subtotal, savings, refresh } = useCart();
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -51,6 +51,7 @@ export default function CheckoutPage() {
         setSubmitting(false);
         return;
       }
+      await refresh();
       router.push(`/order/${json.orderId}`);
     } catch {
       setError("Something went wrong. Please try again.");
@@ -61,8 +62,7 @@ export default function CheckoutPage() {
   if (lines.length === 0) {
     return (
       <div className="mx-auto max-w-lg px-6 py-24 text-center">
-        <p className="eyebrow">Checkout</p>
-        <h1 className="mt-2 font-serif text-3xl">Your bag is empty</h1>
+        <h1 className="font-serif text-3xl">Your bag is empty</h1>
         <Link
           href="/ritual"
           className="mt-6 inline-block border border-ink px-8 py-3 text-[12px] uppercase tracking-[0.25em] transition hover:border-ochre hover:text-ochre"
@@ -75,8 +75,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-12">
-      <p className="eyebrow">Checkout</p>
-      <h1 className="mt-1 font-serif text-3xl">Complete Your Order</h1>
+      <h1 className="font-serif text-3xl">Complete your order</h1>
 
       <div className="mt-10 grid gap-14 lg:grid-cols-[1fr_400px]">
         {/* Left: express + form */}
@@ -199,7 +198,7 @@ export default function CheckoutPage() {
         </div>
 
         {/* Right: order summary */}
-        <aside className="h-fit border border-ink/10 bg-white/60 p-6">
+        <aside className="card-elevated h-fit rounded-md bg-white p-6">
           <p className="text-[11px] uppercase tracking-[0.18em] text-ink/50">
             Order Summary
           </p>
@@ -221,12 +220,14 @@ export default function CheckoutPage() {
                     {modeLabel[line.mode]} · Qty {line.qty}
                   </p>
                 </div>
-                <p className="text-sm">${line.unitPrice * line.qty}</p>
+                <p className="tabular-nums text-sm">
+                  ${line.unitPrice * line.qty}
+                </p>
               </li>
             ))}
           </ul>
 
-          <div className="mt-6 space-y-2 border-t border-ink/10 pt-4 text-sm">
+          <div className="mt-6 space-y-2 border-t border-ink/10 pt-4 text-sm tabular-nums">
             <div className="flex justify-between text-ink/70">
               <span>Subtotal</span>
               <span>${subtotal}</span>

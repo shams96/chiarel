@@ -34,8 +34,7 @@ const assets = [
 export default function PressPage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-16">
-      <p className="eyebrow">Press Kit</p>
-      <h1 className="mt-2 font-serif text-4xl leading-tight">CHIAREL™ Press Kit</h1>
+      <h1 className="font-serif text-4xl leading-tight">CHIAREL™ Press Kit</h1>
       <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink/70">
         Brand facts, the launch lineup, and downloadable assets for
         journalists, editors, and press covering the House.

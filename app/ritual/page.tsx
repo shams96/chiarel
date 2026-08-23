@@ -9,8 +9,7 @@ export default function RitualPage() {
   const lip = products.find((p) => p.slug === "lip-concentrate")!;
   return (
     <div className="mx-auto max-w-6xl px-6 py-16">
-      <p className="eyebrow">The Ritual</p>
-      <h1 className="mt-2 max-w-2xl font-serif text-4xl leading-tight">
+      <h1 className="max-w-2xl font-serif text-4xl leading-tight">
         Cleanse → Tone → Serum → Moisturize
       </h1>
       <p className="mt-4 max-w-xl text-sm text-ink/70">
@@ -45,11 +44,11 @@ export default function RitualPage() {
               />
             </div>
             <div className="w-full md:w-1/2">
-              <p className="eyebrow">
+              <h2 className="font-serif text-3xl">{p.name}</h2>
+              <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/40">
                 Step {p.ritualOrder} · {p.step}
               </p>
-              <h2 className="mt-2 font-serif text-3xl">{p.name}</h2>
-              <p className="text-sm text-ink/60">{p.descriptor}</p>
+              <p className="mt-2 text-sm text-ink/60">{p.descriptor}</p>
               <p className="mt-4 max-w-md text-sm text-ink/75">{p.blurb}</p>
               <p className="mt-3 text-[12px] text-ink/50">
                 {p.complex} · {p.family}
@@ -71,7 +70,7 @@ export default function RitualPage() {
       </div>
 
       <section className="mt-24 border-t border-ink/10 pt-14">
-        <p className="eyebrow">Beyond the Ritual</p>
+        <h2 className="font-serif text-2xl">Beyond the ritual</h2>
         <div className="mt-6 flex flex-col items-center gap-10 md:flex-row">
           <div
             className="relative aspect-square w-full overflow-hidden rounded-sm md:w-1/3"

@@ -37,8 +37,8 @@ export default function PurchaseOptions({
             The Ritual Plan
           </span>
           <span className="mt-1 block text-sm text-ink/70">
-            Two deliveries, 45 days apart · pause or adjust anytime · member
-            advantages reserved for subscribers
+            One delivery, the full 90-day ritual · pause or adjust anytime ·
+            member advantages reserved for subscribers
           </span>
         </span>
         <span className="text-right">

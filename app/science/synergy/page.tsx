@@ -45,7 +45,9 @@ export default function SynergyPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <p className="eyebrow">The Science · CHIAREL Intelligence™</p>
+      <Link href="/science" className="text-[12px] text-ink/50 hover:text-ochre">
+        ← The Science
+      </Link>
       <h1 className="mt-2 font-serif text-4xl leading-tight">
         Presence Complex™
       </h1>

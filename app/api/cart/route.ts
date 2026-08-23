@@ -33,9 +33,16 @@ export async function POST(req: NextRequest) {
   });
 
   if (existing) {
+    // Re-adding the same tier is a genuine "one more" — bump quantity.
+    // Adding a different tier means the customer changed their mind about
+    // which plan they want, not that they want a second unit at the new
+    // tier's price, so only the mode updates and quantity is preserved.
     await db.cartItem.update({
       where: { id: existing.id },
-      data: { mode, qty: existing.qty + 1 },
+      data:
+        existing.mode === mode
+          ? { qty: existing.qty + 1 }
+          : { mode },
     });
   } else {
     await db.cartItem.create({

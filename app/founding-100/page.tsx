@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import ComingSoonPackshot from "@/components/ComingSoonPackshot";
 import { getProduct } from "@/lib/products";
+import { db } from "@/lib/db";
 
 export const metadata: Metadata = {
   title: "The Founding 100",
@@ -10,7 +12,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/founding-100" },
 };
 
-export default function Founding100Page() {
+export const dynamic = "force-dynamic";
+
+export default async function Founding100Page() {
   const masque = getProduct("recovery-masque")!;
   const ninetyDaySubscriptionTotal = masque.price.subscription * 2;
   const ninetyDayOneTimeTotal = masque.price.oneTime * 2;
@@ -18,24 +22,81 @@ export default function Founding100Page() {
   const circleCredit = Math.round(circleCheckoutTotal * 0.25);
   const circleNet = circleCheckoutTotal - circleCredit;
 
+  const claimed = await db.foundingSignup.count();
+  const remaining = Math.max(0, 100 - claimed);
+  const full = remaining === 0;
+
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
-      <p className="eyebrow">The House Opens</p>
-      <h1 className="mt-2 font-serif text-4xl leading-tight">
-        The Founding 100
-      </h1>
-      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/75">
-        Half the price. Then none of it. We are opening the House to its
-        first hundred — not as a discount, but as an invitation to trust
-        us first, and be repaid for it. The ritual asks for ninety days; we
-        ask you to give it that long.
-      </p>
+    <div>
+      {/* Hero — image-led gateway moment. The capture card is the page's
+          entire job, so it gets the visual weight; the program mechanics
+          and legal terms live below, for whoever scrolls to them. */}
+      <section className="relative overflow-hidden bg-ink text-ivory">
+        <div className="mx-auto grid max-w-6xl gap-0 lg:grid-cols-2">
+          <div className="relative aspect-[4/5] w-full lg:aspect-auto">
+            <Image
+              src={masque.image}
+              alt={masque.name}
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="flex flex-col justify-center px-6 py-16 md:px-12 lg:py-20">
+            <p className="text-[11px] uppercase tracking-[0.4em] text-champagne">
+              By invitation · The House Opens
+            </p>
+            <h1 className="mt-5 font-serif text-5xl leading-[0.98] tracking-[-0.01em] md:text-6xl">
+              The Founding 100
+            </h1>
+            <p className="mt-6 max-w-md text-[15px] leading-relaxed text-ivory/75">
+              Half the price. Then none of it. We are opening the House to
+              its first hundred — not as a discount, but as an invitation
+              to trust us first, and be repaid for it.
+            </p>
 
-      <div className="mt-12 max-w-sm">
-        <ComingSoonPackshot productName={masque.name} color={masque.color.hex} />
-      </div>
+            {/* Real scarcity, not decoration — this number is the actual
+                count of saved signups, not a fabricated countdown. */}
+            <div className="mt-8 flex items-baseline gap-3">
+              <span className="tabular-nums font-serif text-4xl text-champagne">
+                {remaining}
+              </span>
+              <span className="text-[12px] uppercase leading-tight tracking-[0.14em] text-ivory/60">
+                {full ? (
+                  <>places remaining
+                  <br />
+                  the Founding 100 is closed</>
+                ) : (
+                  <>of 100 places remaining<br />no more once they&rsquo;re claimed</>
+                )}
+              </span>
+            </div>
 
-      <section className="mt-16 space-y-10">
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-1 border-t border-ivory/10 pt-5 text-[12px] text-ivory/55">
+              <span>Formulated by Grazia Savoriti, Pharmacist</span>
+              <span>L-Ornithine 1.0% · Panthenol 2.0%, disclosed</span>
+            </div>
+
+            <div className="mt-8">
+              {full ? (
+                <p className="card-elevated rounded-md bg-white/5 p-6 text-sm leading-relaxed text-ivory/80">
+                  The Founding 100 has been claimed.{" "}
+                  <Link href="/shop/recovery-masque" className="border-b border-champagne text-champagne">
+                    Join the CHIAREL Circle™
+                  </Link>{" "}
+                  below instead — the next chapter, open now.
+                </p>
+              ) : (
+                <ComingSoonPackshot source={`${masque.name} — Founding 100`} />
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="mx-auto max-w-3xl px-6 py-16">
+      <section className="space-y-10">
         <div className="border-l-2 border-ochre pl-6">
           <h2 className="font-serif text-2xl">How it works</h2>
           <ol className="mt-3 max-w-xl space-y-3 text-sm leading-relaxed text-ink/75">
@@ -171,6 +232,7 @@ export default function Founding100Page() {
         <Link href="/science" className="border-b border-ink/30 pb-0.5 text-ink/60">
           The Science
         </Link>
+      </div>
       </div>
     </div>
   );

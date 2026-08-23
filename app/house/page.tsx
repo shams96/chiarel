@@ -3,8 +3,7 @@ export const metadata = { title: "The House", alternates: { canonical: "/house" 
 export default function HousePage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-16">
-      <p className="eyebrow">Provenance</p>
-      <h1 className="mt-2 font-serif text-4xl">The House</h1>
+      <h1 className="font-serif text-4xl">The House</h1>
 
       {/* No real photo of Isola del Liri exists in the asset library — the prior
           image here ("hero.png") was a mislabeled product-jar mockup, not a place

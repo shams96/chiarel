@@ -26,7 +26,7 @@ const serumTable = {
     {
       label: "Price",
       values: [
-        "$116 with subscription · $145 one-time (30 ml)",
+        "$151 with subscription · $189 one-time (30 ml)",
         "~$185 (30 ml)",
         "~$320 (30 ml)",
         "~$545 (30 ml)",
@@ -118,7 +118,7 @@ function ComparisonTable({
     <div className="mt-14">
       <h2 className="font-serif text-2xl">{table.title}</h2>
       <div className="mt-6 overflow-x-auto">
-        <table className="w-full min-w-[640px] border-collapse text-left text-[13px]">
+        <table className="tabular-nums w-full min-w-[640px] border-collapse text-left text-[13px]">
           <thead>
             <tr>
               <th className="w-40 border-b border-ink/15 pb-3 pr-4 text-[11px] uppercase tracking-[0.14em] text-ink/50">
@@ -169,7 +169,9 @@ function ComparisonTable({
 export default function ComparisonPage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-16">
-      <p className="eyebrow">The Science</p>
+      <Link href="/science" className="text-[12px] text-ink/50 hover:text-ochre">
+        ← The Science
+      </Link>
       <h1 className="mt-2 font-serif text-4xl leading-tight">
         How CHIAREL Compares
       </h1>

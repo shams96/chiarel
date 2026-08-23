@@ -29,10 +29,10 @@ export default function RitualCarousel({ products }: { products: Product[] }) {
               className="transition duration-700 group-hover:scale-[1.03]"
             />
           </div>
-          <p className="mt-4 text-[11px] uppercase tracking-[0.2em] text-ink/50">
+          <p className="mt-4 font-serif text-xl leading-tight">{p.name}</p>
+          <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-ink/40">
             {p.step}
           </p>
-          <p className="font-serif text-xl leading-tight">{p.name}</p>
         </Link>
       ))}
     </div>

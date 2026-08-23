@@ -24,8 +24,7 @@ export default async function OrderConfirmationPage({
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-24 text-center">
-      <p className="eyebrow">Order Confirmed</p>
-      <h1 className="mt-2 font-serif text-3xl">Thank you, {order.firstName}.</h1>
+      <h1 className="font-serif text-3xl">Thank you, {order.firstName}.</h1>
       <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink/70">
         Your ritual has been recorded. Order{" "}
         <span className="font-medium text-ink">#{order.id.slice(-8).toUpperCase()}</span>{" "}

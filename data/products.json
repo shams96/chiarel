@@ -87,8 +87,8 @@
     "line": "Restore™",
     "size": "30 ml / 1.0 fl. oz.",
     "price": {
-      "subscription": 116,
-      "oneTime": 145
+      "subscription": 151,
+      "oneTime": 189
     },
     "image": "/assets/products/essence-shore.png",
     "blurb": "The Signature Serum of the House. A concentrated treatment that supports Cellular Clarity™ at the heart of the ritual.",
@@ -236,8 +236,8 @@
     "line": "",
     "size": "Two full-size treatments",
     "price": {
-      "subscription": 212,
-      "oneTime": 303
+      "subscription": 243,
+      "oneTime": 347
     },
     "image": "/assets/products/founding-pair-shore.png",
     "blurb": "The Signature Serum of the House paired with its Icon — CHIAREL Essence™ and Terra Radiance Crème™, delivered together every 45 days. The essential ritual, in two gestures.",
@@ -261,8 +261,8 @@
     "line": "",
     "size": "Four full-size treatments",
     "price": {
-      "subscription": 342,
-      "oneTime": 489
+      "subscription": 372,
+      "oneTime": 533
     },
     "image": "/assets/products/ritual-set-shore.png",
     "blurb": "Every step of the daily ritual, delivered together on your rhythm. The complete practice of the House — Cellular Cleanser™, Cellular Mist™, CHIAREL Essence™, and Terra Radiance Crème™.",

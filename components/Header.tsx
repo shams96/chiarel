@@ -44,7 +44,7 @@ export default function Header() {
   const pathname = usePathname();
   const showFounding100Ticker = FOUNDING_100_PAGES.includes(pathname ?? "");
   return (
-    <header className="site-header sticky top-0 z-50 border-b border-ink/10">
+    <header className="site-header sticky top-0 z-50 overflow-x-hidden border-b border-ink/10">
       {showFounding100Ticker && (
         <Link
           href="/founding-100"
