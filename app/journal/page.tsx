@@ -15,7 +15,7 @@ const entries = [
     title: "Three Skins, One House: The CHIAREL Origin Story",
     tag: "The House",
     excerpt:
-      "Why CHIAREL exists: a household with three biologically distinct skin profiles, and no formulation house precise enough to serve all three.",
+      "Why CHIAREL exists: one household, three different skin types, and no formulation house precise enough to serve all three.",
   },
   {
     slug: "isola-del-liri-waterfall",

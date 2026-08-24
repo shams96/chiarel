@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Three Skins, One House: The CHIAREL Origin Story",
   description:
-    "Why CHIAREL exists: a household with three biologically distinct skin profiles, and no formulation house precise enough to serve all three.",
+    "Why CHIAREL exists: one household, three different skin types, and no formulation house precise enough to serve all three.",
   alternates: { canonical: "/journal/three-skins-one-house" },
 };
 
@@ -21,29 +21,30 @@ export default function ThreeSkinsPage() {
 
       <div className="mt-10 space-y-6 text-sm leading-relaxed text-ink/80">
         <p>
-          CHIAREL™ was not built backward from a product brief. It began at a
-          table, not a laboratory bench — one household, three biologically
-          distinct skin profiles, each governed by its own logic. What
-          should have been solvable with a well-stocked bathroom cabinet was
-          not. No single formulation house understood all three with equal
-          precision.
+          The question started at a kitchen table, not a lab: one household,
+          three different skin types — reactive, combination, mature — and a
+          bathroom cabinet that couldn&rsquo;t keep up with any of them.
+          Every formula on the market seemed built for one skin and merely
+          tolerated by the other two.
         </p>
         <p>
-          That absence became the brief. The brief led to Isola del Liri, and
-          to a partnership with Natural You Srl — a formulation house
-          willing to treat each skin as its own problem to solve, not a
-          variation on a single default.
+          That question needed a real answer, not a home remedy. It led to
+          Isola del Liri, Italy, and to a partnership with Natural You Srl —
+          each formulation developed under the guidance of CHIAREL&rsquo;s
+          pharmacist, Grazia Savoriti, rather than adapted from someone
+          else&rsquo;s default.
         </p>
         <p>
-          The founding question was not <em>who might like this</em>. It was
-          simpler and harder: why does a category this size still ask
-          everyone to trust the same formula? Skin is not one thing. A house
-          built to serve it should not pretend otherwise.
+          The premise was never <em>who might like this</em>. It was harder
+          than that: why does an entire category still ask everyone to
+          trust the same formula? Skin is not one thing — a house built to
+          serve it shouldn&rsquo;t pretend otherwise.
         </p>
         <p>
-          That is the origin of CHIAREL Intelligence™ — not a marketing
-          concept, but the working method the House still holds: begin with
-          the biology in front of you, not the biology the industry assumes.
+          That premise is CHIAREL Intelligence™ — not a marketing concept,
+          but the working method the House still holds: start with the
+          biology in front of you, formulate it properly, and disclose
+          exactly what went in.
         </p>
       </div>
 

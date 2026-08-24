@@ -775,11 +775,11 @@ export default function Home() {
             pretend otherwise.&rdquo;
           </p>
           <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-ink/70">
-            CHIAREL Intelligence™ began at a table, not a laboratory bench —
-            the working method still holds: begin with the biology in front
-            of you, not the biology the industry assumes. It is the same
-            discipline behind La Bella Figura — presenting one&rsquo;s best
-            self, quietly, without announcement.
+            CHIAREL Intelligence™ began as a question at a kitchen table —
+            the working method still holds: start with the biology in front
+            of you, formulate it properly, and disclose exactly what went
+            in. It is the same discipline behind La Bella Figura —
+            presenting one&rsquo;s best self, quietly, without announcement.
           </p>
           <Link
             href="/journal/three-skins-one-house"

@@ -71,10 +71,11 @@ export default function PressPage() {
               Founding Story
             </dt>
             <dd className="mt-1 max-w-xl">
-              CHIAREL began at a table, not a laboratory bench — one
-              household, three biologically distinct skin profiles, and no
-              formulation house precise enough to serve all three with equal
-              rigor. That absence became the brief.{" "}
+              The question started at a kitchen table, not a lab — one
+              household, three different skin types (reactive, combination,
+              mature), and no formulation house precise enough to serve all
+              three with equal rigor. That question became the brief, formulated
+              properly under a pharmacist&rsquo;s guidance in Isola del Liri.{" "}
               <Link
                 href="/journal/three-skins-one-house"
                 className="border-b border-ochre text-ochre"
