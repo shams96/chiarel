@@ -575,24 +575,29 @@ export default function Home() {
             <h3 className="font-serif text-xl text-ink">
               Common Skin Concerns This Addresses
             </h3>
+            <p className="mt-3 max-w-2xl text-[13px] leading-relaxed text-ink/60">
+              If you&rsquo;re experiencing any of the following, here&rsquo;s
+              what in the ritual is formulated to help.
+            </p>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               <li className="text-[13px] leading-relaxed text-ink/70">
                 <span className="font-medium text-ink">
-                  Dehydration or a compromised barrier:
+                  Dehydration or a compromised moisture barrier:
                 </span>{" "}
                 addressed with Ceramide NP and low molecular weight
                 Hyaluronic Acid.
               </li>
               <li className="text-[13px] leading-relaxed text-ink/70">
                 <span className="font-medium text-ink">
-                  Sensitive or reactive skin:
+                  Sensitive, reactive, or easily irritated skin:
                 </span>{" "}
                 addressed with a prebiotic complex formulated to cleanse
                 without stripping the barrier.
               </li>
               <li className="text-[13px] leading-relaxed text-ink/70">
                 <span className="font-medium text-ink">
-                  Dullness, uneven texture, or loss of firmness:
+                  Fine lines, dullness, uneven texture, or loss of visible
+                  firmness:
                 </span>{" "}
                 addressed with Palmitoyl Pentapeptide-4 at 3% concentration.
               </li>
