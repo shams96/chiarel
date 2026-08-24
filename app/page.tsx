@@ -11,15 +11,35 @@ import {
   faqJsonLd,
   offerCatalogJsonLd,
   webPageJsonLd,
+  researchArticleJsonLd,
   SITE_URL,
+  SITE_NAME,
   HOMEPAGE_LAST_UPDATED,
   HOMEPAGE_PUBLISHED,
+  HOMEPAGE_LAST_UPDATED_DISPLAY,
+  HOMEPAGE_PUBLISHED_DISPLAY,
 } from "@/lib/seo";
 
 // Homepage-specific authorship metadata — renders a real <meta name="author">
-// tag, since some AEO/GEO crawlers check the meta tag rather than JSON-LD alone.
+// tag plus OpenGraph article:published_time/modified_time (property=, not
+// name=, which is the convention crawlers actually check for freshness).
+// Next.js replaces the whole openGraph object per-route rather than merging
+// it with the root layout's, so title/description/siteName/url/images from
+// layout.tsx are repeated here verbatim rather than relying on inheritance.
 export const metadata: Metadata = {
   authors: [{ name: "Grazia Savoriti", url: `${SITE_URL}/house` }],
+  openGraph: {
+    type: "article",
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} — House of Skin Intelligence™`,
+    description:
+      "CHIAREL™ · House of Skin Intelligence™ · Advancing Cellular Clarity™. Intelligent formulations crafted in Isola del Liri, Italy.",
+    url: SITE_URL,
+    images: [{ url: "/assets/editorial/hero-shore-duo.png", width: 1536, height: 934 }],
+    publishedTime: HOMEPAGE_PUBLISHED,
+    modifiedTime: HOMEPAGE_LAST_UPDATED,
+    authors: [`${SITE_URL}/house`],
+  },
 };
 
 const faqs = [
@@ -36,22 +56,22 @@ const faqs = [
   {
     question: "Who formulates CHIAREL?",
     answer:
-      "CHIAREL is formulated by Grazia Savoriti, CHIAREL's pharmacist specializing in cosmetic and nutraceutical research. Every formulation is developed under her guidance and produced fresh, to order, in small batches in Isola del Liri, Italy.",
+      "CHIAREL is formulated by Grazia Savoriti, CHIAREL's pharmacist specializing in cosmetic and nutraceutical research. Every formulation — from CHIAREL Essence™'s peptide complex to Terra Radiance Crème™'s barrier-support blend — is developed under her direct guidance, then produced fresh, to order, in small batches in Isola del Liri, Italy, rather than manufactured in bulk ahead of demand. She also reviews the published, peer-reviewed research cited for each active ingredient before it's formulated into a CHIAREL product, which is why every formula states its actives and exact percentages rather than grouping them into an undisclosed blend.",
   },
   {
     question: "Where can I buy CHIAREL?",
     answer:
-      "CHIAREL is available directly at chiarel.com, made to order in Isola del Liri, Italy and shipped from there to you.",
+      "CHIAREL is available directly at chiarel.com — it is not sold in retail stores, department stores, or through third-party marketplaces or resellers. Buying direct means each order is made fresh to order in Isola del Liri, Italy and shipped straight to you, without the markup layers of traditional retail distribution. This also lets CHIAREL keep every active ingredient and its exact concentration listed on the product page, since pricing and formulation are controlled end to end by the House rather than a retail partner.",
   },
   {
     question: "How does the CHIAREL subscription work?",
     answer:
-      "Choosing subscription pricing on any product sets a recurring 45-day delivery at the discounted rate. Every product is also available as a one-time purchase, giving you the flexibility to reorder whenever you choose.",
+      "Choosing subscription pricing on any product sets a recurring delivery every 45 days at the discounted subscription rate, timed to the pace most people move through a bottle of serum or crème. Every product is also available as a one-time purchase at full price, with no subscription required, so you can try a single product before committing to a recurring delivery. Self-service subscription management (pause, skip, or cancel) is being added to the account experience; until then, contacting orders@chiarel.com handles any change promptly.",
   },
   {
     question: "Where is CHIAREL made?",
     answer:
-      "CHIAREL formulas are produced in Isola del Liri, Italy, with manufacturing partner Natural You Srl, using water drawn where the Liri meets the Fibreno — a river fed entirely by limestone karst springs.",
+      "CHIAREL formulas are produced in Isola del Liri, Italy, with manufacturing partner Natural You Srl, using water drawn where the Liri meets the Fibreno — a river fed entirely by limestone karst springs, with no surface tributaries of its own. That confluence of newly filtered spring water is what gives The Cascata Complex™ its name. Formulating on-site, rather than sourcing water and actives from a distance, is also why every CHIAREL batch is produced fresh, to order, instead of held in standing inventory ahead of demand.",
   },
 ];
 
@@ -151,6 +171,12 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(offerCatalogJsonLd(products)),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(researchArticleJsonLd),
         }}
       />
 
@@ -453,6 +479,36 @@ export default function Home() {
                 Read the formulation science →
               </Link>
             </li>
+            <li className="border-l-2 border-ochre pl-5">
+              <p className="text-ink/70">
+                L-Ornithine (used in Recovery Masque™) is studied for its
+                role in the skin's Natural Moisturizing Factor and overnight
+                barrier repair.
+              </p>
+              <a
+                href="https://pubmed.ncbi.nlm.nih.gov/?term=ornithine+skin+barrier"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-1 inline-block border-b border-ink/30 text-[12px] text-ink/50 hover:border-ochre hover:text-ochre"
+              >
+                Published research, PubMed (NIH) →
+              </a>
+            </li>
+            <li className="border-l-2 border-ochre pl-5">
+              <p className="text-ink/70">
+                Low molecular weight Hyaluronic Acid (used in Cellular Mist™)
+                is studied for fast-absorbing surface hydration ahead of
+                treatment.
+              </p>
+              <a
+                href="https://pubmed.ncbi.nlm.nih.gov/?term=low+molecular+weight+hyaluronic+acid+skin+hydration"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-1 inline-block border-b border-ink/30 text-[12px] text-ink/50 hover:border-ochre hover:text-ochre"
+              >
+                Published research, PubMed (NIH) →
+              </a>
+            </li>
           </ul>
         </div>
       </section>
@@ -514,6 +570,54 @@ export default function Home() {
             built to be used in full or picked apart by the single product
             your skin needs most.
           </p>
+
+          <div className="mt-14 border-t border-ink/10 pt-10">
+            <h3 className="font-serif text-xl text-ink">
+              Common Skin Concerns This Addresses
+            </h3>
+            <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+              <li className="text-[13px] leading-relaxed text-ink/70">
+                <span className="font-medium text-ink">
+                  Dehydration or a compromised barrier:
+                </span>{" "}
+                addressed with Ceramide NP and low molecular weight
+                Hyaluronic Acid.
+              </li>
+              <li className="text-[13px] leading-relaxed text-ink/70">
+                <span className="font-medium text-ink">
+                  Sensitive or reactive skin:
+                </span>{" "}
+                addressed with a prebiotic complex formulated to cleanse
+                without stripping the barrier.
+              </li>
+              <li className="text-[13px] leading-relaxed text-ink/70">
+                <span className="font-medium text-ink">
+                  Dullness, uneven texture, or loss of firmness:
+                </span>{" "}
+                addressed with Palmitoyl Pentapeptide-4 at 3% concentration.
+              </li>
+              <li className="text-[13px] leading-relaxed text-ink/70">
+                <span className="font-medium text-ink">
+                  Environmental stress and everyday exposure:
+                </span>{" "}
+                addressed with Niacinamide for daily environmental defense.
+              </li>
+              <li className="text-[13px] leading-relaxed text-ink/70">
+                <span className="font-medium text-ink">
+                  Combination skin needing balance, not stripping:
+                </span>{" "}
+                addressed by pairing a gentle cleanser with a light,
+                fast-absorbing mist rather than a heavy single-step product.
+              </li>
+              <li className="text-[13px] leading-relaxed text-ink/70">
+                <span className="font-medium text-ink">
+                  Slow overnight recovery:
+                </span>{" "}
+                addressed with L-Ornithine and Panthenol in the closing,
+                overnight step of the ritual.
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -710,8 +814,9 @@ export default function Home() {
         <Link href="/house" className="border-b border-ink/30 hover:border-ochre hover:text-ochre">
           Grazia Savoriti
         </Link>
-        , CHIAREL&rsquo;s formulating pharmacist. Published {HOMEPAGE_PUBLISHED},
-        last reviewed {HOMEPAGE_LAST_UPDATED}.
+        , CHIAREL&rsquo;s formulating pharmacist. Published{" "}
+        {HOMEPAGE_PUBLISHED_DISPLAY}, last reviewed{" "}
+        {HOMEPAGE_LAST_UPDATED_DISPLAY}.
       </p>
     </>
   );

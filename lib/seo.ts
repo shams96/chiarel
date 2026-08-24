@@ -10,11 +10,15 @@ export const PRESS_EMAIL = "press@chiarel.com";
 
 // Bump this when homepage content materially changes — feeds dateModified
 // in webPageJsonLd and the visible "content last reviewed" line, both of
-// which are freshness signals AI systems weight for citation.
-export const HOMEPAGE_LAST_UPDATED = "2026-08-23";
+// which are freshness signals AI systems weight for citation. Full ISO 8601
+// datetimes, not bare dates — some crawlers only recognize the full form.
+export const HOMEPAGE_LAST_UPDATED = "2026-08-24T00:00:00Z";
 // The site's actual launch date (first substantive build commit) — used as
 // datePublished, distinct from the dateModified value above.
-export const HOMEPAGE_PUBLISHED = "2026-08-07";
+export const HOMEPAGE_PUBLISHED = "2026-08-07T00:00:00Z";
+// Display-friendly versions of the two dates above, for visible on-page text.
+export const HOMEPAGE_LAST_UPDATED_DISPLAY = "August 24, 2026";
+export const HOMEPAGE_PUBLISHED_DISPLAY = "August 7, 2026";
 
 export const organizationJsonLd = {
   "@context": "https://schema.org",
@@ -70,6 +74,28 @@ export function webPageJsonLd(opts: {
     publisher: { "@type": "Organization", name: "CHIAREL" },
   };
 }
+
+// Describes the on-page "Backed by Published Research" editorial section as
+// an Article, distinct from the WebPage schema for the page as a whole —
+// some crawlers specifically look for Article/BlogPosting to credit
+// datePublished/author signals rather than reading them off WebPage.
+export const researchArticleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "CHIAREL Formulation Science: Backed by Published Research",
+  description:
+    "The published, peer-reviewed research behind CHIAREL's active ingredients — Palmitoyl Pentapeptide-4, Ceramide NP, Niacinamide, and Bioactive Ferment Lysate.",
+  datePublished: HOMEPAGE_PUBLISHED,
+  dateModified: HOMEPAGE_LAST_UPDATED,
+  author: {
+    "@type": "Person",
+    name: "Grazia Savoriti",
+    url: `${SITE_URL}/house`,
+    jobTitle: "Pharmacist · Cosmetic & Nutraceutical Research",
+  },
+  publisher: { "@type": "Organization", name: "CHIAREL", url: SITE_URL },
+  mainEntityOfPage: SITE_URL,
+};
 
 export function faqJsonLd(faqs: { question: string; answer: string }[]) {
   return {
