@@ -42,7 +42,16 @@ export default function HousePage() {
             Natural You Srl is guided by Grazia Savoriti, a pharmacist with
             deep expertise in cosmetic and nutraceutical research and
             development. It is under her guidance that every CHIAREL™
-            formulation is developed and produced, in Isola del Liri.
+            formulation is developed and produced, in Isola del Liri.{" "}
+            <a
+              href="https://www.naturalyou.it/about-us-detail/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-b border-ochre text-ochre"
+            >
+              See her profile at Natural You Srl
+            </a>
+            .
           </p>
         </section>
         <section className="border-t border-ink/10 pt-10">

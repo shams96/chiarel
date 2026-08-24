@@ -18,16 +18,20 @@ import {
   HOMEPAGE_PUBLISHED,
   HOMEPAGE_LAST_UPDATED_DISPLAY,
   HOMEPAGE_PUBLISHED_DISPLAY,
+  FORMULATOR_EXTERNAL_URL,
 } from "@/lib/seo";
 
 // Homepage-specific authorship metadata — renders a real <meta name="author">
 // tag plus OpenGraph article:published_time/modified_time (property=, not
 // name=, which is the convention crawlers actually check for freshness).
+// The author link points to Grazia Savoriti's independent bio on Natural
+// You Srl's own site (not chiarel.com) — an external, third-party-verified
+// credential rather than a self-referential link back to our own /house page.
 // Next.js replaces the whole openGraph object per-route rather than merging
 // it with the root layout's, so title/description/siteName/url/images from
 // layout.tsx are repeated here verbatim rather than relying on inheritance.
 export const metadata: Metadata = {
-  authors: [{ name: "Grazia Savoriti", url: `${SITE_URL}/house` }],
+  authors: [{ name: "Grazia Savoriti", url: FORMULATOR_EXTERNAL_URL }],
   openGraph: {
     type: "article",
     siteName: SITE_NAME,
@@ -38,7 +42,7 @@ export const metadata: Metadata = {
     images: [{ url: "/assets/editorial/hero-shore-duo.png", width: 1536, height: 934 }],
     publishedTime: HOMEPAGE_PUBLISHED,
     modifiedTime: HOMEPAGE_LAST_UPDATED,
-    authors: [`${SITE_URL}/house`],
+    authors: [FORMULATOR_EXTERNAL_URL],
   },
 };
 
@@ -419,6 +423,14 @@ export default function Home() {
           >
             Read her full bio →
           </Link>
+          <a
+            href={FORMULATOR_EXTERNAL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 block text-[11px] uppercase tracking-[0.16em] text-ivory/40 hover:text-champagne"
+          >
+            Verified profile at Natural You Srl →
+          </a>
         </Reveal>
       </section>
 
@@ -816,9 +828,14 @@ export default function Home() {
 
       <p className="pb-10 text-center text-[11px] text-ink/40">
         Written by{" "}
-        <Link href="/house" className="border-b border-ink/30 hover:border-ochre hover:text-ochre">
+        <a
+          href={FORMULATOR_EXTERNAL_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="border-b border-ink/30 hover:border-ochre hover:text-ochre"
+        >
           Grazia Savoriti
-        </Link>
+        </a>
         , CHIAREL&rsquo;s formulating pharmacist. Published{" "}
         {HOMEPAGE_PUBLISHED_DISPLAY}, last reviewed{" "}
         {HOMEPAGE_LAST_UPDATED_DISPLAY}.

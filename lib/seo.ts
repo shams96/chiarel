@@ -8,6 +8,11 @@ export const CONTACT_EMAIL = "hello@chiarel.com";
 export const ORDERS_EMAIL = "orders@chiarel.com";
 export const PRESS_EMAIL = "press@chiarel.com";
 
+// Grazia Savoriti's independent, third-party bio — published by Natural You
+// Srl (CHIAREL's manufacturing partner) on their own site, not CHIAREL's.
+// This is the external verifying link for author/formulator attribution.
+export const FORMULATOR_EXTERNAL_URL = "https://www.naturalyou.it/about-us-detail/";
+
 // Bump this when homepage content materially changes — feeds dateModified
 // in webPageJsonLd and the visible "content last reviewed" line, both of
 // which are freshness signals AI systems weight for citation. Full ISO 8601
@@ -48,6 +53,7 @@ export const formulatorJsonLd = {
   jobTitle: "Pharmacist · Cosmetic & Nutraceutical Research",
   worksFor: { "@type": "Organization", name: "CHIAREL" },
   url: `${SITE_URL}/house`,
+  sameAs: [FORMULATOR_EXTERNAL_URL],
 };
 
 export function webPageJsonLd(opts: {
@@ -69,6 +75,7 @@ export function webPageJsonLd(opts: {
       "@type": "Person",
       name: "Grazia Savoriti",
       url: `${SITE_URL}/house`,
+      sameAs: [FORMULATOR_EXTERNAL_URL],
       jobTitle: "Pharmacist · Cosmetic & Nutraceutical Research",
     },
     publisher: { "@type": "Organization", name: "CHIAREL" },
