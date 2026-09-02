@@ -141,6 +141,8 @@ export default function ProductPage({
         </div>
       </div>
 
+      <BenefitPills actives={p.actives} />
+
       {p.benefits && <KeyBenefits benefits={p.benefits} />}
       {p.slug === "recovery-masque" && <IncludedSpatula />}
       {p.actives && (
@@ -165,6 +167,44 @@ export default function ProductPage({
         image={p.image}
         subscriptionPrice={p.price.subscription}
       />
+    </div>
+  );
+}
+
+// Benefit pills band — sits directly under the hero, not buried mid-page.
+// Reuses only facts already established and vetted elsewhere on the site
+// (the primary active's dosed percentage, and the same trust badges used
+// in the footer) rather than inventing new short-form marketing claims.
+function BenefitPills({
+  actives,
+}: {
+  actives?: { name: string; percent: string | null }[];
+}) {
+  const primaryActive = actives?.[0];
+  const pills = [
+    primaryActive?.percent
+      ? `${primaryActive.percent} ${primaryActive.name}`
+      : null,
+    "Clinically Dosed",
+    "Every Active Disclosed",
+    "Made to Order in Isola del Liri, Italy",
+  ].filter((pill): pill is string => Boolean(pill));
+
+  return (
+    <div className="border-b border-ink/10 bg-cloud/30">
+      <div className="mx-auto max-w-6xl px-6 py-4">
+        <ul className="flex flex-wrap justify-center gap-x-8 gap-y-2 md:justify-start">
+          {pills.map((pill) => (
+            <li
+              key={pill}
+              className="flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-ink/60"
+            >
+              <span className="inline-block h-1 w-1 rounded-full bg-ochre" aria-hidden="true" />
+              {pill}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
