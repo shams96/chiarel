@@ -143,6 +143,8 @@ export default function ProductPage({
 
       <BenefitPills actives={p.actives} />
 
+      <BrandStatement />
+
       {p.benefits && <KeyBenefits benefits={p.benefits} />}
       {p.slug === "recovery-masque" && <IncludedSpatula />}
       {p.actives && (
@@ -206,6 +208,58 @@ function BenefitPills({
         </ul>
       </div>
     </div>
+  );
+}
+
+// Full-width statement block — row 04 of the reference spec ("headline plus
+// five paragraphs"). Reused as-is across every PDP rather than fabricated
+// per product: the copy draws only on facts already established and vetted
+// elsewhere on the site (the origin story, Grazia Savoriti, Natural You Srl,
+// the disclosure ethos) — see /journal/three-skins-one-house for the source.
+function BrandStatement() {
+  return (
+    <Reveal className="border-t border-ink/10 bg-white py-20">
+      <div className="mx-auto max-w-xl px-6 text-center">
+        <h2 className="font-serif text-3xl leading-snug text-ink">
+          A House Built on One Rule
+        </h2>
+        <div className="mt-8 space-y-5 text-sm leading-relaxed text-ink/70">
+          <p>
+            The question started at a kitchen table, not a lab — one
+            household, three different skin types, and a bathroom cabinet
+            that couldn&rsquo;t keep up with any of them.
+          </p>
+          <p>
+            That question needed a real answer. It led to Isola del Liri,
+            Italy, and to a partnership with Natural You Srl, where every
+            CHIAREL™ formulation is developed under the guidance of
+            pharmacist Grazia Savoriti.
+          </p>
+          <p>
+            Skin is not one thing. A house built to serve it
+            shouldn&rsquo;t pretend otherwise — which is why every active
+            ingredient and its exact concentration is stated on this page,
+            not folded into an undisclosed blend.
+          </p>
+          <p>
+            Each formula is produced fresh, to order, in small batches —
+            not manufactured ahead of demand and held in standing
+            inventory.
+          </p>
+          <p>
+            That is CHIAREL Intelligence™: start with the biology in front
+            of you, formulate it properly, and disclose exactly what went
+            in.
+          </p>
+        </div>
+        <Link
+          href="/journal/three-skins-one-house"
+          className="mt-8 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
+        >
+          Read the Origin Story
+        </Link>
+      </div>
+    </Reveal>
   );
 }
 
