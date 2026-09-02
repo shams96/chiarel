@@ -43,16 +43,19 @@ export default function ProductPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd(p)) }}
       />
 
-      {/* Hero — gallery left, buy box right (stacked on mobile). Buy box sits
-          beside the product from the first viewport, not below a full-bleed
-          banner — the single highest-leverage PDP conversion fix. */}
-      <div className="mx-auto max-w-6xl px-6 pt-8 md:pt-14">
-        <div className="grid gap-8 md:grid-cols-2 md:items-start md:gap-14">
+      {/* Hero — gallery left, buy box right on desktop, stacked on mobile.
+          Mobile hero is deliberately shorter (aspect-[5/4] vs. desktop's
+          aspect-[4/5]) and the name/price block sits with tight spacing
+          directly beneath it — a short image, not a full-viewport banner,
+          so price and the buy CTA are reachable within roughly one
+          screen-height of scroll on a phone, not two. */}
+      <div className="mx-auto max-w-6xl px-6 pt-4 md:pt-14">
+        <div className="grid gap-6 md:grid-cols-2 md:items-start md:gap-14">
           {/* Gallery column — single image today; sized to take a second/third
               thumbnail or video without restructuring once more assets exist. */}
           <div className="md:sticky md:top-24">
             <div
-              className="relative aspect-[4/5] w-full overflow-hidden rounded-md"
+              className="relative aspect-[5/4] w-full overflow-hidden rounded-md md:aspect-[4/5]"
               style={{ backgroundColor: productTint(p.color.hex) }}
             >
               <Image
@@ -73,20 +76,20 @@ export default function ProductPage({
 
           {/* Buy box column */}
           <div className="md:pt-2">
-            <h1 className="font-serif text-4xl leading-tight md:text-5xl">
+            <h1 className="font-serif text-3xl leading-tight md:text-5xl">
               {p.name}
             </h1>
             <p className="mt-1 text-sm text-ink/60">{p.descriptor}</p>
             {p.role && (
-              <p className="mt-4 inline-block border border-champagne px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ochre">
+              <p className="mt-3 inline-block border border-champagne px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ochre md:mt-4">
                 {p.role}
               </p>
             )}
-            <p className="mt-6 max-w-md text-sm leading-relaxed text-ink/75">
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-ink/75 md:mt-6">
               {p.blurb}
             </p>
 
-            <div className="mt-8">
+            <div className="mt-6 md:mt-8">
               <PurchaseOptions
                 slug={p.slug}
                 subscription={p.price.subscription}
@@ -142,6 +145,8 @@ export default function ProductPage({
       </div>
 
       <BenefitPills actives={p.actives} />
+
+      {p.includes && <WhatsInside slugs={p.includes} />}
 
       <BrandStatement />
 
@@ -263,6 +268,60 @@ function BrandStatement() {
   );
 }
 
+// What's Inside — the bundle payoff module. Bundle PDPs (The Founding Pair,
+// The Ritual Set) carry no `benefits`/`actives`/`complex` of their own, so
+// without this they fall through every conditional below to a dead stop
+// right after the brand statement — the highest-AOV products on the site
+// getting the thinnest pages. Shows each included product's real name,
+// image, and one-line blurb, pulled from the product data itself.
+function WhatsInside({ slugs }: { slugs: string[] }) {
+  const items = slugs.map((slug) => getProduct(slug)).filter(Boolean) as ReturnType<
+    typeof getProduct
+  >[];
+  if (items.length === 0) return null;
+
+  return (
+    <Reveal className="border-t border-ink/10 bg-cloud/40 py-16">
+      <div className="mx-auto max-w-4xl px-6">
+        <h2 className="text-center font-serif text-2xl">What&rsquo;s Inside</h2>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          {items.map((item) => (
+            <Link
+              key={item!.slug}
+              href={`/shop/${item!.slug}`}
+              className="group flex items-center gap-5 rounded-md border border-ink/10 bg-white p-4 transition hover:border-ochre"
+            >
+              <div
+                className="relative h-20 w-20 shrink-0 overflow-hidden rounded-sm"
+                style={{ backgroundColor: productTint(item!.color.hex) }}
+              >
+                <Image
+                  src={item!.image}
+                  alt={item!.name}
+                  fill
+                  sizes="80px"
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.16em] text-ink/40">
+                  {item!.step}
+                </p>
+                <p className="mt-1 font-serif text-lg leading-snug text-ink">
+                  {item!.name}
+                </p>
+                <p className="mt-1 text-[13px] leading-relaxed text-ink/60">
+                  {item!.descriptor}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </Reveal>
+  );
+}
+
 function KeyBenefits({ benefits }: { benefits: string[] }) {
   return (
     <Reveal className="border-t border-ink/10 bg-cloud/40 py-16">
@@ -321,13 +380,14 @@ function ClinicallyDosed({
       <div className="grid gap-10 md:grid-cols-[1fr_1.2fr] md:items-start md:gap-14">
         <div>
           <h2 className="font-serif text-2xl leading-snug">
-            Clinically Dosed. No Hidden Blends.
+            The Full Formulation Record
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-ink/70">
             Most formulations name an ingredient without saying how much of
-            it is actually in the bottle. CHIAREL™ states the concentration
-            of every active that governs performance — not as a marketing
-            claim, but as a matter of record.
+            it is actually in the bottle, grouping the actives that matter
+            into an undisclosed &ldquo;proprietary blend.&rdquo; Every
+            concentration below is what actually governs performance — not
+            a marketing claim, a matter of record.
           </p>
         </div>
         <div className="grid gap-8 sm:grid-cols-2">

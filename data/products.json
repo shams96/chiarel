@@ -243,7 +243,8 @@
     "blurb": "The Signature Serum of the House paired with its Icon — CHIAREL Essence™ and Terra Radiance Crème™, delivered together every 45 days. The essential ritual, in two gestures.",
     "badge": "Founding Pair",
     "set": true,
-    "icon": false
+    "icon": false,
+    "includes": ["chiarel-essence", "terra-radiance-creme"]
   },
   {
     "slug": "the-ritual-set",
@@ -268,6 +269,7 @@
     "blurb": "Every step of the daily ritual, delivered together on your rhythm. The complete practice of the House — Cellular Cleanser™, Cellular Mist™, CHIAREL Essence™, and Terra Radiance Crème™.",
     "badge": "The Ritual, Complete",
     "set": true,
-    "icon": false
+    "icon": false,
+    "includes": ["cellular-cleanser", "cellular-mist", "chiarel-essence", "terra-radiance-creme"]
   }
 ]

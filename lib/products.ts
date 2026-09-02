@@ -18,6 +18,7 @@ export type Product = {
   role?: string;
   badge?: string;
   set?: boolean;
+  includes?: string[];
   icon: boolean;
   actives?: { name: string; percent: string | null }[];
   benefits?: string[];
