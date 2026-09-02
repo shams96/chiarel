@@ -43,81 +43,102 @@ export default function ProductPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd(p)) }}
       />
 
-      {/* Image-led top: full-width visual, purchase panel below the fold of the image */}
-      <div className="relative h-[60vh] min-h-[420px] w-full overflow-hidden bg-ink">
-        <Image
-          src={p.image}
-          alt={p.name}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-          style={{ backgroundColor: productTint(p.color.hex) }}
-        />
-      </div>
-
-      <div className="mx-auto max-w-3xl px-6 py-14 text-center">
-        <h1 className="font-serif text-5xl">{p.name}</h1>
-        <p className="mt-1 text-sm text-ink/60">{p.descriptor}</p>
-        {p.role && (
-          <p className="mt-4 inline-block border border-champagne px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ochre">
-            {p.role}
-          </p>
-        )}
-        <p className="mx-auto mt-6 max-w-lg text-sm leading-relaxed text-ink/75">
-          {p.blurb}
-        </p>
-      </div>
-
-      <div className="mx-auto max-w-lg px-6">
-        <PurchaseOptions
-          slug={p.slug}
-          subscription={p.price.subscription}
-          oneTime={p.price.oneTime}
-          perDayCadenceDays={p.set ? 45 : undefined}
-        />
-        <dl className="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-2 border-t border-ink/10 pt-6 text-[12px] text-ink/60">
-          <div className="flex gap-1.5">
-            <dt className="text-ink/40">Step:</dt>
-            <dd>{p.step}</dd>
-          </div>
-          <div className="flex gap-1.5">
-            <dt className="text-ink/40">Family:</dt>
-            <dd>{p.family}</dd>
-          </div>
-          {p.complex && (
-            <div className="flex gap-1.5">
-              <dt className="text-ink/40">Complex:</dt>
-              <dd>{p.complex}</dd>
-            </div>
-          )}
-          <div className="flex gap-1.5">
-            <dt className="text-ink/40">Size:</dt>
-            <dd>{p.size}</dd>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <dt className="text-ink/40">Color:</dt>
-            <dd className="flex items-center gap-1.5">
-              <span
-                className="inline-block h-2.5 w-2.5 rounded-full border border-ink/20"
-                style={{ backgroundColor: p.color.hex }}
-              />
-              {p.color.name}
-            </dd>
-          </div>
-        </dl>
-        {(p.slug === "terra-radiance-creme" || p.slug === "recovery-masque") && (
-          <p className="mt-4 text-center text-[12px] text-ink/50">
-            Wondering why day and night formulas feel different?{" "}
-            <Link
-              href="/journal/chiarel-ritual-guide"
-              className="border-b border-ochre text-ochre"
+      {/* Hero — gallery left, buy box right (stacked on mobile). Buy box sits
+          beside the product from the first viewport, not below a full-bleed
+          banner — the single highest-leverage PDP conversion fix. */}
+      <div className="mx-auto max-w-6xl px-6 pt-8 md:pt-14">
+        <div className="grid gap-8 md:grid-cols-2 md:items-start md:gap-14">
+          {/* Gallery column — single image today; sized to take a second/third
+              thumbnail or video without restructuring once more assets exist. */}
+          <div className="md:sticky md:top-24">
+            <div
+              className="relative aspect-[4/5] w-full overflow-hidden rounded-md"
+              style={{ backgroundColor: productTint(p.color.hex) }}
             >
-              Read the texture guide
-            </Link>
-            .
-          </p>
-        )}
+              <Image
+                src={p.image}
+                alt={p.name}
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
+              {p.badge && (
+                <span className="absolute left-4 top-4 bg-ivory/90 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-ochre">
+                  {p.badge}
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Buy box column */}
+          <div className="md:pt-2">
+            <h1 className="font-serif text-4xl leading-tight md:text-5xl">
+              {p.name}
+            </h1>
+            <p className="mt-1 text-sm text-ink/60">{p.descriptor}</p>
+            {p.role && (
+              <p className="mt-4 inline-block border border-champagne px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ochre">
+                {p.role}
+              </p>
+            )}
+            <p className="mt-6 max-w-md text-sm leading-relaxed text-ink/75">
+              {p.blurb}
+            </p>
+
+            <div className="mt-8">
+              <PurchaseOptions
+                slug={p.slug}
+                subscription={p.price.subscription}
+                oneTime={p.price.oneTime}
+                perDayCadenceDays={p.set ? 45 : undefined}
+              />
+            </div>
+
+            <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-t border-ink/10 pt-6 text-[12px] text-ink/60">
+              <div className="flex gap-1.5">
+                <dt className="text-ink/40">Step:</dt>
+                <dd>{p.step}</dd>
+              </div>
+              <div className="flex gap-1.5">
+                <dt className="text-ink/40">Family:</dt>
+                <dd>{p.family}</dd>
+              </div>
+              {p.complex && (
+                <div className="flex gap-1.5">
+                  <dt className="text-ink/40">Complex:</dt>
+                  <dd>{p.complex}</dd>
+                </div>
+              )}
+              <div className="flex gap-1.5">
+                <dt className="text-ink/40">Size:</dt>
+                <dd>{p.size}</dd>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <dt className="text-ink/40">Color:</dt>
+                <dd className="flex items-center gap-1.5">
+                  <span
+                    className="inline-block h-2.5 w-2.5 rounded-full border border-ink/20"
+                    style={{ backgroundColor: p.color.hex }}
+                  />
+                  {p.color.name}
+                </dd>
+              </div>
+            </dl>
+            {(p.slug === "terra-radiance-creme" || p.slug === "recovery-masque") && (
+              <p className="mt-4 text-[12px] text-ink/50">
+                Wondering why day and night formulas feel different?{" "}
+                <Link
+                  href="/journal/chiarel-ritual-guide"
+                  className="border-b border-ochre text-ochre"
+                >
+                  Read the texture guide
+                </Link>
+                .
+              </p>
+            )}
+          </div>
+        </div>
       </div>
 
       {p.benefits && <KeyBenefits benefits={p.benefits} />}
