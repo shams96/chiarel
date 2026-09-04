@@ -229,15 +229,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Campaign banner — text-only editorial moment. No real photo of Isola del Liri exists in
-          the asset library yet (the only "editorial" images on hand are mislabeled "CHIAREL Rome"
-          product-jar mockups, not location photography) — deliberately not forcing a mismatched
-          image here rather than paper over that gap. Swap in a real place photo when one exists. */}
+      {/* Campaign banner — commissioned editorial illustration of the Cascata
+          Grande (watercolor-and-ink style, not a photograph) standing in for
+          real location photography, which doesn't exist yet. Deliberately
+          illustrative rather than photorealistic so it's never mistaken for
+          a documentary photo of the actual site — swap in a real place photo
+          when one exists. */}
       <section className="relative section-y overflow-hidden border-y border-ink/10 text-ivory">
         <Image
-          src="/assets/editorial/water-texture.png"
-          alt=""
-          aria-hidden="true"
+          src="/assets/editorial/isola-del-liri-cascata.png"
+          alt="Editorial illustration of the Cascata Grande waterfall running through Isola del Liri, Italy"
           fill
           className="object-cover"
         />
