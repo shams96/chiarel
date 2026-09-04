@@ -375,6 +375,14 @@ function ClinicallyDosed({
 }: {
   actives: { name: string; percent: string | null }[];
 }) {
+  // Only actives with a real, formulated concentration are shown here — the
+  // entire premise of this panel is "we always state the real number," so an
+  // active without one is omitted rather than shown with a placeholder.
+  const dosed = actives.filter(
+    (a): a is { name: string; percent: string } => a.percent != null
+  );
+  if (dosed.length === 0) return null;
+
   return (
     <div className="mx-auto max-w-4xl border-t border-ink/10 px-6 py-16">
       <div className="grid gap-10 md:grid-cols-[1fr_1.2fr] md:items-start md:gap-14">
@@ -391,11 +399,9 @@ function ClinicallyDosed({
           </p>
         </div>
         <div className="grid gap-8 sm:grid-cols-2">
-          {actives.map((a) => (
+          {dosed.map((a) => (
             <div key={a.name}>
-              <p className="font-serif text-5xl text-ochre">
-                {a.percent ?? "Complex"}
-              </p>
+              <p className="font-serif text-5xl text-ochre">{a.percent}</p>
               <p className="mt-2 text-sm text-ink/70">{a.name}</p>
             </div>
           ))}
