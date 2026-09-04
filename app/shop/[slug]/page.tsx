@@ -5,9 +5,12 @@ import type { Metadata } from "next";
 import { getProduct, products, ritualProducts } from "@/lib/products";
 import PurchaseOptions from "@/components/PurchaseOptions";
 import StickyPurchaseBar from "@/components/StickyPurchaseBar";
+import ProductHeroImage from "@/components/ProductHeroImage";
+import CellularHydrationCascade from "@/components/CellularHydrationCascade";
 import Reveal from "@/components/Reveal";
 import { productJsonLd } from "@/lib/seo";
 import { productTint } from "@/lib/color";
+import { productHoverClass } from "@/lib/motion";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -58,19 +61,12 @@ export default function ProductPage({
               className="relative aspect-[5/4] w-full overflow-hidden rounded-md md:aspect-[4/5]"
               style={{ backgroundColor: productTint(p.color.hex) }}
             >
-              <Image
+              <ProductHeroImage
                 src={p.image}
                 alt={p.name}
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
+                step={p.step}
+                badge={p.badge}
               />
-              {p.badge && (
-                <span className="absolute left-4 top-4 bg-ivory/90 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-ochre">
-                  {p.badge}
-                </span>
-              )}
             </div>
           </div>
 
@@ -434,25 +430,41 @@ const mechanismBySlug: Record<string, { step: string; text: string }[]> = {
   ],
 };
 
+// Slugs with a dedicated visualization instead of the plain numbered-step
+// list — currently just Cellular Mist™, whose Low MW Hyaluronic Acid
+// mechanism (fast surface absorption) is what the hydration-cascade diagram
+// actually depicts. Not applied elsewhere: the visual would overclaim for
+// products whose real mechanism isn't a hydration-diffusion story.
+const visualizationBySlug: Record<string, () => JSX.Element> = {
+  "cellular-mist": CellularHydrationCascade,
+};
+
 function TheScience({ complex, slug }: { complex: string; slug: string }) {
+  const Visualization = visualizationBySlug[slug];
   const steps = mechanismBySlug[slug];
-  if (!steps) return null;
+  if (!Visualization && !steps) return null;
   return (
     <div className="border-t border-ink/10 bg-ink py-20 text-ivory">
       <div className="mx-auto max-w-2xl px-6">
         <h2 className="text-center font-serif text-2xl text-champagne">
           The science of {complex}
         </h2>
-        <div className="relative mt-12 space-y-10 border-l border-champagne/25 pl-8">
-          {steps.map((s, i) => (
-            <div key={s.step} className="relative">
-              <span className="absolute -left-[41px] top-0 flex h-6 w-6 items-center justify-center rounded-full border border-champagne/40 bg-ink text-[11px] text-champagne">
-                {i + 1}
-              </span>
-              <p className="text-sm leading-relaxed text-ivory/75">{s.text}</p>
-            </div>
-          ))}
-        </div>
+        {Visualization ? (
+          <div className="mt-12">
+            <Visualization />
+          </div>
+        ) : (
+          <div className="relative mt-12 space-y-10 border-l border-champagne/25 pl-8">
+            {steps!.map((s, i) => (
+              <div key={s.step} className="relative">
+                <span className="absolute -left-[41px] top-0 flex h-6 w-6 items-center justify-center rounded-full border border-champagne/40 bg-ink text-[11px] text-champagne">
+                  {i + 1}
+                </span>
+                <p className="text-sm leading-relaxed text-ivory/75">{s.text}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/lib/products";
 import { productTint } from "@/lib/color";
+import { productHoverClass } from "@/lib/motion";
 
 /**
  * A paced, single-row scroll-snap carousel for the ritual steps — deliberately
@@ -26,7 +27,7 @@ export default function RitualCarousel({ products }: { products: Product[] }) {
               alt={p.name}
               fill
               sizes="(max-width: 640px) 72vw, 30vw"
-              className="transition duration-700 group-hover:scale-[1.03]"
+              className={productHoverClass(p.step)}
             />
           </div>
           <p className="mt-4 font-serif text-xl leading-tight">{p.name}</p>

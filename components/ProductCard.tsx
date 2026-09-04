@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/lib/products";
 import { productTint } from "@/lib/color";
+import { productHoverClass } from "@/lib/motion";
 
 export default function ProductCard({
   product,
@@ -21,7 +22,7 @@ export default function ProductCard({
           alt={product.name}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
-          className="transition duration-700 group-hover:scale-[1.03]"
+          className={productHoverClass(product.step)}
         />
         {product.badge && (
           <span className="absolute left-3 top-3 bg-ivory/90 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-ochre">

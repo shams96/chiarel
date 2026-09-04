@@ -7,6 +7,7 @@ import RitualCarousel from "@/components/RitualCarousel";
 import EvidenceGrid from "@/components/EvidenceGrid";
 import Reveal from "@/components/Reveal";
 import { productTint } from "@/lib/color";
+import { productHoverClass } from "@/lib/motion";
 import {
   faqJsonLd,
   offerCatalogJsonLd,
@@ -368,7 +369,7 @@ export default function Home() {
                         alt={p.name}
                         fill
                         sizes="(max-width: 768px) 100vw, 50vw"
-                        className="transition duration-700 group-hover:scale-[1.03]"
+                        className={productHoverClass(p.step)}
                       />
                       {p.badge && (
                         <span className="absolute left-3 top-3 bg-ivory/90 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-ochre">
