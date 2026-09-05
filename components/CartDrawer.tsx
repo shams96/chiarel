@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
+import { ritualProducts } from "@/lib/products";
 
 const modeLabel: Record<string, string> = {
   ninetyDay: "The Ritual Plan · 90-day supply, one delivery",
@@ -11,10 +12,18 @@ const modeLabel: Record<string, string> = {
 };
 
 const FREE_SHIP_THRESHOLD = 150;
+const EXTRA_SAMPLE_THRESHOLD = 250;
 
 export default function CartDrawer() {
-  const { lines, remove, setQty, isOpen, close, subtotal, savings } = useCart();
-  const remaining = Math.max(0, FREE_SHIP_THRESHOLD - subtotal);
+  const { lines, add, remove, setQty, isOpen, close, subtotal, savings } = useCart();
+  const remainingForShipping = Math.max(0, FREE_SHIP_THRESHOLD - subtotal);
+  const remainingForSample = Math.max(0, EXTRA_SAMPLE_THRESHOLD - subtotal);
+  const sampleUnlocked = subtotal >= EXTRA_SAMPLE_THRESHOLD;
+  const savingsPercent =
+    savings > 0 ? Math.round((savings / (subtotal + savings)) * 100) : 0;
+  const nextStep = ritualProducts.find(
+    (p) => !lines.some((line) => line.slug === p.slug)
+  );
 
   return (
     <>
@@ -54,13 +63,19 @@ export default function CartDrawer() {
         ) : (
           <>
             <div className="flex-1 overflow-y-auto px-6 py-4">
-              {remaining > 0 ? (
+              {remainingForShipping > 0 ? (
                 <p className="mb-4 text-[12px] text-ink/60">
-                  Add ${remaining} more for complimentary shipping.
+                  Add ${remainingForShipping} more for complimentary shipping.
+                </p>
+              ) : sampleUnlocked ? (
+                <p className="mb-4 text-[12px] text-ochre">
+                  Complimentary shipping unlocked — a little something extra has been
+                  added to your order.
                 </p>
               ) : (
                 <p className="mb-4 text-[12px] text-ochre">
-                  Complimentary shipping unlocked.
+                  Complimentary shipping unlocked — add ${remainingForSample} more to
+                  unlock a surprise with your order.
                 </p>
               )}
               <ul className="space-y-5">
@@ -119,18 +134,56 @@ export default function CartDrawer() {
                   </li>
                 ))}
               </ul>
+
+              {nextStep && (
+                <div className="mt-6 border-t border-ink/10 pt-5">
+                  <p className="mb-3 text-[11px] uppercase tracking-[0.16em] text-ink/50">
+                    Complete the Ritual
+                  </p>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-sm bg-cloud/50">
+                      <Image
+                        src={nextStep.image}
+                        alt={nextStep.name}
+                        fill
+                        sizes="64px"
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium leading-tight">
+                        {nextStep.name}
+                      </p>
+                      <p className="mt-0.5 truncate text-[11px] uppercase tracking-[0.14em] text-ink/50">
+                        {nextStep.step}
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => add(nextStep.slug, "subscription")}
+                      className="btn-press w-full shrink-0 border border-ink/20 px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-ink/70 transition hover:border-ochre hover:text-ochre sm:w-auto"
+                    >
+                      Add · ${nextStep.price.subscription}
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="border-t border-ink/10 px-6 py-5">
               {savings > 0 && (
                 <p className="tabular-nums mb-2 flex justify-between text-[12px] text-ochre">
                   <span>Ritual savings</span>
-                  <span>−${savings}</span>
+                  <span>
+                    −${savings} ({savingsPercent}%)
+                  </span>
                 </p>
               )}
               <p className="tabular-nums mb-4 flex justify-between text-base">
                 <span>Subtotal</span>
                 <span className="font-serif text-xl">${subtotal}</span>
+              </p>
+              <p className="mb-3 text-center text-[11px] uppercase tracking-[0.14em] text-ink/45">
+                Clinically dosed · every active disclosed
               </p>
               <Link
                 href="/checkout"

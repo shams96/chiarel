@@ -5,6 +5,8 @@ import { stripe } from "@/lib/stripe";
 import { withApiErrorHandling } from "@/lib/api-error";
 
 const FREE_SHIP_THRESHOLD = 150;
+// Keep in sync with EXTRA_SAMPLE_THRESHOLD in components/CartDrawer.tsx.
+const EXTRA_SAMPLE_THRESHOLD = 250;
 
 const modeLabel: Record<string, string> = {
   ninetyDay: "The Ritual Plan · 90-day supply, one delivery",
@@ -56,6 +58,7 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
       savings: cart.savings,
       shipping,
       total,
+      bonusSample: cart.subtotal >= EXTRA_SAMPLE_THRESHOLD,
       status: "pending",
       items: {
         create: cart.lines.map((line) => ({

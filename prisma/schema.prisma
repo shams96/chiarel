@@ -70,6 +70,11 @@ model Order {
   savings       Int
   shipping      Int
   total         Int
+  // Set at checkout when subtotal crossed the bonus-sample threshold (see
+  // EXTRA_SAMPLE_THRESHOLD in app/api/checkout/route.ts). Fulfillment-facing
+  // only — deliberately not shown to the customer on the order page, so the
+  // extra sample stays a surprise when they open the box.
+  bonusSample   Boolean     @default(false)
   items         OrderItem[]
 }
 
