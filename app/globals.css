@@ -191,34 +191,29 @@ body::after {
   z-index: 1;
 }
 
-/* Cascata veil — draft option B: the actual Cascata Grande photo (user-supplied,
-   rights TBC — see project memory ruling before shipping live), desaturated
-   and faded to a watermark rather than shown as a photo. Grayscale + low
-   opacity keep it from competing with the ivory/ink palette or reading as a
-   travel-brochure image. Fixed positioning makes it a page-wide backdrop
-   (stays put behind all sections as the page scrolls, rather than repeating
-   or stretching per-section) with a top/bottom fade so it dissolves into the
-   page rather than sitting as a hard rectangle. Alternative to .liri-flow-bg
-   above — pick one, not both. */
-.cascata-veil-page {
+/* Liri Flow, page-wide variant — same procedural pattern as .liri-flow-bg
+   above, fixed so it reads as one continuous backdrop behind all sections
+   rather than tiling awkwardly per-section. No rights/licensing exposure —
+   generated, not a sourced photo (see removed Cascata-photo veil: the
+   user did not hold rights to that image, pulled 2026-09-05). */
+.liri-flow-page {
   position: relative;
   isolation: isolate;
 }
-.cascata-veil-page::before {
+.liri-flow-page::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.08;
-  background-image: url("/assets/editorial/image-1788640706729.webp");
-  background-size: cover;
-  background-position: center 35%;
-  filter: grayscale(1) contrast(1.05);
+  opacity: 0.05;
+  background-image: url("/assets/patterns/liri-flow.svg");
+  background-size: 480px 480px;
+  background-repeat: repeat;
   -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
   mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
 }
-.cascata-veil-page > * {
+.liri-flow-page > * {
   position: relative;
   z-index: 1;
 }

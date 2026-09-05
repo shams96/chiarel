@@ -2,7 +2,7 @@ export const metadata = { title: "The House", alternates: { canonical: "/house" 
 
 export default function HousePage() {
   return (
-    <div className="cascata-veil-page mx-auto max-w-4xl px-6 py-16">
+    <div className="liri-flow-page mx-auto max-w-4xl px-6 py-16">
       <h1 className="font-serif text-4xl">The House</h1>
 
       {/* No real photo of Isola del Liri exists in the asset library — the prior
