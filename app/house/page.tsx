@@ -2,7 +2,7 @@ export const metadata = { title: "The House", alternates: { canonical: "/house" 
 
 export default function HousePage() {
   return (
-    <div className="mx-auto max-w-4xl px-6 py-16">
+    <div className="cascata-veil-page mx-auto max-w-4xl px-6 py-16">
       <h1 className="font-serif text-4xl">The House</h1>
 
       {/* No real photo of Isola del Liri exists in the asset library — the prior
@@ -17,6 +17,16 @@ export default function HousePage() {
             stands a town built around a waterfall — the Cascata Grande falls
             through Isola del Liri itself. It is here, with our manufacturing
             partner Natural You Srl, that CHIAREL™ formulations are crafted.
+          </p>
+        </section>
+        <section>
+          <h2 className="font-serif text-2xl text-ink">A Red Drawn From the Land</h2>
+          <p className="mt-2 max-w-2xl">
+            Red Ochre is not a packaging color chosen from a swatch book. It is
+            the color of Isola del Liri itself — the terracotta, clay, and
+            sun-warmed stone of the Liri valley — carried into the House as
+            its one signature red. The water stays water. The green stays
+            green. Only the red is CHIAREL&rsquo;s.
           </p>
         </section>
         <section>
