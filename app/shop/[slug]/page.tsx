@@ -8,9 +8,36 @@ import StickyPurchaseBar from "@/components/StickyPurchaseBar";
 import ProductHeroImage from "@/components/ProductHeroImage";
 import CellularHydrationCascade from "@/components/CellularHydrationCascade";
 import Reveal from "@/components/Reveal";
-import { productJsonLd } from "@/lib/seo";
+import { productJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { productTint } from "@/lib/color";
 import { productHoverClass } from "@/lib/motion";
+
+// A compact, purely factual summary near the top of the page — GEO guidance
+// calls for a short extractable block AI answer engines can lift directly,
+// separate from the editorial blurb. Restates only facts already disclosed
+// elsewhere on this same page (formulation origin, active ingredients and
+// their exact percentages): no price (changes independently of this content
+// and isn't part of the spec) and no efficacy language.
+function productFactSummary(p: Product): string {
+  const origin = "formulated in Isola del Liri, Italy";
+
+  if (p.set && p.includes) {
+    const includedNames = p.includes
+      .map((slug) => getProduct(slug)?.name)
+      .filter((n): n is string => Boolean(n));
+    if (includedNames.length > 0) {
+      return `${p.name} combines ${includedNames.join(" and ")}, ${origin}.`;
+    }
+  }
+
+  const dosedActives = (p.actives ?? []).filter((a) => a.percent);
+  if (dosedActives.length > 0) {
+    const activeList = dosedActives.map((a) => `${a.percent} ${a.name}`);
+    return `${p.name} is ${origin}, containing ${activeList.join(" and ")}.`;
+  }
+
+  return `${p.name} is ${origin}.`;
+}
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -45,6 +72,18 @@ export default function ProductPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd(p)) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "Shop", path: "/shop" },
+              { name: p.name, path: `/shop/${p.slug}` },
+            ])
+          ),
+        }}
+      />
 
       {/* Hero — gallery left, buy box right on desktop, stacked on mobile.
           Mobile hero is deliberately shorter (aspect-[5/4] vs. desktop's
@@ -76,6 +115,9 @@ export default function ProductPage({
               {p.name}
             </h1>
             <p className="mt-1 text-sm text-ink/60">{p.descriptor}</p>
+            <p className="mt-2 text-[12px] leading-relaxed text-ink/45">
+              {productFactSummary(p)}
+            </p>
             {p.role && (
               <p className="mt-3 inline-block border border-champagne px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ochre md:mt-4">
                 {p.role}

@@ -144,6 +144,20 @@ export function offerCatalogJsonLd(
   };
 }
 
+/** Home -> Shop -> Product Name, etc. Every crumb's item is an absolute URL. */
+export function breadcrumbJsonLd(crumbs: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((c, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: c.name,
+      item: `${SITE_URL}${c.path}`,
+    })),
+  };
+}
+
 export function productJsonLd(p: {
   name: string;
   descriptor: string;
