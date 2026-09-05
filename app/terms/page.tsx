@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/terms" },
 };
 
-const EFFECTIVE_DATE = "August 23, 2026";
+const EFFECTIVE_DATE = "September 5, 2026";
 
 export default function TermsPage() {
   return (
@@ -66,11 +66,32 @@ export default function TermsPage() {
           </p>
         </section>
 
+        <section id="guarantee">
+          <h2 className="font-serif text-xl text-ink">The 90-Day Guarantee</h2>
+          <p className="mt-3">
+            A customer&rsquo;s first CHIAREL™ order is covered by a 90-day
+            guarantee. If you are not satisfied, contact{" "}
+            <a
+              href={`mailto:${ORDERS_EMAIL}`}
+              className="border-b border-ochre pb-0.5 text-ochre"
+            >
+              {ORDERS_EMAIL}
+            </a>{" "}
+            with your order number within 90 days of delivery, and we will
+            refund the product price in full. Shipping is non-refundable, and
+            there is no need to return the product. This guarantee applies
+            once per customer, to a first order only; it does not extend to
+            subsequent orders or subscription renewals, which are handled
+            under Returns &amp; exchanges below.
+          </p>
+        </section>
+
         <section>
           <h2 className="font-serif text-xl text-ink">Returns &amp; exchanges</h2>
           <p className="mt-3">
             If something arrives damaged, incorrect, or you are otherwise
-            unsatisfied, contact{" "}
+            unsatisfied with an order the 90-Day Guarantee above does not
+            cover, contact{" "}
             <a
               href={`mailto:${ORDERS_EMAIL}`}
               className="border-b border-ochre pb-0.5 text-ochre"

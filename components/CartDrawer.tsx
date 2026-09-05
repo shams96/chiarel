@@ -183,6 +183,13 @@ export default function CartDrawer() {
                 Clinically dosed · every active disclosed
               </p>
               <Link
+                href="/terms#guarantee"
+                onClick={close}
+                className="mb-3 block text-center text-[11px] uppercase tracking-[0.14em] text-ink/45 underline decoration-ink/20 underline-offset-2 hover:text-ochre"
+              >
+                90-Day Guarantee on your first order
+              </Link>
+              <Link
                 href="/checkout"
                 onClick={close}
                 className="btn-press block w-full bg-ink py-4 text-center text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre"
