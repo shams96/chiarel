@@ -185,47 +185,62 @@ export default function Home() {
         }}
       />
 
-      {/* Hero — capped height so this photo's crop doesn't over-zoom on tall viewports; text anchored left, clear of the products on the right. */}
-      <section className="relative flex h-[86dvh] max-h-[840px] min-h-[660px] w-full items-center overflow-hidden bg-ink">
-        <Image
-          src="/assets/editorial/hero-shore-duo.png"
-          alt="CHIAREL Essence™ and Recovery Masque™ at the shore"
-          fill
-          priority
-          className="object-cover object-[88%_50%]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink/70 via-ink/25 to-transparent" />
-        <div className="relative z-10 mx-auto w-full max-w-6xl px-6">
-          <div className="hero-in max-w-xl text-ivory">
-            <p className="text-[12px] uppercase tracking-[0.5em] text-champagne">
+      {/* Hero — the prior full-bleed landscape photo (hero-shore-duo.png) was
+          replaced (2026-09-05, warped/unusable). Its replacement is a square
+          product render, not a wide atmospheric shot, so the section is
+          rebuilt as a contained two-column layout (product right, copy left)
+          on a solid ivory ground instead of a full-bleed dark-gradient photo
+          banner — object-cover would badly crop a square product-only image. */}
+      <section className="liri-flow-bg relative w-full bg-ivory">
+        <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-6 py-16 md:min-h-[640px] md:grid-cols-2 md:py-20">
+          <div className="hero-in order-2 max-w-xl md:order-1">
+            <p className="text-[12px] uppercase tracking-[0.5em] text-ochre">
               House of Skin Intelligence™
             </p>
-            <h1 className="mt-7 font-serif text-[13vw] leading-[0.95] tracking-[-0.02em] sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+            <h1 className="mt-7 font-serif text-[13vw] leading-[0.95] tracking-[-0.02em] text-ink sm:text-6xl md:text-7xl lg:text-[5.5rem]">
               Advancing
               <br />
               Cellular Clarity™
             </h1>
-            <p className="mt-8 max-w-sm text-[15px] leading-relaxed text-ivory/80">
+            <p className="mt-8 max-w-sm text-[15px] leading-relaxed text-ink/70">
               Intelligent formulations, born at Isola del Liri, Italy — made
               to support the skin against Modern Biological Stress.
             </p>
             <div className="mt-10 flex flex-col items-start gap-4">
               <Link
                 href="/ritual"
-                className="inline-block border border-champagne px-10 py-4 text-[12px] uppercase tracking-[0.3em] text-champagne transition hover:bg-champagne hover:text-ink"
+                className="inline-block border border-ink px-10 py-4 text-[12px] uppercase tracking-[0.3em] text-ink transition hover:border-ochre hover:text-ochre"
               >
                 Enter the Ritual
               </Link>
               <Link
                 href="/assessment"
-                className="text-[11px] uppercase tracking-[0.2em] text-ivory/70 underline decoration-champagne/50 underline-offset-4 hover:text-champagne"
+                className="text-[11px] uppercase tracking-[0.2em] text-ink/60 underline decoration-ochre/50 underline-offset-4 hover:text-ochre"
               >
                 Not sure where to start? Take the Skin Assessment
               </Link>
             </div>
           </div>
+          <div className="order-1 flex justify-center md:order-2 md:justify-end">
+            <div className="product-reveal relative aspect-square w-full max-w-md">
+              <div
+                className="absolute inset-[8%] rounded-full blur-3xl"
+                style={{
+                  background:
+                    "radial-gradient(circle, rgba(214,197,160,0.35) 0%, rgba(214,197,160,0) 70%)",
+                }}
+              />
+              <Image
+                src="/assets/products/essence-freeze-frame.png"
+                alt="CHIAREL Essence™"
+                fill
+                priority
+                className="relative object-contain drop-shadow-[0_30px_40px_rgba(28,26,23,0.18)]"
+              />
+            </div>
+          </div>
         </div>
-        <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[10px] uppercase tracking-[0.3em] text-ivory/50">
+        <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[10px] uppercase tracking-[0.3em] text-ink/40">
           Scroll
         </div>
       </section>
