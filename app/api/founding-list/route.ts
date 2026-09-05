@@ -1,15 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { withApiErrorHandling } from "@/lib/api-error";
 
 const FOUNDING_CAP = 100;
 
-export async function GET() {
+export const GET = withApiErrorHandling(async () => {
   const claimed = await db.foundingSignup.count();
   return NextResponse.json({ claimed, cap: FOUNDING_CAP });
-}
+});
 
-export async function POST(req: NextRequest) {
-  const { name, email, phone, social, referredBy, source } = await req.json();
+export const POST = withApiErrorHandling(async (req: NextRequest) => {
+  const body = await req.json().catch(() => null);
+  const { name, email, phone, social, referredBy, source } = body ?? {};
 
   if (!name || typeof name !== "string") {
     return NextResponse.json({ error: "Name is required" }, { status: 400 });
@@ -60,4 +62,4 @@ export async function POST(req: NextRequest) {
   }
 
   return NextResponse.json({ ok: true });
-}
+});

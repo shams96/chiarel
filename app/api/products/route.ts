@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { withApiErrorHandling } from "@/lib/api-error";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export const GET = withApiErrorHandling(async () => {
   const products = await db.product.findMany({ orderBy: { ritualOrder: "asc" } });
 
   const shaped = products.map((p) => ({
@@ -29,4 +30,4 @@ export async function GET() {
   }));
 
   return NextResponse.json(shaped);
-}
+});

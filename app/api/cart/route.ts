@@ -1,15 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { getCartWithTotals, getOrCreateCart, type CartMode } from "@/lib/cart-server";
+import { withApiErrorHandling } from "@/lib/api-error";
 
 const VALID_MODES: CartMode[] = ["ninetyDay", "subscription", "oneTime"];
 
-export async function GET() {
+export const GET = withApiErrorHandling(async () => {
   const cart = await getCartWithTotals();
   return NextResponse.json(cart);
-}
+});
 
-export async function POST(req: NextRequest) {
+export const POST = withApiErrorHandling(async (req: NextRequest) => {
   const body = await req.json().catch(() => null);
   const slug = body?.slug;
   const mode = body?.mode;
@@ -52,4 +53,4 @@ export async function POST(req: NextRequest) {
 
   const updated = await getCartWithTotals();
   return NextResponse.json(updated, { status: 201 });
-}
+});

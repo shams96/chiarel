@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { getCartWithTotals, getOrCreateCart } from "@/lib/cart-server";
+import { withApiErrorHandling } from "@/lib/api-error";
 
 async function assertOwnedByCurrentCart(itemId: string) {
   const cart = await getOrCreateCart();
@@ -9,7 +10,7 @@ async function assertOwnedByCurrentCart(itemId: string) {
   return item;
 }
 
-export async function PATCH(
+export const PATCH = withApiErrorHandling(async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ itemId: string }> }
 ) {
@@ -31,9 +32,9 @@ export async function PATCH(
 
   await db.cartItem.update({ where: { id: itemId }, data: { qty } });
   return NextResponse.json(await getCartWithTotals());
-}
+});
 
-export async function DELETE(
+export const DELETE = withApiErrorHandling(async function DELETE(
   _req: NextRequest,
   { params }: { params: Promise<{ itemId: string }> }
 ) {
@@ -45,4 +46,4 @@ export async function DELETE(
 
   await db.cartItem.delete({ where: { id: itemId } });
   return NextResponse.json(await getCartWithTotals());
-}
+});

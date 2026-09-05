@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { getCartWithTotals, getOrCreateCart } from "@/lib/cart-server";
 import { stripe } from "@/lib/stripe";
+import { withApiErrorHandling } from "@/lib/api-error";
 
 const FREE_SHIP_THRESHOLD = 150;
 
@@ -15,7 +16,7 @@ function isNonEmptyString(v: unknown): v is string {
   return typeof v === "string" && v.trim().length > 0;
 }
 
-export async function POST(req: NextRequest) {
+export const POST = withApiErrorHandling(async (req: NextRequest) => {
   const body = await req.json().catch(() => null);
   const { email, firstName, lastName, address, city, state, zip } = body ?? {};
 
@@ -123,4 +124,4 @@ export async function POST(req: NextRequest) {
   // payment — clearing it here would empty a customer's bag even if they
   // cancel out of Stripe Checkout without paying.
   return NextResponse.json({ orderId: order.id, checkoutUrl: session.url }, { status: 201 });
-}
+});
