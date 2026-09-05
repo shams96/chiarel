@@ -97,7 +97,7 @@ export default function ProductPage({
               thumbnail or video without restructuring once more assets exist. */}
           <div className="md:sticky md:top-24">
             <div
-              className="relative aspect-[5/4] w-full overflow-hidden rounded-md md:aspect-[4/5]"
+              className="relative aspect-[5/4] w-full overflow-hidden md:aspect-[4/5]"
               style={{ backgroundColor: productTint(p.color.hex) }}
             >
               <ProductHeroImage
@@ -330,7 +330,7 @@ function WhatsInside({ slugs }: { slugs: string[] }) {
               className="group flex items-center gap-5 rounded-md border border-ink/10 bg-white p-4 transition hover:border-ochre"
             >
               <div
-                className="relative h-20 w-20 shrink-0 overflow-hidden rounded-sm"
+                className="relative h-20 w-20 shrink-0 overflow-hidden"
                 style={{ backgroundColor: productTint(item.color.hex) }}
               >
                 <Image
@@ -387,7 +387,7 @@ function IncludedSpatula() {
   return (
     <Reveal className="border-t border-ink/10 bg-white py-16">
       <div className="mx-auto flex max-w-2xl flex-col items-center gap-8 px-6 text-center md:flex-row md:text-left">
-        <div className="relative aspect-square w-40 shrink-0 overflow-hidden rounded-sm bg-champagne/20">
+        <div className="relative aspect-square w-40 shrink-0 overflow-hidden bg-champagne/20">
           <Image
             src="/assets/products/applicator-spatula.png"
             alt="CHIAREL Spatula, Champagne Gold"
@@ -557,7 +557,7 @@ function CompleteYourRitual({ currentSlug }: { currentSlug: string }) {
         className="mt-6 flex items-center gap-6 rounded-sm border border-ink/10 p-4 transition hover:border-ochre"
       >
         <div
-          className="relative h-24 w-24 shrink-0 overflow-hidden rounded-sm"
+          className="relative h-24 w-24 shrink-0 overflow-hidden"
           style={{ backgroundColor: productTint(next.color.hex) }}
         >
           <Image src={next.image} alt={next.name} fill sizes="96px" className="object-cover" />

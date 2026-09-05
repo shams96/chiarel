@@ -123,7 +123,7 @@ export default function AccountSubscriptions() {
               }`}
             >
               <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
-                <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-sm bg-cloud/50">
+                <div className="relative h-20 w-20 shrink-0 overflow-hidden bg-cloud/50">
                   <Image
                     src={product.image}
                     alt={product.name}

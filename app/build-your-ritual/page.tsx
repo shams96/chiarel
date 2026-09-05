@@ -63,7 +63,7 @@ export default function BuildYourRitualPage() {
               }`}
             >
               <div
-                className="relative aspect-square w-full overflow-hidden rounded-sm"
+                className="relative aspect-square w-full overflow-hidden"
                 style={{ backgroundColor: productTint(p.color.hex) }}
               >
                 <Image

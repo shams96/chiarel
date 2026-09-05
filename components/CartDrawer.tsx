@@ -78,7 +78,7 @@ export default function CartDrawer() {
               <ul className="space-y-5">
                 {lines.map((line) => (
                   <li key={line.slug} className="flex gap-4">
-                    <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-sm bg-cloud/50">
+                    <div className="relative h-20 w-20 shrink-0 overflow-hidden bg-cloud/50">
                       <Image
                         src={line.product.image}
                         alt={line.product.name}
@@ -138,7 +138,7 @@ export default function CartDrawer() {
                     Complete the Ritual
                   </p>
                   <div className="flex flex-wrap items-center gap-3">
-                    <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-sm bg-cloud/50">
+                    <div className="relative h-16 w-16 shrink-0 overflow-hidden bg-cloud/50">
                       <Image
                         src={nextStep.image}
                         alt={nextStep.name}

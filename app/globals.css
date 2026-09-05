@@ -119,7 +119,7 @@ body::after {
    same frame, instead of object-cover exaggerating whatever margin the
    source photo happens to have baked in. */
 .product-frame {
-  @apply relative overflow-hidden rounded-sm;
+  @apply relative overflow-hidden;
 }
 /* Full-bleed, matching every other product image on the site (PDP hero,
    Build Your Ritual, /ritual, editorial). The old contain+padding treatment

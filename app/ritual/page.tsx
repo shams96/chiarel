@@ -40,7 +40,7 @@ export default function RitualPage() {
             }`}
           >
             <div
-              className="relative aspect-square w-full overflow-hidden rounded-sm md:w-1/2"
+              className="relative aspect-square w-full overflow-hidden md:w-1/2"
               style={{ backgroundColor: productTint(p.color.hex) }}
             >
               <Image
@@ -81,7 +81,7 @@ export default function RitualPage() {
         <h2 className="font-serif text-2xl">Beyond the ritual</h2>
         <div className="mt-6 flex flex-col items-center gap-10 md:flex-row">
           <div
-            className="relative aspect-square w-full overflow-hidden rounded-sm md:w-1/3"
+            className="relative aspect-square w-full overflow-hidden md:w-1/3"
             style={{ backgroundColor: productTint(lip.color.hex) }}
           >
             <Image src={lip.image} alt={lip.name} fill sizes="33vw" className="object-cover" />

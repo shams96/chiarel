@@ -168,7 +168,7 @@ export default function PressPage() {
           {assets.map((a) => (
             <div key={a.file} className="border border-ink/10 p-5">
               <div
-                className={`flex h-28 items-center justify-center rounded-sm ${a.bg}`}
+                className={`flex h-28 items-center justify-center ${a.bg}`}
               >
                 <Image
                   src={`/assets/brand/${a.file}`}

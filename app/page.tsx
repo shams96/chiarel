@@ -683,13 +683,13 @@ export default function Home() {
         <div className="section-x flex flex-col items-center gap-10 md:flex-row">
           <Reveal className="grid w-full grid-cols-5 gap-4 md:w-3/5">
             <div
-              className="card-elevated product-frame col-span-3 aspect-[4/5] rounded-md"
+              className="card-elevated product-frame col-span-3 aspect-[4/5]"
               style={{ backgroundColor: productTint(essence.color.hex) }}
             >
               <Image src={essence.image} alt={essence.name} fill sizes="35vw" />
             </div>
             <div
-              className="card-elevated product-frame col-span-2 aspect-[4/5] self-end rounded-md"
+              className="card-elevated product-frame col-span-2 aspect-[4/5] self-end"
               style={{ backgroundColor: productTint(terraCreme.color.hex) }}
             >
               <Image src={terraCreme.image} alt={terraCreme.name} fill sizes="25vw" />

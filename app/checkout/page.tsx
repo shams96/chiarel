@@ -202,7 +202,7 @@ export default function CheckoutPage() {
           <ul className="mt-4 space-y-4">
             {lines.map((line) => (
               <li key={line.slug} className="flex gap-3">
-                <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-sm bg-cloud/50">
+                <div className="relative h-14 w-14 shrink-0 overflow-hidden bg-cloud/50">
                   <Image
                     src={line.product.image}
                     alt={line.product.name}

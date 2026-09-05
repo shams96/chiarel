@@ -53,7 +53,7 @@ export default function AssessmentPage() {
             return (
               <div key={r.slug} className="flex flex-col gap-5 sm:flex-row sm:items-center">
                 <div
-                  className="relative h-32 w-32 shrink-0 overflow-hidden rounded-sm"
+                  className="relative h-32 w-32 shrink-0 overflow-hidden"
                   style={{ backgroundColor: productTint(p.color.hex) }}
                 >
                   <Image src={p.image} alt={p.name} fill sizes="128px" className="object-cover" />

@@ -68,7 +68,7 @@ export default async function OrderConfirmationPage({
       <ul className="mt-10 space-y-4 border-t border-ink/10 pt-8 text-left">
         {order.items.map((item) => (
           <li key={item.id} className="flex gap-4">
-            <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-sm bg-cloud/50">
+            <div className="relative h-16 w-16 shrink-0 overflow-hidden bg-cloud/50">
               <Image
                 src={item.product.image}
                 alt={item.product.name}
