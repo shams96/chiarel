@@ -496,7 +496,7 @@ export default function Home() {
             <li className="border-l-2 border-ochre pl-5">
               <p className="text-ink/70">
                 L-Ornithine (used in Recovery Masque™) is studied for its
-                role in the skin's Natural Moisturizing Factor and overnight
+                role in the skin&rsquo;s Natural Moisturizing Factor and overnight
                 barrier repair.
               </p>
               <a

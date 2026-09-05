@@ -16,6 +16,10 @@ const nav = [
   { href: "/account", label: "Account" },
 ];
 
+// These become children of the already-keyed <span key={i}> in TickerHalf's
+// .map() below, not siblings rendered directly from this array, so they
+// don't need their own keys.
+/* eslint-disable react/jsx-key */
 const tickerMessages = [
   <>
     <span className="text-ochre">Hurry</span> — the Founding 100 is closing fast
@@ -24,6 +28,7 @@ const tickerMessages = [
   "Only 100 places, then it’s gone",
   <span className="text-ochre">See the terms →</span>,
 ];
+/* eslint-enable react/jsx-key */
 
 function TickerHalf() {
   return (

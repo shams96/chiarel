@@ -209,7 +209,7 @@ export default function CellularHydrationCascade() {
         <div className="act">
           <span className="num">III</span>
           <h3>Ready to receive</h3>
-          <p>The mist's job ends here — priming skin to absorb the treatment steps that follow.</p>
+          <p>The mist&rsquo;s job ends here — priming skin to absorb the treatment steps that follow.</p>
         </div>
       </div>
     </div>
