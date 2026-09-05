@@ -121,9 +121,13 @@ body::after {
 .product-frame {
   @apply relative overflow-hidden rounded-sm;
 }
+/* Full-bleed, matching every other product image on the site (PDP hero,
+   Build Your Ritual, /ritual, editorial). The old contain+padding treatment
+   let the product float inside a visible tint-colored matte border, which
+   made these five card/grid spots look like a different, dated template
+   next to everything else. */
 .product-frame img {
-  object-fit: contain !important;
-  padding: 10%;
+  object-fit: cover;
 }
 
 /* Sticky header "glass" chrome — see .site-header reduced-transparency override below */
@@ -152,9 +156,11 @@ body::after {
   transform: scale(0.97);
 }
 
-/* Cart drawer slide-in: critically-damped, slight-bounce spring approximation */
+/* Cart drawer slide-in: smooth deceleration, no overshoot — a spring bounce
+   read as an AI-generated-UI tell and clashed with the site's restrained,
+   quiet-luxury tone. */
 .cart-panel {
-  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   transition-duration: 400ms;
 }
 
