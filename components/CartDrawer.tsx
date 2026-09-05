@@ -11,14 +11,17 @@ const modeLabel: Record<string, string> = {
   oneTime: "One-time purchase",
 };
 
+// Keep in sync with FREE_SHIP_THRESHOLD / the $12 shipping charge in
+// app/api/checkout/route.ts — this only estimates the checkout-button total,
+// the API route is the actual source of truth for what gets charged.
 const FREE_SHIP_THRESHOLD = 150;
-const EXTRA_SAMPLE_THRESHOLD = 250;
+const SHIPPING_COST = 12;
 
 export default function CartDrawer() {
   const { lines, add, remove, setQty, isOpen, close, subtotal, savings } = useCart();
   const remainingForShipping = Math.max(0, FREE_SHIP_THRESHOLD - subtotal);
-  const remainingForSample = Math.max(0, EXTRA_SAMPLE_THRESHOLD - subtotal);
-  const sampleUnlocked = subtotal >= EXTRA_SAMPLE_THRESHOLD;
+  const estimatedTotal =
+    subtotal + (subtotal >= FREE_SHIP_THRESHOLD ? 0 : SHIPPING_COST);
   const savingsPercent =
     savings > 0 ? Math.round((savings / (subtotal + savings)) * 100) : 0;
   const nextStep = ritualProducts.find(
@@ -67,15 +70,9 @@ export default function CartDrawer() {
                 <p className="mb-4 text-[12px] text-ink/60">
                   Add ${remainingForShipping} more for complimentary shipping.
                 </p>
-              ) : sampleUnlocked ? (
-                <p className="mb-4 text-[12px] text-ochre">
-                  Complimentary shipping unlocked — a little something extra has been
-                  added to your order.
-                </p>
               ) : (
                 <p className="mb-4 text-[12px] text-ochre">
-                  Complimentary shipping unlocked — add ${remainingForSample} more to
-                  unlock a surprise with your order.
+                  Complimentary shipping unlocked.
                 </p>
               )}
               <ul className="space-y-5">
@@ -190,7 +187,7 @@ export default function CartDrawer() {
                 onClick={close}
                 className="btn-press block w-full bg-ink py-4 text-center text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre"
               >
-                Checkout
+                Checkout — ${estimatedTotal}
               </Link>
               <p className="mt-3 text-center text-[11px] text-ink/50">
                 Two complimentary samples included with every order.
