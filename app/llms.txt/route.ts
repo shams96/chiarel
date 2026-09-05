@@ -13,7 +13,7 @@ function buildLlmsTxt(): string {
 
   return `# CHIAREL™
 
-> CHIAREL™ is a direct-to-consumer luxury skincare house — House of Skin Intelligence™ — formulating clinically dosed serums, moisturizers, and treatments in Isola del Liri, Italy, under pharmacist Grazia Savoriti. Every active ingredient and its concentration is disclosed on the product page; nothing is held back as an undisclosed "proprietary blend." Products are sold exclusively at chiarel.com, either one-time or on a 45-day subscription cadence.
+> CHIAREL™ is a direct-to-consumer luxury skincare house — House of Skin Intelligence™ — formulating customer-tested serums, moisturizers, and treatments in Isola del Liri, Italy, under pharmacist Grazia Savoriti. Every active ingredient and its concentration is disclosed on the product page; nothing is held back as an undisclosed "proprietary blend." Products are sold exclusively at chiarel.com, either one-time or on a 45-day subscription cadence.
 
 ## Key pages
 

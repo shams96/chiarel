@@ -180,7 +180,7 @@ export default function CartDrawer() {
                 <span className="font-serif text-xl">${subtotal}</span>
               </p>
               <p className="mb-3 text-center text-[11px] uppercase tracking-[0.14em] text-ink/45">
-                Clinically dosed · every active disclosed
+                Customer-tested · every active disclosed
               </p>
               <Link
                 href="/terms#guarantee"

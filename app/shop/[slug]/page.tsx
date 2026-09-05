@@ -230,7 +230,7 @@ function BenefitPills({
     primaryActive?.percent
       ? `${primaryActive.percent} ${primaryActive.name}`
       : null,
-    "Clinically Dosed",
+    "Customer Tested",
     "Every Active Disclosed",
     "Made to Order in Isola del Liri, Italy",
   ].filter((pill): pill is string => Boolean(pill));

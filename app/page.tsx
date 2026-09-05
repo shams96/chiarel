@@ -167,7 +167,7 @@ export default function Home() {
               url: SITE_URL,
               name: "CHIAREL™ — House of Skin Intelligence™",
               description:
-                "Clinically dosed skincare formulated in Isola del Liri, Italy. Every active ingredient disclosed.",
+                "Customer-tested skincare formulated in Isola del Liri, Italy. Every active ingredient disclosed.",
             })
           ),
         }}
@@ -275,7 +275,7 @@ export default function Home() {
               What&rsquo;s Actually in CHIAREL™ Formulas?
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-ink/70">
-              Clinically dosed, no hidden blends — every active, stated. Not a
+              Customer-tested, no hidden blends — every active, stated. Not a
               marketing claim, a matter of record.
             </p>
           </Reveal>
@@ -437,7 +437,8 @@ export default function Home() {
       </section>
 
       {/* Backed by Research — genuine third-party citations for the actives
-          named above, not just a claim of "clinically dosed" */}
+          named above, distinct from the "Customer Tested" claim used
+          elsewhere (which refers to customer feedback, not clinical trials) */}
       <section className="section-y bg-ivory">
         <div className="section-x-narrow">
           <Reveal className="text-center">
