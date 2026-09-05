@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 const trustBadges = [
+  "Complimentary shipping at $150",
+  "90-Day Guarantee on your first order",
   "Secure checkout via Stripe",
   "Formulated by a pharmacist",
   "Made to order in Isola del Liri, Italy",
