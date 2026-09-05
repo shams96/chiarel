@@ -8,8 +8,9 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { computeUnitPrice, type CartMode } from "@/lib/pricing";
 
-export type CartMode = "ninetyDay" | "subscription" | "oneTime";
+export type { CartMode };
 
 export type CartLine = {
   id: string;
@@ -25,10 +26,7 @@ export function unitPrice(
   product: { price: { subscription: number; oneTime: number } },
   mode: CartMode
 ): number {
-  if (mode === "ninetyDay") return product.price.subscription * 2;
-  return mode === "subscription"
-    ? product.price.subscription
-    : product.price.oneTime;
+  return computeUnitPrice(product.price.subscription, product.price.oneTime, mode);
 }
 
 type CartApiResponse = {

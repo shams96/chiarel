@@ -1,16 +1,16 @@
 import { cookies } from "next/headers";
 import { db } from "@/lib/db";
+import { computeUnitPrice, computeLineSavings, type CartMode } from "@/lib/pricing";
+
+export type { CartMode };
 
 const CART_COOKIE = "chiarel_cart_id";
-
-export type CartMode = "ninetyDay" | "subscription" | "oneTime";
 
 export function unitPriceFor(
   product: { priceSub: number; priceOneTime: number },
   mode: CartMode
 ): number {
-  if (mode === "ninetyDay") return product.priceSub * 2;
-  return mode === "subscription" ? product.priceSub : product.priceOneTime;
+  return computeUnitPrice(product.priceSub, product.priceOneTime, mode);
 }
 
 /** Reads the cart-id cookie set by middleware and ensures a Cart row exists for it. */
@@ -42,12 +42,8 @@ export async function getCartWithTotals() {
 
   const lines = items.map((item) => {
     const unit = unitPriceFor(item.product, item.mode as CartMode);
-    const oneTimeEquivalent =
-      item.mode === "ninetyDay"
-        ? item.product.priceOneTime * 2
-        : item.product.priceOneTime;
     subtotal += unit * item.qty;
-    savings += (oneTimeEquivalent - unit) * item.qty;
+    savings += computeLineSavings(item.product.priceOneTime, unit, item.mode as CartMode, item.qty);
 
     return {
       id: item.id,
