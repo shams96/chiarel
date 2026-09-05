@@ -32,3 +32,18 @@ export const ritualProducts = products
 
 export const getProduct = (slug: string) =>
   products.find((p) => p.slug === slug);
+
+/**
+ * For call sites that only make sense with a known-good, hardcoded slug
+ * (e.g. the homepage's featured products) — throws a descriptive error
+ * instead of allowing `undefined` through. If a slug is ever renamed in
+ * data/products.json without updating every caller, this turns that into a
+ * traceable build/runtime error instead of a silent `undefined.price` crash.
+ */
+export function getProductOrThrow(slug: string): Product {
+  const product = getProduct(slug);
+  if (!product) {
+    throw new Error(`getProductOrThrow: no product found for slug "${slug}"`);
+  }
+  return product;
+}

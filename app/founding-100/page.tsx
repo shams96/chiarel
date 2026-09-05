@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import ComingSoonPackshot from "@/components/ComingSoonPackshot";
-import { getProduct } from "@/lib/products";
+import { getProductOrThrow } from "@/lib/products";
 import { db } from "@/lib/db";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function Founding100Page() {
-  const masque = getProduct("recovery-masque")!;
+  const masque = getProductOrThrow("recovery-masque");
   const ninetyDaySubscriptionTotal = masque.price.subscription * 2;
   const ninetyDayOneTimeTotal = masque.price.oneTime * 2;
   const circleCheckoutTotal = Math.round(ninetyDaySubscriptionTotal * 0.8);

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { QUESTIONS, scoreAxes, recommend } from "@/lib/skin-assessment";
-import { getProduct } from "@/lib/products";
+import { getProduct, getProductOrThrow } from "@/lib/products";
 import { useCart } from "@/lib/cart-context";
 import { productTint } from "@/lib/color";
 
@@ -93,7 +93,7 @@ export default function AssessmentPage() {
                 href="/shop/the-founding-pair"
                 className="mt-3 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
               >
-                View The Founding Pair — ${getProduct("the-founding-pair")!.price.subscription}
+                View The Founding Pair — ${getProductOrThrow("the-founding-pair").price.subscription}
               </Link>
             </div>
           )}

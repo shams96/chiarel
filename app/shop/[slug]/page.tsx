@@ -2,7 +2,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getProduct, products, ritualProducts } from "@/lib/products";
+import { getProduct, products, ritualProducts, type Product } from "@/lib/products";
 import PurchaseOptions from "@/components/PurchaseOptions";
 import StickyPurchaseBar from "@/components/StickyPurchaseBar";
 import ProductHeroImage from "@/components/ProductHeroImage";
@@ -271,9 +271,9 @@ function BrandStatement() {
 // getting the thinnest pages. Shows each included product's real name,
 // image, and one-line blurb, pulled from the product data itself.
 function WhatsInside({ slugs }: { slugs: string[] }) {
-  const items = slugs.map((slug) => getProduct(slug)).filter(Boolean) as ReturnType<
-    typeof getProduct
-  >[];
+  const items = slugs
+    .map((slug) => getProduct(slug))
+    .filter((p): p is Product => p !== undefined);
   if (items.length === 0) return null;
 
   return (
@@ -283,17 +283,17 @@ function WhatsInside({ slugs }: { slugs: string[] }) {
         <div className="mt-10 grid gap-6 sm:grid-cols-2">
           {items.map((item) => (
             <Link
-              key={item!.slug}
-              href={`/shop/${item!.slug}`}
+              key={item.slug}
+              href={`/shop/${item.slug}`}
               className="group flex items-center gap-5 rounded-md border border-ink/10 bg-white p-4 transition hover:border-ochre"
             >
               <div
                 className="relative h-20 w-20 shrink-0 overflow-hidden rounded-sm"
-                style={{ backgroundColor: productTint(item!.color.hex) }}
+                style={{ backgroundColor: productTint(item.color.hex) }}
               >
                 <Image
-                  src={item!.image}
-                  alt={item!.name}
+                  src={item.image}
+                  alt={item.name}
                   fill
                   sizes="80px"
                   className="object-cover"
@@ -301,13 +301,13 @@ function WhatsInside({ slugs }: { slugs: string[] }) {
               </div>
               <div>
                 <p className="text-[11px] uppercase tracking-[0.16em] text-ink/40">
-                  {item!.step}
+                  {item.step}
                 </p>
                 <p className="mt-1 font-serif text-lg leading-snug text-ink">
-                  {item!.name}
+                  {item.name}
                 </p>
                 <p className="mt-1 text-[13px] leading-relaxed text-ink/60">
-                  {item!.descriptor}
+                  {item.descriptor}
                 </p>
               </div>
             </Link>

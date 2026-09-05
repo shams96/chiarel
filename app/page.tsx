@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { products, ritualProducts, getProduct } from "@/lib/products";
+import { products, ritualProducts, getProductOrThrow } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import RitualCarousel from "@/components/RitualCarousel";
 import EvidenceGrid from "@/components/EvidenceGrid";
@@ -141,11 +141,11 @@ const ingredientTable = products
   );
 
 export default function Home() {
-  const essence = getProduct("chiarel-essence")!;
-  const masque = getProduct("recovery-masque")!;
-  const foundingPair = getProduct("the-founding-pair")!;
-  const ritualSet = getProduct("the-ritual-set")!;
-  const terraCreme = getProduct("terra-radiance-creme")!;
+  const essence = getProductOrThrow("chiarel-essence");
+  const masque = getProductOrThrow("recovery-masque");
+  const foundingPair = getProductOrThrow("the-founding-pair");
+  const ritualSet = getProductOrThrow("the-ritual-set");
+  const terraCreme = getProductOrThrow("terra-radiance-creme");
   const featuredIcons = products.filter((p) =>
     ["cellular-cleanser", "lip-concentrate"].includes(p.slug)
   );
