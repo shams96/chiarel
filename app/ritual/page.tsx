@@ -16,12 +16,20 @@ export default function RitualPage() {
         Four gestures, morning and evening. The skin responds to consistency —
         which is why the ritual is designed to be delivered, not repurchased.
       </p>
-      <Link
-        href="/assessment"
-        className="mt-4 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
-      >
-        Take the Skin Assessment™ to find your starting point
-      </Link>
+      <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+        <Link
+          href="/assessment"
+          className="inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
+        >
+          Take the Skin Assessment™ to find your starting point
+        </Link>
+        <Link
+          href="/build-your-ritual"
+          className="inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
+        >
+          Or build your own ritual, step by step
+        </Link>
+      </div>
 
       <div className="mt-16 space-y-20">
         {ritualProducts.map((p, i) => (
