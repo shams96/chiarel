@@ -2,7 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
+/* overflow-x: hidden on body ONLY, not html — setting it on both makes both
+   elements independent scroll containers (per spec, overflow-x: hidden with
+   overflow-y left at its default forces overflow-y to compute as auto),
+   which breaks position: sticky on any descendant (e.g. .site-header) since
+   sticky needs one unambiguous scrolling ancestor. */
+body {
   overflow-x: hidden;
 }
 body {
