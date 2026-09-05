@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { getHeroEntrance } from "@/lib/motion";
@@ -17,12 +18,17 @@ export default function ProductHeroImage({
 }) {
   const reduceMotion = useReducedMotion();
   const variants = getHeroEntrance(step);
+  // Gate the entrance on the image actually finishing loading, not on the
+  // wrapper mounting — on a prerendered page the component mounts (and an
+  // animation fired immediately would complete) before the browser has any
+  // pixels to show, so the "drop" would play out on an invisible element.
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <motion.div
       className="relative h-full w-full"
       initial={reduceMotion ? false : "hidden"}
-      animate="visible"
+      animate={loaded ? "visible" : "hidden"}
       variants={reduceMotion ? undefined : variants}
     >
       <Image
@@ -32,6 +38,7 @@ export default function ProductHeroImage({
         priority
         sizes="(max-width: 768px) 100vw, 50vw"
         className="object-cover"
+        onLoad={() => setLoaded(true)}
       />
       {badge && (
         <span className="absolute left-4 top-4 bg-ivory/90 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-ochre">
