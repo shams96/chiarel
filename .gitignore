@@ -41,3 +41,6 @@ next-env.d.ts
 /prisma/dev.db
 /prisma/dev.db-journal
 .env
+
+# Raw, unredacted customer/subject photos — never commit, never serve publicly
+.private-assets/

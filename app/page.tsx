@@ -5,6 +5,7 @@ import { products, ritualProducts, getProductOrThrow } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import RitualCarousel from "@/components/RitualCarousel";
 import EvidenceGrid from "@/components/EvidenceGrid";
+import ResultsSection from "@/components/ResultsSection";
 import Reveal from "@/components/Reveal";
 import { productTint } from "@/lib/color";
 import { productHoverClass } from "@/lib/motion";
@@ -244,6 +245,8 @@ export default function Home() {
           Scroll
         </div>
       </section>
+
+      <ResultsSection />
 
       {/* Campaign banner — commissioned editorial illustration of the Cascata
           Grande (watercolor-and-ink style, not a photograph) standing in for
