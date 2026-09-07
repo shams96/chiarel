@@ -779,8 +779,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FAQ — direct-answer content for pricing, formulation, and availability questions */}
-      <section className="section-y bg-ivory">
+      {/* FAQ — direct-answer content for pricing, formulation, and availability questions.
+          id="faq" gives product pages (see UsageGuidance in app/shop/[slug]/page.tsx) a
+          real anchor to link back to instead of duplicating this content per-product. */}
+      <section id="faq" className="section-y bg-ivory">
         <div className="section-x-narrow">
           <Reveal>
             <h2 className="text-center font-serif text-3xl">

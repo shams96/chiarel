@@ -201,6 +201,11 @@ export default function ProductPage({
         </Reveal>
       )}
       <ScienceLinks slug={p.slug} />
+      {!p.set && (
+        <Reveal>
+          <UsageGuidance />
+        </Reveal>
+      )}
       {p.ritualOrder !== null && (
         <Reveal>
           <CompleteYourRitual currentSlug={p.slug} />
@@ -542,6 +547,62 @@ function ScienceLinks({ slug }: { slug: string }) {
           </span>
         ))}
       </p>
+    </div>
+  );
+}
+
+// Usage guidance, patch-test caution, and support/policy links — the PDP
+// content items the Brand Action Guide brief calls out that weren't yet on
+// the page. Deliberately generic, standard cosmetic-industry practice
+// language, not a per-product claim: it doesn't reference this product's
+// specific actives or efficacy, only how to introduce any new leave-on
+// treatment safely. Shown only on single-product pages (bundles link into
+// each included product's own page, which already carries this section).
+function UsageGuidance() {
+  return (
+    <div className="border-t border-ink/10 bg-cloud/30 py-16">
+      <div className="mx-auto max-w-3xl px-6">
+        <h2 className="text-center font-serif text-2xl">
+          Introducing a New Product to Your Routine
+        </h2>
+        <div className="mt-10 grid gap-8 sm:grid-cols-2">
+          <div>
+            <h3 className="font-serif text-lg text-ink">Patch test first</h3>
+            <p className="mt-2 text-sm leading-relaxed text-ink/70">
+              Apply a small amount to the inner forearm and wait 24 hours
+              before using on the face. This is standard practice for any
+              new skincare product, regardless of formulation.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-serif text-lg text-ink">
+              Using alongside retinoids or acids
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-ink/70">
+              If your routine already includes a retinoid or an exfoliating
+              acid (AHA/BHA), introduce this product gradually — for
+              example, on alternating nights — and reduce frequency if you
+              notice irritation. When in doubt, space active treatments
+              apart rather than layering them the same evening.
+            </p>
+          </div>
+        </div>
+        <p className="mt-10 text-center text-[12px] leading-relaxed text-ink/50">
+          Questions about how this fits your routine?{" "}
+          <Link href="/contact" className="border-b border-ochre text-ochre">
+            Contact us
+          </Link>
+          , see the{" "}
+          <Link href="/#faq" className="border-b border-ochre text-ochre">
+            FAQ
+          </Link>
+          , or review{" "}
+          <Link href="/terms" className="border-b border-ochre text-ochre">
+            shipping &amp; returns
+          </Link>
+          .
+        </p>
+      </div>
     </div>
   );
 }

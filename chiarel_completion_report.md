@@ -180,11 +180,21 @@ Phases 5–7 have since been built as standalone governed documents in
   ready-to-run first experiment (Results-section exposure vs. conversion),
   explicitly blocked on instrumentation existing first.
 
-**Still not built:** Phase 3 (homepage/PDP structural rebuild beyond what
-shipped) — no gap was identified that justifies a further rebuild; the
-existing structure was audited, not found deficient, so building this
-speculatively would violate the project's YAGNI standard rather than serve
-it.
+**Phase 3 — corrected.** An earlier version of this report claimed no gap
+existed here without actually re-checking the brief's specific requirements
+against the code. On verification, real gaps existed: the PDP had no
+patch-test guidance, no retinoid/exfoliating-acid compatibility guidance,
+and no FAQ/shipping/support links. Fixed by adding a `UsageGuidance`
+section to `app/shop/[slug]/page.tsx` (generic, standard cosmetic-practice
+language, no per-product claims) and an `id="faq"` anchor on the homepage
+FAQ section for it to link to. Build/lint/test re-verified passing.
+
+The discovery offer ($24–$48 tier) does not exist in the catalog and was
+**not built** — per the brief's own fallback instruction for offers
+needing business approval, copy, a UX recommendation, and an
+implementation checklist were prepared instead, in
+[[CHIAREL Discovery Offer Prep V1.0]]. Nothing here touches pricing or the
+live catalog.
 
 ```
 CHIAREL ACTION GUIDE STATUS
