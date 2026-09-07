@@ -43,7 +43,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-2 border-t border-ink/10 pt-6 text-[11px] uppercase tracking-[0.14em] text-ink/50">
+        <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-2 border-t border-ink/10 pt-6 text-[11px] uppercase tracking-[0.14em] text-ink/65">
           {trustBadges.map((badge) => (
             <li key={badge} className="flex items-center gap-2">
               <span className="inline-block h-1 w-1 rounded-full bg-ochre" aria-hidden="true" />
@@ -52,7 +52,7 @@ export default function Footer() {
           ))}
         </ul>
 
-        <p className="mt-8 text-[11px] text-ink/50">
+        <p className="mt-8 text-[11px] text-ink/65">
           © {new Date().getFullYear()} CHIAREL™ · 1HubSolutions, LLC. All rights
           reserved.
         </p>

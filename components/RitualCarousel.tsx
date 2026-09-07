@@ -31,7 +31,7 @@ export default function RitualCarousel({ products }: { products: Product[] }) {
             />
           </div>
           <p className="mt-4 font-serif text-xl leading-tight">{p.name}</p>
-          <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-ink/40">
+          <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-ink/65">
             {p.step}
           </p>
         </Link>

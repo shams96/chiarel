@@ -115,7 +115,7 @@ export default function ProductPage({
               {p.name}
             </h1>
             <p className="mt-1 text-sm text-ink/60">{p.descriptor}</p>
-            <p className="mt-2 text-[12px] leading-relaxed text-ink/45">
+            <p className="mt-2 text-[12px] leading-relaxed text-ink/65">
               {productFactSummary(p)}
             </p>
             {p.role && (
@@ -138,25 +138,25 @@ export default function ProductPage({
 
             <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-t border-ink/10 pt-6 text-[12px] text-ink/60">
               <div className="flex gap-1.5">
-                <dt className="text-ink/40">Step:</dt>
+                <dt className="text-ink/65">Step:</dt>
                 <dd>{p.step}</dd>
               </div>
               <div className="flex gap-1.5">
-                <dt className="text-ink/40">Family:</dt>
+                <dt className="text-ink/65">Family:</dt>
                 <dd>{p.family}</dd>
               </div>
               {p.complex && (
                 <div className="flex gap-1.5">
-                  <dt className="text-ink/40">Complex:</dt>
+                  <dt className="text-ink/65">Complex:</dt>
                   <dd>{p.complex}</dd>
                 </div>
               )}
               <div className="flex gap-1.5">
-                <dt className="text-ink/40">Size:</dt>
+                <dt className="text-ink/65">Size:</dt>
                 <dd>{p.size}</dd>
               </div>
               <div className="flex items-center gap-1.5">
-                <dt className="text-ink/40">Color:</dt>
+                <dt className="text-ink/65">Color:</dt>
                 <dd className="flex items-center gap-1.5">
                   <span
                     className="inline-block h-2.5 w-2.5 rounded-full border border-ink/20"
@@ -167,7 +167,7 @@ export default function ProductPage({
               </div>
             </dl>
             {(p.slug === "terra-radiance-creme" || p.slug === "recovery-masque") && (
-              <p className="mt-4 text-[12px] text-ink/50">
+              <p className="mt-4 text-[12px] text-ink/65">
                 Wondering why day and night formulas feel different?{" "}
                 <Link
                   href="/journal/chiarel-ritual-guide"
@@ -347,7 +347,7 @@ function WhatsInside({ slugs }: { slugs: string[] }) {
                 />
               </div>
               <div>
-                <p className="text-[11px] uppercase tracking-[0.16em] text-ink/40">
+                <p className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
                   {item.step}
                 </p>
                 <p className="mt-1 font-serif text-lg leading-snug text-ink">
@@ -536,7 +536,7 @@ function ScienceLinks({ slug }: { slug: string }) {
   if (!links) return null;
   return (
     <div className="mx-auto mt-8 max-w-2xl px-6 text-center">
-      <p className="text-[12px] text-ink/50">
+      <p className="text-[12px] text-ink/65">
         Formulated with:{" "}
         {links.map((l, i) => (
           <span key={l.href}>
@@ -587,7 +587,7 @@ function UsageGuidance() {
             </p>
           </div>
         </div>
-        <p className="mt-10 text-center text-[12px] leading-relaxed text-ink/50">
+        <p className="mt-10 text-center text-[12px] leading-relaxed text-ink/65">
           Questions about how this fits your routine?{" "}
           <Link href="/contact" className="border-b border-ochre text-ochre">
             Contact us
@@ -625,10 +625,10 @@ function CompleteYourRitual({ currentSlug }: { currentSlug: string }) {
         </div>
         <div>
           <p className="font-serif text-lg">{next.name}</p>
-          <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-ink/40">
+          <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-ink/65">
             {next.step}
           </p>
-          <p className="text-[12px] text-ink/50">
+          <p className="text-[12px] text-ink/65">
             ${next.price.subscription} with subscription
           </p>
         </div>

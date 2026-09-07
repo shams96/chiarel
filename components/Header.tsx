@@ -131,7 +131,7 @@ export default function Header() {
           <button
             onClick={() => setMenuOpen(false)}
             aria-label="Close menu"
-            className="flex h-11 w-11 items-center justify-center text-xl text-ink/50 hover:text-ink"
+            className="flex h-11 w-11 items-center justify-center text-xl text-ink/65 hover:text-ink"
           >
             ×
           </button>

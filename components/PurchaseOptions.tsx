@@ -24,7 +24,15 @@ export default function PurchaseOptions({
 
   return (
     <div className="mt-8">
+      {/* role="radiogroup"/"radio" — these three buttons are a mutually
+          exclusive choice (visually communicated via border/background), but
+          plain <button> gives a screen reader no indication of that
+          relationship or which one is selected. aria-checked carries the
+          same state sighted users get from the ochre border. */}
+      <div role="radiogroup" aria-label="Purchase plan">
       <button
+        role="radio"
+        aria-checked={tier === "ninetyDay"}
         onClick={() => setTier("ninetyDay")}
         className={`flex w-full items-start justify-between rounded-sm border p-5 text-left transition ${
           tier === "ninetyDay"
@@ -43,13 +51,15 @@ export default function PurchaseOptions({
         </span>
         <span className="text-right">
           <span className="block font-serif text-2xl">${ninetyDayTotal}</span>
-          <span className="block text-[11px] text-ink/45">
+          <span className="block text-[11px] text-ink/65">
             ${(ninetyDayTotal / 90).toFixed(2)}/day
           </span>
         </span>
       </button>
 
       <button
+        role="radio"
+        aria-checked={tier === "single"}
         onClick={() => setTier("single")}
         className={`mt-3 flex w-full items-center justify-between rounded-sm border p-3 text-left text-sm transition ${
           tier === "single"
@@ -61,7 +71,7 @@ export default function PurchaseOptions({
         <span className="text-right">
           <span className="font-serif text-lg">${subscription}</span>
           {perDayCadenceDays && (
-            <span className="ml-1 text-[11px] text-ink/45">
+            <span className="ml-1 text-[11px] text-ink/65">
               (${(subscription / perDayCadenceDays).toFixed(2)}/day)
             </span>
           )}
@@ -69,6 +79,8 @@ export default function PurchaseOptions({
       </button>
 
       <button
+        role="radio"
+        aria-checked={tier === "oneTime"}
         onClick={() => setTier("oneTime")}
         className={`mt-3 flex w-full items-center justify-between rounded-sm border p-3 text-left text-sm transition ${
           tier === "oneTime"
@@ -79,6 +91,7 @@ export default function PurchaseOptions({
         <span>Prefer a one-time purchase</span>
         <span className="font-serif text-lg">${oneTime}</span>
       </button>
+      </div>
 
       <button
         onClick={() => add(slug, tier === "single" ? "subscription" : tier)}
@@ -86,10 +99,10 @@ export default function PurchaseOptions({
       >
         {tier === "oneTime" ? "Add to Bag" : "Begin the Ritual"}
       </button>
-      <p className="mt-3 text-center text-[11px] text-ink/50">
+      <p className="mt-3 text-center text-[11px] text-ink/65">
         Two complimentary samples with every order.
       </p>
-      <p className="mt-1 text-center text-[11px] text-ink/40">
+      <p className="mt-1 text-center text-[11px] text-ink/65">
         Formulated under pharmacist guidance at Natural You Srl, Isola del
         Liri.
       </p>

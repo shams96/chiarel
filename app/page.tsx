@@ -236,12 +236,13 @@ export default function Home() {
                 alt="CHIAREL Essence™"
                 fill
                 priority
+                sizes="(max-width: 768px) 90vw, 448px"
                 className="relative object-contain drop-shadow-[0_30px_40px_rgba(28,26,23,0.18)]"
               />
             </div>
           </div>
         </div>
-        <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[10px] uppercase tracking-[0.3em] text-ink/40">
+        <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[10px] uppercase tracking-[0.3em] text-ink/65">
           Scroll
         </div>
       </section>
@@ -318,7 +319,7 @@ export default function Home() {
           <div className="mt-10 overflow-x-auto">
             <table className="w-full min-w-[560px] border-collapse text-left text-sm">
               <thead>
-                <tr className="border-b border-ink/20 text-[11px] uppercase tracking-[0.16em] text-ink/50">
+                <tr className="border-b border-ink/20 text-[11px] uppercase tracking-[0.16em] text-ink/65">
                   <th className="py-3 pr-4 font-normal">Product</th>
                   <th className="py-3 pr-4 font-normal">Active Ingredient</th>
                   <th className="py-3 font-normal">Concentration</th>
@@ -343,7 +344,7 @@ export default function Home() {
                 <li key={i} className="flex items-start gap-3 text-[13px] leading-relaxed text-ink/70">
                   <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-ochre" aria-hidden="true" />
                   <span>
-                    <span className="text-ink/40">{row.product}: </span>
+                    <span className="text-ink/65">{row.product}: </span>
                     {row.benefit}
                   </span>
                 </li>
@@ -365,7 +366,7 @@ export default function Home() {
               const meta = (
                 <Link href={`/shop/${p.slug}`}>
                   <p className="mt-4 font-serif text-2xl">{p.name}</p>
-                  <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-ink/40">
+                  <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-ink/65">
                     {p.step}
                   </p>
                   <p className="mt-1 text-[13px] text-ink/60">{p.descriptor}</p>
@@ -479,7 +480,7 @@ export default function Home() {
                 href="https://pubmed.ncbi.nlm.nih.gov/?term=palmitoyl+pentapeptide+skin"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-1 inline-block border-b border-ink/30 text-[12px] text-ink/50 hover:border-ochre hover:text-ochre"
+                className="mt-1 inline-block border-b border-ink/30 text-[12px] text-ink/65 hover:border-ochre hover:text-ochre"
               >
                 Published research, PubMed (NIH) →
               </a>
@@ -494,7 +495,7 @@ export default function Home() {
                 href="https://pubmed.ncbi.nlm.nih.gov/?term=ceramide+niacinamide+skin+barrier"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-1 inline-block border-b border-ink/30 text-[12px] text-ink/50 hover:border-ochre hover:text-ochre"
+                className="mt-1 inline-block border-b border-ink/30 text-[12px] text-ink/65 hover:border-ochre hover:text-ochre"
               >
                 Published research, PubMed (NIH) →
               </a>
@@ -522,7 +523,7 @@ export default function Home() {
                 href="https://pubmed.ncbi.nlm.nih.gov/?term=ornithine+skin+barrier"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-1 inline-block border-b border-ink/30 text-[12px] text-ink/50 hover:border-ochre hover:text-ochre"
+                className="mt-1 inline-block border-b border-ink/30 text-[12px] text-ink/65 hover:border-ochre hover:text-ochre"
               >
                 Published research, PubMed (NIH) →
               </a>
@@ -537,7 +538,7 @@ export default function Home() {
                 href="https://pubmed.ncbi.nlm.nih.gov/?term=low+molecular+weight+hyaluronic+acid+skin+hydration"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-1 inline-block border-b border-ink/30 text-[12px] text-ink/50 hover:border-ochre hover:text-ochre"
+                className="mt-1 inline-block border-b border-ink/30 text-[12px] text-ink/65 hover:border-ochre hover:text-ochre"
               >
                 Published research, PubMed (NIH) →
               </a>
@@ -582,7 +583,7 @@ export default function Home() {
             {fitGuidance.map((row, i) => (
               <li key={row.concern}>
                 <Reveal delay={i * 0.08} className="border border-ink/10 p-6">
-                  <p className="text-[11px] uppercase tracking-[0.16em] text-ink/40">
+                  <p className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
                     Best for skin that…
                   </p>
                   <p className="mt-2 font-serif text-lg leading-snug text-ink">
@@ -598,7 +599,7 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          <p className="mt-6 max-w-2xl text-[13px] leading-relaxed text-ink/50">
+          <p className="mt-6 max-w-2xl text-[13px] leading-relaxed text-ink/65">
             Not every step is necessary for every routine — the Ritual is
             built to be used in full or picked apart by the single product
             your skin needs most.
@@ -676,7 +677,7 @@ export default function Home() {
           <div className="mt-10 overflow-x-auto">
             <table className="w-full min-w-[560px] border-collapse text-left text-sm">
               <thead>
-                <tr className="border-b border-ink/20 text-[11px] uppercase tracking-[0.16em] text-ink/50">
+                <tr className="border-b border-ink/20 text-[11px] uppercase tracking-[0.16em] text-ink/65">
                   <th className="py-3 pr-4 font-normal">Dimension</th>
                   <th className="py-3 pr-4 font-normal text-ochre">CHIAREL™</th>
                   <th className="py-3 font-normal">Category Norm</th>
@@ -687,7 +688,7 @@ export default function Home() {
                   <tr key={row.dimension} className="border-b border-ink/10 align-top">
                     <td className="py-4 pr-4 font-serif text-base text-ink">{row.dimension}</td>
                     <td className="py-4 pr-4 text-ink/80">{row.chiarel}</td>
-                    <td className="py-4 text-ink/50">{row.categoryNorm}</td>
+                    <td className="py-4 text-ink/65">{row.categoryNorm}</td>
                   </tr>
                 ))}
               </tbody>
@@ -726,7 +727,7 @@ export default function Home() {
               <span className="tabular-nums font-serif text-2xl">
                 ${foundingPair.price.subscription}
               </span>
-              <span className="ml-2 text-[12px] text-ink/50">
+              <span className="ml-2 text-[12px] text-ink/65">
                 every 45 days with subscription · ${foundingPair.price.oneTime}{" "}
                 one-time
               </span>
@@ -745,7 +746,7 @@ export default function Home() {
                 The complete set — ${ritualSet.price.subscription}
               </Link>
             </div>
-            <p className="mt-6 text-[11px] uppercase tracking-[0.14em] text-ink/40">
+            <p className="mt-6 text-[11px] uppercase tracking-[0.14em] text-ink/65">
               Available online only at chiarel.com — not sold in retail
               stores or through other sellers.
             </p>
@@ -809,7 +810,7 @@ export default function Home() {
       {/* Editorial — Ritual philosophy */}
       <Reveal className="section-y-lg mx-auto max-w-3xl px-6 text-center">
         <section>
-          <h2 className="font-serif text-lg text-ink/50">The Philosophy</h2>
+          <h2 className="font-serif text-lg text-ink/65">The Philosophy</h2>
           <p className="mt-5 font-serif text-3xl leading-relaxed text-ink">
             &ldquo;Skin is not one thing. A house built to serve it should not
             pretend otherwise.&rdquo;
@@ -833,7 +834,7 @@ export default function Home() {
       {/* House note — no top padding: intentionally reads as one closing pair with Philosophy above */}
       <Reveal className="mx-auto max-w-3xl px-6 pb-24 text-center md:pb-32">
         <section>
-          <h2 className="font-serif text-lg text-ink/50">The House</h2>
+          <h2 className="font-serif text-lg text-ink/65">The House</h2>
           <p className="mt-4 font-serif text-2xl leading-relaxed">
             From the waters of Isola del Liri — where the Cascata Grande
             falls through the town itself — CHIAREL™ practices La Bella
@@ -849,7 +850,7 @@ export default function Home() {
         </section>
       </Reveal>
 
-      <p className="pb-10 text-center text-[11px] text-ink/40">
+      <p className="pb-10 text-center text-[11px] text-ink/65">
         Written by{" "}
         <a
           href={FORMULATOR_EXTERNAL_URL}

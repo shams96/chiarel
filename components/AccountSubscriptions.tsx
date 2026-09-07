@@ -140,7 +140,7 @@ export default function AccountSubscriptions() {
                   <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ochre">
                     Ritual Plan
                   </p>
-                  <p className="tabular-nums mt-0.5 text-[12px] text-ink/50">
+                  <p className="tabular-nums mt-0.5 text-[12px] text-ink/65">
                     Delivered every {CADENCE_DAYS} days · $
                     {product.price.subscription}/delivery
                   </p>
@@ -178,7 +178,7 @@ export default function AccountSubscriptions() {
                     <button
                       type="button"
                       onClick={() => setConfirmingCancel(null)}
-                      className="btn-press px-5 py-2 text-[11px] uppercase tracking-[0.2em] text-ink/50 transition hover:text-ink"
+                      className="btn-press px-5 py-2 text-[11px] uppercase tracking-[0.2em] text-ink/65 transition hover:text-ink"
                     >
                       Keep Ritual
                     </button>
@@ -214,7 +214,7 @@ export default function AccountSubscriptions() {
                   <button
                     type="button"
                     onClick={() => setConfirmingCancel(sub.id)}
-                    className="btn-press px-5 py-2 text-[11px] uppercase tracking-[0.2em] text-ink/40 transition hover:text-ink"
+                    className="btn-press px-5 py-2 text-[11px] uppercase tracking-[0.2em] text-ink/65 transition hover:text-ink"
                   >
                     Cancel
                   </button>

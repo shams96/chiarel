@@ -49,7 +49,7 @@ export default function ResultsSection() {
                     className="h-full w-full object-cover"
                   />
                 </div>
-                <p className="mt-2 text-center text-[11px] uppercase tracking-[0.14em] text-ink/50">
+                <p className="mt-2 text-center text-[11px] uppercase tracking-[0.14em] text-ink/65">
                   Before
                 </p>
               </div>
@@ -62,7 +62,7 @@ export default function ResultsSection() {
                     className="h-full w-full object-cover"
                   />
                 </div>
-                <p className="mt-2 text-center text-[11px] uppercase tracking-[0.14em] text-ink/50">
+                <p className="mt-2 text-center text-[11px] uppercase tracking-[0.14em] text-ink/65">
                   After
                 </p>
               </div>

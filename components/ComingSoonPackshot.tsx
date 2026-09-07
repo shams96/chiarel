@@ -105,7 +105,7 @@ function ComingSoonPackshotInner({
       className="card-elevated w-full rounded-md bg-white p-8"
     >
       {referredBy && (
-        <p className="mb-4 text-[12px] text-ink/50">
+        <p className="mb-4 text-[12px] text-ink/65">
           Referred by <span className="text-ochre">{referredBy}</span>
         </p>
       )}
@@ -116,7 +116,7 @@ function ComingSoonPackshotInner({
           placeholder="First name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
+          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/65 focus:border-ochre focus:outline-none"
         />
         <input
           type="email"
@@ -124,21 +124,21 @@ function ComingSoonPackshotInner({
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
+          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/65 focus:border-ochre focus:outline-none"
         />
         <input
           type="tel"
           placeholder="Phone (optional)"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
+          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/65 focus:border-ochre focus:outline-none"
         />
         <input
           type="text"
           placeholder="Instagram or TikTok (optional)"
           value={social}
           onChange={(e) => setSocial(e.target.value)}
-          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:border-ochre focus:outline-none"
+          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/65 focus:border-ochre focus:outline-none"
         />
       </div>
       <button

@@ -33,7 +33,7 @@ export default function EvidenceGrid({ products }: { products: Product[] }) {
             {e.percent}
           </p>
           <p className="mt-3 text-sm text-ink/80">{e.activeName}</p>
-          <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-ink/45">
+          <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-ink/65">
             {e.productName}
           </p>
         </Link>

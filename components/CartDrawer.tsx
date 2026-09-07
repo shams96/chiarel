@@ -46,7 +46,7 @@ export default function CartDrawer() {
           <button
             onClick={close}
             aria-label="Close cart"
-            className="text-xl text-ink/50 hover:text-ink"
+            className="text-xl text-ink/65 hover:text-ink"
           >
             ×
           </button>
@@ -91,7 +91,7 @@ export default function CartDrawer() {
                       <p className="text-sm font-medium leading-tight">
                         {line.product.name}
                       </p>
-                      <p className="mt-0.5 text-[11px] uppercase tracking-[0.14em] text-ink/50">
+                      <p className="mt-0.5 text-[11px] uppercase tracking-[0.14em] text-ink/65">
                         {modeLabel[line.mode]}
                       </p>
                       <div className="mt-2 flex items-center justify-between">
@@ -116,13 +116,13 @@ export default function CartDrawer() {
                               +
                             </button>
                           </div>
-                          <span className="tabular-nums text-sm text-ink/50">
+                          <span className="tabular-nums text-sm text-ink/65">
                             × ${line.unitPrice}
                           </span>
                         </div>
                         <button
                           onClick={() => remove(line.slug)}
-                          className="text-[11px] uppercase tracking-[0.14em] text-ink/40 hover:text-ochre"
+                          className="text-[11px] uppercase tracking-[0.14em] text-ink/65 hover:text-ochre"
                         >
                           Remove
                         </button>
@@ -134,7 +134,7 @@ export default function CartDrawer() {
 
               {nextStep && (
                 <div className="mt-6 border-t border-ink/10 pt-5">
-                  <p className="mb-3 text-[11px] uppercase tracking-[0.16em] text-ink/50">
+                  <p className="mb-3 text-[11px] uppercase tracking-[0.16em] text-ink/65">
                     Complete the Ritual
                   </p>
                   <div className="flex flex-wrap items-center gap-3">
@@ -151,7 +151,7 @@ export default function CartDrawer() {
                       <p className="truncate text-sm font-medium leading-tight">
                         {nextStep.name}
                       </p>
-                      <p className="mt-0.5 truncate text-[11px] uppercase tracking-[0.14em] text-ink/50">
+                      <p className="mt-0.5 truncate text-[11px] uppercase tracking-[0.14em] text-ink/65">
                         {nextStep.step}
                       </p>
                     </div>
@@ -179,13 +179,13 @@ export default function CartDrawer() {
                 <span>Subtotal</span>
                 <span className="font-serif text-xl">${subtotal}</span>
               </p>
-              <p className="mb-3 text-center text-[11px] uppercase tracking-[0.14em] text-ink/45">
+              <p className="mb-3 text-center text-[11px] uppercase tracking-[0.14em] text-ink/65">
                 Customer-tested · every active disclosed
               </p>
               <Link
                 href="/terms#guarantee"
                 onClick={close}
-                className="mb-3 block text-center text-[11px] uppercase tracking-[0.14em] text-ink/45 underline decoration-ink/20 underline-offset-2 hover:text-ochre"
+                className="mb-3 block text-center text-[11px] uppercase tracking-[0.14em] text-ink/65 underline decoration-ink/20 underline-offset-2 hover:text-ochre"
               >
                 90-Day Guarantee on your first order
               </Link>
@@ -196,7 +196,7 @@ export default function CartDrawer() {
               >
                 Checkout — ${estimatedTotal}
               </Link>
-              <p className="mt-3 text-center text-[11px] text-ink/50">
+              <p className="mt-3 text-center text-[11px] text-ink/65">
                 Two complimentary samples included with every order.
               </p>
             </div>
