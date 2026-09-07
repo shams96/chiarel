@@ -284,10 +284,10 @@ function BrandStatement() {
             pharmacist Grazia Savoriti.
           </p>
           <p>
-            Skin is not one thing. A house built to serve it
-            shouldn&rsquo;t pretend otherwise — which is why every active
-            ingredient and its exact concentration is stated on this page,
-            not folded into an undisclosed blend.
+            Skin is not one thing, and a house built to serve it
+            shouldn&rsquo;t pretend otherwise. Every active ingredient and
+            its exact concentration is stated on this page, not folded
+            into an undisclosed blend.
           </p>
           <p>
             Each formula is produced fresh, to order, in small batches —

@@ -62,7 +62,7 @@ const faqs = [
   {
     question: "Who formulates CHIAREL?",
     answer:
-      "CHIAREL is formulated by Grazia Savoriti, CHIAREL's pharmacist specializing in cosmetic and nutraceutical research. Every formulation — from CHIAREL Essence™'s peptide complex to Terra Radiance Crème™'s barrier-support blend — is developed under her direct guidance, then produced fresh, to order, in small batches in Isola del Liri, Italy, rather than manufactured in bulk ahead of demand. She also reviews the published, peer-reviewed research cited for each active ingredient before it's formulated into a CHIAREL product, which is why every formula states its actives and exact percentages rather than grouping them into an undisclosed blend.",
+      "CHIAREL is formulated by Grazia Savoriti, CHIAREL's pharmacist specializing in cosmetic and nutraceutical research. Every formulation — from CHIAREL Essence™'s peptide complex to Terra Radiance Crème™'s barrier-support blend — is developed under her direct guidance, then produced fresh, to order, in small batches in Isola del Liri, Italy, rather than manufactured in bulk ahead of demand. She also reviews the published, peer-reviewed research cited for each active ingredient before it's formulated into a CHIAREL product. Every formula states its actives and exact percentages rather than grouping them into an undisclosed blend.",
   },
   {
     question: "Where can I buy CHIAREL?",
@@ -77,7 +77,7 @@ const faqs = [
   {
     question: "Where is CHIAREL made?",
     answer:
-      "CHIAREL formulas are produced in Isola del Liri, Italy, with manufacturing partner Natural You Srl, using water drawn where the Liri meets the Fibreno — a river fed entirely by limestone karst springs, with no surface tributaries of its own. That confluence of newly filtered spring water is what gives The Cascata Complex™ its name. Formulating on-site, rather than sourcing water and actives from a distance, is also why every CHIAREL batch is produced fresh, to order, instead of held in standing inventory ahead of demand.",
+      "CHIAREL formulas are produced in Isola del Liri, Italy, with manufacturing partner Natural You Srl, using water drawn where the Liri meets the Fibreno — a river fed entirely by limestone karst springs, with no surface tributaries of its own. That confluence of newly filtered spring water is what gives The Cascata Complex™ its name. The formulation happens on-site rather than sourcing water and actives from a distance, so every CHIAREL batch is produced fresh, to order, instead of held in standing inventory ahead of demand.",
   },
 ];
 
