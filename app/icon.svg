@@ -1,9 +1,25 @@
 <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="50" cy="50" r="48" fill="#D6C5A0" />
-  <path d="M42 32C32 32 25 40 25 50C25 60 32 68 42 68" 
-        stroke="white" strokeWidth="5" strokeLinecap="round" />
-  <path d="M58 32C68 32 75 40 75 50C75 60 68 68 58 68" 
-        stroke="white" strokeWidth="5" strokeLinecap="round" />
-  <path d="M50 25V75" 
-        stroke="white" strokeWidth="3" strokeLinecap="round" opacity="0.6" />
+  <!-- Ochre ground — distinct, saturated color reads at a glance in a tab
+       strip full of blue/red app icons. -->
+  <circle cx="50" cy="50" r="48" fill="#9B4722" />
+
+  <!-- The "C" is the real Libre Bodoni glyph (weight 600 — the heaviest
+       weight this brand actually uses, in app/layout.tsx's `serif` font
+       config), not a generic geometric ring. Path extracted directly from
+       the actual Libre Bodoni font file via fontTools and scaled into
+       this viewBox — real brand typography, not an approximation. -->
+  <path
+    d="M54.55 83.02 Q48.00 83.02 42.44 80.34 Q36.87 77.67 32.79 73.12 Q28.71 68.57 26.45 62.62 Q24.20 56.67 24.20 50.13 Q24.20 43.58 26.45 37.63 Q28.71 31.68 32.83 27.05 Q36.95 22.42 42.56 19.70 Q48.17 16.98 54.80 16.98 Q59.14 16.98 62.41 18.21 Q65.68 19.44 69.08 22.08 L72.65 17.83 L74.78 17.83 L74.78 37.29 L72.40 37.29 Q71.46 32.45 69.34 28.45 Q67.21 24.46 63.60 22.12 Q59.99 19.78 54.55 19.78 Q51.23 19.78 48.47 21.01 Q45.71 22.25 43.71 25.56 Q41.71 28.88 40.61 34.95 Q39.50 41.03 39.50 50.81 Q39.50 59.73 40.44 65.47 Q41.37 71.21 43.33 74.44 Q45.28 77.67 48.09 78.90 Q50.89 80.13 54.55 80.13 Q60.41 80.13 64.24 77.88 Q68.06 75.63 70.27 71.84 Q72.48 68.06 73.42 63.64 L75.80 63.64 L75.80 81.92 L73.42 81.92 L69.93 78.01 Q66.36 80.64 62.50 81.83 Q58.63 83.02 54.55 83.02 Z"
+    fill="#F8F6F1"
+  />
+
+  <!-- Water falling from the ridge through the gorge — the C's own
+       terminal opening (top hook ~17.8, bottom hook ~78.0). Physically
+       straight (gravity pulls straight down; no lateral force to wiggle
+       it) and tapered wide-to-narrow top-to-bottom: by continuity
+       (A·v = constant flow), the accelerating fall means cross-section
+       must shrink as it descends. Two streams, not one, for two points
+       along the ridge where water breaches. -->
+  <path d="M58 26 C60.5 26 62 27.5 61.7 30 L58.8 60 C58.6 61.5 57.4 61.5 57.2 60 L54.3 30 C54 27.5 55.5 26 58 26 Z" fill="#D6C5A0" />
+  <path d="M67 32 C68.8 32 69.9 33.1 69.7 34.9 L67.8 56 C67.65 57 66.85 57 66.7 56 L64.8 34.9 C64.6 33.1 65.7 32 67 32 Z" fill="#D6C5A0" />
 </svg>
