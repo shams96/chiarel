@@ -7,6 +7,7 @@ import RitualCarousel from "@/components/RitualCarousel";
 import EvidenceGrid from "@/components/EvidenceGrid";
 import ResultsSection from "@/components/ResultsSection";
 import Reveal from "@/components/Reveal";
+import HeroIntro from "@/components/HeroIntro";
 import { productTint } from "@/lib/color";
 import { productHoverClass } from "@/lib/motion";
 import {
@@ -156,6 +157,7 @@ export default function Home() {
 
   return (
     <>
+      <HeroIntro />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faqs)) }}
