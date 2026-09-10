@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 // The one signature, once-per-session moment on the site (per craft-floor
@@ -10,27 +10,43 @@ import { motion, useReducedMotion } from "framer-motion";
 // entrance, which still plays underneath and is what the visitor sees the
 // instant this overlay clears).
 //
-// Concept, revised from the original botanical version: growth/nature
-// imagery reads as a wellness brand, not the precision/Italian-craftsmanship
-// positioning CHIAREL actually holds. This version replaces the olive sprig
-// with a light-and-glass motif — a beam sweep, a droplet landing on a
-// polished glass plane, refraction — expressing precision and luminous
-// clarity instead of botanical transformation. Sequence lands at ~2.8s,
-// under the 3s ceiling for this version. Every stage animates
-// transform/opacity only (no width/height/layout properties) so it stays
-// cheap on low-end devices.
+// Concept: light and glass, not botanical growth — a beam sweep, a droplet
+// landing on a polished glass plane, a ripple, a refraction glint —
+// expressing precision and luminous clarity rather than nature/wellness
+// imagery. Sequence lands at ~2.9s total (exit fade included), against a
+// ~3s target.
+//
+// First-paint fix: earlier builds returned `null` while phase was "idle",
+// so the real page was what actually painted first (server-rendered HTML
+// has no overlay in it at all), and the white overlay only appeared once a
+// post-hydration effect fired — a visible flash of real content before the
+// intro. Fixed by having "idle" render the same blank white overlay as
+// "playing" (just without the animated children yet), so the very first
+// paint — server-rendered, before any client JS runs — is already the
+// blank white page. The decision effect below runs via useLayoutEffect
+// rather than useEffect so a skip (repeat visit / reduced motion) clears
+// that overlay before the browser paints the next frame, keeping any
+// flash to the unavoidable minimum of one frame.
+//
+// Every stage animates transform/opacity (and, for the ripple, SVG
+// rx/ry) only — no width/height/layout properties — so it stays cheap on
+// low-end devices.
 //
 // Session flag is set the moment we decide to play, not after it finishes —
 // so a refresh or back-navigation mid-sequence can't retrigger it. That
 // matches "never repeats during the visit" literally, at the cost of a
 // visitor who navigates away mid-animation not seeing the rest on return;
-// that trade favors the "never repeats" guarantee over completeness. Key is
-// versioned (v2) so anyone who already saw the botanical cut this session
-// sees the revised one without needing to clear storage by hand.
-const SESSION_FLAG = "chiarel-hero-intro-v2-seen";
+// that trade favors the "never repeats" guarantee over completeness.
+const SESSION_FLAG = "chiarel-hero-intro-v3-seen";
 
-const HOLD_MS = 2500; // time from mount to the start of the exit fade
+const HOLD_MS = 2600; // time from mount to the start of the exit fade
 const EXIT_MS = 300; // overlay fade-out duration
+
+// useLayoutEffect warns "does nothing on the server" during Next.js SSR;
+// effects never run during server rendering regardless of which hook is
+// used, so aliasing to useEffect there is purely cosmetic (silences the
+// warning) and changes no behavior.
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 type Phase = "idle" | "playing" | "exiting" | "done";
 
@@ -54,7 +70,7 @@ export default function HeroIntro() {
   const decisionRef = useRef<"skip" | "play" | null>(null);
   const exitAtRef = useRef<number | null>(null);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (typeof window === "undefined") return;
 
     if (decisionRef.current === null) {
@@ -132,7 +148,14 @@ export default function HeroIntro() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [phase, skip]);
 
-  if (phase === "idle" || phase === "done") return null;
+  if (phase === "done") return null;
+
+  // "idle" (the very first render, both server and client, before the
+  // decision effect has run) renders this same container with no animated
+  // children — a blank white overlay. That's deliberate: it's what
+  // guarantees the first thing ever painted is a clear white page, not a
+  // flash of the real hero underneath.
+  const showContent = phase === "playing" || phase === "exiting";
 
   return (
     <div
@@ -157,154 +180,178 @@ export default function HeroIntro() {
       }}
       className="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden bg-ivory"
     >
-      {/* Light beam — a soft diagonal sweep of warm light, the opening
-          gesture instead of a growth cue. Skewed gradient bar translating
-          across the full width, blurred so it reads as light rather than a
-          hard shape. */}
-      <motion.div
-        aria-hidden="true"
-        initial={{ x: "-120%", opacity: 0 }}
-        animate={{ x: "220%", opacity: [0, 0.7, 0] }}
-        transition={{ duration: 0.7, delay: 0.05, ease: "easeInOut", times: [0, 0.5, 1] }}
-        className="absolute top-0 h-full w-1/3 -skew-x-12"
-        style={{
-          background: "linear-gradient(90deg, transparent, rgba(214,197,160,0.55), transparent)",
-          filter: "blur(24px)",
-        }}
-      />
+      {showContent && (
+        <>
+          {/* Light beam — a soft diagonal sweep of warm light, on its own
+              for half a second before anything else starts so it actually
+              registers rather than being lost in simultaneous motion.
+              Two layers: a broad soft wash plus a slim brighter core, so it
+              reads as a gleam of light rather than a flat moving gradient. */}
+          <motion.div
+            aria-hidden="true"
+            initial={{ x: "-130%", opacity: 0 }}
+            animate={{ x: "230%", opacity: [0, 0.85, 0] }}
+            transition={{ duration: 0.6, delay: 0.15, ease: "easeInOut", times: [0, 0.5, 1] }}
+            className="absolute top-0 h-full w-1/3 -skew-x-12"
+            style={{
+              background: "linear-gradient(90deg, transparent, rgba(214,197,160,0.7), transparent)",
+              filter: "blur(16px)",
+            }}
+          />
+          <motion.div
+            aria-hidden="true"
+            initial={{ x: "-130%", opacity: 0 }}
+            animate={{ x: "230%", opacity: [0, 0.9, 0] }}
+            transition={{ duration: 0.6, delay: 0.15, ease: "easeInOut", times: [0, 0.5, 1] }}
+            className="absolute top-0 h-full w-2 -skew-x-12"
+            style={{
+              background: "linear-gradient(90deg, transparent, rgba(248,246,241,0.9), transparent)",
+              filter: "blur(4px)",
+            }}
+          />
 
-      {/* Glass surface — a thin reflective plane the droplet lands on,
-          present just before impact so the drop reads as landing ON
-          something engineered, not falling into open space. */}
-      <motion.div
-        aria-hidden="true"
-        initial={{ opacity: 0, scaleX: 0.6 }}
-        animate={{ opacity: 0.6, scaleX: 1 }}
-        transition={{ duration: 0.3, delay: 0.15, ease: "easeOut" }}
-        className="absolute h-px w-44 md:w-64"
-        style={{ background: "linear-gradient(90deg, transparent, rgba(214,197,160,0.9), transparent)" }}
-      />
+          {/* Glass surface — a thin reflective plane the droplet lands on,
+              present just before impact so the drop reads as landing ON
+              something engineered, not falling into open space. */}
+          <motion.div
+            aria-hidden="true"
+            initial={{ opacity: 0, scaleX: 0.6 }}
+            animate={{ opacity: 0.6, scaleX: 1 }}
+            transition={{ duration: 0.3, delay: 0.5, ease: "easeOut" }}
+            className="absolute h-px w-44 md:w-64"
+            style={{ background: "linear-gradient(90deg, transparent, rgba(214,197,160,0.9), transparent)" }}
+          />
 
-      {/* Droplet — falls onto the glass plane */}
-      <motion.div
-        aria-hidden="true"
-        initial={{ y: -120, opacity: 1 }}
-        animate={{ y: 0, opacity: [1, 1, 0] }}
-        transition={{
-          duration: 0.5,
-          delay: 0.35,
-          times: [0, 0.9, 1],
-          ease: [0.55, 0, 0.85, 0.3],
-        }}
-        className="absolute h-3 w-3 rounded-full"
-        style={{
-          background: "radial-gradient(circle at 35% 30%, #F3E6C8 0%, #D6C5A0 55%, #9B4722 100%)",
-          boxShadow: "0 0 12px rgba(155,71,34,0.35)",
-        }}
-      />
+          {/* Droplet — a slow, weighted fall (0.85s) onto the glass plane,
+              timed to be clearly visible rather than a blink-and-miss-it
+              blip. Lands at 0.55 + 0.85 = 1.40s. */}
+          <motion.div
+            aria-hidden="true"
+            initial={{ y: -130, opacity: 1 }}
+            animate={{ y: 0, opacity: [1, 1, 0] }}
+            transition={{
+              duration: 0.85,
+              delay: 0.55,
+              times: [0, 0.92, 1],
+              ease: [0.6, 0, 0.85, 0.3],
+            }}
+            className="absolute h-3 w-3 rounded-full"
+            style={{
+              background: "radial-gradient(circle at 35% 30%, #F3E6C8 0%, #D6C5A0 55%, #9B4722 100%)",
+              boxShadow: "0 0 12px rgba(155,71,34,0.35)",
+            }}
+          />
 
-      {/* Ripple — flattened into an ellipse rather than a circle, so it
-          reads as a plane seen face-on (glass), not water in open space */}
-      <motion.div
-        aria-hidden="true"
-        initial={{ scaleX: 0, scaleY: 0, opacity: 0.6 }}
-        animate={{ scaleX: 9, scaleY: 3.5, opacity: 0 }}
-        transition={{ duration: 0.5, delay: 0.85, ease: "easeOut" }}
-        className="absolute h-3 w-3 rounded-full border border-champagne"
-      />
+          {/* Ripple — a real SVG ellipse animated via rx/ry (not a
+              CSS-scaled circle). A non-uniform CSS transform (scaleX/scaleY)
+              on a bordered div distorts the border's apparent thickness
+              unevenly and can render the ring almost invisible — reproduced
+              live in testing (no ripple was visible at all). Animating the
+              ellipse's own geometry keeps stroke-width constant regardless
+              of aspect ratio, and holds at full opacity briefly before
+              fading so it has a moment to actually be seen. */}
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 200 100"
+            className="absolute h-16 w-40 overflow-visible md:h-20 md:w-52"
+          >
+            <motion.ellipse
+              cx="100"
+              cy="50"
+              initial={{ rx: 2, ry: 1, opacity: 0.75 }}
+              animate={{ rx: 95, ry: 34, opacity: [0.75, 0.75, 0] }}
+              transition={{ duration: 0.6, delay: 1.4, times: [0, 0.35, 1], ease: "easeOut" }}
+              fill="none"
+              stroke="#9B4722"
+              strokeWidth="1.5"
+            />
+          </svg>
 
-      {/* Refraction glint — a brief bright flash at the point of impact,
-          simulating light bending through the glass rather than a splash */}
-      <motion.div
-        aria-hidden="true"
-        initial={{ opacity: 0, scaleX: 0.3, rotate: -8 }}
-        animate={{ opacity: [0, 1, 0], scaleX: [0.3, 1.4, 1.1] }}
-        transition={{ duration: 0.25, delay: 0.85, ease: "easeOut" }}
-        className="absolute h-px w-24 rounded-full"
-        style={{
-          background: "linear-gradient(90deg, transparent, #F8F6F1, transparent)",
-          boxShadow: "0 0 8px rgba(248,246,241,0.8)",
-        }}
-      />
+          {/* Refraction glint — a brief bright flash just after impact,
+              simulating light bending through the glass. Offset slightly
+              from the ripple's own start so the two don't fire in the same
+              instant and cancel each other out visually. */}
+          <motion.div
+            aria-hidden="true"
+            initial={{ opacity: 0, scaleX: 0.3, rotate: -8 }}
+            animate={{ opacity: [0, 1, 0], scaleX: [0.3, 1.4, 1.1] }}
+            transition={{ duration: 0.3, delay: 1.48, ease: "easeOut" }}
+            className="absolute h-px w-24 rounded-full"
+            style={{
+              background: "linear-gradient(90deg, transparent, #F8F6F1, transparent)",
+              boxShadow: "0 0 8px rgba(248,246,241,0.85)",
+            }}
+          />
 
-      {/* Reflection — a faint, inverted echo beneath the surface line,
-          selling the plane as reflective glass rather than a flat backdrop */}
-      <motion.div
-        aria-hidden="true"
-        initial={{ opacity: 0, scaleY: -1, y: 10 }}
-        animate={{ opacity: [0, 0.18, 0], y: 14 }}
-        transition={{ duration: 0.45, delay: 0.85, ease: "easeOut" }}
-        className="absolute h-3 w-3 rounded-full"
-        style={{ background: "radial-gradient(circle, #D6C5A0 0%, transparent 70%)" }}
-      />
+          {/* Wordmark — same styling as the live header, so the crossfade
+              into the real page reads as continuous, not a swap */}
+          <div aria-hidden="true" className="relative flex flex-col items-center text-center">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4, delay: 1.75 }}
+              className="flex flex-col items-center leading-none"
+            >
+              <span className="font-serif text-3xl tracking-[0.35em] text-ink md:text-4xl">
+                CHIAREL
+              </span>
+              <span className="mt-2 text-[10px] uppercase tracking-[0.28em] text-ochre">
+                House of Skin Intelligence™
+              </span>
+            </motion.div>
 
-      {/* Wordmark — same styling as the live header, so the crossfade
-          into the real page reads as continuous, not a swap */}
-      <div aria-hidden="true" className="relative flex flex-col items-center text-center">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 1.05 }}
-          className="flex flex-col items-center leading-none"
-        >
-          <span className="font-serif text-3xl tracking-[0.35em] text-ink md:text-4xl">
-            CHIAREL
-          </span>
-          <span className="mt-2 text-[10px] uppercase tracking-[0.28em] text-ochre">
-            House of Skin Intelligence™
-          </span>
-        </motion.div>
+            <motion.p
+              initial={{ y: 12, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.4, delay: 1.95, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-6 font-serif text-xl tracking-[-0.01em] text-ink/80 md:text-2xl"
+            >
+              Advancing Cellular Clarity™
+            </motion.p>
 
-        <motion.p
-          initial={{ y: 12, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.4, delay: 1.3, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-6 font-serif text-xl tracking-[-0.01em] text-ink/80 md:text-2xl"
-        >
-          Advancing Cellular Clarity™
-        </motion.p>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.35, delay: 2.15 }}
+              className="mt-4 max-w-xs text-[12px] leading-relaxed text-ink/60"
+            >
+              Intelligent formulations, precision-made in Isola del Liri, Italy.
+            </motion.p>
+          </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.35, delay: 1.55 }}
-          className="mt-4 max-w-xs text-[12px] leading-relaxed text-ink/60"
-        >
-          Intelligent formulations, precision-made in Isola del Liri, Italy.
-        </motion.p>
-      </div>
+          {/* Product emergence — a soft bloom of light off to one side,
+              foreshadowing the real product photo's position in the hero
+              behind this overlay, so the crossfade hands off to it rather
+              than introducing it cold */}
+          <motion.div
+            aria-hidden="true"
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 0.5, scale: 1 }}
+            transition={{ duration: 0.45, delay: 2.2, ease: "easeOut" }}
+            className="pointer-events-none absolute right-[12%] top-1/2 h-40 w-40 -translate-y-1/2 rounded-full md:h-56 md:w-56"
+            style={{
+              background: "radial-gradient(circle, rgba(214,197,160,0.45) 0%, rgba(214,197,160,0) 72%)",
+              filter: "blur(2px)",
+            }}
+          />
 
-      {/* Product emergence — a soft bloom of light off to one side,
-          foreshadowing the real product photo's position in the hero
-          behind this overlay, so the crossfade hands off to it rather
-          than introducing it cold */}
-      <motion.div
-        aria-hidden="true"
-        initial={{ opacity: 0, scale: 0.85 }}
-        animate={{ opacity: 0.5, scale: 1 }}
-        transition={{ duration: 0.5, delay: 1.75, ease: "easeOut" }}
-        className="pointer-events-none absolute right-[12%] top-1/2 h-40 w-40 -translate-y-1/2 rounded-full md:h-56 md:w-56"
-        style={{
-          background: "radial-gradient(circle, rgba(214,197,160,0.45) 0%, rgba(214,197,160,0) 72%)",
-          filter: "blur(2px)",
-        }}
-      />
-
-      <motion.button
-        ref={skipButtonRef}
-        type="button"
-        onClick={(event) => {
-          event.stopPropagation();
-          skip();
-        }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3, delay: 0.6 }}
-        aria-label="Skip intro animation"
-        className="absolute bottom-8 right-8 text-[10px] uppercase tracking-[0.3em] text-ink/40 transition hover:text-ochre focus:text-ochre focus:outline focus:outline-1 focus:outline-offset-4 focus:outline-ochre"
-      >
-        Skip
-      </motion.button>
+          <motion.button
+            ref={skipButtonRef}
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              skip();
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: 0.6 }}
+            aria-label="Skip intro animation"
+            className="absolute bottom-8 right-8 text-[10px] uppercase tracking-[0.3em] text-ink/40 transition hover:text-ochre focus:text-ochre focus:outline focus:outline-1 focus:outline-offset-4 focus:outline-ochre"
+          >
+            Skip
+          </motion.button>
+        </>
+      )}
     </div>
   );
 }
