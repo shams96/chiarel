@@ -13,8 +13,11 @@ import { motion, useReducedMotion } from "framer-motion";
 // Concept: light and glass, not botanical growth — a beam sweep, a droplet
 // landing on a polished glass plane, a ripple, a refraction glint —
 // expressing precision and luminous clarity rather than nature/wellness
-// imagery. Sequence lands at ~2.9s total (exit fade included), against a
-// ~3s target.
+// imagery. Sequence lands at ~3.3s total (exit fade included) — over the
+// original ~3s target, deliberately: compressing the beam and drop enough
+// to hit 3.0s flat made both read as a blink-and-miss-it flash (reported
+// directly after the first cut). Each beat now gets enough duration to
+// actually be seen; total time is a secondary constraint to that.
 //
 // First-paint fix: earlier builds returned `null` while phase was "idle",
 // so the real page was what actually painted first (server-rendered HTML
@@ -37,9 +40,9 @@ import { motion, useReducedMotion } from "framer-motion";
 // matches "never repeats during the visit" literally, at the cost of a
 // visitor who navigates away mid-animation not seeing the rest on return;
 // that trade favors the "never repeats" guarantee over completeness.
-const SESSION_FLAG = "chiarel-hero-intro-v3-seen";
+const SESSION_FLAG = "chiarel-hero-intro-v4-seen";
 
-const HOLD_MS = 2600; // time from mount to the start of the exit fade
+const HOLD_MS = 3000; // time from mount to the start of the exit fade
 const EXIT_MS = 300; // overlay fade-out duration
 
 // useLayoutEffect warns "does nothing on the server" during Next.js SSR;
@@ -194,12 +197,21 @@ export default function HeroIntro() {
               Moves on the site's own signature ease (cubic-bezier(0.16,1,
               0.3,1), the curve behind .hero-in in globals.css) instead of a
               generic ease-in-out, so the motion feels considered rather
-              than mechanical. */}
+              than mechanical.
+
+              Slowed from 0.75s to 1.1s, and — the real fix — the opacity
+              keyframes now HOLD at peak brightness for a stretch (times
+              [0, 0.3, 0.7, 1] against opacity [0, 1, 1, 0]) instead of
+              spiking for a single instant at the midpoint. A brief instant
+              peak combined with a fast cross-screen translation is exactly
+              what reads as a "flash" rather than a sweep you can watch
+              travel — the eye needs the light to still be there a moment
+              after it arrives, not just pass through one frame of it. */}
           <motion.div
             aria-hidden="true"
             initial={{ x: "-140%", opacity: 0 }}
-            animate={{ x: "240%", opacity: [0, 0.65, 0] }}
-            transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1], times: [0, 0.5, 1] }}
+            animate={{ x: "240%", opacity: [0, 0.75, 0.75, 0] }}
+            transition={{ duration: 1.1, delay: 0.1, ease: [0.16, 1, 0.3, 1], times: [0, 0.3, 0.7, 1] }}
             className="absolute top-0 h-full w-1/3 -skew-x-12"
             style={{
               background: "linear-gradient(90deg, transparent, rgba(155,71,34,0.4), rgba(214,197,160,0.55), transparent)",
@@ -209,8 +221,8 @@ export default function HeroIntro() {
           <motion.div
             aria-hidden="true"
             initial={{ x: "-140%", opacity: 0 }}
-            animate={{ x: "240%", opacity: [0, 1, 0] }}
-            transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1], times: [0, 0.5, 1] }}
+            animate={{ x: "240%", opacity: [0, 1, 1, 0] }}
+            transition={{ duration: 1.1, delay: 0.1, ease: [0.16, 1, 0.3, 1], times: [0, 0.3, 0.7, 1] }}
             className="absolute top-0 h-full w-[3px] -skew-x-12"
             style={{
               background: "linear-gradient(180deg, transparent 10%, #F3E6C8 50%, transparent 90%)",
@@ -219,13 +231,13 @@ export default function HeroIntro() {
           />
 
           {/* The mark the scan leaves behind — arrives as the beam's core
-              crosses center, holds through the droplet's fall, and is
-              absorbed into the ripple on impact */}
+              crosses center (~0.1 + 1.1*0.5 = 0.65s), holds through the
+              droplet's fall, and is absorbed into the ripple on impact */}
           <motion.div
             aria-hidden="true"
             initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: [0, 0.35, 0.2], scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.5, times: [0, 0.4, 1], ease: "easeOut" }}
+            animate={{ opacity: [0, 0.35, 0.35, 0.15], scale: 1 }}
+            transition={{ duration: 1.1, delay: 0.65, times: [0, 0.25, 0.8, 1], ease: "easeOut" }}
             className="absolute h-24 w-24 rounded-full"
             style={{ background: "radial-gradient(circle, rgba(155,71,34,0.4) 0%, transparent 70%)" }}
           />
@@ -237,21 +249,23 @@ export default function HeroIntro() {
             aria-hidden="true"
             initial={{ opacity: 0, scaleX: 0.6 }}
             animate={{ opacity: 0.6, scaleX: 1 }}
-            transition={{ duration: 0.3, delay: 0.5, ease: "easeOut" }}
+            transition={{ duration: 0.3, delay: 0.7, ease: "easeOut" }}
             className="absolute h-px w-44 md:w-64"
             style={{ background: "linear-gradient(90deg, transparent, rgba(214,197,160,0.9), transparent)" }}
           />
 
           {/* Droplet — a slow, weighted fall (0.85s) onto the glass plane,
               timed to be clearly visible rather than a blink-and-miss-it
-              blip. Lands at 0.55 + 0.85 = 1.40s. */}
+              blip. Starts once the beam has fully cleared (1.2s) rather
+              than overlapping it, so each beat gets its own moment. Lands
+              at 0.9 + 0.85 = 1.75s. */}
           <motion.div
             aria-hidden="true"
             initial={{ y: -130, opacity: 1 }}
             animate={{ y: 0, opacity: [1, 1, 0] }}
             transition={{
               duration: 0.85,
-              delay: 0.55,
+              delay: 0.9,
               times: [0, 0.92, 1],
               ease: [0.6, 0, 0.85, 0.3],
             }}
@@ -280,7 +294,7 @@ export default function HeroIntro() {
               cy="50"
               initial={{ rx: 2, ry: 1, opacity: 0.75 }}
               animate={{ rx: 95, ry: 34, opacity: [0.75, 0.75, 0] }}
-              transition={{ duration: 0.6, delay: 1.4, times: [0, 0.35, 1], ease: "easeOut" }}
+              transition={{ duration: 0.6, delay: 1.75, times: [0, 0.35, 1], ease: "easeOut" }}
               fill="none"
               stroke="#9B4722"
               strokeWidth="1.5"
@@ -299,7 +313,7 @@ export default function HeroIntro() {
             aria-hidden="true"
             initial={{ opacity: 0, scaleX: 0.3, rotate: -8 }}
             animate={{ opacity: [0, 1, 0], scaleX: [0.3, 1.4, 1.1] }}
-            transition={{ duration: 0.3, delay: 1.48, ease: "easeOut" }}
+            transition={{ duration: 0.3, delay: 1.83, ease: "easeOut" }}
             className="absolute h-px w-24 rounded-full"
             style={{
               background: "linear-gradient(90deg, transparent, #F3E6C8, transparent)",
@@ -313,7 +327,7 @@ export default function HeroIntro() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.4, delay: 1.75 }}
+              transition={{ duration: 0.4, delay: 2.15 }}
               className="flex flex-col items-center leading-none"
             >
               <span className="font-serif text-3xl tracking-[0.35em] text-ink md:text-4xl">
@@ -327,7 +341,7 @@ export default function HeroIntro() {
             <motion.p
               initial={{ y: 12, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.4, delay: 1.95, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.4, delay: 2.35, ease: [0.16, 1, 0.3, 1] }}
               className="mt-6 font-serif text-xl tracking-[-0.01em] text-ink/80 md:text-2xl"
             >
               Advancing Cellular Clarity™
@@ -336,7 +350,7 @@ export default function HeroIntro() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.35, delay: 2.15 }}
+              transition={{ duration: 0.35, delay: 2.55 }}
               className="mt-4 max-w-xs text-[12px] leading-relaxed text-ink/60"
             >
               Intelligent formulations, precision-made in Isola del Liri, Italy.
@@ -351,7 +365,7 @@ export default function HeroIntro() {
             aria-hidden="true"
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 0.5, scale: 1 }}
-            transition={{ duration: 0.45, delay: 2.2, ease: "easeOut" }}
+            transition={{ duration: 0.45, delay: 2.6, ease: "easeOut" }}
             className="pointer-events-none absolute right-[12%] top-1/2 h-40 w-40 -translate-y-1/2 rounded-full md:h-56 md:w-56"
             style={{
               background: "radial-gradient(circle, rgba(214,197,160,0.45) 0%, rgba(214,197,160,0) 72%)",
