@@ -13,12 +13,14 @@ import { motion, useReducedMotion } from "framer-motion";
 // Concept: light and glass, not botanical growth — a beam sweep, a droplet
 // landing on a polished glass plane, a ripple, a refraction glint —
 // expressing precision and luminous clarity rather than nature/wellness
-// imagery. Sequence lands at ~3.7s total (exit fade included) — over the
-// original ~3s target, deliberately: compressing the beam and drop enough
-// to hit 3.0s flat made both read as a blink-and-miss-it flash (reported
-// repeatedly). The beam alone was slowed in stages (0.75s → 1.1s → 1.5s)
-// until it stopped reading as a flash. Each beat now gets enough duration
-// to actually be seen; total time is a secondary constraint to that.
+// imagery. Sequence lands at ~4.2s total (exit fade included) — well over
+// the original ~3s target, deliberately: compressing the beam and drop
+// enough to hit 3.0s flat made both read as a blink-and-miss-it flash
+// (reported repeatedly). The beam was slowed in stages (0.75s → 1.1s →
+// 1.5s), and the impact ripple was expanded into three staggered
+// concentric rings plus a light disc, which needs its own ~1s window.
+// Each beat now gets enough duration to actually be seen; total time is
+// a secondary constraint to that.
 //
 // First-paint fix: earlier builds returned `null` while phase was "idle",
 // so the real page was what actually painted first (server-rendered HTML
@@ -41,9 +43,9 @@ import { motion, useReducedMotion } from "framer-motion";
 // matches "never repeats during the visit" literally, at the cost of a
 // visitor who navigates away mid-animation not seeing the rest on return;
 // that trade favors the "never repeats" guarantee over completeness.
-const SESSION_FLAG = "chiarel-hero-intro-v5-seen";
+const SESSION_FLAG = "chiarel-hero-intro-v6-seen";
 
-const HOLD_MS = 3400; // time from mount to the start of the exit fade
+const HOLD_MS = 3900; // time from mount to the start of the exit fade
 const EXIT_MS = 300; // overlay fade-out duration
 
 // useLayoutEffect warns "does nothing on the server" during Next.js SSR;
@@ -277,28 +279,63 @@ export default function HeroIntro() {
             }}
           />
 
-          {/* Ripple — a real SVG ellipse animated via rx/ry (not a
-              CSS-scaled circle). A non-uniform CSS transform (scaleX/scaleY)
-              on a bordered div distorts the border's apparent thickness
-              unevenly and can render the ring almost invisible — reproduced
-              live in testing (no ripple was visible at all). Animating the
-              ellipse's own geometry keeps stroke-width constant regardless
-              of aspect ratio, and holds at full opacity briefly before
-              fading so it has a moment to actually be seen. */}
+          {/* Ripple — the impact moment, substantially enlarged: three
+              concentric rings radiating outward on a stagger (not one
+              lone ellipse), plus a soft ochre disc of light underneath
+              them for body. Rings are true circles (r animated, cx/cy
+              fixed) rather than a flattened ellipse — animating a real SVG
+              <circle>'s radius keeps the stroke a constant weight all the
+              way around regardless of size, which a CSS scale transform on
+              a bordered div does not (that distorts the border unevenly
+              and can render it near-invisible — the original bug here).
+              The whole group is bigger on screen too: the SVG footprint
+              roughly tripled. */}
           <svg
             aria-hidden="true"
-            viewBox="0 0 200 100"
-            className="absolute h-16 w-40 overflow-visible md:h-20 md:w-52"
+            viewBox="0 0 200 200"
+            className="absolute h-56 w-56 overflow-visible md:h-72 md:w-72"
           >
-            <motion.ellipse
+            {/* disc of light — soft filled pulse under the rings */}
+            <motion.circle
               cx="100"
-              cy="50"
-              initial={{ rx: 2, ry: 1, opacity: 0.75 }}
-              animate={{ rx: 95, ry: 34, opacity: [0.75, 0.75, 0] }}
-              transition={{ duration: 0.6, delay: 2.15, times: [0, 0.35, 1], ease: "easeOut" }}
+              cy="100"
+              initial={{ r: 4, opacity: 0 }}
+              animate={{ r: 62, opacity: [0, 0.28, 0] }}
+              transition={{ duration: 0.9, delay: 2.15, times: [0, 0.3, 1], ease: "easeOut" }}
+              fill="#9B4722"
+            />
+            {/* ring 1 — leading edge, strongest */}
+            <motion.circle
+              cx="100"
+              cy="100"
+              initial={{ r: 3, opacity: 0.9 }}
+              animate={{ r: 92, opacity: [0.9, 0.9, 0] }}
+              transition={{ duration: 0.85, delay: 2.15, times: [0, 0.35, 1], ease: "easeOut" }}
               fill="none"
               stroke="#9B4722"
-              strokeWidth="1.5"
+              strokeWidth="2.5"
+            />
+            {/* ring 2 — trails ring 1 */}
+            <motion.circle
+              cx="100"
+              cy="100"
+              initial={{ r: 3, opacity: 0.7 }}
+              animate={{ r: 74, opacity: [0.7, 0.7, 0] }}
+              transition={{ duration: 0.8, delay: 2.28, times: [0, 0.35, 1], ease: "easeOut" }}
+              fill="none"
+              stroke="#9B4722"
+              strokeWidth="1.75"
+            />
+            {/* ring 3 — innermost, faintest */}
+            <motion.circle
+              cx="100"
+              cy="100"
+              initial={{ r: 3, opacity: 0.55 }}
+              animate={{ r: 54, opacity: [0.55, 0.55, 0] }}
+              transition={{ duration: 0.75, delay: 2.4, times: [0, 0.35, 1], ease: "easeOut" }}
+              fill="none"
+              stroke="#D6C5A0"
+              strokeWidth="1.25"
             />
           </svg>
 
@@ -328,7 +365,7 @@ export default function HeroIntro() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.4, delay: 2.55 }}
+              transition={{ duration: 0.4, delay: 2.95 }}
               className="flex flex-col items-center leading-none"
             >
               <span className="font-serif text-3xl tracking-[0.35em] text-ink md:text-4xl">
@@ -342,7 +379,7 @@ export default function HeroIntro() {
             <motion.p
               initial={{ y: 12, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.4, delay: 2.75, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.4, delay: 3.15, ease: [0.16, 1, 0.3, 1] }}
               className="mt-6 font-serif text-xl tracking-[-0.01em] text-ink/80 md:text-2xl"
             >
               Advancing Cellular Clarity™
@@ -351,7 +388,7 @@ export default function HeroIntro() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.35, delay: 2.95 }}
+              transition={{ duration: 0.35, delay: 3.35 }}
               className="mt-4 max-w-xs text-[12px] leading-relaxed text-ink/60"
             >
               Intelligent formulations, precision-made in Isola del Liri, Italy.
@@ -366,7 +403,7 @@ export default function HeroIntro() {
             aria-hidden="true"
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 0.5, scale: 1 }}
-            transition={{ duration: 0.45, delay: 3.0, ease: "easeOut" }}
+            transition={{ duration: 0.45, delay: 3.4, ease: "easeOut" }}
             className="pointer-events-none absolute right-[12%] top-1/2 h-40 w-40 -translate-y-1/2 rounded-full md:h-56 md:w-56"
             style={{
               background: "radial-gradient(circle, rgba(214,197,160,0.45) 0%, rgba(214,197,160,0) 72%)",
