@@ -10,23 +10,27 @@ import { motion, useReducedMotion } from "framer-motion";
 // entrance, which still plays underneath and is what the visitor sees the
 // instant this overlay clears).
 //
-// Sequence (droplet → ripple → botanical line art → wordmark → headline →
-// CTA) lands the whole thing, exit fade included, at ~5.0s. The original
-// build held to a 3-4s target; the droplet fall was slowed down on request
-// (a quick fall read as a blip, not a considered moment), which pushed the
-// total past that window — a deliberate trade of the timing guardrail for
-// the requested feel. Every stage animates transform/opacity only (no
-// width/height/layout properties) so it stays cheap on low-end devices.
+// Concept, revised from the original botanical version: growth/nature
+// imagery reads as a wellness brand, not the precision/Italian-craftsmanship
+// positioning CHIAREL actually holds. This version replaces the olive sprig
+// with a light-and-glass motif — a beam sweep, a droplet landing on a
+// polished glass plane, refraction — expressing precision and luminous
+// clarity instead of botanical transformation. Sequence lands at ~2.8s,
+// under the 3s ceiling for this version. Every stage animates
+// transform/opacity only (no width/height/layout properties) so it stays
+// cheap on low-end devices.
 //
 // Session flag is set the moment we decide to play, not after it finishes —
 // so a refresh or back-navigation mid-sequence can't retrigger it. That
 // matches "never repeats during the visit" literally, at the cost of a
 // visitor who navigates away mid-animation not seeing the rest on return;
-// that trade favors the "never repeats" guarantee over completeness.
-const SESSION_FLAG = "chiarel-hero-intro-seen";
+// that trade favors the "never repeats" guarantee over completeness. Key is
+// versioned (v2) so anyone who already saw the botanical cut this session
+// sees the revised one without needing to clear storage by hand.
+const SESSION_FLAG = "chiarel-hero-intro-v2-seen";
 
-const HOLD_MS = 4600; // time from mount to the start of the exit fade
-const EXIT_MS = 400; // overlay fade-out duration
+const HOLD_MS = 2500; // time from mount to the start of the exit fade
+const EXIT_MS = 300; // overlay fade-out duration
 
 type Phase = "idle" | "playing" | "exiting" | "done";
 
@@ -153,70 +157,86 @@ export default function HeroIntro() {
       }}
       className="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden bg-ivory"
     >
-      {/* Droplet — a slow, weighted fall (1.6s, not the original 0.7s):
-          gravity reads as unhurried at first and only gathers speed in the
-          last third, per the "slow the drop down" note — a quick fall
-          registered as a blip rather than a considered moment. */}
+      {/* Light beam — a soft diagonal sweep of warm light, the opening
+          gesture instead of a growth cue. Skewed gradient bar translating
+          across the full width, blurred so it reads as light rather than a
+          hard shape. */}
       <motion.div
         aria-hidden="true"
-        initial={{ y: -140, opacity: 1 }}
+        initial={{ x: "-120%", opacity: 0 }}
+        animate={{ x: "220%", opacity: [0, 0.7, 0] }}
+        transition={{ duration: 0.7, delay: 0.05, ease: "easeInOut", times: [0, 0.5, 1] }}
+        className="absolute top-0 h-full w-1/3 -skew-x-12"
+        style={{
+          background: "linear-gradient(90deg, transparent, rgba(214,197,160,0.55), transparent)",
+          filter: "blur(24px)",
+        }}
+      />
+
+      {/* Glass surface — a thin reflective plane the droplet lands on,
+          present just before impact so the drop reads as landing ON
+          something engineered, not falling into open space. */}
+      <motion.div
+        aria-hidden="true"
+        initial={{ opacity: 0, scaleX: 0.6 }}
+        animate={{ opacity: 0.6, scaleX: 1 }}
+        transition={{ duration: 0.3, delay: 0.15, ease: "easeOut" }}
+        className="absolute h-px w-44 md:w-64"
+        style={{ background: "linear-gradient(90deg, transparent, rgba(214,197,160,0.9), transparent)" }}
+      />
+
+      {/* Droplet — falls onto the glass plane */}
+      <motion.div
+        aria-hidden="true"
+        initial={{ y: -120, opacity: 1 }}
         animate={{ y: 0, opacity: [1, 1, 0] }}
         transition={{
-          duration: 1.6,
-          delay: 0.2,
-          times: [0, 0.92, 1],
-          ease: [0.64, 0, 0.86, 0.32],
+          duration: 0.5,
+          delay: 0.35,
+          times: [0, 0.9, 1],
+          ease: [0.55, 0, 0.85, 0.3],
         }}
         className="absolute h-3 w-3 rounded-full"
         style={{
-          background:
-            "radial-gradient(circle at 35% 30%, #F3E6C8 0%, #D6C5A0 55%, #9B4722 100%)",
+          background: "radial-gradient(circle at 35% 30%, #F3E6C8 0%, #D6C5A0 55%, #9B4722 100%)",
           boxShadow: "0 0 12px rgba(155,71,34,0.35)",
         }}
       />
 
-      {/* Ripple — expands and fades from the point of impact (timed to the
-          slower droplet: impact now lands at 0.2 + 1.6 = 1.8s) */}
+      {/* Ripple — flattened into an ellipse rather than a circle, so it
+          reads as a plane seen face-on (glass), not water in open space */}
       <motion.div
         aria-hidden="true"
-        initial={{ scale: 0, opacity: 0.55 }}
-        animate={{ scale: 7, opacity: 0 }}
-        transition={{ duration: 0.9, delay: 1.8, ease: "easeOut" }}
-        className="absolute h-16 w-16 rounded-full border border-champagne"
+        initial={{ scaleX: 0, scaleY: 0, opacity: 0.6 }}
+        animate={{ scaleX: 9, scaleY: 3.5, opacity: 0 }}
+        transition={{ duration: 0.5, delay: 0.85, ease: "easeOut" }}
+        className="absolute h-3 w-3 rounded-full border border-champagne"
       />
 
-      {/* Botanical line art — a specific olive sprig, not a generic
-          abstract-fern gesture. Olive is the actual flora of the Liri
-          valley/Lazio (the real setting behind The Cascata Complex™'s
-          water story), so this is a considered, place-specific motif
-          rather than any stock "botanical" shorthand: one curved stem,
-          seven leaves at alternating, decreasing size going up the
-          branch (as a real sprig tapers), each leaf its own closed
-          almond outline rather than a bare line. */}
-      <motion.svg
+      {/* Refraction glint — a brief bright flash at the point of impact,
+          simulating light bending through the glass rather than a splash */}
+      <motion.div
         aria-hidden="true"
-        initial={{ opacity: 0, scale: 0.9, y: 6 }}
-        animate={{ opacity: 0.2, scale: 1, y: 0 }}
-        transition={{ duration: 1, delay: 2.1, ease: "easeOut" }}
-        viewBox="0 0 200 200"
-        className="pointer-events-none absolute h-48 w-48 text-ochre md:h-64 md:w-64"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="0.75"
-        strokeLinejoin="round"
-      >
-        {/* stem, gently curved as a real branch rather than a straight rule */}
-        <path d="M100 195 C 98 160 102 130 99 95 C 96 62 101 40 100 22" />
-        {/* leaves, base-to-tip, largest near the base and smallest at the crown */}
-        <path d="M99 150 Q80 128 65 130 Q80 152 99 150 Z" />
-        <path d="M100 120 Q122 96 138 102 Q122 122 100 120 Z" />
-        <path d="M98 90 Q80 70 68 74 Q80 92 98 90 Z" />
-        <path d="M100 60 Q118 42 128 46 Q116 62 100 60 Z" />
-        <path d="M99 35 Q84 20 78 24 Q88 36 99 35 Z" />
-        {/* terminal bud pair at the crown */}
-        <path d="M100 22 Q90 10 82 14 Q92 22 100 22 Z" />
-        <path d="M100 22 Q110 10 118 14 Q108 22 100 22 Z" />
-      </motion.svg>
+        initial={{ opacity: 0, scaleX: 0.3, rotate: -8 }}
+        animate={{ opacity: [0, 1, 0], scaleX: [0.3, 1.4, 1.1] }}
+        transition={{ duration: 0.25, delay: 0.85, ease: "easeOut" }}
+        className="absolute h-px w-24 rounded-full"
+        style={{
+          background: "linear-gradient(90deg, transparent, #F8F6F1, transparent)",
+          boxShadow: "0 0 8px rgba(248,246,241,0.8)",
+        }}
+      />
+
+      {/* Reflection — a faint, inverted echo beneath the surface line,
+          selling the plane as reflective glass rather than a flat backdrop */}
+      <motion.div
+        aria-hidden="true"
+        initial={{ opacity: 0, scaleY: -1, y: 10 }}
+        animate={{ opacity: [0, 0.18, 0], y: 14 }}
+        transition={{ duration: 0.45, delay: 0.85, ease: "easeOut" }}
+        className="absolute h-3 w-3 rounded-full"
+        style={{ background: "radial-gradient(circle, #D6C5A0 0%, transparent 70%)" }}
+      />
 
       {/* Wordmark — same styling as the live header, so the crossfade
           into the real page reads as continuous, not a swap */}
@@ -224,7 +244,7 @@ export default function HeroIntro() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 3.0 }}
+          transition={{ duration: 0.4, delay: 1.05 }}
           className="flex flex-col items-center leading-none"
         >
           <span className="font-serif text-3xl tracking-[0.35em] text-ink md:text-4xl">
@@ -236,23 +256,39 @@ export default function HeroIntro() {
         </motion.div>
 
         <motion.p
-          initial={{ y: 14, opacity: 0 }}
+          initial={{ y: 12, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6, delay: 3.35, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.4, delay: 1.3, ease: [0.16, 1, 0.3, 1] }}
           className="mt-6 font-serif text-xl tracking-[-0.01em] text-ink/80 md:text-2xl"
         >
           Advancing Cellular Clarity™
         </motion.p>
 
-        <motion.div
+        <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 3.7 }}
-          className="mt-8 text-[11px] uppercase tracking-[0.3em] text-ink/50"
+          transition={{ duration: 0.35, delay: 1.55 }}
+          className="mt-4 max-w-xs text-[12px] leading-relaxed text-ink/60"
         >
-          Enter the Ritual
-        </motion.div>
+          Intelligent formulations, precision-made in Isola del Liri, Italy.
+        </motion.p>
       </div>
+
+      {/* Product emergence — a soft bloom of light off to one side,
+          foreshadowing the real product photo's position in the hero
+          behind this overlay, so the crossfade hands off to it rather
+          than introducing it cold */}
+      <motion.div
+        aria-hidden="true"
+        initial={{ opacity: 0, scale: 0.85 }}
+        animate={{ opacity: 0.5, scale: 1 }}
+        transition={{ duration: 0.5, delay: 1.75, ease: "easeOut" }}
+        className="pointer-events-none absolute right-[12%] top-1/2 h-40 w-40 -translate-y-1/2 rounded-full md:h-56 md:w-56"
+        style={{
+          background: "radial-gradient(circle, rgba(214,197,160,0.45) 0%, rgba(214,197,160,0) 72%)",
+          filter: "blur(2px)",
+        }}
+      />
 
       <motion.button
         ref={skipButtonRef}
@@ -263,7 +299,7 @@ export default function HeroIntro() {
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.4, delay: 1 }}
+        transition={{ duration: 0.3, delay: 0.6 }}
         aria-label="Skip intro animation"
         className="absolute bottom-8 right-8 text-[10px] uppercase tracking-[0.3em] text-ink/40 transition hover:text-ochre focus:text-ochre focus:outline focus:outline-1 focus:outline-offset-4 focus:outline-ochre"
       >
