@@ -182,32 +182,52 @@ export default function HeroIntro() {
     >
       {showContent && (
         <>
-          {/* Light beam — a soft diagonal sweep of warm light, on its own
-              for half a second before anything else starts so it actually
-              registers rather than being lost in simultaneous motion.
-              Two layers: a broad soft wash plus a slim brighter core, so it
-              reads as a gleam of light rather than a flat moving gradient. */}
+          {/* Light beam — reworked as a precision scan, not a decorative
+              wipe: a warm ochre wash trailing a bright core edge, and where
+              that core crosses center it leaves a soft mark that lingers
+              exactly where the droplet is about to land — the beam isn't
+              incidental light, it's locating the point of impact before
+              the drop arrives. Colors are the brand's own (ochre/champagne)
+              rather than a generic white glow, and the core's visibility
+              comes from an ochre box-shadow glow rather than fill contrast
+              alone, so it still reads clearly against the ivory ground.
+              Moves on the site's own signature ease (cubic-bezier(0.16,1,
+              0.3,1), the curve behind .hero-in in globals.css) instead of a
+              generic ease-in-out, so the motion feels considered rather
+              than mechanical. */}
           <motion.div
             aria-hidden="true"
-            initial={{ x: "-130%", opacity: 0 }}
-            animate={{ x: "230%", opacity: [0, 0.85, 0] }}
-            transition={{ duration: 0.6, delay: 0.15, ease: "easeInOut", times: [0, 0.5, 1] }}
+            initial={{ x: "-140%", opacity: 0 }}
+            animate={{ x: "240%", opacity: [0, 0.65, 0] }}
+            transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1], times: [0, 0.5, 1] }}
             className="absolute top-0 h-full w-1/3 -skew-x-12"
             style={{
-              background: "linear-gradient(90deg, transparent, rgba(214,197,160,0.7), transparent)",
-              filter: "blur(16px)",
+              background: "linear-gradient(90deg, transparent, rgba(155,71,34,0.4), rgba(214,197,160,0.55), transparent)",
+              filter: "blur(10px)",
             }}
           />
           <motion.div
             aria-hidden="true"
-            initial={{ x: "-130%", opacity: 0 }}
-            animate={{ x: "230%", opacity: [0, 0.9, 0] }}
-            transition={{ duration: 0.6, delay: 0.15, ease: "easeInOut", times: [0, 0.5, 1] }}
-            className="absolute top-0 h-full w-2 -skew-x-12"
+            initial={{ x: "-140%", opacity: 0 }}
+            animate={{ x: "240%", opacity: [0, 1, 0] }}
+            transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1], times: [0, 0.5, 1] }}
+            className="absolute top-0 h-full w-[3px] -skew-x-12"
             style={{
-              background: "linear-gradient(90deg, transparent, rgba(248,246,241,0.9), transparent)",
-              filter: "blur(4px)",
+              background: "linear-gradient(180deg, transparent 10%, #F3E6C8 50%, transparent 90%)",
+              boxShadow: "0 0 24px 4px rgba(155,71,34,0.45)",
             }}
+          />
+
+          {/* The mark the scan leaves behind — arrives as the beam's core
+              crosses center, holds through the droplet's fall, and is
+              absorbed into the ripple on impact */}
+          <motion.div
+            aria-hidden="true"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: [0, 0.35, 0.2], scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.5, times: [0, 0.4, 1], ease: "easeOut" }}
+            className="absolute h-24 w-24 rounded-full"
+            style={{ background: "radial-gradient(circle, rgba(155,71,34,0.4) 0%, transparent 70%)" }}
           />
 
           {/* Glass surface — a thin reflective plane the droplet lands on,
@@ -270,7 +290,11 @@ export default function HeroIntro() {
           {/* Refraction glint — a brief bright flash just after impact,
               simulating light bending through the glass. Offset slightly
               from the ripple's own start so the two don't fire in the same
-              instant and cancel each other out visually. */}
+              instant and cancel each other out visually. Previously used
+              #F8F6F1 as the fill — the exact same hex as this overlay's own
+              bg-ivory background, so it had zero contrast to be seen by at
+              all regardless of opacity. Given a warm champagne core and an
+              ochre glow instead, matching how the beam's core reads. */}
           <motion.div
             aria-hidden="true"
             initial={{ opacity: 0, scaleX: 0.3, rotate: -8 }}
@@ -278,8 +302,8 @@ export default function HeroIntro() {
             transition={{ duration: 0.3, delay: 1.48, ease: "easeOut" }}
             className="absolute h-px w-24 rounded-full"
             style={{
-              background: "linear-gradient(90deg, transparent, #F8F6F1, transparent)",
-              boxShadow: "0 0 8px rgba(248,246,241,0.85)",
+              background: "linear-gradient(90deg, transparent, #F3E6C8, transparent)",
+              boxShadow: "0 0 10px 2px rgba(155,71,34,0.5)",
             }}
           />
 
