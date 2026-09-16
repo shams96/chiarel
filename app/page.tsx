@@ -193,9 +193,37 @@ export default function Home() {
           product render, not a wide atmospheric shot, so the section is
           rebuilt as a contained two-column layout (product right, copy left)
           on a solid ivory ground instead of a full-bleed dark-gradient photo
-          banner — object-cover would badly crop a square product-only image. */}
-      <section className="liri-flow-bg relative w-full bg-ivory">
-        <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-6 py-16 md:min-h-[640px] md:grid-cols-2 md:py-20">
+          banner — object-cover would badly crop a square product-only image.
+          liri-flow-bg (a live SVG feTurbulence noise filter, explicitly
+          marked "DRAFT... pending review before wider use" in its own
+          globals.css comment) was removed 2026-09-16: it rendered as a
+          blotchy, uneven texture on real devices rather than the refined
+          fine strata it was designed for, and competitive research (La Mer,
+          Augustinus Bader, Tatcha) found no real luxury skincare peer layers
+          an abstract generative pattern under hero copy — they use clean
+          flat color or real photography instead. The site already has one
+          authored, polished texture signature sitewide (the film-grain
+          body::after overlay) — this removes a second, unpolished one
+          competing with it rather than adding a third. */}
+      <section className="relative w-full overflow-hidden bg-ivory">
+        {/* Wide atmospheric wash — the same champagne-gold token already used
+            tightly behind the product photo below, extended into a much
+            larger, much softer glow anchored toward that same side. Gives
+            the flat ivory ground depth and a sense of light emanating from
+            the product, echoing HeroIntro's light-beam/droplet motif as a
+            persistent afterglow rather than a one-time animation, without
+            reintroducing a competing texture pattern (see liri-flow removal
+            note above) — pure gradient, same technique already proven
+            reliable elsewhere on the page. */}
+        <div
+          className="pointer-events-none absolute -right-1/4 top-0 h-full w-3/4"
+          aria-hidden="true"
+          style={{
+            background:
+              "radial-gradient(ellipse 60% 70% at 70% 40%, rgba(214,197,160,0.22) 0%, rgba(214,197,160,0) 65%)",
+          }}
+        />
+        <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-6 py-16 md:min-h-[640px] md:grid-cols-2 md:py-20">
           <div className="hero-in order-2 max-w-xl md:order-1">
             <p className="text-[12px] uppercase tracking-[0.5em] text-ochre">
               The House of Clarity™
