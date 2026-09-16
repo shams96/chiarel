@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Tailwind's `list-none` on <summary> removes the default marker in
+   Chrome/Firefox but not Safari, which renders its own disclosure triangle
+   via a separate pseudo-element outside the list-style system. Needed for
+   the native <details>/<summary> accordion pattern (see UsageGuidance in
+   app/shop/[slug]/page.tsx) to look identical across browsers instead of
+   showing a stray triangle next to the custom +/- indicator in Safari. */
+summary::-webkit-details-marker {
+  display: none;
+}
+
 /* overflow-x: hidden on body ONLY, not html — setting it on both makes both
    elements independent scroll containers (per spec, overflow-x: hidden with
    overflow-y left at its default forces overflow-y to compute as auto),

@@ -92,6 +92,20 @@ export default function ProductPage({
           so price and the buy CTA are reachable within roughly one
           screen-height of scroll on a phone, not two. */}
       <div className="mx-auto max-w-6xl px-6 pt-4 md:pt-14">
+        {/* Visible breadcrumb — a breadcrumbJsonLd script already exists on
+            this page for search engines, but nothing rendered one for an
+            actual visitor. Same typographic voice as every other small label
+            on the site (11px uppercase tracked, ink/65 -> ochre on hover),
+            not a new pattern. */}
+        <nav aria-label="Breadcrumb" className="mb-4 text-[11px] uppercase tracking-[0.14em] text-ink/65 md:mb-6">
+          <ol className="flex flex-wrap items-center gap-2">
+            <li>
+              <Link href="/shop" className="hover:text-ochre">Shop</Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li className="text-ink" aria-current="page">{p.name}</li>
+          </ol>
+        </nav>
         <div className="grid gap-6 md:grid-cols-2 md:items-start md:gap-14">
           {/* Gallery column — single image today; sized to take a second/third
               thumbnail or video without restructuring once more assets exist. */}
@@ -558,6 +572,16 @@ function ScienceLinks({ slug }: { slug: string }) {
 // specific actives or efficacy, only how to introduce any new leave-on
 // treatment safely. Shown only on single-product pages (bundles link into
 // each included product's own page, which already carries this section).
+// A <details>/<summary> accordion rather than a JS-driven one — reference
+// point for the pattern is La Mer's PDP ("Ingredients" / "How to use"
+// collapsed behind a +/- toggle), but implemented as plain HTML so it needs
+// no client component, no hydration cost, and works with JS disabled;
+// keyboard and screen-reader behavior come from the browser for free.
+// Deliberately scoped to usage/patch-test guidance only — the actives
+// table (ClinicallyDosed, above) stays fully expanded on every PDP, since
+// "every active ingredient disclosed, not hidden behind a click" is
+// Chiarel's own stated differentiator, not incidental page content to
+// compress for scroll length.
 function UsageGuidance() {
   return (
     <div className="border-t border-ink/10 bg-cloud/30 py-16">
@@ -565,27 +589,33 @@ function UsageGuidance() {
         <h2 className="text-center font-serif text-2xl">
           Introducing a New Product to Your Routine
         </h2>
-        <div className="mt-10 grid gap-8 sm:grid-cols-2">
-          <div>
-            <h3 className="font-serif text-lg text-ink">Patch test first</h3>
-            <p className="mt-2 text-sm leading-relaxed text-ink/70">
+        <div className="mt-10 divide-y divide-ink/10 border-y border-ink/10">
+          <details className="group py-5">
+            <summary className="flex cursor-pointer list-none items-center justify-between font-serif text-lg text-ink">
+              Patch test first
+              <span className="ml-4 text-xl text-ink/50 group-open:hidden" aria-hidden="true">+</span>
+              <span className="ml-4 hidden text-xl text-ink/50 group-open:inline" aria-hidden="true">−</span>
+            </summary>
+            <p className="mt-3 text-sm leading-relaxed text-ink/70">
               Apply a small amount to the inner forearm and wait 24 hours
               before using on the face. This is standard practice for any
               new skincare product, regardless of formulation.
             </p>
-          </div>
-          <div>
-            <h3 className="font-serif text-lg text-ink">
+          </details>
+          <details className="group py-5">
+            <summary className="flex cursor-pointer list-none items-center justify-between font-serif text-lg text-ink">
               Using alongside retinoids or acids
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-ink/70">
+              <span className="ml-4 text-xl text-ink/50 group-open:hidden" aria-hidden="true">+</span>
+              <span className="ml-4 hidden text-xl text-ink/50 group-open:inline" aria-hidden="true">−</span>
+            </summary>
+            <p className="mt-3 text-sm leading-relaxed text-ink/70">
               If your routine already includes a retinoid or an exfoliating
               acid (AHA/BHA), introduce this product gradually — for
               example, on alternating nights — and reduce frequency if you
               notice irritation. When in doubt, space active treatments
               apart rather than layering them the same evening.
             </p>
-          </div>
+          </details>
         </div>
         <p className="mt-10 text-center text-[12px] leading-relaxed text-ink/65">
           Questions about how this fits your routine?{" "}
