@@ -320,7 +320,7 @@ export default function Home() {
           </p>
           <Link
             href="/journal/isola-del-liri-waterfall"
-            className="mt-6 inline-block border-b border-champagne pb-0.5 text-[12px] uppercase tracking-[0.18em] text-champagne"
+            className="btn-press mt-6 inline-block border-b border-champagne pb-0.5 text-[12px] uppercase tracking-[0.18em] text-champagne transition-colors hover:text-ivory"
           >
             Read the Journal
           </Link>
@@ -369,7 +369,10 @@ export default function Home() {
               </thead>
               <tbody>
                 {ingredientTable.map((row, i) => (
-                  <tr key={`${row.product}-${row.ingredient}-${i}`} className="border-b border-ink/10">
+                  <tr
+                    key={`${row.product}-${row.ingredient}-${i}`}
+                    className="border-b border-ink/10 transition-colors hover:bg-ochre/5"
+                  >
                     <td className="py-3 pr-4 text-ink/80">{row.product}</td>
                     <td className="py-3 pr-4 text-ink/70">{row.ingredient}</td>
                     <td className="py-3 tabular-nums text-ochre">{row.percent}</td>
@@ -727,7 +730,10 @@ export default function Home() {
               </thead>
               <tbody>
                 {formulationApproach.map((row) => (
-                  <tr key={row.dimension} className="border-b border-ink/10 align-top">
+                  <tr
+                    key={row.dimension}
+                    className="border-b border-ink/10 align-top transition-colors hover:bg-ochre/5"
+                  >
                     <td className="py-4 pr-4 font-serif text-base text-ink">{row.dimension}</td>
                     <td className="py-4 pr-4 text-ink/80">{row.chiarel}</td>
                     <td className="py-4 text-ink/65">{row.categoryNorm}</td>
@@ -783,7 +789,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/shop/the-ritual-set"
-                className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
+                className="btn-press border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
               >
                 The complete set — ${ritualSet.price.subscription}
               </Link>
@@ -807,7 +813,7 @@ export default function Home() {
             </h2>
             <Link
               href="/shop"
-              className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
+              className="btn-press border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
             >
               See the Full House
             </Link>
@@ -824,7 +830,10 @@ export default function Home() {
 
       {/* FAQ — direct-answer content for pricing, formulation, and availability questions.
           id="faq" gives product pages (see UsageGuidance in app/shop/[slug]/page.tsx) a
-          real anchor to link back to instead of duplicating this content per-product. */}
+          real anchor to link back to instead of duplicating this content per-product.
+          <details>/<summary> accordion — same zero-JS pattern as UsageGuidance on the
+          PDP, reused here since these six answers ran long as flat static text with no
+          way to scan just the questions first. */}
       <section id="faq" className="section-y bg-ivory">
         <div className="section-x-narrow">
           <Reveal>
@@ -832,20 +841,22 @@ export default function Home() {
               Frequently Asked Questions
             </h2>
           </Reveal>
-          <dl className="mt-12 divide-y divide-ink/10">
+          <div className="mt-12 divide-y divide-ink/10 border-y border-ink/10">
             {faqs.map((faq, i) => (
-              <Reveal key={faq.question} delay={i * 0.06} className="py-6">
-                <dt>
-                  <h3 className="font-serif text-lg leading-snug">
+              <Reveal key={faq.question} delay={i * 0.06}>
+                <details className="group py-6">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-serif text-lg leading-snug text-ink">
                     {faq.question}
-                  </h3>
-                </dt>
-                <dd className="mt-2 text-sm leading-relaxed text-ink/70">
-                  {faq.answer}
-                </dd>
+                    <span className="ml-4 shrink-0 text-xl text-ink/50 group-open:hidden" aria-hidden="true">+</span>
+                    <span className="ml-4 hidden shrink-0 text-xl text-ink/50 group-open:inline" aria-hidden="true">−</span>
+                  </summary>
+                  <p className="mt-3 text-sm leading-relaxed text-ink/70">
+                    {faq.answer}
+                  </p>
+                </details>
               </Reveal>
             ))}
-          </dl>
+          </div>
         </div>
       </section>
 
@@ -866,7 +877,7 @@ export default function Home() {
           </p>
           <Link
             href="/journal/three-skins-one-house"
-            className="mt-6 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
+            className="btn-press mt-6 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
           >
             Read the Origin Story
           </Link>
@@ -885,7 +896,7 @@ export default function Home() {
           </p>
           <Link
             href="/house"
-            className="mt-8 inline-block border-b border-ochre pb-1 text-[12px] uppercase tracking-[0.2em] text-ochre"
+            className="btn-press mt-8 inline-block border-b border-ochre pb-1 text-[12px] uppercase tracking-[0.2em] text-ochre"
           >
             Discover the House
           </Link>
