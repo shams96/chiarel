@@ -56,7 +56,7 @@ export default function BuildYourRitualPage() {
               key={p.slug}
               onClick={() => toggle(p.slug)}
               aria-pressed={isSelected}
-              className={`flex flex-col items-start gap-3 rounded-sm border p-4 text-left transition ${
+              className={`btn-press flex flex-col items-start gap-3 rounded-sm border p-4 text-left transition ${
                 isSelected
                   ? "border-ochre bg-ochre/5"
                   : "border-ink/15 hover:border-ink/30"

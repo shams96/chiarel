@@ -124,7 +124,7 @@ export default function AssessmentPage() {
       <div className="mt-2 flex items-center gap-3">
         <div className="h-px flex-1 bg-ink/10">
           <div
-            className="h-px bg-ochre transition-all"
+            className="h-px bg-ochre transition-[width] duration-300 ease-out"
             style={{ width: `${(step / QUESTIONS.length) * 100}%` }}
           />
         </div>
@@ -141,7 +141,7 @@ export default function AssessmentPage() {
           <button
             key={opt.label}
             onClick={() => choose(opt.value)}
-            className="block w-full border border-ink/15 px-5 py-4 text-left text-sm transition hover:border-ochre hover:bg-white"
+            className="btn-press block w-full border border-ink/15 px-5 py-4 text-left text-sm transition hover:border-ochre hover:bg-white"
           >
             {opt.label}
           </button>

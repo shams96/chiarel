@@ -34,7 +34,7 @@ export default function PurchaseOptions({
         role="radio"
         aria-checked={tier === "ninetyDay"}
         onClick={() => setTier("ninetyDay")}
-        className={`flex w-full items-start justify-between rounded-sm border p-5 text-left transition ${
+        className={`btn-press flex w-full items-start justify-between rounded-sm border p-5 text-left transition ${
           tier === "ninetyDay"
             ? "border-ochre bg-white"
             : "border-ink/15 bg-transparent"
@@ -61,7 +61,7 @@ export default function PurchaseOptions({
         role="radio"
         aria-checked={tier === "single"}
         onClick={() => setTier("single")}
-        className={`mt-3 flex w-full items-center justify-between rounded-sm border p-3 text-left text-sm transition ${
+        className={`btn-press mt-3 flex w-full items-center justify-between rounded-sm border p-3 text-left text-sm transition ${
           tier === "single"
             ? "border-ink/40 bg-white"
             : "border-ink/10 text-ink/60"
@@ -82,7 +82,7 @@ export default function PurchaseOptions({
         role="radio"
         aria-checked={tier === "oneTime"}
         onClick={() => setTier("oneTime")}
-        className={`mt-3 flex w-full items-center justify-between rounded-sm border p-3 text-left text-sm transition ${
+        className={`btn-press mt-3 flex w-full items-center justify-between rounded-sm border p-3 text-left text-sm transition ${
           tier === "oneTime"
             ? "border-ink/40 bg-white"
             : "border-ink/10 text-ink/60"
