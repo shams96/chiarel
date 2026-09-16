@@ -26,7 +26,21 @@ export default async function OrderConfirmationPage({
     include: { items: { include: { product: true } } },
   });
 
-  if (!order) notFound();
+  // This page has no auth system to check against, and order ids appear in
+  // URLs (redirect, browser history, anything pasted into a support ticket)
+  // — so the *only* thing standing between "not found" and rendering a
+  // stranger's name, email, address, and full order contents was the order
+  // id itself. cuid()s aren't sequential, but "not guessable at random" is
+  // not the same bar as "only the customer can view this": anyone who ever
+  // has the URL, forever, could load it. The Stripe session_id Stripe put
+  // in the success_url (`?session_id={CHECKOUT_SESSION_ID}`) is the actual
+  // capability the customer holds that a stranger with just the order id
+  // doesn't — so require it to match before showing anything but a generic
+  // not-found, exactly like an unrecognized id. This doesn't change the
+  // reconciliation logic below at all (that already required a matching
+  // session_id before touching status); it just makes matching session_id
+  // a precondition for *viewing* the order too, not only for updating it.
+  if (!order || session_id !== order.stripeSessionId) notFound();
 
   // Never trust the redirect itself as proof of payment — re-verify the
   // session with Stripe server-side before marking an order paid, and empty
