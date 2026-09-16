@@ -74,7 +74,7 @@ export default function Header() {
             CHIAREL
           </span>
           <span className="mt-1 text-[9px] uppercase tracking-[0.28em] text-ochre">
-            House of Skin Intelligence™
+            The House of Clarity™
           </span>
         </Link>
         <nav className="hidden gap-7 md:flex">

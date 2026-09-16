@@ -3,10 +3,12 @@
 **Status:** Drafted from real, already-ratified brand facts (Decision Register, Brand Bible) — not the generic template's "restoration for dry/stressed skin" framing, which doesn't match this brand's actual established territory. Flagged as DRAFT where explicitly noted; everything else restates existing ratified positioning rather than inventing new language.
 
 ## What CHIAREL actually owns (already ratified, not proposed)
-CHIAREL™ · House of Skin Intelligence™ · Mission: Advancing Cellular Clarity™ · Enemy: Modern Biological Stress™. This is the real strategic territory — not "restoration for dry, tight, stressed, over-treated skin" (the generic brief's framing), which was never ratified anywhere in this project's Decision Register or Brand Bible.
+CHIAREL™ · The House of Clarity™ · Mission: Advancing Cellular Clarity™ · Enemy: Modern Biological Stress™. This is the real strategic territory — not "restoration for dry, tight, stressed, over-treated skin" (the generic brief's framing), which was never ratified anywhere in this project's Decision Register or Brand Bible.
+
+*(Tagline updated 2026-09-16 — see Decision 037 in the Decision Register: "House of Skin Intelligence™" was never actually CEO-ratified, and collided with a live competitor's tagline. "The House of Clarity™" is the current, real ratification.)*
 
 ## One-sentence positioning
-CHIAREL is the House of Skin Intelligence™ — Italian-made, ingredient-disclosed skincare built around Advancing Cellular Clarity™, for skin under Modern Biological Stress™.
+CHIAREL is The House of Clarity™ — Italian-made, ingredient-disclosed skincare built around Advancing Cellular Clarity™, for skin under Modern Biological Stress™.
 
 ## One-sentence customer promise
 Every active ingredient disclosed, every formula made to order in Isola del Liri, Italy — a ritual built on transparency rather than a marketing story.

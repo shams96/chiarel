@@ -26,12 +26,12 @@ const sans = Jost({
 });
 
 const description =
-  "CHIAREL™ · House of Skin Intelligence™ · Advancing Cellular Clarity™. Intelligent formulations crafted in Isola del Liri, Italy.";
+  "CHIAREL™ · The House of Clarity™ · Advancing Cellular Clarity™. Intelligent formulations crafted in Isola del Liri, Italy.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — House of Skin Intelligence™`,
+    default: `${SITE_NAME} — The House of Clarity™`,
     template: `%s — ${SITE_NAME}`,
   },
   description,
@@ -39,14 +39,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — House of Skin Intelligence™`,
+    title: `${SITE_NAME} — The House of Clarity™`,
     description,
     url: SITE_URL,
     images: [{ url: "/assets/editorial/hero-shore-duo.png", width: 1536, height: 934 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — House of Skin Intelligence™`,
+    title: `${SITE_NAME} — The House of Clarity™`,
     description,
     images: ["/assets/editorial/hero-shore-duo.png"],
   },

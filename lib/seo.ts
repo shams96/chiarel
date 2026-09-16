@@ -33,8 +33,8 @@ export const organizationJsonLd = {
   url: SITE_URL,
   logo: `${SITE_URL}/assets/brand/CHIAREL_Favicon_Monogram.svg`,
   description:
-    "CHIAREL™ — House of Skin Intelligence™. Advancing Cellular Clarity™. Formulated in Isola del Liri, Italy, with Natural You Srl.",
-  slogan: "House of Skin Intelligence™",
+    "CHIAREL™ — The House of Clarity™. Advancing Cellular Clarity™. Formulated in Isola del Liri, Italy, with Natural You Srl.",
+  slogan: "The House of Clarity™",
   foundingLocation: {
     "@type": "Place",
     name: "Isola del Liri, Italy",

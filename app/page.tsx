@@ -38,9 +38,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — House of Skin Intelligence™`,
+    title: `${SITE_NAME} — The House of Clarity™`,
     description:
-      "CHIAREL™ · House of Skin Intelligence™ · Advancing Cellular Clarity™. Intelligent formulations crafted in Isola del Liri, Italy.",
+      "CHIAREL™ · The House of Clarity™ · Advancing Cellular Clarity™. Intelligent formulations crafted in Isola del Liri, Italy.",
     url: SITE_URL,
     images: [{ url: "/assets/editorial/hero-shore-duo.png", width: 1536, height: 934 }],
     publishedTime: HOMEPAGE_PUBLISHED,
@@ -168,7 +168,7 @@ export default function Home() {
           __html: JSON.stringify(
             webPageJsonLd({
               url: SITE_URL,
-              name: "CHIAREL™ — House of Skin Intelligence™",
+              name: "CHIAREL™ — The House of Clarity™",
               description:
                 "Customer-tested skincare formulated in Isola del Liri, Italy. Every active ingredient disclosed.",
             })
@@ -198,7 +198,7 @@ export default function Home() {
         <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-6 py-16 md:min-h-[640px] md:grid-cols-2 md:py-20">
           <div className="hero-in order-2 max-w-xl md:order-1">
             <p className="text-[12px] uppercase tracking-[0.5em] text-ochre">
-              House of Skin Intelligence™
+              The House of Clarity™
             </p>
             {/* Fluid clamp() instead of a raw vw size + breakpoint overrides —
                 the previous text-[13vw] sm:text-6xl md:text-7xl combination

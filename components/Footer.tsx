@@ -17,7 +17,7 @@ export default function Footer() {
           <div>
             <p className="font-serif text-xl tracking-[0.3em] text-ink">CHIAREL</p>
             <p className="mt-2 max-w-xs text-[13px]">
-              House of Skin Intelligence™ · Advancing Cellular Clarity™
+              The House of Clarity™ · Advancing Cellular Clarity™
             </p>
             <p className="mt-4 text-[12px]">
               Isola del Liri · Roma, Italia — crafted with Natural You Srl

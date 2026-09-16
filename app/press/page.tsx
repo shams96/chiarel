@@ -54,7 +54,7 @@ export default function PressPage() {
             <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
               Tagline
             </dt>
-            <dd className="mt-1">House of Skin Intelligence™</dd>
+            <dd className="mt-1">The House of Clarity™</dd>
           </div>
           <div>
             <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/65">

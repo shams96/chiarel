@@ -372,7 +372,7 @@ export default function HeroIntro() {
                 CHIAREL
               </span>
               <span className="mt-2 text-[10px] uppercase tracking-[0.28em] text-ochre">
-                House of Skin Intelligence™
+                The House of Clarity™
               </span>
             </motion.div>
 
