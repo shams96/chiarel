@@ -1,22 +1,24 @@
+import Image from "next/image";
+
 // Real customer-testing photography, anonymized (eye bar) at the subject's
-// request — no names used. Product/duration fields are TODO pending owner
-// input; do not ship this section live with the TODOs still showing, and do
-// not invent duration/product specifics to fill the gap (brief's own rule:
-// no fabricated evidence in production).
+// request — no names used. The photos themselves are real and cleared to
+// use; what's removed here (2026-09-16) is the per-subject product/duration
+// caption line, which was hardcoded placeholder data ("2 days" for both
+// subjects) never confirmed by the owner — an unverified specific claim is
+// exactly what the brief's own "no fabricated evidence in production" rule
+// exists to catch. Once real, confirmed product/duration data exists per
+// subject, reintroduce it as a `product`/`duration` field here rather than
+// guessing again.
 const results = [
   {
     id: "subject-1",
     before: "/assets/testimonials/subject-1-before.jpg",
     after: "/assets/testimonials/subject-1-after.jpg",
-    product: "CHIAREL Essence™ + Recovery Masque™",
-    duration: "2 days",
   },
   {
     id: "subject-2",
     before: "/assets/testimonials/subject-2-before.jpg",
     after: "/assets/testimonials/subject-2-after.jpg",
-    product: "CHIAREL Essence™ + Recovery Masque™",
-    duration: "2 days",
   },
 ];
 
@@ -42,11 +44,12 @@ export default function ResultsSection() {
             <div className="grid grid-cols-2 gap-2">
               <div>
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-cloud/50">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={r.before}
                     alt="Before — subject face, eyes obscured"
-                    className="h-full w-full object-cover"
+                    fill
+                    sizes="(max-width: 640px) 45vw, 22vw"
+                    className="object-cover"
                   />
                 </div>
                 <p className="mt-2 text-center text-[11px] uppercase tracking-[0.14em] text-ink/65">
@@ -55,11 +58,12 @@ export default function ResultsSection() {
               </div>
               <div>
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-cloud/50">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={r.after}
                     alt="After — subject face, eyes obscured"
-                    className="h-full w-full object-cover"
+                    fill
+                    sizes="(max-width: 640px) 45vw, 22vw"
+                    className="object-cover"
                   />
                 </div>
                 <p className="mt-2 text-center text-[11px] uppercase tracking-[0.14em] text-ink/65">
@@ -67,9 +71,6 @@ export default function ResultsSection() {
                 </p>
               </div>
             </div>
-            <p className="mt-3 text-[13px] text-ink/60">
-              {r.product} · {r.duration}
-            </p>
           </div>
         ))}
       </div>

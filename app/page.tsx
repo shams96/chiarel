@@ -200,7 +200,19 @@ export default function Home() {
             <p className="text-[12px] uppercase tracking-[0.5em] text-ochre">
               House of Skin Intelligence™
             </p>
-            <h1 className="mt-7 font-serif text-[13vw] leading-[0.95] tracking-[-0.02em] text-ink sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+            {/* Fluid clamp() instead of a raw vw size + breakpoint overrides —
+                the previous text-[13vw] sm:text-6xl md:text-7xl combination
+                left the 13vw value uncapped for the entire 0-640px range, so
+                at 630px (just under the sm: breakpoint) it rendered at 82px
+                and then, one pixel wider at 640px, *snapped down* to 60px —
+                a non-monotonic jump where the heading shrinks as the
+                viewport grows. clamp(min, preferred, max) removes every
+                breakpoint discontinuity by construction: the preferred term
+                (1.5rem + 6vw) is tuned to pass close to the same sizes the
+                old breakpoints targeted (~47px mobile, ~60px at 640px,
+                ~70px at 768px, capping at 5.5rem/88px), but scales
+                continuously between them instead of jumping. */}
+            <h1 className="mt-7 font-serif text-[clamp(2.5rem,1.5rem+6vw,5.5rem)] leading-[0.95] tracking-[-0.02em] text-ink">
               Advancing
               <br />
               Cellular Clarity™
