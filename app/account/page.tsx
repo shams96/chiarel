@@ -14,7 +14,7 @@ export default function AccountPage() {
 
       <AccountSubscriptions />
 
-      <p className="mt-10 text-center text-[11px] text-ink/45">
+      <p className="mt-10 text-center text-[11px] text-ink/65">
         This is a preview of the subscription management experience. No
         deliveries, pauses, or cancellations shown here are real.
       </p>

@@ -15,7 +15,7 @@ export default function PrivacyPage() {
   return (
     <div className="mx-auto max-w-2xl px-6 py-16">
       <h1 className="font-serif text-4xl leading-tight">Privacy Policy</h1>
-      <p className="mt-3 text-[12px] uppercase tracking-[0.16em] text-ink/50">
+      <p className="mt-3 text-[12px] uppercase tracking-[0.16em] text-ink/65">
         Effective {EFFECTIVE_DATE}
       </p>
 

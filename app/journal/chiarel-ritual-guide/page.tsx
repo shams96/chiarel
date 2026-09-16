@@ -45,7 +45,7 @@ export default function RitualGuidePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <Link href="/journal" className="text-[12px] text-ink/50 hover:text-ochre">
+      <Link href="/journal" className="text-[12px] text-ink/65 hover:text-ochre">
         ← Journal
       </Link>
       <h1 className="mt-2 font-serif text-4xl leading-tight">

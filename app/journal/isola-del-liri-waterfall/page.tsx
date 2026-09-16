@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function WaterfallPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
-      <Link href="/journal" className="text-[12px] text-ink/50 hover:text-ochre">
+      <Link href="/journal" className="text-[12px] text-ink/65 hover:text-ochre">
         ← Journal
       </Link>
       <h1 className="mt-2 font-serif text-4xl leading-tight">

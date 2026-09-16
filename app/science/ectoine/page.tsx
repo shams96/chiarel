@@ -45,7 +45,7 @@ export default function EctoinePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <Link href="/science" className="text-[12px] text-ink/50 hover:text-ochre">
+      <Link href="/science" className="text-[12px] text-ink/65 hover:text-ochre">
         ← The Science
       </Link>
       <h1 className="mt-2 font-serif text-4xl leading-tight">
@@ -77,7 +77,7 @@ export default function EctoinePage() {
             UV exposure, and pollution-related stress. It does not penetrate
             deeply and is not classified as a traditional antioxidant.
           </p>
-          <p className="mt-3 text-[12px] text-ink/50">
+          <p className="mt-3 text-[12px] text-ink/65">
             Source:{" "}
             <a
               href="https://pubmed.ncbi.nlm.nih.gov/?term=ectoine+skin+hydration"
@@ -114,7 +114,7 @@ export default function EctoinePage() {
         </div>
       </section>
 
-      <p className="mt-14 max-w-2xl text-[11px] leading-relaxed text-ink/45">
+      <p className="mt-14 max-w-2xl text-[11px] leading-relaxed text-ink/65">
         Ectoine is an INCI ingredient name, not a CHIAREL trademark. This page
         is educational and reflects published cosmetic-science understanding
         of the ingredient category; it is not a guarantee of individual

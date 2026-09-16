@@ -29,7 +29,7 @@ export default function SciencePage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-16">
       <h1 className="font-serif text-4xl">The Science</h1>
-      <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/40">
+      <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/65">
         CHIAREL Intelligence™
       </p>
       <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/75">
@@ -48,7 +48,7 @@ export default function SciencePage() {
         ))}
       </div>
 
-      <p className="mt-14 text-[11px] text-ink/45">
+      <p className="mt-14 text-[11px] text-ink/65">
         Complex names are provisional pending formal trademark clearance.
         CHIAREL™ uses outcome language — our formulations support and optimize;
         they do not promise miracles.

@@ -20,7 +20,7 @@ export default function ContactPage() {
 
       <dl className="mt-12 space-y-8 text-sm leading-relaxed text-ink/80">
         <div>
-          <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/50">
+          <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
             General Inquiries
           </dt>
           <dd className="mt-2">
@@ -33,7 +33,7 @@ export default function ContactPage() {
           </dd>
         </div>
         <div>
-          <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/50">
+          <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
             Order Support
           </dt>
           <dd className="mt-2 max-w-md">
@@ -48,7 +48,7 @@ export default function ContactPage() {
           </dd>
         </div>
         <div>
-          <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/50">
+          <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
             Press
           </dt>
           <dd className="mt-2 max-w-md">
@@ -67,7 +67,7 @@ export default function ContactPage() {
           </dd>
         </div>
         <div>
-          <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/50">
+          <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
             Formulation &amp; Manufacturing
           </dt>
           <dd className="mt-2 max-w-md">
@@ -81,7 +81,7 @@ export default function ContactPage() {
         </div>
       </dl>
 
-      <p className="mt-16 max-w-xl text-[12px] leading-relaxed text-ink/50">
+      <p className="mt-16 max-w-xl text-[12px] leading-relaxed text-ink/65">
         CHIAREL™ is operated by 1HubSolutions, LLC. See our{" "}
         <Link href="/privacy" className="border-b border-ink/30 text-ink/60">
           Privacy Policy

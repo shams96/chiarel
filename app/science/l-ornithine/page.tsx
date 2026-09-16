@@ -41,7 +41,7 @@ export default function LOrnithinePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <Link href="/science" className="text-[12px] text-ink/50 hover:text-ochre">
+      <Link href="/science" className="text-[12px] text-ink/65 hover:text-ochre">
         ← The Science
       </Link>
       <h1 className="mt-2 font-serif text-4xl leading-tight">
@@ -68,7 +68,7 @@ export default function LOrnithinePage() {
             collagen and barrier maintenance — supporting processes skin
             already runs, rather than introducing a synthetic mechanism.
           </p>
-          <p className="mt-3 text-[12px] text-ink/50">
+          <p className="mt-3 text-[12px] text-ink/65">
             Source:{" "}
             <a
               href="https://pubmed.ncbi.nlm.nih.gov/?term=ornithine+skin+barrier"
@@ -102,7 +102,7 @@ export default function LOrnithinePage() {
         </div>
       </section>
 
-      <p className="mt-14 max-w-2xl text-[11px] leading-relaxed text-ink/45">
+      <p className="mt-14 max-w-2xl text-[11px] leading-relaxed text-ink/65">
         L-Ornithine is an INCI ingredient name, not a CHIAREL trademark. This
         page reflects published cosmetic-science understanding of the
         ingredient category and is not a guarantee of individual results.

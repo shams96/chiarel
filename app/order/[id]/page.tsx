@@ -79,7 +79,7 @@ export default async function OrderConfirmationPage({
             </div>
             <div className="flex-1 text-sm">
               <p className="leading-tight">{item.product.name}</p>
-              <p className="text-[11px] text-ink/50">
+              <p className="text-[11px] text-ink/65">
                 {modeLabel[item.mode]} · Qty {item.qty}
               </p>
             </div>

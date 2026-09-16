@@ -37,7 +37,7 @@ export default function AssessmentPage() {
         <dl className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
           {axisScores.map((a) => (
             <div key={a.axis} className="card-elevated rounded-md bg-white p-3 text-center">
-              <dt className="text-[10px] uppercase tracking-[0.14em] text-ink/50">
+              <dt className="text-[10px] uppercase tracking-[0.14em] text-ink/65">
                 {a.axis}
               </dt>
               <dd className="mt-1 font-serif text-lg">{a.pole}</dd>
@@ -104,12 +104,12 @@ export default function AssessmentPage() {
             setAnswers({});
             setStep(0);
           }}
-          className="mt-12 text-[11px] uppercase tracking-[0.16em] text-ink/40 hover:text-ink"
+          className="mt-12 text-[11px] uppercase tracking-[0.16em] text-ink/65 hover:text-ink"
         >
           Retake the Assessment
         </button>
 
-        <p className="mt-10 text-[11px] text-ink/45">
+        <p className="mt-10 text-[11px] text-ink/65">
           This assessment is adapted from the Baumann Skin Type Indicator, a
           published dermatological framework, for educational and product-fit
           purposes. It does not diagnose skin conditions.
@@ -120,7 +120,7 @@ export default function AssessmentPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-16">
-      <p className="text-sm text-ink/50">CHIAREL Skin Assessment™</p>
+      <p className="text-sm text-ink/65">CHIAREL Skin Assessment™</p>
       <div className="mt-2 flex items-center gap-3">
         <div className="h-px flex-1 bg-ink/10">
           <div
@@ -128,13 +128,13 @@ export default function AssessmentPage() {
             style={{ width: `${(step / QUESTIONS.length) * 100}%` }}
           />
         </div>
-        <span className="text-[11px] text-ink/40">
+        <span className="text-[11px] text-ink/65">
           {step + 1} / {QUESTIONS.length}
         </span>
       </div>
 
       <h1 className="mt-8 font-serif text-3xl leading-snug">{q.prompt}</h1>
-      <p className="mt-2 text-[12px] italic text-ink/50">Why we ask: {q.why}</p>
+      <p className="mt-2 text-[12px] italic text-ink/65">Why we ask: {q.why}</p>
 
       <div className="mt-8 space-y-3">
         {q.options.map((opt) => (

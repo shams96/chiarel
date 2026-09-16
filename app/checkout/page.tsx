@@ -84,13 +84,13 @@ export default function CheckoutPage() {
                 type="button"
                 disabled
                 title="Arriving with our Shopify boutique — pay by card below for now"
-                className="cursor-not-allowed border border-ink/20 py-3 text-[12px] uppercase tracking-[0.14em] text-ink/40"
+                className="cursor-not-allowed border border-ink/20 py-3 text-[12px] uppercase tracking-[0.14em] text-ink/65"
               >
                 {m}
               </button>
             ))}
           </div>
-          <div className="my-8 flex items-center gap-4 text-[11px] uppercase tracking-[0.18em] text-ink/40">
+          <div className="my-8 flex items-center gap-4 text-[11px] uppercase tracking-[0.18em] text-ink/65">
             <span className="h-px flex-1 bg-ink/10" />
             Or pay by card
             <span className="h-px flex-1 bg-ink/10" />
@@ -98,7 +98,7 @@ export default function CheckoutPage() {
 
           <form className="space-y-5" onSubmit={handleSubmit}>
             <div>
-              <label className="text-[11px] uppercase tracking-[0.16em] text-ink/50">
+              <label className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
                 Email
               </label>
               <input
@@ -112,7 +112,7 @@ export default function CheckoutPage() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-[11px] uppercase tracking-[0.16em] text-ink/50">
+                <label className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
                   First Name
                 </label>
                 <input
@@ -122,7 +122,7 @@ export default function CheckoutPage() {
                 />
               </div>
               <div>
-                <label className="text-[11px] uppercase tracking-[0.16em] text-ink/50">
+                <label className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
                   Last Name
                 </label>
                 <input
@@ -134,7 +134,7 @@ export default function CheckoutPage() {
             </div>
 
             <div>
-              <label className="text-[11px] uppercase tracking-[0.16em] text-ink/50">
+              <label className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
                 Shipping Address
               </label>
               <input
@@ -187,7 +187,7 @@ export default function CheckoutPage() {
             >
               {submitting ? "Continuing to payment…" : `Continue to Payment — $${total}`}
             </button>
-            <p className="text-center text-[11px] text-ink/45">
+            <p className="text-center text-[11px] text-ink/65">
               You&rsquo;ll enter your card details securely on the next
               screen, processed by Stripe.
             </p>
@@ -196,7 +196,7 @@ export default function CheckoutPage() {
 
         {/* Right: order summary */}
         <aside className="card-elevated h-fit rounded-md bg-white p-6">
-          <p className="text-[11px] uppercase tracking-[0.18em] text-ink/50">
+          <p className="text-[11px] uppercase tracking-[0.18em] text-ink/65">
             Order Summary
           </p>
           <ul className="mt-4 space-y-4">
@@ -213,7 +213,7 @@ export default function CheckoutPage() {
                 </div>
                 <div className="flex-1 text-sm">
                   <p className="leading-tight">{line.product.name}</p>
-                  <p className="text-[11px] text-ink/50">
+                  <p className="text-[11px] text-ink/65">
                     {modeLabel[line.mode]} · Qty {line.qty}
                   </p>
                 </div>
@@ -244,7 +244,7 @@ export default function CheckoutPage() {
               <span className="font-serif text-xl">${total}</span>
             </div>
           </div>
-          <p className="mt-4 text-[11px] text-ink/50">
+          <p className="mt-4 text-[11px] text-ink/65">
             Two complimentary samples included, chosen by the House.
           </p>
         </aside>

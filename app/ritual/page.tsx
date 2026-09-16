@@ -53,12 +53,12 @@ export default function RitualPage() {
             </div>
             <div className="w-full md:w-1/2">
               <h2 className="font-serif text-3xl">{p.name}</h2>
-              <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/40">
+              <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/65">
                 Step {p.ritualOrder} · {p.step}
               </p>
               <p className="mt-2 text-sm text-ink/60">{p.descriptor}</p>
               <p className="mt-4 max-w-md text-sm text-ink/75">{p.blurb}</p>
-              <p className="mt-3 text-[12px] text-ink/50">
+              <p className="mt-3 text-[12px] text-ink/65">
                 {p.complex} · {p.family}
               </p>
               <div className="mt-6 flex items-center gap-6">
@@ -68,7 +68,7 @@ export default function RitualPage() {
                 >
                   ${p.price.subscription} — Subscribe
                 </Link>
-                <span className="text-[12px] text-ink/50">
+                <span className="text-[12px] text-ink/65">
                   ${p.price.oneTime} one-time
                 </span>
               </div>

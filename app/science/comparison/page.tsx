@@ -121,7 +121,7 @@ function ComparisonTable({
         <table className="tabular-nums w-full min-w-[640px] border-collapse text-left text-[13px]">
           <thead>
             <tr>
-              <th className="w-40 border-b border-ink/15 pb-3 pr-4 text-[11px] uppercase tracking-[0.14em] text-ink/50">
+              <th className="w-40 border-b border-ink/15 pb-3 pr-4 text-[11px] uppercase tracking-[0.14em] text-ink/65">
                 &nbsp;
               </th>
               {table.columns.map((col, i) => (
@@ -143,7 +143,7 @@ function ComparisonTable({
               <tr key={row.label} className="border-b border-ink/10">
                 <th
                   scope="row"
-                  className="py-4 pr-4 align-top text-[12px] font-medium uppercase tracking-[0.08em] text-ink/50"
+                  className="py-4 pr-4 align-top text-[12px] font-medium uppercase tracking-[0.08em] text-ink/65"
                 >
                   {row.label}
                 </th>
@@ -169,7 +169,7 @@ function ComparisonTable({
 export default function ComparisonPage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-16">
-      <Link href="/science" className="text-[12px] text-ink/50 hover:text-ochre">
+      <Link href="/science" className="text-[12px] text-ink/65 hover:text-ochre">
         ← The Science
       </Link>
       <h1 className="mt-2 font-serif text-4xl leading-tight">
@@ -207,7 +207,7 @@ export default function ComparisonPage() {
         </p>
       </div>
 
-      <div className="mt-14 max-w-2xl border-t border-ink/10 pt-8 text-[12px] leading-relaxed text-ink/50">
+      <div className="mt-14 max-w-2xl border-t border-ink/10 pt-8 text-[12px] leading-relaxed text-ink/65">
         <p>
           Competitor prices and formulation disclosures reflect publicly
           listed information as of {new Date().getFullYear()} and are subject

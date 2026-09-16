@@ -45,19 +45,19 @@ export default function PressPage() {
         <h2 className="font-serif text-2xl text-ink">Brand Fact Sheet</h2>
         <dl className="mt-6 space-y-5 text-sm leading-relaxed text-ink/80">
           <div>
-            <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/50">
+            <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
               Name
             </dt>
             <dd className="mt-1">CHIAREL™</dd>
           </div>
           <div>
-            <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/50">
+            <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
               Tagline
             </dt>
             <dd className="mt-1">House of Skin Intelligence™</dd>
           </div>
           <div>
-            <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/50">
+            <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
               Mission
             </dt>
             <dd className="mt-1 max-w-xl">
@@ -67,7 +67,7 @@ export default function PressPage() {
             </dd>
           </div>
           <div>
-            <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/50">
+            <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
               Founding Story
             </dt>
             <dd className="mt-1 max-w-xl">
@@ -86,7 +86,7 @@ export default function PressPage() {
             </dd>
           </div>
           <div>
-            <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/50">
+            <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
               Provenance
             </dt>
             <dd className="mt-1 max-w-xl">
@@ -101,13 +101,13 @@ export default function PressPage() {
             </dd>
           </div>
           <div>
-            <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/50">
+            <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
               Parent Company
             </dt>
             <dd className="mt-1">1HubSolutions, LLC</dd>
           </div>
           <div>
-            <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/50">
+            <dt className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
               Website
             </dt>
             <dd className="mt-1">
@@ -142,7 +142,7 @@ export default function PressPage() {
                   {p.name}
                 </p>
                 <p className="mt-1 text-[13px] text-ink/60">{p.descriptor}</p>
-                <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-ink/40">
+                <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-ink/65">
                   {p.color.name} · {p.family}
                 </p>
               </div>

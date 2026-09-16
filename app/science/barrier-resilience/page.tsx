@@ -41,7 +41,7 @@ export default function BarrierResiliencePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <Link href="/science" className="text-[12px] text-ink/50 hover:text-ochre">
+      <Link href="/science" className="text-[12px] text-ink/65 hover:text-ochre">
         ← The Science
       </Link>
       <h1 className="mt-2 font-serif text-4xl leading-tight">
@@ -97,7 +97,7 @@ export default function BarrierResiliencePage() {
         </div>
       </section>
 
-      <p className="mt-14 max-w-2xl text-[11px] leading-relaxed text-ink/45">
+      <p className="mt-14 max-w-2xl text-[11px] leading-relaxed text-ink/65">
         Ectoine, Bifida Ferment Lysate, and L-Ornithine are established INCI
         ingredient names, not CHIAREL trademarks or proprietary technologies.
         Mechanism descriptions reflect published cosmetic-science
