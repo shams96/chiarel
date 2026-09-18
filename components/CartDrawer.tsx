@@ -159,7 +159,7 @@ export default function CartDrawer() {
                       onClick={() => add(nextStep.slug, "subscription")}
                       className="btn-press w-full shrink-0 border border-ink/20 px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-ink/70 transition hover:border-ochre hover:text-ochre sm:w-auto"
                     >
-                      Add · ${nextStep.price.subscription}
+                      Add · ${nextStep.price!.subscription}
                     </button>
                   </div>
                 </div>
@@ -197,7 +197,7 @@ export default function CartDrawer() {
                 Checkout — ${estimatedTotal}
               </Link>
               <p className="mt-3 text-center text-[11px] text-ink/65">
-                Two complimentary samples included with every order.
+                Complimentary samples included with every order.
               </p>
             </div>
           </>

@@ -1,14 +1,16 @@
-import { products } from "@/lib/products";
+import { products, isPurchasable } from "@/lib/products";
 import { SITE_URL } from "@/lib/seo";
 
 export const dynamic = "force-static";
 
 function buildLlmsTxt(): string {
   const productLines = products
-    .map(
-      (p) =>
-        `- [${p.name}](${SITE_URL}/shop/${p.slug}): ${p.descriptor} — $${p.price.oneTime} one-time / $${p.price.subscription} on 45-day subscription.`
-    )
+    .map((p) => {
+      const pricing = isPurchasable(p)
+        ? `$${p.price.oneTime} one-time / $${p.price.subscription} on 45-day subscription`
+        : "price to be announced, not yet available for purchase";
+      return `- [${p.name}](${SITE_URL}/shop/${p.slug}): ${p.descriptor} — ${pricing}.`;
+    })
     .join("\n");
 
   return `# CHIAREL™
@@ -19,7 +21,7 @@ function buildLlmsTxt(): string {
 
 - [Homepage](${SITE_URL}/): brand overview, FAQ (pricing, formulation, sourcing, availability), and the core product lineup.
 - [The Shop](${SITE_URL}/shop): full product catalog with pricing.
-- [The Ritual](${SITE_URL}/ritual): the four-step Cleanse · Tone · Serum · Moisturize regimen.
+- [The Ritual](${SITE_URL}/ritual): the CHIAREL Four-Product Ritual — a focused morning and evening practice led by N1 Neck & Décolleté Renewal Emulsion.
 - [The Science](${SITE_URL}/science): ingredient mechanism explainers (Ectoine, Bifida Ferment Lysate, L-Ornithine) and formulation rationale, each with cited third-party research.
 - [The House](${SITE_URL}/house): brand origin and philosophy, Isola del Liri, Italy.
 - [Journal](${SITE_URL}/journal): editorial long-form content on sourcing and formulation.

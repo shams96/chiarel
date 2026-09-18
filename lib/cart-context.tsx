@@ -66,9 +66,20 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  // Every fetch below is wrapped in try/catch: `fetch` itself rejects (not
+  // just resolves with a non-ok response) on a real network failure — a
+  // dropped connection, a sleeping serverless function waking up, a dev
+  // server restart — and an uncaught rejection here crashes the whole page
+  // to Next's unhandled-runtime-error overlay for what's really just a
+  // transient network blip. Failing silently (leaving cart state as it was)
+  // is the honest behavior: the action didn't happen, nothing changed.
   const refresh = useCallback(async () => {
-    const res = await fetch("/api/cart");
-    if (res.ok) setData(await res.json());
+    try {
+      const res = await fetch("/api/cart");
+      if (res.ok) setData(await res.json());
+    } catch {
+      // Network failure — leave existing cart state as-is.
+    }
   }, []);
 
   useEffect(() => {
@@ -76,30 +87,42 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [refresh]);
 
   const add: CartContextValue["add"] = async (slug, mode) => {
-    const res = await fetch("/api/cart", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ slug, mode }),
-    });
-    if (res.ok) setData(await res.json());
-    setIsOpen(true);
+    try {
+      const res = await fetch("/api/cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug, mode }),
+      });
+      if (res.ok) setData(await res.json());
+      setIsOpen(true);
+    } catch {
+      // Network failure — the item wasn't added; cart state is unchanged.
+    }
   };
 
   const remove: CartContextValue["remove"] = async (slug) => {
     const line = data.lines.find((l) => l.slug === slug);
     if (!line) return;
-    const res = await fetch(`/api/cart/${line.id}`, { method: "DELETE" });
-    if (res.ok) setData(await res.json());
+    try {
+      const res = await fetch(`/api/cart/${line.id}`, { method: "DELETE" });
+      if (res.ok) setData(await res.json());
+    } catch {
+      // Network failure — the item wasn't removed; cart state is unchanged.
+    }
   };
 
   const setQty: CartContextValue["setQty"] = async (lineId, qty) => {
     if (qty < 1) return;
-    const res = await fetch(`/api/cart/${lineId}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ qty }),
-    });
-    if (res.ok) setData(await res.json());
+    try {
+      const res = await fetch(`/api/cart/${lineId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ qty }),
+      });
+      if (res.ok) setData(await res.json());
+    } catch {
+      // Network failure — the quantity wasn't changed; cart state is unchanged.
+    }
   };
 
   return (

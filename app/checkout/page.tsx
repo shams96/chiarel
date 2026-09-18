@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
+import RefundPolicyContent, { REFUND_POLICY_VERSION } from "@/components/RefundPolicyContent";
 
 const FREE_SHIP_THRESHOLD = 150;
 const modeLabel: Record<string, string> = {
@@ -35,6 +36,8 @@ export default function CheckoutPage() {
       city: form.get("city"),
       state: form.get("state"),
       zip: form.get("zip"),
+      termsAccepted: form.get("termsAccepted") === "on",
+      termsVersion: REFUND_POLICY_VERSION,
     };
 
     try {
@@ -174,6 +177,34 @@ export default function CheckoutPage() {
               </div>
             )}
 
+            {/* Full policy text inline, not just a link — per Stripe's own
+                dispute-prevention guidance, a link-only checkbox risks being
+                rejected as evidence that the customer actually saw the policy.
+                Same zero-JS <details>/<summary> pattern already used in
+                UsageGuidance and the homepage FAQ. See
+                claudedocs/specs/dispute-risk-mitigation/. */}
+            <details className="group border border-ink/15 bg-cloud/20 px-4 py-3 text-[13px] leading-relaxed text-ink/75">
+              <summary className="flex cursor-pointer list-none items-center justify-between font-medium text-ink">
+                Refund Policy &amp; Terms
+                <span className="ml-4 text-lg text-ink/50 group-open:hidden" aria-hidden="true">+</span>
+                <span className="ml-4 hidden text-lg text-ink/50 group-open:inline" aria-hidden="true">−</span>
+              </summary>
+              <div className="mt-3 space-y-3">
+                <RefundPolicyContent />
+              </div>
+            </details>
+
+            <label className="flex items-start gap-2 text-[12px] leading-relaxed text-ink/75">
+              <input type="checkbox" name="termsAccepted" required className="mt-0.5" />
+              <span>
+                I have read and agree to the{" "}
+                <Link href="/terms" className="border-b border-ochre text-ochre">
+                  Refund Policy and Terms of Service
+                </Link>
+                .
+              </span>
+            </label>
+
             {error && (
               <p className="text-[12px] text-ochre" role="alert">
                 {error}
@@ -245,7 +276,7 @@ export default function CheckoutPage() {
             </div>
           </div>
           <p className="mt-4 text-[11px] text-ink/65">
-            Two complimentary samples included, chosen by the House.
+            Complimentary samples included, chosen by the House.
           </p>
         </aside>
       </div>

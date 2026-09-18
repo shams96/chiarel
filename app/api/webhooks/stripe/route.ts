@@ -41,10 +41,15 @@ export async function POST(req: NextRequest) {
         // updateMany + status:"pending" guard makes this idempotent — Stripe
         // may deliver the same event more than once, and this must not
         // double-process an order the customer's own return-redirect
-        // already marked paid.
+        // already marked paid. Also records the PaymentIntent id, which is
+        // how a later dispute event (below) gets matched back to this order.
         await db.order.updateMany({
           where: { id: orderId, status: "pending" },
-          data: { status: "paid" },
+          data: {
+            status: "paid",
+            stripePaymentIntentId:
+              typeof session.payment_intent === "string" ? session.payment_intent : null,
+          },
         });
       } catch (err) {
         // Let this surface as a 500 (not caught/downgraded) so Stripe's
@@ -54,6 +59,42 @@ export async function POST(req: NextRequest) {
         console.error("Failed to reconcile order from Stripe webhook:", err);
         return NextResponse.json({ error: "Reconciliation failed" }, { status: 500 });
       }
+    }
+  }
+
+  // Dispute handling — see claudedocs/specs/dispute-risk-mitigation/. This does
+  // NOT submit evidence programmatically (Stripe's Dashboard/Smart Disputes stays
+  // the actual response mechanism, per that spec's explicit scope boundary); it
+  // exists purely to make dispute state visible against the order record instead
+  // of only living in the Stripe Dashboard, and to feed the daily rate monitor.
+  if (event.type === "charge.dispute.created" || event.type === "charge.dispute.closed") {
+    const dispute = event.data.object as Stripe.Dispute;
+    const paymentIntentId =
+      typeof dispute.payment_intent === "string" ? dispute.payment_intent : null;
+
+    if (paymentIntentId) {
+      try {
+        const isClosed = event.type === "charge.dispute.closed";
+        await db.order.updateMany({
+          where: { stripePaymentIntentId: paymentIntentId },
+          data: {
+            disputeId: dispute.id,
+            disputeStatus: dispute.status,
+            disputeReason: dispute.reason,
+            disputeAmount: dispute.amount,
+            // Use Stripe's own event timestamp, not `new Date()` — a redelivered
+            // event must not shift these dates on retry.
+            ...(isClosed
+              ? { disputeClosedAt: new Date(event.created * 1000) }
+              : { disputeOpenedAt: new Date(dispute.created * 1000) }),
+          },
+        });
+      } catch (err) {
+        console.error("Failed to reconcile dispute from Stripe webhook:", err);
+        return NextResponse.json({ error: "Reconciliation failed" }, { status: 500 });
+      }
+    } else {
+      console.error(`Dispute ${dispute.id} has no payment_intent — cannot match to an order`);
     }
   }
 

@@ -100,7 +100,7 @@ export default function PurchaseOptions({
         {tier === "oneTime" ? "Add to Bag" : "Begin the Ritual"}
       </button>
       <p className="mt-3 text-center text-[11px] text-ink/65">
-        Two complimentary samples with every order.
+        Complimentary samples with every order.
       </p>
       <p className="mt-1 text-center text-[11px] text-ink/65">
         Formulated under pharmacist guidance at Natural You Srl, Isola del

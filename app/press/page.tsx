@@ -7,11 +7,18 @@ import { SITE_URL } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Press Kit",
   description:
-    "CHIAREL™ press kit: brand fact sheet, the six-formulation launch lineup, downloadable wordmarks and monogram, and press contact information.",
+    "CHIAREL™ press kit: brand fact sheet, a focused four-product ritual led by a dedicated neck and décolleté treatment, downloadable wordmarks and monogram, and press contact information.",
   alternates: { canonical: "/press" },
 };
 
-const launchSkus = products.filter((p) => !p.set);
+// Launch-lineup framing replaced per
+// CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §12 — no automatically
+// derived product count is stated publicly; the four launch products are
+// listed explicitly, with every other current product (Cleanser, Mist, Lip
+// Concentrate, and both existing sets) still shown below, unpublished from
+// nothing.
+const launchSkus = products.filter((p) => p.launchRitual === true);
+const otherSkus = products.filter((p) => !p.set && p.launchRitual !== true);
 
 const assets = [
   {
@@ -122,12 +129,42 @@ export default function PressPage() {
       {/* Product Lineup */}
       <section className="mt-16 border-t border-ink/10 pt-12">
         <h2 className="font-serif text-2xl text-ink">The Launch Lineup</h2>
+        {/* DRAFT — OWNER / REGULATORY APPROVAL REQUIRED */}
         <p className="mt-2 max-w-xl text-sm text-ink/70">
-          Six formulations, each assigned a signature category color across
-          the ritual.
+          A focused four-product ritual led by a dedicated neck and
+          décolleté treatment.
         </p>
         <ul className="mt-8 grid gap-4 sm:grid-cols-2">
           {launchSkus.map((p) => (
+            <li
+              key={p.slug}
+              className="flex items-start gap-4 border border-ink/10 p-4"
+            >
+              <span
+                className="mt-1 inline-block h-4 w-4 shrink-0 rounded-full border border-ink/20"
+                style={{ backgroundColor: p.color.hex }}
+                aria-hidden
+              />
+              <div>
+                <p className="font-serif text-lg leading-tight text-ink">
+                  {p.name}
+                </p>
+                <p className="mt-1 text-[13px] text-ink/60">{p.descriptor}</p>
+                <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-ink/65">
+                  {p.color.name} · {p.family}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <h3 className="mt-12 font-serif text-lg text-ink">Also Available</h3>
+        <p className="mt-2 max-w-xl text-sm text-ink/70">
+          Additional CHIAREL products, outside the core four-product launch
+          ritual — fully available, never discontinued.
+        </p>
+        <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+          {otherSkus.map((p) => (
             <li
               key={p.slug}
               className="flex items-start gap-4 border border-ink/10 p-4"

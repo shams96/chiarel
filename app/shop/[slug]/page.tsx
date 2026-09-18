@@ -2,14 +2,14 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getProduct, products, ritualProducts, type Product } from "@/lib/products";
+import { getProduct, products, ritualProducts, productImageAlt, isPurchasable, type Product } from "@/lib/products";
 import PurchaseOptions from "@/components/PurchaseOptions";
 import StickyPurchaseBar from "@/components/StickyPurchaseBar";
 import ProductHeroImage from "@/components/ProductHeroImage";
 import CellularHydrationCascade from "@/components/CellularHydrationCascade";
 import Reveal from "@/components/Reveal";
 import { productJsonLd, breadcrumbJsonLd } from "@/lib/seo";
-import { productTint } from "@/lib/color";
+import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { productHoverClass } from "@/lib/motion";
 
 // A compact, purely factual summary near the top of the page — GEO guidance
@@ -68,10 +68,15 @@ export default function ProductPage({
 
   return (
     <div>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd(p)) }}
-      />
+      {/* No Product/Offer schema until a real, owner-approved price exists —
+          publishing an Offer with a fabricated price would be inaccurate
+          structured data. See CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §9. */}
+      {isPurchasable(p) && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd(p)) }}
+        />
+      )}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -112,11 +117,11 @@ export default function ProductPage({
           <div className="md:sticky md:top-24">
             <div
               className="relative aspect-[5/4] w-full overflow-hidden md:aspect-[4/5]"
-              style={{ backgroundColor: productTint(p.color.hex) }}
+              style={{ backgroundColor: NEUTRAL_FRAME_BG }}
             >
               <ProductHeroImage
                 src={p.image}
-                alt={p.name}
+                alt={productImageAlt(p)}
                 step={p.step}
                 badge={p.badge}
               />
@@ -142,12 +147,16 @@ export default function ProductPage({
             </p>
 
             <div className="mt-6 md:mt-8">
-              <PurchaseOptions
-                slug={p.slug}
-                subscription={p.price.subscription}
-                oneTime={p.price.oneTime}
-                perDayCadenceDays={p.set ? 45 : undefined}
-              />
+              {isPurchasable(p) ? (
+                <PurchaseOptions
+                  slug={p.slug}
+                  subscription={p.price.subscription}
+                  oneTime={p.price.oneTime}
+                  perDayCadenceDays={p.set ? 45 : undefined}
+                />
+              ) : (
+                <PriceToBeAnnounced />
+              )}
             </div>
 
             <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-t border-ink/10 pt-6 text-[12px] text-ink/60">
@@ -202,16 +211,43 @@ export default function ProductPage({
 
       <BrandStatement />
 
-      {p.benefits && <KeyBenefits benefits={p.benefits} />}
+      {/* N1 gets its own structured "what it's for / what it feels like"
+          module instead of the generic KeyBenefits heading, matching the
+          required PDP structure in CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §7. */}
+      {p.slug === "n1-neck-decollete" ? (
+        <Reveal>
+          <N1WhatItsForAndFeel />
+        </Reveal>
+      ) : (
+        p.benefits && <KeyBenefits benefits={p.benefits} />
+      )}
+      {p.slug === "n1-neck-decollete" && (
+        <Reveal>
+          <N1HowToUse />
+        </Reveal>
+      )}
       {p.slug === "recovery-masque" && <IncludedSpatula />}
       {p.actives && (
         <Reveal>
           <ClinicallyDosed actives={p.actives} />
         </Reveal>
       )}
+      {/* N1 has no owner-approved formula/actives data yet — a distinct,
+          honest placeholder ships instead of reusing ClinicallyDosed (which
+          would either render nothing, or invent percentages). */}
+      {p.slug === "n1-neck-decollete" && (
+        <Reveal>
+          <N1FormulaTransparencyPlaceholder />
+        </Reveal>
+      )}
       {p.complex && (
         <Reveal>
           <TheScience complex={p.complex} slug={p.slug} />
+        </Reveal>
+      )}
+      {p.slug === "n1-neck-decollete" && (
+        <Reveal>
+          <N1EvidencePlaceholder />
         </Reveal>
       )}
       <ScienceLinks slug={p.slug} />
@@ -220,17 +256,32 @@ export default function ProductPage({
           <UsageGuidance />
         </Reveal>
       )}
-      {p.ritualOrder !== null && (
+      {/* Launch products (Essence, Terra Radiance Crème, Recovery Masque, N1)
+          get routine-position + pair-with guidance grounded in the real AM/PM
+          launch architecture, instead of the legacy "first other ritual
+          product" heuristic. Legacy ritual products that are NOT part of the
+          launch (Cellular Cleanser, Cellular Mist) keep the original
+          CompleteYourRitual behavior unchanged, per
+          CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §4. */}
+      {p.launchRitual ? (
         <Reveal>
-          <CompleteYourRitual currentSlug={p.slug} />
+          <LaunchRoutinePosition currentSlug={p.slug} />
         </Reveal>
+      ) : (
+        p.ritualOrder !== null && (
+          <Reveal>
+            <CompleteYourRitual currentSlug={p.slug} />
+          </Reveal>
+        )
       )}
-      <StickyPurchaseBar
-        slug={p.slug}
-        name={p.name}
-        image={p.image}
-        subscriptionPrice={p.price.subscription}
-      />
+      {isPurchasable(p) && (
+        <StickyPurchaseBar
+          slug={p.slug}
+          name={p.name}
+          image={p.image}
+          subscriptionPrice={p.price.subscription}
+        />
+      )}
     </div>
   );
 }
@@ -350,7 +401,7 @@ function WhatsInside({ slugs }: { slugs: string[] }) {
             >
               <div
                 className="relative h-20 w-20 shrink-0 overflow-hidden"
-                style={{ backgroundColor: productTint(item.color.hex) }}
+                style={{ backgroundColor: NEUTRAL_FRAME_BG }}
               >
                 <Image
                   src={item.image}
@@ -468,7 +519,232 @@ function ClinicallyDosed({
   );
 }
 
+// Customer-facing buy-box replacement for any product with no owner-approved
+// price yet (currently only N1). Plain commerce copy, not an internal review
+// label — see CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §1 and §3.
+function PriceToBeAnnounced() {
+  return (
+    <div className="border border-ink/15 bg-cloud/20 p-5">
+      <p className="text-[12px] uppercase tracking-[0.18em] text-ochre">
+        Price to be announced
+      </p>
+      <p className="mt-2 text-sm leading-relaxed text-ink/70">
+        Not yet available for purchase. In the meantime,{" "}
+        <Link href="/contact" className="border-b border-ochre text-ochre">
+          contact us
+        </Link>{" "}
+        with questions, or explore the rest of{" "}
+        <Link href="/ritual" className="border-b border-ochre text-ochre">
+          The CHIAREL Four-Product Ritual
+        </Link>
+        .
+      </p>
+    </div>
+  );
+}
+
+// N1 PDP sections 2–3 from CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §7.
+// Cosmetic-appearance language only, drawn from the brief's own approved
+// draft templates — pending final owner/regulatory sign-off before this
+// product is promoted at scale (DRAFT — OWNER / REGULATORY APPROVAL REQUIRED).
+function N1WhatItsForAndFeel() {
+  return (
+    <Reveal className="border-t border-ink/10 bg-cloud/40 py-16">
+      <div className="mx-auto grid max-w-3xl gap-10 px-6 sm:grid-cols-2">
+        <div>
+          <h2 className="font-serif text-2xl">What it&rsquo;s for</h2>
+          <ul className="mt-4 space-y-2 text-sm leading-relaxed text-ink/75">
+            <li>· The visible appearance of dryness</li>
+            <li>· Crepey-looking texture</li>
+            <li>· The appearance of horizontal lines</li>
+            <li>· Reduced visible suppleness</li>
+          </ul>
+        </div>
+        <div>
+          <h2 className="font-serif text-2xl">What it feels like</h2>
+          <ul className="mt-4 space-y-2 text-sm leading-relaxed text-ink/75">
+            <li>· Fragrance-free</li>
+            <li>· Cushioning</li>
+            <li>· Low drag</li>
+            <li>· A satin finish</li>
+          </ul>
+        </div>
+      </div>
+    </Reveal>
+  );
+}
+
+// N1 PDP section 4. General cosmetic application guidance only — no medical
+// or clinical framing (DRAFT — OWNER / REGULATORY APPROVAL REQUIRED).
+function N1HowToUse() {
+  return (
+    <div className="border-t border-ink/10 bg-white py-16">
+      <div className="mx-auto max-w-2xl px-6 text-center">
+        <h2 className="font-serif text-2xl">How to use</h2>
+        <ul className="mx-auto mt-5 max-w-md space-y-2 text-left text-sm leading-relaxed text-ink/75">
+          <li>· Apply across the neck, jawline, décolleté, and upper chest</li>
+          <li>· Use upward, sweeping movements</li>
+          <li>· Use at night, as the closing step of the evening ritual</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+// N1 PDP section 7. No formula/actives data exists yet — this is a
+// deliberately honest placeholder, not a reuse of ClinicallyDosed (which
+// would either render nothing or risk implying invented percentages).
+function N1FormulaTransparencyPlaceholder() {
+  return (
+    <div className="mx-auto max-w-2xl border-t border-ink/10 px-6 py-16 text-center">
+      <h2 className="font-serif text-2xl leading-snug">Formula Transparency</h2>
+      <p className="mt-3 text-sm leading-relaxed text-ink/70">
+        CHIAREL discloses every active ingredient and its exact concentration
+        on the product page, with no undisclosed &ldquo;proprietary
+        blend.&rdquo; N1&rsquo;s full formulation record — the same standard
+        applied to every other CHIAREL product — will be published here once
+        the formula is finalized.
+      </p>
+    </div>
+  );
+}
+
+// N1 PDP section 8. No third-party or in-house testing has been completed
+// yet — stated plainly rather than implying evidence that doesn't exist.
+function N1EvidencePlaceholder() {
+  return (
+    <div className="border-t border-ink/10 bg-ink py-16 text-ivory">
+      <div className="mx-auto max-w-xl px-6 text-center">
+        <h2 className="font-serif text-2xl text-champagne">Testing &amp; Evidence</h2>
+        <p className="mt-4 text-sm leading-relaxed text-ivory/75">
+          N1 is designed to support hydration, comfort, and a smoother-looking
+          appearance in the skin below the jawline. Product-specific testing
+          results are not yet available; this page will be updated with
+          approved evidence once testing is complete.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// The launch ritual's real AM/PM sequences, as approved in
+// CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §5 — the single source both
+// the homepage, /ritual, and this component draw from conceptually (kept
+// local here since it drives PDP-only routine-position/pairing copy, not
+// page layout).
+const LAUNCH_AM_ROUTE = ["chiarel-essence", "terra-radiance-creme"];
+const LAUNCH_PM_ROUTE = ["chiarel-essence", "recovery-masque", "n1-neck-decollete"];
+
+function launchPairsFor(slug: string): string[] {
+  const pairs = new Set<string>();
+  for (const route of [LAUNCH_AM_ROUTE, LAUNCH_PM_ROUTE]) {
+    if (route.includes(slug)) {
+      route.forEach((s) => {
+        if (s !== slug) pairs.add(s);
+      });
+    }
+  }
+  return Array.from(pairs);
+}
+
+// Replaces CompleteYourRitual for the four launch products only. Rather than
+// "the first other ritual product" (the legacy heuristic), this shows the
+// real AM and/or PM sequence the current product belongs to, plus which
+// other launch products it pairs with — grounded entirely in
+// launchRitualProducts data, nothing invented per product.
+function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
+  const inAM = LAUNCH_AM_ROUTE.includes(currentSlug);
+  const inPM = LAUNCH_PM_ROUTE.includes(currentSlug);
+  const pairSlugs = launchPairsFor(currentSlug);
+  const pairs = pairSlugs
+    .map((slug) => getProduct(slug))
+    .filter((p): p is Product => p !== undefined);
+
+  function RouteStrip({ label, route }: { label: string; route: string[] }) {
+    return (
+      <div>
+        <p className="text-[11px] uppercase tracking-[0.16em] text-ink/65">{label}</p>
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          {route.map((slug, i) => {
+            const item = getProduct(slug);
+            if (!item) return null;
+            const isCurrent = slug === currentSlug;
+            return (
+              <span key={slug} className="flex items-center gap-2">
+                {isCurrent ? (
+                  <span className="border-b border-ochre pb-0.5 text-sm text-ochre">
+                    {item.name}
+                  </span>
+                ) : (
+                  <Link
+                    href={`/shop/${slug}`}
+                    className="text-sm text-ink/70 hover:text-ochre"
+                  >
+                    {item.name}
+                  </Link>
+                )}
+                {i < route.length - 1 && <span className="text-ink/40">→</span>}
+              </span>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mx-auto mt-4 max-w-2xl border-t border-ink/10 px-6 pb-20 pt-14">
+      <h2 className="text-center font-serif text-2xl">Routine Position</h2>
+      <div className="mt-8 space-y-6">
+        {inAM && <RouteStrip label="Morning" route={LAUNCH_AM_ROUTE} />}
+        {inPM && <RouteStrip label="Evening" route={LAUNCH_PM_ROUTE} />}
+      </div>
+      {pairs.length > 0 && (
+        <div className="mt-10 border-t border-ink/10 pt-8">
+          <p className="text-center text-[11px] uppercase tracking-[0.16em] text-ink/65">
+            Pairs with
+          </p>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            {pairs.map((item) => (
+              <Link
+                key={item.slug}
+                href={`/shop/${item.slug}`}
+                className="flex items-center gap-4 rounded-sm border border-ink/10 p-4 transition hover:border-ochre"
+              >
+                <div
+                  className="relative h-16 w-16 shrink-0 overflow-hidden"
+                  style={{ backgroundColor: NEUTRAL_FRAME_BG }}
+                >
+                  <Image src={item.image} alt={productImageAlt(item)} fill sizes="64px" className="object-cover" />
+                </div>
+                <div>
+                  <p className="font-serif text-base leading-snug">{item.name}</p>
+                  <p className="mt-0.5 text-[11px] uppercase tracking-[0.16em] text-ink/65">
+                    {item.step}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// N1 has no complex name yet (see N1FormulaTransparencyPlaceholder above), so
+// it never reaches TheScience's generic `p.complex` gate — this entry exists
+// for architectural consistency with the other launch products and is ready
+// to be wired in once a real complex name is approved. Draft wording matches
+// CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §11 verbatim (DRAFT — OWNER /
+// REGULATORY APPROVAL REQUIRED).
 const mechanismBySlug: Record<string, { step: string; text: string }[]> = {
+  "n1-neck-decollete": [
+    {
+      step: "01",
+      text: "Designed to support hydration, comfort, and a smoother-looking appearance in the skin below the jawline.",
+    },
+  ],
   "cellular-cleanser": [
     { step: "01", text: "A postbiotic lysate supports the skin's surface microbiome balance during cleansing." },
     { step: "02", text: "A prebiotic complex feeds that same microbial balance, rather than stripping it." },
@@ -487,7 +763,7 @@ const mechanismBySlug: Record<string, { step: string; text: string }[]> = {
   "recovery-masque": [
     { step: "01", text: "L-Ornithine is a natural component of the skin's own moisture-regulation system." },
     { step: "02", text: "Panthenol supports moisture replenishment and comfort overnight." },
-    { step: "03", text: "Formulated as the ritual's closing gesture, while the skin recovers at rest." },
+    { step: "03", text: "Formulated as the evening ritual's face-recovery step, before N1." },
   ],
 };
 
@@ -649,7 +925,7 @@ function CompleteYourRitual({ currentSlug }: { currentSlug: string }) {
       >
         <div
           className="relative h-24 w-24 shrink-0 overflow-hidden"
-          style={{ backgroundColor: productTint(next.color.hex) }}
+          style={{ backgroundColor: NEUTRAL_FRAME_BG }}
         >
           <Image src={next.image} alt={next.name} fill sizes="96px" className="object-cover" />
         </div>
@@ -659,7 +935,7 @@ function CompleteYourRitual({ currentSlug }: { currentSlug: string }) {
             {next.step}
           </p>
           <p className="text-[12px] text-ink/65">
-            ${next.price.subscription} with subscription
+            ${next.price!.subscription} with subscription
           </p>
         </div>
       </Link>

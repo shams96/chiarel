@@ -2,14 +2,22 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ritualProducts } from "@/lib/products";
-import { productTint } from "@/lib/color";
+import { launchRitualProducts, productImageAlt, isPurchasable } from "@/lib/products";
+import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { useCart, unitPrice } from "@/lib/cart-context";
 
 export default function BuildYourRitualPage() {
   const { add } = useCart();
+  // Only priced launch products are selectable by default — N1 has no
+  // price yet (see CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §1) and is
+  // rendered below as a non-selectable, clearly labeled "coming soon" tile,
+  // excluded from the toggle set, the subtotal, and the add-to-bag loop so
+  // the builder never attempts to price or cart a priceless product.
+  const selectableProducts = launchRitualProducts.filter(isPurchasable);
+  const comingSoonProducts = launchRitualProducts.filter((p) => !isPurchasable(p));
+
   const [selected, setSelected] = useState<Set<string>>(
-    new Set(ritualProducts.map((p) => p.slug))
+    new Set(selectableProducts.map((p) => p.slug))
   );
   const [adding, setAdding] = useState(false);
 
@@ -22,7 +30,7 @@ export default function BuildYourRitualPage() {
     });
   };
 
-  const chosen = ritualProducts.filter((p) => selected.has(p.slug));
+  const chosen = selectableProducts.filter((p) => selected.has(p.slug));
   const subtotal = chosen.reduce(
     (sum, p) => sum + unitPrice(p, "subscription"),
     0
@@ -43,13 +51,13 @@ export default function BuildYourRitualPage() {
         Build Your Ritual
       </h1>
       <p className="mt-4 max-w-xl text-sm text-ink/70">
-        Choose exactly the steps your skin needs. Each is priced and
-        delivered on its own — nothing is bundled into a set price, so what
-        you leave out costs you nothing.
+        Choose exactly the steps your skin needs from the CHIAREL Four-Product
+        Ritual. Each is priced and delivered on its own — nothing is bundled
+        into a set price, so what you leave out costs you nothing.
       </p>
 
       <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {ritualProducts.map((p) => {
+        {selectableProducts.map((p) => {
           const isSelected = selected.has(p.slug);
           return (
             <button
@@ -64,11 +72,11 @@ export default function BuildYourRitualPage() {
             >
               <div
                 className="relative aspect-square w-full overflow-hidden"
-                style={{ backgroundColor: productTint(p.color.hex) }}
+                style={{ backgroundColor: NEUTRAL_FRAME_BG }}
               >
                 <Image
                   src={p.image}
-                  alt={p.name}
+                  alt={productImageAlt(p)}
                   fill
                   sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                   className="object-cover"
@@ -86,7 +94,7 @@ export default function BuildYourRitualPage() {
               </div>
               <div>
                 <p className="text-[11px] uppercase tracking-[0.14em] text-ink/65">
-                  Step {p.ritualOrder} · {p.step}
+                  {p.timeOfUse} · {p.descriptor}
                 </p>
                 <p className="mt-1 text-sm font-medium leading-tight">
                   {p.name}
@@ -98,6 +106,39 @@ export default function BuildYourRitualPage() {
             </button>
           );
         })}
+
+        {comingSoonProducts.map((p) => (
+          <div
+            key={p.slug}
+            aria-disabled="true"
+            className="flex flex-col items-start gap-3 rounded-sm border border-ink/10 bg-cloud/20 p-4 text-left opacity-70"
+          >
+            <div
+              className="relative aspect-square w-full overflow-hidden"
+              style={{ backgroundColor: NEUTRAL_FRAME_BG }}
+            >
+              <Image
+                src={p.image}
+                alt={productImageAlt(p)}
+                fill
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                className="object-cover"
+              />
+              <span className="absolute left-2 top-2 bg-ivory/90 px-2 py-1 text-[10px] uppercase tracking-[0.16em] text-ink/70">
+                Coming Soon
+              </span>
+            </div>
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.14em] text-ink/65">
+                {p.timeOfUse} · {p.descriptor}
+              </p>
+              <p className="mt-1 text-sm font-medium leading-tight">
+                {p.name}
+              </p>
+              <p className="mt-1 text-sm text-ink/65">Price to be announced</p>
+            </div>
+          </div>
+        ))}
       </div>
 
       <div className="sticky bottom-6 mt-12 flex flex-col items-center gap-3 rounded-sm border border-ink/15 bg-ivory/95 p-6 shadow-lg backdrop-blur sm:flex-row sm:justify-between">

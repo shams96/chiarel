@@ -6,7 +6,7 @@ import Link from "next/link";
 import { QUESTIONS, scoreAxes, recommend } from "@/lib/skin-assessment";
 import { getProduct, getProductOrThrow } from "@/lib/products";
 import { useCart } from "@/lib/cart-context";
-import { productTint } from "@/lib/color";
+import { NEUTRAL_FRAME_BG } from "@/lib/color";
 
 export default function AssessmentPage() {
   const [step, setStep] = useState(0);
@@ -54,7 +54,7 @@ export default function AssessmentPage() {
               <div key={r.slug} className="flex flex-col gap-5 sm:flex-row sm:items-center">
                 <div
                   className="relative h-32 w-32 shrink-0 overflow-hidden"
-                  style={{ backgroundColor: productTint(p.color.hex) }}
+                  style={{ backgroundColor: NEUTRAL_FRAME_BG }}
                 >
                   <Image src={p.image} alt={p.name} fill sizes="128px" className="object-cover" />
                 </div>
@@ -66,7 +66,7 @@ export default function AssessmentPage() {
                       href={`/shop/${p.slug}`}
                       className="tabular-nums border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
                     >
-                      View — ${p.price.subscription} with subscription
+                      View — ${p.price!.subscription} with subscription
                     </Link>
                     <button
                       onClick={() => add(p.slug, "subscription")}
@@ -93,7 +93,7 @@ export default function AssessmentPage() {
                 href="/shop/the-founding-pair"
                 className="mt-3 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
               >
-                View The Founding Pair — ${getProductOrThrow("the-founding-pair").price.subscription}
+                View The Founding Pair — ${getProductOrThrow("the-founding-pair").price!.subscription}
               </Link>
             </div>
           )}

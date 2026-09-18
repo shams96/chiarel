@@ -35,7 +35,12 @@
         "name": "Prebiotic Complex",
         "percent": "0.3%"
       }
-    ]
+    ],
+    "launchRitual": false,
+    "launchRitualOrder": null,
+    "launchRole": "deferred",
+    "launchStatus": "deferred",
+    "productColorToken": "Cloud Dancer"
   },
   {
     "slug": "cellular-mist",
@@ -69,7 +74,12 @@
         "name": "Hyaluronic Acid (Low Molecular Weight)",
         "percent": "0.3%"
       }
-    ]
+    ],
+    "launchRitual": false,
+    "launchRitualOrder": null,
+    "launchRole": "deferred",
+    "launchStatus": "deferred",
+    "productColorToken": "Cloud Dancer"
   },
   {
     "slug": "chiarel-essence",
@@ -109,7 +119,13 @@
         "name": "Bioactive Ferment Lysate (BFL)",
         "percent": "0.30%"
       }
-    ]
+    ],
+    "launchRitual": true,
+    "launchRitualOrder": 1,
+    "launchRole": "preparation",
+    "timeOfUse": "AM/PM",
+    "launchStatus": "launch",
+    "productColorToken": "Peach Dust"
   },
   {
     "slug": "terra-radiance-creme",
@@ -131,13 +147,13 @@
       "oneTime": 158
     },
     "image": "/assets/products/terra-radiance-creme-shore.png",
-    "blurb": "The Icon Product of the House. A daily crème that supports radiance and resilience against Modern Biological Stress™.",
+    "blurb": "The Icon Product of the House. A daily barrier-comfort crème that supports hydration and a refined, comfortable day finish against Modern Biological Stress™.",
     "role": "Icon Product",
     "badge": "Icon of the House",
     "benefits": [
-      "Supports the skin barrier with ceramide and niacinamide",
-      "Helps defend against everyday environmental stress",
-      "Leaves skin feeling comfortable through the day"
+      "Supports barrier comfort with ceramide and niacinamide",
+      "Helps improve the appearance of dryness across the day",
+      "Leaves skin feeling hydrated and comfortable, with a refined finish"
     ],
     "icon": true,
     "actives": [
@@ -149,7 +165,13 @@
         "name": "Niacinamide",
         "percent": "3.0%"
       }
-    ]
+    ],
+    "launchRitual": true,
+    "launchRitualOrder": 2,
+    "launchRole": "day-foundation",
+    "timeOfUse": "AM",
+    "launchStatus": "launch",
+    "productColorToken": "Red Ochre"
   },
   {
     "slug": "recovery-masque",
@@ -170,14 +192,14 @@
       "subscription": 118,
       "oneTime": 148
     },
-    "image": "/assets/products/masque-shore.png",
-    "blurb": "An overnight masque that strengthens and supports recovery while you rest — the ritual's closing gesture.",
+    "image": "/assets/products/recovery-masque-jar.png",
+    "blurb": "An overnight masque that strengthens and supports facial recovery while you rest — the evening ritual's face-recovery step, followed by N1 Neck & Décolleté Renewal Emulsion™.",
     "role": "Night Recovery Hero",
     "badge": "Night Icon",
     "benefits": [
-      "Supports overnight recovery while you rest",
+      "Supports overnight facial recovery while you rest",
       "Panthenol helps soothe and replenish moisture",
-      "The ritual's closing gesture, formulated for night"
+      "The evening ritual's face-recovery step, before N1"
     ],
     "icon": true,
     "actives": [
@@ -189,7 +211,13 @@
         "name": "Panthenol",
         "percent": "2.0%"
       }
-    ]
+    ],
+    "launchRitual": true,
+    "launchRitualOrder": 3,
+    "launchRole": "night-treatment",
+    "timeOfUse": "PM",
+    "launchStatus": "launch",
+    "productColorToken": "Formal Garden"
   },
   {
     "slug": "lip-concentrate",
@@ -218,7 +246,13 @@
       "Complements the facial ritual, used any time"
     ],
     "badge": "New",
-    "icon": true
+    "icon": true,
+    "launchRitual": false,
+    "launchRitualOrder": null,
+    "launchRole": "standalone",
+    "timeOfUse": "standalone",
+    "launchStatus": "deferred",
+    "productColorToken": "Peach Dust"
   },
   {
     "slug": "the-founding-pair",
@@ -244,7 +278,12 @@
     "badge": "Founding Pair",
     "set": true,
     "icon": false,
-    "includes": ["chiarel-essence", "terra-radiance-creme"]
+    "includes": ["chiarel-essence", "terra-radiance-creme"],
+    "launchRitual": false,
+    "launchRitualOrder": null,
+    "launchRole": "legacy-set",
+    "launchStatus": "legacy",
+    "productColorToken": "Champagne Gold"
   },
   {
     "slug": "the-ritual-set",
@@ -270,6 +309,48 @@
     "badge": "The Ritual, Complete",
     "set": true,
     "icon": false,
-    "includes": ["cellular-cleanser", "cellular-mist", "chiarel-essence", "terra-radiance-creme"]
+    "includes": ["cellular-cleanser", "cellular-mist", "chiarel-essence", "terra-radiance-creme"],
+    "launchRitual": false,
+    "launchRitualOrder": null,
+    "launchRole": "legacy-set",
+    "launchStatus": "legacy",
+    "productColorToken": "Champagne Gold"
+  },
+  {
+    "slug": "n1-neck-decollete",
+    "sku": "N1-R",
+    "name": "N1 Neck & Décolleté Renewal Emulsion™",
+    "descriptor": "Fragrance-Free Nightly Renewal Emulsion",
+    "role": "The Neck & Décolleté Treatment",
+    "step": "Renew PM",
+    "ritualOrder": null,
+    "family": "CHIAREL Verde™",
+    "color": {
+      "name": "Formal Garden",
+      "hex": "#1F5129"
+    },
+    "complex": "",
+    "line": "",
+    "size": "Size to be confirmed",
+    "price": {
+      "subscription": 118,
+      "oneTime": 138
+    },
+    "hidePriceUntilApproved": false,
+    "image": "/assets/products/n1-neck-decollete-jar.png",
+    "imageIsPlaceholder": false,
+    "blurb": "A fragrance-free nightly emulsion for the neck, jawline, and décolleté — designed to help the appearance of dryness, crepey-looking texture, and fine lines feel and look more comfortable, smooth, and supple with continued use.",
+    "benefits": [
+      "Helps improve the appearance of dryness across the neck and décolleté",
+      "Designed for crepey-looking texture and the visible appearance of fine lines",
+      "Supports a comfortable, hydrated skin feel with a cushioning, low-drag, satin finish"
+    ],
+    "icon": true,
+    "launchRitual": true,
+    "launchRitualOrder": 4,
+    "launchRole": "hero",
+    "timeOfUse": "PM",
+    "launchStatus": "launch",
+    "productColorToken": "Formal Garden"
   }
 ]

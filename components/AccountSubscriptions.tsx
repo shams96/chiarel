@@ -142,7 +142,7 @@ export default function AccountSubscriptions() {
                   </p>
                   <p className="tabular-nums mt-0.5 text-[12px] text-ink/65">
                     Delivered every {CADENCE_DAYS} days · $
-                    {product.price.subscription}/delivery
+                    {product.price!.subscription}/delivery
                   </p>
                   {sub.paused ? (
                     <p className="mt-2 text-[13px] text-ink/60">

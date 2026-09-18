@@ -20,7 +20,8 @@ function isNonEmptyString(v: unknown): v is string {
 
 export const POST = withApiErrorHandling(async (req: NextRequest) => {
   const body = await req.json().catch(() => null);
-  const { email, firstName, lastName, address, city, state, zip } = body ?? {};
+  const { email, firstName, lastName, address, city, state, zip, termsAccepted, termsVersion } =
+    body ?? {};
 
   const required = { email, firstName, lastName, address, city, state, zip };
   const missing = Object.entries(required).filter(([, v]) => !isNonEmptyString(v));
@@ -32,6 +33,15 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
   }
   if (!email.includes("@")) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
+  }
+  // Server-side enforcement, not just a disabled submit button — a disabled
+  // client-side control is a UX nicety, not the actual control. See
+  // claudedocs/specs/dispute-risk-mitigation/PLAN.md item 2.
+  if (termsAccepted !== true || !isNonEmptyString(termsVersion)) {
+    return NextResponse.json(
+      { error: "You must agree to the Refund Policy and Terms of Service to continue." },
+      { status: 400 }
+    );
   }
 
   const cart = await getCartWithTotals();
@@ -60,6 +70,8 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
       total,
       bonusSample: cart.subtotal >= EXTRA_SAMPLE_THRESHOLD,
       status: "pending",
+      termsAcceptedAt: new Date(),
+      termsVersion,
       items: {
         create: cart.lines.map((line) => ({
           productSlug: line.slug,

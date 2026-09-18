@@ -22,8 +22,8 @@ const faqs = [
     a: "A dedicated eye contour treatment is not currently part of the CHIAREL catalog. In the meantime, apply CHIAREL Essence™ and your day or night moisturizer carefully around the orbital bone with a lighter touch, avoiding the lash line.",
   },
   {
-    q: "What is the correct order of the CHIAREL ritual?",
-    a: "Cleanse with Cellular Cleanser™ → Tone with Cellular Mist™ → Treat with CHIAREL Essence™ → Moisturize with Terra Radiance Crème™ in the morning, or Recovery Masque™ in the evening.",
+    q: "What is the correct order of the CHIAREL Four-Product Ritual?",
+    a: "Mornings: CHIAREL Essence™ → Terra Radiance Crème™. Evenings: CHIAREL Essence™ → Recovery Masque™ → N1 Neck & Décolleté Renewal Emulsion™. Cellular Cleanser™ and Cellular Mist™ remain available as an optional cleanse-and-tone step ahead of either routine.",
   },
 ];
 
@@ -49,33 +49,39 @@ export default function RitualGuidePage() {
         ← Journal
       </Link>
       <h1 className="mt-2 font-serif text-4xl leading-tight">
-        How to Use the CHIAREL Daily Ritual
+        How to Use the CHIAREL Four-Product Ritual
       </h1>
       <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink/75">
-        The CHIAREL ritual is a five-step daily practice built for skin
-        intelligence. Each step prepares the skin for the next — supporting
-        clarity, resilience, and overnight recovery.
+        The CHIAREL Four-Product Ritual is a focused morning and evening
+        practice for hydration, comfort, renewal, and the skin below the
+        jawline. Each step prepares the skin for the next.
       </p>
 
       <section className="mt-12 grid gap-10 sm:grid-cols-2">
         <div>
           <h3 className="font-serif text-lg">Morning ritual</h3>
           <ol className="mt-3 space-y-2 text-sm text-ink/80">
-            <li>1. Cellular Cleanser™ — adaptive purifying cleanser</li>
-            <li>2. Cellular Mist™ — conditioning preparation mist</li>
-            <li>3. CHIAREL Essence™ — Signature Serum of the House</li>
-            <li>4. Terra Radiance Crème™ — daytime radiance treatment</li>
+            <li>1. CHIAREL Essence™ — Signature Serum of the House</li>
+            <li>2. Terra Radiance Crème™ — daytime radiance treatment</li>
           </ol>
         </div>
         <div>
           <h3 className="font-serif text-lg">Evening ritual</h3>
           <ol className="mt-3 space-y-2 text-sm text-ink/80">
-            <li>1. Cellular Cleanser™</li>
-            <li>2. Cellular Mist™</li>
-            <li>3. CHIAREL Essence™</li>
-            <li>4. Recovery Masque™ — overnight recovery treatment</li>
+            <li>1. CHIAREL Essence™</li>
+            <li>2. Recovery Masque™ — overnight recovery treatment</li>
+            <li>3. N1 Neck &amp; Décolleté Renewal Emulsion™ — neck and décolleté renewal</li>
           </ol>
         </div>
+      </section>
+
+      <section className="mt-12 border-t border-ink/10 pt-10">
+        <h3 className="font-serif text-lg">Optional preparation</h3>
+        <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/75">
+          Cellular Cleanser™ and Cellular Mist™ remain fully available as an
+          optional cleanse-and-tone step ahead of either routine above — not
+          part of the core four-product ritual, never discontinued.
+        </p>
       </section>
 
       <section className="mt-14 border-t border-ink/10 pt-10">
@@ -157,6 +163,12 @@ export default function RitualGuidePage() {
           className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
         >
           Shop Recovery Masque™
+        </Link>
+        <Link
+          href="/shop/n1-neck-decollete"
+          className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
+        >
+          Discover N1
         </Link>
         <Link
           href="/assessment"
