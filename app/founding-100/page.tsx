@@ -16,8 +16,12 @@ export const dynamic = "force-dynamic";
 
 export default async function Founding100Page() {
   const masque = getProductOrThrow("recovery-masque");
-  const ninetyDaySubscriptionTotal = masque.price.subscription * 2;
-  const ninetyDayOneTimeTotal = masque.price.oneTime * 2;
+  // Recovery Masque is an existing, unaffected priced product — the
+  // non-null assertions below are a type-compatibility artifact of making
+  // `Product.price` optional for N1's sake, not a behavior change. See
+  // CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §1.
+  const ninetyDaySubscriptionTotal = masque.price!.subscription * 2;
+  const ninetyDayOneTimeTotal = masque.price!.oneTime * 2;
   const circleCheckoutTotal = Math.round(ninetyDaySubscriptionTotal * 0.8);
   const circleCredit = Math.round(circleCheckoutTotal * 0.25);
   const circleNet = circleCheckoutTotal - circleCredit;
@@ -104,7 +108,7 @@ export default async function Founding100Page() {
               <strong className="text-ink">1. Join.</strong> The first 100
               members receive the 90-Day Recovery Ritual — two consecutive
               deliveries of Recovery Masque™, 45 days apart — at 50% off at
-              checkout: ${masque.price.subscription} instead of $
+              checkout: ${masque.price!.subscription} instead of $
               {ninetyDaySubscriptionTotal}.
             </li>
             <li>

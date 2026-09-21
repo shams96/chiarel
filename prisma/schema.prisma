@@ -76,6 +76,24 @@ model Order {
   // extra sample stays a surprise when they open the box.
   bonusSample   Boolean     @default(false)
   items         OrderItem[]
+
+  // Dispute/chargeback risk mitigation — see claudedocs/specs/dispute-risk-mitigation/.
+  // termsAcceptedAt/termsVersion is the checkout consent record: real evidence for
+  // Stripe's "Refund policy details" dispute-response field, not just a UI checkbox.
+  termsAcceptedAt DateTime?
+  termsVersion    String?
+  // Flat fields on Order rather than a separate Dispute table/relation — a dispute
+  // always maps to exactly one order and doesn't need its own history of state
+  // transitions here (Stripe's own dashboard is the audit trail for that).
+  // PaymentIntent id, not charge id — Stripe's Dispute object exposes
+  // `payment_intent` directly, so matching on that avoids an extra charge lookup.
+  stripePaymentIntentId String?
+  disputeId       String?   @unique
+  disputeStatus   String?
+  disputeReason   String?
+  disputeAmount   Int?
+  disputeOpenedAt DateTime?
+  disputeClosedAt DateTime?
 }
 
 model OrderItem {
@@ -98,4 +116,32 @@ model FoundingSignup {
   social     String?
   referredBy String?
   source     String?
+}
+
+// Internal/admin RBAC — see claudedocs/specs/admin-rbac/. Distinct from customer
+// orders above: these are accounts for people operating the business (Admin/Member/
+// Viewer), not customers, who never authenticate at all (guest checkout only).
+enum Role {
+  ADMIN
+  MEMBER
+  VIEWER
+}
+
+model User {
+  id           String    @id @default(cuid())
+  createdAt    DateTime  @default(now())
+  email        String    @unique
+  passwordHash String
+  role         Role
+  sessions     Session[]
+}
+
+// DB-backed rather than a stateless JWT so a role change or account cutoff takes
+// effect immediately (delete the row) instead of waiting out a token's expiry.
+model Session {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  createdAt DateTime @default(now())
+  expiresAt DateTime
 }

@@ -23,6 +23,14 @@ const nextConfig = {
     // compressed at rest rather than resized on demand.
     unoptimized: true,
   },
+  // instrumentation.ts's register() hook (used to start the dispute-rate
+  // monitor's daily background check — see lib/dispute-alert-scheduler.ts)
+  // requires this explicitly on Next 14.x; it isn't on by default until Next 15.
+  // Confirmed by inspecting the actual build output: without this flag,
+  // instrumentation.ts is silently never compiled into .next at all.
+  experimental: {
+    instrumentationHook: true,
+  },
 };
 
 export default nextConfig;

@@ -8,8 +8,9 @@ import { useCart } from "@/lib/cart-context";
 const FOUNDING_100_PAGES = ["/", "/founding-100", "/shop/recovery-masque"];
 
 const nav = [
-  { href: "/ritual", label: "The Ritual" },
   { href: "/shop", label: "Shop" },
+  { href: "/shop/n1-neck-decollete", label: "Neck & Décolleté" },
+  { href: "/ritual", label: "The Ritual" },
   { href: "/science", label: "The Science" },
   { href: "/house", label: "The House" },
   { href: "/journal", label: "Journal" },

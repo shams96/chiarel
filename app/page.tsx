@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { products, ritualProducts, getProductOrThrow } from "@/lib/products";
+import { products, getProductOrThrow, launchRitualProducts, productImageAlt, isPurchasable } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import RitualCarousel from "@/components/RitualCarousel";
 import EvidenceGrid from "@/components/EvidenceGrid";
 import ResultsSection from "@/components/ResultsSection";
 import Reveal from "@/components/Reveal";
 import HeroIntro from "@/components/HeroIntro";
-import { productTint } from "@/lib/color";
+import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { productHoverClass } from "@/lib/motion";
 import {
   faqJsonLd,
@@ -24,23 +24,20 @@ import {
   FORMULATOR_EXTERNAL_URL,
 } from "@/lib/seo";
 
-// Homepage-specific authorship metadata — renders a real <meta name="author">
-// tag plus OpenGraph article:published_time/modified_time (property=, not
-// name=, which is the convention crawlers actually check for freshness).
-// The author link points to Grazia Savoriti's independent bio on Natural
-// You Srl's own site (not chiarel.com) — an external, third-party-verified
-// credential rather than a self-referential link back to our own /house page.
-// Next.js replaces the whole openGraph object per-route rather than merging
-// it with the root layout's, so title/description/siteName/url/images from
-// layout.tsx are repeated here verbatim rather than relying on inheritance.
+// Homepage-specific authorship metadata — see prior comment history for why
+// this is repeated rather than inherited from layout.tsx. Title/description
+// updated to lead with N1 (the four-product launch's category-defining
+// hero) since that's now the page's actual first-screen content — per
+// CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §9, this is a metadata update
+// that tracks a real visible-content change, not a cosmetic edit.
 export const metadata: Metadata = {
   authors: [{ name: "Grazia Savoriti", url: FORMULATOR_EXTERNAL_URL }],
   openGraph: {
     type: "article",
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — The House of Clarity™`,
+    title: `${SITE_NAME} — N1 Neck & Décolleté Renewal Emulsion`,
     description:
-      "CHIAREL™ · The House of Clarity™ · Advancing Cellular Clarity™. Intelligent formulations crafted in Isola del Liri, Italy.",
+      "A fragrance-free nightly emulsion for the skin below the jawline, at the center of CHIAREL's focused four-product ritual. Formulated in Isola del Liri, Italy.",
     url: SITE_URL,
     images: [{ url: "/assets/editorial/hero-shore-duo.png", width: 1536, height: 934 }],
     publishedTime: HOMEPAGE_PUBLISHED,
@@ -49,11 +46,17 @@ export const metadata: Metadata = {
   },
 };
 
+// FAQ pricing answer reworded: the prior version hardcoded specific dollar
+// figures and called the Ritual Set "five-step" — both go stale under the
+// four-product restructuring (N1 has no price yet, and "five-step"/"six-
+// product" language is retired sitewide per
+// CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md). Uses the brief's own "see
+// individual product pages" fallback rather than inventing new numbers.
 const faqs = [
   {
     question: "How much does CHIAREL cost?",
     answer:
-      "CHIAREL Essence™, the Signature Serum, is $151 on a 45-day subscription or $189 one-time. The Founding Pair (Essence + Terra Radiance Crème) is $243 subscription or $347 one-time, and individual products range from $46 for the Lip Concentrate to $372 for the complete five-step Ritual Set. Subscription pricing sets a recurring 45-day delivery at the discounted rate; one-time purchase is priced per order.",
+      "Pricing varies by product and by whether you choose subscription (recurring, every 45 days, at a discounted rate) or one-time purchase. See each product's page for its current price. N1 Neck & Décolleté Renewal Emulsion's price will be announced when it becomes available for purchase.",
   },
   {
     question: "What is CHIAREL made of?",
@@ -80,6 +83,11 @@ const faqs = [
     answer:
       "CHIAREL formulas are produced in Isola del Liri, Italy, with manufacturing partner Natural You Srl, using water drawn where the Liri meets the Fibreno — a river fed entirely by limestone karst springs, with no surface tributaries of its own. That confluence of newly filtered spring water is what gives The Cascata Complex™ its name. The formulation happens on-site rather than sourcing water and actives from a distance, so every CHIAREL batch is produced fresh, to order, instead of held in standing inventory ahead of demand.",
   },
+  {
+    question: "What is the CHIAREL Four-Product Ritual?",
+    answer:
+      "A focused morning and evening practice: mornings pair CHIAREL Essence™ with Terra Radiance Crème™; evenings pair CHIAREL Essence™ with Recovery Masque™ and N1 Neck & Décolleté Renewal Emulsion™. Cellular Cleanser™ and Cellular Mist™ remain available as optional preparation steps, and CHIAREL Lip Concentrate™ remains available beyond the core ritual.",
+  },
 ];
 
 const fitGuidance = [
@@ -94,14 +102,14 @@ const fitGuidance = [
     why: "Built around Palmitoyl Pentapeptide-4 (3%), the concentrated treatment layer of the ritual.",
   },
   {
-    concern: "Needs a hydration layer before treatment, or midday refresh",
-    fit: "Cellular Mist™",
-    why: "Low molecular weight Hyaluronic Acid for a fast-absorbing layer that preps skin for what follows.",
+    concern: "Neck, jawline, and décolleté show dryness or crepey-looking texture",
+    fit: "N1 Neck & Décolleté Renewal Emulsion™",
+    why: "Formulated specifically for the skin below the jawline, not repurposed face cream.",
   },
   {
     concern: "Wants overnight recovery without a heavy routine",
     fit: "Recovery Masque™",
-    why: "L-Ornithine and Panthenol formulated as the ritual's single closing, overnight gesture.",
+    why: "L-Ornithine and Panthenol formulated as the ritual's closing facial gesture, before N1.",
   },
 ];
 
@@ -145,9 +153,10 @@ const ingredientTable = products
 export default function Home() {
   const essence = getProductOrThrow("chiarel-essence");
   const masque = getProductOrThrow("recovery-masque");
+  const terraCreme = getProductOrThrow("terra-radiance-creme");
+  const n1 = getProductOrThrow("n1-neck-decollete");
   const foundingPair = getProductOrThrow("the-founding-pair");
   const ritualSet = getProductOrThrow("the-ritual-set");
-  const terraCreme = getProductOrThrow("terra-radiance-creme");
   const featuredIcons = products.filter((p) =>
     ["cellular-cleanser", "lip-concentrate"].includes(p.slug)
   );
@@ -168,17 +177,20 @@ export default function Home() {
           __html: JSON.stringify(
             webPageJsonLd({
               url: SITE_URL,
-              name: "CHIAREL™ — The House of Clarity™",
+              name: "CHIAREL™ — N1 Neck & Décolleté Renewal Emulsion",
               description:
-                "Customer-tested skincare formulated in Isola del Liri, Italy. Every active ingredient disclosed.",
+                "CHIAREL's focused four-product ritual, led by N1 Neck & Décolleté Renewal Emulsion. Customer-tested skincare formulated in Isola del Liri, Italy. Every active ingredient disclosed.",
             })
           ),
         }}
       />
+      {/* Only priced products get an Offer — N1 has no owner-approved price
+          yet, so it's excluded here rather than publishing an inaccurate
+          Offer. See CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §9. */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(offerCatalogJsonLd(products)),
+          __html: JSON.stringify(offerCatalogJsonLd(products.filter(isPurchasable))),
         }}
       />
       <script
@@ -188,79 +200,48 @@ export default function Home() {
         }}
       />
 
-      {/* Hero — the prior full-bleed landscape photo (hero-shore-duo.png) was
-          replaced (2026-09-05, warped/unusable). Its replacement is a square
-          product render, not a wide atmospheric shot, so the section is
-          rebuilt as a contained two-column layout (product right, copy left)
-          on a solid ivory ground instead of a full-bleed dark-gradient photo
-          banner — object-cover would badly crop a square product-only image.
-          liri-flow-bg (a live SVG feTurbulence noise filter, explicitly
-          marked "DRAFT... pending review before wider use" in its own
-          globals.css comment) was removed 2026-09-16: it rendered as a
-          blotchy, uneven texture on real devices rather than the refined
-          fine strata it was designed for, and competitive research (La Mer,
-          Augustinus Bader, Tatcha) found no real luxury skincare peer layers
-          an abstract generative pattern under hero copy — they use clean
-          flat color or real photography instead. The site already has one
-          authored, polished texture signature sitewide (the film-grain
-          body::after overlay) — this removes a second, unpolished one
-          competing with it rather than adding a third. */}
+      {/* Hero — N1-led per CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §6.
+          Supporting copy below is drafted from the brief's own supplied
+          text verbatim (DRAFT — OWNER / REGULATORY APPROVAL REQUIRED before
+          this is treated as final, per the brief's §15 review process).
+          Formal Garden replaces the prior champagne-gold glow/backdrop
+          tokens since N1's product color is Formal Garden, not the
+          Founding Pair's champagne gold. */}
       <section className="relative w-full overflow-hidden bg-ivory">
-        {/* Wide atmospheric wash — the same champagne-gold token already used
-            tightly behind the product photo below, extended into a much
-            larger, much softer glow anchored toward that same side. Gives
-            the flat ivory ground depth and a sense of light emanating from
-            the product, echoing HeroIntro's light-beam/droplet motif as a
-            persistent afterglow rather than a one-time animation, without
-            reintroducing a competing texture pattern (see liri-flow removal
-            note above) — pure gradient, same technique already proven
-            reliable elsewhere on the page. */}
         <div
           className="pointer-events-none absolute -right-1/4 top-0 h-full w-3/4"
           aria-hidden="true"
           style={{
             background:
-              "radial-gradient(ellipse 60% 70% at 70% 40%, rgba(214,197,160,0.22) 0%, rgba(214,197,160,0) 65%)",
+              "radial-gradient(ellipse 60% 70% at 70% 40%, rgba(31,81,41,0.16) 0%, rgba(31,81,41,0) 65%)",
           }}
         />
         <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-6 py-16 md:min-h-[640px] md:grid-cols-2 md:py-20">
           <div className="hero-in order-2 max-w-xl md:order-1">
             <p className="text-[12px] uppercase tracking-[0.5em] text-ochre">
-              The House of Clarity™
+              CHIAREL™ · The House of Clarity™
             </p>
-            {/* Fluid clamp() instead of a raw vw size + breakpoint overrides —
-                the previous text-[13vw] sm:text-6xl md:text-7xl combination
-                left the 13vw value uncapped for the entire 0-640px range, so
-                at 630px (just under the sm: breakpoint) it rendered at 82px
-                and then, one pixel wider at 640px, *snapped down* to 60px —
-                a non-monotonic jump where the heading shrinks as the
-                viewport grows. clamp(min, preferred, max) removes every
-                breakpoint discontinuity by construction: the preferred term
-                (1.5rem + 6vw) is tuned to pass close to the same sizes the
-                old breakpoints targeted (~47px mobile, ~60px at 640px,
-                ~70px at 768px, capping at 5.5rem/88px), but scales
-                continuously between them instead of jumping. */}
-            <h1 className="mt-7 font-serif text-[clamp(2.5rem,1.5rem+6vw,5.5rem)] leading-[0.95] tracking-[-0.02em] text-ink">
-              Advancing
-              <br />
-              Cellular Clarity™
+            <h1 className="mt-7 font-serif text-[clamp(2.25rem,1.4rem+5vw,4.5rem)] leading-[1.02] tracking-[-0.02em] text-ink">
+              The Neck &amp; Décolleté Treatment Your Routine Forgot.
             </h1>
+            {/* DRAFT — OWNER / REGULATORY APPROVAL REQUIRED */}
             <p className="mt-8 max-w-sm text-[15px] leading-relaxed text-ink/70">
-              Intelligent formulations, born at Isola del Liri, Italy — made
-              to support the skin against Modern Biological Stress.
+              A fragrance-free nightly emulsion designed for the skin below
+              the jawline — where visible dryness, crepey-looking texture,
+              and fine lines often need more than a face cream.
             </p>
             <div className="mt-10 flex flex-col items-start gap-4">
               <Link
-                href="/ritual"
+                href="/shop/n1-neck-decollete"
                 className="inline-block border border-ink px-10 py-4 text-[12px] uppercase tracking-[0.3em] text-ink transition hover:border-ochre hover:text-ochre"
               >
-                Enter the Ritual
+                Discover N1
               </Link>
               <Link
-                href="/assessment"
+                href="/ritual"
                 className="text-[11px] uppercase tracking-[0.2em] text-ink/60 underline decoration-ochre/50 underline-offset-4 hover:text-ochre"
               >
-                Not sure where to start? Take the Skin Assessment
+                Build Your Ritual
               </Link>
             </div>
           </div>
@@ -270,12 +251,12 @@ export default function Home() {
                 className="absolute inset-[8%] rounded-full blur-3xl"
                 style={{
                   background:
-                    "radial-gradient(circle, rgba(214,197,160,0.35) 0%, rgba(214,197,160,0) 70%)",
+                    "radial-gradient(circle, rgba(31,81,41,0.18) 0%, rgba(31,81,41,0) 70%)",
                 }}
               />
               <Image
-                src="/assets/products/essence-freeze-frame.png"
-                alt="CHIAREL Essence™"
+                src={n1.image}
+                alt={productImageAlt(n1)}
                 fill
                 priority
                 sizes="(max-width: 768px) 90vw, 448px"
@@ -289,46 +270,130 @@ export default function Home() {
         </div>
       </section>
 
-      <ResultsSection />
-
-      {/* Campaign banner — commissioned editorial illustration of the Cascata
-          Grande (watercolor-and-ink style, not a photograph) standing in for
-          real location photography, which doesn't exist yet. Deliberately
-          illustrative rather than photorealistic so it's never mistaken for
-          a documentary photo of the actual site — swap in a real place photo
-          when one exists. */}
-      <section className="relative section-y overflow-hidden border-y border-ink/10 text-ivory">
-        <Image
-          src="/assets/editorial/isola-del-liri-cascata.png"
-          alt="Editorial illustration of the Cascata Grande waterfall running through Isola del Liri, Italy"
-          fill
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-garden/85" />
-        <Reveal className="section-x-narrow relative text-center">
-          <h2 className="font-serif text-4xl leading-tight md:text-5xl">
-            Where Is CHIAREL™ Made?
-          </h2>
-          <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-ivory/75">
-            Before the Liri falls through Isola del Liri as the Cascata
-            Grande, it is met by the Fibreno — a river fed entirely by
-            limestone karst springs, with no surface tributaries of its
-            own. That confluence, water arriving newly filtered rather than
-            run off the surface, is what gives The Cascata Complex™ its
-            name and its place: formulated here, with our manufacturing
-            partner Natural You Srl, rather than sourced from a distance.
-          </p>
-          <Link
-            href="/journal/isola-del-liri-waterfall"
-            className="btn-press mt-6 inline-block border-b border-champagne pb-0.5 text-[12px] uppercase tracking-[0.18em] text-champagne transition-colors hover:text-ivory"
-          >
-            Read the Journal
-          </Link>
-        </Reveal>
+      {/* N1 visible-concern explanation — cosmetic, non-medical language only.
+          DRAFT — OWNER / REGULATORY APPROVAL REQUIRED. */}
+      <section className="section-y bg-white">
+        <div className="section-x">
+          <Reveal>
+            <h2 className="font-serif text-3xl leading-snug">
+              What N1 Is Designed For
+            </h2>
+          </Reveal>
+          <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              "Dryness",
+              "Crepey-looking texture",
+              "The appearance of horizontal lines",
+              "Reduced visible suppleness",
+            ].map((concern) => (
+              <li
+                key={concern}
+                className="border border-ink/10 p-6 text-center font-serif text-lg leading-snug text-ink"
+              >
+                {concern}
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
-      {/* Evidence — asymmetric label+grid, deliberately not another centered
-          block, so it doesn't repeat the Provenance section directly above it */}
+      {/* "Why the skin below the jawline needs its own ritual" —
+          DRAFT — OWNER / REGULATORY APPROVAL REQUIRED. Cosmetic framing
+          only, no medical claims about skin physiology differences. */}
+      <section className="section-y border-y border-ink/10 bg-cloud/40">
+        <div className="section-x-narrow">
+          <Reveal className="text-center">
+            <h2 className="font-serif text-3xl leading-snug">
+              Why the Skin Below the Jawline Needs Its Own Ritual
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-ink/70">
+              Most routines stop at the jawline. The neck and décolleté are
+              treated, at best, as an afterthought of whatever face cream is
+              left on the fingertips — not formulated for on their own terms.
+              N1 is CHIAREL&rsquo;s answer: a dedicated nightly step for the
+              skin most routines forget.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Four-product AM/PM ritual — replaces the prior five-step carousel
+          section. Sourced from launchRitualProducts, not the legacy
+          ritualProducts array, per
+          CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §5. */}
+      <section id="four-product-ritual" className="section-y bg-ivory">
+        <div className="section-x">
+          <Reveal>
+            <h2 className="font-serif text-3xl">The CHIAREL Four-Product Ritual</h2>
+            <p className="mt-4 max-w-2xl text-sm text-ink/70">
+              A focused morning and evening practice for hydration, comfort,
+              renewal, and the skin below the jawline.
+            </p>
+          </Reveal>
+          <div className="mt-10 grid gap-10 sm:grid-cols-2">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.18em] text-ink/65">Morning</p>
+              <p className="mt-3 font-serif text-xl leading-snug">
+                CHIAREL Essence™ <span className="text-ink/40">→</span> Terra Radiance Crème™
+              </p>
+            </div>
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.18em] text-ink/65">Evening</p>
+              <p className="mt-3 font-serif text-xl leading-snug">
+                CHIAREL Essence™ <span className="text-ink/40">→</span> Recovery Masque™{" "}
+                <span className="text-ink/40">→</span> N1 Neck &amp; Décolleté Renewal Emulsion™
+              </p>
+            </div>
+          </div>
+          <RitualCarousel products={launchRitualProducts} />
+          <p className="mt-6 max-w-2xl text-[13px] leading-relaxed text-ink/65">
+            Cellular Cleanser™ and Cellular Mist™ remain available as{" "}
+            <Link href="/ritual#optional-preparation" className="border-b border-ochre text-ochre">
+              optional preparation
+            </Link>{" "}
+            ahead of either routine.
+          </p>
+        </div>
+      </section>
+
+      {/* Fit guidance — updated to include N1 alongside the existing entries */}
+      <section className="section-y border-y border-ink/10 bg-white">
+        <div className="section-x">
+          <Reveal>
+            <h2 className="font-serif text-3xl">Which CHIAREL™ Product Is Right for You?</h2>
+            <p className="mt-4 max-w-2xl text-sm text-ink/70">
+              Best for matching a product to what your skin is showing you,
+              not the shelf. Not sure? Take the{" "}
+              <Link href="/assessment" className="border-b border-ochre text-ochre">
+                Skin Assessment
+              </Link>
+              .
+            </p>
+          </Reveal>
+          <ul className="mt-10 grid gap-6 sm:grid-cols-2">
+            {fitGuidance.map((row, i) => (
+              <li key={row.concern}>
+                <Reveal delay={i * 0.08} className="border border-ink/10 p-6">
+                  <p className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
+                    Best for skin that…
+                  </p>
+                  <p className="mt-2 font-serif text-lg leading-snug text-ink">
+                    {row.concern}
+                  </p>
+                  <p className="mt-4 text-[11px] uppercase tracking-[0.16em] text-ochre">
+                    {row.fit}
+                  </p>
+                  <p className="mt-2 text-[13px] leading-relaxed text-ink/60">
+                    {row.why}
+                  </p>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Evidence — asymmetric label+grid */}
       <section className="section-y-lg bg-ivory">
         <div className="section-x grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-16">
           <Reveal>
@@ -345,8 +410,8 @@ export default function Home() {
       </section>
 
       {/* Full ingredient/formulation table — real actives + percentages from
-          the product catalog, addressing the lack of scannable, tabular,
-          original-data content that generative engines preferentially lift. */}
+          the product catalog. N1 has no actives yet, so it does not appear
+          here — this table is never populated with invented figures. */}
       <section className="section-y bg-white">
         <div className="section-x">
           <Reveal>
@@ -398,7 +463,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Signature Duo — the two hero treatments, no price (story, not shelf) */}
+      {/* Signature Duo — the two face-ritual hero treatments, no price */}
       <section className="section-y border-y border-ink/10 bg-white">
         <div className="section-x">
           <Reveal className="text-center">
@@ -426,11 +491,11 @@ export default function Home() {
                   <Link href={`/shop/${p.slug}`} className="group block">
                     <div
                       className="product-frame aspect-square"
-                      style={{ backgroundColor: productTint(p.color.hex) }}
+                      style={{ backgroundColor: NEUTRAL_FRAME_BG }}
                     >
                       <Image
                         src={p.image}
-                        alt={p.name}
+                        alt={productImageAlt(p)}
                         fill
                         sizes="(max-width: 768px) 100vw, 50vw"
                         className={productHoverClass(p.step)}
@@ -450,7 +515,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Formulated By — enlarged founder/formulator credibility block */}
+      {/* Provenance — Isola del Liri, Italy */}
+      <section className="relative section-y overflow-hidden border-y border-ink/10 text-ivory">
+        <Image
+          src="/assets/editorial/isola-del-liri-cascata.png"
+          alt="Editorial illustration of the Cascata Grande waterfall running through Isola del Liri, Italy"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-garden/85" />
+        <Reveal className="section-x-narrow relative text-center">
+          <h2 className="font-serif text-4xl leading-tight md:text-5xl">
+            Where Is CHIAREL™ Made?
+          </h2>
+          <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-ivory/75">
+            Before the Liri falls through Isola del Liri as the Cascata
+            Grande, it is met by the Fibreno — a river fed entirely by
+            limestone karst springs, with no surface tributaries of its
+            own. That confluence, water arriving newly filtered rather than
+            run off the surface, is what gives The Cascata Complex™ its
+            name and its place: formulated here, with our manufacturing
+            partner Natural You Srl, rather than sourced from a distance.
+          </p>
+          <Link
+            href="/journal/isola-del-liri-waterfall"
+            className="btn-press mt-6 inline-block border-b border-champagne pb-0.5 text-[12px] uppercase tracking-[0.18em] text-champagne transition-colors hover:text-ivory"
+          >
+            Read the Journal
+          </Link>
+        </Reveal>
+      </section>
+
+      {/* Formulated By */}
       <section className="relative section-y-lg overflow-hidden bg-ink text-ivory">
         <div
           className="pointer-events-none absolute inset-0"
@@ -500,9 +596,7 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* Backed by Research — genuine third-party citations for the actives
-          named above, distinct from the "Customer Tested" claim used
-          elsewhere (which refers to customer feedback, not clinical trials) */}
+      {/* Backed by Research — only currently supported, real citations */}
       <section className="section-y bg-ivory">
         <div className="section-x-narrow">
           <Reveal className="text-center">
@@ -589,124 +683,14 @@ export default function Home() {
               </a>
             </li>
           </ul>
-        </div>
-      </section>
-
-      {/* Ritual carousel — paced, not a shelf */}
-      <section className="section-y bg-ivory">
-        <div className="section-x">
-          <Reveal>
-            <h2 className="font-serif text-3xl">
-              How Does the CHIAREL™ Ritual Work?
-            </h2>
-            <p className="mt-4 max-w-2xl text-sm text-ink/70">
-              Cleanse · Tone · Serum · Moisturize — delivered. A subscription
-              keeps every step arriving on your rhythm, the consistency the
-              skin recognises.
-            </p>
-          </Reveal>
-          <RitualCarousel products={ritualProducts} />
-        </div>
-      </section>
-
-      {/* Fit guidance — "who this is for" mapped to real skin concerns and
-          real actives, not generic brand narrative */}
-      <section className="section-y border-y border-ink/10 bg-white">
-        <div className="section-x">
-          <Reveal>
-            <h2 className="font-serif text-3xl">Which CHIAREL™ Product Is Right for You?</h2>
-            <p className="mt-4 max-w-2xl text-sm text-ink/70">
-              Best for matching a product to what your skin is showing you,
-              not the shelf. Not sure? Take the{" "}
-              <Link href="/assessment" className="border-b border-ochre text-ochre">
-                Skin Assessment
-              </Link>
-              .
-            </p>
-          </Reveal>
-          <ul className="mt-10 grid gap-6 sm:grid-cols-2">
-            {fitGuidance.map((row, i) => (
-              <li key={row.concern}>
-                <Reveal delay={i * 0.08} className="border border-ink/10 p-6">
-                  <p className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
-                    Best for skin that…
-                  </p>
-                  <p className="mt-2 font-serif text-lg leading-snug text-ink">
-                    {row.concern}
-                  </p>
-                  <p className="mt-4 text-[11px] uppercase tracking-[0.16em] text-ochre">
-                    {row.fit}
-                  </p>
-                  <p className="mt-2 text-[13px] leading-relaxed text-ink/60">
-                    {row.why}
-                  </p>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 max-w-2xl text-[13px] leading-relaxed text-ink/65">
-            Not every step is necessary for every routine — the Ritual is
-            built to be used in full or picked apart by the single product
-            your skin needs most.
+          <p className="mx-auto mt-6 max-w-xl text-[12px] leading-relaxed text-ink/60">
+            N1 Neck &amp; Décolleté Renewal Emulsion has no product-specific
+            testing results published yet — see its product page for status.
           </p>
-
-          <div className="mt-14 border-t border-ink/10 pt-10">
-            <h3 className="font-serif text-xl text-ink">
-              Common Skin Concerns This Addresses
-            </h3>
-            <p className="mt-3 max-w-2xl text-[13px] leading-relaxed text-ink/60">
-              If you&rsquo;re experiencing any of the following, here&rsquo;s
-              what in the ritual is formulated to help.
-            </p>
-            <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-              <li className="text-[13px] leading-relaxed text-ink/70">
-                <span className="font-medium text-ink">
-                  Dehydration or a compromised moisture barrier:
-                </span>{" "}
-                addressed with Ceramide NP and low molecular weight
-                Hyaluronic Acid.
-              </li>
-              <li className="text-[13px] leading-relaxed text-ink/70">
-                <span className="font-medium text-ink">
-                  Sensitive, reactive, or easily irritated skin:
-                </span>{" "}
-                addressed with a prebiotic complex formulated to cleanse
-                without stripping the barrier.
-              </li>
-              <li className="text-[13px] leading-relaxed text-ink/70">
-                <span className="font-medium text-ink">
-                  Fine lines, dullness, uneven texture, or loss of visible
-                  firmness:
-                </span>{" "}
-                addressed with Palmitoyl Pentapeptide-4 at 3% concentration.
-              </li>
-              <li className="text-[13px] leading-relaxed text-ink/70">
-                <span className="font-medium text-ink">
-                  Environmental stress and everyday exposure:
-                </span>{" "}
-                addressed with Niacinamide for daily environmental defense.
-              </li>
-              <li className="text-[13px] leading-relaxed text-ink/70">
-                <span className="font-medium text-ink">
-                  Combination skin needing balance, not stripping:
-                </span>{" "}
-                addressed by pairing a gentle cleanser with a light,
-                fast-absorbing mist rather than a heavy single-step product.
-              </li>
-              <li className="text-[13px] leading-relaxed text-ink/70">
-                <span className="font-medium text-ink">
-                  Slow overnight recovery:
-                </span>{" "}
-                addressed with L-Ornithine and Panthenol in the closing,
-                overnight step of the ritual.
-              </li>
-            </ul>
-          </div>
         </div>
       </section>
 
-      {/* Comparison content — CHIAREL's formulation approach vs. the
-          category norm, framed generically (no named competitors) */}
+      {/* Comparison content — CHIAREL's formulation approach vs. category norm */}
       <section className="section-y bg-cloud/40">
         <div className="section-x">
           <Reveal>
@@ -745,95 +729,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Founding Pair — the featured purchase, price shown once here */}
-      <section className="section-y bg-champagne/25">
-        <div className="section-x flex flex-col items-center gap-10 md:flex-row">
-          <Reveal className="grid w-full grid-cols-5 gap-4 md:w-3/5">
-            <div
-              className="card-elevated product-frame col-span-3 aspect-[4/5]"
-              style={{ backgroundColor: productTint(essence.color.hex) }}
-            >
-              <Image src={essence.image} alt={essence.name} fill sizes="35vw" />
-            </div>
-            <div
-              className="card-elevated product-frame col-span-2 aspect-[4/5] self-end"
-              style={{ backgroundColor: productTint(terraCreme.color.hex) }}
-            >
-              <Image src={terraCreme.image} alt={terraCreme.name} fill sizes="25vw" />
-            </div>
-          </Reveal>
-          <Reveal delay={0.15} className="w-full md:w-2/5">
-            <h2 className="font-serif text-3xl">The Founding Pair</h2>
-            <p className="mt-2 text-sm text-ink/60">
-              The Signature Serum &amp; The Icon
-            </p>
-            <p className="mt-3 max-w-md text-sm text-ink/70">
-              CHIAREL Essence and Terra Radiance Crème — the essential
-              ritual in two gestures, delivered together every 45 days.
-            </p>
-            <p className="mt-4 text-sm">
-              <span className="tabular-nums font-serif text-2xl">
-                ${foundingPair.price.subscription}
-              </span>
-              <span className="ml-2 text-[12px] text-ink/65">
-                every 45 days with subscription · ${foundingPair.price.oneTime}{" "}
-                one-time
-              </span>
-            </p>
-            <div className="mt-6 flex items-center gap-6">
-              <Link
-                href="/shop/the-founding-pair"
-                className="btn-press inline-block border border-ink px-8 py-3 text-[12px] uppercase tracking-[0.25em] transition hover:border-ochre hover:text-ochre"
-              >
-                Begin the Ritual
-              </Link>
-              <Link
-                href="/shop/the-ritual-set"
-                className="btn-press border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
-              >
-                The complete set — ${ritualSet.price.subscription}
-              </Link>
-            </div>
-            <p className="mt-6 text-[11px] uppercase tracking-[0.14em] text-ink/65">
-              Available online only at chiarel.com — not sold in retail
-              stores or through other sellers.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <ResultsSection />
 
-      {/* Icon Products — curated selection, not the full shelf. Header row is
-          left/right split rather than centered, so it doesn't repeat the
-          centered-heading shape used everywhere else on the page. */}
-      <section className="section-y bg-cloud/60">
-        <div className="section-x">
-          <Reveal className="flex flex-wrap items-end justify-between gap-4">
-            <h2 className="font-serif text-2xl">
-              Which CHIAREL™ Products Are Best-Sellers?
-            </h2>
-            <Link
-              href="/shop"
-              className="btn-press border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
-            >
-              See the Full House
-            </Link>
-          </Reveal>
-          <div className="mt-10 grid gap-10 sm:grid-cols-2">
-            {featuredIcons.map((p, i) => (
-              <Reveal key={p.slug} delay={i * 0.12}>
-                <ProductCard product={p} hidePrice />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Deeper brand/philosophy section — The House of Clarity™, Advancing
+          Cellular Clarity™, Modern Biological Stress™ — positioned below all
+          the customer-facing product clarity above, per
+          CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §6. */}
+      <Reveal className="section-y-lg mx-auto max-w-3xl px-6 text-center">
+        <section>
+          <h2 className="font-serif text-lg text-ink/65">The Philosophy</h2>
+          <p className="mt-5 font-serif text-3xl leading-relaxed text-ink">
+            &ldquo;Skin is not one thing. A house built to serve it should not
+            pretend otherwise.&rdquo;
+          </p>
+          <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-ink/70">
+            CHIAREL Intelligence™ began as a question at a kitchen table —
+            the working method still holds: start with the biology in front
+            of you, formulate it properly, and disclose exactly what went
+            in. Advancing Cellular Clarity™ against Modern Biological
+            Stress™ is the mission behind every formula, including N1. It is
+            the same discipline behind La Bella Figura — presenting one&rsquo;s
+            best self, quietly, without announcement.
+          </p>
+          <Link
+            href="/journal/three-skins-one-house"
+            className="btn-press mt-6 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
+          >
+            Read the Origin Story
+          </Link>
+        </section>
+      </Reveal>
 
-      {/* FAQ — direct-answer content for pricing, formulation, and availability questions.
-          id="faq" gives product pages (see UsageGuidance in app/shop/[slug]/page.tsx) a
-          real anchor to link back to instead of duplicating this content per-product.
-          <details>/<summary> accordion — same zero-JS pattern as UsageGuidance on the
-          PDP, reused here since these six answers ran long as flat static text with no
-          way to scan just the questions first. */}
+      {/* FAQ */}
       <section id="faq" className="section-y bg-ivory">
         <div className="section-x-narrow">
           <Reveal>
@@ -860,32 +787,99 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Editorial — Ritual philosophy */}
-      <Reveal className="section-y-lg mx-auto max-w-3xl px-6 text-center">
-        <section>
-          <h2 className="font-serif text-lg text-ink/65">The Philosophy</h2>
-          <p className="mt-5 font-serif text-3xl leading-relaxed text-ink">
-            &ldquo;Skin is not one thing. A house built to serve it should not
-            pretend otherwise.&rdquo;
-          </p>
-          <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-ink/70">
-            CHIAREL Intelligence™ began as a question at a kitchen table —
-            the working method still holds: start with the biology in front
-            of you, formulate it properly, and disclose exactly what went
-            in. It is the same discipline behind La Bella Figura —
-            presenting one&rsquo;s best self, quietly, without announcement.
-          </p>
-          <Link
-            href="/journal/three-skins-one-house"
-            className="btn-press mt-6 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
-          >
-            Read the Origin Story
-          </Link>
-        </section>
-      </Reveal>
+      {/* Founding Pair — unchanged contents/price/route/CTAs; homepage
+          prominence reduced by moving it below the N1 hero and the
+          four-product ritual, per
+          CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §6/§13. */}
+      <section className="section-y bg-champagne/25">
+        <div className="section-x flex flex-col items-center gap-10 md:flex-row">
+          <Reveal className="grid w-full grid-cols-5 gap-4 md:w-3/5">
+            <div
+              className="card-elevated product-frame col-span-3 aspect-[4/5]"
+              style={{ backgroundColor: NEUTRAL_FRAME_BG }}
+            >
+              <Image src={essence.image} alt={productImageAlt(essence)} fill sizes="35vw" />
+            </div>
+            <div
+              className="card-elevated product-frame col-span-2 aspect-[4/5] self-end"
+              style={{ backgroundColor: NEUTRAL_FRAME_BG }}
+            >
+              <Image src={terraCreme.image} alt={productImageAlt(terraCreme)} fill sizes="25vw" />
+            </div>
+          </Reveal>
+          <Reveal delay={0.15} className="w-full md:w-2/5">
+            <h2 className="font-serif text-3xl">The Founding Pair</h2>
+            <p className="mt-2 text-sm text-ink/60">
+              The Signature Serum &amp; The Icon
+            </p>
+            <p className="mt-3 max-w-md text-sm text-ink/70">
+              CHIAREL Essence and Terra Radiance Crème — the essential
+              ritual in two gestures, delivered together every 45 days.
+            </p>
+            <p className="mt-4 text-sm">
+              <span className="tabular-nums font-serif text-2xl">
+                ${foundingPair.price!.subscription}
+              </span>
+              <span className="ml-2 text-[12px] text-ink/65">
+                every 45 days with subscription · ${foundingPair.price!.oneTime}{" "}
+                one-time
+              </span>
+            </p>
+            <div className="mt-6 flex items-center gap-6">
+              <Link
+                href="/shop/the-founding-pair"
+                className="btn-press inline-block border border-ink px-8 py-3 text-[12px] uppercase tracking-[0.25em] transition hover:border-ochre hover:text-ochre"
+              >
+                Begin the Ritual
+              </Link>
+              <Link
+                href="/shop/the-ritual-set"
+                className="btn-press border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
+              >
+                The complete set — ${ritualSet.price!.subscription}
+              </Link>
+            </div>
+            <p className="mt-6 text-[11px] uppercase tracking-[0.14em] text-ink/65">
+              Available online only at chiarel.com — not sold in retail
+              stores or through other sellers.
+            </p>
+          </Reveal>
+        </div>
+      </section>
 
-      {/* House note — no top padding: intentionally reads as one closing pair with Philosophy above */}
-      <Reveal className="mx-auto max-w-3xl px-6 pb-24 text-center md:pb-32">
+      {/* Beyond the Ritual — Cellular Cleanser and Lip Concentrate remain
+          fully live and purchasable; only their homepage framing changes to
+          reflect that they're deferred from the primary four-product launch
+          ritual, per CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §6. */}
+      <section className="section-y bg-cloud/60">
+        <div className="section-x">
+          <Reveal className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <h2 className="font-serif text-2xl">Beyond the Ritual</h2>
+              <p className="mt-2 max-w-xl text-sm text-ink/70">
+                Additional CHIAREL products, available anytime — not part of
+                the core four-product launch ritual, but never discontinued.
+              </p>
+            </div>
+            <Link
+              href="/shop"
+              className="btn-press border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
+            >
+              See the Full House
+            </Link>
+          </Reveal>
+          <div className="mt-10 grid gap-10 sm:grid-cols-2">
+            {featuredIcons.map((p, i) => (
+              <Reveal key={p.slug} delay={i * 0.12}>
+                <ProductCard product={p} hidePrice />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* House note — closing */}
+      <Reveal className="mx-auto max-w-3xl px-6 py-24 text-center md:py-32">
         <section>
           <h2 className="font-serif text-lg text-ink/65">The House</h2>
           <p className="mt-4 font-serif text-2xl leading-relaxed">

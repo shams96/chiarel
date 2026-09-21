@@ -25,8 +25,9 @@ export default function Footer() {
           </div>
           <div className="flex gap-12 text-[13px]">
             <div className="flex flex-col gap-2">
-              <Link href="/ritual">The Ritual</Link>
               <Link href="/shop">Shop</Link>
+              <Link href="/shop/n1-neck-decollete">Neck & Décolleté</Link>
+              <Link href="/ritual">The Ritual</Link>
               <Link href="/science">The Science</Link>
             </div>
             <div className="flex flex-col gap-2">

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Product } from "@/lib/products";
-import { productTint } from "@/lib/color";
+import { productImageAlt, type Product } from "@/lib/products";
+import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { productHoverClass } from "@/lib/motion";
 
 /**
@@ -20,11 +20,11 @@ export default function RitualCarousel({ products }: { products: Product[] }) {
         >
           <div
             className="product-frame aspect-[4/5]"
-            style={{ backgroundColor: productTint(p.color.hex) }}
+            style={{ backgroundColor: NEUTRAL_FRAME_BG }}
           >
             <Image
               src={p.image}
-              alt={p.name}
+              alt={productImageAlt(p)}
               fill
               sizes="(max-width: 640px) 72vw, 30vw"
               className={productHoverClass(p.step)}
