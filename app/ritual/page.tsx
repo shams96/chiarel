@@ -106,7 +106,9 @@ export default function RitualPage() {
       <section className="mt-14">
         <p className="text-[11px] uppercase tracking-[0.18em] text-ink/65">Morning</p>
         <p className="mt-2 font-serif text-2xl">
-          CHIAREL Essence™ <span className="text-ink/40">→</span> Terra Radiance Crème™
+          <span className="text-ochre">Step 1</span> CHIAREL Essence™{" "}
+          <span className="text-ink/40">→</span> <span className="text-ochre">Step 2</span> Terra Radiance
+          Crème™
         </p>
       </section>
       <RoutineRow slugs={morningRoute} />
@@ -114,8 +116,10 @@ export default function RitualPage() {
       <section className="mt-24 border-t border-ink/10 pt-14">
         <p className="text-[11px] uppercase tracking-[0.18em] text-ink/65">Evening</p>
         <p className="mt-2 font-serif text-2xl">
-          CHIAREL Essence™ <span className="text-ink/40">→</span> Recovery Masque™{" "}
-          <span className="text-ink/40">→</span> N1 Neck &amp; Décolleté Renewal Emulsion™
+          <span className="text-ochre">Step 1</span> CHIAREL Essence™{" "}
+          <span className="text-ink/40">→</span> <span className="text-ochre">Step 2</span> Recovery
+          Masque™ <span className="text-ink/40">→</span> <span className="text-ochre">Step 3</span> N1 Neck
+          &amp; Décolleté Renewal Emulsion™
         </p>
       </section>
       <RoutineRow slugs={eveningRoute} />

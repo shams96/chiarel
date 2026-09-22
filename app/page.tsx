@@ -334,14 +334,18 @@ export default function Home() {
             <div>
               <p className="text-[11px] uppercase tracking-[0.18em] text-ink/65">Morning</p>
               <p className="mt-3 font-serif text-xl leading-snug">
-                CHIAREL Essence™ <span className="text-ink/40">→</span> Terra Radiance Crème™
+                <span className="text-ochre">Step 1</span> CHIAREL Essence™{" "}
+                <span className="text-ink/40">→</span> <span className="text-ochre">Step 2</span> Terra
+                Radiance Crème™
               </p>
             </div>
             <div>
               <p className="text-[11px] uppercase tracking-[0.18em] text-ink/65">Evening</p>
               <p className="mt-3 font-serif text-xl leading-snug">
-                CHIAREL Essence™ <span className="text-ink/40">→</span> Recovery Masque™{" "}
-                <span className="text-ink/40">→</span> N1 Neck &amp; Décolleté Renewal Emulsion™
+                <span className="text-ochre">Step 1</span> CHIAREL Essence™{" "}
+                <span className="text-ink/40">→</span> <span className="text-ochre">Step 2</span> Recovery
+                Masque™ <span className="text-ink/40">→</span> <span className="text-ochre">Step 3</span> N1
+                Neck &amp; Décolleté Renewal Emulsion™
               </p>
             </div>
           </div>
