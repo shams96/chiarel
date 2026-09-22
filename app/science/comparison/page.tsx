@@ -26,7 +26,7 @@ const serumTable = {
     {
       label: "Price",
       values: [
-        "$151 with subscription · $189 one-time (30 ml)",
+        "$151 with subscription · $189 one-time (40 ml)",
         "~$185 (30 ml)",
         "~$320 (30 ml)",
         "~$545 (30 ml)",
