@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -18,10 +19,16 @@ export default function WaterfallPage() {
         A Town Built Around a Waterfall
       </h1>
 
-      {/* No real photo of Isola del Liri exists in the asset library — the prior
-          image here ("hero-bright.png") was a mislabeled product-jar mockup, not
-          a place photo. Deliberately text-only until real location photography
-          exists — the article ironically deserves better than a fake jar. */}
+      <div className="relative mt-8 aspect-[4/3] w-full overflow-hidden">
+        <Image
+          src="/assets/journal/isola-del-liri-bridge.jpg"
+          alt="The bridge over the Liri, with the Cascata Grande and the Boncompagni-Viscogliosi castle behind it"
+          fill
+          sizes="(max-width: 768px) 100vw, 768px"
+          className="object-cover"
+          priority
+        />
+      </div>
 
       <div className="mt-10 space-y-6 text-sm leading-relaxed text-ink/80">
         <p>
@@ -52,6 +59,20 @@ export default function WaterfallPage() {
           Italy&rsquo;s finest paper mills — precision and craft, running on
           the same current that still falls through the town today.
         </p>
+        <figure className="not-prose">
+          <div className="relative aspect-[16/10] w-full overflow-hidden">
+            <Image
+              src="/assets/journal/isola-del-liri-illustration.jpg"
+              alt="Illustration of Isola del Liri: the Cascata Grande, the castle above it, and the town's ochre houses"
+              fill
+              sizes="(max-width: 768px) 100vw, 768px"
+              className="object-cover"
+            />
+          </div>
+          <figcaption className="mt-2 text-[11px] uppercase tracking-[0.14em] text-ink/50">
+            Illustration, not a photograph — the town CHIAREL formulates in
+          </figcaption>
+        </figure>
         <p>
           This is where Natural You Srl, CHIAREL&rsquo;s manufacturing
           partner, formulates every product in the House. Provenance is not
