@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { getProduct, products, ritualProducts, productImageAlt, isPurchasable, type Product } from "@/lib/products";
 import PurchaseOptions from "@/components/PurchaseOptions";
 import StickyPurchaseBar from "@/components/StickyPurchaseBar";
-import ProductHeroImage from "@/components/ProductHeroImage";
+import ProductGallery from "@/components/ProductGallery";
 import CellularHydrationCascade from "@/components/CellularHydrationCascade";
 import Reveal from "@/components/Reveal";
 import { productJsonLd, breadcrumbJsonLd } from "@/lib/seo";
@@ -112,20 +112,18 @@ export default function ProductPage({
           </ol>
         </nav>
         <div className="grid gap-6 md:grid-cols-2 md:items-start md:gap-14">
-          {/* Gallery column — single image today; sized to take a second/third
-              thumbnail or video without restructuring once more assets exist. */}
+          {/* Gallery column — see claudedocs/specs/product-image-gallery/ for
+              the spec/plan. ProductGallery falls back to a single-image
+              gallery built from `image`/`imageIsPlaceholder` when a product
+              has no `gallery` array yet (every product today). */}
           <div className="md:sticky md:top-24">
-            <div
-              className="relative aspect-[5/4] w-full overflow-hidden md:aspect-[4/5]"
-              style={{ backgroundColor: NEUTRAL_FRAME_BG }}
-            >
-              <ProductHeroImage
-                src={p.image}
-                alt={productImageAlt(p)}
-                step={p.step}
-                badge={p.badge}
-              />
-            </div>
+            <ProductGallery
+              images={
+                p.gallery ?? [{ src: p.image, alt: productImageAlt(p), role: "hero" }]
+              }
+              step={p.step}
+              badge={p.badge}
+            />
           </div>
 
           {/* Buy box column */}

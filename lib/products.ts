@@ -1,5 +1,14 @@
 import data from "@/data/products.json";
 
+// See claudedocs/specs/product-image-gallery/SPEC.md for the role/background
+// rules: hero and ingredient are transparent PNGs on the shared frame;
+// texture, application, and lifestyle are graded scene photography, no alpha.
+export type ProductGalleryImage = {
+  src: string;
+  alt: string;
+  role?: "hero" | "texture" | "application" | "lifestyle" | "ingredient" | "detail";
+};
+
 export type Product = {
   slug: string;
   sku: string;
@@ -20,6 +29,14 @@ export type Product = {
   // "Price to be announced" state instead of a number.
   price?: { subscription: number; oneTime: number };
   image: string;
+  /**
+   * Optional multi-image gallery. Absent for every product today — the PDP
+   * falls back to a single-image gallery built from `image`/`imageIsPlaceholder`
+   * (see ProductGallery's caller in app/shop/[slug]/page.tsx). Populate this
+   * once real photography exists for a product; see SPEC.md's Out of scope
+   * on why no product ships a fabricated `gallery` array.
+   */
+  gallery?: ProductGalleryImage[];
   blurb: string;
   role?: string;
   badge?: string;
