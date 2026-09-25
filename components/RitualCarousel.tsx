@@ -8,6 +8,16 @@ import { productHoverClass } from "@/lib/motion";
  * A paced, single-row scroll-snap carousel for the ritual steps — deliberately
  * not a static N-up grid. Each step is shown large, one (mobile) or two-plus-peek
  * (desktop) at a time, with the next card visibly peeking in to invite scrolling.
+ *
+ * Card widths are `min(Xvw, Ypx)`, not plain `Xvw` — this section's track sits
+ * inside `.section-x` (`max-w-6xl` = 1152px, ~1104px of content after its
+ * padding; see globals.css). Below that width, vw tracks the actual visible
+ * track width fine, but pure vw has no ceiling: past 1152px the track stops
+ * growing while a card sized in vw keeps scaling with the full monitor width,
+ * so on an ultrawide/29" display the cards balloon far past what the capped
+ * track can show — 2-plus-peek becomes "1.8 cards, the second oversized and
+ * cut off". The px ceiling in each min() is that breakpoint's vw share of
+ * ~1104px, so cards stop growing exactly where the track stops growing too.
  */
 export default function RitualCarousel({ products }: { products: Product[] }) {
   return (
@@ -16,7 +26,7 @@ export default function RitualCarousel({ products }: { products: Product[] }) {
         <Link
           key={p.slug}
           href={`/shop/${p.slug}`}
-          className="group w-[72vw] flex-none snap-start sm:w-[42vw] md:w-[30vw] lg:w-[24vw]"
+          className="group w-[72vw] flex-none snap-start sm:w-[min(42vw,464px)] md:w-[min(30vw,331px)] lg:w-[min(24vw,265px)]"
         >
           <div
             className="product-frame aspect-[4/5]"
@@ -26,7 +36,7 @@ export default function RitualCarousel({ products }: { products: Product[] }) {
               src={p.image}
               alt={productImageAlt(p)}
               fill
-              sizes="(max-width: 640px) 72vw, 30vw"
+              sizes="(max-width: 640px) 72vw, (max-width: 1152px) 30vw, 331px"
               className={productHoverClass(p.step)}
             />
           </div>
