@@ -351,6 +351,12 @@
     "hidePriceUntilApproved": false,
     "image": "/assets/products/n1-neck-decollete-jar.png",
     "imageIsPlaceholder": false,
+    "gallery": [
+      { "src": "/assets/products/n1-neck-decollete-jar.png", "alt": "N1 Neck & Décolleté Renewal Emulsion", "role": "hero" },
+      { "src": "/assets/products/n1-neck-decollete-studio.jpg", "alt": "N1 held in soft studio light", "role": "application" },
+      { "src": "/assets/products/n1-neck-decollete-lifestyle-2.jpg", "alt": "N1 on a stone ledge overlooking Isola del Liri", "role": "application" },
+      { "src": "/assets/products/n1-neck-decollete-lifestyle-1.jpg", "alt": "N1 on a marble counter", "role": "lifestyle" }
+    ],
     "blurb": "A fragrance-free nightly emulsion for the neck, jawline, and décolleté — designed to help the appearance of dryness, crepey-looking texture, and fine lines feel and look more comfortable, smooth, and supple with continued use.",
     "benefits": [
       "Helps improve the appearance of dryness across the neck and décolleté",
