@@ -137,17 +137,27 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
   // calculates once this Stripe account is registered to collect in the
   // relevant jurisdiction — enabling this here makes the code ready, it
   // doesn't perform that registration.
-  const customer = await stripe.customers.create({
-    email,
-    name: `${firstName} ${lastName}`,
-    address: {
-      line1: address,
-      city,
-      state: selectedCountry.requiresState ? state : undefined,
-      postal_code: zip,
-      country,
-    },
-  });
+  // De-dup by email instead of creating a new Stripe Customer on every
+  // checkout attempt (including retries after a failed submission) — flagged
+  // in QA (claudedocs/specs/international-launch/TASKS.md).
+  const customerAddress = {
+    line1: address,
+    city,
+    state: selectedCountry.requiresState ? state : undefined,
+    postal_code: zip,
+    country,
+  };
+  const existing = await stripe.customers.list({ email, limit: 1 });
+  const customer = existing.data[0]
+    ? await stripe.customers.update(existing.data[0].id, {
+        name: `${firstName} ${lastName}`,
+        address: customerAddress,
+      })
+    : await stripe.customers.create({
+        email,
+        name: `${firstName} ${lastName}`,
+        address: customerAddress,
+      });
 
   const session = await stripe.checkout.sessions.create({
     mode: "payment",

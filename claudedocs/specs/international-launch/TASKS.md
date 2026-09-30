@@ -26,13 +26,15 @@ feature-flagged off** until the EU Responsible Person question is answered.
       creates a Stripe Customer with the shipping address, `automatic_tax: { enabled: true }` +
       `tax_behavior: "exclusive"` on the session.
 
-## QA follow-ups (not blocking, not done)
+## QA follow-ups — both done (2026-09-30)
 
-- `stripe.customers.create()` runs on every checkout attempt with no de-dup by email — creates a new
-  Stripe Customer object per submission, including retries. Worth fixing before volume grows.
-- No automated tests for the country-aware validation branching (state-required-only-when-needed,
-  zip-always-required, unsupported/disabled-country rejection) — this kind of conditional logic
-  regresses silently without one.
+- [x] Stripe Customer de-dup by email: `app/api/checkout/route.ts` now looks up an existing customer
+  by email (`stripe.customers.list`) and updates it instead of always creating a new one.
+- [x] `lib/countries.test.ts` added — pins the exact contract the QA-caught bug lived in
+  (`getCountry()` is a lookup, not an authorization check; `ENABLED_COUNTRIES` excludes Italy;
+  `requiresState`/`postalLabel` per country). Did not extend this to a full API-route test (would
+  need mocking Next.js request/Prisma/Stripe for marginal extra coverage beyond what's already
+  pinned here) — scoped down deliberately, not an oversight.
 
 ## Deployment-order warning — read before pushing
 
