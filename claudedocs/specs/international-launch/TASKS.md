@@ -36,14 +36,13 @@ feature-flagged off** until the EU Responsible Person question is answered.
   need mocking Next.js request/Prisma/Stripe for marginal extra coverage beyond what's already
   pinned here) — scoped down deliberately, not an oversight.
 
-## Deployment-order warning — read before pushing
+## Migration — APPLIED to the live database (2026-09-30)
 
-**#5's migration is NOT applied to the live Supabase database.** `app/api/checkout/route.ts` (#7) now
-writes a `country` value on every order. If this code ships to production before the migration runs
-against the real database, **every checkout will fail** (the `country` column won't exist yet). The
-migration must be applied first — either by running `npx prisma migrate deploy` with the real
-`DATABASE_URL` (locally with production credentials, or via whatever deploy step Hostinger runs), or
-by executing `prisma/migrations/20260930000000_order_country_optional_state_zip/migration.sql`
-directly against the Supabase database. This is the one step I cannot do from this environment — no
-DB credentials are configured here, and even if they were, applying a schema change to the live
-database is a call for you to make explicitly, not something to run silently.
+User explicitly authorized running it. The live Supabase DB's schema predated tracked migrations (no
+`_prisma_migrations` row for the init migration despite its tables existing), so `prisma migrate
+deploy` initially failed with P3005. Resolved by baselining: `prisma migrate resolve --applied
+20260823184957_init_postgres` (marks it applied, executes no SQL — the tables already existed), then
+`prisma migrate deploy` applied only the new migration. Verified live: existing orders (3 total)
+correctly backfilled with `country: "US"`, `state`/`zip` intact, no data loss.
+
+International launch code is now safe to be live in production.
