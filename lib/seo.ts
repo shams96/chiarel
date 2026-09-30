@@ -98,11 +98,36 @@ export const researchArticleJsonLd = {
     "@type": "Person",
     name: "Grazia Savoriti",
     url: `${SITE_URL}/house`,
+    sameAs: [FORMULATOR_EXTERNAL_URL],
     jobTitle: "Pharmacist · Cosmetic & Nutraceutical Research",
   },
   publisher: { "@type": "Organization", name: "CHIAREL", url: SITE_URL },
   mainEntityOfPage: SITE_URL,
 };
+
+// Mirrors the visible numbered AM/PM steps on the homepage's Four-Product
+// Ritual section exactly — schema must match on-page content, not add
+// structure the page doesn't actually show.
+export function howToJsonLd(opts: {
+  name: string;
+  description: string;
+  totalTime?: string;
+  steps: { name: string; text: string; url?: string }[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: opts.name,
+    description: opts.description,
+    ...(opts.totalTime ? { totalTime: opts.totalTime } : {}),
+    step: opts.steps.map((s) => ({
+      "@type": "HowToStep",
+      name: s.name,
+      text: s.text,
+      ...(s.url ? { url: s.url } : {}),
+    })),
+  };
+}
 
 export function faqJsonLd(faqs: { question: string; answer: string }[]) {
   return {

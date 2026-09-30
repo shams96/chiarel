@@ -15,6 +15,7 @@ import {
   offerCatalogJsonLd,
   webPageJsonLd,
   researchArticleJsonLd,
+  howToJsonLd,
   SITE_URL,
   SITE_NAME,
   HOMEPAGE_LAST_UPDATED,
@@ -66,22 +67,22 @@ const faqs = [
   {
     question: "Who formulates CHIAREL?",
     answer:
-      "CHIAREL is formulated by Grazia Savoriti, CHIAREL's pharmacist specializing in cosmetic and nutraceutical research. Every formulation — from CHIAREL Essence™'s peptide complex to Terra Radiance Crème™'s barrier-support blend — is developed under her direct guidance, then produced fresh, to order, in small batches in Isola del Liri, Italy, rather than manufactured in bulk ahead of demand. She also reviews the published, peer-reviewed research cited for each active ingredient before it's formulated into a CHIAREL product. Every formula states its actives and exact percentages rather than grouping them into an undisclosed blend.",
+      "CHIAREL is formulated by Grazia Savoriti, a pharmacist specializing in cosmetic and nutraceutical research. She develops every formulation directly, from CHIAREL Essence™'s peptide complex to Terra Radiance Crème™'s barrier-support blend. Each batch is then produced fresh, to order, in Isola del Liri, Italy — never manufactured in bulk ahead of demand. Savoriti also reviews the published, peer-reviewed research behind each active ingredient before it's formulated into a product. Every formula lists its actives and exact percentages; nothing is grouped into an undisclosed blend.",
   },
   {
     question: "Where can I buy CHIAREL?",
     answer:
-      "CHIAREL is available directly at chiarel.com — it is not sold in retail stores, department stores, or through third-party marketplaces or resellers. Buying direct means each order is made fresh to order in Isola del Liri, Italy and shipped straight to you, without the markup layers of traditional retail distribution. This also lets CHIAREL keep every active ingredient and its exact concentration listed on the product page, since pricing and formulation are controlled end to end by the House rather than a retail partner.",
+      "CHIAREL is sold only at chiarel.com. It is not available in retail stores, department stores, or through third-party marketplaces or resellers. Buying direct means each order is made fresh in Isola del Liri, Italy and shipped straight to you, with no retail markup layers. It also lets CHIAREL list every active ingredient and its exact concentration on the product page, since pricing and formulation stay fully in-house.",
   },
   {
     question: "How does the CHIAREL subscription work?",
     answer:
-      "Choosing subscription pricing on any product sets a recurring delivery every 45 days at the discounted subscription rate, timed to the pace most people move through a bottle of serum or crème. Every product is also available as a one-time purchase at full price, with no subscription required, so you can try a single product before committing to a recurring delivery. Self-service subscription management (pause, skip, or cancel) is being added to the account experience; until then, contacting orders@chiarel.com handles any change promptly.",
+      "Choosing subscription pricing sets a recurring delivery every 45 days, timed to how fast most people use a bottle of serum or crème, at a discounted rate. Every product is also available as a one-time purchase at full price, with no subscription required. Self-service subscription management (pause, skip, or cancel) is coming to the account experience. Until then, email orders@chiarel.com for any change.",
   },
   {
     question: "Where is CHIAREL made?",
     answer:
-      "CHIAREL formulas are produced in Isola del Liri, Italy, with manufacturing partner Natural You Srl, using water drawn where the Liri meets the Fibreno — a river fed entirely by limestone karst springs, with no surface tributaries of its own. That confluence of newly filtered spring water is what gives The Cascata Complex™ its name. The formulation happens on-site rather than sourcing water and actives from a distance, so every CHIAREL batch is produced fresh, to order, instead of held in standing inventory ahead of demand.",
+      "CHIAREL formulas are produced in Isola del Liri, Italy, with manufacturing partner Natural You Srl. Formulation uses water drawn where the Liri meets the Fibreno — a river fed entirely by limestone karst springs, with no surface tributaries of its own. That confluence of newly filtered spring water gives The Cascata Complex™ its name. Formulation happens on-site, so every CHIAREL batch is produced fresh, to order — never held in standing inventory.",
   },
   {
     question: "What is the CHIAREL Four-Product Ritual?",
@@ -89,6 +90,29 @@ const faqs = [
       "A focused morning and evening practice: mornings pair CHIAREL Essence™ with Terra Radiance Crème™; evenings pair CHIAREL Essence™ with Recovery Masque™ and N1 Neck & Décolleté Renewal Emulsion™. Cellular Cleanser™ and Cellular Mist™ remain available as optional preparation steps, and CHIAREL Lip Concentrate™ remains available beyond the core ritual.",
   },
 ];
+
+// Mirrors the visible "Step 1 → Step 2 [→ Step 3]" AM/PM copy in the
+// Four-Product Ritual section below exactly — do not drift the two out of
+// sync if that section's copy changes.
+const amRitualHowTo = howToJsonLd({
+  name: "CHIAREL Morning Ritual",
+  description:
+    "The CHIAREL morning routine: CHIAREL Essence™ followed by Terra Radiance Crème™.",
+  steps: [
+    { name: "CHIAREL Essence™", text: "Apply CHIAREL Essence™ as the treatment serum step." },
+    { name: "Terra Radiance Crème™", text: "Follow with Terra Radiance Crème™ for daytime barrier support." },
+  ],
+});
+const pmRitualHowTo = howToJsonLd({
+  name: "CHIAREL Evening Ritual",
+  description:
+    "The CHIAREL evening routine: CHIAREL Essence™, then Recovery Masque™, then N1 Neck & Décolleté Renewal Emulsion™.",
+  steps: [
+    { name: "CHIAREL Essence™", text: "Apply CHIAREL Essence™ as the treatment serum step." },
+    { name: "Recovery Masque™", text: "Follow with Recovery Masque™ as the evening face-recovery step, before N1." },
+    { name: "N1 Neck & Décolleté Renewal Emulsion™", text: "Finish with N1 Neck & Décolleté Renewal Emulsion™ on the neck and décolleté." },
+  ],
+});
 
 const fitGuidance = [
   {
@@ -197,6 +221,14 @@ export default function Home() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(researchArticleJsonLd),
         }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(amRitualHowTo) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pmRitualHowTo) }}
       />
 
       {/* Hero — N1-led per CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §6.
@@ -333,20 +365,21 @@ export default function Home() {
           <div className="mt-10 grid gap-10 sm:grid-cols-2">
             <div>
               <p className="text-[11px] uppercase tracking-[0.18em] text-ink/65">Morning</p>
-              <p className="mt-3 font-serif text-xl leading-snug">
-                <span className="text-ochre">Step 1</span> CHIAREL Essence™{" "}
-                <span className="text-ink/40">→</span> <span className="text-ochre">Step 2</span> Terra
-                Radiance Crème™
-              </p>
+              <ol className="mt-3 flex flex-wrap items-baseline gap-x-2 font-serif text-xl leading-snug">
+                <li><span className="text-ochre">Step 1</span> CHIAREL Essence™</li>
+                <li aria-hidden="true" className="text-ink/40">→</li>
+                <li><span className="text-ochre">Step 2</span> Terra Radiance Crème™</li>
+              </ol>
             </div>
             <div>
               <p className="text-[11px] uppercase tracking-[0.18em] text-ink/65">Evening</p>
-              <p className="mt-3 font-serif text-xl leading-snug">
-                <span className="text-ochre">Step 1</span> CHIAREL Essence™{" "}
-                <span className="text-ink/40">→</span> <span className="text-ochre">Step 2</span> Recovery
-                Masque™ <span className="text-ink/40">→</span> <span className="text-ochre">Step 3</span> N1
-                Neck &amp; Décolleté Renewal Emulsion™
-              </p>
+              <ol className="mt-3 flex flex-wrap items-baseline gap-x-2 font-serif text-xl leading-snug">
+                <li><span className="text-ochre">Step 1</span> CHIAREL Essence™</li>
+                <li aria-hidden="true" className="text-ink/40">→</li>
+                <li><span className="text-ochre">Step 2</span> Recovery Masque™</li>
+                <li aria-hidden="true" className="text-ink/40">→</li>
+                <li><span className="text-ochre">Step 3</span> N1 Neck &amp; Décolleté Renewal Emulsion™</li>
+              </ol>
             </div>
           </div>
           <RitualCarousel products={launchRitualProducts} />
