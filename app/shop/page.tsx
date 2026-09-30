@@ -12,7 +12,11 @@ export const metadata = { title: "Shop", alternates: { canonical: "/shop" } };
 // purchase-path priority.
 const dayRitual = ["chiarel-essence", "terra-radiance-creme"];
 const nightRitual = ["chiarel-essence", "recovery-masque", "n1-neck-decollete"];
-const beyondTheRitual = ["cellular-cleanser", "cellular-mist", "lip-concentrate"];
+// Confirmed, priced launch formula (7A per CHIAREL_Launch_Formulas_Register.pdf) —
+// not part of the four-step AM/PM sequence, but a real launch product, so it gets
+// its own section rather than sitting with the unpriced "coming soon" items below.
+const launchCollection = ["eye-contour-concentrate"];
+const comingSoon = ["cellular-cleanser", "cellular-mist", "lip-concentrate"];
 const existingSets = ["the-founding-pair", "the-ritual-set"];
 
 function ProductGrid({ slugs }: { slugs: string[] }) {
@@ -72,12 +76,20 @@ export default function ShopPage() {
       </section>
 
       <section className="mt-16 border-t border-ink/10 pt-12">
-        <h2 className="font-serif text-2xl">Beyond the Ritual</h2>
+        <h2 className="font-serif text-2xl">The Launch Collection</h2>
         <p className="mt-1 max-w-xl text-[13px] leading-relaxed text-ink/65">
-          Additional CHIAREL products — fully available, just outside the
-          core four-product launch ritual.
+          Confirmed for this launch alongside the four-product ritual —
+          available now.
         </p>
-        <ProductGrid slugs={beyondTheRitual} />
+        <ProductGrid slugs={launchCollection} />
+      </section>
+
+      <section className="mt-16 border-t border-ink/10 pt-12">
+        <h2 className="font-serif text-2xl">Coming Soon</h2>
+        <p className="mt-1 max-w-xl text-[13px] leading-relaxed text-ink/65">
+          Additional CHIAREL products, outside the core launch ritual.
+        </p>
+        <ProductGrid slugs={comingSoon} />
       </section>
 
       <section className="mt-16 border-t border-ink/10 pt-12">

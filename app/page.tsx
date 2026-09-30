@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: `${SITE_NAME} — N1 Neck & Décolleté Renewal Emulsion`,
     description:
-      "A fragrance-free nightly emulsion for the skin below the jawline, at the center of CHIAREL's focused four-product ritual. Formulated in Isola del Liri, Italy.",
+      "A nightly emulsion for the skin below the jawline, at the center of CHIAREL's focused four-product ritual. Formulated in Isola del Liri, Italy.",
     url: SITE_URL,
     images: [{ url: "/assets/editorial/hero-shore-duo.png", width: 1536, height: 934 }],
     publishedTime: HOMEPAGE_PUBLISHED,
@@ -153,7 +153,6 @@ const ingredientTable = products
 export default function Home() {
   const essence = getProductOrThrow("chiarel-essence");
   const masque = getProductOrThrow("recovery-masque");
-  const terraCreme = getProductOrThrow("terra-radiance-creme");
   const n1 = getProductOrThrow("n1-neck-decollete");
   const foundingPair = getProductOrThrow("the-founding-pair");
   const ritualSet = getProductOrThrow("the-ritual-set");
@@ -226,9 +225,10 @@ export default function Home() {
             </h1>
             {/* DRAFT — OWNER / REGULATORY APPROVAL REQUIRED */}
             <p className="mt-8 max-w-sm text-[15px] leading-relaxed text-ink/70">
-              A fragrance-free nightly emulsion designed for the skin below
-              the jawline — where visible dryness, crepey-looking texture,
-              and fine lines often need more than a face cream.
+              A nightly emulsion designed for the skin below the jawline —
+              where visible dryness, crepey-looking texture, and fine lines
+              often need more than a face cream. Finished with a delicate
+              CHIAREL accord.
             </p>
             <div className="mt-10 flex flex-col items-start gap-4">
               <Link
@@ -791,9 +791,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Founding Pair — unchanged contents/price/route/CTAs; homepage
-          prominence reduced by moving it below the N1 hero and the
-          four-product ritual, per
+      {/* Founding Pair — now CHIAREL Essence + N1 (changed 2026-09-30, was
+          Essence + Terra Radiance Crème); price/route/CTAs unchanged pending
+          founder confirmation on whether $243/$347 still holds for the new
+          contents. Homepage prominence reduced by moving it below the N1
+          hero and the four-product ritual, per
           CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §6/§13. */}
       <section className="section-y bg-champagne/25">
         <div className="section-x flex flex-col items-center gap-10 md:flex-row">
@@ -808,17 +810,17 @@ export default function Home() {
               className="card-elevated product-frame col-span-2 aspect-[4/5] self-end"
               style={{ backgroundColor: NEUTRAL_FRAME_BG }}
             >
-              <Image src={terraCreme.image} alt={productImageAlt(terraCreme)} fill sizes="25vw" />
+              <Image src={n1.image} alt={productImageAlt(n1)} fill sizes="25vw" />
             </div>
           </Reveal>
           <Reveal delay={0.15} className="w-full md:w-2/5">
             <h2 className="font-serif text-3xl">The Founding Pair</h2>
             <p className="mt-2 text-sm text-ink/60">
-              The Signature Serum &amp; The Icon
+              The Signature Serum &amp; N1
             </p>
             <p className="mt-3 max-w-md text-sm text-ink/70">
-              CHIAREL Essence and Terra Radiance Crème — the essential
-              ritual in two gestures, delivered together every 45 days.
+              CHIAREL Essence and N1 Neck &amp; Décolleté Renewal Emulsion —
+              face and décolleté, delivered together every 45 days.
             </p>
             <p className="mt-4 text-sm">
               <span className="tabular-nums font-serif text-2xl">

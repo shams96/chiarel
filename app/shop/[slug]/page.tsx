@@ -561,7 +561,7 @@ function N1WhatItsForAndFeel() {
         <div>
           <h2 className="font-serif text-2xl">What it feels like</h2>
           <ul className="mt-4 space-y-2 text-sm leading-relaxed text-ink/75">
-            <li>· Fragrance-free</li>
+            <li>· Finished with a delicate CHIAREL accord</li>
             <li>· Cushioning</li>
             <li>· Low drag</li>
             <li>· A satin finish</li>

@@ -18,7 +18,7 @@
       "subscription": 78,
       "oneTime": 98
     },
-    "image": "/assets/products/cellular-cleanser-shore.png",
+    "image": "/assets/products/cellular-cleanser-bottle.png",
     "blurb": "A gentle daily cleanser that supports the skin barrier while lifting away impurities — the first gesture of the ritual.",
     "benefits": [
       "Cleanses without disrupting the skin's natural barrier",
@@ -61,7 +61,7 @@
       "subscription": 70,
       "oneTime": 88
     },
-    "image": "/assets/products/cellular-mist-shore.png",
+    "image": "/assets/products/cellular-mist-bottle.png",
     "blurb": "A conditioning mist that optimizes skin receptivity, preparing the complexion for treatment.",
     "benefits": [
       "Delivers a fine, fast-absorbing layer of hydration",
@@ -250,7 +250,7 @@
       "subscription": 46,
       "oneTime": 58
     },
-    "image": "/assets/products/lip-concentrate-ivory.png",
+    "image": "/assets/products/lip-gloss-bottle.png",
     "blurb": "A dual-action treatment that supports volume and radiance. Standalone — beyond the face ritual.",
     "benefits": [
       "Dual-action treatment for volume and radiance",
@@ -270,7 +270,7 @@
     "slug": "the-founding-pair",
     "sku": "SET-02",
     "name": "The Founding Pair",
-    "descriptor": "The Signature Serum & The Icon — CHIAREL Essence™ + Terra Radiance Crème™",
+    "descriptor": "The Signature Serum & N1 — CHIAREL Essence™ + N1 Neck & Décolleté Renewal Emulsion™",
     "step": "Founding Pair",
     "ritualOrder": null,
     "family": "The House",
@@ -282,15 +282,19 @@
     "line": "",
     "size": "Two full-size treatments",
     "price": {
-      "subscription": 243,
-      "oneTime": 347
+      "subscription": 302,
+      "oneTime": 378
     },
-    "image": "/assets/products/founding-pair-shore.png",
-    "blurb": "The Signature Serum of the House paired with its Icon — CHIAREL Essence™ and Terra Radiance Crème™, delivered together every 45 days. The essential ritual, in two gestures.",
+    "image": "/assets/products/chiarel-essence-jar.png",
+    "gallery": [
+      { "src": "/assets/products/chiarel-essence-jar.png", "alt": "CHIAREL Essence", "role": "hero" },
+      { "src": "/assets/products/n1-neck-decollete-jar.png", "alt": "N1 Neck & Décolleté Renewal Emulsion", "role": "application" }
+    ],
+    "blurb": "The Signature Serum of the House paired with N1 Neck & Décolleté Renewal Emulsion™ — CHIAREL Essence™ and N1™, delivered together every 45 days. Face and décolleté, in two gestures.",
     "badge": "Founding Pair",
     "set": true,
     "icon": false,
-    "includes": ["chiarel-essence", "terra-radiance-creme"],
+    "includes": ["chiarel-essence", "n1-neck-decollete"],
     "launchRitual": false,
     "launchRitualOrder": null,
     "launchRole": "legacy-set",
@@ -316,7 +320,13 @@
       "subscription": 372,
       "oneTime": 533
     },
-    "image": "/assets/products/ritual-set-shore.png",
+    "image": "/assets/products/cellular-cleanser-bottle.png",
+    "gallery": [
+      { "src": "/assets/products/cellular-cleanser-bottle.png", "alt": "Cellular Cleanser", "role": "hero" },
+      { "src": "/assets/products/cellular-mist-bottle.png", "alt": "Cellular Mist", "role": "application" },
+      { "src": "/assets/products/chiarel-essence-jar.png", "alt": "CHIAREL Essence", "role": "application" },
+      { "src": "/assets/products/terra-radiance-creme-jar.png", "alt": "Terra Radiance Crème", "role": "application" }
+    ],
     "blurb": "Every step of the daily ritual, delivered together on your rhythm. The complete practice of the House — Cellular Cleanser™, Cellular Mist™, CHIAREL Essence™, and Terra Radiance Crème™.",
     "badge": "The Ritual, Complete",
     "set": true,
@@ -332,7 +342,7 @@
     "slug": "n1-neck-decollete",
     "sku": "N1-R",
     "name": "N1 Neck & Décolleté Renewal Emulsion™",
-    "descriptor": "Fragrance-Free Nightly Renewal Emulsion",
+    "descriptor": "Nightly Neck & Décolleté Renewal Emulsion",
     "role": "The Neck & Décolleté Treatment",
     "step": "Renew PM",
     "ritualOrder": null,
@@ -357,7 +367,7 @@
       { "src": "/assets/products/n1-neck-decollete-lifestyle-2.jpg", "alt": "N1 on a stone ledge overlooking Isola del Liri", "role": "application" },
       { "src": "/assets/products/n1-neck-decollete-lifestyle-1.jpg", "alt": "N1 on a marble counter", "role": "lifestyle" }
     ],
-    "blurb": "A fragrance-free nightly emulsion for the neck, jawline, and décolleté — designed to help the appearance of dryness, crepey-looking texture, and fine lines feel and look more comfortable, smooth, and supple with continued use.",
+    "blurb": "A nightly emulsion for the neck, jawline, and décolleté — designed to help the appearance of dryness, crepey-looking texture, and fine lines feel and look more comfortable, smooth, and supple with continued use. N1 is finished with a delicate CHIAREL accord.",
     "benefits": [
       "Helps improve the appearance of dryness across the neck and décolleté",
       "Designed for crepey-looking texture and the visible appearance of fine lines",
@@ -368,6 +378,40 @@
     "launchRitualOrder": 4,
     "launchRole": "hero",
     "timeOfUse": "PM",
+    "launchStatus": "launch",
+    "productColorToken": "Formal Garden"
+  },
+  {
+    "slug": "eye-contour-concentrate",
+    "sku": "7A",
+    "name": "CHIAREL Eye Contour Concentrate™",
+    "descriptor": "Nightly Eye Contour Treatment",
+    "step": "Eye Contour",
+    "ritualOrder": null,
+    "family": "CHIAREL Verde™",
+    "color": {
+      "name": "Formal Garden",
+      "hex": "#1F5129"
+    },
+    "complex": "",
+    "line": "",
+    "size": "15 ml / 0.5 fl. oz.",
+    "price": {
+      "subscription": 151,
+      "oneTime": 189
+    },
+    "image": "/assets/products/eye-contour-concentrate-jar.png",
+    "imageIsPlaceholder": false,
+    "blurb": "A nightly concentrate for the eye contour — designed to comfort this delicate area and help it look smoother and more rested.",
+    "benefits": [
+      "Helps comfort the delicate eye contour area",
+      "Supports a smoother-looking, more hydrated appearance",
+      "A lightweight, fast-absorbing finish"
+    ],
+    "icon": true,
+    "launchRitual": false,
+    "launchRitualOrder": null,
+    "launchRole": "standalone",
     "launchStatus": "launch",
     "productColorToken": "Formal Garden"
   }
