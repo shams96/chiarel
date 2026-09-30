@@ -36,7 +36,7 @@ const serumTable = {
       label: "Active concentrations disclosed",
       values: [
         "Yes — Palmitoyl Pentapeptide-4 at 3%, Bioactive Ferment Lysate at 0.30%, published on the product page",
-        "Not published",
+        "Yes — 15% L-ascorbic acid, 1% alpha tocopherol, 0.5% ferulic acid, published on packaging",
         "Not published",
         "Not published",
       ],
@@ -74,7 +74,7 @@ const cremeTable = {
       label: "Price",
       values: [
         "$126 with subscription · $158 one-time (50 g)",
-        "$450 (0.5 oz) · price scales with size",
+        "$450 (2 oz) · price scales with size",
         "~$315 (50 ml)",
       ],
     },

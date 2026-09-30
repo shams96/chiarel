@@ -154,12 +154,15 @@ export default function CartDrawer() {
                       <p className="mt-0.5 truncate text-[11px] uppercase tracking-[0.14em] text-ink/65">
                         {nextStep.step}
                       </p>
+                      <p className="mt-0.5 text-[11px] text-ink/50">
+                        Subscription · renews every 45 days
+                      </p>
                     </div>
                     <button
                       onClick={() => add(nextStep.slug, "subscription")}
                       className="btn-press w-full shrink-0 border border-ink/20 px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-ink/70 transition hover:border-ochre hover:text-ochre sm:w-auto"
                     >
-                      Add · ${nextStep.price!.subscription}
+                      Subscribe · ${nextStep.price!.subscription}
                     </button>
                   </div>
                 </div>
@@ -169,7 +172,7 @@ export default function CartDrawer() {
             <div className="border-t border-ink/10 px-6 py-5">
               {savings > 0 && (
                 <p className="tabular-nums mb-2 flex justify-between text-[12px] text-ochre">
-                  <span>Ritual savings</span>
+                  <span>Ritual savings (already applied)</span>
                   <span>
                     −${savings} ({savingsPercent}%)
                   </span>

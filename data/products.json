@@ -282,8 +282,8 @@
     "line": "",
     "size": "Two full-size treatments",
     "price": {
-      "subscription": 302,
-      "oneTime": 378
+      "subscription": 269,
+      "oneTime": 327
     },
     "image": "/assets/products/chiarel-essence-jar.png",
     "gallery": [
@@ -305,8 +305,8 @@
     "slug": "the-ritual-set",
     "sku": "SET-01",
     "name": "The Ritual Set",
-    "descriptor": "The Complete Daily Ritual — Cleanse · Tone · Serum · Moisturize",
-    "step": "Complete Ritual",
+    "descriptor": "The Original Morning Ritual — Cleanse · Tone · Serum · Moisturize AM",
+    "step": "Original Ritual",
     "ritualOrder": null,
     "family": "The House",
     "color": {
@@ -327,8 +327,8 @@
       { "src": "/assets/products/chiarel-essence-jar.png", "alt": "CHIAREL Essence", "role": "application" },
       { "src": "/assets/products/terra-radiance-creme-jar.png", "alt": "Terra Radiance Crème", "role": "application" }
     ],
-    "blurb": "Every step of the daily ritual, delivered together on your rhythm. The complete practice of the House — Cellular Cleanser™, Cellular Mist™, CHIAREL Essence™, and Terra Radiance Crème™.",
-    "badge": "The Ritual, Complete",
+    "blurb": "The House's original four-step morning ritual, delivered together on your rhythm — Cellular Cleanser™, Cellular Mist™, CHIAREL Essence™, and Terra Radiance Crème™. For the evening ritual featuring N1, see The Founding Pair or the four-product ritual.",
+    "badge": "The Original Ritual",
     "set": true,
     "icon": false,
     "includes": ["cellular-cleanser", "cellular-mist", "chiarel-essence", "terra-radiance-creme"],

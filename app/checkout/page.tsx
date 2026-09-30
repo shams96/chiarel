@@ -87,9 +87,12 @@ export default function CheckoutPage() {
                 type="button"
                 disabled
                 title="Arriving with our Shopify boutique — pay by card below for now"
-                className="cursor-not-allowed border border-ink/20 py-3 text-[12px] uppercase tracking-[0.14em] text-ink/65"
+                className="cursor-not-allowed border border-dashed border-ink/20 py-3 text-[12px] uppercase tracking-[0.14em] text-ink/40 opacity-60"
               >
                 {m}
+                <span className="mt-1 block text-[9px] normal-case tracking-normal text-ink/45">
+                  Coming soon
+                </span>
               </button>
             ))}
           </div>
@@ -262,7 +265,7 @@ export default function CheckoutPage() {
             </div>
             {savings > 0 && (
               <div className="flex justify-between text-ochre">
-                <span>Ritual savings</span>
+                <span>Ritual savings (already applied)</span>
                 <span>−${savings}</span>
               </div>
             )}

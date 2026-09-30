@@ -109,7 +109,7 @@ export default async function OrderConfirmationPage({
         </div>
         {order.savings > 0 && (
           <div className="flex justify-between text-ochre">
-            <span>Ritual savings</span>
+            <span>Ritual savings (already applied)</span>
             <span>−${order.savings}</span>
           </div>
         )}
