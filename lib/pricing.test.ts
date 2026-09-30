@@ -26,6 +26,21 @@ describe("computeUnitPrice", () => {
       expect(computeUnitPrice(sub, sub * 1.25, "ninetyDay")).toBe(sub * 2);
     }
   });
+
+  it("applies the real Founding 100 20% discount for enrolled slugs, not the flat 2x", () => {
+    // N1's real bug this pins: the sitewide "90-day ritual, half price" banner
+    // promised a discount that N1's own Ritual Plan never actually applied.
+    expect(computeUnitPrice(118, 138, "ninetyDay", "n1-neck-decollete")).toBe(189); // round(236*0.8)
+  });
+
+  it("does not apply the Founding 100 discount to a non-enrolled product", () => {
+    expect(computeUnitPrice(151, 189, "ninetyDay", "chiarel-essence")).toBe(302);
+  });
+
+  it("ignores the slug entirely for non-ninetyDay modes", () => {
+    expect(computeUnitPrice(118, 138, "subscription", "n1-neck-decollete")).toBe(118);
+    expect(computeUnitPrice(118, 138, "oneTime", "n1-neck-decollete")).toBe(138);
+  });
 });
 
 describe("computeLineSavings", () => {

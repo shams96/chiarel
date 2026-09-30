@@ -7,10 +7,10 @@ export type { CartMode };
 const CART_COOKIE = "chiarel_cart_id";
 
 export function unitPriceFor(
-  product: { priceSub: number; priceOneTime: number },
+  product: { slug: string; priceSub: number; priceOneTime: number },
   mode: CartMode
 ): number {
-  return computeUnitPrice(product.priceSub, product.priceOneTime, mode);
+  return computeUnitPrice(product.priceSub, product.priceOneTime, mode, product.slug);
 }
 
 /** Reads the cart-id cookie set by middleware and ensures a Cart row exists for it. */

@@ -23,10 +23,10 @@ export type CartLine = {
 
 /** Kept for callers that price a product client-side before it's in the cart (e.g. PDP tier previews). */
 export function unitPrice(
-  product: { price: { subscription: number; oneTime: number } },
+  product: { slug: string; price: { subscription: number; oneTime: number } },
   mode: CartMode
 ): number {
-  return computeUnitPrice(product.price.subscription, product.price.oneTime, mode);
+  return computeUnitPrice(product.price.subscription, product.price.oneTime, mode, product.slug);
 }
 
 type CartApiResponse = {

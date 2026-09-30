@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useCart } from "@/lib/cart-context";
+import { isFounding100, founding100Pricing } from "@/lib/founding100";
 
 type Tier = "ninetyDay" | "single" | "oneTime";
 
@@ -20,7 +21,15 @@ export default function PurchaseOptions({
   const [tier, setTier] = useState<Tier>("ninetyDay");
   const { add } = useCart();
 
-  const ninetyDayTotal = subscription * 2;
+  const flatNinetyDayTotal = subscription * 2;
+  const enrolledInFounding100 = isFounding100(slug);
+  const founding100 = enrolledInFounding100 ? founding100Pricing(flatNinetyDayTotal) : null;
+  // The actual checkout price for the Ritual Plan — real 20%-off for
+  // Founding 100 products, otherwise the flat 2x rate. Previously this
+  // component always used the flat rate, which is what made the sitewide
+  // "90-day ritual, half price" banner's promise false on N1's own page —
+  // see claudedocs/specs/international-launch/ (N1 Ritual Plan resolution).
+  const ninetyDayTotal = founding100 ? founding100.checkoutTotal : flatNinetyDayTotal;
 
   return (
     <div className="mt-8">
@@ -45,8 +54,17 @@ export default function PurchaseOptions({
             The Ritual Plan
           </span>
           <span className="mt-1 block text-sm text-ink/70">
-            One delivery, the full 90-day ritual · pause or adjust anytime ·
-            member advantages reserved for subscribers
+            {founding100 ? (
+              <>
+                One delivery, the full 90-day ritual · 20% off at checkout ·
+                ${founding100.credit} credited back — part of{" "}
+                <a href="/founding-100" className="underline decoration-ink/30 hover:text-ochre">
+                  The Founding 100
+                </a>
+              </>
+            ) : (
+              <>One delivery, the full 90-day ritual · pause or adjust anytime</>
+            )}
           </span>
         </span>
         <span className="text-right">

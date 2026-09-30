@@ -4,14 +4,24 @@
 // two used to hand-duplicate this exact rule with no shared import — a real
 // business-logic risk, not just a data-shape one: the 90-day multiplier
 // could change on one side and not the other with nothing to catch it.
+import { isFounding100, founding100Pricing } from "./founding100";
+
 export type CartMode = "ninetyDay" | "subscription" | "oneTime";
 
 export function computeUnitPrice(
   priceSubscription: number,
   priceOneTime: number,
-  mode: CartMode
+  mode: CartMode,
+  slug?: string
 ): number {
-  if (mode === "ninetyDay") return priceSubscription * 2;
+  if (mode === "ninetyDay") {
+    const ninetyDayTotal = priceSubscription * 2;
+    // Founding 100 products (see lib/founding100.ts) apply a real 20% discount
+    // at checkout instead of the flat 2x — this is what makes the sitewide
+    // "90-day ritual, half price" banner's claim actually true wherever it's
+    // shown, rather than only on the dedicated /founding-100 page.
+    return slug && isFounding100(slug) ? founding100Pricing(ninetyDayTotal).checkoutTotal : ninetyDayTotal;
+  }
   return mode === "subscription" ? priceSubscription : priceOneTime;
 }
 
