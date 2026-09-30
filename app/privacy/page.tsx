@@ -102,8 +102,9 @@ export default function PrivacyPage() {
             provider, may process data outside the EU/UK; where that
             happens, it is covered by those providers&rsquo; own
             GDPR-compliant safeguards (such as Standard Contractual Clauses).
-            For any request or question specific to your rights under GDPR,
-            contact{" "}
+            Our designated EU representative for GDPR matters is reachable at
+            the same address below. For any request or question specific to
+            your rights under GDPR, contact{" "}
             <a
               href={`mailto:${CONTACT_EMAIL}`}
               className="border-b border-ochre pb-0.5 text-ochre"

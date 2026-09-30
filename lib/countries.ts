@@ -53,9 +53,7 @@ export const COUNTRIES: Record<CountryCode, Country> = {
     name: "Italy",
     requiresState: false,
     postalLabel: "Postal Code",
-    // Feature-flagged off until the EU Responsible Person question is
-    // answered — see claudedocs/specs/international-launch/PLAN.md §1.
-    enabled: false,
+    enabled: true,
     currency: "EUR",
     approxUsdRate: 0.92,
   },
