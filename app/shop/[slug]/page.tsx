@@ -294,12 +294,18 @@ function BenefitPills({
   actives?: { name: string; percent: string | null }[];
 }) {
   const primaryActive = actives?.[0];
+  // "Customer Tested" and "Every Active Disclosed" are only true once a
+  // product has actives on record — without that (currently just N1, whose
+  // own Formula Transparency / Testing & Evidence sections below say
+  // plainly that testing and full disclosure aren't done yet), showing
+  // these pills would contradict the page's own honest placeholder copy.
+  const hasActives = Boolean(actives && actives.length > 0);
   const pills = [
     primaryActive?.percent
       ? `${primaryActive.percent} ${primaryActive.name}`
       : null,
-    "Customer Tested",
-    "Every Active Disclosed",
+    hasActives ? "Customer Tested" : null,
+    hasActives ? "Every Active Disclosed" : null,
     "Made to Order in Isola del Liri, Italy",
   ].filter((pill): pill is string => Boolean(pill));
 

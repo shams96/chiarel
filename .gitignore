@@ -44,3 +44,6 @@ next-env.d.ts
 
 # Raw, unredacted customer/subject photos — never commit, never serve publicly
 .private-assets/
+
+# Stray large archive, not a project artifact
+.claude.zip

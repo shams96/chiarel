@@ -1,8 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { withApiErrorHandling } from "@/lib/api-error";
+import { isRateLimited, clientIp } from "@/lib/rate-limit";
 
 const FOUNDING_CAP = 100;
+// Unauthenticated public signup endpoint with no CAPTCHA — throttle by IP so
+// it can't be used to flood the DB, the CRM webhook, or the live "N of 100"
+// counter with bulk fake signups.
+const SIGNUP_MAX_ATTEMPTS = 10;
+const SIGNUP_WINDOW_MS = 15 * 60 * 1000;
 
 export const GET = withApiErrorHandling(async () => {
   const claimed = await db.foundingSignup.count();
@@ -10,6 +16,13 @@ export const GET = withApiErrorHandling(async () => {
 });
 
 export const POST = withApiErrorHandling(async (req: NextRequest) => {
+  if (isRateLimited(`founding-list:${clientIp(req)}`, SIGNUP_MAX_ATTEMPTS, SIGNUP_WINDOW_MS)) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again in a few minutes." },
+      { status: 429 }
+    );
+  }
+
   const body = await req.json().catch(() => null);
   const { name, email, phone, social, referredBy, source } = body ?? {};
 

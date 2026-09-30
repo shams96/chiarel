@@ -50,7 +50,8 @@ export default function Header() {
   const pathname = usePathname();
   const showFounding100Ticker = FOUNDING_100_PAGES.includes(pathname ?? "");
   return (
-    <header className="site-header sticky top-0 z-50 overflow-x-hidden border-b border-ink/10">
+    <>
+      <header className="site-header sticky top-0 z-50 overflow-x-hidden border-b border-ink/10">
       {showFounding100Ticker && (
         <Link
           href="/founding-100"
@@ -122,7 +123,13 @@ export default function Header() {
           </button>
         </div>
       </div>
-
+    </header>
+      {/* Rendered outside <header> deliberately: .site-header has
+          backdrop-filter (see globals.css), which establishes a new
+          containing block for position:fixed descendants — a fixed-position
+          menu panel nested inside it resolves "fixed" against the header's
+          own box instead of the viewport, collapsing the overlay into a
+          small box pinned near the top instead of a full-height panel. */}
       <div
         className={`fixed inset-0 z-[80] bg-ink/40 transition-opacity md:hidden ${
           menuOpen ? "opacity-100" : "pointer-events-none opacity-0"
@@ -158,6 +165,6 @@ export default function Header() {
           ))}
         </nav>
       </aside>
-    </header>
+    </>
   );
 }

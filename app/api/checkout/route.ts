@@ -2,14 +2,22 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { getCartWithTotals, getOrCreateCart } from "@/lib/cart-server";
 import { stripe } from "@/lib/stripe";
+import Stripe from "stripe";
 import { withApiErrorHandling } from "@/lib/api-error";
 import { getCountry } from "@/lib/countries";
 import { totalFounding100Credit } from "@/lib/founding100";
 import { getProductOrThrow } from "@/lib/products";
+import { isRateLimited, clientIp } from "@/lib/rate-limit";
 
 const FREE_SHIP_THRESHOLD = 150;
 // Keep in sync with EXTRA_SAMPLE_THRESHOLD in components/CartDrawer.tsx.
 const EXTRA_SAMPLE_THRESHOLD = 250;
+// Throttle by IP: checkout creates a pending Order row and a Stripe Checkout
+// Session on every call, so an unthrottled endpoint is a cheap way to spam
+// both the DB and the Stripe account — not a customer-facing limit anyone
+// placing real orders would ever hit.
+const CHECKOUT_MAX_ATTEMPTS = 20;
+const CHECKOUT_WINDOW_MS = 10 * 60 * 1000;
 
 const modeLabel: Record<string, string> = {
   ninetyDay: "The Ritual Plan · 90-day supply, one delivery",
@@ -22,6 +30,13 @@ function isNonEmptyString(v: unknown): v is string {
 }
 
 export const POST = withApiErrorHandling(async (req: NextRequest) => {
+  if (isRateLimited(`checkout:${clientIp(req)}`, CHECKOUT_MAX_ATTEMPTS, CHECKOUT_WINDOW_MS)) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again in a few minutes." },
+      { status: 429 }
+    );
+  }
+
   const body = await req.json().catch(() => null);
   const { email, firstName, lastName, address, city, country, state, zip, termsAccepted, termsVersion } =
     body ?? {};
@@ -166,16 +181,54 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
         address: customerAddress,
       });
 
-  const session = await stripe.checkout.sessions.create({
-    mode: "payment",
-    payment_method_types: ["card"],
-    customer: customer.id,
-    line_items: lineItems,
-    automatic_tax: { enabled: true },
-    success_url: `${origin}/order/${order.id}?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${origin}/checkout`,
-    metadata: { orderId: order.id },
-  });
+  // automatic_tax needs the Stripe account itself to have a registered head
+  // office address (Dashboard → Tax settings) — an account-level setup step,
+  // not something this code can perform. Until that's done, Stripe rejects
+  // EVERY session creation with automatic_tax enabled (verified live during
+  // QA: "You must have a valid head office address to enable automatic tax
+  // calculation in test mode"), which would otherwise take down checkout
+  // entirely for all customers. Fall back to a session without automatic
+  // tax rather than hard-failing the purchase — no tax is collected in that
+  // fallback path, same as before automatic_tax was added (see
+  // claudedocs/specs/international-launch/SPEC.md's prior no-tax baseline).
+  let session;
+  try {
+    session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      payment_method_types: ["card"],
+      customer: customer.id,
+      line_items: lineItems,
+      automatic_tax: { enabled: true },
+      success_url: `${origin}/order/${order.id}?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/checkout`,
+      metadata: { orderId: order.id },
+    });
+  } catch (err) {
+    // Stripe doesn't expose a stable error code for this specific
+    // misconfiguration (verified against the SDK's error types) — narrowing
+    // on StripeInvalidRequestError + the known message substring is the best
+    // available check. If Stripe ever changes this message's wording, this
+    // stops matching and checkout reverts to hard-failing loudly (safer than
+    // silently swallowing an unrelated error) rather than to fail silently.
+    const isKnownTaxConfigError =
+      err instanceof Stripe.errors.StripeInvalidRequestError &&
+      err.message.includes("head office address");
+    if (!isKnownTaxConfigError) throw err;
+    const message = err.message;
+    console.error(
+      "[checkout] automatic_tax rejected by Stripe account config — falling back to no-tax session. Fix: set a head office address at https://dashboard.stripe.com/test/settings/tax",
+      message
+    );
+    session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      payment_method_types: ["card"],
+      customer: customer.id,
+      line_items: lineItems,
+      success_url: `${origin}/order/${order.id}?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/checkout`,
+      metadata: { orderId: order.id },
+    });
+  }
 
   await db.order.update({
     where: { id: order.id },

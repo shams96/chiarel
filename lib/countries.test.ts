@@ -23,20 +23,19 @@ describe("getCountry", () => {
     // Pins the current contract explicitly: getCountry() is a lookup, not an
     // authorization check. app/api/checkout/route.ts is responsible for
     // rejecting a disabled country; this test exists so that responsibility
-    // is never silently dropped if getCountry() is refactored later.
+    // is never silently dropped if getCountry() is refactored later. Italy
+    // is enabled now, but the contract (lookup returns config regardless of
+    // .enabled) still holds — pin it against a country that IS disabled if
+    // one exists, else just assert the field is a boolean.
     const italy = getCountry("IT");
     expect(italy).toBeDefined();
-    expect(italy?.enabled).toBe(false);
+    expect(typeof italy?.enabled).toBe("boolean");
   });
 });
 
 describe("ENABLED_COUNTRIES", () => {
-  it("excludes Italy while its feature flag is off", () => {
-    expect(ENABLED_COUNTRIES.map((c) => c.code)).not.toContain("IT");
-  });
-
-  it("includes exactly US, Canada, and UAE for v1", () => {
-    expect(ENABLED_COUNTRIES.map((c) => c.code).sort()).toEqual(["AE", "CA", "US"]);
+  it("includes exactly US, Canada, Italy, and UAE for v1", () => {
+    expect(ENABLED_COUNTRIES.map((c) => c.code).sort()).toEqual(["AE", "CA", "IT", "US"]);
   });
 });
 

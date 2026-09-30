@@ -8,6 +8,38 @@ export function middleware(request: NextRequest) {
   response.headers.set("X-Frame-Options", "DENY");
   response.headers.set("X-Content-Type-Options", "nosniff");
   response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  // 'unsafe-inline' on script-src is required for the JSON-LD
+  // dangerouslySetInnerHTML blocks (app/layout.tsx, app/page.tsx, etc.) —
+  // all of those are server-rendered from static/DB-sourced data, never raw
+  // user input, so this doesn't open an XSS hole; frame-ancestors 'none'
+  // backs up X-Frame-Options for browsers that honor CSP over the legacy
+  // header.
+  // Next.js dev mode's Fast Refresh runtime evaluates code via eval() to
+  // patch modules in place; a strict script-src without 'unsafe-eval' makes
+  // the browser throw on every HMR update, which crashes hydration client-side
+  // and can leave the page's splash/preloader stuck (blank screen) even
+  // though the server-rendered HTML is fine. Production never uses eval-based
+  // Fast Refresh, so this relaxation is dev-only and doesn't weaken the
+  // deployed CSP.
+  const scriptSrc =
+    process.env.NODE_ENV === "production"
+      ? "script-src 'self' 'unsafe-inline' https://js.stripe.com"
+      : "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com";
+  response.headers.set(
+    "Content-Security-Policy",
+    [
+      "default-src 'self'",
+      scriptSrc,
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: https:",
+      "font-src 'self' data:",
+      "connect-src 'self' https://api.stripe.com",
+      "frame-src https://js.stripe.com https://checkout.stripe.com",
+      "frame-ancestors 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+    ].join("; ")
+  );
   // Only meaningful once the site is actually served over HTTPS (see the
   // chiarel.com domain-connection work) — tells browsers to always use
   // HTTPS for this origin going forward, closing the window an attacker on

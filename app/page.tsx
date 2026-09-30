@@ -57,7 +57,7 @@ const faqs = [
   {
     question: "How much does CHIAREL cost?",
     answer:
-      "Pricing varies by product and by whether you choose subscription (recurring, every 45 days, at a discounted rate) or one-time purchase. See each product's page for its current price. N1 Neck & Décolleté Renewal Emulsion's price will be announced when it becomes available for purchase.",
+      "Pricing varies by product and by whether you choose subscription (recurring, every 45 days, at a discounted rate) or one-time purchase. See each product's page for its current price.",
   },
   {
     question: "What is CHIAREL made of?",
@@ -202,7 +202,7 @@ export default function Home() {
               url: SITE_URL,
               name: "CHIAREL™ — N1 Neck & Décolleté Renewal Emulsion",
               description:
-                "CHIAREL's focused four-product ritual, led by N1 Neck & Décolleté Renewal Emulsion. Customer-tested skincare formulated in Isola del Liri, Italy. Every active ingredient disclosed.",
+                "CHIAREL's focused four-product ritual, led by N1 Neck & Décolleté Renewal Emulsion. Skincare formulated in Isola del Liri, Italy, with every active ingredient and concentration disclosed on each product page as it becomes available.",
             })
           ),
         }}
