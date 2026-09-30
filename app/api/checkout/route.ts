@@ -4,6 +4,8 @@ import { getCartWithTotals, getOrCreateCart } from "@/lib/cart-server";
 import { stripe } from "@/lib/stripe";
 import { withApiErrorHandling } from "@/lib/api-error";
 import { getCountry } from "@/lib/countries";
+import { totalFounding100Credit } from "@/lib/founding100";
+import { getProductOrThrow } from "@/lib/products";
 
 const FREE_SHIP_THRESHOLD = 150;
 // Keep in sync with EXTRA_SAMPLE_THRESHOLD in components/CartDrawer.tsx.
@@ -61,6 +63,10 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
 
   const shipping = cart.subtotal >= FREE_SHIP_THRESHOLD ? 0 : 12;
   const total = cart.subtotal + shipping;
+  const founding100Credit = totalFounding100Credit(
+    cart.lines,
+    (slug) => getProductOrThrow(slug).price!.subscription
+  );
 
   // Order is recorded as pending until Stripe confirms payment — the order
   // page verifies the session server-side and flips this to "paid" itself,
@@ -80,6 +86,7 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
       shipping,
       total,
       bonusSample: cart.subtotal >= EXTRA_SAMPLE_THRESHOLD,
+      founding100Credit: founding100Credit > 0 ? founding100Credit : null,
       status: "pending",
       termsAcceptedAt: new Date(),
       termsVersion,

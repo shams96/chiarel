@@ -87,6 +87,13 @@ model Order {
   // Stripe's "Refund policy details" dispute-response field, not just a UI checkbox.
   termsAcceptedAt DateTime?
   termsVersion    String?
+  // Founding 100 credit-back ledger (claudedocs/specs/international-launch/,
+  // N1/Founding 100 fold): the promised 25%-of-checkout store credit for
+  // Founding 100 orders (Recovery Masque, N1) wasn't tracked anywhere before
+  // this — an unenforced promise. null = not a Founding 100 order. A non-null
+  // amount with issuedAt still null = owed but not yet redeemed.
+  founding100Credit         Int?
+  founding100CreditIssuedAt DateTime?
   // Flat fields on Order rather than a separate Dispute table/relation — a dispute
   // always maps to exactly one order and doesn't need its own history of state
   // transitions here (Stripe's own dashboard is the audit trail for that).

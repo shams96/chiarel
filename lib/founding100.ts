@@ -29,3 +29,21 @@ export function founding100Pricing(ninetyDayTotal: number) {
   const netCost = checkoutTotal - credit;
   return { checkoutTotal, credit, netCost };
 }
+
+/**
+ * Total credit owed across a cart/order's lines — the amount that belongs in
+ * the Order.founding100Credit ledger field. `subscriptionPriceFor` looks up
+ * a line's real (undiscounted) subscription price by slug; kept as an
+ * injected function rather than importing lib/products.ts directly, so this
+ * stays a pure, easily testable function.
+ */
+export function totalFounding100Credit(
+  lines: { slug: string; mode: string; qty: number }[],
+  subscriptionPriceFor: (slug: string) => number
+): number {
+  return lines.reduce((sum, line) => {
+    if (line.mode !== "ninetyDay" || !isFounding100(line.slug)) return sum;
+    const flatNinetyDayTotal = subscriptionPriceFor(line.slug) * 2;
+    return sum + founding100Pricing(flatNinetyDayTotal).credit * line.qty;
+  }, 0);
+}
