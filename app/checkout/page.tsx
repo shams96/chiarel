@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import RefundPolicyContent, { REFUND_POLICY_VERSION } from "@/components/RefundPolicyContent";
+import { ENABLED_COUNTRIES, getCountry, approxConverted, type CountryCode } from "@/lib/countries";
 
 const FREE_SHIP_THRESHOLD = 150;
 const modeLabel: Record<string, string> = {
@@ -17,6 +18,8 @@ export default function CheckoutPage() {
   const { lines, subtotal, savings } = useCart();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [countryCode, setCountryCode] = useState<CountryCode>("US");
+  const country = getCountry(countryCode) ?? ENABLED_COUNTRIES[0];
 
   const hasSubscription = lines.some((l) => l.mode !== "oneTime");
   const shipping = subtotal >= FREE_SHIP_THRESHOLD || subtotal === 0 ? 0 : 12;
@@ -34,8 +37,9 @@ export default function CheckoutPage() {
       lastName: form.get("lastName"),
       address: form.get("address"),
       city: form.get("city"),
-      state: form.get("state"),
-      zip: form.get("zip"),
+      country: form.get("country"),
+      state: form.get("state") || null,
+      zip: form.get("zip") || null,
       termsAccepted: form.get("termsAccepted") === "on",
       termsVersion: REFUND_POLICY_VERSION,
     };
@@ -141,6 +145,25 @@ export default function CheckoutPage() {
 
             <div>
               <label className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
+                Country
+              </label>
+              <select
+                name="country"
+                required
+                value={countryCode}
+                onChange={(e) => setCountryCode(e.target.value as CountryCode)}
+                className="mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
+              >
+                {ENABLED_COUNTRIES.map((c) => (
+                  <option key={c.code} value={c.code}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
                 Shipping Address
               </label>
               <input
@@ -151,24 +174,26 @@ export default function CheckoutPage() {
               />
             </div>
 
-            <div className="grid grid-cols-3 gap-4">
+            <div className={`grid gap-4 ${country.requiresState ? "grid-cols-3" : "grid-cols-2"}`}>
               <input
                 name="city"
                 required
                 className="border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
                 placeholder="City"
               />
-              <input
-                name="state"
-                required
-                className="border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
-                placeholder="State"
-              />
+              {country.requiresState && (
+                <input
+                  name="state"
+                  required
+                  className="border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
+                  placeholder="State"
+                />
+              )}
               <input
                 name="zip"
                 required
                 className="border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
-                placeholder="ZIP"
+                placeholder={country.postalLabel}
               />
             </div>
 
@@ -277,6 +302,11 @@ export default function CheckoutPage() {
               <span>Total</span>
               <span className="font-serif text-xl">${total}</span>
             </div>
+            {country.currency !== "USD" && (
+              <p className="text-right text-[11px] text-ink/50">
+                {approxConverted(total, country)} — charged in USD, see Terms
+              </p>
+            )}
           </div>
           <p className="mt-4 text-[11px] text-ink/65">
             Complimentary samples included, chosen by the House.

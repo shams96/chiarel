@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { getCartWithTotals, getOrCreateCart } from "@/lib/cart-server";
 import { stripe } from "@/lib/stripe";
 import { withApiErrorHandling } from "@/lib/api-error";
+import { getCountry } from "@/lib/countries";
 
 const FREE_SHIP_THRESHOLD = 150;
 // Keep in sync with EXTRA_SAMPLE_THRESHOLD in components/CartDrawer.tsx.
@@ -20,16 +21,25 @@ function isNonEmptyString(v: unknown): v is string {
 
 export const POST = withApiErrorHandling(async (req: NextRequest) => {
   const body = await req.json().catch(() => null);
-  const { email, firstName, lastName, address, city, state, zip, termsAccepted, termsVersion } =
+  const { email, firstName, lastName, address, city, country, state, zip, termsAccepted, termsVersion } =
     body ?? {};
 
-  const required = { email, firstName, lastName, address, city, state, zip };
+  const selectedCountry = getCountry(country);
+  if (!selectedCountry || !selectedCountry.enabled) {
+    return NextResponse.json({ error: "Unsupported country" }, { status: 400 });
+  }
+
+  const required: Record<string, unknown> = { email, firstName, lastName, address, city, country };
+  if (selectedCountry.requiresState) required.state = state;
   const missing = Object.entries(required).filter(([, v]) => !isNonEmptyString(v));
   if (missing.length > 0) {
     return NextResponse.json(
       { error: `Missing required field(s): ${missing.map(([k]) => k).join(", ")}` },
       { status: 400 }
     );
+  }
+  if (!isNonEmptyString(zip)) {
+    return NextResponse.json({ error: "Missing required field(s): zip" }, { status: 400 });
   }
   if (!email.includes("@")) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
@@ -62,7 +72,8 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
       lastName,
       address,
       city,
-      state,
+      country,
+      state: selectedCountry.requiresState ? state : null,
       zip,
       subtotal: cart.subtotal,
       savings: cart.savings,
@@ -90,6 +101,7 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
     price_data: {
       currency: string;
       unit_amount: number;
+      tax_behavior: "exclusive";
       product_data: { name: string; description?: string };
     };
     quantity: number;
@@ -97,6 +109,7 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
     price_data: {
       currency: "usd",
       unit_amount: Math.round(line.unitPrice * 100),
+      tax_behavior: "exclusive",
       product_data: {
         name: line.product.name,
         description: modeLabel[line.mode] ?? line.mode,
@@ -110,17 +123,38 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
       price_data: {
         currency: "usd",
         unit_amount: shipping * 100,
+        tax_behavior: "exclusive",
         product_data: { name: "Shipping" },
       },
       quantity: 1,
     });
   }
 
+  // A Stripe Customer with the collected shipping address, so Stripe Tax
+  // (enabled below) has a jurisdiction to calculate against — automatic_tax
+  // needs a known customer address, not just customer_email. See
+  // claudedocs/specs/international-launch/PLAN.md §4. Tax only actually
+  // calculates once this Stripe account is registered to collect in the
+  // relevant jurisdiction — enabling this here makes the code ready, it
+  // doesn't perform that registration.
+  const customer = await stripe.customers.create({
+    email,
+    name: `${firstName} ${lastName}`,
+    address: {
+      line1: address,
+      city,
+      state: selectedCountry.requiresState ? state : undefined,
+      postal_code: zip,
+      country,
+    },
+  });
+
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
     payment_method_types: ["card"],
-    customer_email: email,
+    customer: customer.id,
     line_items: lineItems,
+    automatic_tax: { enabled: true },
     success_url: `${origin}/order/${order.id}?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/checkout`,
     metadata: { orderId: order.id },

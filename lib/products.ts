@@ -73,6 +73,15 @@ export type Product = {
    * exist." Every render/purchase site checks `isPurchasable()`, not `price`.
    */
   hidePriceUntilApproved?: boolean;
+  /**
+   * EU Cosmetics Regulation 1223/2009 requires an EU-established Responsible
+   * Person named on the label before a cosmetic can be placed on the EU
+   * market. Left null/absent for every product until that's resolved — see
+   * claudedocs/specs/international-launch/SPEC.md. Present so the PDP can
+   * render it the moment there's a real answer, without inventing one now
+   * (constitution: "honest gaps stay visible, not hidden").
+   */
+  euResponsiblePerson?: { name: string; address: string } | null;
 };
 
 export const products = data as Product[];

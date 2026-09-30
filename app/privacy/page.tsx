@@ -82,6 +82,39 @@ export default function PrivacyPage() {
         </section>
 
         <section>
+          <h2 className="font-serif text-xl text-ink">
+            EU/UK Data Subject Rights (GDPR)
+          </h2>
+          <p className="mt-3">
+            If you are located in the European Union or United Kingdom, we
+            process your personal data on the following legal bases: order
+            and shipping information to perform our contract with you when
+            you place an order, and any marketing communications you opt
+            into on the basis of your consent, which you may withdraw at any
+            time.
+          </p>
+          <p className="mt-3">
+            In addition to the rights described above, you have the right to
+            data portability (receiving your data in a structured, commonly
+            used format) and the right to lodge a complaint with your local
+            data protection authority. Some of the services we use to
+            operate this store, including our payment processor and hosting
+            provider, may process data outside the EU/UK; where that
+            happens, it is covered by those providers&rsquo; own
+            GDPR-compliant safeguards (such as Standard Contractual Clauses).
+            For any request or question specific to your rights under GDPR,
+            contact{" "}
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="border-b border-ochre pb-0.5 text-ochre"
+            >
+              {CONTACT_EMAIL}
+            </a>
+            .
+          </p>
+        </section>
+
+        <section>
           <h2 className="font-serif text-xl text-ink">Children&rsquo;s privacy</h2>
           <p className="mt-3">
             {SITE_NAME} is not directed at children, and we do not knowingly

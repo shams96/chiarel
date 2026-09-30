@@ -22,11 +22,14 @@ export default function TermsPage() {
         <section>
           <h2 className="font-serif text-xl text-ink">Orders &amp; pricing</h2>
           <p className="mt-3">
-            All prices are listed in USD and are current at the time of
-            purchase. Each CHIAREL™ product is made to order in small
-            batches; by placing an order, you agree to the price and product
-            shown at checkout. We reserve the right to correct pricing errors
-            before an order ships.
+            All prices are charged in USD and are current at the time of
+            purchase, regardless of your shipping destination. Any price
+            shown in another currency at checkout is an approximate,
+            informational conversion only — the amount actually charged to
+            your card is the USD amount shown. Each CHIAREL™ product is made
+            to order in small batches; by placing an order, you agree to the
+            price and product shown at checkout. We reserve the right to
+            correct pricing errors before an order ships.
           </p>
         </section>
 
@@ -70,6 +73,34 @@ export default function TermsPage() {
         <RefundPolicyContent />
 
         <section>
+          <h2 className="font-serif text-xl text-ink">
+            Your Right to Cancel (EU Customers)
+          </h2>
+          <p className="mt-3">
+            If you are a consumer in the European Union, you have the right
+            to withdraw from your order within 14 days of delivery, without
+            giving any reason, under EU Directive 2011/83/EU. To exercise
+            this right, contact{" "}
+            <a
+              href={`mailto:${ORDERS_EMAIL}`}
+              className="border-b border-ochre pb-0.5 text-ochre"
+            >
+              {ORDERS_EMAIL}
+            </a>{" "}
+            within that window and we will process your withdrawal.
+          </p>
+          <p className="mt-3">
+            This right does not apply to sealed goods that have been unsealed
+            after delivery and are not suitable for return for health
+            protection or hygiene reasons — this includes CHIAREL™ products
+            once their seal has been broken. It remains available for
+            unopened, unused products within the 14-day window. This
+            exception is separate from, and does not reduce, the 90-Day
+            Guarantee above, which applies regardless of seal status.
+          </p>
+        </section>
+
+        <section>
           <h2 className="font-serif text-xl text-ink">Intellectual property</h2>
           <p className="mt-3">
             {SITE_NAME}, its formulation names, and all site content are the
@@ -95,7 +126,11 @@ export default function TermsPage() {
           <h2 className="font-serif text-xl text-ink">Governing law</h2>
           <p className="mt-3">
             These terms are governed by the laws applicable to 1HubSolutions,
-            LLC, without regard to conflict-of-law principles.
+            LLC, without regard to conflict-of-law principles. If you are a
+            consumer resident in the European Union, the United Kingdom, or
+            another jurisdiction with mandatory consumer-protection laws,
+            nothing in these terms limits the protections those laws give
+            you, and this governing-law clause does not deprive you of them.
           </p>
         </section>
 

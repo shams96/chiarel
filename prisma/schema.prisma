@@ -64,8 +64,13 @@ model Order {
   lastName      String
   address       String
   city          String
-  state         String
-  zip           String
+  // International launch (claudedocs/specs/international-launch/): state/zip
+  // are optional since not every launch country has both (e.g. Italy, UAE
+  // have no "state"). country is required once this field exists — the
+  // checkout form always collects it going forward.
+  country       String  @default("US")
+  state         String?
+  zip           String?
   subtotal      Int
   savings       Int
   shipping      Int
