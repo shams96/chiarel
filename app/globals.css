@@ -186,6 +186,23 @@ body::after {
   animation-play-state: paused;
 }
 
+/* Native <details> accordion — fades the answer in on open instead of a hard
+   snap (display:none → block is a discrete property, so it needs
+   `allow-discrete` + @starting-style rather than a plain transition).
+   Closing still snaps instantly — a CSS-only limitation, no JS keeps the
+   element mounted long enough to animate out — but opening, the only
+   moment a user is actively watching, now reads as an arrival, not a jump.
+   Applies globally to every <details>/<summary> FAQ and usage-guidance
+   block on the site, not just one page. */
+details > summary ~ * {
+  transition: opacity 300ms cubic-bezier(0.22, 1, 0.36, 1), display 300ms allow-discrete;
+}
+@starting-style {
+  details[open] > summary ~ * {
+    opacity: 0;
+  }
+}
+
 /* Primary CTA press feedback — respond on pointer-down, not release */
 .btn-press {
   transition: transform 100ms ease-out;

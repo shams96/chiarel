@@ -89,7 +89,7 @@ export default function Footer() {
                     {col.heading}
                   </p>
                   {col.links.map((link) => (
-                    <Link key={link.href} href={link.href} className="text-cloud hover:text-champagne">
+                    <Link key={link.href} href={link.href} className="text-cloud transition-colors hover:text-champagne">
                       {link.label}
                     </Link>
                   ))}

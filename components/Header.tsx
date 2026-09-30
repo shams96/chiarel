@@ -93,7 +93,7 @@ export default function Header() {
           <button
             onClick={open}
             aria-label="Open cart"
-            className="relative text-[12px] uppercase tracking-[0.18em] text-ink/80 transition hover:text-ochre"
+            className="btn-press relative text-[12px] uppercase tracking-[0.18em] text-ink/80 transition hover:text-ochre"
           >
             Bag
             {count > 0 && (
@@ -103,14 +103,22 @@ export default function Header() {
             )}
           </button>
           <button
-            onClick={() => setMenuOpen(true)}
-            aria-label="Open menu"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
-            className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden"
+            className="btn-press relative flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden"
           >
-            <span className="block h-px w-5 bg-ink" />
-            <span className="block h-px w-5 bg-ink" />
+            <span
+              className={`block h-px w-5 bg-ink transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                menuOpen ? "translate-y-[3.5px] rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`block h-px w-5 bg-ink transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                menuOpen ? "-translate-y-[3.5px] -rotate-45" : ""
+              }`}
+            />
           </button>
         </div>
       </div>
@@ -132,7 +140,7 @@ export default function Header() {
           <button
             onClick={() => setMenuOpen(false)}
             aria-label="Close menu"
-            className="flex h-11 w-11 items-center justify-center text-xl text-ink/65 hover:text-ink"
+            className="btn-press flex h-11 w-11 items-center justify-center text-xl text-ink/65 transition-colors hover:text-ink"
           >
             ×
           </button>

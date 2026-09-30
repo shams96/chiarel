@@ -23,8 +23,13 @@ const HOVER_TRANSFORM_BY_STEP: Record<string, string> = {
   // Moisturize (AM/PM) — jars read as heavier; they settle down, not up.
   "Moisturize AM": `${GATE}:group-hover:translate-y-0.5 ${GATE}:group-hover:scale-[1.02]`,
   "Moisturize PM": `${GATE}:group-hover:translate-y-0.5 ${GATE}:group-hover:scale-[1.02]`,
+  // Renew PM (N1) — same jar-format weight as the other PM moisturizers.
+  "Renew PM": `${GATE}:group-hover:translate-y-0.5 ${GATE}:group-hover:scale-[1.02]`,
   // Standalone (Lip Concentrate) — a precise tool, not a ritual step: crisp, quick.
   Standalone: `${GATE}:group-hover:scale-[1.02]`,
+  // Eye Contour — a precise concentrate dosed in small amounts, same crisp
+  // register as the serum rather than a heavier jar-settle gesture.
+  "Eye Contour": `${GATE}:group-hover:scale-[1.03]`,
 };
 const DEFAULT_HOVER_TRANSFORM = `${GATE}:group-hover:scale-[1.03]`;
 
@@ -62,6 +67,10 @@ const HERO_ENTRANCE_BY_STEP: Record<string, Variants> = {
     visible: { opacity: 1, scale: 1, transition: { duration: 0.75, ease: EASE } },
   },
   "Moisturize PM": {
+    hidden: { opacity: 0, scale: 0.94 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.75, ease: EASE } },
+  },
+  "Renew PM": {
     hidden: { opacity: 0, scale: 0.94 },
     visible: { opacity: 1, scale: 1, transition: { duration: 0.75, ease: EASE } },
   },

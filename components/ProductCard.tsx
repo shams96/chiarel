@@ -12,7 +12,7 @@ export default function ProductCard({
   hidePrice?: boolean;
 }) {
   return (
-    <Link href={`/shop/${product.slug}`} className="group block">
+    <Link href={`/shop/${product.slug}`} className="btn-press group block">
       <div
         className="product-frame aspect-square"
         style={{ backgroundColor: NEUTRAL_FRAME_BG }}
