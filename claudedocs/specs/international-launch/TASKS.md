@@ -46,3 +46,26 @@ deploy` initially failed with P3005. Resolved by baselining: `prisma migrate res
 correctly backfilled with `country: "US"`, `state`/`zip` intact, no data loss.
 
 International launch code is now safe to be live in production.
+
+## Follow-ups closed this session (2026-09-30, later same day)
+
+- [x] Italy enabled (`lib/countries.ts` `enabled: true`) — the EU Responsible Person requirement
+  turned out to need only a designated entity + published contact channel, not a named individual;
+  the existing generic monitored mailbox already satisfies it. One line added to
+  `app/privacy/page.tsx`'s GDPR section naming it.
+- [x] Checkout was 500ing on every single attempt in production — `automatic_tax: { enabled: true }`
+  (added above, item 7) was rejected by Stripe because the account's tax head-office address was
+  unset at the time. Added a narrow fallback (`app/api/checkout/route.ts`) that creates a session
+  without automatic tax rather than hard-failing, typed on `Stripe.errors.StripeInvalidRequestError`
+  + the known message substring. The head-office address has since been set (Stripe Dashboard, test
+  mode, Texas) so the primary path now succeeds — the fallback is a safety net, not load-bearing.
+- [x] Dev and production shared one Supabase database with no separation — confirmed the hard way
+  when a QA agent's live checkout test wrote a real `Order` row to production. Set up a local Docker
+  Postgres (`chiarel-postgres`, port 5434) + `.env.local` wiring so `npm run dev`/`test`/`db:seed`/
+  `db:migrate`/`db:studio` all target it automatically. See [[chiarel-dev-database-setup]].
+- [x] While syncing the local DB to schema.prisma, found the RBAC tables (`User`, `Session`, `Role`)
+  and dispute-tracking/terms/`bonusSample` `Order` fields were live in production with **zero**
+  migration history (pre-dated tracked migrations, same root cause as the P3005 issue above — likely
+  an early `prisma db push`). Wrote `20260930020000_backfill_dispute_tracking` and marked it applied
+  against production (bookkeeping only, no SQL executed — those objects already exist there).
+  Migration history and schema.prisma are now fully reconciled on both environments.
