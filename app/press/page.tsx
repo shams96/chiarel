@@ -7,18 +7,22 @@ import { SITE_URL } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Press Kit",
   description:
-    "CHIAREL™ press kit: brand fact sheet, a focused four-product ritual led by a dedicated neck and décolleté treatment, downloadable wordmarks and monogram, and press contact information.",
+    "CHIAREL™ press kit: brand fact sheet, a five-product launch lineup led by a dedicated neck and décolleté treatment, downloadable wordmarks and monogram, and press contact information.",
   alternates: { canonical: "/press" },
 };
 
-// Launch-lineup framing replaced per
-// CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §12 — no automatically
-// derived product count is stated publicly; the four launch products are
-// listed explicitly, with every other current product (Cleanser, Mist, Lip
-// Concentrate, and both existing sets) still shown below, unpublished from
-// nothing.
-const launchSkus = products.filter((p) => p.launchRitual === true);
-const otherSkus = products.filter((p) => !p.set && p.launchRitual !== true);
+// Launch-lineup framing per CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §12 —
+// no automatically derived product count is stated publicly; the launch
+// products are listed explicitly, with every other current product
+// (Cleanser, Mist, Lip Concentrate, and both existing sets) shown below,
+// unpublished from nothing. The launch lineup is five products: the
+// four-step AM/PM ritual (launchRitual === true) plus Eye Contour
+// Concentrate™, a real priced launch product that stands outside the ritual
+// sequence itself (see data/products.json's launchRole: "standalone") —
+// it's part of the launch, not part of the ritual's 4 steps.
+const ritualSkus = products.filter((p) => p.launchRitual === true);
+const launchSkus = products.filter((p) => p.launchStatus === "launch");
+const otherSkus = products.filter((p) => !p.set && p.launchStatus !== "launch");
 
 const assets = [
   {
@@ -131,8 +135,9 @@ export default function PressPage() {
         <h2 className="font-serif text-2xl text-ink">The Launch Lineup</h2>
         {/* DRAFT — OWNER / REGULATORY APPROVAL REQUIRED */}
         <p className="mt-2 max-w-xl text-sm text-ink/70">
-          A focused four-product ritual led by a dedicated neck and
-          décolleté treatment.
+          Five launch products: a focused four-product ritual led by a
+          dedicated neck and décolleté treatment, plus CHIAREL Eye Contour
+          Concentrate™, a standalone nightly treatment.
         </p>
         <ul className="mt-8 grid gap-4 sm:grid-cols-2">
           {launchSkus.map((p) => (
@@ -152,6 +157,9 @@ export default function PressPage() {
                 <p className="mt-1 text-[13px] text-ink/60">{p.descriptor}</p>
                 <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-ink/65">
                   {p.color.name} · {p.family}
+                  {ritualSkus.some((r) => r.slug === p.slug)
+                    ? " · Four-Product Ritual"
+                    : " · Standalone"}
                 </p>
               </div>
             </li>
@@ -160,8 +168,8 @@ export default function PressPage() {
 
         <h3 className="mt-12 font-serif text-lg text-ink">Also Available</h3>
         <p className="mt-2 max-w-xl text-sm text-ink/70">
-          Additional CHIAREL products, outside the core four-product launch
-          ritual — fully available, never discontinued.
+          Additional CHIAREL products, outside the five-product launch
+          lineup — fully available, never discontinued.
         </p>
         <ul className="mt-6 grid gap-4 sm:grid-cols-2">
           {otherSkus.map((p) => (
