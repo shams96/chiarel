@@ -23,7 +23,8 @@ const HOVER_TRANSFORM_BY_STEP: Record<string, string> = {
   // Moisturize (AM/PM) — jars read as heavier; they settle down, not up.
   "Moisturize AM": `${GATE}:group-hover:translate-y-0.5 ${GATE}:group-hover:scale-[1.02]`,
   "Moisturize PM": `${GATE}:group-hover:translate-y-0.5 ${GATE}:group-hover:scale-[1.02]`,
-  // Renew PM (N1) — same jar-format weight as the other PM moisturizers.
+  // Renew PM (N1) — same settled weight as the other PM moisturizers, despite
+  // N1's own packaging being a 40ml bottle rather than a jar.
   "Renew PM": `${GATE}:group-hover:translate-y-0.5 ${GATE}:group-hover:scale-[1.02]`,
   // Standalone (Lip Concentrate) — a precise tool, not a ritual step: crisp, quick.
   Standalone: `${GATE}:group-hover:scale-[1.02]`,
