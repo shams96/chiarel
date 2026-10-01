@@ -47,3 +47,4 @@ next-env.d.ts
 
 # Stray large archive, not a project artifact
 .claude.zip
+/scripts/.scratch/

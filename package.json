@@ -11,11 +11,13 @@
     "postbuild": "node scripts/copy-standalone-assets.mjs",
     "start": "node .next/standalone/server.js",
     "lint": "next lint",
-    "test": "vitest run",
+    "test": "dotenv -e .env.local -e .env -- vitest run",
     "postinstall": "prisma generate",
-    "db:seed": "tsx prisma/seed.ts",
-    "db:migrate": "prisma migrate dev",
-    "db:studio": "prisma studio"
+    "db:seed": "dotenv -e .env.local -e .env -- tsx prisma/seed.ts",
+    "db:migrate": "dotenv -e .env.local -e .env -- prisma migrate dev",
+    "db:studio": "dotenv -e .env.local -e .env -- prisma studio",
+    "db:dev:start": "docker start chiarel-postgres",
+    "db:prod:status": "dotenv -e .env -- prisma migrate status"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -40,6 +42,7 @@
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
     "@types/nodemailer": "^8.0.2",
+    "dotenv-cli": "^11.0.0",
     "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.35",
     "tsx": "^4.23.12",
