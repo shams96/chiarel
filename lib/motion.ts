@@ -11,28 +11,40 @@ const EASE_CLASS = "ease-[cubic-bezier(0.22,1,0.36,1)]";
 // mist rises, a jar settles with weight, a serum stays light — rather than
 // the same scale-[1.03] copy-pasted across every card. Hover-gated to real
 // pointers so touch taps don't trigger a "stuck" hover state.
-const GATE = "[@media(hover:hover)_and_(pointer:fine)]";
-
+//
+// Every class name below is written out in full, not assembled via template-
+// literal interpolation (e.g. `${GATE}:group-hover:...`) — Tailwind's JIT
+// scanner finds candidate classes by regex-matching literal substrings in
+// source files, and a class built from `${variable}:suffix` never appears as
+// one complete literal token anywhere in the file, so it silently never gets
+// generated. This was confirmed broken in production: every one of these
+// hover transforms had zero matching CSS rules despite the classes being
+// present in the rendered DOM.
 const HOVER_TRANSFORM_BY_STEP: Record<string, string> = {
   // Cleanse — a light upward drift, like foam lifting.
-  Cleanse: `${GATE}:group-hover:-translate-y-0.5 ${GATE}:group-hover:scale-[1.02]`,
+  Cleanse:
+    "[@media(hover:hover)_and_(pointer:fine)]:group-hover:-translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.02]",
   // Tone — mist is the lightest product in the line; barely a breath of scale.
-  Tone: `${GATE}:group-hover:scale-[1.015]`,
+  Tone: "[@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.015]",
   // Serum — the signature concentrate; the most pronounced (still subtle) lift.
-  Serum: `${GATE}:group-hover:scale-[1.035]`,
+  Serum: "[@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.035]",
   // Moisturize (AM/PM) — jars read as heavier; they settle down, not up.
-  "Moisturize AM": `${GATE}:group-hover:translate-y-0.5 ${GATE}:group-hover:scale-[1.02]`,
-  "Moisturize PM": `${GATE}:group-hover:translate-y-0.5 ${GATE}:group-hover:scale-[1.02]`,
+  "Moisturize AM":
+    "[@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.02]",
+  "Moisturize PM":
+    "[@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.02]",
   // Renew PM (N1) — same settled weight as the other PM moisturizers, despite
   // N1's own packaging being a 40ml bottle rather than a jar.
-  "Renew PM": `${GATE}:group-hover:translate-y-0.5 ${GATE}:group-hover:scale-[1.02]`,
+  "Renew PM":
+    "[@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.02]",
   // Standalone (Lip Concentrate) — a precise tool, not a ritual step: crisp, quick.
-  Standalone: `${GATE}:group-hover:scale-[1.02]`,
+  Standalone: "[@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.02]",
   // Eye Contour — a precise concentrate dosed in small amounts, same crisp
   // register as the serum rather than a heavier jar-settle gesture.
-  "Eye Contour": `${GATE}:group-hover:scale-[1.03]`,
+  "Eye Contour": "[@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.03]",
 };
-const DEFAULT_HOVER_TRANSFORM = `${GATE}:group-hover:scale-[1.03]`;
+const DEFAULT_HOVER_TRANSFORM =
+  "[@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.03]";
 
 const DURATION_BY_STEP: Record<string, string> = {
   Tone: "duration-500",
