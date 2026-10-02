@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Libre_Bodoni, Jost } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -14,14 +14,27 @@ import { SITE_URL, SITE_NAME, organizationJsonLd } from "@/lib/seo";
 // Revalidating hourly bounds the damage without losing CDN caching entirely.
 export const revalidate = 3600;
 
-const serif = Libre_Bodoni({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+// Self-hosted instead of next/font/google: that loader fetches font files
+// from fonts.googleapis.com DURING the production build, which crashes
+// ("Cannot read properties of null (reading '1')") on any host whose build
+// container can't reach Google's servers — confirmed on Hostinger's build
+// environment. Files downloaded once from the same Google Fonts CDN
+// (fonts.gstatic.com) that next/font/google would have fetched at build
+// time; both Libre Bodoni and Jost are variable fonts, so one physical file
+// per subset serves every declared weight via the font's own weight axis —
+// mirrors exactly what Google's own generated CSS does.
+const serif = localFont({
+  src: [
+    { path: "../public/fonts/libre-bodoni-latin.woff2", weight: "400 600", style: "normal" },
+    { path: "../public/fonts/libre-bodoni-latin-ext.woff2", weight: "400 600", style: "normal" },
+  ],
   variable: "--font-serif",
 });
-const sans = Jost({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
+const sans = localFont({
+  src: [
+    { path: "../public/fonts/jost-latin.woff2", weight: "300 500", style: "normal" },
+    { path: "../public/fonts/jost-latin-ext.woff2", weight: "300 500", style: "normal" },
+  ],
   variable: "--font-sans",
 });
 
