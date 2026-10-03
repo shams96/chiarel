@@ -136,10 +136,13 @@ body::after {
   opacity: 0;
   animation: hero-rise 900ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
   animation-delay: 260ms;
-  transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: scale 500ms cubic-bezier(0.16, 1, 0.3, 1);
 }
+/* Uses the independent `scale` property, not `transform`: the entrance
+   animation's `forwards` fill holds transform: translateY(0) permanently,
+   which silently overrides any :hover transform. */
 .product-reveal:hover {
-  transform: scale(1.035);
+  scale: 1.035;
 }
 @media (prefers-reduced-motion: reduce) {
   .product-reveal {
@@ -147,7 +150,7 @@ body::after {
     animation: none;
   }
   .product-reveal:hover {
-    transform: none;
+    scale: none;
   }
 }
 
