@@ -53,9 +53,9 @@ There is no staging environment. Production secrets live only in Hostinger's env
 
 ## 7. Known technical gaps
 
-- No CI. Nothing runs tests, type-checking or the build automatically before a push to `main`.
-- Test coverage is thin: 25 tests covering pricing and countries only. Checkout, webhook, auth and cart have no automated tests.
+- CI added 2026-10-09 (`.github/workflows/ci.yml`: typecheck, lint, tests, build). It reports after a push; it does not block Hostinger from deploying `main`. Pull requests and branch protection are not set up.
+- Test coverage is thin: 21 tests covering pricing and countries only. Checkout, webhook, auth and cart have no automated tests.
 - No error or uptime monitoring, no alerting except the dispute-rate email.
 - No staging environment.
-- `npm audit` reports 46 vulnerabilities (3 critical, 19 high), mostly from Next.js 14 and Vitest 2 needing major-version upgrades. Not yet addressed.
+- `npm audit` reports 20 vulnerabilities (10 in production dependencies, 1 critical in Next.js 14); Hostinger's scanner reports 46. Fix is a planned major upgrade of Next.js, Vitest and Tailwind. See `claudedocs/audit-2026-10-09.md`. Not yet addressed.
 - Rate limiting is in memory and per instance.

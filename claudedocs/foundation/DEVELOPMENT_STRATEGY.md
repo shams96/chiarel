@@ -26,12 +26,12 @@ Assessed 2026-10-07 against the repository, not from memory.
 
 | Gap | Risk | Suggested fix |
 | --- | --- | --- |
-| **No CI** (no `.github/workflows`) | A push to `main` deploys with nothing running tests, typecheck or build first. Hostinger's build failing silently is how the font issue went unnoticed | GitHub Action: install, `tsc --noEmit`, lint, test, `next build` on every push and PR |
-| **Thin automated tests**: 25 tests, two files | Checkout, webhook, cart, auth and RBAC have none. Regressions are found by hand | Tests for `withRole`, cart totals on the server, webhook idempotency, checkout validation |
+| **CI is new and advisory** (`.github/workflows/ci.yml`, added 2026-10-09) | It runs typecheck, lint, tests and build after each push, but Hostinger still deploys `main` without waiting for it | Branch protection plus pull requests so nothing reaches `main` unless CI is green |
+| **Thin automated tests**: 21 tests, two files | Checkout, webhook, cart, auth and RBAC have none. Regressions are found by hand | Tests for `withRole`, cart totals on the server, webhook idempotency, checkout validation |
 | **Work committed straight to `main`** | The global rules ask for feature branches. Every change here deploys immediately to production | Feature branches and pull requests, with CI as the gate |
 | **No staging environment** | The first real test of a build is production | Hostinger staging or a preview deploy |
 | **No error or uptime monitoring** | Failures such as the failed deploy were found by the owner, not by an alert | Uptime check on `/` and the webhook; error reporting |
-| **Dependency vulnerabilities** (46 reported, 3 critical) | Known issues in Next.js 14 and Vitest 2 | Planned upgrade to Next.js 15 and Vitest 3 with a full regression pass |
+| **Dependency vulnerabilities** (npm audit 20, 10 in production; Hostinger reports 46) | Known issues in Next.js 14 and Vitest 2 | Planned upgrade to Next.js 15 and Vitest 3 with a full regression pass |
 | **Deploy not verified after push** | Pushes have deployed unseen failures | Check hPanel deployment status after every push |
 | **Specs written after the fact for the whole site** | The foundation documents here were written after the build | Keep them current; update when behaviour changes |
 | **Rate limiting is in memory** | Resets on restart, not shared between instances | Move to a shared store if traffic grows |

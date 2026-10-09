@@ -8,9 +8,9 @@ import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import type { ProductGalleryImage } from "@/lib/products";
 
 // See claudedocs/specs/product-image-gallery/ for the spec/plan this
-// implements. Single-image products render identically to the previous
-// ProductHeroImage-only column; the thumbnail rail and swipe track only
-// mount once a product actually has more than one gallery image.
+// implements. Single-image products render as one hero image; the thumbnail
+// rail and swipe track only mount once a product actually has more than one
+// gallery image.
 export default function ProductGallery({
   images,
   step,
