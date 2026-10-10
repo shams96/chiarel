@@ -5,11 +5,10 @@ import { withApiErrorHandling } from "@/lib/api-error";
 
 const ROLES = ["ADMIN", "MEMBER", "VIEWER"] as const;
 
-type RouteContext = { params: Promise<{ id: string }> };
+type RouteContext = { params: { id: string } };
 
 export const PATCH = withApiErrorHandling(
-  withRole<[RouteContext]>(["ADMIN"], async (req, currentUser, { params: paramsPromise }) => {
-    const params = await paramsPromise;
+  withRole<[RouteContext]>(["ADMIN"], async (req, currentUser, { params }) => {
     const body = await req.json().catch(() => null);
     const role = body?.role;
     if (!ROLES.includes(role)) {
@@ -46,8 +45,7 @@ export const PATCH = withApiErrorHandling(
 );
 
 export const DELETE = withApiErrorHandling(
-  withRole<[RouteContext]>(["ADMIN"], async (_req, currentUser, { params: paramsPromise }) => {
-    const params = await paramsPromise;
+  withRole<[RouteContext]>(["ADMIN"], async (_req, currentUser, { params }) => {
     if (params.id === currentUser.id) {
       return NextResponse.json({ error: "Cannot delete your own account" }, { status: 400 });
     }

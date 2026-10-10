@@ -4,7 +4,7 @@
 
 | Layer | Choice | Notes |
 | --- | --- | --- |
-| Framework | Next.js 15 (App Router), React 18, TypeScript | `output: standalone`, served with `node .next/standalone/server.js` |
+| Framework | Next.js 14 (App Router), React 18, TypeScript | `output: standalone`, served with `node .next/standalone/server.js` |
 | Styling | Tailwind CSS 3 plus `app/globals.css` | Tokens in `tailwind.config.ts` |
 | Motion | CSS plus framer-motion | Shared in `lib/motion.ts` and `components/Reveal.tsx` |
 | Fonts | Libre Bodoni (headlines) and Jost (body), self-hosted via `next/font/local` | Files in `public/fonts/`. Do not use `next/font/google`: it fetches at build time and breaks the Hostinger build |
@@ -53,7 +53,7 @@ There is no staging environment. Production secrets live only in Hostinger's env
 
 ## 7. Known technical gaps
 
-- CI (`.github/workflows/ci.yml`: typecheck, lint, tests, build) runs on every push and pull request. `main` is protected (2026-10-09): changes go through a pull request and the `check` job must pass; the repo admin can still override. Hostinger deploys `main` on merge, so test a Stripe test-mode checkout before merging anything that touches checkout, cart or webhooks.
+- CI added 2026-10-09 (`.github/workflows/ci.yml`: typecheck, lint, tests, build). It reports after a push; it does not block Hostinger from deploying `main`. Pull requests and branch protection are not set up.
 - Test coverage is thin: 21 tests covering pricing and countries only. Checkout, webhook, auth and cart have no automated tests.
 - No error or uptime monitoring, no alerting except the dispute-rate email.
 - No staging environment.

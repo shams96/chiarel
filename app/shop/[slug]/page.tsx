@@ -43,13 +43,12 @@ export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({
+export function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-  const { slug } = await params;
-  const p = getProduct(slug);
+  params: { slug: string };
+}): Metadata {
+  const p = getProduct(params.slug);
   if (!p) return {};
   return {
     title: `${p.name} — ${p.descriptor}`,
@@ -59,13 +58,12 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProductPage({
+export default function ProductPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const { slug } = await params;
-  const p = getProduct(slug);
+  const p = getProduct(params.slug);
   if (!p) notFound();
 
   return (
