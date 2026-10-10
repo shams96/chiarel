@@ -26,8 +26,9 @@ Assessed 2026-10-07 against the repository, not from memory.
 
 | Gap | Risk | Suggested fix |
 | --- | --- | --- |
-| **CI and branch protection are new** (2026-10-09) | `main` now requires a pull request with a green `check` job, but tests are still thin (21) and there is no staging, so green CI does not prove checkout works | Add tests for checkout, cart, webhook and `withRole`; add staging |
+| **CI is new and advisory** (`.github/workflows/ci.yml`, added 2026-10-09) | It runs typecheck, lint, tests and build after each push, but Hostinger still deploys `main` without waiting for it | Branch protection plus pull requests so nothing reaches `main` unless CI is green |
 | **Thin automated tests**: 21 tests, two files | Checkout, webhook, cart, auth and RBAC have none. Regressions are found by hand | Tests for `withRole`, cart totals on the server, webhook idempotency, checkout validation |
+| **Work committed straight to `main`** | The global rules ask for feature branches. Every change here deploys immediately to production | Feature branches and pull requests, with CI as the gate |
 | **No staging environment** | The first real test of a build is production | Hostinger staging or a preview deploy |
 | **No error or uptime monitoring** | Failures such as the failed deploy were found by the owner, not by an alert | Uptime check on `/` and the webhook; error reporting |
 | **Dependency vulnerabilities** (npm audit 20, 10 in production; Hostinger reports 46) | Known issues in Next.js 14 and Vitest 2 | Planned upgrade to Next.js 15 and Vitest 3 with a full regression pass |

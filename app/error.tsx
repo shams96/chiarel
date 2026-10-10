@@ -36,8 +36,6 @@ export default function Error({
         >
           Try again
         </button>
-        {/* Plain anchor on purpose: a full page load clears the broken client state; a soft <Link> navigation would not. */}
-        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
         <a
           href="/"
           className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
