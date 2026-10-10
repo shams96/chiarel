@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { db } from "@/lib/db";
 import { withRole } from "@/lib/auth";
 import { withApiErrorHandling } from "@/lib/api-error";
