@@ -23,7 +23,7 @@ Source of truth: `prisma/schema.prisma`. This document explains it; the file win
 | `Order` | One per checkout attempt | `status` (`pending`, `paid`), `stripeSessionId` (unique), shipping address and `country`, `subtotal`, `savings`, `shipping`, `total`, `bonusSample`, consent fields, Founding 100 credit fields, dispute fields |
 | `OrderItem` | Frozen line of an order | `productSlug`, `mode`, `qty`, `unitPrice` at purchase time |
 | `FoundingSignup` | Founding 100 waitlist | `name`, `email`, optional `phone`, `social`, `referredBy`, `source` |
-| `User` | Operator account | `email` (unique), `passwordHash` (bcrypt), `role` |
+| `User` | Operator account | `email` (unique), `passwordHash` (bcrypt hash, verified with bcryptjs), `role` |
 | `Session` | Admin login session | `userId`, `expiresAt` |
 
 Enum `Role`: `ADMIN`, `MEMBER`, `VIEWER`.
@@ -55,7 +55,7 @@ Deny by default: an admin API route without `withRole` is a defect. Roles are ch
 ## 5. Sensitive data
 
 - Orders hold name, email, shipping address. Treat as personal data: never log it, never put it in URLs.
-- `passwordHash` is bcrypt. Never returned by any API.
+- `passwordHash` is a bcrypt hash (cost 12), created and checked with the pure-JS `bcryptjs` because the native `bcrypt` module failed to load on Hostinger. Never returned by any API.
 - The database connection strings and `ADMIN_SESSION_SECRET` live only in environment variables.
 
 ## 6. Migration history
