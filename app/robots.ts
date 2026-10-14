@@ -1,7 +1,11 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
+import { isStaging } from "@/lib/app-env";
 
 export default function robots(): MetadataRoute.Robots {
+  if (isStaging()) {
+    return { rules: [{ userAgent: "*", disallow: "/" }] };
+  }
   return {
     rules: [
       { userAgent: "*", allow: "/", disallow: ["/checkout", "/account"] },

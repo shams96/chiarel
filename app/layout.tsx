@@ -5,6 +5,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
 import { CartProvider } from "@/lib/cart-context";
+import StagingBanner from "@/components/StagingBanner";
+import { rootRobotsMetadata } from "@/lib/app-env";
 import { SITE_URL, SITE_NAME, organizationJsonLd } from "@/lib/seo";
 
 // Next's default static-page cache header (s-maxage=31536000, one year) is
@@ -63,7 +65,7 @@ export const metadata: Metadata = {
     description,
     images: ["/assets/editorial/hero-shore-duo.png"],
   },
-  robots: { index: true, follow: true },
+  robots: rootRobotsMetadata(),
 };
 
 export default function RootLayout({
@@ -83,6 +85,7 @@ export default function RootLayout({
           <main className="min-h-screen">{children}</main>
           <Footer />
           <CartDrawer />
+          <StagingBanner />
         </CartProvider>
       </body>
     </html>
