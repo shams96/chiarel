@@ -242,7 +242,7 @@ export default function CheckoutPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="btn-press mt-2 w-full bg-ink py-4 text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre disabled:cursor-wait disabled:opacity-60"
+              className="btn-press w-full bg-ink py-4 text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre disabled:cursor-wait disabled:opacity-60"
             >
               {submitting ? "Continuing to payment…" : `Continue to Payment — $${total}`}
             </button>
