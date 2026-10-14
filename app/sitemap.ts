@@ -1,8 +1,10 @@
 import type { MetadataRoute } from "next";
 import { products } from "@/lib/products";
 import { SITE_URL } from "@/lib/seo";
+import { isStaging } from "@/lib/app-env";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  if (isStaging()) return [];
   const staticRoutes = [
     "",
     "/ritual",

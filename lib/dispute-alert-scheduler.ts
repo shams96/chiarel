@@ -1,6 +1,7 @@
 import { computeDisputeRateReport } from "@/lib/dispute-monitoring";
 import { sendMail } from "@/lib/mail";
 import { ORDERS_EMAIL } from "@/lib/seo";
+import { isStaging } from "@/lib/app-env";
 
 const CHECK_INTERVAL_MS = 24 * 60 * 60 * 1000; // once daily — matches the monitor's own monthly-window granularity, no need for finer polling
 
@@ -45,6 +46,8 @@ async function runCheck(): Promise<void> {
 // double-registration across Next.js's dev-mode hot reloads, the same pattern
 // already used for the Prisma client singleton in lib/db.ts.
 export function startDisputeMonitorSchedule(): void {
+  // Staging must never email real recipients (ORDERS_EMAIL / DISPUTE_ALERT_EMAIL).
+  if (isStaging()) return;
   if (globalForScheduler.chiarelDisputeSchedulerStarted) return;
   globalForScheduler.chiarelDisputeSchedulerStarted = true;
 
