@@ -404,7 +404,7 @@ export default function HeroIntro() {
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 0.5, scale: 1 }}
             transition={{ duration: 0.45, delay: 3.4, ease: "easeOut" }}
-            className="pointer-events-none absolute right-[12%] top-1/2 h-40 w-40 -translate-y-1/2 rounded-full md:h-56 md:w-56"
+            className="pointer-events-none absolute right-[12%] top-1/2 h-40 w-40 rounded-full md:h-56 md:w-56"
             style={{
               background: "radial-gradient(circle, rgba(214,197,160,0.45) 0%, rgba(214,197,160,0) 72%)",
               filter: "blur(2px)",

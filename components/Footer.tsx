@@ -65,7 +65,7 @@ export default function Footer() {
           {/* Right card — Red Ochre, all footer content */}
           <div className="relative flex min-h-[460px] flex-col justify-between overflow-hidden rounded-3xl bg-ochre p-8 text-cloud sm:p-10 md:p-12">
             <div className="relative z-10">
-              <h2 className="font-serif text-3xl leading-tight sm:text-4xl">
+              <h2 className="font-serif text-3xl leading-tight sm:text-4xl sm:leading-10">
                 Contact{" "}
                 <span
                   className="text-transparent"

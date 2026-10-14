@@ -28,7 +28,7 @@ export default function ResultsSection() {
       <p className="text-[11px] uppercase tracking-[0.18em] text-ochre">
         Customer Testing
       </p>
-      <h2 className="mt-3 max-w-xl font-serif text-3xl leading-tight md:text-4xl">
+      <h2 className="mt-3 max-w-xl font-serif text-3xl leading-tight md:text-4xl md:leading-10">
         Real subjects, unretouched
       </h2>
       <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink/70">

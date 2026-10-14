@@ -1,4 +1,9 @@
-@import 'tailwindcss';
+@import 'tailwindcss' source(none);
+/* Tailwind 4 scans the whole repo by default, which picked up class names from
+   the markdown docs under .claude/ and claudedocs/. List the real sources. */
+@source "../app";
+@source "../components";
+@source "../lib";
 
 @theme {
   --color-cloud: #f0f2eb;
@@ -47,6 +52,21 @@
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
+  }
+}
+
+/* v3 compatibility. v4's preflight makes form controls transparent and gives
+   placeholders a 50% currentColor tint; v3 left the browser's white field and
+   used gray-400 placeholders. Utilities such as bg-white still override this. */
+@layer base {
+  input,
+  select,
+  textarea {
+    background-color: Field;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-gray-400);
   }
 }
 

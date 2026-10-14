@@ -51,7 +51,7 @@ export default async function Founding100Page() {
             <p className="text-[11px] uppercase tracking-[0.4em] text-champagne">
               By invitation · The House Opens
             </p>
-            <h1 className="mt-5 font-serif text-5xl leading-[0.98] tracking-[-0.01em] md:text-6xl">
+            <h1 className="mt-5 font-serif text-5xl leading-[0.98] tracking-[-0.01em] md:text-6xl md:leading-none">
               The Founding 100
             </h1>
             <p className="mt-6 max-w-md text-[15px] leading-relaxed text-ivory/75">

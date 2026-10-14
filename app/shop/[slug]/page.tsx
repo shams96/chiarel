@@ -130,7 +130,7 @@ export default async function ProductPage({
 
           {/* Buy box column */}
           <div className="md:pt-2">
-            <h1 className="font-serif text-3xl leading-tight md:text-5xl">
+            <h1 className="font-serif text-3xl leading-tight md:text-5xl md:leading-none">
               {p.name}
             </h1>
             <p className="mt-1 text-sm text-ink/60">{p.descriptor}</p>

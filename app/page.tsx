@@ -562,7 +562,7 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-garden/85" />
         <Reveal className="section-x-narrow relative text-center">
-          <h2 className="font-serif text-4xl leading-tight md:text-5xl">
+          <h2 className="font-serif text-4xl leading-tight md:text-5xl md:leading-none">
             Where Is CHIAREL™ Made?
           </h2>
           <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-ivory/75">
