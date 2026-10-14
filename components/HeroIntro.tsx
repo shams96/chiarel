@@ -184,7 +184,7 @@ export default function HeroIntro() {
       onTransitionEnd={(event) => {
         if (event.propertyName === "opacity" && phase === "exiting") setPhase("done");
       }}
-      className="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden bg-ivory"
+      className="fixed inset-0 z-200 flex items-center justify-center overflow-hidden bg-ivory"
     >
       {showContent && (
         <>
@@ -404,7 +404,7 @@ export default function HeroIntro() {
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 0.5, scale: 1 }}
             transition={{ duration: 0.45, delay: 3.4, ease: "easeOut" }}
-            className="pointer-events-none absolute right-[12%] top-1/2 h-40 w-40 -translate-y-1/2 rounded-full md:h-56 md:w-56"
+            className="pointer-events-none absolute right-[12%] top-1/2 h-40 w-40 rounded-full md:h-56 md:w-56"
             style={{
               background: "radial-gradient(circle, rgba(214,197,160,0.45) 0%, rgba(214,197,160,0) 72%)",
               filter: "blur(2px)",
@@ -422,7 +422,7 @@ export default function HeroIntro() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3, delay: 0.6 }}
             aria-label="Skip intro animation"
-            className="absolute bottom-8 right-8 text-[10px] uppercase tracking-[0.3em] text-ink/65 transition hover:text-ochre focus:text-ochre focus:outline focus:outline-1 focus:outline-offset-4 focus:outline-ochre"
+            className="absolute bottom-8 right-8 text-[10px] uppercase tracking-widest2 text-ink/65 transition hover:text-ochre focus:text-ochre focus:outline-solid focus:outline-1 focus:outline-offset-4 focus:outline-ochre"
           >
             Skip
           </motion.button>

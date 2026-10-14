@@ -30,7 +30,7 @@ export default function StickyPurchaseBar({
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 96, opacity: 0 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-x-0 bottom-0 z-40 border-t border-ink/10 bg-ivory/95 px-6 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] backdrop-blur"
+          className="fixed inset-x-0 bottom-0 z-40 border-t border-ink/10 bg-ivory/95 px-6 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] backdrop-blur-sm"
         >
           <div className="mx-auto flex max-w-6xl items-center gap-4">
             <div className="relative h-12 w-12 shrink-0 overflow-hidden bg-cloud/50">

@@ -115,7 +115,7 @@ export default function CheckoutPage() {
                 name="email"
                 type="email"
                 required
-                className="mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
+                className="mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm outline-hidden focus:border-ochre"
                 placeholder="you@example.com"
               />
             </div>
@@ -128,7 +128,7 @@ export default function CheckoutPage() {
                 <input
                   name="firstName"
                   required
-                  className="mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
+                  className="mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm outline-hidden focus:border-ochre"
                 />
               </div>
               <div>
@@ -138,7 +138,7 @@ export default function CheckoutPage() {
                 <input
                   name="lastName"
                   required
-                  className="mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
+                  className="mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm outline-hidden focus:border-ochre"
                 />
               </div>
             </div>
@@ -152,7 +152,7 @@ export default function CheckoutPage() {
                 required
                 value={countryCode}
                 onChange={(e) => setCountryCode(e.target.value as CountryCode)}
-                className="mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
+                className="mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm outline-hidden focus:border-ochre"
               >
                 {ENABLED_COUNTRIES.map((c) => (
                   <option key={c.code} value={c.code}>
@@ -169,7 +169,7 @@ export default function CheckoutPage() {
               <input
                 name="address"
                 required
-                className="mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
+                className="mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm outline-hidden focus:border-ochre"
                 placeholder="Address"
               />
             </div>
@@ -178,21 +178,21 @@ export default function CheckoutPage() {
               <input
                 name="city"
                 required
-                className="border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
+                className="border border-ink/20 bg-white px-4 py-3 text-sm outline-hidden focus:border-ochre"
                 placeholder="City"
               />
               {country.requiresState && (
                 <input
                   name="state"
                   required
-                  className="border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
+                  className="border border-ink/20 bg-white px-4 py-3 text-sm outline-hidden focus:border-ochre"
                   placeholder="State"
                 />
               )}
               <input
                 name="zip"
                 required
-                className="border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
+                className="border border-ink/20 bg-white px-4 py-3 text-sm outline-hidden focus:border-ochre"
                 placeholder={country.postalLabel}
               />
             </div>
@@ -217,7 +217,7 @@ export default function CheckoutPage() {
                 <span className="ml-4 text-lg text-ink/50 group-open:hidden" aria-hidden="true">+</span>
                 <span className="ml-4 hidden text-lg text-ink/50 group-open:inline" aria-hidden="true">−</span>
               </summary>
-              <div className="mt-3 space-y-3">
+              <div className="mt-3 space-y-3 [&>section]:mt-0">
                 <RefundPolicyContent />
               </div>
             </details>
@@ -242,7 +242,7 @@ export default function CheckoutPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="btn-press mt-2 w-full bg-ink py-4 text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre disabled:cursor-wait disabled:opacity-60"
+              className="btn-press w-full bg-ink py-4 text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre disabled:cursor-wait disabled:opacity-60"
             >
               {submitting ? "Continuing to payment…" : `Continue to Payment — $${total}`}
             </button>

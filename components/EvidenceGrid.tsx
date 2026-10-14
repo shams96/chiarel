@@ -27,7 +27,7 @@ export default function EvidenceGrid({ products }: { products: Product[] }) {
         <Link
           key={`${e.productSlug}-${e.activeName}`}
           href={`/shop/${e.productSlug}`}
-          className="card-elevated group block rounded-md bg-white p-6 text-center transition hover:-translate-y-0.5"
+          className="card-elevated group block rounded-md bg-white p-6 text-center transition"
         >
           <p className="tabular-nums font-serif text-5xl text-ochre transition group-hover:text-ink">
             {e.percent}

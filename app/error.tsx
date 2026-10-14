@@ -19,7 +19,7 @@ export default function Error({
 
   return (
     <div className="flex min-h-[70vh] flex-col items-center justify-center bg-ivory px-6 text-center">
-      <p className="text-[11px] uppercase tracking-[0.3em] text-ochre">
+      <p className="text-[11px] uppercase tracking-widest2 text-ochre">
         CHIAREL™
       </p>
       <h1 className="mt-6 font-serif text-3xl text-ink">

@@ -28,7 +28,7 @@ export default function ResultsSection() {
       <p className="text-[11px] uppercase tracking-[0.18em] text-ochre">
         Customer Testing
       </p>
-      <h2 className="mt-3 max-w-xl font-serif text-3xl leading-tight md:text-4xl">
+      <h2 className="mt-3 max-w-xl font-serif text-3xl leading-tight md:text-4xl md:leading-10">
         Real subjects, unretouched
       </h2>
       <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink/70">
@@ -43,7 +43,7 @@ export default function ResultsSection() {
           <div key={r.id}>
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-cloud/50">
+                <div className="relative aspect-4/5 w-full overflow-hidden bg-cloud/50">
                   <Image
                     src={r.before}
                     alt="Before — subject face, eyes obscured"
@@ -57,7 +57,7 @@ export default function ResultsSection() {
                 </p>
               </div>
               <div>
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-cloud/50">
+                <div className="relative aspect-4/5 w-full overflow-hidden bg-cloud/50">
                   <Image
                     src={r.after}
                     alt="After — subject face, eyes obscured"

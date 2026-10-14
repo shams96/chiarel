@@ -5,7 +5,7 @@
 | Layer | Choice | Notes |
 | --- | --- | --- |
 | Framework | Next.js 15 (App Router), React 18, TypeScript | `output: standalone`, served with `node .next/standalone/server.js` |
-| Styling | Tailwind CSS 3 plus `app/globals.css` | Tokens in `tailwind.config.ts` |
+| Styling | Tailwind CSS 4 plus `app/globals.css` | Tokens and v3-compatible line-heights in the `@theme` block of `app/globals.css`; there is no `tailwind.config.ts`. Fonts use `@theme inline` against the `--font-bodoni` and `--font-jost` variables set by `next/font` (see `chiarel-tailwind4-migration` memory). Needs Node 20 or newer |
 | Motion | CSS plus framer-motion | Shared in `lib/motion.ts` and `components/Reveal.tsx` |
 | Fonts | Libre Bodoni (headlines) and Jost (body), self-hosted via `next/font/local` | Files in `public/fonts/`. Do not use `next/font/google`: it fetches at build time and breaks the Hostinger build |
 | Database | PostgreSQL through Prisma 6.12 | Production: Supabase. Local dev: Docker container `chiarel-postgres` on port 5434 |
@@ -57,5 +57,5 @@ There is no staging environment. Production secrets live only in Hostinger's env
 - Tests: 110 across 8 files. Unit tests cover pricing, countries and password hashing. Route tests with an in-memory database stand-in cover the Stripe webhook, cart, checkout and admin auth (a scan fails the build if any admin route lacks `withRole`). Not covered: real database queries, the real Stripe API, page rendering, the order confirmation page, the Founding 100 signup route.
 - No error or uptime monitoring, no alerting except the dispute-rate email.
 - No staging environment.
-- `npm audit` reports 11 vulnerabilities (9 in production dependencies, none critical) as of 2026-10-14, down from 20 with 1 critical. Next.js 15.5.27 and Vitest 5 are done. What remains is the Tailwind 3 and `eslint-config-next` chains, which need major upgrades. Hostinger's scanner reports a higher count. See `claudedocs/audit-2026-10-09.md`.
+- `npm audit` reports 7 vulnerabilities (2 in production dependencies, none critical) as of 2026-10-14, down from 20 with 1 critical. Next.js 15.5.27, Vitest 5 and Tailwind 4 are done. What remains is the `eslint-config-next` tooling chain and the PostCSS 8.4.31 copy bundled inside Next.js (build-time only, so it never runs against user input in production). Hostinger's scanner reports a higher count. See `claudedocs/audit-2026-10-09.md`.
 - Rate limiting is in memory and per instance.
