@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "@prisma/client": "6.12.0",
-    "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "bcryptjs": "^3.0.3",
@@ -40,11 +39,12 @@
     "typescript": "^5"
   },
   "devDependencies": {
+    "@types/node": "^22.20.5",
     "@types/nodemailer": "^8.0.2",
     "dotenv-cli": "^11.0.0",
     "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.35",
     "tsx": "^4.23.12",
-    "vitest": "^2.1.9"
+    "vitest": "^5.0.4"
   }
 }
