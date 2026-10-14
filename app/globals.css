@@ -68,6 +68,12 @@
   textarea::placeholder {
     color: var(--color-gray-400);
   }
+  /* v4's reset zeroes the browser's 1px table-cell padding that v3 kept;
+     without it every table header sits 1-4px shorter than before. */
+  th,
+  td {
+    padding: 1px;
+  }
 }
 
 /* Tailwind's `list-none` on <summary> removes the default marker in
