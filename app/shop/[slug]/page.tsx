@@ -8,7 +8,7 @@ import StickyPurchaseBar from "@/components/StickyPurchaseBar";
 import ProductGallery from "@/components/ProductGallery";
 import CellularHydrationCascade from "@/components/CellularHydrationCascade";
 import Reveal from "@/components/Reveal";
-import { productJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { productJsonLd, productPageTitle, breadcrumbJsonLd } from "@/lib/seo";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { productHoverClass } from "@/lib/motion";
 
@@ -52,7 +52,7 @@ export async function generateMetadata({
   const p = getProduct(slug);
   if (!p) return {};
   return {
-    title: `${p.name} — ${p.descriptor}`,
+    title: productPageTitle(p.name, p.descriptor),
     description: p.blurb,
     alternates: { canonical: `/shop/${p.slug}` },
     openGraph: { images: [{ url: p.image }] },

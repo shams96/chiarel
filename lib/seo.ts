@@ -161,6 +161,7 @@ export function offerCatalogJsonLd(
       url: `${SITE_URL}/shop/${p.slug}`,
       priceCurrency: "USD",
       price: p.price.oneTime,
+      itemCondition: "https://schema.org/NewCondition",
       availability: "https://schema.org/InStock",
       areaServed: "US",
       seller: { "@type": "Organization", name: "CHIAREL", url: SITE_URL },
@@ -183,8 +184,20 @@ export function breadcrumbJsonLd(crumbs: { name: string; path: string }[]) {
   };
 }
 
+// Search results truncate around 60 characters; the root layout appends
+// " — CHIAREL™" (11 chars), so name + descriptor must fit in what remains or
+// the descriptor is dropped rather than cut mid-word.
+const TITLE_SUFFIX_LENGTH = " — CHIAREL™".length;
+const TITLE_BUDGET = 60;
+
+export function productPageTitle(name: string, descriptor: string): string {
+  const full = `${name} — ${descriptor}`;
+  return full.length + TITLE_SUFFIX_LENGTH <= TITLE_BUDGET ? full : name;
+}
+
 export function productJsonLd(p: {
   name: string;
+  sku: string;
   descriptor: string;
   blurb: string;
   image: string;
@@ -196,6 +209,8 @@ export function productJsonLd(p: {
     "@context": "https://schema.org",
     "@type": "Product",
     name: p.name,
+    sku: p.sku,
+    url: `${SITE_URL}/shop/${p.slug}`,
     description: p.blurb,
     image: `${SITE_URL}${p.image}`,
     brand: { "@type": "Brand", name: "CHIAREL" },
@@ -205,6 +220,7 @@ export function productJsonLd(p: {
       url: `${SITE_URL}/shop/${p.slug}`,
       priceCurrency: "USD",
       price: p.price.oneTime,
+      itemCondition: "https://schema.org/NewCondition",
       availability: "https://schema.org/InStock",
     },
   };
