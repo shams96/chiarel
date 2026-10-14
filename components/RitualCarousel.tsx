@@ -21,7 +21,7 @@ import { productHoverClass } from "@/lib/motion";
  */
 export default function RitualCarousel({ products }: { products: Product[] }) {
   return (
-    <div className="mt-10 -mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-4 scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+    <div className="mt-10 -mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
       {products.map((p) => (
         <Link
           key={p.slug}
@@ -29,7 +29,7 @@ export default function RitualCarousel({ products }: { products: Product[] }) {
           className="group w-[72vw] flex-none snap-start sm:w-[min(42vw,464px)] md:w-[min(30vw,331px)] lg:w-[min(24vw,265px)]"
         >
           <div
-            className="product-frame aspect-4/5"
+            className="product-frame aspect-[4/5]"
             style={{ backgroundColor: NEUTRAL_FRAME_BG }}
           >
             <Image

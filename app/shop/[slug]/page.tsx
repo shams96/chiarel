@@ -130,7 +130,7 @@ export default async function ProductPage({
 
           {/* Buy box column */}
           <div className="md:pt-2">
-            <h1 className="font-serif text-3xl leading-tight md:text-5xl md:leading-none">
+            <h1 className="font-serif text-3xl leading-tight md:text-5xl">
               {p.name}
             </h1>
             <p className="mt-1 text-sm text-ink/60">{p.descriptor}</p>
@@ -715,7 +715,7 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
               <Link
                 key={item.slug}
                 href={`/shop/${item.slug}`}
-                className="flex items-center gap-4 rounded-xs border border-ink/10 p-4 transition hover:border-ochre"
+                className="flex items-center gap-4 rounded-sm border border-ink/10 p-4 transition hover:border-ochre"
               >
                 <div
                   className="relative h-16 w-16 shrink-0 overflow-hidden"
@@ -800,7 +800,7 @@ function TheScience({ complex, slug }: { complex: string; slug: string }) {
           <div className="relative mt-12 space-y-10 border-l border-champagne/25 pl-8">
             {steps!.map((s, i) => (
               <div key={s.step} className="relative">
-                <span className="absolute left-[-41px] top-0 flex h-6 w-6 items-center justify-center rounded-full border border-champagne/40 bg-ink text-[11px] text-champagne">
+                <span className="absolute -left-[41px] top-0 flex h-6 w-6 items-center justify-center rounded-full border border-champagne/40 bg-ink text-[11px] text-champagne">
                   {i + 1}
                 </span>
                 <p className="text-sm leading-relaxed text-ivory/75">{s.text}</p>
@@ -927,7 +927,7 @@ function CompleteYourRitual({ currentSlug }: { currentSlug: string }) {
       <h2 className="text-center font-serif text-2xl">Complete your ritual</h2>
       <Link
         href={`/shop/${next.slug}`}
-        className="mt-6 flex items-center gap-6 rounded-xs border border-ink/10 p-4 transition hover:border-ochre"
+        className="mt-6 flex items-center gap-6 rounded-sm border border-ink/10 p-4 transition hover:border-ochre"
       >
         <div
           className="relative h-24 w-24 shrink-0 overflow-hidden"

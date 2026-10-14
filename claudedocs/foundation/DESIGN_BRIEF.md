@@ -6,7 +6,7 @@ Every screen follows this. Change a rule here and in the shared file it points t
 
 An editorial luxury skincare house, quiet and light. High-key daylight, generous space, restrained motion. **Never dark**: no dark sections or dusk art direction (the announcement bar is the one existing exception and is not a pattern to extend).
 
-## 2. Colour (tokens in the `@theme` block of `app/globals.css`)
+## 2. Colour (tokens in `tailwind.config.ts`)
 
 | Token | Hex | Use |
 | --- | --- | --- |

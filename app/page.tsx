@@ -265,7 +265,7 @@ export default function Home() {
             <div className="mt-10 flex flex-col items-start gap-4">
               <Link
                 href="/shop/n1-neck-decollete"
-                className="inline-block border border-ink px-10 py-4 text-[12px] uppercase tracking-widest2 text-ink transition hover:border-ochre hover:text-ochre"
+                className="inline-block border border-ink px-10 py-4 text-[12px] uppercase tracking-[0.3em] text-ink transition hover:border-ochre hover:text-ochre"
               >
                 Discover N1
               </Link>
@@ -297,7 +297,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[10px] uppercase tracking-widest2 text-ink/65">
+        <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[10px] uppercase tracking-[0.3em] text-ink/65">
           Scroll
         </div>
       </section>
@@ -562,7 +562,7 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-garden/85" />
         <Reveal className="section-x-narrow relative text-center">
-          <h2 className="font-serif text-4xl leading-tight md:text-5xl md:leading-none">
+          <h2 className="font-serif text-4xl leading-tight md:text-5xl">
             Where Is CHIAREL™ Made?
           </h2>
           <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-ivory/75">
@@ -834,13 +834,13 @@ export default function Home() {
         <div className="section-x flex flex-col items-center gap-10 md:flex-row">
           <Reveal className="grid w-full grid-cols-5 gap-4 md:w-3/5">
             <div
-              className="card-elevated product-frame col-span-3 aspect-4/5"
+              className="card-elevated product-frame col-span-3 aspect-[4/5]"
               style={{ backgroundColor: NEUTRAL_FRAME_BG }}
             >
               <Image src={essence.image} alt={productImageAlt(essence)} fill sizes="35vw" />
             </div>
             <div
-              className="card-elevated product-frame col-span-2 aspect-4/5 self-end"
+              className="card-elevated product-frame col-span-2 aspect-[4/5] self-end"
               style={{ backgroundColor: NEUTRAL_FRAME_BG }}
             >
               <Image src={n1.image} alt={productImageAlt(n1)} fill sizes="25vw" />

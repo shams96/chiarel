@@ -29,7 +29,7 @@ Launch a subscription-first skincare store for CHIAREL in the US, Canada, Italy 
 | Confirm Hostinger has the right `STRIPE_SECRET_KEY` for the intended account | Owner | Yes |
 | Fix the bare `chiarel.com` domain HTTPS binding in hPanel (`www` works) | Owner | Yes |
 | EU Cosmetics Regulation Responsible Person answer from Natural You Srl | Owner | For Italy sales |
-| Dependency vulnerabilities: Next.js 15 and Vitest 5 done (2026-10-14); Tailwind 4 done; remaining lint-tooling chain and 2 production items (7 total, none critical) | Engineering | Should fix before launch |
+| Dependency vulnerabilities: Next.js 15 and Vitest 5 done (2026-10-14); remaining Tailwind 3 and lint-tooling chains (11 total, none critical) | Engineering | Should fix before launch |
 | Real subscription billing and the `/account` page | Product | No (preview today) |
 | N1 formula and evidence content (owner-approved) | Owner | No (honest placeholders live) |
 | CI, wider automated tests, error monitoring, staging | Engineering | Recommended before live payments |
