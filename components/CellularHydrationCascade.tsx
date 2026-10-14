@@ -78,7 +78,7 @@ export default function CellularHydrationCascade() {
         .cascade-viz .act { flex: 1; padding: 18px 16px 0; text-align: left; }
         .cascade-viz .act + .act { border-left: 1px solid rgba(248,246,241,0.12); }
         .cascade-viz .act .num {
-          font-family: var(--font-bodoni), serif; font-style: italic;
+          font-family: var(--font-serif), serif; font-style: italic;
           font-size: 13px; color: #D6C5A0; display: block; margin-bottom: 6px;
         }
         .cascade-viz .act h3 { font-size: 13.5px; margin: 0 0 6px; font-weight: 500; color: #F8F6F1; }

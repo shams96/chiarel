@@ -30,14 +30,14 @@ const serif = localFont({
     { path: "../public/fonts/libre-bodoni-latin.woff2", weight: "400 600", style: "normal" },
     { path: "../public/fonts/libre-bodoni-latin-ext.woff2", weight: "400 600", style: "normal" },
   ],
-  variable: "--font-bodoni",
+  variable: "--font-serif",
 });
 const sans = localFont({
   src: [
     { path: "../public/fonts/jost-latin.woff2", weight: "300 500", style: "normal" },
     { path: "../public/fonts/jost-latin-ext.woff2", weight: "300 500", style: "normal" },
   ],
-  variable: "--font-jost",
+  variable: "--font-sans",
 });
 
 const description =
