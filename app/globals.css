@@ -16,6 +16,19 @@
   --color-ink: #1c1a17;
 
   --tracking-widest2: 0.3em;
+
+  /* Tailwind 3 gave each text size a fixed rem line-height that children
+     inherited as-is. v4 defaults to a unitless ratio, so a small child inside
+     a text-sm parent got a shorter line than before (table headers, prices).
+     These are the v3 values. */
+  --text-xs--line-height: 1rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl--line-height: 1.75rem;
+  --text-2xl--line-height: 2rem;
+  --text-3xl--line-height: 2.25rem;
+  --text-4xl--line-height: 2.5rem;
 }
 
 /* `inline` so the utilities reference var(--font-bodoni)/var(--font-jost)
