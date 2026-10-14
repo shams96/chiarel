@@ -17,6 +17,22 @@ jobs:
       STRIPE_SECRET_KEY: sk_test_ci_placeholder
       STRIPE_WEBHOOK_SECRET: whsec_ci_placeholder
       ADMIN_SESSION_SECRET: ci-placeholder-session-secret-not-real
+    # Throwaway Postgres for the smoke steps at the end of this job. Credentials
+    # match the DATABASE_URL above. The earlier steps still never touch it.
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: ci
+          POSTGRES_PASSWORD: ci
+          POSTGRES_DB: ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U ci"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -28,3 +44,24 @@ jobs:
       - run: npm run lint
       - run: npx vitest run
       - run: npm run build
+
+      # Smoke test of the production bundle: proves .next/standalone actually
+      # boots and the DB-backed routes (Prisma engine, bcryptjs) work, which
+      # tsc/lint/unit tests/build alone do not.
+      - name: Smoke - migrate and seed
+        run: |
+          npx prisma migrate deploy
+          npm run db:seed
+      - name: Smoke - start standalone server
+        run: |
+          PORT=3000 node .next/standalone/server.js > server.log 2>&1 &
+          for i in $(seq 1 60); do
+            curl -sf -o /dev/null http://localhost:3000/api/products && exit 0
+            sleep 1
+          done
+          echo "Server did not become ready within 60s"; cat server.log; exit 1
+      - name: Smoke - run checks
+        run: node scripts/smoke.mjs
+      - name: Smoke - server log on failure
+        if: failure()
+        run: cat server.log || true
