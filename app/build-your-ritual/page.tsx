@@ -64,7 +64,7 @@ export default function BuildYourRitualPage() {
               key={p.slug}
               onClick={() => toggle(p.slug)}
               aria-pressed={isSelected}
-              className={`btn-press flex flex-col items-start gap-3 rounded-sm border p-4 text-left transition ${
+              className={`btn-press flex flex-col items-start gap-3 rounded-xs border p-4 text-left transition ${
                 isSelected
                   ? "border-ochre bg-ochre/5"
                   : "border-ink/15 hover:border-ink/30"
@@ -111,7 +111,7 @@ export default function BuildYourRitualPage() {
           <div
             key={p.slug}
             aria-disabled="true"
-            className="flex flex-col items-start gap-3 rounded-sm border border-ink/10 bg-cloud/20 p-4 text-left opacity-70"
+            className="flex flex-col items-start gap-3 rounded-xs border border-ink/10 bg-cloud/20 p-4 text-left opacity-70"
           >
             <div
               className="relative aspect-square w-full overflow-hidden"
@@ -141,7 +141,7 @@ export default function BuildYourRitualPage() {
         ))}
       </div>
 
-      <div className="sticky bottom-6 mt-12 flex flex-col items-center gap-3 rounded-sm border border-ink/15 bg-ivory/95 p-6 shadow-lg backdrop-blur sm:flex-row sm:justify-between">
+      <div className="sticky bottom-6 mt-12 flex flex-col items-center gap-3 rounded-xs border border-ink/15 bg-ivory/95 p-6 shadow-lg backdrop-blur-sm sm:flex-row sm:justify-between">
         <p className="text-sm">
           <span className="font-medium">
             {chosen.length} {chosen.length === 1 ? "step" : "steps"} selected

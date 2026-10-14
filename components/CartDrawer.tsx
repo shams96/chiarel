@@ -31,13 +31,13 @@ export default function CartDrawer() {
   return (
     <>
       <div
-        className={`fixed inset-0 z-[60] bg-ink/40 transition-opacity ${
+        className={`fixed inset-0 z-60 bg-ink/40 transition-opacity ${
           isOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
         onClick={close}
       />
       <aside
-        className={`cart-panel fixed right-0 top-0 z-[70] flex h-full w-full max-w-md flex-col bg-ivory shadow-2xl transition-transform ${
+        className={`cart-panel fixed right-0 top-0 z-70 flex h-full w-full max-w-md flex-col bg-ivory shadow-2xl transition-transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -96,7 +96,7 @@ export default function CartDrawer() {
                       </p>
                       <div className="mt-2 flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <div className="flex items-center rounded-sm border border-ink/15">
+                          <div className="flex items-center rounded-xs border border-ink/15">
                             <button
                               onClick={() => setQty(line.id, line.qty - 1)}
                               disabled={line.qty <= 1}

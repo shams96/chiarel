@@ -37,7 +37,7 @@ export default async function Founding100Page() {
           and legal terms live below, for whoever scrolls to them. */}
       <section className="relative overflow-hidden bg-ink text-ivory">
         <div className="mx-auto grid max-w-6xl gap-0 lg:grid-cols-2">
-          <div className="relative aspect-[4/5] w-full lg:aspect-auto">
+          <div className="relative aspect-4/5 w-full lg:aspect-auto">
             <Image
               src={masque.image}
               alt={masque.name}

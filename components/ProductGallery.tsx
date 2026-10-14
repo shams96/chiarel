@@ -76,13 +76,13 @@ export default function ProductGallery({
       }
     >
       <div
-        className="relative aspect-[5/4] w-full overflow-hidden md:aspect-[4/5]"
+        className="relative aspect-5/4 w-full overflow-hidden md:aspect-4/5"
         style={{ backgroundColor: NEUTRAL_FRAME_BG }}
       >
         {isMultiple ? (
           <div
             ref={trackRef}
-            className="flex h-full w-full snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            className="flex h-full w-full snap-x snap-mandatory overflow-x-auto scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
           >
             {images.map((img, i) => (
               <div

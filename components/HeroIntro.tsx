@@ -184,7 +184,7 @@ export default function HeroIntro() {
       onTransitionEnd={(event) => {
         if (event.propertyName === "opacity" && phase === "exiting") setPhase("done");
       }}
-      className="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden bg-ivory"
+      className="fixed inset-0 z-200 flex items-center justify-center overflow-hidden bg-ivory"
     >
       {showContent && (
         <>
@@ -422,7 +422,7 @@ export default function HeroIntro() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3, delay: 0.6 }}
             aria-label="Skip intro animation"
-            className="absolute bottom-8 right-8 text-[10px] uppercase tracking-[0.3em] text-ink/65 transition hover:text-ochre focus:text-ochre focus:outline focus:outline-1 focus:outline-offset-4 focus:outline-ochre"
+            className="absolute bottom-8 right-8 text-[10px] uppercase tracking-widest2 text-ink/65 transition hover:text-ochre focus:text-ochre focus:outline-solid focus:outline-1 focus:outline-offset-4 focus:outline-ochre"
           >
             Skip
           </motion.button>

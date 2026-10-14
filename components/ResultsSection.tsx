@@ -43,7 +43,7 @@ export default function ResultsSection() {
           <div key={r.id}>
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-cloud/50">
+                <div className="relative aspect-4/5 w-full overflow-hidden bg-cloud/50">
                   <Image
                     src={r.before}
                     alt="Before — subject face, eyes obscured"
@@ -57,7 +57,7 @@ export default function ResultsSection() {
                 </p>
               </div>
               <div>
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-cloud/50">
+                <div className="relative aspect-4/5 w-full overflow-hidden bg-cloud/50">
                   <Image
                     src={r.after}
                     alt="After — subject face, eyes obscured"

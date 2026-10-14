@@ -1,6 +1,54 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+  --color-cloud: #f0f2eb;
+  --color-ochre: #9b4722;
+  --color-garden: #1f5129;
+  --color-peach: #fad6c9;
+  --color-ocean: #0c2d38;
+  --color-champagne: #d6c5a0;
+  --color-ivory: #f8f6f1;
+  --color-ink: #1c1a17;
+
+  --tracking-widest2: 0.3em;
+}
+
+/* `inline` so the utilities reference var(--font-bodoni)/var(--font-jost)
+   directly on each element. next/font defines those variables on <body>
+   (app/layout.tsx), not :root, so a plain @theme entry would resolve them at
+   :root, where they do not exist, and every headline would fall back to sans. */
+@theme inline {
+  --font-serif: var(--font-bodoni), serif;
+  --font-sans: var(--font-jost), sans-serif;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+/* Tailwind 4's preflight no longer gives buttons the pointer cursor that v3
+   did (it follows the browser default). Restore it for every enabled button
+   so no page has to opt in. */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
 
 /* Tailwind's `list-none` on <summary> removes the default marker in
    Chrome/Firefox but not Safari, which renders its own disclosure triangle
@@ -280,29 +328,29 @@ details > summary ~ * {
    selection and scrollbar now carry the CHIAREL palette rather than the
    generic blue-selection/gray-scrollbar every unstyled page ships with. */
 ::selection {
-  background-color: theme("colors.ochre");
-  color: theme("colors.ivory");
+  background-color: var(--color-ochre);
+  color: var(--color-ivory);
 }
 html {
-  scrollbar-color: theme("colors.ochre") theme("colors.cloud");
+  scrollbar-color: var(--color-ochre) var(--color-cloud);
 }
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: theme("colors.cloud");
+  background: var(--color-cloud);
 }
 ::-webkit-scrollbar-thumb {
-  background-color: theme("colors.ochre");
+  background-color: var(--color-ochre);
   border-radius: 999px;
-  border: 2px solid theme("colors.cloud");
+  border: 2px solid var(--color-cloud);
 }
 
 /* Keyboard focus visibility — consistent ochre ring across all interactive elements */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible {
-  @apply outline-none ring-2 ring-ochre ring-offset-2 ring-offset-ivory;
+  @apply outline-hidden ring-2 ring-ochre ring-offset-2 ring-offset-ivory;
 }
 
 /* Reduced transparency: raise background opacity, drop blur on floating chrome */

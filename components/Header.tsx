@@ -117,7 +117,7 @@ export default function Header() {
             />
             <span
               className={`block h-px w-5 bg-ink transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                menuOpen ? "-translate-y-[3.5px] -rotate-45" : ""
+                menuOpen ? "translate-y-[-3.5px] -rotate-45" : ""
               }`}
             />
           </button>
@@ -131,14 +131,14 @@ export default function Header() {
           own box instead of the viewport, collapsing the overlay into a
           small box pinned near the top instead of a full-height panel. */}
       <div
-        className={`fixed inset-0 z-[80] bg-ink/40 transition-opacity md:hidden ${
+        className={`fixed inset-0 z-80 bg-ink/40 transition-opacity md:hidden ${
           menuOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
         onClick={() => setMenuOpen(false)}
       />
       <aside
         id="mobile-menu"
-        className={`cart-panel fixed right-0 top-0 z-[90] flex h-full w-full max-w-xs flex-col bg-ivory shadow-2xl transition-transform md:hidden ${
+        className={`cart-panel fixed right-0 top-0 z-90 flex h-full w-full max-w-xs flex-col bg-ivory shadow-2xl transition-transform md:hidden ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
