@@ -217,7 +217,7 @@ export default function CheckoutPage() {
                 <span className="ml-4 text-lg text-ink/50 group-open:hidden" aria-hidden="true">+</span>
                 <span className="ml-4 hidden text-lg text-ink/50 group-open:inline" aria-hidden="true">−</span>
               </summary>
-              <div className="mt-3 space-y-3">
+              <div className="mt-3 space-y-3 [&>section]:mt-0">
                 <RefundPolicyContent />
               </div>
             </details>
