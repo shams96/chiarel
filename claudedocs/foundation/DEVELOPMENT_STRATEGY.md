@@ -26,11 +26,11 @@ Assessed 2026-10-07 against the repository, not from memory.
 
 | Gap | Risk | Suggested fix |
 | --- | --- | --- |
-| **CI and branch protection are new** (2026-10-09) | `main` now requires a pull request with a green `check` job, but tests are still thin (21) and there is no staging, so green CI does not prove checkout works | Add tests for checkout, cart, webhook and `withRole`; add staging |
-| **Thin automated tests**: 21 tests, two files | Checkout, webhook, cart, auth and RBAC have none. Regressions are found by hand | Tests for `withRole`, cart totals on the server, webhook idempotency, checkout validation |
+| **CI and branch protection are new** (2026-10-09) | `main` now requires a pull request with a green `check` job, and 110 tests now cover the Stripe webhook, cart, checkout and admin permissions, but there is no staging and CI does not start the built server, so green CI still does not prove the deployed site works | Smoke test of the built server in CI; staging environment (in progress) |
+| **Test gaps**: 110 tests, 8 files (2026-10-14) | Webhook, cart, checkout and admin auth are covered against an in-memory database stand-in. Not covered: real database queries and migrations, the real Stripe API, page rendering, order confirmation page, Founding 100 signup | Smoke test against a real database in CI; test the order page and signup route |
 | **No staging environment** | The first real test of a build is production | Hostinger staging or a preview deploy |
 | **No error or uptime monitoring** | Failures such as the failed deploy were found by the owner, not by an alert | Uptime check on `/` and the webhook; error reporting |
-| **Dependency vulnerabilities** (npm audit 20, 10 in production; Hostinger reports 46) | Known issues in Next.js 14 and Vitest 2 | Planned upgrade to Next.js 15 and Vitest 3 with a full regression pass |
+| **Dependency vulnerabilities** (npm audit 11, none critical, 9 in production, 2026-10-14; Hostinger reports a higher count) | Next.js 15.5.27 and Vitest 5 are in. The rest are the Tailwind 3 and `eslint-config-next` chains, which need major upgrades (Tailwind 4, Next 16 tooling) | Upgrade Tailwind and lint tooling in their own PRs with a visual check |
 | **Deploy not verified after push** | Pushes have deployed unseen failures | Check hPanel deployment status after every push |
 | **Specs written after the fact for the whole site** | The foundation documents here were written after the build | Keep them current; update when behaviour changes |
 | **Rate limiting is in memory** | Resets on restart, not shared between instances | Move to a shared store if traffic grows |

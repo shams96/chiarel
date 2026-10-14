@@ -11,8 +11,8 @@
 | Database | PostgreSQL through Prisma 6.12 | Production: Supabase. Local dev: Docker container `chiarel-postgres` on port 5434 |
 | Payments | Stripe Checkout, Stripe Tax, webhooks | Test mode today |
 | Email | Nodemailer over Hostinger SMTP | Used only for the dispute-rate alert |
-| Auth (admin only) | Custom, bcrypt password hashes, DB-backed sessions, HMAC-signed cookie | `lib/auth.ts` |
-| Tests | Vitest | `lib/pricing.test.ts`, `lib/countries.test.ts` |
+| Auth (admin only) | Custom, bcryptjs password hashes, DB-backed sessions, HMAC-signed cookie | `lib/auth.ts` |
+| Tests | Vitest 5 | `lib/*.test.ts` (pricing, countries, password) and `tests/` (Stripe webhook, cart, checkout, admin auth and permissions) |
 
 ## 2. Environments
 
@@ -54,8 +54,8 @@ There is no staging environment. Production secrets live only in Hostinger's env
 ## 7. Known technical gaps
 
 - CI (`.github/workflows/ci.yml`: typecheck, lint, tests, build) runs on every push and pull request. `main` is protected (2026-10-09): changes go through a pull request and the `check` job must pass; the repo admin can still override. Hostinger deploys `main` on merge, so test a Stripe test-mode checkout before merging anything that touches checkout, cart or webhooks.
-- Test coverage is thin: 21 tests covering pricing and countries only. Checkout, webhook, auth and cart have no automated tests.
+- Tests: 110 across 8 files. Unit tests cover pricing, countries and password hashing. Route tests with an in-memory database stand-in cover the Stripe webhook, cart, checkout and admin auth (a scan fails the build if any admin route lacks `withRole`). Not covered: real database queries, the real Stripe API, page rendering, the order confirmation page, the Founding 100 signup route.
 - No error or uptime monitoring, no alerting except the dispute-rate email.
 - No staging environment.
-- `npm audit` reports 20 vulnerabilities (10 in production dependencies, 1 critical in Next.js 14); Hostinger's scanner reports 46. Fix is a planned major upgrade of Next.js, Vitest and Tailwind. See `claudedocs/audit-2026-10-09.md`. Not yet addressed.
+- `npm audit` reports 11 vulnerabilities (9 in production dependencies, none critical) as of 2026-10-14, down from 20 with 1 critical. Next.js 15.5.27 and Vitest 5 are done. What remains is the Tailwind 3 and `eslint-config-next` chains, which need major upgrades. Hostinger's scanner reports a higher count. See `claudedocs/audit-2026-10-09.md`.
 - Rate limiting is in memory and per instance.
