@@ -11,6 +11,7 @@ import ProductAccordions from "@/components/ProductAccordions";
 import AddPairButton from "@/components/AddPairButton";
 import CellularHydrationCascade from "@/components/CellularHydrationCascade";
 import Reveal from "@/components/Reveal";
+import EditorialFeature from "@/components/EditorialFeature";
 import { productJsonLd, productPageTitle, breadcrumbJsonLd } from "@/lib/seo";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { productHoverClass } from "@/lib/motion";
@@ -226,6 +227,16 @@ export default async function ProductPage({
       <BenefitPills actives={p.actives} />
 
       {p.includes && <WhatsInside slugs={p.includes} />}
+
+      {p.slug === "terra-radiance-creme" && (
+        <EditorialFeature
+          src="/assets/products/terra-radiance-creme-editorial.jpg"
+          alt="A woman holding Terra Radiance Crème against the Capri coastline, with the line Radiance, Elevated"
+          kicker="The Icon Product"
+          headline="The daily crème of the morning ritual."
+          body="Terra Radiance Crème is the moisturising step of the AM ritual."
+        />
+      )}
 
       <BrandStatement />
 
