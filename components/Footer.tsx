@@ -76,7 +76,7 @@ export default function Footer() {
               </h2>
               <Link
                 href="/contact"
-                className="mt-6 inline-block border-b border-champagne pb-0.5 text-[12px] uppercase tracking-[0.2em] text-champagne transition hover:text-cloud"
+                className="tap-area mt-6 inline-block border-b border-champagne pb-0.5 text-[12px] uppercase tracking-[0.2em] text-champagne transition hover:text-cloud"
               >
                 Reach the House →
               </Link>
@@ -84,12 +84,12 @@ export default function Footer() {
 
             <nav className="relative z-10 mt-10 grid grid-cols-2 gap-x-8 gap-y-8 text-[13px] sm:grid-cols-3">
               {navColumns.map((col) => (
-                <div key={col.heading} className="flex flex-col gap-2">
-                  <p className="text-[11px] uppercase tracking-[0.14em] text-cloud/60">
+                <div key={col.heading} className="flex flex-col">
+                  <p className="mb-1 text-[11px] uppercase tracking-[0.14em] text-cloud/60">
                     {col.heading}
                   </p>
                   {col.links.map((link) => (
-                    <Link key={link.href} href={link.href} className="text-cloud transition-colors hover:text-champagne">
+                    <Link key={link.href} href={link.href} className="flex min-h-[44px] items-center text-cloud transition-colors hover:text-champagne">
                       {link.label}
                     </Link>
                   ))}

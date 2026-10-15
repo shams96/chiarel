@@ -107,7 +107,7 @@ export default async function ProductPage({
         <nav aria-label="Breadcrumb" className="mb-4 text-[11px] uppercase tracking-[0.14em] text-ink/65 md:mb-6">
           <ol className="flex flex-wrap items-center gap-2">
             <li>
-              <Link href="/shop" className="hover:text-ochre">Shop</Link>
+              <Link href="/shop" className="tap-area hover:text-ochre">Shop</Link>
             </li>
             <li aria-hidden="true">/</li>
             <li className="text-ink" aria-current="page">{p.name}</li>

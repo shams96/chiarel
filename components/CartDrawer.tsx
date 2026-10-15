@@ -46,7 +46,7 @@ export default function CartDrawer() {
           <button
             onClick={close}
             aria-label="Close cart"
-            className="text-xl text-ink/65 hover:text-ink"
+            className="btn-press -mr-3 flex h-11 w-11 items-center justify-center text-xl text-ink/65 hover:text-ink"
           >
             ×
           </button>
@@ -58,7 +58,7 @@ export default function CartDrawer() {
             <Link
               href="/ritual"
               onClick={close}
-              className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
+              className="tap-area border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
             >
               Begin the Ritual
             </Link>
@@ -101,7 +101,7 @@ export default function CartDrawer() {
                               onClick={() => setQty(line.id, line.qty - 1)}
                               disabled={line.qty <= 1}
                               aria-label={`Decrease quantity of ${line.product.name}`}
-                              className="btn-press flex h-7 w-7 items-center justify-center text-sm text-ink/60 transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-ink/60"
+                              className="btn-press tap-area flex h-7 w-7 items-center justify-center text-sm text-ink/60 transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-ink/60"
                             >
                               −
                             </button>
@@ -111,7 +111,7 @@ export default function CartDrawer() {
                             <button
                               onClick={() => setQty(line.id, line.qty + 1)}
                               aria-label={`Increase quantity of ${line.product.name}`}
-                              className="btn-press flex h-7 w-7 items-center justify-center text-sm text-ink/60 transition hover:text-ochre"
+                              className="btn-press tap-area flex h-7 w-7 items-center justify-center text-sm text-ink/60 transition hover:text-ochre"
                             >
                               +
                             </button>
@@ -122,7 +122,7 @@ export default function CartDrawer() {
                         </div>
                         <button
                           onClick={() => remove(line.slug)}
-                          className="text-[11px] uppercase tracking-[0.14em] text-ink/65 hover:text-ochre"
+                          className="tap-area text-[11px] uppercase tracking-[0.14em] text-ink/65 hover:text-ochre"
                         >
                           Remove
                         </button>
@@ -160,7 +160,7 @@ export default function CartDrawer() {
                     </div>
                     <button
                       onClick={() => add(nextStep.slug, "subscription")}
-                      className="btn-press w-full shrink-0 border border-ink/20 px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-ink/70 transition hover:border-ochre hover:text-ochre sm:w-auto"
+                      className="btn-press min-h-[44px] w-full shrink-0 border border-ink/20 px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-ink/70 transition hover:border-ochre hover:text-ochre sm:w-auto"
                     >
                       Subscribe · ${nextStep.price!.subscription}
                     </button>
@@ -188,7 +188,7 @@ export default function CartDrawer() {
               <Link
                 href="/terms#guarantee"
                 onClick={close}
-                className="mb-3 block text-center text-[11px] uppercase tracking-[0.14em] text-ink/65 underline decoration-ink/20 underline-offset-2 hover:text-ochre"
+                className="flex min-h-[44px] items-center justify-center text-center text-[11px] uppercase tracking-[0.14em] text-ink/65 underline decoration-ink/20 underline-offset-2 hover:text-ochre"
               >
                 90-Day Guarantee on your first order
               </Link>
