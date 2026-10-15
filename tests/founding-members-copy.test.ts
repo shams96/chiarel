@@ -23,4 +23,8 @@ describe("Founding Members copy", () => {
   it("the checkout route no longer writes a founders credit", () => {
     expect(readFileSync("app/api/checkout/route.ts", "utf8")).not.toMatch(/founding100Credit/);
   });
+
+  it("the signup form no longer asks for a social handle (it served the retired content mechanic)", () => {
+    expect(readFileSync("components/ComingSoonPackshot.tsx", "utf8")).not.toMatch(/Instagram|TikTok/i);
+  });
 });

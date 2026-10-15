@@ -34,7 +34,6 @@ function ComingSoonPackshotInner({
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [social, setSocial] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">(
     "idle"
   );
@@ -48,7 +47,7 @@ function ComingSoonPackshotInner({
       const res = await fetch("/api/founding-list", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone, social, referredBy, source }),
+        body: JSON.stringify({ name, email, phone, referredBy, source }),
       });
       if (res.ok) track("email_signup", { source });
       setStatus(res.ok ? "done" : "error");
@@ -133,13 +132,6 @@ function ComingSoonPackshotInner({
           placeholder="Phone (optional)"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/65 focus:border-ochre focus:outline-none"
-        />
-        <input
-          type="text"
-          placeholder="Instagram or TikTok (optional)"
-          value={social}
-          onChange={(e) => setSocial(e.target.value)}
           className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/65 focus:border-ochre focus:outline-none"
         />
       </div>
