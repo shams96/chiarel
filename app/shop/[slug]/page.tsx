@@ -92,6 +92,10 @@ export default async function ProductPage({
         }}
       />
 
+      {/* ANALYTICS SLOT — mount a small client component here (it renders
+          nothing visible), e.g. <ViewItem slug={p.slug} />, to fire the
+          view_item event once per product view. */}
+
       {/* Hero — gallery left, buy box right on desktop, stacked on mobile.
           Mobile hero is deliberately shorter (aspect-[5/4] vs. desktop's
           aspect-[4/5]) and the name/price block sits with tight spacing
@@ -105,12 +109,12 @@ export default async function ProductPage({
             on the site (11px uppercase tracked, ink/65 -> ochre on hover),
             not a new pattern. */}
         <nav aria-label="Breadcrumb" className="mb-4 text-[11px] uppercase tracking-[0.14em] text-ink/65 md:mb-6">
-          <ol className="flex flex-wrap items-center gap-2">
+          <ol className="flex items-center gap-2">
             <li>
               <Link href="/shop" className="hover:text-ochre">Shop</Link>
             </li>
             <li aria-hidden="true">/</li>
-            <li className="text-ink" aria-current="page">{p.name}</li>
+            <li className="min-w-0 truncate text-ink" aria-current="page">{p.name}</li>
           </ol>
         </nav>
         <div className="grid gap-6 md:grid-cols-2 md:items-start md:gap-14">
@@ -130,34 +134,40 @@ export default async function ProductPage({
 
           {/* Buy box column */}
           <div className="md:pt-2">
-            <h1 className="font-serif text-3xl leading-tight md:text-5xl">
+            <h1 className="font-serif text-2xl leading-tight sm:text-3xl md:text-5xl">
               {p.name}
             </h1>
             <p className="mt-1 text-sm text-ink/60">{p.descriptor}</p>
-            <p className="mt-2 text-[12px] leading-relaxed text-ink/65">
-              {productFactSummary(p)}
-            </p>
-            {p.role && (
-              <p className="mt-3 inline-block border border-champagne px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ochre md:mt-4">
-                {p.role}
-              </p>
-            )}
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-ink/75 md:mt-6">
-              {p.blurb}
-            </p>
+            {/* Slot: star rating / review count summary. Renders nothing
+                until a real review source exists (never fabricated). */}
+            <ProductRatingSlot slug={p.slug} />
 
-            <div className="mt-6 md:mt-8">
+            {/* Buy box comes straight after the title so price and the CTA
+                sit within the first phone screen. The long-form blurb and
+                fact summary follow below it. */}
+            <div className="mt-4 md:mt-6">
               {isPurchasable(p) ? (
                 <PurchaseOptions
                   slug={p.slug}
                   subscription={p.price.subscription}
                   oneTime={p.price.oneTime}
-                  perDayCadenceDays={p.set ? 45 : undefined}
                 />
               ) : (
                 <PriceToBeAnnounced />
               )}
             </div>
+
+            <p className="mt-6 max-w-md text-sm leading-relaxed text-ink/75 md:mt-8">
+              {p.blurb}
+            </p>
+            {p.role && (
+              <p className="mt-4 inline-block border border-champagne px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ochre">
+                {p.role}
+              </p>
+            )}
+            <p className="mt-4 text-[12px] leading-relaxed text-ink/65">
+              {productFactSummary(p)}
+            </p>
 
             <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-t border-ink/10 pt-6 text-[12px] text-ink/60">
               <div className="flex gap-1.5">
@@ -221,15 +231,20 @@ export default async function ProductPage({
       ) : (
         p.benefits && <KeyBenefits benefits={p.benefits} />
       )}
-      {p.slug === "n1-neck-decollete" && (
+      {p.howToUse && p.howToUse.length > 0 && (
         <Reveal>
-          <N1HowToUse />
+          <HowToUse steps={p.howToUse} />
         </Reveal>
       )}
       {p.slug === "recovery-masque" && <IncludedSpatula />}
       {p.actives && (
         <Reveal>
           <ClinicallyDosed actives={p.actives} />
+        </Reveal>
+      )}
+      {p.ingredientsInci && (
+        <Reveal>
+          <FullIngredientList inci={p.ingredientsInci} />
         </Reveal>
       )}
       {/* N1 has no owner-approved formula/actives data yet — a distinct,
@@ -251,6 +266,9 @@ export default async function ProductPage({
         </Reveal>
       )}
       <ScienceLinks slug={p.slug} />
+      {/* Slot: reviews list. Renders nothing until a real review source
+          exists (never fabricated). */}
+      <ProductReviewsSlot slug={p.slug} />
       {!p.set && (
         <Reveal>
           <UsageGuidance />
@@ -580,21 +598,53 @@ function N1WhatItsForAndFeel() {
   );
 }
 
-// N1 PDP section 4. General cosmetic application guidance only — no medical
-// or clinical framing (DRAFT — OWNER / REGULATORY APPROVAL REQUIRED).
-function N1HowToUse() {
+// Directions for use, rendered only for products whose data/products.json
+// entry carries `howToUse` (each line already published elsewhere on the
+// site — see `howToUseSource`). General cosmetic application guidance only.
+// This replaced the N1-only block; N1's copy is unchanged, now in the data.
+function HowToUse({ steps }: { steps: string[] }) {
   return (
     <div className="border-t border-ink/10 bg-white py-16">
       <div className="mx-auto max-w-2xl px-6 text-center">
         <h2 className="font-serif text-2xl">How to use</h2>
-        <ul className="mx-auto mt-5 max-w-md space-y-2 text-left text-sm leading-relaxed text-ink/75">
-          <li>· Apply across the neck, jawline, décolleté, and upper chest</li>
-          <li>· Use upward, sweeping movements</li>
-          <li>· Use at night, as the closing step of the evening ritual</li>
-        </ul>
+        <ol className="mx-auto mt-5 max-w-md space-y-2 text-left text-sm leading-relaxed text-ink/75">
+          {steps.map((step, i) => (
+            <li key={step} className="flex gap-3">
+              <span className="font-serif text-ochre" aria-hidden="true">{i + 1}.</span>
+              <span>{step}</span>
+            </li>
+          ))}
+        </ol>
       </div>
     </div>
   );
+}
+
+// Full consumer ingredient list. Renders only when `ingredientsInci` exists
+// in the product data, which requires lab-confirmed final-label INCI.
+function FullIngredientList({ inci }: { inci: string }) {
+  return (
+    <div className="mx-auto max-w-2xl border-t border-ink/10 px-6 py-16">
+      <details className="group">
+        <summary className="flex cursor-pointer list-none items-center justify-between font-serif text-2xl">
+          Full ingredient list
+          <span className="ml-4 text-xl text-ink/50 group-open:hidden" aria-hidden="true">+</span>
+          <span className="ml-4 hidden text-xl text-ink/50 group-open:inline" aria-hidden="true">−</span>
+        </summary>
+        <p className="mt-4 text-[13px] leading-relaxed text-ink/70">{inci}</p>
+      </details>
+    </div>
+  );
+}
+
+// Review slots. Deliberately render nothing: there is no review source yet
+// and reviews must never be fabricated. When one exists, render the rating
+// summary under the title and the review list in the page body from here.
+function ProductRatingSlot(_props: { slug: string }) {
+  return null;
+}
+function ProductReviewsSlot(_props: { slug: string }) {
+  return null;
 }
 
 // N1 PDP section 7. No formula/actives data exists yet — this is a
@@ -728,6 +778,11 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
                   <p className="mt-0.5 text-[11px] uppercase tracking-[0.16em] text-ink/65">
                     {item.step}
                   </p>
+                  {isPurchasable(item) && (
+                    <p className="mt-1 text-[12px] text-ink/65">
+                      ${item.price.subscription} per delivery, subscribe &amp; save
+                    </p>
+                  )}
                 </div>
               </Link>
             ))}
@@ -941,7 +996,7 @@ function CompleteYourRitual({ currentSlug }: { currentSlug: string }) {
             {next.step}
           </p>
           <p className="text-[12px] text-ink/65">
-            ${next.price!.subscription} with subscription
+            ${next.price!.subscription} per delivery, subscribe &amp; save
           </p>
         </div>
       </Link>
