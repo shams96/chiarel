@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { ritualProducts } from "@/lib/products";
+import { FREE_SHIP_THRESHOLD, shippingFor } from "@/lib/shipping";
 
 const modeLabel: Record<string, string> = {
   ninetyDay: "The Ritual Plan · 90-day supply, one delivery",
@@ -11,17 +12,10 @@ const modeLabel: Record<string, string> = {
   oneTime: "One-time purchase",
 };
 
-// Keep in sync with FREE_SHIP_THRESHOLD / the $12 shipping charge in
-// app/api/checkout/route.ts — this only estimates the checkout-button total,
-// the API route is the actual source of truth for what gets charged.
-const FREE_SHIP_THRESHOLD = 150;
-const SHIPPING_COST = 12;
-
 export default function CartDrawer() {
   const { lines, add, remove, setQty, isOpen, close, subtotal, savings } = useCart();
   const remainingForShipping = Math.max(0, FREE_SHIP_THRESHOLD - subtotal);
-  const estimatedTotal =
-    subtotal + (subtotal >= FREE_SHIP_THRESHOLD ? 0 : SHIPPING_COST);
+  const estimatedTotal = subtotal + shippingFor(subtotal);
   const savingsPercent =
     savings > 0 ? Math.round((savings / (subtotal + savings)) * 100) : 0;
   const nextStep = ritualProducts.find(
@@ -185,6 +179,13 @@ export default function CartDrawer() {
               <p className="mb-3 text-center text-[11px] uppercase tracking-[0.14em] text-ink/65">
                 Customer-tested · every active disclosed
               </p>
+              <Link
+                href="/cart"
+                onClick={close}
+                className="flex min-h-[44px] items-center justify-center text-center text-[11px] uppercase tracking-[0.14em] text-ink/80 underline decoration-ink/30 underline-offset-2 hover:text-ochre"
+              >
+                View bag
+              </Link>
               <Link
                 href="/terms#guarantee"
                 onClick={close}

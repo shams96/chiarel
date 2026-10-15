@@ -5,10 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { track } from "@/lib/analytics";
+import { shippingFor } from "@/lib/shipping";
 import RefundPolicyContent, { REFUND_POLICY_VERSION } from "@/components/RefundPolicyContent";
 import { ENABLED_COUNTRIES, getCountry, approxConverted, type CountryCode } from "@/lib/countries";
 
-const FREE_SHIP_THRESHOLD = 150;
 const modeLabel: Record<string, string> = {
   ninetyDay: "The Ritual Plan",
   subscription: "Subscription",
@@ -23,7 +23,7 @@ export default function CheckoutPage() {
   const country = getCountry(countryCode) ?? ENABLED_COUNTRIES[0];
 
   const hasSubscription = lines.some((l) => l.mode !== "oneTime");
-  const shipping = subtotal >= FREE_SHIP_THRESHOLD || subtotal === 0 ? 0 : 12;
+  const shipping = shippingFor(subtotal);
   const total = subtotal + shipping;
 
   // begin_checkout: once per visit to this page, as soon as the bag has items.

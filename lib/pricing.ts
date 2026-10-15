@@ -76,3 +76,32 @@ export const DELIVERY_DAYS = 45;
 export function perDayPrice(price: number, days: number = DELIVERY_DAYS): string {
   return (Math.round((price / days) * 100) / 100).toFixed(2);
 }
+
+export type PlanOption = { mode: CartMode; label: string; detail: string; price: number };
+
+/**
+ * The three plans a bag line can be switched between, with the same prices
+ * the cart charges. Order matches the product page: Ritual Plan first.
+ */
+export function planOptions(slug: string, priceSubscription: number, priceOneTime: number): PlanOption[] {
+  return [
+    {
+      mode: "ninetyDay",
+      label: "The Ritual Plan",
+      detail: "90-day supply, one delivery",
+      price: computeUnitPrice(priceSubscription, priceOneTime, "ninetyDay", slug),
+    },
+    {
+      mode: "subscription",
+      label: "Subscription",
+      detail: `renews every ${DELIVERY_DAYS} days`,
+      price: computeUnitPrice(priceSubscription, priceOneTime, "subscription", slug),
+    },
+    {
+      mode: "oneTime",
+      label: "One-time",
+      detail: "single delivery",
+      price: computeUnitPrice(priceSubscription, priceOneTime, "oneTime", slug),
+    },
+  ];
+}

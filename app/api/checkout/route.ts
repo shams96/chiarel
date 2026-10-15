@@ -7,10 +7,8 @@ import { withApiErrorHandling } from "@/lib/api-error";
 import { getCountry } from "@/lib/countries";
 import { getProductOrThrow } from "@/lib/products";
 import { isRateLimited, clientIp } from "@/lib/rate-limit";
+import { EXTRA_SAMPLE_THRESHOLD, shippingFor } from "@/lib/shipping";
 
-const FREE_SHIP_THRESHOLD = 150;
-// Keep in sync with EXTRA_SAMPLE_THRESHOLD in components/CartDrawer.tsx.
-const EXTRA_SAMPLE_THRESHOLD = 250;
 // Throttle by IP: checkout creates a pending Order row and a Stripe Checkout
 // Session on every call, so an unthrottled endpoint is a cheap way to spam
 // both the DB and the Stripe account — not a customer-facing limit anyone
@@ -75,7 +73,7 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
     return NextResponse.json({ error: "Cart is empty" }, { status: 400 });
   }
 
-  const shipping = cart.subtotal >= FREE_SHIP_THRESHOLD ? 0 : 12;
+  const shipping = shippingFor(cart.subtotal);
   const total = cart.subtotal + shipping;
 
   // Order is recorded as pending until Stripe confirms payment — the order

@@ -58,7 +58,7 @@ describe("production (APP_ENV unset)", () => {
       (x) => x.userAgent === "*"
     )!;
     expect(star.allow).toBe("/");
-    expect(star.disallow).toEqual(["/checkout", "/account"]);
+    expect(star.disallow).toEqual(["/checkout", "/cart", "/account"]);
   });
   it("sitemap lists pages", () => {
     expect(sitemap().length).toBeGreaterThan(10);

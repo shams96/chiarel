@@ -42,6 +42,8 @@ type CartContextValue = {
   add: (slug: string, mode: CartMode) => Promise<void>;
   remove: (slug: string) => Promise<void>;
   setQty: (lineId: string, qty: number) => Promise<void>;
+  /** Switches a line to another plan, keeping its quantity. Unlike add(), it does not open the drawer. */
+  changePlan: (slug: string, mode: CartMode) => Promise<void>;
   isOpen: boolean;
   open: () => void;
   close: () => void;
@@ -137,6 +139,24 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const changePlan: CartContextValue["changePlan"] = async (slug, mode) => {
+    const line = data.lines.find((l) => l.slug === slug);
+    if (!line || line.mode === mode) return;
+    try {
+      const res = await fetch("/api/cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug, mode }),
+      });
+      if (res.ok) {
+        setData(await res.json());
+        track("subscribe_toggle", { item_id: slug, plan: mode });
+      }
+    } catch {
+      // Network failure — the plan wasn't changed; cart state is unchanged.
+    }
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -144,6 +164,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         add,
         remove,
         setQty,
+        changePlan,
         isOpen,
         open: () => setIsOpen(true),
         close: () => setIsOpen(false),
