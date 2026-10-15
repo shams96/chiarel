@@ -71,3 +71,15 @@ export function purchaseOptionSummary(
     oneTime: { price: priceOneTime },
   };
 }
+
+/** Days of product one delivery covers; the subscription renews on this cadence. */
+export const DELIVERY_DAYS = 45;
+
+/**
+ * Price per day of use, in dollars to the cent, for a price covering `days`
+ * days. Display-only: derived from the same prices the cart charges, so the
+ * headline per-day figure cannot drift from checkout.
+ */
+export function perDayPrice(price: number, days: number = DELIVERY_DAYS): string {
+  return (Math.round((price / days) * 100) / 100).toFixed(2);
+}
