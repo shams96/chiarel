@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import EmailSignup from "@/components/EmailSignup";
 import { CONTACT_EMAIL, ORDERS_EMAIL, PRESS_EMAIL } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -80,6 +81,10 @@ export default function ContactPage() {
           </dd>
         </div>
       </dl>
+
+      <div className="mt-16 border-t border-ink/10 pt-12">
+        <EmailSignup source="contact" />
+      </div>
 
       <p className="mt-16 max-w-xl text-[12px] leading-relaxed text-ink/65">
         CHIAREL™ is operated by 1HubSolutions, LLC. See our{" "}

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import EmailSignup from "@/components/EmailSignup";
 
 export const metadata = { title: "Journal", alternates: { canonical: "/journal" } };
 
@@ -57,6 +58,9 @@ export default function JournalPage() {
             </Link>
           </article>
         ))}
+      </div>
+      <div className="mt-6 border-t border-ink/10 pt-12">
+        <EmailSignup source="journal" />
       </div>
     </div>
   );

@@ -26,7 +26,12 @@ export default function PrivacyPage() {
             When you place an order, we collect your name, email address,
             shipping address, and order contents in order to fulfill it. When
             you join our founding list, we collect your name, email, and any
-            phone or social handle you choose to provide. We do not collect
+            phone or social handle you choose to provide. If you join our
+            email list, we collect your email address, the date you agreed,
+            and the page you signed up on. We only email you if you tick the
+            consent box, and every message includes an unsubscribe link. If
+            we use an email service provider to send these messages, it
+            receives your email address for that purpose only. We do not collect
             or store your payment card details — those are handled entirely
             by our payment processor, Stripe (see below).
           </p>
