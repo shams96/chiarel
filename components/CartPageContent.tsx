@@ -18,7 +18,7 @@ const MODE_LABEL: Record<CartLine["mode"], string> = {
 };
 
 function PlanSelect({ line }: { line: CartLine }) {
-  const { changePlan, updating } = useCart();
+  const { changePlan } = useCart();
   const product = getProduct(line.slug);
   if (!product || !isPurchasable(product)) {
     return <p className="text-[13px] text-ink/70">{MODE_LABEL[line.mode]}</p>;
@@ -32,7 +32,6 @@ function PlanSelect({ line }: { line: CartLine }) {
       <select
         id={`plan-${line.id}`}
         value={line.mode}
-        disabled={updating}
         onChange={(e) => changePlan(line.slug, e.target.value as CartLine["mode"])}
         className="min-h-[44px] w-full cursor-pointer border border-ink/20 bg-white px-3 py-2 text-[13px] text-ink focus:border-ochre focus:outline-none"
       >
@@ -50,13 +49,13 @@ function PlanSelect({ line }: { line: CartLine }) {
 }
 
 function QuantityStepper({ line }: { line: CartLine }) {
-  const { setQty, updating } = useCart();
+  const { setQty } = useCart();
   return (
     <div className="inline-flex items-center border border-ink/15">
       <button
         type="button"
         onClick={() => setQty(line.id, line.qty - 1)}
-        disabled={line.qty <= 1 || updating}
+        disabled={line.qty <= 1}
         aria-label={`Decrease quantity of ${line.product.name}`}
         className="btn-press flex h-11 w-11 items-center justify-center text-base text-ink/70 transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-ink/70"
       >
@@ -68,7 +67,6 @@ function QuantityStepper({ line }: { line: CartLine }) {
       <button
         type="button"
         onClick={() => setQty(line.id, line.qty + 1)}
-        disabled={updating}
         aria-label={`Increase quantity of ${line.product.name}`}
         className="btn-press flex h-11 w-11 items-center justify-center text-base text-ink/70 transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30"
       >
