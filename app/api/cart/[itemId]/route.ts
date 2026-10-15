@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { getCartWithTotals, getOrCreateCart } from "@/lib/cart-server";
+import { getCartWithTotals, getOrCreateCart, type CartMode } from "@/lib/cart-server";
 import { withApiErrorHandling } from "@/lib/api-error";
+
+const VALID_MODES: CartMode[] = ["ninetyDay", "subscription", "oneTime"];
 
 async function assertOwnedByCurrentCart(itemId: string) {
   const cart = await getOrCreateCart();
@@ -17,6 +19,19 @@ export const PATCH = withApiErrorHandling(async function PATCH(
   const { itemId } = await params;
   const body = await req.json().catch(() => null);
   const qty = body?.qty;
+  const mode = body?.mode;
+
+  // Either change the plan (idempotent: setting the plan the line already has
+  // is a no-op) or the quantity. Plan changes never touch quantity.
+  if (mode !== undefined) {
+    if (!VALID_MODES.includes(mode)) {
+      return NextResponse.json({ error: "invalid mode" }, { status: 400 });
+    }
+    const owned = await assertOwnedByCurrentCart(itemId);
+    if (!owned) return NextResponse.json({ error: "Item not found" }, { status: 404 });
+    await db.cartItem.update({ where: { id: itemId }, data: { mode } });
+    return NextResponse.json(await getCartWithTotals());
+  }
 
   if (typeof qty !== "number" || qty < 1 || !Number.isInteger(qty)) {
     return NextResponse.json(

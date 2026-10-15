@@ -52,6 +52,8 @@ export function startDisputeMonitorSchedule(): void {
   globalForScheduler.chiarelDisputeSchedulerStarted = true;
 
   console.log("[dispute-monitor] scheduler started");
-  runCheck();
+  // First check a minute after boot, not at boot: a cold start (and a deploy
+  // restart) should not open database connections before the site is serving.
+  setTimeout(runCheck, 60 * 1000);
   setInterval(runCheck, CHECK_INTERVAL_MS);
 }

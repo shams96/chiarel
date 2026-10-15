@@ -7,6 +7,12 @@
 // in a middleware context, where setInterval/Prisma access isn't meaningful.
 export async function register() {
   if (process.env.NEXT_RUNTIME === "nodejs") {
+    // A fire-and-forget promise that rejects would otherwise terminate the Node
+    // process (Node 15+), and the host does not necessarily restart it. Log and
+    // keep serving.
+    process.on("unhandledRejection", (reason) => {
+      console.error("[unhandledRejection]", reason);
+    });
     const { startDisputeMonitorSchedule } = await import("@/lib/dispute-alert-scheduler");
     startDisputeMonitorSchedule();
   }

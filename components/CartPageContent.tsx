@@ -5,17 +5,23 @@ import Link from "next/link";
 import { useCart, type CartLine } from "@/lib/cart-context";
 import { getProduct, isPurchasable } from "@/lib/products";
 import { planOptions } from "@/lib/pricing";
-import { FREE_SHIP_THRESHOLD, shippingFor } from "@/lib/shipping";
+import { FREE_SHIP_THRESHOLD, shippingFor, shippingNote } from "@/lib/shipping";
 
 // The bag as its own page: one row per product with a plan selector, and a
 // summary panel beside it. Same numbers as the drawer and /checkout (shared
 // pricing and shipping code); payment itself is still hosted by Stripe.
 
+const MODE_LABEL: Record<CartLine["mode"], string> = {
+  ninetyDay: "The Ritual Plan",
+  subscription: "Subscription",
+  oneTime: "One-time",
+};
+
 function PlanSelect({ line }: { line: CartLine }) {
-  const { changePlan } = useCart();
+  const { changePlan, updating } = useCart();
   const product = getProduct(line.slug);
   if (!product || !isPurchasable(product)) {
-    return <p className="text-[13px] text-ink/70">{line.mode}</p>;
+    return <p className="text-[13px] text-ink/70">{MODE_LABEL[line.mode]}</p>;
   }
   const options = planOptions(line.slug, product.price.subscription, product.price.oneTime);
   return (
@@ -26,6 +32,7 @@ function PlanSelect({ line }: { line: CartLine }) {
       <select
         id={`plan-${line.id}`}
         value={line.mode}
+        disabled={updating}
         onChange={(e) => changePlan(line.slug, e.target.value as CartLine["mode"])}
         className="min-h-[44px] w-full cursor-pointer border border-ink/20 bg-white px-3 py-2 text-[13px] text-ink focus:border-ochre focus:outline-none"
       >
@@ -43,13 +50,13 @@ function PlanSelect({ line }: { line: CartLine }) {
 }
 
 function QuantityStepper({ line }: { line: CartLine }) {
-  const { setQty } = useCart();
+  const { setQty, updating } = useCart();
   return (
     <div className="inline-flex items-center border border-ink/15">
       <button
         type="button"
         onClick={() => setQty(line.id, line.qty - 1)}
-        disabled={line.qty <= 1}
+        disabled={line.qty <= 1 || updating}
         aria-label={`Decrease quantity of ${line.product.name}`}
         className="btn-press flex h-11 w-11 items-center justify-center text-base text-ink/70 transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-ink/70"
       >
@@ -61,8 +68,9 @@ function QuantityStepper({ line }: { line: CartLine }) {
       <button
         type="button"
         onClick={() => setQty(line.id, line.qty + 1)}
+        disabled={updating}
         aria-label={`Increase quantity of ${line.product.name}`}
-        className="btn-press flex h-11 w-11 items-center justify-center text-base text-ink/70 transition hover:text-ochre"
+        className="btn-press flex h-11 w-11 items-center justify-center text-base text-ink/70 transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30"
       >
         +
       </button>
@@ -85,9 +93,8 @@ function InfoItem({ title, children }: { title: string; children: React.ReactNod
 
 export default function CartPageContent() {
   const { lines, remove, subtotal, savings, count, loading } = useCart();
-  const shipping = shippingFor(subtotal);
+  const shipping = shippingFor(subtotal, lines);
   const total = subtotal + shipping;
-  const remainingForShipping = Math.max(0, FREE_SHIP_THRESHOLD - subtotal);
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-10 md:py-14">
@@ -154,7 +161,8 @@ export default function CartPageContent() {
                         onClick={() => remove(line.slug)}
                         className="tap-area mt-2 text-[11px] uppercase tracking-[0.14em] text-ink/70 underline underline-offset-4 hover:text-ochre"
                       >
-                        Remove
+                        <span aria-hidden="true">Remove</span>
+                        <span className="sr-only">Remove {line.product.name}</span>
                       </button>
                     </div>
                   </div>
@@ -208,9 +216,9 @@ export default function CartPageContent() {
                 <dd className="font-serif text-xl">${total}</dd>
               </div>
             </dl>
-            {remainingForShipping > 0 && (
+            {shipping > 0 && (
               <p className="mt-3 text-[12px] text-ink/65">
-                Add ${remainingForShipping} more for complimentary shipping.
+                {shippingNote(subtotal, lines)}
               </p>
             )}
             <p className="mt-3 text-[12px] leading-relaxed text-ink/65">
@@ -222,7 +230,8 @@ export default function CartPageContent() {
               <InfoItem title="Shipping & handling">
                 Made to order in Isola del Liri, Italy. Allow standard processing time before
                 dispatch; shipping options and timing are shown at checkout. Shipping is
-                complimentary on bags of ${FREE_SHIP_THRESHOLD} or more.
+                complimentary on the Ritual Plan, on subscriptions, and on bags of ${FREE_SHIP_THRESHOLD} or
+                more.
               </InfoItem>
               <InfoItem title="Payment & sales tax">
                 You enter your card details on the next screen, securely processed by Stripe. Sales

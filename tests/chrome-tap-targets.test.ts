@@ -17,7 +17,7 @@ describe("site chrome tap targets", () => {
   const bigEnough = /min-h-\[44px\]|h-11\b|tap-area/;
 
   it("header Bag, Shop and logo links have a 44px hit area", () => {
-    for (const needle of ['aria-label="Open cart"', 'href="/shop" className', 'href="/" className']) {
+    for (const needle of ['aria-label={count > 0', 'href="/shop" className', 'href="/" className']) {
       const i = header.indexOf(needle);
       expect(i, needle).toBeGreaterThan(-1);
       expect(header.slice(i, i + 220)).toMatch(bigEnough);
@@ -30,7 +30,7 @@ describe("site chrome tap targets", () => {
   });
 
   it("cart drawer controls have a 44px hit area", () => {
-    for (const needle of ['aria-label="Close cart"', "Decrease quantity", "Increase quantity", "onClick={() => remove("]) {
+    for (const needle of ['aria-label="Close bag"', "Decrease quantity", "Increase quantity", "onClick={() => remove("]) {
       const i = cart.indexOf(needle);
       expect(i, needle).toBeGreaterThan(-1);
       expect(cart.slice(i, i + 260)).toMatch(bigEnough);

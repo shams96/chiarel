@@ -4,7 +4,7 @@ import CookieSettingsLink from "@/components/CookieSettingsLink";
 import EmailSignup from "@/components/EmailSignup";
 
 const trustBadges = [
-  "Complimentary shipping at $150",
+  "Complimentary shipping on every plan",
   "90-Day Guarantee on your first order",
   "Secure checkout via Stripe",
   "Formulated by a pharmacist",

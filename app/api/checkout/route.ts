@@ -73,7 +73,7 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
     return NextResponse.json({ error: "Cart is empty" }, { status: 400 });
   }
 
-  const shipping = shippingFor(cart.subtotal);
+  const shipping = shippingFor(cart.subtotal, cart.lines);
   const total = cart.subtotal + shipping;
 
   // Order is recorded as pending until Stripe confirms payment — the order
