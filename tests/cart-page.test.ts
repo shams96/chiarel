@@ -1,19 +1,32 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { computeUnitPrice, planOptions } from "@/lib/pricing";
-import { EXTRA_SAMPLE_THRESHOLD, FREE_SHIP_THRESHOLD, SHIPPING_COST, shippingFor } from "@/lib/shipping";
+import { EXTRA_SAMPLE_THRESHOLD, FREE_SHIP_THRESHOLD, SHIPPING_COST, shippingFor, shippingNote } from "@/lib/shipping";
 import { isPurchasable, products } from "@/lib/products";
 
 describe("shippingFor (shared by checkout, drawer and cart page)", () => {
-  it("is free at or above the threshold and a flat charge below it", () => {
-    expect(shippingFor(FREE_SHIP_THRESHOLD)).toBe(0);
-    expect(shippingFor(FREE_SHIP_THRESHOLD - 1)).toBe(SHIPPING_COST);
-    expect(shippingFor(118)).toBe(SHIPPING_COST);
-    expect(shippingFor(302)).toBe(0);
+  const oneTime = [{ mode: "oneTime" }];
+
+  it("one-time bags ship free at or above the threshold and pay a flat charge below it", () => {
+    expect(shippingFor(FREE_SHIP_THRESHOLD, oneTime)).toBe(0);
+    expect(shippingFor(FREE_SHIP_THRESHOLD - 1, oneTime)).toBe(SHIPPING_COST);
+    expect(shippingFor(138, oneTime)).toBe(SHIPPING_COST);
+  });
+
+  it("the Ritual Plan and subscriptions ship free at any size", () => {
+    expect(shippingFor(118, [{ mode: "subscription" }])).toBe(0);
+    expect(shippingFor(40, [{ mode: "ninetyDay" }])).toBe(0);
+    expect(shippingFor(40, [{ mode: "oneTime" }, { mode: "subscription" }])).toBe(0);
   });
 
   it("charges nothing for an empty bag", () => {
-    expect(shippingFor(0)).toBe(0);
+    expect(shippingFor(0, [])).toBe(0);
+  });
+
+  it("the note tells a one-time bag how to unlock free shipping, and confirms it once unlocked", () => {
+    expect(shippingNote(138, oneTime)).toMatch(/Ritual Plan or a subscription, or add \$12 more/);
+    expect(shippingNote(138, [{ mode: "ninetyDay" }])).toBe("Complimentary shipping included.");
+    expect(shippingNote(150, oneTime)).toBe("Complimentary shipping included.");
   });
 
   it("keeps the bonus-sample threshold above the free-shipping threshold", () => {

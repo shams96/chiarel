@@ -153,6 +153,19 @@ describe("checkout: totals", () => {
     expect(items[1].price_data.product_data.name).toBe("Shipping");
   });
 
+  it("ships a subscription under 150 free (no Shipping line item)", async () => {
+    setCart([line({ mode: "subscription", unitPrice: 118 })]);
+    await checkout(validBody);
+    expect(orderCreate.mock.calls[0][0].data).toMatchObject({ subtotal: 118, shipping: 0, total: 118 });
+    expect(sessionsCreate.mock.calls[0][0].line_items).toHaveLength(1);
+  });
+
+  it("ships the whole bag free when any line is a Ritual Plan", async () => {
+    setCart([line({ mode: "ninetyDay", unitPrice: 100 }), line({ id: "i2", slug: "other", unitPrice: 20 })]);
+    await checkout(validBody);
+    expect(orderCreate.mock.calls[0][0].data).toMatchObject({ shipping: 0 });
+  });
+
   it("ships free at exactly 150", async () => {
     setCart([line({ unitPrice: 150 })]);
     await checkout(validBody);

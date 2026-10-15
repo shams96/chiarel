@@ -23,7 +23,7 @@ export default function CheckoutPage() {
   const country = getCountry(countryCode) ?? ENABLED_COUNTRIES[0];
 
   const hasSubscription = lines.some((l) => l.mode !== "oneTime");
-  const shipping = shippingFor(subtotal);
+  const shipping = shippingFor(subtotal, lines);
   const total = subtotal + shipping;
 
   // begin_checkout: once per visit to this page, as soon as the bag has items.

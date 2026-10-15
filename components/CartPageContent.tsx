@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useCart, type CartLine } from "@/lib/cart-context";
 import { getProduct, isPurchasable } from "@/lib/products";
 import { planOptions } from "@/lib/pricing";
-import { FREE_SHIP_THRESHOLD, shippingFor } from "@/lib/shipping";
+import { FREE_SHIP_THRESHOLD, shippingFor, shippingNote } from "@/lib/shipping";
 
 // The bag as its own page: one row per product with a plan selector, and a
 // summary panel beside it. Same numbers as the drawer and /checkout (shared
@@ -85,9 +85,8 @@ function InfoItem({ title, children }: { title: string; children: React.ReactNod
 
 export default function CartPageContent() {
   const { lines, remove, subtotal, savings, count, loading } = useCart();
-  const shipping = shippingFor(subtotal);
+  const shipping = shippingFor(subtotal, lines);
   const total = subtotal + shipping;
-  const remainingForShipping = Math.max(0, FREE_SHIP_THRESHOLD - subtotal);
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-10 md:py-14">
@@ -208,9 +207,9 @@ export default function CartPageContent() {
                 <dd className="font-serif text-xl">${total}</dd>
               </div>
             </dl>
-            {remainingForShipping > 0 && (
+            {shipping > 0 && (
               <p className="mt-3 text-[12px] text-ink/65">
-                Add ${remainingForShipping} more for complimentary shipping.
+                {shippingNote(subtotal, lines)}
               </p>
             )}
             <p className="mt-3 text-[12px] leading-relaxed text-ink/65">
@@ -222,7 +221,8 @@ export default function CartPageContent() {
               <InfoItem title="Shipping & handling">
                 Made to order in Isola del Liri, Italy. Allow standard processing time before
                 dispatch; shipping options and timing are shown at checkout. Shipping is
-                complimentary on bags of ${FREE_SHIP_THRESHOLD} or more.
+                complimentary on the Ritual Plan, on subscriptions, and on bags of ${FREE_SHIP_THRESHOLD} or
+                more.
               </InfoItem>
               <InfoItem title="Payment & sales tax">
                 You enter your card details on the next screen, securely processed by Stripe. Sales
