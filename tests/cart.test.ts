@@ -175,6 +175,34 @@ describe("cart: changing a line's plan (PATCH mode)", () => {
   });
 });
 
+describe("cart: reads never write, and display fields come from the catalog", () => {
+  it("a visitor with no cart cookie gets an empty bag and no cart row is created", async () => {
+    state.cookie = undefined;
+    const before = state.carts.size;
+    const res = await cartRoute.GET();
+    expect(res.status).toBe(200);
+    expect(await res.json()).toMatchObject({ cartId: null, lines: [], count: 0, subtotal: 0, savings: 0 });
+    expect(state.carts.size).toBe(before);
+  });
+
+  it("a cookie that points at no cart is also read-only", async () => {
+    state.cookie = "cart_unknown";
+    const before = state.carts.size;
+    await cartRoute.GET();
+    expect(state.carts.size).toBe(before);
+  });
+
+  it("a line's name and image come from the catalog, not the database row", async () => {
+    await post({ slug: "chiarel-essence", mode: "oneTime" });
+    const cart = await (await cartRoute.GET()).json();
+    const { getProduct } = await import("@/lib/products");
+    const catalog = getProduct("chiarel-essence")!;
+    expect(cart.lines[0].product.image).toBe(catalog.image);
+    expect(cart.lines[0].product.image).not.toBe("/e.png"); // the stale value the mock database holds
+    expect(cart.lines[0].product.name).toBe(catalog.name);
+  });
+});
+
 describe("cart: ownership", () => {
   it("creates a cart when the cookie is missing", async () => {
     state.cookie = undefined;

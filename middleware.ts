@@ -2,8 +2,26 @@ import { NextRequest, NextResponse } from "next/server";
 
 const CART_COOKIE = "chiarel_cart_id";
 
+// The cart cookie is minted only when a visitor first WRITES to the cart
+// (POST /api/cart), never on page loads or reads. Two reasons: (1) pages with a
+// Set-Cookie cannot be cached by the CDN, so minting on every page forced every
+// visit to the origin; (2) a cookie set only on the response is invisible to
+// code running in the same request, so the first add-to-cart used to create an
+// orphan cart nothing pointed at. The new id is also placed on the forwarded
+// request so the route handler sees the very cookie the browser will receive.
 export function middleware(request: NextRequest) {
-  const response = NextResponse.next();
+  const mintsCartCookie =
+    !request.cookies.get(CART_COOKIE) &&
+    request.method === "POST" &&
+    request.nextUrl.pathname === "/api/cart";
+  const newCartId = mintsCartCookie ? crypto.randomUUID() : null;
+
+  const requestHeaders = new Headers(request.headers);
+  if (newCartId) {
+    const existing = requestHeaders.get("cookie");
+    requestHeaders.set("cookie", `${existing ? `${existing}; ` : ""}${CART_COOKIE}=${newCartId}`);
+  }
+  const response = NextResponse.next({ request: { headers: requestHeaders } });
 
   response.headers.set("X-Frame-Options", "DENY");
   response.headers.set("X-Content-Type-Options", "nosniff");
@@ -55,8 +73,8 @@ export function middleware(request: NextRequest) {
     );
   }
 
-  if (!request.cookies.get(CART_COOKIE)) {
-    response.cookies.set(CART_COOKIE, crypto.randomUUID(), {
+  if (newCartId) {
+    response.cookies.set(CART_COOKIE, newCartId, {
       httpOnly: true,
       sameSite: "lax",
       secure: process.env.NODE_ENV === "production",

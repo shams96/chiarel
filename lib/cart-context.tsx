@@ -5,6 +5,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -92,7 +93,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
     refresh().finally(() => setLoading(false));
   }, [refresh]);
 
+  // One add at a time: a fresh visitor with no cart cookie yet would otherwise
+  // mint a cart on each of two rapid clicks, and the last cookie would win.
+  const adding = useRef(false);
+
   const add: CartContextValue["add"] = async (slug, mode) => {
+    if (adding.current) return;
+    adding.current = true;
     try {
       const res = await fetch("/api/cart", {
         method: "POST",
@@ -114,6 +121,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setIsOpen(true);
     } catch {
       // Network failure — the item wasn't added; cart state is unchanged.
+    } finally {
+      adding.current = false;
     }
   };
 

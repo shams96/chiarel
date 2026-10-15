@@ -9,7 +9,7 @@ async function assertOwnedByCurrentCart(itemId: string) {
   const cart = await getOrCreateCart();
   const item = await db.cartItem.findUnique({ where: { id: itemId } });
   if (!item || item.cartId !== cart.id) return null;
-  return item;
+  return { cart, item };
 }
 
 export const PATCH = withApiErrorHandling(async function PATCH(
@@ -30,7 +30,7 @@ export const PATCH = withApiErrorHandling(async function PATCH(
     const owned = await assertOwnedByCurrentCart(itemId);
     if (!owned) return NextResponse.json({ error: "Item not found" }, { status: 404 });
     await db.cartItem.update({ where: { id: itemId }, data: { mode } });
-    return NextResponse.json(await getCartWithTotals());
+    return NextResponse.json(await getCartWithTotals(owned.cart));
   }
 
   if (typeof qty !== "number" || qty < 1 || !Number.isInteger(qty)) {
@@ -40,13 +40,13 @@ export const PATCH = withApiErrorHandling(async function PATCH(
     );
   }
 
-  const item = await assertOwnedByCurrentCart(itemId);
-  if (!item) {
+  const owned = await assertOwnedByCurrentCart(itemId);
+  if (!owned) {
     return NextResponse.json({ error: "Item not found" }, { status: 404 });
   }
 
   await db.cartItem.update({ where: { id: itemId }, data: { qty } });
-  return NextResponse.json(await getCartWithTotals());
+  return NextResponse.json(await getCartWithTotals(owned.cart));
 });
 
 export const DELETE = withApiErrorHandling(async function DELETE(
@@ -54,11 +54,11 @@ export const DELETE = withApiErrorHandling(async function DELETE(
   { params }: { params: Promise<{ itemId: string }> }
 ) {
   const { itemId } = await params;
-  const item = await assertOwnedByCurrentCart(itemId);
-  if (!item) {
+  const owned = await assertOwnedByCurrentCart(itemId);
+  if (!owned) {
     return NextResponse.json({ error: "Item not found" }, { status: 404 });
   }
 
   await db.cartItem.delete({ where: { id: itemId } });
-  return NextResponse.json(await getCartWithTotals());
+  return NextResponse.json(await getCartWithTotals(owned.cart));
 });
