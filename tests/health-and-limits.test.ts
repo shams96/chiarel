@@ -22,9 +22,13 @@ describe("/api/health", () => {
     queryRaw.mockResolvedValueOnce([{ "?column?": 1 }]);
     const ok = await (await GET(req("?db=1", "1.1.1.1"))).json();
     expect(ok.db.ok).toBe(true);
-    queryRaw.mockRejectedValueOnce(new Error("down"));
+    queryRaw.mockRejectedValueOnce(Object.assign(new Error("secret host details"), { code: "P1001" }));
     const bad = await GET(req("?db=1", "2.2.2.2"));
     expect(bad.status).toBe(503);
+    const badBody = await bad.json();
+    expect(badBody.db).toMatchObject({ ok: false, code: "P1001" });
+    expect(badBody.env).toEqual({ DATABASE_URL: expect.any(Boolean), DIRECT_URL: expect.any(Boolean) });
+    expect(JSON.stringify(badBody)).not.toContain("secret host details");
   });
 
   it("?db=1 is throttled per IP so it cannot be used to exhaust the pool", async () => {

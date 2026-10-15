@@ -27,8 +27,22 @@ export async function GET(req: NextRequest) {
     try {
       await db.$queryRaw`select 1`;
       body.db = { ok: true, ms: Date.now() - t };
-    } catch {
-      return NextResponse.json({ ...body, ok: false, db: { ok: false, ms: Date.now() - t } }, { status: 503 });
+    } catch (err) {
+      // Hostinger exposes no runtime log for this app, so a failure reports what
+      // it can safely: the Prisma/Node error code or class name (never the
+      // message, which can contain connection details) and whether the database
+      // settings are present at all.
+      const e = err as { code?: unknown; name?: unknown };
+      const code = typeof e?.code === "string" ? e.code : typeof e?.name === "string" ? e.name : "unknown";
+      return NextResponse.json(
+        {
+          ...body,
+          ok: false,
+          db: { ok: false, ms: Date.now() - t, code },
+          env: { DATABASE_URL: Boolean(process.env.DATABASE_URL), DIRECT_URL: Boolean(process.env.DIRECT_URL) },
+        },
+        { status: 503 }
+      );
     }
   }
   return NextResponse.json(body, { headers: { "Cache-Control": "no-store" } });
