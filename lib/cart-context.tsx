@@ -11,6 +11,8 @@ import {
 } from "react";
 import { computeUnitPrice, type CartMode } from "@/lib/pricing";
 import { track } from "@/lib/analytics";
+import { removeLine, setLinePlan, setLineQty } from "@/lib/cart-math";
+import { createOpRunner } from "@/lib/cart-ops";
 
 export type { CartMode };
 
@@ -52,8 +54,6 @@ type CartContextValue = {
   subtotal: number;
   savings: number;
   loading: boolean;
-  /** True while a quantity or plan change is in flight; controls should be disabled. */
-  updating: boolean;
   /** Re-syncs client state with the server cart — call after any change the
       add/remove helpers didn't make directly, e.g. after checkout clears the
       cart server-side, so the header/drawer don't keep showing stale counts. */
@@ -71,7 +71,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
   });
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [updating, setUpdating] = useState(false);
 
   // Every fetch below is wrapped in try/catch: `fetch` itself rejects (not
   // just resolves with a non-ok response) on a real network failure — a
@@ -93,6 +92,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
     refresh().finally(() => setLoading(false));
   }, [refresh]);
 
+  // Every change goes through one serial runner (lib/cart-ops.ts): requests reach
+  // the server in the order they were made, and only the answer to the last one
+  // replaces what is on screen. A failed last change re-reads the bag.
+  const runnerRef = useRef<ReturnType<typeof createOpRunner> | null>(null);
+  if (!runnerRef.current) {
+    runnerRef.current = createOpRunner(
+      async (res) => setData(await res.json()),
+      () => refresh()
+    );
+  }
+  const runner = runnerRef.current;
+
   // One add at a time: a fresh visitor with no cart cookie yet would otherwise
   // mint a cart on each of two rapid clicks, and the last cookie would win.
   const adding = useRef(false);
@@ -101,80 +112,70 @@ export function CartProvider({ children }: { children: ReactNode }) {
     if (adding.current) return;
     adding.current = true;
     try {
-      const res = await fetch("/api/cart", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slug, mode }),
-      });
-      if (res.ok) {
-        const next: CartApiResponse = await res.json();
-        setData(next);
-        const line = next.lines.find((l) => l.slug === slug && l.mode === mode);
-        if (line) {
-          track("add_to_cart", {
-            currency: "USD",
-            value: line.unitPrice,
-            items: [{ item_id: slug, item_name: line.product.name, price: line.unitPrice, quantity: 1 }],
-          });
+      await runner.run(async () => {
+        const res = await fetch("/api/cart", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ slug, mode }),
+        });
+        if (res.ok) {
+          try {
+            const next: CartApiResponse = await res.clone().json();
+            const line = next.lines.find((l) => l.slug === slug && l.mode === mode);
+            if (line) {
+              track("add_to_cart", {
+                currency: "USD",
+                value: line.unitPrice,
+                items: [{ item_id: slug, item_name: line.product.name, price: line.unitPrice, quantity: 1 }],
+              });
+            }
+          } catch {
+            // Analytics only; never block the add.
+          }
         }
-      }
+        return res;
+      });
       setIsOpen(true);
-    } catch {
-      // Network failure — the item wasn't added; cart state is unchanged.
     } finally {
       adding.current = false;
     }
   };
 
+  // The three changes below update the bag on screen immediately (lib/cart-math.ts
+  // uses the same pricing code as the server) and then confirm with the server.
   const remove: CartContextValue["remove"] = async (slug) => {
     const line = data.lines.find((l) => l.slug === slug);
     if (!line) return;
-    try {
-      const res = await fetch(`/api/cart/${line.id}`, { method: "DELETE" });
-      if (res.ok) setData(await res.json());
-    } catch {
-      // Network failure — the item wasn't removed; cart state is unchanged.
-    }
+    setData((prev) => removeLine(prev, line.id) ?? prev);
+    await runner.run(() => fetch(`/api/cart/${line.id}`, { method: "DELETE" }));
   };
 
   const setQty: CartContextValue["setQty"] = async (lineId, qty) => {
-    if (qty < 1 || updating) return;
-    setUpdating(true);
-    try {
-      const res = await fetch(`/api/cart/${lineId}`, {
+    if (qty < 1) return;
+    setData((prev) => setLineQty(prev, lineId, qty) ?? prev);
+    await runner.run(() =>
+      fetch(`/api/cart/${lineId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ qty }),
-      });
-      if (res.ok) setData(await res.json());
-    } catch {
-      // Network failure — the quantity wasn't changed; cart state is unchanged.
-    } finally {
-      setUpdating(false);
-    }
+      })
+    );
   };
 
   const changePlan: CartContextValue["changePlan"] = async (slug, mode) => {
     const line = data.lines.find((l) => l.slug === slug);
-    if (!line || line.mode === mode || updating) return;
-    setUpdating(true);
-    try {
-      // PATCH sets the plan outright (idempotent); POST would add a unit if a
-      // stale client asked for the plan the server already holds.
-      const res = await fetch(`/api/cart/${line.id}`, {
+    if (!line || line.mode === mode) return;
+    setData((prev) => setLinePlan(prev, slug, mode) ?? prev);
+    track("subscribe_toggle", { item_id: slug, plan: mode });
+    // PATCH sets the plan outright (idempotent); POST would add a unit if a
+    // stale client asked for the plan the server already holds.
+    await runner.run(() =>
+      fetch(`/api/cart/${line.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ mode }),
-      });
-      if (res.ok) {
-        setData(await res.json());
-        track("subscribe_toggle", { item_id: slug, plan: mode });
-      }
-    } catch {
-      // Network failure — the plan wasn't changed; cart state is unchanged.
-    } finally {
-      setUpdating(false);
-    }
+      })
+    );
   };
 
   return (
@@ -192,7 +193,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
         subtotal: data.subtotal,
         savings: data.savings,
         loading,
-        updating,
         refresh,
       }}
     >
