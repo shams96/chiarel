@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { products, isPurchasable } from "@/lib/products";
 import HeroIntro from "@/components/HeroIntro";
+import EmailSignup from "@/components/EmailSignup";
 import HomeHero from "@/components/home/HomeHero";
 import HomeRitual from "@/components/home/HomeRitual";
 import HomeFitGuidance from "@/components/home/HomeFitGuidance";
@@ -170,7 +171,9 @@ export default function Home() {
       <HomeBeyondRitual />
       <HomeFaq faqs={faqs} />
       <HomeFinalCta />
-      {/* Email-signup slot: place the signup component here. */}
+      <div className="mx-auto max-w-xl px-6 pb-10">
+        <EmailSignup source="home" />
+      </div>
 
       <p className="pb-10 pt-6 text-center text-[11px] text-ink/65">
         Written by{" "}
