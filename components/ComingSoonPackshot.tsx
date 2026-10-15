@@ -2,6 +2,7 @@
 
 import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { track } from "@/lib/analytics";
 
 /**
  * The Founding 100 capture card. Deliberately plain — no product color tint,
@@ -49,6 +50,7 @@ function ComingSoonPackshotInner({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, phone, social, referredBy, source }),
       });
+      if (res.ok) track("email_signup", { source });
       setStatus(res.ok ? "done" : "error");
     } catch {
       setStatus("error");

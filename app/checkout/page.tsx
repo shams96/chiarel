@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
+import { track } from "@/lib/analytics";
 import RefundPolicyContent, { REFUND_POLICY_VERSION } from "@/components/RefundPolicyContent";
 import { ENABLED_COUNTRIES, getCountry, approxConverted, type CountryCode } from "@/lib/countries";
 
@@ -24,6 +25,23 @@ export default function CheckoutPage() {
   const hasSubscription = lines.some((l) => l.mode !== "oneTime");
   const shipping = subtotal >= FREE_SHIP_THRESHOLD || subtotal === 0 ? 0 : 12;
   const total = subtotal + shipping;
+
+  // begin_checkout: once per visit to this page, as soon as the bag has items.
+  const beganCheckout = useRef(false);
+  useEffect(() => {
+    if (beganCheckout.current || lines.length === 0) return;
+    beganCheckout.current = true;
+    track("begin_checkout", {
+      currency: "USD",
+      value: subtotal,
+      items: lines.map((l) => ({
+        item_id: l.slug,
+        item_name: l.product.name,
+        price: l.unitPrice,
+        quantity: l.qty,
+      })),
+    });
+  }, [lines, subtotal]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -82,30 +100,8 @@ export default function CheckoutPage() {
       <h1 className="font-serif text-3xl">Complete your order</h1>
 
       <div className="mt-10 grid gap-14 lg:grid-cols-[1fr_400px]">
-        {/* Left: express + form */}
+        {/* Left: form. Payment is taken on Stripe's hosted Checkout page. */}
         <div>
-          <div className="grid grid-cols-3 gap-3">
-            {["Shop Pay", "PayPal", "Apple Pay"].map((m) => (
-              <button
-                key={m}
-                type="button"
-                disabled
-                title="Arriving with our Shopify boutique — pay by card below for now"
-                className="cursor-not-allowed border border-dashed border-ink/20 py-3 text-[12px] uppercase tracking-[0.14em] text-ink/40 opacity-60"
-              >
-                {m}
-                <span className="mt-1 block text-[9px] normal-case tracking-normal text-ink/45">
-                  Coming soon
-                </span>
-              </button>
-            ))}
-          </div>
-          <div className="my-8 flex items-center gap-4 text-[11px] uppercase tracking-[0.18em] text-ink/65">
-            <span className="h-px flex-1 bg-ink/10" />
-            Or pay by card
-            <span className="h-px flex-1 bg-ink/10" />
-          </div>
-
           <form className="space-y-5" onSubmit={handleSubmit}>
             <div>
               <label className="text-[11px] uppercase tracking-[0.16em] text-ink/65">

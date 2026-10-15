@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { QUESTIONS, scoreAxes, recommend } from "@/lib/skin-assessment";
 import { getProduct, getProductOrThrow } from "@/lib/products";
 import { useCart } from "@/lib/cart-context";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
+import { track } from "@/lib/analytics";
 
 export default function AssessmentPage() {
   const [step, setStep] = useState(0);
@@ -15,6 +16,15 @@ export default function AssessmentPage() {
 
   const done = step >= QUESTIONS.length;
   const q = QUESTIONS[step];
+
+  useEffect(() => {
+    if (!done) return;
+    track("assessment_complete", {
+      recommended: recommend(scoreAxes(answers)).recommendations.map((r) => r.slug),
+    });
+    // Fire once when the quiz completes, not on later answer-state changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [done]);
 
   const choose = (value: number) => {
     setAnswers((a) => ({ ...a, [q.id]: value }));

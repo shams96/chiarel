@@ -4,11 +4,12 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getProduct, products, ritualProducts, productImageAlt, isPurchasable, type Product } from "@/lib/products";
 import PurchaseOptions from "@/components/PurchaseOptions";
+import TrackViewItem from "@/components/TrackViewItem";
 import StickyPurchaseBar from "@/components/StickyPurchaseBar";
 import ProductGallery from "@/components/ProductGallery";
 import CellularHydrationCascade from "@/components/CellularHydrationCascade";
 import Reveal from "@/components/Reveal";
-import { productJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { productJsonLd, productPageTitle, breadcrumbJsonLd } from "@/lib/seo";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { productHoverClass } from "@/lib/motion";
 
@@ -52,7 +53,7 @@ export async function generateMetadata({
   const p = getProduct(slug);
   if (!p) return {};
   return {
-    title: `${p.name} — ${p.descriptor}`,
+    title: productPageTitle(p.name, p.descriptor),
     description: p.blurb,
     alternates: { canonical: `/shop/${p.slug}` },
     openGraph: { images: [{ url: p.image }] },
@@ -70,6 +71,9 @@ export default async function ProductPage({
 
   return (
     <div>
+      {isPurchasable(p) && (
+        <TrackViewItem slug={p.slug} name={p.name} price={p.price.oneTime} />
+      )}
       {/* No Product/Offer schema until a real, owner-approved price exists —
           publishing an Offer with a fabricated price would be inaccurate
           structured data. See CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §9. */}
@@ -111,7 +115,7 @@ export default async function ProductPage({
         <nav aria-label="Breadcrumb" className="mb-4 text-[11px] uppercase tracking-[0.14em] text-ink/65 md:mb-6">
           <ol className="flex items-center gap-2">
             <li>
-              <Link href="/shop" className="hover:text-ochre">Shop</Link>
+              <Link href="/shop" className="tap-area hover:text-ochre">Shop</Link>
             </li>
             <li aria-hidden="true">/</li>
             <li className="min-w-0 truncate text-ink" aria-current="page">{p.name}</li>

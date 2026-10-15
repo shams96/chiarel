@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/privacy" },
 };
 
-const EFFECTIVE_DATE = "August 23, 2026";
+const EFFECTIVE_DATE = "October 14, 2026";
 
 export default function PrivacyPage() {
   return (
@@ -26,7 +26,12 @@ export default function PrivacyPage() {
             When you place an order, we collect your name, email address,
             shipping address, and order contents in order to fulfill it. When
             you join our founding list, we collect your name, email, and any
-            phone or social handle you choose to provide. We do not collect
+            phone or social handle you choose to provide. If you join our
+            email list, we collect your email address, the date you agreed,
+            and the page you signed up on. We only email you if you tick the
+            consent box, and every message includes an unsubscribe link. If
+            we use an email service provider to send these messages, it
+            receives your email address for that purpose only. We do not collect
             or store your payment card details — those are handled entirely
             by our payment processor, Stripe (see below).
           </p>
@@ -37,9 +42,21 @@ export default function PrivacyPage() {
           <p className="mt-3">
             {SITE_NAME} uses a single first-party cookie to remember the
             contents of your shopping cart between visits. It is functional,
-            not used for advertising or cross-site tracking. We do not
-            currently use third-party analytics or advertising trackers on
-            this site; if that changes, we will update this policy.
+            not used for advertising or cross-site tracking.
+          </p>
+          <p className="mt-3">
+            Separately, we may use Google Analytics 4 (Google LLC) to measure
+            how the site is used, such as which pages are viewed, what is
+            added to the bag, and completed orders. It is off by default and
+            loads only if you choose Accept in the cookie banner. If you
+            accept, Google sets analytics cookies (named _ga and _ga_*) and
+            receives your usage data, which may be processed outside your
+            country. We do not use advertising features or share this data
+            for advertising, and the event data we send does not
+            include your name, email, or address. Declining has no effect on
+            your ability to browse or buy. Your choice is stored in your
+            browser&rsquo;s local storage, and you can change it at any time
+            with the &ldquo;Cookie settings&rdquo; link in the footer.
           </p>
         </section>
 

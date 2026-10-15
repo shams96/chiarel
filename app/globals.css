@@ -177,16 +177,64 @@ body::after {
   backdrop-filter: blur(12px);
 }
 
-/* Founding 100 announcement ticker */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+/* Founding 100 announcement bar — one message at a time. All messages share
+   one grid cell (so the bar is always as tall as the longest message wrapped
+   at the current width and nothing is clipped), and a 16s CSS-only cycle
+   cross-fades them in turn. Reduced motion: no cycle; every message is shown
+   at once as a wrapped, static line. */
+.ticker-rotor {
+  display: grid;
+  justify-items: center;
+  text-align: center;
 }
-.marquee-track {
-  animation: marquee 22s linear infinite;
+.ticker-msg {
+  grid-area: 1 / 1;
+  opacity: 0;
+  animation: ticker-cycle 16s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 4s);
 }
-.marquee-track:hover {
+.ticker-sep {
+  display: none;
+}
+@keyframes ticker-cycle {
+  0% { opacity: 0; }
+  4%, 22% { opacity: 1; }
+  26%, 100% { opacity: 0; }
+}
+a:hover .ticker-msg,
+a:focus-visible .ticker-msg {
   animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-rotor {
+    display: block;
+  }
+  .ticker-msg {
+    display: inline;
+    opacity: 1;
+    animation: none !important;
+  }
+  .ticker-sep {
+    display: inline;
+    margin: 0 0.5em;
+  }
+}
+
+/* Hit-area expansion: grows the tappable area to 44px without changing the
+   element's visual box or the layout around it. For elements whose
+   neighbours are >= 44px away (centre to centre); stacked lists use real
+   min-h padding instead so areas never overlap. */
+.tap-area {
+  position: relative;
+}
+.tap-area::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100%, 44px);
+  height: max(100%, 44px);
+  transform: translate(-50%, -50%);
 }
 
 /* Native <details> accordion — fades the answer in on open instead of a hard

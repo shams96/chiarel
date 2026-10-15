@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { isFounding100, founding100Pricing } from "@/lib/founding100";
 import { purchaseOptionSummary } from "@/lib/pricing";
+import { track } from "@/lib/analytics";
 
 type Tier = "ninetyDay" | "single" | "oneTime";
 
@@ -31,6 +32,10 @@ export default function PurchaseOptions({
   oneTime: number;
 }) {
   const [tier, setTier] = useState<Tier>("ninetyDay");
+  const chooseTier = (next: Tier) => {
+    if (next !== tier) track("subscribe_toggle", { item_id: slug, plan: next });
+    setTier(next);
+  };
   const { add } = useCart();
 
   const summary = purchaseOptionSummary(slug, subscription, oneTime);
@@ -91,7 +96,7 @@ export default function PurchaseOptions({
           type="button"
           role="radio"
           aria-checked={tier === "ninetyDay"}
-          onClick={() => setTier("ninetyDay")}
+          onClick={() => chooseTier("ninetyDay")}
           className={optionClass(tier === "ninetyDay")}
         >
           <span className="min-w-0">
@@ -114,7 +119,7 @@ export default function PurchaseOptions({
           type="button"
           role="radio"
           aria-checked={tier === "single"}
-          onClick={() => setTier("single")}
+          onClick={() => chooseTier("single")}
           className={optionClass(tier === "single")}
         >
           <span className="min-w-0">
@@ -142,7 +147,7 @@ export default function PurchaseOptions({
           type="button"
           role="radio"
           aria-checked={tier === "oneTime"}
-          onClick={() => setTier("oneTime")}
+          onClick={() => chooseTier("oneTime")}
           className={optionClass(tier === "oneTime")}
         >
           <span className="min-w-0">
@@ -171,7 +176,7 @@ export default function PurchaseOptions({
       {founding100 && tier === "ninetyDay" && (
         <p className="mt-3 text-[12px] leading-relaxed text-ink/65">
           20% off at checkout · ${founding100.credit} credited back — part of{" "}
-          <Link href="/founding-100" className="underline decoration-ink/30 hover:text-ochre">
+          <Link href="/founding-100" className="tap-area underline decoration-ink/30 hover:text-ochre">
             The Founding 100
           </Link>
         </p>
@@ -186,7 +191,7 @@ export default function PurchaseOptions({
           checkout.
         </li>
         <li>
-          <Link href="/terms#guarantee" className="text-ink underline decoration-ink/30 hover:text-ochre">
+          <Link href="/terms#guarantee" className="tap-area text-ink underline decoration-ink/30 hover:text-ochre">
             90-Day Guarantee
           </Link>{" "}
           on your first order: if you are not satisfied, we refund the product price in full. No
@@ -196,7 +201,7 @@ export default function PurchaseOptions({
           <li>
             Subscriptions renew every 45 days at the subscription price until paused or
             cancelled. To change or cancel, contact us as described in the{" "}
-            <Link href="/terms" className="underline decoration-ink/30 hover:text-ochre">
+            <Link href="/terms" className="tap-area underline decoration-ink/30 hover:text-ochre">
               terms
             </Link>
             .
@@ -204,7 +209,7 @@ export default function PurchaseOptions({
         )}
         <li>
           Complimentary samples with every order.{" "}
-          <Link href="/terms" className="underline decoration-ink/30 hover:text-ochre">
+          <Link href="/terms" className="tap-area underline decoration-ink/30 hover:text-ochre">
             Full shipping &amp; returns policy
           </Link>
         </li>
