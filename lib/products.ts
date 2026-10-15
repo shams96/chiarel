@@ -82,6 +82,22 @@ export type Product = {
    * (constitution: "honest gaps stay visible, not hidden").
    */
   euResponsiblePerson?: { name: string; address: string } | null;
+  /**
+   * Directions for use, one step per entry. Only present where every line is
+   * already published elsewhere on the site (see `howToUseSource`); the PDP
+   * renders its "How to use" section only when this exists.
+   */
+  howToUse?: string[];
+  /** Repo path(s) the `howToUse` lines were taken from, for audit. Not rendered. */
+  howToUseSource?: string;
+  /**
+   * Full consumer ingredient list (final legal INCI, label order). Deliberately
+   * absent for every product until the lab supplies final-label INCI: the
+   * Launch Formulas Register states its tables are internal formula-control
+   * records, not consumer label lists. The PDP renders "Full ingredient list"
+   * only when this exists.
+   */
+  ingredientsInci?: string;
 };
 
 export const products = data as Product[];

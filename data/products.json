@@ -129,7 +129,13 @@
     "launchRole": "preparation",
     "timeOfUse": "AM/PM",
     "launchStatus": "launch",
-    "productColorToken": "Peach Dust"
+    "productColorToken": "Peach Dust",
+    "howToUse": [
+      "Use a pea-sized amount.",
+      "Apply to slightly damp skin, morning and evening.",
+      "Pause 10–30 seconds before your moisturizer step."
+    ],
+    "howToUseSource": "app/science/application/page.tsx; app/journal/chiarel-ritual-guide/page.tsx"
   },
   {
     "slug": "terra-radiance-creme",
@@ -179,7 +185,13 @@
     "launchRole": "day-foundation",
     "timeOfUse": "AM",
     "launchStatus": "launch",
-    "productColorToken": "Red Ochre"
+    "productColorToken": "Red Ochre",
+    "howToUse": [
+      "Warm a small amount between your fingertips.",
+      "Press, don’t rub, onto slightly damp skin after CHIAREL Essence™.",
+      "Use in the morning."
+    ],
+    "howToUseSource": "app/science/application/page.tsx; app/journal/chiarel-ritual-guide/page.tsx"
   },
   {
     "slug": "recovery-masque",
@@ -229,7 +241,15 @@
     "launchRole": "night-treatment",
     "timeOfUse": "PM",
     "launchStatus": "launch",
-    "productColorToken": "Formal Garden"
+    "productColorToken": "Formal Garden",
+    "howToUse": [
+      "Use a small amount — approximately lentil-sized for the full face.",
+      "Warm thoroughly between your fingertips.",
+      "Press and smooth onto slightly damp skin after CHIAREL Essence™.",
+      "Allow 15–30 minutes for the film to integrate.",
+      "Use in the evening."
+    ],
+    "howToUseSource": "app/journal/chiarel-ritual-guide/page.tsx"
   },
   {
     "slug": "lip-concentrate",
@@ -379,7 +399,13 @@
     "launchRole": "hero",
     "timeOfUse": "PM",
     "launchStatus": "launch",
-    "productColorToken": "Formal Garden"
+    "productColorToken": "Formal Garden",
+    "howToUse": [
+      "Apply across the neck, jawline, décolleté, and upper chest.",
+      "Use upward, sweeping movements.",
+      "Use at night, as the closing step of the evening ritual."
+    ],
+    "howToUseSource": "app/shop/[slug]/page.tsx (N1HowToUse, pre-existing)"
   },
   {
     "slug": "eye-contour-concentrate",
@@ -413,6 +439,11 @@
     "launchRitualOrder": null,
     "launchRole": "standalone",
     "launchStatus": "launch",
-    "productColorToken": "Formal Garden"
+    "productColorToken": "Formal Garden",
+    "howToUse": [
+      "Apply nightly, after Recovery Masque™.",
+      "Use a light touch around the orbital bone — avoid the immediate lash line."
+    ],
+    "howToUseSource": "app/journal/chiarel-ritual-guide/page.tsx"
   }
 ]

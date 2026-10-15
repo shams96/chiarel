@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useCart } from "@/lib/cart-context";
+import { PURCHASE_CTA_ID } from "@/components/PurchaseOptions";
 
 export default function StickyPurchaseBar({
   slug,
@@ -17,10 +18,26 @@ export default function StickyPurchaseBar({
   subscriptionPrice: number;
 }) {
   const [visible, setVisible] = useState(false);
-  const { scrollY } = useScroll();
   const { add } = useCart();
 
-  useMotionValueEvent(scrollY, "change", (y) => setVisible(y > 620));
+  // Show the bar only once the page's own "Begin the Ritual" button has
+  // scrolled up out of view (not while it is on screen, and not before the
+  // visitor has reached it). Falls back to a scroll threshold if the button
+  // or IntersectionObserver is unavailable.
+  useEffect(() => {
+    const cta = document.getElementById(PURCHASE_CTA_ID);
+    if (!cta || typeof IntersectionObserver === "undefined") {
+      const onScroll = () => setVisible(window.scrollY > 620);
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      return () => window.removeEventListener("scroll", onScroll);
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      setVisible(!entry.isIntersecting && entry.boundingClientRect.top < 0);
+    });
+    observer.observe(cta);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <AnimatePresence>
@@ -38,8 +55,8 @@ export default function StickyPurchaseBar({
             </div>
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium">{name}</p>
-              <p className="text-[12px] text-ink/65">
-                ${subscriptionPrice} with subscription
+              <p className="truncate text-[12px] text-ink/65">
+                ${subscriptionPrice} / delivery · subscribe
               </p>
             </div>
             <button
