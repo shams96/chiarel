@@ -212,9 +212,9 @@
       "subscription": 118,
       "oneTime": 148
     },
-    "image": "/assets/products/recovery-masque-jar.png",
+    "image": "/assets/products/recovery-masque-jar.jpg",
     "gallery": [
-      { "src": "/assets/products/recovery-masque-jar.png", "alt": "Recovery Masque", "role": "hero" },
+      { "src": "/assets/products/recovery-masque-jar.jpg", "alt": "Recovery Masque", "role": "hero" },
       { "src": "/assets/products/recovery-masque-studio.jpg", "alt": "Recovery Masque held in soft studio light", "role": "application" }
     ],
     "blurb": "An overnight masque that strengthens and supports facial recovery while you rest — the evening ritual's face-recovery step, followed by N1 Neck & Décolleté Renewal Emulsion™.",
