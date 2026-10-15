@@ -146,8 +146,8 @@ export default function Header() {
       />
       <aside
         id="mobile-menu"
-        className={`cart-panel fixed right-0 top-0 z-[90] flex h-full w-full max-w-xs flex-col bg-ivory shadow-2xl transition-transform md:hidden ${
-          menuOpen ? "translate-x-0" : "translate-x-full"
+        className={`cart-panel fixed right-0 top-0 z-[90] flex h-full w-full max-w-xs flex-col bg-ivory transition-transform md:hidden ${
+          menuOpen ? "translate-x-0 shadow-2xl" : "translate-x-full"
         }`}
       >
         <div className="flex items-center justify-between border-b border-ink/10 px-6 py-5">
