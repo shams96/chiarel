@@ -51,6 +51,6 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
     });
   }
 
-  const updated = await getCartWithTotals();
+  const updated = await getCartWithTotals(cart);
   return NextResponse.json(updated, { status: 201 });
 });
