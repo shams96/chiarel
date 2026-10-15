@@ -25,6 +25,10 @@ function getTransport() {
     port: Number(port),
     secure: Number(port) === 465,
     auth: { user, pass },
+    // A hung SMTP server must not hold a socket and timer open for minutes.
+    connectionTimeout: 10_000,
+    greetingTimeout: 10_000,
+    socketTimeout: 15_000,
   });
 }
 

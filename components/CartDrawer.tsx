@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { ritualProducts } from "@/lib/products";
+import { shippingFor, shippingNote } from "@/lib/shipping";
 
 const modeLabel: Record<string, string> = {
   ninetyDay: "The Ritual Plan · 90-day supply, one delivery",
@@ -11,17 +12,10 @@ const modeLabel: Record<string, string> = {
   oneTime: "One-time purchase",
 };
 
-// Keep in sync with FREE_SHIP_THRESHOLD / the $12 shipping charge in
-// app/api/checkout/route.ts — this only estimates the checkout-button total,
-// the API route is the actual source of truth for what gets charged.
-const FREE_SHIP_THRESHOLD = 150;
-const SHIPPING_COST = 12;
-
 export default function CartDrawer() {
   const { lines, add, remove, setQty, isOpen, close, subtotal, savings } = useCart();
-  const remainingForShipping = Math.max(0, FREE_SHIP_THRESHOLD - subtotal);
-  const estimatedTotal =
-    subtotal + (subtotal >= FREE_SHIP_THRESHOLD ? 0 : SHIPPING_COST);
+  const shipping = shippingFor(subtotal, lines);
+  const estimatedTotal = subtotal + shipping;
   const savingsPercent =
     savings > 0 ? Math.round((savings / (subtotal + savings)) * 100) : 0;
   const nextStep = ritualProducts.find(
@@ -45,7 +39,7 @@ export default function CartDrawer() {
           <p className="font-serif text-xl">Your Ritual Bag</p>
           <button
             onClick={close}
-            aria-label="Close cart"
+            aria-label="Close bag"
             className="btn-press -mr-3 flex h-11 w-11 items-center justify-center text-xl text-ink/65 hover:text-ink"
           >
             ×
@@ -66,15 +60,9 @@ export default function CartDrawer() {
         ) : (
           <>
             <div className="flex-1 overflow-y-auto px-6 py-4">
-              {remainingForShipping > 0 ? (
-                <p className="mb-4 text-[12px] text-ink/60">
-                  Add ${remainingForShipping} more for complimentary shipping.
-                </p>
-              ) : (
-                <p className="mb-4 text-[12px] text-ochre">
-                  Complimentary shipping unlocked.
-                </p>
-              )}
+              <p className={`mb-4 text-[12px] ${shipping === 0 ? "text-ochre" : "text-ink/60"}`}>
+                {shippingNote(subtotal, lines)}
+              </p>
               <ul className="space-y-5">
                 {lines.map((line) => (
                   <li key={line.slug} className="flex gap-4">
@@ -124,7 +112,8 @@ export default function CartDrawer() {
                           onClick={() => remove(line.slug)}
                           className="tap-area text-[11px] uppercase tracking-[0.14em] text-ink/65 hover:text-ochre"
                         >
-                          Remove
+                          <span aria-hidden="true">Remove</span>
+                          <span className="sr-only">Remove {line.product.name}</span>
                         </button>
                       </div>
                     </div>
@@ -182,9 +171,19 @@ export default function CartDrawer() {
                 <span>Subtotal</span>
                 <span className="font-serif text-xl">${subtotal}</span>
               </p>
-              <p className="mb-3 text-center text-[11px] uppercase tracking-[0.14em] text-ink/65">
-                Customer-tested · every active disclosed
-              </p>
+              {/* N1 has no testing or full disclosure yet (see its product page), so the line is not shown for a bag that contains it. */}
+              {!lines.some((l) => l.slug === "n1-neck-decollete") && (
+                <p className="mb-3 text-center text-[11px] uppercase tracking-[0.14em] text-ink/65">
+                  Customer-tested · every active disclosed
+                </p>
+              )}
+              <Link
+                href="/cart"
+                onClick={close}
+                className="flex min-h-[44px] items-center justify-center text-center text-[11px] uppercase tracking-[0.14em] text-ink/80 underline decoration-ink/30 underline-offset-2 hover:text-ochre"
+              >
+                View bag
+              </Link>
               <Link
                 href="/terms#guarantee"
                 onClick={close}

@@ -150,6 +150,31 @@ describe("cart: pricing rules", () => {
   });
 });
 
+describe("cart: changing a line's plan (PATCH mode)", () => {
+  it("sets the plan and keeps the quantity", async () => {
+    await post({ slug: "chiarel-essence", mode: "subscription" });
+    await post({ slug: "chiarel-essence", mode: "subscription" });
+    const res = await patch(state.items[0].id, { mode: "oneTime" });
+    expect(res.status).toBe(200);
+    expect(state.items[0]).toMatchObject({ mode: "oneTime", qty: 2 });
+  });
+
+  it("is idempotent: asking for the plan the line already has changes nothing", async () => {
+    await post({ slug: "chiarel-essence", mode: "oneTime" });
+    await patch(state.items[0].id, { mode: "oneTime" });
+    await patch(state.items[0].id, { mode: "oneTime" });
+    expect(state.items[0]).toMatchObject({ mode: "oneTime", qty: 1 });
+  });
+
+  it("rejects an unknown plan and another shopper's line", async () => {
+    await post({ slug: "chiarel-essence", mode: "oneTime" });
+    expect((await patch(state.items[0].id, { mode: "free" })).status).toBe(400);
+    state.items.push({ id: "theirs", cartId: "cart_other", productSlug: "chiarel-essence", mode: "oneTime", qty: 1 });
+    expect((await patch("theirs", { mode: "subscription" })).status).toBe(404);
+    expect(state.items.find((i) => i.id === "theirs")!.mode).toBe("oneTime");
+  });
+});
+
 describe("cart: ownership", () => {
   it("creates a cart when the cookie is missing", async () => {
     state.cookie = undefined;

@@ -42,6 +42,8 @@ type CartContextValue = {
   add: (slug: string, mode: CartMode) => Promise<void>;
   remove: (slug: string) => Promise<void>;
   setQty: (lineId: string, qty: number) => Promise<void>;
+  /** Switches a line to another plan, keeping its quantity. Unlike add(), it does not open the drawer. */
+  changePlan: (slug: string, mode: CartMode) => Promise<void>;
   isOpen: boolean;
   open: () => void;
   close: () => void;
@@ -49,6 +51,8 @@ type CartContextValue = {
   subtotal: number;
   savings: number;
   loading: boolean;
+  /** True while a quantity or plan change is in flight; controls should be disabled. */
+  updating: boolean;
   /** Re-syncs client state with the server cart — call after any change the
       add/remove helpers didn't make directly, e.g. after checkout clears the
       cart server-side, so the header/drawer don't keep showing stale counts. */
@@ -66,6 +70,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   });
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [updating, setUpdating] = useState(false);
 
   // Every fetch below is wrapped in try/catch: `fetch` itself rejects (not
   // just resolves with a non-ok response) on a real network failure — a
@@ -124,7 +129,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
 
   const setQty: CartContextValue["setQty"] = async (lineId, qty) => {
-    if (qty < 1) return;
+    if (qty < 1 || updating) return;
+    setUpdating(true);
     try {
       const res = await fetch(`/api/cart/${lineId}`, {
         method: "PATCH",
@@ -134,6 +140,31 @@ export function CartProvider({ children }: { children: ReactNode }) {
       if (res.ok) setData(await res.json());
     } catch {
       // Network failure — the quantity wasn't changed; cart state is unchanged.
+    } finally {
+      setUpdating(false);
+    }
+  };
+
+  const changePlan: CartContextValue["changePlan"] = async (slug, mode) => {
+    const line = data.lines.find((l) => l.slug === slug);
+    if (!line || line.mode === mode || updating) return;
+    setUpdating(true);
+    try {
+      // PATCH sets the plan outright (idempotent); POST would add a unit if a
+      // stale client asked for the plan the server already holds.
+      const res = await fetch(`/api/cart/${line.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mode }),
+      });
+      if (res.ok) {
+        setData(await res.json());
+        track("subscribe_toggle", { item_id: slug, plan: mode });
+      }
+    } catch {
+      // Network failure — the plan wasn't changed; cart state is unchanged.
+    } finally {
+      setUpdating(false);
     }
   };
 
@@ -144,6 +175,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         add,
         remove,
         setQty,
+        changePlan,
         isOpen,
         open: () => setIsOpen(true),
         close: () => setIsOpen(false),
@@ -151,6 +183,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         subtotal: data.subtotal,
         savings: data.savings,
         loading,
+        updating,
         refresh,
       }}
     >

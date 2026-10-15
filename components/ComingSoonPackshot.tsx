@@ -86,9 +86,7 @@ function ComingSoonPackshotInner({
           You&rsquo;re on the list — welcome to the House.
         </p>
         <p className="max-w-xs text-[13px] leading-relaxed text-ink/60">
-          Know someone who&rsquo;d love this? Send them your link — if they
-          join, it helps both of you stand out as founding voices of the
-          House.
+          Know someone who&rsquo;d love this? Share your link with them.
         </p>
         <button
           onClick={handleShare}
@@ -111,24 +109,33 @@ function ComingSoonPackshotInner({
         </p>
       )}
       <div className="grid gap-3 sm:grid-cols-2">
+        <label htmlFor="founding-first-name" className="sr-only">First name</label>
         <input
+          id="founding-first-name"
           type="text"
+          autoComplete="given-name"
           required
           placeholder="First name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/65 focus:border-ochre focus:outline-none"
         />
+        <label htmlFor="founding-email" className="sr-only">Email</label>
         <input
+          id="founding-email"
           type="email"
+          autoComplete="email"
           required
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/65 focus:border-ochre focus:outline-none"
         />
+        <label htmlFor="founding-phone" className="sr-only">Phone (optional)</label>
         <input
+          id="founding-phone"
           type="tel"
+          autoComplete="tel"
           placeholder="Phone (optional)"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
@@ -140,7 +147,7 @@ function ComingSoonPackshotInner({
         disabled={status === "loading"}
         className="btn-press mt-3 w-full bg-ink py-4 text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre disabled:cursor-wait disabled:opacity-60"
       >
-        {status === "loading" ? "Claiming your place…" : "Claim your place"}
+        {status === "loading" ? "Joining the list…" : "Join the list"}
       </button>
       {status === "error" && (
         <p className="mt-2 text-[12px] text-ochre" role="alert">
