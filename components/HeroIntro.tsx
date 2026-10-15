@@ -45,7 +45,8 @@ import { motion, useReducedMotion } from "framer-motion";
 // that trade favors the "never repeats" guarantee over completeness.
 const SESSION_FLAG = "chiarel-hero-intro-v6-seen";
 
-const HOLD_MS = 3900; // time from mount to the start of the exit fade
+const T = 0.6; // timeline scale: whole sequence runs at 60% of authored length (4.2s -> ~2.5s) so it never holds the hero CTA hostage
+const HOLD_MS = Math.round(3900 * T); // time from mount to the start of the exit fade
 const EXIT_MS = 300; // overlay fade-out duration
 
 // useLayoutEffect warns "does nothing on the server" during Next.js SSR;
@@ -128,9 +129,16 @@ export default function HeroIntro() {
     // exit-complete or unmount so a fast route change never leaves the
     // page stuck unscrollable.
     const previousOverflow = document.body.style.overflow;
+    const previousPaddingRight = document.body.style.paddingRight;
+    // Hiding overflow removes a classic (non-overlay) scrollbar, which
+    // widens the layout and re-wraps the hero text when it comes back —
+    // a layout shift. Pad by the scrollbar width so the layout stays put.
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = "hidden";
+    if (scrollbarWidth > 0) document.body.style.paddingRight = `${scrollbarWidth}px`;
     return () => {
       document.body.style.overflow = previousOverflow;
+      document.body.style.paddingRight = previousPaddingRight;
     };
   }, [phase]);
 
@@ -214,7 +222,7 @@ export default function HeroIntro() {
             aria-hidden="true"
             initial={{ x: "-140%", opacity: 0 }}
             animate={{ x: "240%", opacity: [0, 0.75, 0.75, 0] }}
-            transition={{ duration: 1.5, delay: 0.1, ease: [0.16, 1, 0.3, 1], times: [0, 0.3, 0.7, 1] }}
+            transition={{ duration: 1.5 * T, delay: 0.1 * T, ease: [0.16, 1, 0.3, 1], times: [0, 0.3, 0.7, 1] }}
             className="absolute top-0 h-full w-1/3 -skew-x-12"
             style={{
               background: "linear-gradient(90deg, transparent, rgba(155,71,34,0.4), rgba(214,197,160,0.55), transparent)",
@@ -225,7 +233,7 @@ export default function HeroIntro() {
             aria-hidden="true"
             initial={{ x: "-140%", opacity: 0 }}
             animate={{ x: "240%", opacity: [0, 1, 1, 0] }}
-            transition={{ duration: 1.5, delay: 0.1, ease: [0.16, 1, 0.3, 1], times: [0, 0.3, 0.7, 1] }}
+            transition={{ duration: 1.5 * T, delay: 0.1 * T, ease: [0.16, 1, 0.3, 1], times: [0, 0.3, 0.7, 1] }}
             className="absolute top-0 h-full w-[3px] -skew-x-12"
             style={{
               background: "linear-gradient(180deg, transparent 10%, #F3E6C8 50%, transparent 90%)",
@@ -240,7 +248,7 @@ export default function HeroIntro() {
             aria-hidden="true"
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: [0, 0.35, 0.35, 0.15], scale: 1 }}
-            transition={{ duration: 1.5, delay: 0.85, times: [0, 0.2, 0.82, 1], ease: "easeOut" }}
+            transition={{ duration: 1.5 * T, delay: 0.85 * T, times: [0, 0.2, 0.82, 1], ease: "easeOut" }}
             className="absolute h-24 w-24 rounded-full"
             style={{ background: "radial-gradient(circle, rgba(155,71,34,0.4) 0%, transparent 70%)" }}
           />
@@ -252,7 +260,7 @@ export default function HeroIntro() {
             aria-hidden="true"
             initial={{ opacity: 0, scaleX: 0.6 }}
             animate={{ opacity: 0.6, scaleX: 1 }}
-            transition={{ duration: 0.3, delay: 1.1, ease: "easeOut" }}
+            transition={{ duration: 0.3 * T, delay: 1.1 * T, ease: "easeOut" }}
             className="absolute h-px w-44 md:w-64"
             style={{ background: "linear-gradient(90deg, transparent, rgba(214,197,160,0.9), transparent)" }}
           />
@@ -267,8 +275,8 @@ export default function HeroIntro() {
             initial={{ y: -130, opacity: 1 }}
             animate={{ y: 0, opacity: [1, 1, 0] }}
             transition={{
-              duration: 0.85,
-              delay: 1.3,
+              duration: 0.85 * T,
+              delay: 1.3 * T,
               times: [0, 0.92, 1],
               ease: [0.6, 0, 0.85, 0.3],
             }}
@@ -301,7 +309,7 @@ export default function HeroIntro() {
               cy="100"
               initial={{ r: 4, opacity: 0 }}
               animate={{ r: 62, opacity: [0, 0.28, 0] }}
-              transition={{ duration: 0.9, delay: 2.15, times: [0, 0.3, 1], ease: "easeOut" }}
+              transition={{ duration: 0.9 * T, delay: 2.15 * T, times: [0, 0.3, 1], ease: "easeOut" }}
               fill="#9B4722"
             />
             {/* ring 1 — leading edge, strongest */}
@@ -310,7 +318,7 @@ export default function HeroIntro() {
               cy="100"
               initial={{ r: 3, opacity: 0.9 }}
               animate={{ r: 92, opacity: [0.9, 0.9, 0] }}
-              transition={{ duration: 0.85, delay: 2.15, times: [0, 0.35, 1], ease: "easeOut" }}
+              transition={{ duration: 0.85 * T, delay: 2.15 * T, times: [0, 0.35, 1], ease: "easeOut" }}
               fill="none"
               stroke="#9B4722"
               strokeWidth="2.5"
@@ -321,7 +329,7 @@ export default function HeroIntro() {
               cy="100"
               initial={{ r: 3, opacity: 0.7 }}
               animate={{ r: 74, opacity: [0.7, 0.7, 0] }}
-              transition={{ duration: 0.8, delay: 2.28, times: [0, 0.35, 1], ease: "easeOut" }}
+              transition={{ duration: 0.8 * T, delay: 2.28 * T, times: [0, 0.35, 1], ease: "easeOut" }}
               fill="none"
               stroke="#9B4722"
               strokeWidth="1.75"
@@ -332,7 +340,7 @@ export default function HeroIntro() {
               cy="100"
               initial={{ r: 3, opacity: 0.55 }}
               animate={{ r: 54, opacity: [0.55, 0.55, 0] }}
-              transition={{ duration: 0.75, delay: 2.4, times: [0, 0.35, 1], ease: "easeOut" }}
+              transition={{ duration: 0.75 * T, delay: 2.4 * T, times: [0, 0.35, 1], ease: "easeOut" }}
               fill="none"
               stroke="#D6C5A0"
               strokeWidth="1.25"
@@ -351,7 +359,7 @@ export default function HeroIntro() {
             aria-hidden="true"
             initial={{ opacity: 0, scaleX: 0.3, rotate: -8 }}
             animate={{ opacity: [0, 1, 0], scaleX: [0.3, 1.4, 1.1] }}
-            transition={{ duration: 0.3, delay: 2.23, ease: "easeOut" }}
+            transition={{ duration: 0.3 * T, delay: 2.23 * T, ease: "easeOut" }}
             className="absolute h-px w-24 rounded-full"
             style={{
               background: "linear-gradient(90deg, transparent, #F3E6C8, transparent)",
@@ -365,7 +373,7 @@ export default function HeroIntro() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.4, delay: 2.95 }}
+              transition={{ duration: 0.4 * T, delay: 2.95 * T }}
               className="flex flex-col items-center leading-none"
             >
               <span className="font-serif text-3xl tracking-[0.35em] text-ink md:text-4xl">
@@ -379,7 +387,7 @@ export default function HeroIntro() {
             <motion.p
               initial={{ y: 12, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.4, delay: 3.15, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.4 * T, delay: 3.15 * T, ease: [0.16, 1, 0.3, 1] }}
               className="mt-6 font-serif text-xl tracking-[-0.01em] text-ink/80 md:text-2xl"
             >
               Advancing Cellular Clarity™
@@ -388,7 +396,7 @@ export default function HeroIntro() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.35, delay: 3.35 }}
+              transition={{ duration: 0.35 * T, delay: 3.35 * T }}
               className="mt-4 max-w-xs text-[12px] leading-relaxed text-ink/60"
             >
               Intelligent formulations, precision-made in Isola del Liri, Italy.
@@ -403,7 +411,7 @@ export default function HeroIntro() {
             aria-hidden="true"
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 0.5, scale: 1 }}
-            transition={{ duration: 0.45, delay: 3.4, ease: "easeOut" }}
+            transition={{ duration: 0.45 * T, delay: 3.4 * T, ease: "easeOut" }}
             className="pointer-events-none absolute right-[12%] top-1/2 h-40 w-40 -translate-y-1/2 rounded-full md:h-56 md:w-56"
             style={{
               background: "radial-gradient(circle, rgba(214,197,160,0.45) 0%, rgba(214,197,160,0) 72%)",
@@ -420,7 +428,7 @@ export default function HeroIntro() {
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.3, delay: 0.6 }}
+            transition={{ duration: 0.3 * T, delay: 0.6 * T }}
             aria-label="Skip intro animation"
             className="absolute bottom-8 right-8 text-[10px] uppercase tracking-[0.3em] text-ink/65 transition hover:text-ochre focus:text-ochre focus:outline focus:outline-1 focus:outline-offset-4 focus:outline-ochre"
           >
