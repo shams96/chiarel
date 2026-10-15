@@ -66,8 +66,8 @@ function ComingSoonPackshotInner({
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "The Founding 100 — CHIAREL",
-          text: "Half price, full refund when you share your result. Only 100 places.",
+          title: "The Founding Members — CHIAREL",
+          text: "One hundred numbered places, with early access to every new CHIAREL formula.",
           url: shareUrl,
         });
         return;

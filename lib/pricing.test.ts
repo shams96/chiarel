@@ -1,6 +1,5 @@
 import { describe, it, expect } from "vitest";
 import { computeUnitPrice, computeLineSavings } from "./pricing";
-import { totalFounding100Credit } from "./founding100";
 
 // Pricing math is the highest-cost place for a silent bug on this site — a
 // wrong number here means every order at that tier is mispriced, and
@@ -28,13 +27,8 @@ describe("computeUnitPrice", () => {
     }
   });
 
-  it("applies the real Founding 100 20% discount for enrolled slugs, not the flat 2x", () => {
-    // N1's real bug this pins: the sitewide "90-day ritual, half price" banner
-    // promised a discount that N1's own Ritual Plan never actually applied.
-    expect(computeUnitPrice(118, 138, "ninetyDay", "n1-neck-decollete")).toBe(189); // round(236*0.8)
-  });
-
-  it("does not apply the Founding 100 discount to a non-enrolled product", () => {
+  it("charges the flat 2x for every product, with no founders discount", () => {
+    expect(computeUnitPrice(118, 138, "ninetyDay", "n1-neck-decollete")).toBe(236);
     expect(computeUnitPrice(151, 189, "ninetyDay", "chiarel-essence")).toBe(302);
   });
 
@@ -65,32 +59,5 @@ describe("computeLineSavings", () => {
   it("scales linearly with quantity", () => {
     const unit = computeUnitPrice(151, 189, "subscription");
     expect(computeLineSavings(189, unit, "subscription", 3)).toBe(38 * 3);
-  });
-});
-
-describe("totalFounding100Credit", () => {
-  const priceFor = (slug: string) => (slug === "n1-neck-decollete" ? 118 : 151);
-
-  it("owes credit for an enrolled product in ninetyDay mode", () => {
-    const lines = [{ slug: "n1-neck-decollete", mode: "ninetyDay", qty: 1 }];
-    expect(totalFounding100Credit(lines, priceFor)).toBe(47); // round(round(236*0.8)*0.25)
-  });
-
-  it("owes nothing for a non-enrolled product", () => {
-    const lines = [{ slug: "chiarel-essence", mode: "ninetyDay", qty: 1 }];
-    expect(totalFounding100Credit(lines, priceFor)).toBe(0);
-  });
-
-  it("owes nothing for an enrolled product NOT in ninetyDay mode", () => {
-    const lines = [{ slug: "n1-neck-decollete", mode: "subscription", qty: 1 }];
-    expect(totalFounding100Credit(lines, priceFor)).toBe(0);
-  });
-
-  it("scales with quantity and sums across multiple lines", () => {
-    const lines = [
-      { slug: "n1-neck-decollete", mode: "ninetyDay", qty: 2 },
-      { slug: "chiarel-essence", mode: "ninetyDay", qty: 1 }, // not enrolled, ignored
-    ];
-    expect(totalFounding100Credit(lines, priceFor)).toBe(47 * 2);
   });
 });

@@ -22,12 +22,9 @@ const nav = [
 // don't need their own keys.
 /* eslint-disable react/jsx-key */
 const tickerMessages = [
-  <>
-    <span className="text-ochre">Hurry</span> — the Founding 100 is closing fast
-  </>,
-  "The 90-Day Ritual, half price. We return the rest.",
-  "Only 100 places, then it’s gone",
-  <span className="text-ochre">See the terms →</span>,
+  "The Founding Members: one hundred numbered places",
+  "Early access to every new CHIAREL formula",
+  <span className="text-ochre">Learn more →</span>,
 ];
 /* eslint-enable react/jsx-key */
 
@@ -64,7 +61,7 @@ export default function Header() {
       {showFounding100Ticker && (
         <Link
           href="/founding-100"
-          aria-label="The Founding 100 is open — the 90-Day Ritual at half price. Complete it and we return the rest. See the terms."
+          aria-label="The Founding Members: one hundred numbered places, with early access to every new formula. Learn more."
           className="relative flex min-h-[44px] items-center justify-center gap-3 overflow-hidden border-b border-champagne/30 bg-ink px-4 py-2 text-champagne transition hover:bg-ink/90"
         >
           <span className="relative flex h-2 w-2 shrink-0">

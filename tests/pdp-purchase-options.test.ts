@@ -10,10 +10,10 @@ describe("purchaseOptionSummary (PDP purchase box)", () => {
     expect(s.oneTime).toEqual({ price: 189 });
   });
 
-  it("Founding 100 products use the real 20%-off checkout total, not the flat 2x", () => {
+  it("N1 gets the same flat Ritual Plan as every product, with no founders discount", () => {
     const s = purchaseOptionSummary("n1-neck-decollete", 118, 138);
-    expect(s.ritual.total).toBe(189); // round(236 * 0.8)
-    expect(s.ritual.saving).toBe(87); // 276 - 189
+    expect(s.ritual.total).toBe(236); // 2 x 118
+    expect(s.ritual.saving).toBe(40); // 276 - 236
     expect(s.subscription.saving).toBe(20);
   });
 
