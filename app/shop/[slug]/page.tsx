@@ -728,7 +728,7 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
     return (
       <div>
         <p className="text-[11px] uppercase tracking-[0.16em] text-ink/65">{label}</p>
-        <div className="mt-3 flex flex-wrap items-center gap-2">
+        <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-6">
           {route.map((slug, i) => {
             const item = getProduct(slug);
             if (!item) return null;
@@ -742,7 +742,7 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
                 ) : (
                   <Link
                     href={`/shop/${slug}`}
-                    className="text-sm text-ink/70 hover:text-ochre"
+                    className="tap-area text-sm text-ink/70 hover:text-ochre"
                   >
                     {item.name}
                   </Link>

@@ -237,6 +237,29 @@ a:focus-visible .ticker-msg {
   transform: translate(-50%, -50%);
 }
 
+/* Standalone underlined text links (the "Read the journal ->" style) get the same
+   invisible 44px hit area as .tap-area, so the fix does not have to be repeated on
+   every link. Anchors only: it never changes the visible size or layout. */
+a.border-b,
+a.underline {
+  position: relative;
+}
+a.border-b::after,
+a.underline::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100%, 44px);
+  height: max(100%, 44px);
+  transform: translate(-50%, -50%);
+}
+
+/* FAQ / accordion rows: the whole row is the control, so it is at least 44px tall. */
+summary.list-none {
+  min-height: 44px;
+}
+
 /* Native <details> accordion — fades the answer in on open instead of a hard
    snap (display:none → block is a discrete property, so it needs
    `allow-discrete` + @starting-style rather than a plain transition).
