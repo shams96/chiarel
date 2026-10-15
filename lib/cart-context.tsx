@@ -9,6 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import { computeUnitPrice, type CartMode } from "@/lib/pricing";
+import { track } from "@/lib/analytics";
 
 export type { CartMode };
 
@@ -93,7 +94,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ slug, mode }),
       });
-      if (res.ok) setData(await res.json());
+      if (res.ok) {
+        const next: CartApiResponse = await res.json();
+        setData(next);
+        const line = next.lines.find((l) => l.slug === slug && l.mode === mode);
+        if (line) {
+          track("add_to_cart", {
+            currency: "USD",
+            value: line.unitPrice,
+            items: [{ item_id: slug, item_name: line.product.name, price: line.unitPrice, quantity: 1 }],
+          });
+        }
+      }
       setIsOpen(true);
     } catch {
       // Network failure — the item wasn't added; cart state is unchanged.

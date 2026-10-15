@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
+import { track } from "@/lib/analytics";
 import RefundPolicyContent, { REFUND_POLICY_VERSION } from "@/components/RefundPolicyContent";
 import { ENABLED_COUNTRIES, getCountry, approxConverted, type CountryCode } from "@/lib/countries";
 
@@ -24,6 +25,23 @@ export default function CheckoutPage() {
   const hasSubscription = lines.some((l) => l.mode !== "oneTime");
   const shipping = subtotal >= FREE_SHIP_THRESHOLD || subtotal === 0 ? 0 : 12;
   const total = subtotal + shipping;
+
+  // begin_checkout: once per visit to this page, as soon as the bag has items.
+  const beganCheckout = useRef(false);
+  useEffect(() => {
+    if (beganCheckout.current || lines.length === 0) return;
+    beganCheckout.current = true;
+    track("begin_checkout", {
+      currency: "USD",
+      value: subtotal,
+      items: lines.map((l) => ({
+        item_id: l.slug,
+        item_name: l.product.name,
+        price: l.unitPrice,
+        quantity: l.qty,
+      })),
+    });
+  }, [lines, subtotal]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

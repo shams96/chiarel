@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getProduct, products, ritualProducts, productImageAlt, isPurchasable, type Product } from "@/lib/products";
 import PurchaseOptions from "@/components/PurchaseOptions";
+import TrackViewItem from "@/components/TrackViewItem";
 import StickyPurchaseBar from "@/components/StickyPurchaseBar";
 import ProductGallery from "@/components/ProductGallery";
 import CellularHydrationCascade from "@/components/CellularHydrationCascade";
@@ -70,6 +71,9 @@ export default async function ProductPage({
 
   return (
     <div>
+      {isPurchasable(p) && (
+        <TrackViewItem slug={p.slug} name={p.name} price={p.price.oneTime} />
+      )}
       {/* No Product/Offer schema until a real, owner-approved price exists —
           publishing an Offer with a fabricated price would be inaccurate
           structured data. See CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §9. */}
