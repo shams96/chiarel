@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import CookieSettingsLink from "@/components/CookieSettingsLink";
+import EmailSignup from "@/components/EmailSignup";
 
 const trustBadges = [
   "Complimentary shipping at $150",
@@ -98,6 +99,10 @@ export default function Footer() {
                 </div>
               ))}
             </nav>
+
+            <div className="relative z-10 mt-10">
+              <EmailSignup variant="footer" source="footer" />
+            </div>
 
             <ul className="relative z-10 mt-10 flex flex-wrap gap-x-6 gap-y-2 border-t border-cloud/15 pt-6 text-[10px] uppercase tracking-[0.12em] text-cloud/65">
               {trustBadges.map((badge) => (

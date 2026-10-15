@@ -16,7 +16,7 @@ type Props = {
 
 type Status = "idle" | "loading" | "success" | "error";
 
-export default function EmailSignup({
+function EmailSignupForm({
   variant = "inline",
   source,
   heading = "Be first to know",
@@ -142,4 +142,12 @@ export default function EmailSignup({
       )}
     </section>
   );
+}
+
+// Hidden until NEXT_PUBLIC_EMAIL_SIGNUP=on is set at build time. The
+// EmailSubscriber table must exist in production first (prisma migrate
+// deploy, see .env.example); until then the form would only show an error.
+export default function EmailSignup(props: Props) {
+  if (process.env.NEXT_PUBLIC_EMAIL_SIGNUP !== "on") return null;
+  return <EmailSignupForm {...props} />;
 }
