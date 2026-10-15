@@ -31,13 +31,22 @@ const tickerMessages = [
 ];
 /* eslint-enable react/jsx-key */
 
-function TickerHalf() {
+// One message at a time (CSS cross-fade, see .ticker-rotor in globals.css);
+// wraps instead of clipping on narrow screens. Under reduced motion every
+// message shows at once, separated by the dots.
+function Ticker() {
   return (
-    <span className="flex shrink-0 items-center text-[11px] font-medium uppercase tracking-[0.16em]">
+    <span className="ticker-rotor text-[11px] font-medium uppercase leading-snug tracking-[0.16em]">
       {tickerMessages.map((msg, i) => (
-        <span key={i} className="flex items-center gap-3 px-3">
+        <span
+          key={i}
+          className="ticker-msg"
+          style={{ "--i": i } as React.CSSProperties}
+        >
           {msg}
-          <span className="text-champagne/40">·</span>
+          {i < tickerMessages.length - 1 && (
+            <span className="ticker-sep text-champagne/40" aria-hidden="true">·</span>
+          )}
         </span>
       ))}
     </span>
@@ -56,22 +65,17 @@ export default function Header() {
         <Link
           href="/founding-100"
           aria-label="The Founding 100 is open — the 90-Day Ritual at half price. Complete it and we return the rest. See the terms."
-          className="relative flex items-center gap-2 overflow-hidden whitespace-nowrap border-b border-champagne/30 bg-ink py-2.5 text-champagne transition hover:bg-ink/90"
+          className="relative flex min-h-[44px] items-center justify-center gap-3 overflow-hidden border-b border-champagne/30 bg-ink px-4 py-2 text-champagne transition hover:bg-ink/90"
         >
-          <span className="ml-4 flex shrink-0 items-center gap-1.5">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ochre opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-ochre" />
-            </span>
+          <span className="relative flex h-2 w-2 shrink-0">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ochre opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-ochre" />
           </span>
-          <div className="marquee-track flex w-max">
-            <TickerHalf />
-            <TickerHalf />
-          </div>
+          <Ticker />
         </Link>
       )}
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex flex-col leading-none">
+        <Link href="/" className="flex min-h-[44px] flex-col justify-center leading-none">
           <span className="font-serif text-2xl tracking-[0.35em] text-ink">
             CHIAREL
           </span>
@@ -79,22 +83,29 @@ export default function Header() {
             The House of Clarity™
           </span>
         </Link>
-        <nav className="hidden gap-7 md:flex">
+        <nav className="hidden gap-3 md:flex">
           {nav.map((n) => (
             <Link
               key={n.href}
               href={n.href}
-              className="text-[12px] uppercase tracking-[0.18em] text-ink/80 transition hover:text-ochre"
+              className="inline-flex min-h-[44px] items-center px-2 text-[12px] uppercase tracking-[0.18em] text-ink/80 transition hover:text-ochre"
             >
               {n.label}
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-1 sm:gap-3">
+          {/* Mobile: direct path to Shop without opening the menu */}
+          <Link
+            href="/shop"
+            className="btn-press inline-flex min-h-[44px] items-center px-2 text-[12px] uppercase tracking-[0.18em] text-ink/80 transition hover:text-ochre md:hidden"
+          >
+            Shop
+          </Link>
           <button
             onClick={open}
             aria-label="Open cart"
-            className="btn-press relative text-[12px] uppercase tracking-[0.18em] text-ink/80 transition hover:text-ochre"
+            className="btn-press relative inline-flex min-h-[44px] items-center px-2 text-[12px] uppercase tracking-[0.18em] text-ink/80 transition hover:text-ochre"
           >
             Bag
             {count > 0 && (
