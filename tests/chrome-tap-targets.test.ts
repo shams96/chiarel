@@ -44,3 +44,17 @@ describe("site chrome tap targets", () => {
     expect(css).toMatch(/\.ticker-msg[\s\S]*?animation: none/);
   });
 });
+
+describe("off-canvas drawers", () => {
+  // A closed drawer is translated just off-screen; a permanent shadow-2xl
+  // bleeds into the viewport edge as a grey strip. The shadow belongs to the
+  // open state only.
+  for (const file of ["components/CartDrawer.tsx", "components/Header.tsx"]) {
+    it(`${file} only casts its shadow while open`, () => {
+      const src = readFileSync(file, "utf8");
+      const panel = src.slice(src.indexOf("cart-panel fixed"), src.indexOf("cart-panel fixed") + 260);
+      expect(panel).toMatch(/\?\s*"translate-x-0 shadow-2xl"\s*:\s*"translate-x-full"/);
+      expect(panel).not.toMatch(/bg-ivory shadow-2xl/);
+    });
+  }
+});
