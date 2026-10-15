@@ -7,7 +7,7 @@ export default function CookieSettingsButton() {
     <button
       type="button"
       onClick={openConsentSettings}
-      className="text-left text-cloud transition-colors hover:text-champagne"
+      className="flex min-h-[44px] items-center text-left text-cloud transition-colors hover:text-champagne"
     >
       Cookie settings
     </button>
