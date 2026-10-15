@@ -70,13 +70,18 @@ describe("production (APP_ENV unset)", () => {
   it("renders no banner", () => {
     expect(StagingBanner()).toBeNull();
   });
-  it("dispute scheduler starts", () => {
-    vi.spyOn(console, "log").mockImplementation(() => {});
-    const si = vi.spyOn(globalThis, "setInterval").mockReturnValue(0 as unknown as NodeJS.Timeout);
-    computeDisputeRateReport.mockResolvedValue({ overallTier: "ok" });
-    startDisputeMonitorSchedule();
-    expect(si).toHaveBeenCalledTimes(1);
-    expect(computeDisputeRateReport).toHaveBeenCalledTimes(1);
+  it("dispute scheduler starts, with the first check a minute after boot and not at boot", () => {
+    vi.useFakeTimers();
+    try {
+      vi.spyOn(console, "log").mockImplementation(() => {});
+      computeDisputeRateReport.mockResolvedValue({ overallTier: "ok" });
+      startDisputeMonitorSchedule();
+      expect(computeDisputeRateReport).not.toHaveBeenCalled();
+      vi.advanceTimersByTime(60 * 1000);
+      expect(computeDisputeRateReport).toHaveBeenCalledTimes(1);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });
 
