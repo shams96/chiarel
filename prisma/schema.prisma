@@ -157,3 +157,17 @@ model Session {
   createdAt DateTime @default(now())
   expiresAt DateTime
 }
+
+// Newsletter list. Separate from FoundingSignup (a waitlist with a different
+// purpose). Email is stored normalized (trimmed, lowercase) so the unique index
+// dedupes case variants. consentTextVersion records which wording the person
+// agreed to; unsubscribedAt soft-deletes so a suppression is never lost.
+model EmailSubscriber {
+  id                 String    @id @default(cuid())
+  email              String    @unique
+  source             String
+  consentAt          DateTime
+  consentTextVersion String
+  createdAt          DateTime  @default(now())
+  unsubscribedAt     DateTime?
+}
