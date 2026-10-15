@@ -23,8 +23,8 @@ export function middleware(request: NextRequest) {
   // deployed CSP.
   const scriptSrc =
     process.env.NODE_ENV === "production"
-      ? "script-src 'self' 'unsafe-inline' https://js.stripe.com"
-      : "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com";
+      ? "script-src 'self' 'unsafe-inline' https://js.stripe.com https://www.googletagmanager.com"
+      : "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://www.googletagmanager.com";
   response.headers.set(
     "Content-Security-Policy",
     [
@@ -33,7 +33,9 @@ export function middleware(request: NextRequest) {
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: https:",
       "font-src 'self' data:",
-      "connect-src 'self' https://api.stripe.com",
+      // GA4 hosts are inert unless NEXT_PUBLIC_GA_MEASUREMENT_ID is set and the
+      // visitor opts in (components/Analytics.tsx).
+      "connect-src 'self' https://api.stripe.com https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com",
       "frame-src https://js.stripe.com https://checkout.stripe.com",
       "frame-ancestors 'none'",
       "base-uri 'self'",

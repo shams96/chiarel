@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import CookieSettingsLink from "@/components/CookieSettingsLink";
 
 const trustBadges = [
   "Complimentary shipping at $150",
@@ -93,6 +94,7 @@ export default function Footer() {
                       {link.label}
                     </Link>
                   ))}
+                  {col.heading === "Legal" && <CookieSettingsLink />}
                 </div>
               ))}
             </nav>
