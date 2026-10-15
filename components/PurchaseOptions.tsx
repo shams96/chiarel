@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { isFounding100, founding100Pricing } from "@/lib/founding100";
-import { purchaseOptionSummary } from "@/lib/pricing";
+import { purchaseOptionSummary, perDayPrice } from "@/lib/pricing";
 import { track } from "@/lib/analytics";
 
 type Tier = "ninetyDay" | "single" | "oneTime";
@@ -48,6 +48,7 @@ export default function PurchaseOptions({
     tier === "ninetyDay"
       ? {
           price: summary.ritual.total,
+          perDay: perDayPrice(summary.ritual.total, 90),
           label: "one payment · 90-day supply · one delivery",
           saving: summary.ritual.saving,
           savingNote: "vs. buying twice one-time",
@@ -55,12 +56,14 @@ export default function PurchaseOptions({
       : tier === "single"
         ? {
             price: summary.subscription.perDelivery,
+            perDay: perDayPrice(summary.subscription.perDelivery),
             label: "per delivery · every 45 days",
             saving: summary.subscription.saving,
             savingNote: "per delivery vs. one-time",
           }
         : {
             price: summary.oneTime.price,
+            perDay: perDayPrice(summary.oneTime.price),
             label: "one-time · single delivery",
             saving: 0,
             savingNote: "",
@@ -77,8 +80,11 @@ export default function PurchaseOptions({
           reader hears the price change when the plan changes. */}
       <div aria-live="polite">
         <p className="flex flex-wrap items-baseline gap-x-2">
-          <span className="font-serif text-4xl leading-none">${primary.price}</span>
-          <span className="text-[13px] text-ink/70">{primary.label}</span>
+          <span className="font-serif text-4xl leading-none">${primary.perDay}</span>
+          <span className="text-[13px] text-ink/70">a day</span>
+        </p>
+        <p className="mt-1.5 text-[13px] text-ink/70">
+          ${primary.price} · {primary.label}
         </p>
         <p className="mt-1.5 min-h-[1.25rem] text-[13px] text-ochre">
           {primary.saving > 0

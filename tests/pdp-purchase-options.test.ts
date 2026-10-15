@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { purchaseOptionSummary, computeUnitPrice } from "@/lib/pricing";
+import { purchaseOptionSummary, computeUnitPrice, perDayPrice } from "@/lib/pricing";
 import { products, isPurchasable } from "@/lib/products";
 
 describe("purchaseOptionSummary (PDP purchase box)", () => {
@@ -30,5 +30,16 @@ describe("purchaseOptionSummary (PDP purchase box)", () => {
       expect(s.subscription.perDelivery).toBe(computeUnitPrice(p.price.subscription, p.price.oneTime, "subscription", p.slug));
       expect(s.oneTime.price).toBe(computeUnitPrice(p.price.subscription, p.price.oneTime, "oneTime", p.slug));
     }
+  });
+});
+
+describe("perDayPrice", () => {
+  it("Essence: $151 per 45 days is $3.36 a day, $189 one-time is $4.20", () => {
+    expect(perDayPrice(151)).toBe("3.36");
+    expect(perDayPrice(189)).toBe("4.20");
+  });
+
+  it("the Ritual Plan over 90 days matches the subscription per-day figure", () => {
+    expect(perDayPrice(302, 90)).toBe(perDayPrice(151));
   });
 });

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { perDayPrice, DELIVERY_DAYS } from "@/lib/pricing";
 import { getProductOrThrow, productImageAlt, isPurchasable } from "@/lib/products";
 
 // First-viewport hero: headline, one primary CTA, the product and the price
@@ -49,11 +50,13 @@ export default function HomeHero() {
             <p className="mt-4 text-[12px] leading-relaxed text-ink/65">
               CHIAREL Essence™ from{" "}
               <span className="tabular-nums font-serif text-base text-ink">
-                ${essence.price.subscription}
+                ${perDayPrice(essence.price.subscription)}
               </span>{" "}
-              every 45 days with subscription ·{" "}
-              <span className="tabular-nums">${essence.price.oneTime}</span>{" "}
-              one-time
+              a day
+              <span className="mt-1 block text-[11px] text-ink/55">
+                ${essence.price.subscription} every {DELIVERY_DAYS} days with
+                subscription · ${essence.price.oneTime} one-time
+              </span>
             </p>
           )}
         </div>

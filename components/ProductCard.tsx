@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { productImageAlt, isPurchasable, type Product } from "@/lib/products";
+import { perDayPrice } from "@/lib/pricing";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { productHoverClass } from "@/lib/motion";
 
@@ -41,10 +42,11 @@ export default function ProductCard({
             {isPurchasable(product) ? (
               <>
                 <span className="tabular-nums font-medium">
-                  ${product.price.subscription}
+                  From ${perDayPrice(product.price.subscription)} a day
                 </span>
-                <span className="ml-1 text-[12px] text-ink/65">
-                  with subscription · ${product.price.oneTime} one-time
+                <span className="mt-0.5 block text-[12px] text-ink/65">
+                  ${product.price.subscription} with subscription · $
+                  {product.price.oneTime} one-time
                 </span>
               </>
             ) : (

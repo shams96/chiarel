@@ -106,8 +106,8 @@ export default async function Founding100Page() {
           <ol className="mt-3 max-w-xl space-y-3 text-sm leading-relaxed text-ink/75">
             <li>
               <strong className="text-ink">1. Join.</strong> The first 100
-              members receive the 90-Day Recovery Ritual — two consecutive
-              deliveries of Recovery Masque™, 45 days apart — at 50% off at
+              members receive the 90-Day Recovery Ritual — a 90-day
+              supply of Recovery Masque™, sent in one package — at 50% off at
               checkout: ${masque.price!.subscription} instead of $
               {ninetyDaySubscriptionTotal}.
             </li>
@@ -119,7 +119,7 @@ export default async function Founding100Page() {
             </li>
             <li>
               <strong className="text-ink">3. Share it.</strong> Submit
-              within 30 days of your second delivery.
+              within 30 days of your delivery.
             </li>
             <li>
               <strong className="text-ink">4. We return the rest.</strong>{" "}
@@ -161,12 +161,12 @@ export default async function Founding100Page() {
             <li>
               <strong className="text-ink/80">Founding 100.</strong> Limited
               to the first 100 qualifying orders. Qualifying purchase: the
-              90-Day Recovery Ritual (two consecutive 45-day subscription
-              shipments of Recovery Masque™), at 50% off the standard
+              90-Day Recovery Ritual (a 90-day supply of Recovery
+              Masque™, sent in one package), at 50% off the standard
               subscription price, charged at checkout. To receive a full
               refund of the remaining balance, members must submit one
               routine video and one set of honest before-and-after
-              photographs within 30 days of the second shipment&rsquo;s
+              photographs within 30 days of the package&rsquo;s
               delivery date. Submissions are reviewed for authenticity and
               completeness, not for outcome; a positive result is not
               required. Approved members may elect a refund to their
@@ -185,8 +185,8 @@ export default async function Founding100Page() {
               current cycle are unaffected. Qualifying purchase: the 90-Day
               Recovery Ritual at 20% off the standard subscription price.
               Members who submit one honest video and one set of
-              before-and-after photographs within 30 days of their second
-              shipment&rsquo;s delivery date receive a credit equal to 25%
+              before-and-after photographs within 30 days of their
+              package&rsquo;s delivery date receive a credit equal to 25%
               of the amount paid for that cycle, issued to their original
               payment method or as account credit, at the member&rsquo;s
               election. This credit is available once, on a member&rsquo;s
