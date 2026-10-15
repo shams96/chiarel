@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 import Link from "next/link";
 import { CONSENT_TEXT } from "@/lib/email-consent";
+import { track } from "@/lib/analytics";
 
 type Props = {
   /** "inline" sits on cloud/ivory page backgrounds; "footer" is for the dark ochre/garden footer panel. */
@@ -56,7 +57,7 @@ export default function EmailSignup({
         setMessage(data.error ?? "Something went wrong. Please try again.");
         return;
       }
-      // ANALYTICS HOOK: track("email_signup", { source }) once lib/analytics.ts exists.
+      track("email_signup", { source });
       setStatus("success");
       setMessage("Thank you. You are on the list.");
     } catch {

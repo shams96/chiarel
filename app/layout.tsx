@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
 import { CartProvider } from "@/lib/cart-context";
 import StagingBanner from "@/components/StagingBanner";
+import Analytics from "@/components/Analytics";
 import { rootRobotsMetadata } from "@/lib/app-env";
 import { SITE_URL, SITE_NAME, organizationJsonLd } from "@/lib/seo";
 
@@ -86,6 +87,7 @@ export default function RootLayout({
           <Footer />
           <CartDrawer />
           <StagingBanner />
+          <Analytics />
         </CartProvider>
       </body>
     </html>

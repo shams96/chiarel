@@ -78,6 +78,6 @@ export async function POST(req: NextRequest) {
   if (process.env.HOSTINGER_SMTP_HOST && process.env.HOSTINGER_SMTP_USER) {
     sendMail(welcomeEmail(email)).catch((err) => console.error("Welcome email failed:", err));
   }
-  // ANALYTICS HOOK: call track("email_signup", { source }) client-side in EmailSignup.tsx once lib/analytics.ts lands.
+  // email_signup analytics event is fired client-side in EmailSignup.tsx (consent-gated).
   return OK();
 }

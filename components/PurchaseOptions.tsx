@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useCart } from "@/lib/cart-context";
 import { isFounding100, founding100Pricing } from "@/lib/founding100";
+import { track } from "@/lib/analytics";
 
 type Tier = "ninetyDay" | "single" | "oneTime";
 
@@ -20,6 +21,10 @@ export default function PurchaseOptions({
 }) {
   const [tier, setTier] = useState<Tier>("ninetyDay");
   const { add } = useCart();
+  const chooseTier = (next: Tier) => {
+    if (next !== tier) track("subscribe_toggle", { item_id: slug, plan: next });
+    setTier(next);
+  };
 
   const flatNinetyDayTotal = subscription * 2;
   const enrolledInFounding100 = isFounding100(slug);
@@ -42,7 +47,7 @@ export default function PurchaseOptions({
       <button
         role="radio"
         aria-checked={tier === "ninetyDay"}
-        onClick={() => setTier("ninetyDay")}
+        onClick={() => chooseTier("ninetyDay")}
         className={`btn-press flex w-full items-start justify-between rounded-sm border p-5 text-left transition ${
           tier === "ninetyDay"
             ? "border-ochre bg-white"
@@ -78,7 +83,7 @@ export default function PurchaseOptions({
       <button
         role="radio"
         aria-checked={tier === "single"}
-        onClick={() => setTier("single")}
+        onClick={() => chooseTier("single")}
         className={`btn-press mt-3 flex w-full items-center justify-between rounded-sm border p-3 text-left text-sm transition ${
           tier === "single"
             ? "border-ink/40 bg-white"
@@ -99,7 +104,7 @@ export default function PurchaseOptions({
       <button
         role="radio"
         aria-checked={tier === "oneTime"}
-        onClick={() => setTier("oneTime")}
+        onClick={() => chooseTier("oneTime")}
         className={`btn-press mt-3 flex w-full items-center justify-between rounded-sm border p-3 text-left text-sm transition ${
           tier === "oneTime"
             ? "border-ink/40 bg-white"

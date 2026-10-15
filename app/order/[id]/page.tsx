@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 import { stripe } from "@/lib/stripe";
 import { getOrCreateCart } from "@/lib/cart-server";
+import TrackPurchase from "@/components/TrackPurchase";
 
 const modeLabel: Record<string, string> = {
   ninetyDay: "The Ritual Plan",
@@ -62,6 +63,22 @@ export default async function OrderConfirmationPage({
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-24 text-center">
+      {isPaid && (
+        <TrackPurchase
+          purchase={{
+            transaction_id: order.id,
+            currency: "USD",
+            value: order.total,
+            shipping: order.shipping,
+            items: order.items.map((i) => ({
+              item_id: i.productSlug,
+              item_name: i.product.name,
+              price: i.unitPrice,
+              quantity: i.qty,
+            })),
+          }}
+        />
+      )}
       <h1 className="font-serif text-3xl">Thank you, {order.firstName}.</h1>
       {isPaid ? (
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink/70">
