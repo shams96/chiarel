@@ -5,8 +5,8 @@
 // for a busy or cold shared host.
 
 const DEFAULT_PARAMS: Record<string, string> = {
-  connect_timeout: "15",
-  pool_timeout: "20",
+  connect_timeout: "10",
+  pool_timeout: "10",
   connection_limit: "5",
 };
 

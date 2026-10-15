@@ -7,8 +7,8 @@ describe("withConnectionDefaults", () => {
   it("adds timeouts and a pool size when the URL has none, keeping existing params", () => {
     const out = new URL(withConnectionDefaults("postgresql://u:p@host:6543/db?pgbouncer=true")!);
     expect(out.searchParams.get("pgbouncer")).toBe("true");
-    expect(out.searchParams.get("connect_timeout")).toBe("15");
-    expect(out.searchParams.get("pool_timeout")).toBe("20");
+    expect(out.searchParams.get("connect_timeout")).toBe("10");
+    expect(out.searchParams.get("pool_timeout")).toBe("10");
     expect(out.searchParams.get("connection_limit")).toBe("5");
   });
 
@@ -78,18 +78,32 @@ describe("withApiErrorHandling", () => {
     expect(res.status).toBe(503);
   });
 
-  it("a GET retries a transient error and then succeeds", async () => {
+  it("a GET retries a transient error once and then succeeds", async () => {
     const inner = vi.fn().mockRejectedValueOnce({ code: "P1017" }).mockResolvedValue(NextResponse.json({ ok: 1 }));
     const res = await withApiErrorHandling(inner)(new Request("http://x/api", { method: "GET" }));
     expect(res.status).toBe(200);
     expect(inner).toHaveBeenCalledTimes(2);
   });
 
-  it("a POST is not repeated after an ambiguous error", async () => {
+  it("a GET that keeps failing gives up after one retry with a 503", async () => {
     silence();
-    const inner = vi.fn().mockRejectedValue({ code: "P1017" });
-    const res = await withApiErrorHandling(inner)(new Request("http://x/api", { method: "POST" }));
+    const inner = vi.fn().mockRejectedValue({ code: "P1001" });
+    const res = await withApiErrorHandling(inner)(new Request("http://x/api", { method: "GET" }));
     expect(res.status).toBe(503);
-    expect(inner).toHaveBeenCalledTimes(1);
+    expect(inner).toHaveBeenCalledTimes(2);
+  });
+
+  it("a POST is never retried, even for an error raised before any SQL was sent", async () => {
+    silence();
+    for (const code of ["P1001", "P2024", "P1017"]) {
+      const inner = vi.fn(async (req: Request) => {
+        await req.json(); // consumes the body, as the checkout and cart handlers do
+        throw { code };
+      });
+      const req = new Request("http://x/api", { method: "POST", body: JSON.stringify({ a: 1 }) });
+      const res = await withApiErrorHandling(inner)(req);
+      expect(res.status).toBe(503); // a real 503, not a misleading 400 from a re-read body
+      expect(inner).toHaveBeenCalledTimes(1);
+    }
   });
 });

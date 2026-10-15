@@ -9,8 +9,16 @@ import { NextRequest } from "next/server";
  */
 const hits = new Map<string, { count: number; resetAt: number }>();
 
+const MAX_ENTRIES = 5000;
+
+/** Drops expired windows so the map cannot grow with every distinct IP forever. */
+function prune(now: number) {
+  for (const [k, v] of hits) if (now >= v.resetAt) hits.delete(k);
+}
+
 export function isRateLimited(key: string, max: number, windowMs: number): boolean {
   const now = Date.now();
+  if (hits.size > MAX_ENTRIES) prune(now);
   const entry = hits.get(key);
 
   if (!entry || now >= entry.resetAt) {

@@ -58,11 +58,11 @@ export default async function Founding100Page() {
               </span>
               <span className="text-[12px] uppercase leading-tight tracking-[0.14em] text-ivory/60">
                 {full ? (
-                  <>places remaining
+                  <>places left on the list
                   <br />
                   the Founding Members are complete</>
                 ) : (
-                  <>of 100 places remaining<br />no more once they&rsquo;re claimed</>
+                  <>of 100 places left on the list<br />no more once they&rsquo;re taken</>
                 )}
               </span>
             </div>

@@ -39,7 +39,7 @@ export default function CartDrawer() {
           <p className="font-serif text-xl">Your Ritual Bag</p>
           <button
             onClick={close}
-            aria-label="Close cart"
+            aria-label="Close bag"
             className="btn-press -mr-3 flex h-11 w-11 items-center justify-center text-xl text-ink/65 hover:text-ink"
           >
             ×
@@ -112,7 +112,8 @@ export default function CartDrawer() {
                           onClick={() => remove(line.slug)}
                           className="tap-area text-[11px] uppercase tracking-[0.14em] text-ink/65 hover:text-ochre"
                         >
-                          Remove
+                          <span aria-hidden="true">Remove</span>
+                          <span className="sr-only">Remove {line.product.name}</span>
                         </button>
                       </div>
                     </div>
@@ -170,9 +171,12 @@ export default function CartDrawer() {
                 <span>Subtotal</span>
                 <span className="font-serif text-xl">${subtotal}</span>
               </p>
-              <p className="mb-3 text-center text-[11px] uppercase tracking-[0.14em] text-ink/65">
-                Customer-tested · every active disclosed
-              </p>
+              {/* N1 has no testing or full disclosure yet (see its product page), so the line is not shown for a bag that contains it. */}
+              {!lines.some((l) => l.slug === "n1-neck-decollete") && (
+                <p className="mb-3 text-center text-[11px] uppercase tracking-[0.14em] text-ink/65">
+                  Customer-tested · every active disclosed
+                </p>
+              )}
               <Link
                 href="/cart"
                 onClick={close}

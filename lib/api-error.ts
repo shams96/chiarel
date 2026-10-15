@@ -7,10 +7,10 @@ import { retryDb } from "@/lib/db-resilience";
  * can show the customer, instead of Next's bare empty-body 500 that leaves
  * the cart drawer or checkout button silently doing nothing.
  *
- * Transient database errors are retried first (see lib/db-resilience.ts): a
- * handler that reads (GET) retries on any transient code; one that writes
- * retries only on errors raised before any SQL was sent, so a retry can never
- * duplicate an order or a cart line.
+ * Read handlers (GET) retry once on a transient database error (see
+ * lib/db-resilience.ts). Anything that writes is never retried here: a retry
+ * re-runs the whole handler, so it would find the request body already
+ * consumed and could repeat earlier writes (a second order, a bumped quantity).
  */
 export function withApiErrorHandling<Args extends unknown[]>(
   handler: (...args: Args) => Promise<NextResponse>
@@ -19,7 +19,7 @@ export function withApiErrorHandling<Args extends unknown[]>(
     const first = args[0] as { method?: string } | undefined;
     const readOnly = !first?.method || first.method === "GET";
     try {
-      return await retryDb(() => handler(...args), { readOnly });
+      return await retryDb(() => handler(...args), { readOnly, retries: readOnly ? 1 : 0 });
     } catch (err) {
       console.error("[api error]", err);
       return NextResponse.json(

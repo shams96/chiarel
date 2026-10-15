@@ -24,7 +24,7 @@ const nav = [
 const tickerMessages = [
   "The Founding Members · One hundred numbered places",
   "Meet every new formula 48 hours before anyone else",
-  <span className="text-ochre">Become a Founding Member →</span>,
+  <span className="text-champagne">Become a Founding Member →</span>,
 ];
 /* eslint-enable react/jsx-key */
 
@@ -65,8 +65,8 @@ export default function Header() {
           className="relative flex min-h-[44px] items-center justify-center gap-3 overflow-hidden border-b border-champagne/30 bg-ink px-4 py-2 text-champagne transition hover:bg-ink/90"
         >
           <span className="relative flex h-2 w-2 shrink-0">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ochre opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-ochre" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-champagne opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-champagne" />
           </span>
           <Ticker />
         </Link>
@@ -101,7 +101,7 @@ export default function Header() {
           </Link>
           <button
             onClick={open}
-            aria-label="Open cart"
+            aria-label={count > 0 ? `Open bag, ${count} items` : "Open bag"}
             className="btn-press relative inline-flex min-h-[44px] items-center px-2 text-[12px] uppercase tracking-[0.18em] text-ink/80 transition hover:text-ochre"
           >
             Bag
