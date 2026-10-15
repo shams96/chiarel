@@ -7,6 +7,8 @@ import PurchaseOptions from "@/components/PurchaseOptions";
 import TrackViewItem from "@/components/TrackViewItem";
 import StickyPurchaseBar from "@/components/StickyPurchaseBar";
 import ProductGallery from "@/components/ProductGallery";
+import ProductAccordions from "@/components/ProductAccordions";
+import AddPairButton from "@/components/AddPairButton";
 import CellularHydrationCascade from "@/components/CellularHydrationCascade";
 import Reveal from "@/components/Reveal";
 import { productJsonLd, productPageTitle, breadcrumbJsonLd } from "@/lib/seo";
@@ -160,6 +162,8 @@ export default async function ProductPage({
                 <PriceToBeAnnounced />
               )}
             </div>
+
+            <ProductAccordions product={p} />
 
             <p className="mt-6 max-w-md text-sm leading-relaxed text-ink/75 md:mt-8">
               {p.blurb}
@@ -762,33 +766,35 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
       {pairs.length > 0 && (
         <div className="mt-10 border-t border-ink/10 pt-8">
           <p className="text-center text-[11px] uppercase tracking-[0.16em] text-ink/65">
-            Pairs with
+            Complete your regimen
           </p>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             {pairs.map((item) => (
-              <Link
+              <div
                 key={item.slug}
-                href={`/shop/${item.slug}`}
-                className="flex items-center gap-4 rounded-sm border border-ink/10 p-4 transition hover:border-ochre"
+                className="flex flex-col gap-3 rounded-sm border border-ink/10 p-4 transition hover:border-ochre"
               >
-                <div
-                  className="relative h-16 w-16 shrink-0 overflow-hidden"
-                  style={{ backgroundColor: NEUTRAL_FRAME_BG }}
-                >
-                  <Image src={item.image} alt={productImageAlt(item)} fill sizes="64px" className="object-cover" />
-                </div>
-                <div>
-                  <p className="font-serif text-base leading-snug">{item.name}</p>
-                  <p className="mt-0.5 text-[11px] uppercase tracking-[0.16em] text-ink/65">
-                    {item.step}
-                  </p>
-                  {isPurchasable(item) && (
-                    <p className="mt-1 text-[12px] text-ink/65">
-                      ${item.price.subscription} per delivery, subscribe &amp; save
+                <Link href={`/shop/${item.slug}`} className="flex items-center gap-4">
+                  <div
+                    className="relative h-16 w-16 shrink-0 overflow-hidden"
+                    style={{ backgroundColor: NEUTRAL_FRAME_BG }}
+                  >
+                    <Image src={item.image} alt={productImageAlt(item)} fill sizes="64px" className="object-cover" />
+                  </div>
+                  <div>
+                    <p className="font-serif text-base leading-snug">{item.name}</p>
+                    <p className="mt-0.5 text-[11px] uppercase tracking-[0.16em] text-ink/65">
+                      {item.step}
                     </p>
-                  )}
-                </div>
-              </Link>
+                    {isPurchasable(item) && (
+                      <p className="mt-1 text-[12px] text-ink/65">
+                        ${item.price.subscription} per delivery, subscribe &amp; save
+                      </p>
+                    )}
+                  </div>
+                </Link>
+                {isPurchasable(item) && <AddPairButton slug={item.slug} name={item.name} />}
+              </div>
             ))}
           </div>
         </div>
