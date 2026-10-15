@@ -156,7 +156,7 @@ export default function ProductGallery({
                 onClick={() => goTo(i)}
                 aria-current={i === active}
                 aria-label={`Show image ${i + 1} of ${images.length}`}
-                className="flex h-11 w-8 items-center justify-center"
+                className="flex h-11 w-11 items-center justify-center"
               >
                 <span
                   className={`block h-1.5 rounded-full transition-all ${

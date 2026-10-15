@@ -218,8 +218,8 @@ export default function CheckoutPage() {
               </div>
             </details>
 
-            <label className="flex items-start gap-2 text-[12px] leading-relaxed text-ink/75">
-              <input type="checkbox" name="termsAccepted" required className="mt-0.5" />
+            <label className="flex min-h-[44px] items-center gap-3 text-[12px] leading-relaxed text-ink/75">
+              <input type="checkbox" name="termsAccepted" required className="h-5 w-5 shrink-0" />
               <span>
                 I have read and agree to the{" "}
                 <Link href="/terms" className="border-b border-ochre text-ochre">

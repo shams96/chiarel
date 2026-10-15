@@ -68,7 +68,7 @@ export default function HomeProvenance() {
           </Link>
           <Link
             href="/house"
-            className="mt-3 block text-[11px] uppercase tracking-[0.16em] text-ivory/50 hover:text-champagne"
+            className="mt-3 flex min-h-[44px] items-center text-[11px] uppercase tracking-[0.16em] text-ivory/70 hover:text-champagne"
           >
             Read her full bio →
           </Link>
@@ -76,7 +76,7 @@ export default function HomeProvenance() {
             href={FORMULATOR_EXTERNAL_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2 block text-[11px] uppercase tracking-[0.16em] text-ivory/40 hover:text-champagne"
+            className="flex min-h-[44px] items-center text-[11px] uppercase tracking-[0.16em] text-ivory/60 hover:text-champagne"
           >
             Verified profile at Natural You Srl →
           </a>

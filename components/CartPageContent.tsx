@@ -151,7 +151,7 @@ export default function CartPageContent() {
                     <div className="min-w-0">
                       <Link
                         href={`/shop/${line.slug}`}
-                        className="font-serif text-lg leading-tight hover:text-ochre"
+                        className="tap-area font-serif text-lg leading-tight hover:text-ochre"
                       >
                         {line.product.name}
                       </Link>

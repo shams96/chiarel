@@ -126,7 +126,7 @@ export function HomePhilosophy() {
           the same discipline behind La Bella Figura — presenting one&rsquo;s
           best self, quietly, without announcement.
         </p>
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-7">
           <Link
             href="/journal/three-skins-one-house"
             className="btn-press inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
