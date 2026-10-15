@@ -144,9 +144,9 @@ describe("cart: pricing rules", () => {
     expect(cart.savings).toBe(40);
   });
 
-  it("Founding 100 product gets 20% off the 90-day total", async () => {
+  it("N1 is charged the flat 2x for 90 days, with no founders discount", async () => {
     const cart = await (await post({ slug: "n1-neck-decollete", mode: "ninetyDay" })).json();
-    expect(cart.lines[0].unitPrice).toBe(320);
+    expect(cart.lines[0].unitPrice).toBe(400);
   });
 });
 

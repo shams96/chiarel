@@ -39,7 +39,7 @@ describe("site chrome tap targets", () => {
 
   it("announcement bar wraps instead of scrolling or clipping", () => {
     expect(header).not.toMatch(/marquee/);
-    const bar = header.slice(header.indexOf("Founding 100 is open"), header.indexOf("<Ticker />"));
+    const bar = header.slice(header.indexOf("The Founding Members: one hundred"), header.indexOf("<Ticker />"));
     expect(bar).not.toMatch(/whitespace-nowrap/);
     expect(css).toMatch(/\.ticker-msg[\s\S]*?animation: none/);
   });

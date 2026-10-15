@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
-import { isFounding100, founding100Pricing } from "@/lib/founding100";
 import { purchaseOptionSummary, perDayPrice } from "@/lib/pricing";
 import { track } from "@/lib/analytics";
 
@@ -14,8 +13,8 @@ export const PURCHASE_CTA_ID = "purchase-cta";
 
 // How the three options work, as implemented by the cart and checkout
 // (lib/pricing.ts, app/api/checkout/route.ts) and stated in /terms:
-//  - The Ritual Plan: ONE payment of 2x the subscription price (or the
-//    Founding 100 20%-off total), a 90-day supply, ONE delivery.
+//  - The Ritual Plan: ONE payment of 2x the subscription price, a 90-day
+//    supply, ONE delivery.
 //  - Subscription: the subscription price per delivery, renewing every 45
 //    days until paused or cancelled.
 //  - One-time: full price, one delivery.
@@ -39,9 +38,6 @@ export default function PurchaseOptions({
   const { add } = useCart();
 
   const summary = purchaseOptionSummary(slug, subscription, oneTime);
-  const founding100 = isFounding100(slug)
-    ? founding100Pricing(subscription * 2)
-    : null;
 
   // The single primary price: whatever is selected, labelled in plain words.
   const primary =
@@ -178,15 +174,6 @@ export default function PurchaseOptions({
       >
         {tier === "oneTime" ? "Add to Bag" : "Begin the Ritual"}
       </button>
-
-      {founding100 && tier === "ninetyDay" && (
-        <p className="mt-3 text-[12px] leading-relaxed text-ink/65">
-          20% off at checkout · ${founding100.credit} credited back — part of{" "}
-          <Link href="/founding-100" className="tap-area underline decoration-ink/30 hover:text-ochre">
-            The Founding 100
-          </Link>
-        </p>
-      )}
 
       {/* Delivery and returns at the point of purchase. Every statement here
           is taken from /terms (Subscriptions, Shipping, The 90-Day Guarantee). */}

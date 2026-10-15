@@ -180,16 +180,10 @@ describe("checkout: totals", () => {
     expect(item.price_data.currency).toBe("usd");
   });
 
-  it("records the Founding 100 credit for a qualifying 90-day line", async () => {
-    setCart([line({ slug: "n1-neck-decollete", mode: "ninetyDay", unitPrice: 189 })]);
+  it("never writes a founders credit on the order", async () => {
+    setCart([line({ slug: "n1-neck-decollete", mode: "ninetyDay", unitPrice: 236 })]);
     await checkout(validBody);
-    // credit = 25% of the discounted checkout total, per lib/founding100.ts
-    expect(orderCreate.mock.calls[0][0].data.founding100Credit).toBeGreaterThan(0);
-  });
-
-  it("leaves the credit null when nothing qualifies", async () => {
-    await checkout(validBody);
-    expect(orderCreate.mock.calls[0][0].data.founding100Credit).toBeNull();
+    expect(orderCreate.mock.calls[0][0].data.founding100Credit).toBeUndefined();
   });
 });
 

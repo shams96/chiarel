@@ -6,9 +6,9 @@ import { getProductOrThrow } from "@/lib/products";
 import { db } from "@/lib/db";
 
 export const metadata: Metadata = {
-  title: "The Founding 100",
+  title: "The Founding Members",
   description:
-    "Join the first 100 members of the CHIAREL 90-Day Ritual. Half price at checkout, and a full refund when you share your honest result.",
+    "One hundred numbered places in the CHIAREL 90-Day Ritual, with early access to every new formula.",
   alternates: { canonical: "/founding-100" },
 };
 
@@ -16,16 +16,6 @@ export const dynamic = "force-dynamic";
 
 export default async function Founding100Page() {
   const masque = getProductOrThrow("recovery-masque");
-  // Recovery Masque is an existing, unaffected priced product — the
-  // non-null assertions below are a type-compatibility artifact of making
-  // `Product.price` optional for N1's sake, not a behavior change. See
-  // CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §1.
-  const ninetyDaySubscriptionTotal = masque.price!.subscription * 2;
-  const ninetyDayOneTimeTotal = masque.price!.oneTime * 2;
-  const circleCheckoutTotal = Math.round(ninetyDaySubscriptionTotal * 0.8);
-  const circleCredit = Math.round(circleCheckoutTotal * 0.25);
-  const circleNet = circleCheckoutTotal - circleCredit;
-
   const claimed = await db.foundingSignup.count();
   const remaining = Math.max(0, 100 - claimed);
   const full = remaining === 0;
@@ -52,12 +42,12 @@ export default async function Founding100Page() {
               By invitation · The House Opens
             </p>
             <h1 className="mt-5 font-serif text-5xl leading-[0.98] tracking-[-0.01em] md:text-6xl">
-              The Founding 100
+              The Founding Members
             </h1>
             <p className="mt-6 max-w-md text-[15px] leading-relaxed text-ivory/75">
-              Half the price. Then none of it. We are opening the House to
-              its first hundred — not as a discount, but as an invitation
-              to trust us first, and be repaid for it.
+              One hundred places, each one numbered. We are opening the House
+              to its first hundred members, and they will meet every new
+              formula before anyone else.
             </p>
 
             {/* Real scarcity, not decoration — this number is the actual
@@ -70,7 +60,7 @@ export default async function Founding100Page() {
                 {full ? (
                   <>places remaining
                   <br />
-                  the Founding 100 is closed</>
+                  the Founding Members are complete</>
                 ) : (
                   <>of 100 places remaining<br />no more once they&rsquo;re claimed</>
                 )}
@@ -85,14 +75,14 @@ export default async function Founding100Page() {
             <div className="mt-8">
               {full ? (
                 <p className="card-elevated rounded-md bg-white/5 p-6 text-sm leading-relaxed text-ivory/80">
-                  The Founding 100 has been claimed.{" "}
+                  The Founding Members are complete.{" "}
                   <Link href="/shop/recovery-masque" className="border-b border-champagne text-champagne">
-                    Join the CHIAREL Circle™
+                    Begin the 90-Day Ritual
                   </Link>{" "}
-                  below instead — the next chapter, open now.
+                  at its published price.
                 </p>
               ) : (
-                <ComingSoonPackshot source={`${masque.name} — Founding 100`} />
+                <ComingSoonPackshot source={`${masque.name} — Founding Members`} />
               )}
             </div>
           </div>
@@ -105,125 +95,56 @@ export default async function Founding100Page() {
           <h2 className="font-serif text-2xl">How it works</h2>
           <ol className="mt-3 max-w-xl space-y-3 text-sm leading-relaxed text-ink/75">
             <li>
-              <strong className="text-ink">1. Join.</strong> The first 100
-              members receive the 90-Day Recovery Ritual — a 90-day
-              supply of Recovery Masque™, sent in one package — at 50% off at
-              checkout: ${masque.price!.subscription} instead of $
-              {ninetyDaySubscriptionTotal}.
+              <strong className="text-ink">1. Join.</strong> Choose your ritual
+              at its published price. The 90-day Ritual Plan, paid once,
+              arrives in a single package.
             </li>
             <li>
-              <strong className="text-ink">2. Live with it.</strong> Use the
-              ritual as intended across the full 90 days. Document your
-              experience — a short video of your routine, and honest
-              before-and-after photos.
+              <strong className="text-ink">2. Receive.</strong> Your member
+              number, from 001 to 100, and a place on the early-access list.
             </li>
             <li>
-              <strong className="text-ink">3. Share it.</strong> Submit
-              within 30 days of your delivery.
+              <strong className="text-ink">3. Meet each launch first.</strong>{" "}
+              Members hear about every new CHIAREL formula 48 hours before
+              everyone else.
             </li>
             <li>
-              <strong className="text-ink">4. We return the rest.</strong>{" "}
-              Once approved, we refund the remaining balance in full — net
-              free for ninety days. Prefer to keep going? Convert that value
-              to credit toward your next 90-day cycle instead.
+              <strong className="text-ink">4. Tell us the truth.</strong> If
+              you choose to share your experience, we ask only for an honest
+              account. A positive one is never required, and nothing is paid,
+              refunded or credited in return.
             </li>
           </ol>
-        </div>
-
-        <div className="border-l-2 border-champagne pl-6">
-          <h2 className="font-serif text-2xl">The CHIAREL Circle™</h2>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/70">
-            The House doesn&rsquo;t close after a hundred. The next chapter
-            is the CHIAREL Circle™ — open to the next 750 members, or for
-            six months from today, whichever comes first.
-          </p>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/70">
-            Circle members begin the 90-Day Ritual at{" "}
-            <strong className="text-ink">20% off</strong> the subscription
-            rate — ${circleCheckoutTotal} instead of $
-            {ninetyDaySubscriptionTotal}. Complete it — live with the ritual
-            for the full ninety days, and share one honest video and
-            before-and-after set — and we credit back{" "}
-            <strong className="text-ink">25% of what you paid</strong>{" "}
-            (${circleCredit}), bringing your ninety days to ${circleNet}. Stay
-            on, and continue at the standard Circle subscription rate for as
-            long as you remain a member.
-          </p>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/70">
-            This is not a standing discount. It is earned, once, by
-            finishing what you start.
-          </p>
         </div>
 
         <div className="border-l-2 border-ink/20 pl-6">
           <h2 className="font-serif text-2xl">Terms</h2>
           <ul className="mt-3 max-w-xl list-disc space-y-2 pl-5 text-[13px] leading-relaxed text-ink/60">
             <li>
-              <strong className="text-ink/80">Founding 100.</strong> Limited
-              to the first 100 qualifying orders. Qualifying purchase: the
-              90-Day Recovery Ritual (a 90-day supply of Recovery
-              Masque™, sent in one package), at 50% off the standard
-              subscription price, charged at checkout. To receive a full
-              refund of the remaining balance, members must submit one
-              routine video and one set of honest before-and-after
-              photographs within 30 days of the package&rsquo;s
-              delivery date. Submissions are reviewed for authenticity and
-              completeness, not for outcome; a positive result is not
-              required. Approved members may elect a refund to their
-              original payment method (issued within 10 business days) or a
-              credit of equal value toward their next 90-day cycle. Limit
-              one qualifying enrollment per household.
+              <strong className="text-ink/80">Founding Members.</strong> Limited
+              to the first 100 qualifying orders. A qualifying order is one
+              90-day Ritual Plan purchase of an enrolled product at its
+              published price. Limit one enrolment per household. The benefits
+              are those listed on this page; CHIAREL may change them for future
+              members without affecting existing members.
             </li>
             <li>
-              <strong className="text-ink/80">CHIAREL Circle™.</strong> Open
-              to new subscribers after the Founding 100 is filled, until the
-              earlier of 750 enrollments or six (6) months from the
-              Circle&rsquo;s launch date (&ldquo;the enrollment
-              window&rdquo;). After the enrollment window closes, new
-              subscribers receive CHIAREL&rsquo;s then-standard subscription
-              pricing; existing Circle members&rsquo; benefits for their
-              current cycle are unaffected. Qualifying purchase: the 90-Day
-              Recovery Ritual at 20% off the standard subscription price.
-              Members who submit one honest video and one set of
-              before-and-after photographs within 30 days of their
-              package&rsquo;s delivery date receive a credit equal to 25%
-              of the amount paid for that cycle, issued to their original
-              payment method or as account credit, at the member&rsquo;s
-              election. This credit is available once, on a member&rsquo;s
-              first completed 90-day cycle. Subsequent cycles continue at
-              the Circle&rsquo;s standard subscription rate, without
-              additional content-based credit, for as long as the member
-              remains subscribed.
+              <strong className="text-ink/80">No payment for content.</strong>{" "}
+              Members are never required to submit content and receive nothing
+              in exchange for it. Anything a member chooses to share must be an
+              honest account of their experience.
             </li>
             <li>
-              <strong className="text-ink/80">Content rights.</strong> By
-              submitting a video, photograph, testimonial, name, or handle
-              under either program, you grant CHIAREL (a division of
-              1HubSolutions, LLC) a perpetual, irrevocable, royalty-free,
-              worldwide license to use, reproduce, edit, and display that
-              content across CHIAREL&rsquo;s website, social channels,
-              packaging, and marketing materials, with attribution at
-              CHIAREL&rsquo;s discretion. You retain ownership of your
-              original content; this grant does not transfer copyright.
+              <strong className="text-ink/80">Content rights.</strong> For
+              content a member voluntarily submits, the member grants CHIAREL
+              (a division of 1HubSolutions, LLC) a non-exclusive, worldwide
+              licence to display it on CHIAREL&rsquo;s channels with the
+              member&rsquo;s permission for each use. The member keeps
+              ownership.
             </li>
             <li>
-              <strong className="text-ink/80">Disclosure.</strong> All
-              content submitted under either program must be an honest
-              account of the member&rsquo;s experience — a positive review
-              is never required, only a truthful one. Where compensation (a
-              refund or credit) is received in exchange for content, members
-              must disclose the material connection in accordance with FTC
-              endorsement guidance (e.g. &ldquo;#CHIARELPartner&rdquo; or
-              equivalent plain-language disclosure).
-            </li>
-            <li>
-              Founding 100™ and CHIAREL Circle™ are provisional program
-              names pending trademark clearance. One qualifying enrollment
-              per household across both programs combined. CHIAREL reserves
-              the right to verify submissions, and to modify or end either
-              program&rsquo;s enrollment window at its discretion; changes
-              will not affect members already enrolled under their original
-              terms.
+              The 90-day supply ships in one package. Founding Members is a
+              provisional name pending trademark clearance.
             </li>
           </ul>
         </div>
