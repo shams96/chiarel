@@ -57,9 +57,13 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
       { status: 400 }
     );
   }
-  if (!isNonEmptyString(zip)) {
+  if (selectedCountry.postalRequired && !isNonEmptyString(zip)) {
     return NextResponse.json({ error: "Missing required field(s): zip" }, { status: 400 });
   }
+  if (zip != null && typeof zip !== "string") {
+    return NextResponse.json({ error: "Invalid postal code" }, { status: 400 });
+  }
+  const postalCode = isNonEmptyString(zip) ? zip.trim() : "";
   if (!EMAIL_PATTERN.test(email) || email.length > 254) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
   }
@@ -99,7 +103,7 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
       city,
       country,
       state: selectedCountry.requiresState ? state : null,
-      zip,
+      zip: postalCode,
       subtotal: cart.subtotal,
       savings: cart.savings,
       shipping,
@@ -169,7 +173,7 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
     line1: address,
     city,
     state: selectedCountry.requiresState ? state : undefined,
-    postal_code: zip,
+    postal_code: postalCode || undefined,
     country,
   };
   // Reuse a customer only when this address is the one already on file. The
