@@ -26,6 +26,7 @@ export function middleware(request: NextRequest) {
   response.headers.set("X-Frame-Options", "DENY");
   response.headers.set("X-Content-Type-Options", "nosniff");
   response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  response.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=(self)");
   // 'unsafe-inline' on script-src is required for the JSON-LD
   // dangerouslySetInnerHTML blocks (app/layout.tsx, app/page.tsx, etc.) —
   // all of those are server-rendered from static/DB-sourced data, never raw

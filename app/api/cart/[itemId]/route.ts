@@ -1,3 +1,4 @@
+import { MAX_LINE_QTY } from "@/lib/cart-limits";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { getCartWithTotals, getOrCreateCart, type CartMode } from "@/lib/cart-server";
@@ -33,9 +34,9 @@ export const PATCH = withApiErrorHandling(async function PATCH(
     return NextResponse.json(await getCartWithTotals(owned.cart));
   }
 
-  if (typeof qty !== "number" || qty < 1 || !Number.isInteger(qty)) {
+  if (typeof qty !== "number" || qty < 1 || qty > MAX_LINE_QTY || !Number.isInteger(qty)) {
     return NextResponse.json(
-      { error: "qty must be a positive integer" },
+      { error: "qty must be a whole number from 1 to 10" },
       { status: 400 }
     );
   }

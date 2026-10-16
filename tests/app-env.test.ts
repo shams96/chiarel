@@ -58,7 +58,10 @@ describe("production (APP_ENV unset)", () => {
       (x) => x.userAgent === "*"
     )!;
     expect(star.allow).toBe("/");
-    expect(star.disallow).toEqual(["/checkout", "/cart", "/account"]);
+    expect(star.disallow).toEqual(["/checkout", "/cart", "/account", "/admin", "/order", "/api"]);
+    // Named crawler groups do not inherit "*", so they carry the same private paths.
+    const bots = (r.rules as { userAgent: string; disallow?: string[] }[]).filter((x) => x.userAgent !== "*");
+    for (const b of bots) expect(b.disallow, b.userAgent).toContain("/admin");
   });
   it("sitemap lists pages", () => {
     expect(sitemap().length).toBeGreaterThan(10);

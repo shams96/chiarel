@@ -6,7 +6,11 @@ import { withApiErrorHandling } from "@/lib/api-error";
 import { isRateLimited, clientIp } from "@/lib/rate-limit";
 
 const MAX_ATTEMPTS = 5;
+const GLOBAL_MAX_ATTEMPTS = 30;
 const WINDOW_MS = 15 * 60 * 1000;
+// A real bcrypt hash of a random string, compared against when the email is
+// unknown so that case takes as long as a wrong password.
+const DUMMY_HASH = "$2a$10$CwTycUXWue0Thq9StjUM0uJ8.2kqZ2yq8vR0kqJmQeUJ4pXhX0nWi";
 
 // No self-service signup route exists anywhere in this admin surface — accounts
 // are created by an Admin (app/api/admin/users) or the one-time seed bootstrap
@@ -14,8 +18,13 @@ const WINDOW_MS = 15 * 60 * 1000;
 // unnecessary attack surface. See claudedocs/specs/admin-rbac/.
 export const POST = withApiErrorHandling(async (req: NextRequest) => {
   // Throttled by IP, not by the submitted email — keying on email would let an
-  // attacker lock a real admin out by deliberately failing their login.
-  if (isRateLimited(`admin-login:${clientIp(req)}`, MAX_ATTEMPTS, WINDOW_MS)) {
+  // attacker lock a real admin out by deliberately failing their login. The IP
+  // comes from a header the client can set, so a second bucket caps attempts
+  // from everywhere combined: rotating the header cannot get past that one.
+  if (
+    isRateLimited(`admin-login:${clientIp(req)}`, MAX_ATTEMPTS, WINDOW_MS) ||
+    isRateLimited("admin-login:all", GLOBAL_MAX_ATTEMPTS, WINDOW_MS)
+  ) {
     return NextResponse.json(
       { error: "Too many login attempts. Please try again in a few minutes." },
       { status: 429 }
@@ -37,8 +46,8 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
   // which admin emails are registered.
   const invalid = () => NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
 
+  const matches = await bcrypt.compare(password, user?.passwordHash ?? DUMMY_HASH);
   if (!user) return invalid();
-  const matches = await bcrypt.compare(password, user.passwordHash);
   if (!matches) return invalid();
 
   const signedSession = await createSession(user.id);

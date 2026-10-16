@@ -8,6 +8,7 @@ import { getCountry } from "@/lib/countries";
 import { getProductOrThrow } from "@/lib/products";
 import { isRateLimited, clientIp } from "@/lib/rate-limit";
 import { EXTRA_SAMPLE_THRESHOLD, shippingFor } from "@/lib/shipping";
+import { trustedOrigin } from "@/lib/site-origin";
 
 // Throttle by IP: checkout creates a pending Order row and a Stripe Checkout
 // Session on every call, so an unthrottled endpoint is a cheap way to spam
@@ -25,6 +26,10 @@ const modeLabel: Record<string, string> = {
 function isNonEmptyString(v: unknown): v is string {
   return typeof v === "string" && v.trim().length > 0;
 }
+
+// Generous for real addresses; stops megabyte strings reaching the database and Stripe.
+const MAX_FIELD_LENGTH = 200;
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const POST = withApiErrorHandling(async (req: NextRequest) => {
   if (isRateLimited(`checkout:${clientIp(req)}`, CHECKOUT_MAX_ATTEMPTS, CHECKOUT_WINDOW_MS)) {
@@ -55,8 +60,14 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
   if (!isNonEmptyString(zip)) {
     return NextResponse.json({ error: "Missing required field(s): zip" }, { status: 400 });
   }
-  if (!email.includes("@")) {
+  if (!EMAIL_PATTERN.test(email) || email.length > 254) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
+  }
+  const tooLong = [firstName, lastName, address, city, zip, state].some(
+    (v) => typeof v === "string" && v.length > MAX_FIELD_LENGTH
+  );
+  if (tooLong) {
+    return NextResponse.json({ error: "A field is too long" }, { status: 400 });
   }
   // Server-side enforcement, not just a disabled submit button — a disabled
   // client-side control is a UX nicety, not the actual control. See
@@ -109,7 +120,7 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
     include: { items: true },
   });
 
-  const origin = req.headers.get("origin") ?? new URL(req.url).origin;
+  const origin = trustedOrigin(req.headers.get("origin"), req.url);
 
   const lineItems: Array<{
     price_data: {
@@ -161,17 +172,24 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
     postal_code: zip,
     country,
   };
-  const existing = await stripe.customers.list({ email, limit: 1 });
-  const customer = existing.data[0]
-    ? await stripe.customers.update(existing.data[0].id, {
-        name: `${firstName} ${lastName}`,
-        address: customerAddress,
-      })
-    : await stripe.customers.create({
-        email,
-        name: `${firstName} ${lastName}`,
-        address: customerAddress,
-      });
+  // Reuse a customer only when this address is the one already on file. The
+  // email is typed by whoever fills the form, so never overwrite an existing
+  // customer's name or address with it: someone else's email would let a
+  // stranger rewrite that customer's saved details.
+  const existing = await stripe.customers.list({ email, limit: 10 });
+  const sameAddress = existing.data.find(
+    (c) =>
+      c.address?.line1 === customerAddress.line1 &&
+      c.address?.postal_code === customerAddress.postal_code &&
+      c.address?.country === customerAddress.country
+  );
+  const customer =
+    sameAddress ??
+    (await stripe.customers.create({
+      email,
+      name: `${firstName} ${lastName}`,
+      address: customerAddress,
+    }));
 
   // automatic_tax needs the Stripe account itself to have a registered head
   // office address (Dashboard → Tax settings) — an account-level setup step,

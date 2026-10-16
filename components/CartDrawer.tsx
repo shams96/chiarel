@@ -1,5 +1,6 @@
 "use client";
 
+import { MAX_LINE_QTY } from "@/lib/cart-limits";
 import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -107,6 +108,7 @@ export default function CartDrawer() {
                             </span>
                             <button
                               onClick={() => setQty(line.id, line.qty + 1)}
+                              disabled={line.qty >= MAX_LINE_QTY}
                               aria-label={`Increase quantity of ${line.product.name}`}
                               className="btn-press tap-area flex h-7 w-7 items-center justify-center text-sm text-ink/60 transition hover:text-ochre"
                             >

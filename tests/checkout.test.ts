@@ -235,12 +235,24 @@ describe("checkout: order and Stripe session", () => {
     expect(args.automatic_tax).toEqual({ enabled: true });
   });
 
-  it("reuses an existing Stripe customer instead of creating another", async () => {
-    customersList.mockResolvedValue({ data: [{ id: "cus_old" }] });
+  it("reuses an existing Stripe customer only when the address on file matches, and never rewrites it", async () => {
+    customersList.mockResolvedValue({
+      data: [{ id: "cus_old", address: { line1: validBody.address, postal_code: validBody.zip, country: validBody.country } }],
+    });
     await checkout(validBody);
     expect(customersCreate).not.toHaveBeenCalled();
-    expect(customersUpdate).toHaveBeenCalledWith("cus_old", expect.objectContaining({ name: "Ada Lovelace" }));
+    expect(customersUpdate).not.toHaveBeenCalled();
     expect(sessionsCreate.mock.calls[0][0].customer).toBe("cus_old");
+  });
+
+  it("creates a new customer, leaving the old one untouched, when the email matches but the address differs", async () => {
+    customersList.mockResolvedValue({
+      data: [{ id: "cus_old", address: { line1: "9 Other Rd", postal_code: "99999", country: "US" } }],
+    });
+    await checkout(validBody);
+    expect(customersUpdate).not.toHaveBeenCalled();
+    expect(customersCreate).toHaveBeenCalledTimes(1);
+    expect(sessionsCreate.mock.calls[0][0].customer).toBe("cus_new");
   });
 
   it("creates a customer when none exists", async () => {
