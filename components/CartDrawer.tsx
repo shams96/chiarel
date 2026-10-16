@@ -8,6 +8,8 @@ import { useCart } from "@/lib/cart-context";
 import { useDialog } from "@/lib/use-dialog";
 import { ritualProducts } from "@/lib/products";
 import { shippingFor, shippingNote } from "@/lib/shipping";
+import { pickUpsell } from "@/lib/cart-math";
+import CartIncludedNote from "@/components/CartIncludedNote";
 
 const modeLabel: Record<string, string> = {
   ninetyDay: "The Ritual Plan · 90-day supply, one delivery",
@@ -23,9 +25,7 @@ export default function CartDrawer() {
   const estimatedTotal = subtotal + shipping;
   const savingsPercent =
     savings > 0 ? Math.round((savings / (subtotal + savings)) * 100) : 0;
-  const nextStep = ritualProducts.find(
-    (p) => !lines.some((line) => line.slug === p.slug)
-  );
+  const nextStep = pickUpsell(ritualProducts, lines);
 
   return (
     <>
@@ -73,6 +73,7 @@ export default function CartDrawer() {
               <p className={`mb-4 text-[12px] ${shipping === 0 ? "text-ochre" : "text-ink/60"}`}>
                 {shippingNote(subtotal, lines)}
               </p>
+              <CartIncludedNote lines={lines} />
               <ul className="space-y-5">
                 {lines.map((line) => (
                   <li key={line.slug} className="flex gap-4">
@@ -121,10 +122,10 @@ export default function CartDrawer() {
                         </div>
                         <button
                           onClick={() => remove(line.slug)}
+                          aria-label={`Remove ${line.product.name}`}
                           className="tap-area text-[11px] uppercase tracking-[0.14em] text-ink/65 hover:text-ochre"
                         >
                           <span aria-hidden="true">Remove</span>
-                          <span className="sr-only">Remove {line.product.name}</span>
                         </button>
                       </div>
                     </div>
@@ -178,9 +179,17 @@ export default function CartDrawer() {
                   </span>
                 </p>
               )}
-              <p className="tabular-nums mb-4 flex justify-between text-base">
+              <p className="tabular-nums mb-2 flex justify-between text-[13px]">
                 <span>Subtotal</span>
-                <span className="font-serif text-xl">${subtotal}</span>
+                <span>${subtotal}</span>
+              </p>
+              <p className="tabular-nums mb-2 flex justify-between text-[13px]">
+                <span>Shipping</span>
+                <span>{shipping === 0 ? "Complimentary" : `$${shipping}`}</span>
+              </p>
+              <p className="tabular-nums mb-4 flex justify-between border-t border-ink/10 pt-3 text-base">
+                <span>Estimated total</span>
+                <span className="font-serif text-xl">${estimatedTotal}</span>
               </p>
               {/* N1 has no testing or full disclosure yet (see its product page), so the line is not shown for a bag that contains it. */}
               {!lines.some((l) => l.slug === "n1-neck-decollete") && (

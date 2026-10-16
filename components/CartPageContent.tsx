@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useCart, type CartLine } from "@/lib/cart-context";
 import { getProduct, isPurchasable } from "@/lib/products";
 import { planOptions } from "@/lib/pricing";
+import CartIncludedNote from "@/components/CartIncludedNote";
 import { FREE_SHIP_THRESHOLD, shippingFor, shippingNote } from "@/lib/shipping";
 
 // The bag as its own page: one row per product with a plan selector, and a
@@ -102,10 +103,33 @@ export default function CartPageContent() {
         Your Ritual Bag{count > 0 ? ` (${count})` : ""}
       </h1>
 
-      {loading ? (
-        <p className="mt-16 text-center text-sm text-ink/60" role="status">
-          Loading your bag…
-        </p>
+      {loading && lines.length === 0 ? (
+        // Nothing in context yet (first paint of a fresh load): show the page's
+        // own layout as a skeleton instead of a bare message with an empty summary.
+        // If the provider already holds lines (opened from the drawer), the bag renders below.
+        <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_360px] lg:gap-12" aria-busy="true">
+          <p className="sr-only" role="status">
+            Loading your bag…
+          </p>
+          <div aria-hidden="true">
+            {[0, 1].map((i) => (
+              <div key={i} className="flex gap-4 border-b border-ink/10 py-6">
+                <div className="h-24 w-24 shrink-0 animate-pulse bg-cloud/60" />
+                <div className="flex-1 space-y-3">
+                  <div className="h-5 w-2/3 animate-pulse bg-cloud/60" />
+                  <div className="h-4 w-1/2 animate-pulse bg-cloud/60" />
+                </div>
+              </div>
+            ))}
+          </div>
+          <div aria-hidden="true" className="h-fit space-y-4 bg-cloud/40 p-6">
+            <div className="h-12 w-full animate-pulse bg-cloud/70" />
+            <div className="h-4 w-1/2 animate-pulse bg-cloud/70" />
+            <div className="h-4 w-full animate-pulse bg-cloud/70" />
+            <div className="h-4 w-full animate-pulse bg-cloud/70" />
+            <div className="h-6 w-full animate-pulse bg-cloud/70" />
+          </div>
+        </div>
       ) : lines.length === 0 ? (
         <div className="mt-16 flex flex-col items-center gap-4 text-center">
           <p className="text-sm text-ink/70">Your bag is empty.</p>
@@ -131,6 +155,9 @@ export default function CartPageContent() {
               <span>Plan</span>
               <span>Quantity</span>
               <span className="text-right">Total</span>
+            </div>
+            <div className="pt-4">
+              <CartIncludedNote lines={lines} />
             </div>
             <ul>
               {lines.map((line) => (
@@ -159,10 +186,10 @@ export default function CartPageContent() {
                       <button
                         type="button"
                         onClick={() => remove(line.slug)}
+                        aria-label={`Remove ${line.product.name}`}
                         className="tap-area mt-2 text-[11px] uppercase tracking-[0.14em] text-ink/70 underline underline-offset-4 hover:text-ochre"
                       >
                         <span aria-hidden="true">Remove</span>
-                        <span className="sr-only">Remove {line.product.name}</span>
                       </button>
                     </div>
                   </div>
