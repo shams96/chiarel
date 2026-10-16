@@ -125,9 +125,8 @@ export default function SynergyPage() {
         Ferment Lysate, and L-Ornithine are established INCI ingredient
         names, not CHIAREL trademarks, and CHIAREL claims no exclusive
         rights over them. This page reflects published cosmetic-science
-        understanding and is not a guarantee of individual results. Current
-        product availability of individual actives is disclosed per SKU on
-        each product page.
+        understanding and is not a guarantee of individual results. Each
+        product page names that product&rsquo;s key ingredients.
       </p>
 
       <div className="mt-8 flex flex-wrap gap-6 border-t border-ink/10 pt-8 text-[12px] uppercase tracking-[0.16em]">

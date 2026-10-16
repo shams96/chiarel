@@ -91,7 +91,7 @@ export const researchArticleJsonLd = {
   "@type": "Article",
   headline: "CHIAREL Formulation Science: Backed by Published Research",
   description:
-    "The published, peer-reviewed research behind CHIAREL's active ingredients — Palmitoyl Pentapeptide-4, Ceramide NP, Niacinamide, and Bioactive Ferment Lysate.",
+    "The published, peer-reviewed research behind CHIAREL's active ingredients — the Essence peptide complex (Acetyl Hexapeptide-8, Palmitoyl Tripeptide-1, Palmitoyl Tetrapeptide-7), Ceramide NP, Niacinamide, and Bifida Ferment Lysate.",
   datePublished: HOMEPAGE_PUBLISHED,
   dateModified: HOMEPAGE_LAST_UPDATED,
   author: {

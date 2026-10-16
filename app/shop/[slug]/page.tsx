@@ -2,7 +2,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getProduct, products, ritualProducts, productImageAlt, isPurchasable, type Product } from "@/lib/products";
+import { getProduct, products, ritualProducts, productImageAlt, isPurchasable, publishedInci, type Product } from "@/lib/products";
 import PurchaseOptions from "@/components/PurchaseOptions";
 import TrackViewItem from "@/components/TrackViewItem";
 import StickyPurchaseBar from "@/components/StickyPurchaseBar";
@@ -20,8 +20,8 @@ import { productHoverClass } from "@/lib/motion";
 // A compact, purely factual summary near the top of the page — GEO guidance
 // calls for a short extractable block AI answer engines can lift directly,
 // separate from the editorial blurb. Restates only facts already disclosed
-// elsewhere on this same page (formulation origin, active ingredients and
-// their exact percentages): no price (changes independently of this content
+// elsewhere on this same page (formulation origin and key ingredient
+// names; never percentages): no price (changes independently of this content
 // and isn't part of the spec) and no efficacy language.
 function productFactSummary(p: Product): string {
   const origin = "formulated in Isola del Liri, Italy";
@@ -35,10 +35,9 @@ function productFactSummary(p: Product): string {
     }
   }
 
-  const dosedActives = (p.actives ?? []).filter((a) => a.percent);
-  if (dosedActives.length > 0) {
-    const activeList = dosedActives.map((a) => `${a.percent} ${a.name}`);
-    return `${p.name} is ${origin}, containing ${activeList.join(" and ")}.`;
+  const keyIngredients = (p.actives ?? []).map((a) => a.name);
+  if (keyIngredients.length > 0) {
+    return `${p.name} is ${origin}. Key ingredients include ${keyIngredients.join(", ")}.`;
   }
 
   return `${p.name} is ${origin}.`;
@@ -270,19 +269,22 @@ export default async function ProductPage({
         </Reveal>
       )}
       {p.slug === "recovery-masque" && <IncludedSpatula />}
-      {p.actives && (
+      {p.actives && p.actives.length > 0 && (
         <Reveal>
-          <ClinicallyDosed actives={p.actives} />
+          <KeyIngredients actives={p.actives} />
         </Reveal>
       )}
-      {p.ingredientsInci && (
+      {/* The full INCI list renders ONLY once the owner marks it 'final'
+          (see ingredientsInciStatus in lib/products.ts); draft-v2 lists never
+          reach the page. */}
+      {publishedInci(p) && (
         <Reveal>
-          <FullIngredientList inci={p.ingredientsInci} />
+          <FullIngredientList inci={publishedInci(p)!} />
         </Reveal>
       )}
       {/* N1 has no owner-approved formula/actives data yet — a distinct,
-          honest placeholder ships instead of reusing ClinicallyDosed (which
-          would either render nothing, or invent percentages). */}
+          honest placeholder ships instead of reusing KeyIngredients (which
+          would either render nothing, or invent ingredients). */}
       {p.slug === "n1-neck-decollete" && (
         <Reveal>
           <N1FormulaTransparencyPlaceholder />
@@ -339,26 +341,24 @@ export default async function ProductPage({
 
 // Benefit pills band — sits directly under the hero, not buried mid-page.
 // Reuses only facts already established and vetted elsewhere on the site
-// (the primary active's dosed percentage, and the same trust badges used
-// in the footer) rather than inventing new short-form marketing claims.
+// (the primary key ingredient, and the same trust badges used in the
+// footer) rather than inventing new short-form marketing claims.
 function BenefitPills({
   actives,
 }: {
-  actives?: { name: string; percent: string | null }[];
+  actives?: { name: string }[];
 }) {
   const primaryActive = actives?.[0];
-  // "Customer Tested" and "Every Active Disclosed" are only true once a
+  // "Customer Tested" and "Key Ingredients Named" are only true once a
   // product has actives on record — without that (currently just N1, whose
   // own Formula Transparency / Testing & Evidence sections below say
   // plainly that testing and full disclosure aren't done yet), showing
   // these pills would contradict the page's own honest placeholder copy.
   const hasActives = Boolean(actives && actives.length > 0);
   const pills = [
-    primaryActive?.percent
-      ? `${primaryActive.percent} ${primaryActive.name}`
-      : null,
+    primaryActive ? primaryActive.name : null,
     hasActives ? "Customer Tested" : null,
-    hasActives ? "Every Active Disclosed" : null,
+    hasActives ? "Key Ingredients Named" : null,
     "Made to Order in Isola del Liri, Italy",
   ].filter((pill): pill is string => Boolean(pill));
 
@@ -407,9 +407,8 @@ function BrandStatement() {
           </p>
           <p>
             Skin is not one thing, and a house built to serve it
-            shouldn&rsquo;t pretend otherwise. Every active ingredient and
-            its exact concentration is stated on this page, not folded
-            into an undisclosed blend.
+            shouldn&rsquo;t pretend otherwise. This page names the key
+            ingredients behind the formula.
           </p>
           <p>
             Each formula is produced fresh, to order, in small batches —
@@ -418,8 +417,8 @@ function BrandStatement() {
           </p>
           <p>
             That is CHIAREL Intelligence™: start with the biology in front
-            of you, formulate it properly, and disclose exactly what went
-            in.
+            of you, formulate it properly, and name the ingredients the
+            formula is built around.
           </p>
         </div>
         <Link
@@ -535,39 +534,30 @@ function IncludedSpatula() {
   );
 }
 
-function ClinicallyDosed({
+// Key ingredient NAMES only. No percentages, anywhere (owner decision: the
+// luxury standard is named key ingredients plus the full INCI list).
+function KeyIngredients({
   actives,
 }: {
-  actives: { name: string; percent: string | null }[];
+  actives: { name: string }[];
 }) {
-  // Only actives with a real, formulated concentration are shown here — the
-  // entire premise of this panel is "we always state the real number," so an
-  // active without one is omitted rather than shown with a placeholder.
-  const dosed = actives.filter(
-    (a): a is { name: string; percent: string } => a.percent != null
-  );
-  if (dosed.length === 0) return null;
+  if (actives.length === 0) return null;
 
   return (
     <div className="mx-auto max-w-4xl border-t border-ink/10 px-6 py-16">
       <div className="grid gap-10 md:grid-cols-[1fr_1.2fr] md:items-start md:gap-14">
         <div>
           <h2 className="font-serif text-2xl leading-snug">
-            The Full Formulation Record
+            Key ingredients
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-ink/70">
-            Most formulations name an ingredient without saying how much of
-            it is actually in the bottle, grouping the actives that matter
-            into an undisclosed &ldquo;proprietary blend.&rdquo; Every
-            concentration below is what actually governs performance — not
-            a marketing claim, a matter of record.
+            The ingredients this formula is built around, named plainly.
           </p>
         </div>
         <div className="grid gap-8 sm:grid-cols-2">
-          {dosed.map((a) => (
+          {actives.map((a) => (
             <div key={a.name}>
-              <p className="font-serif text-5xl text-ochre">{a.percent}</p>
-              <p className="mt-2 text-sm text-ink/70">{a.name}</p>
+              <p className="font-serif text-2xl leading-snug text-ochre">{a.name}</p>
             </div>
           ))}
         </div>
@@ -653,9 +643,10 @@ function HowToUse({ steps }: { steps: string[] }) {
   );
 }
 
-// Full consumer ingredient list. Renders only when `ingredientsInci` exists
-// in the product data, which requires lab-confirmed final-label INCI.
-function FullIngredientList({ inci }: { inci: string }) {
+// Full consumer ingredient list. Rendered only via publishedInci(), i.e. when
+// the product's ingredientsInciStatus is 'final' (owner-confirmed after
+// Grazia / supplier declarations). Names only, in order, never percentages.
+function FullIngredientList({ inci }: { inci: string[] }) {
   return (
     <div className="mx-auto max-w-2xl border-t border-ink/10 px-6 py-16">
       <details className="group">
@@ -664,7 +655,7 @@ function FullIngredientList({ inci }: { inci: string }) {
           <span className="ml-4 text-xl text-ink/50 group-open:hidden" aria-hidden="true">+</span>
           <span className="ml-4 hidden text-xl text-ink/50 group-open:inline" aria-hidden="true">−</span>
         </summary>
-        <p className="mt-4 text-[13px] leading-relaxed text-ink/70">{inci}</p>
+        <p className="mt-4 text-[13px] leading-relaxed text-ink/70">{inci.join(", ")}</p>
       </details>
     </div>
   );
@@ -681,18 +672,16 @@ function ProductReviewsSlot(_props: { slug: string }) {
 }
 
 // N1 PDP section 7. No formula/actives data exists yet — this is a
-// deliberately honest placeholder, not a reuse of ClinicallyDosed (which
-// would either render nothing or risk implying invented percentages).
+// deliberately honest placeholder, not a reuse of KeyIngredients (which
+// would either render nothing or risk implying invented ingredients).
 function N1FormulaTransparencyPlaceholder() {
   return (
     <div className="mx-auto max-w-2xl border-t border-ink/10 px-6 py-16 text-center">
       <h2 className="font-serif text-2xl leading-snug">Formula Transparency</h2>
       <p className="mt-3 text-sm leading-relaxed text-ink/70">
-        CHIAREL discloses every active ingredient and its exact concentration
-        on the product page, with no undisclosed &ldquo;proprietary
-        blend.&rdquo; N1&rsquo;s full formulation record — the same standard
-        applied to every other CHIAREL product — will be published here once
-        the formula is finalized.
+        Each CHIAREL product page names its key ingredients. N1&rsquo;s
+        ingredient record will be published here once the formula is
+        finalized.
       </p>
     </div>
   );
@@ -847,8 +836,8 @@ const mechanismBySlug: Record<string, { step: string; text: string }[]> = {
     { step: "03", text: "Together, they let the cleanse step support the barrier instead of working against it." },
   ],
   "chiarel-essence": [
-    { step: "01", text: "Palmitoyl Pentapeptide-4 is studied for supporting the skin's structural proteins." },
-    { step: "02", text: "A postbiotic complex is studied for upregulating the proteins that hold the barrier together." },
+    { step: "01", text: "Peptides including Acetyl Hexapeptide-8 and Palmitoyl Tripeptide-1 are studied for supporting the skin's structural proteins." },
+    { step: "02", text: "Bifida Ferment Lysate, a postbiotic, is studied for upregulating the proteins that hold the barrier together." },
     { step: "03", text: "Delivered as a concentrate, positioned as the ritual's central treatment step." },
   ],
   "terra-radiance-creme": [
@@ -950,10 +939,8 @@ function ScienceLinks({ slug }: { slug: string }) {
 // no client component, no hydration cost, and works with JS disabled;
 // keyboard and screen-reader behavior come from the browser for free.
 // Deliberately scoped to usage/patch-test guidance only — the actives
-// table (ClinicallyDosed, above) stays fully expanded on every PDP, since
-// "every active ingredient disclosed, not hidden behind a click" is
-// Chiarel's own stated differentiator, not incidental page content to
-// compress for scroll length.
+// key ingredients (KeyIngredients, above) stay fully expanded on every PDP,
+// not incidental page content to compress for scroll length.
 function UsageGuidance() {
   return (
     <div className="border-t border-ink/10 bg-cloud/30 py-16">

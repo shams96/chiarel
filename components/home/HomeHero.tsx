@@ -30,7 +30,7 @@ export default function HomeHero() {
           </h1>
           <p className="mt-3 max-w-sm text-[14px] leading-relaxed text-ink/70 md:mt-6 md:text-[15px]">
             A focused morning and evening ritual, built around CHIAREL
-            Essence™. Every active, with its exact percentage.
+            Essence™. Key ingredients named across our product pages.
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-x-8 gap-y-3 md:mt-8">
             <Link

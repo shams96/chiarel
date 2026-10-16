@@ -191,10 +191,10 @@ export default function CartDrawer() {
                 <span>Estimated total</span>
                 <span className="font-serif text-xl">${estimatedTotal}</span>
               </p>
-              {/* N1 has no testing or full disclosure yet (see its product page), so the line is not shown for a bag that contains it. */}
+              {/* N1 has no testing or ingredient record yet (see its product page), so the line is not shown for a bag that contains it. */}
               {!lines.some((l) => l.slug === "n1-neck-decollete") && (
                 <p className="mb-3 text-center text-[11px] uppercase tracking-[0.14em] text-ink/65">
-                  Customer-tested · every active disclosed
+                  Customer-tested · key ingredients named
                 </p>
               )}
               <Link

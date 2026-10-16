@@ -45,7 +45,9 @@ export type Product = {
   set?: boolean;
   includes?: string[];
   icon: boolean;
-  actives?: { name: string; percent: string | null }[];
+  // Key ingredient NAMES only. No percentages are stored or published
+  // anywhere on the site (owner decision).
+  actives?: { name: string }[];
   benefits?: string[];
   // Four-product launch fields (added alongside the legacy fields above,
   // which are left untouched for every existing product — see
@@ -93,14 +95,28 @@ export type Product = {
   /** Repo path(s) the `howToUse` lines were taken from, for audit. Not rendered. */
   howToUseSource?: string;
   /**
-   * Full consumer ingredient list (final legal INCI, label order). Deliberately
-   * absent for every product until the lab supplies final-label INCI: the
-   * Launch Formulas Register states its tables are internal formula-control
-   * records, not consumer label lists. The PDP renders "Full ingredient list"
-   * only when this exists.
+   * Full ingredient (INCI) list: names only, in descending order of
+   * concentration, taken from the "INCI Order (draft)" tab of the v2 formula
+   * workbook. NEVER store or render percentages here.
    */
-  ingredientsInci?: string;
+  ingredientsInci?: string[];
+  /**
+   * Publication gate for `ingredientsInci`. 'draft-v2' = chemist-review draft,
+   * NOT shown anywhere on the site. The owner flips a product to 'final' only
+   * after Grazia / the suppliers confirm the consumer INCI (peptide premix
+   * carriers, CHIAREL accord fragrance allergen declaration, IFRA). Use
+   * `publishedInci()` to read it so the gate cannot be bypassed.
+   */
+  ingredientsInciStatus?: InciStatus;
 };
+
+export type InciStatus = "draft-v2" | "final";
+
+/** The full INCI list, but only once the owner has marked it 'final'. */
+export function publishedInci(p: Pick<Product, "ingredientsInci" | "ingredientsInciStatus">): string[] | null {
+  if (p.ingredientsInciStatus !== "final") return null;
+  return p.ingredientsInci && p.ingredientsInci.length > 0 ? p.ingredientsInci : null;
+}
 
 export const products = data as Product[];
 

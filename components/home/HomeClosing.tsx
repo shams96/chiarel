@@ -120,8 +120,8 @@ export function HomePhilosophy() {
         <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-ink/70">
           CHIAREL Intelligence™ began as a question at a kitchen table —
           the working method still holds: start with the biology in front
-          of you, formulate it properly, and disclose exactly what went
-          in. Advancing Cellular Clarity™ against Modern Biological
+          of you, formulate it properly, and name the ingredients that
+          matter. Advancing Cellular Clarity™ against Modern Biological
           Stress™ is the mission behind every formula, including N1. It is
           the same discipline behind La Bella Figura — presenting one&rsquo;s
           best self, quietly, without announcement.

@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "How CHIAREL Compares",
   description:
-    "A factual comparison of CHIAREL™ against La Mer, Augustinus Bader, Dr. Barbara Sturm, SkinCeuticals, and La Prairie on price, dosage transparency, provenance, and subscription policy.",
+    "A factual comparison of CHIAREL™ against La Mer, Augustinus Bader, Dr. Barbara Sturm, SkinCeuticals, and La Prairie on price, provenance, and subscription policy.",
   alternates: { canonical: "/science/comparison" },
 };
 
@@ -30,15 +30,6 @@ const serumTable = {
         "~$185 (30 ml)",
         "~$320 (30 ml)",
         "~$545 (30 ml)",
-      ],
-    },
-    {
-      label: "Active concentrations disclosed",
-      values: [
-        "Yes — Palmitoyl Pentapeptide-4 at 3%, Bioactive Ferment Lysate at 0.30%, published on the product page",
-        "Yes — 15% L-ascorbic acid, 1% alpha tocopherol, 0.5% ferulic acid, published on packaging",
-        "Not published",
-        "Not published",
       ],
     },
     {
@@ -76,14 +67,6 @@ const cremeTable = {
         "$126 with subscription · $158 one-time (50 g)",
         "$450 (2 oz) · price scales with size",
         "~$315 (50 ml)",
-      ],
-    },
-    {
-      label: "Active concentrations disclosed",
-      values: [
-        "Yes — Ceramide NP at 0.8%, Niacinamide at 3.0%, published on the product page",
-        "Not published",
-        "Not published",
       ],
     },
     {
@@ -177,10 +160,10 @@ export default function ComparisonPage() {
       </h1>
       <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/75">
         Luxury skincare is rarely sold with its facts visible. Prices are
-        listed; formulation detail, manufacturing origin, and subscription
-        terms often are not. Below is a plain comparison of CHIAREL™ against
-        houses whose products occupy a comparable role in a daily ritual —
-        the concentrations, the provenance, and the policy, side by side.
+        listed; manufacturing origin and subscription terms often are not.
+        Below is a plain comparison of CHIAREL™ against houses whose
+        products occupy a comparable role in a daily ritual — the price,
+        the provenance, and the policy, side by side.
         Nothing here is a claim about which formulation performs better;
         efficacy is not something either house can verify for the other.
       </p>
@@ -193,8 +176,8 @@ export default function ComparisonPage() {
         <p className="mt-3 text-sm leading-relaxed text-ink/70">
           Mass-market brands talk about the ingredient. Clinical brands
           compete on efficacy claims alone. CHIAREL formulates for a third
-          thing: explaining the mechanism, disclosing the dose, and
-          delivering it inside a lipid/occlusive vehicle designed for
+          thing: explaining the mechanism, naming the key ingredients, and
+          delivering them inside a lipid/occlusive vehicle designed for
           sustained release. Ingredients like Bifida Ferment Lysate and
           L-Ornithine are established, industry-wide INCI names — CHIAREL
           does not claim exclusivity over them. What we describe and stand
@@ -209,7 +192,7 @@ export default function ComparisonPage() {
 
       <div className="mt-14 max-w-2xl border-t border-ink/10 pt-8 text-[12px] leading-relaxed text-ink/65">
         <p>
-          Competitor prices and formulation disclosures reflect publicly
+          Competitor prices and policies reflect publicly
           listed information as of {new Date().getFullYear()} and are subject
           to change without notice from the respective houses. CHIAREL™
           prices reflect current subscription and one-time pricing as listed
@@ -217,10 +200,7 @@ export default function ComparisonPage() {
           <Link href="/shop" className="border-b border-ochre text-ochre">
             The Shop
           </Link>
-          . &ldquo;Active concentrations disclosed&rdquo; refers only to
-          whether a brand publishes the percentage of a named active
-          ingredient on its product page — not to the presence or absence of
-          any ingredient itself.
+          .
         </p>
       </div>
 

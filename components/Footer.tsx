@@ -9,7 +9,7 @@ const trustBadges = [
   "Secure checkout via Stripe",
   "Formulated by a pharmacist",
   "Made to order in Isola del Liri, Italy",
-  "Every active ingredient disclosed",
+  "Key ingredients named across our product pages",
 ];
 
 const navColumns = [
