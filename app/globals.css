@@ -205,6 +205,18 @@ a:hover .ticker-msg,
 a:focus-visible .ticker-msg {
   animation-play-state: paused;
 }
+/* Paused by the visitor: stop the cycle on the first message (not mid-fade,
+   which could leave the bar blank) and stop the pulsing dot. */
+.ticker-paused .ticker-msg {
+  animation: none;
+  opacity: 0;
+}
+.ticker-paused .ticker-msg:first-child {
+  opacity: 1;
+}
+.ticker-paused .animate-ping {
+  animation: none;
+}
 @media (prefers-reduced-motion: reduce) {
   .ticker-rotor {
     display: block;
