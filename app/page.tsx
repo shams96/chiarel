@@ -3,6 +3,7 @@ import { products, isPurchasable } from "@/lib/products";
 import HeroIntro from "@/components/HeroIntro";
 import EmailSignup from "@/components/EmailSignup";
 import HomeHero from "@/components/home/HomeHero";
+import EditorialFeature from "@/components/EditorialFeature";
 import HomeRitual from "@/components/home/HomeRitual";
 import HomeFitGuidance from "@/components/home/HomeFitGuidance";
 import HomeN1Feature from "@/components/home/HomeN1Feature";
@@ -162,6 +163,15 @@ export default function Home() {
           -> final CTA. */}
       <HomeHero />
       <HomeRitual />
+      <EditorialFeature
+        src="/assets/products/terra-radiance-creme-editorial.jpg"
+        alt="A woman holding Terra Radiance Crème against the Capri coastline"
+        kicker="The Icon Product"
+        headline="The daily crème of the morning ritual."
+        body="Terra Radiance Crème: the moisturising step of the AM ritual, finished in Italian light."
+        href="/shop/terra-radiance-creme"
+        cta="Discover Terra Radiance Crème"
+      />
       <HomeFitGuidance />
       <HomeN1Feature />
       <HomeProvenance />
