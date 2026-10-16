@@ -9,7 +9,7 @@ export default function HomeProvenance() {
     <>
       <section className="relative section-y overflow-hidden border-y border-ink/10 text-ivory">
         <Image
-          src="/assets/editorial/isola-del-liri-cascata.png"
+          src="/assets/editorial/isola-del-liri-cascata.jpg"
           alt="Editorial illustration of the Cascata Grande waterfall running through Isola del Liri, Italy"
           fill
           sizes="100vw"
