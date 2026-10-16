@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/lib/cart-context";
+import { useDialog } from "@/lib/use-dialog";
 
 const FOUNDING_100_PAGES = ["/", "/founding-100", "/shop/recovery-masque"];
 
@@ -53,6 +54,8 @@ function Ticker() {
 export default function Header() {
   const { count, open } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLElement>(null);
+  useDialog(menuOpen, menuRef, () => setMenuOpen(false));
   const pathname = usePathname();
   const showFounding100Ticker = FOUNDING_100_PAGES.includes(pathname ?? "");
   return (
@@ -143,8 +146,13 @@ export default function Header() {
           menuOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
         onClick={() => setMenuOpen(false)}
+        aria-hidden="true"
       />
       <aside
+        ref={menuRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
         id="mobile-menu"
         className={`cart-panel fixed right-0 top-0 z-[90] flex h-full w-full max-w-xs flex-col bg-ivory transition-transform md:hidden ${
           menuOpen ? "translate-x-0 shadow-2xl" : "translate-x-full"

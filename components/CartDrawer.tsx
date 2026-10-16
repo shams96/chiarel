@@ -1,8 +1,10 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
+import { useDialog } from "@/lib/use-dialog";
 import { ritualProducts } from "@/lib/products";
 import { shippingFor, shippingNote } from "@/lib/shipping";
 
@@ -14,6 +16,8 @@ const modeLabel: Record<string, string> = {
 
 export default function CartDrawer() {
   const { lines, add, remove, setQty, isOpen, close, subtotal, savings } = useCart();
+  const panelRef = useRef<HTMLElement>(null);
+  useDialog(isOpen, panelRef, close);
   const shipping = shippingFor(subtotal, lines);
   const estimatedTotal = subtotal + shipping;
   const savingsPercent =
@@ -29,8 +33,13 @@ export default function CartDrawer() {
           isOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
         onClick={close}
+        aria-hidden="true"
       />
       <aside
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Your Ritual Bag"
         className={`cart-panel fixed right-0 top-0 z-[70] flex h-full w-full max-w-md flex-col bg-ivory transition-transform ${
           isOpen ? "translate-x-0 shadow-2xl" : "translate-x-full"
         }`}
