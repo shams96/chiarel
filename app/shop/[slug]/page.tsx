@@ -12,6 +12,7 @@ import AddPairButton from "@/components/AddPairButton";
 import CellularHydrationCascade from "@/components/CellularHydrationCascade";
 import Reveal from "@/components/Reveal";
 import EditorialFeature from "@/components/EditorialFeature";
+import AmbientVideo from "@/components/AmbientVideo";
 import { productJsonLd, productPageTitle, breadcrumbJsonLd } from "@/lib/seo";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { productHoverClass } from "@/lib/motion";
@@ -227,6 +228,19 @@ export default async function ProductPage({
       <BenefitPills actives={p.actives} />
 
       {p.includes && <WhatsInside slugs={p.includes} />}
+
+      {p.slug === "n1-neck-decollete" && (
+        <section className="section-y border-y border-ink/10 bg-ink">
+          <div className="section-x">
+            <AmbientVideo
+              src="/assets/products/n1-neck-decollete-ambient.mp4"
+              poster="/assets/products/n1-neck-decollete-honeycomb.jpg"
+              label="N1 Neck & Décolleté Renewal Emulsion, 40 ml, on a reflective surface with water droplets"
+              className="mx-auto aspect-[9/16] max-h-[80vh] w-auto max-w-full bg-ink object-cover"
+            />
+          </div>
+        </section>
+      )}
 
       {p.slug === "terra-radiance-creme" && (
         <EditorialFeature
