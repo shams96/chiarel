@@ -81,12 +81,10 @@ export function MoonMark() {
 }
 
 function RoutineRow({ entries, dark = false }: { entries: Entry[]; dark?: boolean }) {
-  const body = dark ? "text-ivory/80" : "text-ink/75";
-  const sub = dark ? "text-ivory/65" : "text-ink/65";
-  const tag = dark ? "text-champagne" : "text-ochre";
-  const cta = dark
-    ? "border border-ivory/70 text-ivory hover:border-champagne hover:text-champagne"
-    : "border border-ink hover:border-ochre hover:text-ochre";
+  const body = "text-ink/75";
+  const sub = "text-ink/65";
+  const tag = "text-ochre";
+  const cta = "border border-ink hover:border-ochre hover:text-ochre";
   return (
     <div className="mt-12 space-y-16">
       {entries.map(({ product: p, optional }, i) => (
@@ -152,8 +150,8 @@ function RoutineRow({ entries, dark = false }: { entries: Entry[]; dark?: boolea
 // One short row of tiles. md+: a single flex row where lead tiles grow wider.
 // `data-size` makes the hierarchy assertable.
 function CompactRow({ entries, dark = false }: { entries: Entry[]; dark?: boolean }) {
-  const sub = dark ? "text-ivory/70" : "text-ink/65";
-  const tag = dark ? "text-champagne" : "text-ochre";
+  const sub = "text-ink/65";
+  const tag = "text-ochre";
   const spans = mobileSpans(entries);
   return (
     <ul className="mt-8 grid grid-cols-2 gap-4 md:flex md:items-start md:gap-6">
@@ -168,7 +166,7 @@ function CompactRow({ entries, dark = false }: { entries: Entry[]; dark?: boolea
           >
             <Link
               href={`/shop/${p.slug}`}
-              className="group block min-h-[44px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-champagne"
+              className="group block min-h-[44px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ochre"
             >
               <div
                 className="relative h-52 overflow-hidden md:h-64"
@@ -231,22 +229,22 @@ export function RoutineBand({
       id={id}
       aria-labelledby={`${id}-title`}
       data-variant={variant}
-      className={`scroll-mt-20 ${dark ? "bg-garden text-ivory" : "border-y border-champagne/50 bg-champagne/25 text-ink"}`}
+      className={`scroll-mt-20 ${dark ? "border-y border-ink/20 bg-cloud text-ink" : "border-y border-champagne/50 bg-champagne/25 text-ink"}`}
     >
       <div className={`mx-auto max-w-6xl px-6 ${compact ? "py-12 md:py-14" : "py-16 md:py-20"}`}>
-        <div className={`flex items-center gap-4 ${dark ? "text-champagne" : "text-ochre"}`}>
+        <div className={`flex items-center gap-4 ${"text-ochre"}`}>
           {dark ? <MoonMark /> : <SunMark />}
           <p className="text-[11px] font-medium uppercase tracking-[0.3em]">{time}</p>
         </div>
         <Heading id={`${id}-title`} className={`mt-4 font-serif leading-tight ${compact ? "text-3xl md:text-4xl" : "text-4xl md:text-5xl"}`}>
           {title}
         </Heading>
-        <ol className={`mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 font-serif text-xl ${dark ? "text-ivory/90" : "text-ink/85"}`}>
+        <ol className={`mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 font-serif text-xl ${"text-ink/85"}`}>
           {steps.map((st, i) => (
             <li key={st.n} className="flex items-center gap-3">
-              {i > 0 && <span aria-hidden="true" className={dark ? "text-ivory/40" : "text-ink/40"}>→</span>}
+              {i > 0 && <span aria-hidden="true" className={"text-ink/40"}>→</span>}
               <span>
-                <span className={dark ? "text-champagne" : "text-ochre"}>Step {st.n}</span> {st.label}
+                <span className={"text-ochre"}>Step {st.n}</span> {st.label}
               </span>
             </li>
           ))}
