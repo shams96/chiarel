@@ -43,8 +43,8 @@ export default function ThreeSkinsPage() {
         <p>
           That premise is CHIAREL Intelligence™ — not a marketing concept,
           but the working method the House still holds: start with the
-          biology in front of you, formulate it properly, and disclose
-          exactly what went in.
+          biology in front of you, formulate it properly, and name the
+          ingredients that matter.
         </p>
       </div>
 

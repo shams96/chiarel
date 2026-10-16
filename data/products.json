@@ -28,12 +28,10 @@
     "icon": true,
     "actives": [
       {
-        "name": "Bioactive Ferment Lysate (BFL)",
-        "percent": "0.30%"
+        "name": "Bifida Ferment Lysate"
       },
       {
-        "name": "Prebiotic Complex",
-        "percent": "0.3%"
+        "name": "Prebiotic Complex"
       }
     ],
     "launchRitual": false,
@@ -71,8 +69,7 @@
     "icon": false,
     "actives": [
       {
-        "name": "Hyaluronic Acid (Low Molecular Weight)",
-        "percent": "0.3%"
+        "name": "Hyaluronic Acid (Low Molecular Weight)"
       }
     ],
     "launchRitual": false,
@@ -116,18 +113,50 @@
     "icon": true,
     "actives": [
       {
-        "name": "Palmitoyl Pentapeptide-4",
-        "percent": "3%"
+        "name": "Acetyl Hexapeptide-8"
       },
       {
-        "name": "Bioactive Ferment Lysate (BFL)",
-        "percent": "0.30%"
+        "name": "Palmitoyl Tripeptide-1"
+      },
+      {
+        "name": "Palmitoyl Tetrapeptide-7"
+      },
+      {
+        "name": "Bifida Ferment Lysate"
+      },
+      {
+        "name": "Niacinamide"
       }
     ],
     "launchRitual": true,
     "launchRitualOrder": 1,
     "launchRole": "preparation",
     "timeOfUse": "AM/PM",
+    "ingredientsInci": [
+      "Aqua",
+      "Glycerin",
+      "Niacinamide",
+      "Acetyl Hexapeptide-8",
+      "Propanediol",
+      "Pentylene Glycol",
+      "Palmitoyl Tripeptide-1",
+      "Palmitoyl Tetrapeptide-7",
+      "Panthenol",
+      "Hydrolyzed Collagen",
+      "Phenoxyethanol (and) Ethylhexylglycerin",
+      "Sodium PCA",
+      "Bifida Ferment Lysate",
+      "Sodium Hyaluronate (high MW)",
+      "Decapeptide-52",
+      "Sodium Hyaluronate (low MW)",
+      "Beta-Glucan",
+      "Disodium EDTA",
+      "Sodium Citrate",
+      "Xanthan Gum",
+      "Citric Acid",
+      "Parfum (CHIAREL accord)"
+    ],
+    "ingredientsInciStatus": "draft-v2",
     "launchStatus": "launch",
     "productColorToken": "Peach Dust",
     "howToUse": [
@@ -173,18 +202,50 @@
     "icon": true,
     "actives": [
       {
-        "name": "Ceramide NP",
-        "percent": "0.8%"
+        "name": "Ceramide NP"
       },
       {
-        "name": "Niacinamide",
-        "percent": "3.0%"
+        "name": "Niacinamide"
       }
     ],
     "launchRitual": true,
     "launchRitualOrder": 2,
     "launchRole": "day-foundation",
     "timeOfUse": "AM",
+    "ingredientsInci": [
+      "Aqua",
+      "Squalane",
+      "Glycerin",
+      "Niacinamide",
+      "Caprylic/Capric Triglyceride",
+      "Cetearyl Alcohol",
+      "Simmondsia Chinensis Seed Oil",
+      "Panthenol",
+      "Glyceryl Stearate SE",
+      "Butyrospermum Parkii Butter",
+      "Ascorbyl Glucoside",
+      "Cetyl Palmitate",
+      "Ceramide NP",
+      "Phenoxyethanol (and) Ethylhexylglycerin",
+      "Cholesterol",
+      "Phytosphingosine",
+      "Copper Tripeptide-1",
+      "Lecithin",
+      "Tocopherol",
+      "Ceramide AP",
+      "Ceramide EOP",
+      "Bifida Ferment Lysate",
+      "Sodium Hyaluronate",
+      "Alpha-Glucan Oligosaccharide",
+      "Sclerotium Gum",
+      "Xanthan Gum",
+      "Sh-Oligopeptide-1",
+      "Sodium Citrate",
+      "Citric Acid",
+      "Palmitoyl Tripeptide-38",
+      "Parfum (CHIAREL accord)"
+    ],
+    "ingredientsInciStatus": "draft-v2",
     "launchStatus": "launch",
     "productColorToken": "Red Ochre",
     "howToUse": [
@@ -230,18 +291,54 @@
     "icon": true,
     "actives": [
       {
-        "name": "L-Ornithine",
-        "percent": "1.0%"
+        "name": "L-Ornithine"
       },
       {
-        "name": "Panthenol",
-        "percent": "2.0%"
+        "name": "Panthenol"
       }
     ],
     "launchRitual": true,
     "launchRitualOrder": 3,
     "launchRole": "night-treatment",
     "timeOfUse": "PM",
+    "ingredientsInci": [
+      "Aqua",
+      "Glycerin",
+      "Niacinamide",
+      "Squalane",
+      "Simmondsia Chinensis Seed Oil",
+      "Caprylic/Capric Triglyceride",
+      "Palmitoyl Tetrapeptide-7",
+      "Aloe Barbadensis Leaf Juice",
+      "Bakuchiol",
+      "Acetyl Hexapeptide-8",
+      "Palmitoyl Tripeptide-38",
+      "Propanediol",
+      "Ornithine",
+      "Cetearyl Alcohol",
+      "Glyceryl Stearate SE",
+      "Palmitoyl Tripeptide-1",
+      "Copper Tripeptide-1",
+      "Panthenol",
+      "Cetyl Palmitate",
+      "Phenoxyethanol (and) Ethylhexylglycerin",
+      "Nicotinamide Mononucleotide",
+      "Adenosine",
+      "Lecithin",
+      "Tocopherol",
+      "Decapeptide-52",
+      "Sodium Hyaluronate (high MW)",
+      "Sclerotium Gum",
+      "Ceramide NP",
+      "Sodium Hyaluronate (low MW)",
+      "Cholesterol",
+      "Xanthan Gum",
+      "Disodium EDTA",
+      "Sodium Citrate",
+      "Citric Acid",
+      "Parfum (CHIAREL accord)"
+    ],
+    "ingredientsInciStatus": "draft-v2",
     "launchStatus": "launch",
     "productColorToken": "Formal Garden",
     "howToUse": [
@@ -405,6 +502,40 @@
     "launchRitualOrder": 4,
     "launchRole": "hero",
     "timeOfUse": "PM",
+    "ingredientsInci": [
+      "Aqua",
+      "Squalane",
+      "Glycerin",
+      "Niacinamide",
+      "Caprylic/Capric Triglyceride",
+      "Cetearyl Alcohol",
+      "Simmondsia Chinensis Seed Oil",
+      "Panthenol",
+      "Glyceryl Stearate SE",
+      "Butyrospermum Parkii Butter",
+      "Ascorbyl Glucoside",
+      "Cetyl Palmitate",
+      "Ceramide NP",
+      "Phenoxyethanol (and) Ethylhexylglycerin",
+      "Alpha-Glucan Oligosaccharide",
+      "Cholesterol",
+      "Phytosphingosine",
+      "Copper Tripeptide-1",
+      "Lecithin",
+      "Tocopherol",
+      "Ceramide AP",
+      "Ceramide EOP",
+      "Bifida Ferment Lysate",
+      "Sodium Hyaluronate",
+      "Sclerotium Gum",
+      "Xanthan Gum",
+      "Sh-Oligopeptide-1",
+      "Sodium Citrate",
+      "Citric Acid",
+      "Palmitoyl Tripeptide-38",
+      "Parfum (CHIAREL accord)"
+    ],
+    "ingredientsInciStatus": "draft-v2",
     "launchStatus": "launch",
     "productColorToken": "Formal Garden",
     "howToUse": [
@@ -445,6 +576,34 @@
     "launchRitual": false,
     "launchRitualOrder": null,
     "launchRole": "standalone",
+    "ingredientsInci": [
+      "Aqua",
+      "Glycerin",
+      "Niacinamide",
+      "Propanediol",
+      "Caffeine",
+      "Acetyl Tetrapeptide-5",
+      "Palmitoyl Tetrapeptide-7",
+      "Dipeptide-2",
+      "Panthenol",
+      "Mica (CI 77019)",
+      "Palmitoyl Tripeptide-1",
+      "Phenoxyethanol (and) Ethylhexylglycerin",
+      "Sodium PCA",
+      "Phytonadione",
+      "Boron Nitride",
+      "Sodium Hyaluronate (high MW)",
+      "Sodium Hyaluronate (low MW)",
+      "Bisabolol",
+      "Sodium Hyaluronate",
+      "Bifida Ferment Lysate",
+      "Xanthan Gum",
+      "Sodium Citrate",
+      "Disodium EDTA",
+      "Citric Acid",
+      "Parfum (CHIAREL accord)"
+    ],
+    "ingredientsInciStatus": "draft-v2",
     "launchStatus": "launch",
     "productColorToken": "Formal Garden",
     "howToUse": [

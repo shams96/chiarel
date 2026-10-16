@@ -69,7 +69,7 @@ export default async function Founding100Page() {
 
             <div className="mt-6 flex flex-wrap gap-x-6 gap-y-1 border-t border-ivory/10 pt-5 text-[12px] text-ivory/55">
               <span>Formulated by Grazia Savoriti, Pharmacist</span>
-              <span>L-Ornithine 1.0% · Panthenol 2.0%, disclosed</span>
+              <span>Built around L-Ornithine and Panthenol</span>
             </div>
 
             <div className="mt-8">

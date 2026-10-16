@@ -28,11 +28,12 @@ export default function HomeProof() {
           <ul className="mx-auto mt-10 max-w-xl space-y-4 text-sm">
             <li className="border-l-2 border-ochre pl-5">
               <p className="text-ink/70">
-                Palmitoyl Pentapeptide-4 (used in CHIAREL Essence™) is studied
-                for its role in visible firmness and texture support.
+                Peptides such as Acetyl Hexapeptide-8 and Palmitoyl Tripeptide-1
+                (used in CHIAREL Essence™) are studied for their role in visible
+                firmness and texture support.
               </p>
               <a
-                href="https://pubmed.ncbi.nlm.nih.gov/?term=palmitoyl+pentapeptide+skin"
+                href="https://pubmed.ncbi.nlm.nih.gov/?term=acetyl+hexapeptide-8+palmitoyl+tripeptide-1+skin"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={pubmedLink}
@@ -57,7 +58,7 @@ export default function HomeProof() {
             </li>
             <li className="border-l-2 border-ochre pl-5">
               <p className="text-ink/70">
-                Bioactive Ferment Lysate — a postbiotic used across the
+                Bifida Ferment Lysate — a postbiotic used across the
                 ritual — is studied for supporting barrier proteins and
                 microbiome balance. See the full mechanism explainer.
               </p>

@@ -5,13 +5,13 @@ import { products } from "@/lib/products";
 const formulationApproach = [
   {
     dimension: "Active ingredient approach",
-    chiarel: "Peptide- and postbiotic-based actives (e.g. Palmitoyl Pentapeptide-4, Bioactive Ferment Lysate)",
+    chiarel: "Peptide- and postbiotic-based actives (e.g. Acetyl Hexapeptide-8, Palmitoyl Tripeptide-1, Bifida Ferment Lysate)",
     categoryNorm: "Often built around retinol or retinoid derivatives",
   },
   {
-    dimension: "Ingredient disclosure",
-    chiarel: "Every active and its exact percentage, published on the product page",
-    categoryNorm: "Often grouped into an undisclosed \"proprietary blend\"",
+    dimension: "Ingredient naming",
+    chiarel: "Key ingredients named on each product page",
+    categoryNorm: "Often described only as a branded \"complex\"",
   },
   {
     dimension: "Batch production",
@@ -30,13 +30,12 @@ const formulationApproach = [
   },
 ];
 
-// N1 has no actives yet, so it does not appear in the table — this table is
-// never populated with invented figures.
+// N1 has no key ingredients on record yet, so it does not appear in the
+// table. No percentages are shown: the site names key ingredients only.
 const ingredientTable = products.flatMap((p) =>
   (p.actives ?? []).map((a) => ({
     product: p.name,
     ingredient: a.name,
-    percent: a.percent ?? "—",
   }))
 );
 
@@ -54,10 +53,10 @@ export default function HomeFormulationRecord() {
         <details className="group border-y border-ink/10">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-6 font-serif text-2xl leading-snug text-ink md:text-3xl">
             <span>
-              See the full formulation record
+              See the key ingredients
               <span className="mt-1 block font-sans text-[13px] leading-relaxed text-ink/65">
-                Every active by product and percentage, and how CHIAREL™
-                compares with the category norm.
+                Key ingredients by product, and how CHIAREL™ compares with
+                the category norm.
               </span>
             </span>
             <span className="ml-4 shrink-0 text-xl text-ink/50 group-open:hidden" aria-hidden="true">+</span>
@@ -71,8 +70,8 @@ export default function HomeFormulationRecord() {
                   What&rsquo;s Actually in CHIAREL™ Formulas?
                 </h2>
                 <p className="mt-4 text-sm leading-relaxed text-ink/70">
-                  Customer-tested, no hidden blends — every active, stated. Not a
-                  marketing claim, a matter of record.
+                  The key ingredients behind each formula, named. Each product
+                  page carries the detail.
                 </p>
               </div>
               <EvidenceGrid products={evidenceProducts} />
@@ -80,19 +79,17 @@ export default function HomeFormulationRecord() {
 
             <div className="mt-16">
               <h2 className="font-serif text-3xl leading-snug">
-                Every Active, by Product and Percentage
+                Key Ingredients, by Product
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink/70">
-                The complete formulation record across the House — no
-                proprietary blends, no undisclosed percentages.
+                The key ingredients behind each formula across the House.
               </p>
               <div className="mt-8 overflow-x-auto">
                 <table className="w-full min-w-[560px] border-collapse text-left text-sm">
                   <thead>
                     <tr className="border-b border-ink/20 text-[11px] uppercase tracking-[0.16em] text-ink/65">
                       <th className="py-3 pr-4 font-normal">Product</th>
-                      <th className="py-3 pr-4 font-normal">Active Ingredient</th>
-                      <th className="py-3 font-normal">Concentration</th>
+                      <th className="py-3 font-normal">Key Ingredient</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -102,8 +99,7 @@ export default function HomeFormulationRecord() {
                         className="border-b border-ink/10 transition-colors hover:bg-ochre/5"
                       >
                         <td className="py-3 pr-4 text-ink/80">{row.product}</td>
-                        <td className="py-3 pr-4 text-ink/70">{row.ingredient}</td>
-                        <td className="py-3 tabular-nums text-ochre">{row.percent}</td>
+                        <td className="py-3 text-ink/70">{row.ingredient}</td>
                       </tr>
                     ))}
                   </tbody>

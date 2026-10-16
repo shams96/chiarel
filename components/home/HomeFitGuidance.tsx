@@ -5,12 +5,12 @@ const fitGuidance = [
   {
     concern: "Barrier feels reactive, tight, or easily irritated",
     fit: "Cellular Cleanser™ + Terra Radiance Crème™",
-    why: "Ceramide NP and a prebiotic complex are dosed to support barrier function rather than strip it.",
+    why: "Ceramide NP and a prebiotic complex are formulated to support barrier function rather than strip it.",
   },
   {
     concern: "Skin looks dull, uneven, or has lost visible firmness",
     fit: "CHIAREL Essence™",
-    why: "Built around Palmitoyl Pentapeptide-4 (3%), the concentrated treatment layer of the ritual.",
+    why: "Built around a peptide complex with Bifida Ferment Lysate and Niacinamide, the concentrated treatment layer of the ritual.",
   },
   {
     concern: "Neck, jawline, and décolleté show dryness or crepey-looking texture",

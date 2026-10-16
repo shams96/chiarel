@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: `${SITE_NAME} — The Ritual, Formulated in Isola del Liri`,
     description:
-      "A focused morning and evening skincare ritual built around CHIAREL Essence™, made fresh to order in Isola del Liri, Italy. Every active and its percentage disclosed.",
+      "A focused morning and evening skincare ritual built around CHIAREL Essence™, made fresh to order in Isola del Liri, Italy. Key ingredients named on every product page.",
     url: SITE_URL,
     images: [{ url: "/assets/editorial/hero-shore-duo.jpg", width: 1536, height: 934 }],
     publishedTime: HOMEPAGE_PUBLISHED,
@@ -62,17 +62,17 @@ const faqs = [
   {
     question: "What is CHIAREL made of?",
     answer:
-      "Every formula discloses its actives and concentrations plainly. CHIAREL Essence™ is built around Palmitoyl Pentapeptide-4 (3%) and Bioactive Ferment Lysate (0.30%); Terra Radiance Crème™ carries Ceramide NP (0.8%) and Niacinamide (3.0%). Each product page states its complete active ingredient list and percentage where applicable.",
+      "Each product page names its key ingredients. CHIAREL Essence™ is built around a peptide complex (Acetyl Hexapeptide-8, Palmitoyl Tripeptide-1, Palmitoyl Tetrapeptide-7) with Bifida Ferment Lysate and Niacinamide; Terra Radiance Crème™ carries Ceramide NP and Niacinamide; Recovery Masque™ is built around L-Ornithine and Panthenol.",
   },
   {
     question: "Who formulates CHIAREL?",
     answer:
-      "CHIAREL is formulated by Grazia Savoriti, a pharmacist specializing in cosmetic and nutraceutical research. She develops every formulation directly, from CHIAREL Essence™'s peptide complex to Terra Radiance Crème™'s barrier-support blend. Each batch is then produced fresh, to order, in Isola del Liri, Italy — never manufactured in bulk ahead of demand. Savoriti also reviews the published, peer-reviewed research behind each active ingredient before it's formulated into a product. Every formula lists its actives and exact percentages; nothing is grouped into an undisclosed blend.",
+      "CHIAREL is formulated by Grazia Savoriti, a pharmacist specializing in cosmetic and nutraceutical research. She develops every formulation directly, from CHIAREL Essence™'s peptide complex to Terra Radiance Crème™'s barrier-support blend. Each batch is then produced fresh, to order, in Isola del Liri, Italy — never manufactured in bulk ahead of demand. Savoriti also reviews the published, peer-reviewed research behind each active ingredient before it's formulated into a product.",
   },
   {
     question: "Where can I buy CHIAREL?",
     answer:
-      "CHIAREL is sold only at chiarel.com. It is not available in retail stores, department stores, or through third-party marketplaces or resellers. Buying direct means each order is made fresh in Isola del Liri, Italy and shipped straight to you, with no retail markup layers. It also lets CHIAREL list every active ingredient and its exact concentration on the product page, since pricing and formulation stay fully in-house.",
+      "CHIAREL is sold only at chiarel.com. It is not available in retail stores, department stores, or through third-party marketplaces or resellers. Buying direct means each order is made fresh in Isola del Liri, Italy and shipped straight to you, with no retail markup layers. It also keeps pricing and formulation fully in-house.",
   },
   {
     question: "How does the CHIAREL subscription work?",
@@ -130,7 +130,7 @@ export default function Home() {
               url: SITE_URL,
               name: "CHIAREL™ — The Ritual, Formulated in Isola del Liri",
               description:
-                "CHIAREL's focused morning and evening ritual, built around CHIAREL Essence and including N1 Neck & Décolleté Renewal Emulsion. Skincare formulated in Isola del Liri, Italy, with every active ingredient and concentration disclosed on each product page as it becomes available.",
+                "CHIAREL's focused morning and evening ritual, built around CHIAREL Essence and including N1 Neck & Décolleté Renewal Emulsion. Skincare formulated in Isola del Liri, Italy, with key ingredients named on each product page.",
             })
           ),
         }}

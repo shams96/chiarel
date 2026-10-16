@@ -19,11 +19,11 @@ const faqs = [
   },
   {
     q: "Does CHIAREL own or trademark Ectoine?",
-    a: "No. Ectoine is an INCI (International Nomenclature of Cosmetic Ingredients) name, freely used across the industry. CHIAREL does not claim exclusive rights to the ingredient — only to how we formulate, dose, and deliver it within our own products.",
+    a: "No. Ectoine is an INCI (International Nomenclature of Cosmetic Ingredients) name, freely used across the industry. CHIAREL does not claim exclusive rights to the ingredient — only to how we formulate and deliver it within our own products.",
   },
   {
     q: "Which CHIAREL products contain Ectoine?",
-    a: "Dosage is disclosed per product on each product page's transparency panel. Check the individual product listing in The Shop for current formulation details.",
+    a: "Each product page names its key ingredients. Check the individual product listing in The Shop for current formulation details.",
   },
 ];
 
@@ -104,7 +104,7 @@ export default function EctoinePage() {
             CHIAREL does not claim exclusivity over Ectoine as an ingredient.
             What we describe transparently is our formulation approach:
             Ectoine paired with a lipid/occlusive delivery vehicle, alongside
-            Bifida Ferment Lysate and L-Ornithine, dosed and disclosed on each
+            Bifida Ferment Lysate and L-Ornithine, named on each
             product page. See{" "}
             <Link href="/science/barrier-resilience" className="border-b border-ochre text-ochre">
               Barrier Resilience

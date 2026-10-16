@@ -2,7 +2,7 @@ import type { Product } from "@/lib/products";
 import { pdpSections } from "@/lib/pdp-sections";
 
 // Compact accordions under the buy box, so benefits, directions and the
-// disclosed actives are one tap from the Add to Bag button instead of far
+// key ingredients are one tap from the Add to Bag button instead of far
 // down the page. Zero-JS <details>, the same pattern used by the FAQ and
 // checkout policy. The longer sections further down the page are unchanged.
 export default function ProductAccordions({ product }: { product: Product }) {
@@ -38,14 +38,11 @@ export default function ProductAccordions({ product }: { product: Product }) {
             )}
             {s.kind === "inci" && <p>{s.inci}</p>}
             {s.kind === "actives" && (
-              <dl className="space-y-1.5">
+              <ul className="list-disc space-y-1.5 pl-5">
                 {s.actives.map((a) => (
-                  <div key={a.name} className="flex justify-between gap-4">
-                    <dt>{a.name}</dt>
-                    <dd className="tabular-nums font-serif text-base text-ochre">{a.percent}</dd>
-                  </div>
+                  <li key={a.name}>{a.name}</li>
                 ))}
-              </dl>
+              </ul>
             )}
           </div>
         </details>
