@@ -14,9 +14,14 @@ const morningRoute = ["chiarel-essence", "terra-radiance-creme"];
 const eveningRoute = ["chiarel-essence", "recovery-masque", "n1-neck-decollete"];
 const optionalPreparation = ["cellular-cleanser", "cellular-mist"];
 
-function RoutineRow({ slugs }: { slugs: string[] }) {
+function RoutineRow({ slugs, dark = false }: { slugs: string[]; dark?: boolean }) {
+  const body = dark ? "text-ivory/80" : "text-ink/75";
+  const sub = dark ? "text-ivory/65" : "text-ink/65";
+  const cta = dark
+    ? "border border-ivory/70 text-ivory hover:border-champagne hover:text-champagne"
+    : "border border-ink hover:border-ochre hover:text-ochre";
   return (
-    <div className="mt-16 space-y-20">
+    <div className="mt-12 space-y-16">
       {slugs.map((slug, i) => {
         const p = getProduct(slug);
         if (!p) return null;
@@ -41,27 +46,27 @@ function RoutineRow({ slugs }: { slugs: string[] }) {
             </div>
             <div className="w-full md:w-1/2">
               <h3 className="font-serif text-3xl">{p.name}</h3>
-              <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/65">
+              <p className={`mt-1 text-[12px] uppercase tracking-[0.14em] ${sub}`}>
                 {p.descriptor}
               </p>
-              <p className="mt-4 max-w-md text-sm text-ink/75">{p.blurb}</p>
+              <p className={`mt-4 max-w-md text-sm ${body}`}>{p.blurb}</p>
               <div className="mt-6 flex items-center gap-6">
                 {isPurchasable(p) ? (
                   <>
                     <Link
                       href={`/shop/${p.slug}`}
-                      className="border border-ink px-6 py-2.5 text-[11px] uppercase tracking-[0.2em] transition hover:border-ochre hover:text-ochre"
+                      className={`px-6 py-2.5 text-[11px] uppercase tracking-[0.2em] transition ${cta}`}
                     >
                       ${p.price.subscription} — Subscribe
                     </Link>
-                    <span className="text-[12px] text-ink/65">
+                    <span className={`text-[12px] ${sub}`}>
                       ${p.price.oneTime} one-time
                     </span>
                   </>
                 ) : (
                   <Link
                     href={`/shop/${p.slug}`}
-                    className="border border-ink px-6 py-2.5 text-[11px] uppercase tracking-[0.2em] transition hover:border-ochre hover:text-ochre"
+                    className={`px-6 py-2.5 text-[11px] uppercase tracking-[0.2em] transition ${cta}`}
                   >
                     See product page — price to be announced
                   </Link>
@@ -75,11 +80,81 @@ function RoutineRow({ slugs }: { slugs: string[] }) {
   );
 }
 
+type Step = { n: number; label: string };
+
+function SunMark() {
+  return (
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" aria-hidden="true">
+      <circle cx="20" cy="20" r="7" />
+      {Array.from({ length: 8 }, (_, i) => {
+        const a = (i * Math.PI) / 4;
+        return <line key={i} x1={20 + Math.cos(a) * 11.5} y1={20 + Math.sin(a) * 11.5} x2={20 + Math.cos(a) * 15.5} y2={20 + Math.sin(a) * 15.5} />;
+      })}
+    </svg>
+  );
+}
+
+function MoonMark() {
+  return (
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" aria-hidden="true">
+      <path d="M26 8.5A12.5 12.5 0 1 0 31.5 28 10 10 0 0 1 26 8.5Z" />
+    </svg>
+  );
+}
+
+// One full-width band per time of day, so the two routines read as two distinct
+// places on the page: Morning is a light, warm band; Evening a deep green one.
+function RoutineBand({
+  id,
+  time,
+  title,
+  steps,
+  slugs,
+  dark = false,
+}: {
+  id: string;
+  time: "Morning" | "Evening";
+  title: string;
+  steps: Step[];
+  slugs: string[];
+  dark?: boolean;
+}) {
+  return (
+    <section
+      id={id}
+      aria-labelledby={`${id}-title`}
+      className={`scroll-mt-20 ${dark ? "bg-garden text-ivory" : "border-y border-champagne/50 bg-champagne/25 text-ink"}`}
+    >
+      <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
+        <div className={`flex items-center gap-4 ${dark ? "text-champagne" : "text-ochre"}`}>
+          {dark ? <MoonMark /> : <SunMark />}
+          <p className="text-[11px] font-medium uppercase tracking-[0.3em]">{time}</p>
+        </div>
+        <h2 id={`${id}-title`} className="mt-4 font-serif text-4xl leading-tight md:text-5xl">
+          {title}
+        </h2>
+        <ol className={`mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 font-serif text-xl ${dark ? "text-ivory/90" : "text-ink/85"}`}>
+          {steps.map((st, i) => (
+            <li key={st.n} className="flex items-center gap-3">
+              {i > 0 && <span aria-hidden="true" className={dark ? "text-ivory/40" : "text-ink/40"}>→</span>}
+              <span>
+                <span className={dark ? "text-champagne" : "text-ochre"}>Step {st.n}</span> {st.label}
+              </span>
+            </li>
+          ))}
+        </ol>
+        <RoutineRow slugs={slugs} dark={dark} />
+      </div>
+    </section>
+  );
+}
+
 export default function RitualPage() {
   const lip = getProductOrThrow("lip-concentrate");
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-16">
+    <>
+    <div className="mx-auto max-w-6xl px-6 pt-16">
       <h1 className="max-w-2xl font-serif text-4xl leading-tight">
         The CHIAREL Four-Product Ritual
       </h1>
@@ -103,27 +178,38 @@ export default function RitualPage() {
         </Link>
       </div>
 
-      <section className="mt-14">
-        <p className="text-[11px] uppercase tracking-[0.18em] text-ink/65">Morning</p>
-        <p className="mt-2 font-serif text-2xl">
-          <span className="text-ochre">Step 1</span> CHIAREL Essence™{" "}
-          <span className="text-ink/40">→</span> <span className="text-ochre">Step 2</span> Terra Radiance
-          Crème™
-        </p>
-      </section>
-      <RoutineRow slugs={morningRoute} />
+      <nav aria-label="Jump to a routine" className="mt-8 flex gap-3">
+        <a href="#morning" className="inline-flex min-h-[44px] items-center border border-ink/30 px-5 text-[11px] uppercase tracking-[0.2em] text-ink/80 transition hover:border-ochre hover:text-ochre">Morning</a>
+        <a href="#evening" className="inline-flex min-h-[44px] items-center border border-garden bg-garden px-5 text-[11px] uppercase tracking-[0.2em] text-ivory transition hover:bg-garden/90">Evening</a>
+      </nav>
+    </div>
 
-      <section className="mt-24 border-t border-ink/10 pt-14">
-        <p className="text-[11px] uppercase tracking-[0.18em] text-ink/65">Evening</p>
-        <p className="mt-2 font-serif text-2xl">
-          <span className="text-ochre">Step 1</span> CHIAREL Essence™{" "}
-          <span className="text-ink/40">→</span> <span className="text-ochre">Step 2</span> Recovery
-          Masque™ <span className="text-ink/40">→</span> <span className="text-ochre">Step 3</span> N1 Neck
-          &amp; Décolleté Renewal Emulsion™
-        </p>
-      </section>
-      <RoutineRow slugs={eveningRoute} />
+    <div className="mt-14">
+      <RoutineBand
+        id="morning"
+        time="Morning"
+        title="The Morning Ritual"
+        steps={[
+          { n: 1, label: "CHIAREL Essence™" },
+          { n: 2, label: "Terra Radiance Crème™" },
+        ]}
+        slugs={morningRoute}
+      />
+      <RoutineBand
+        id="evening"
+        time="Evening"
+        title="The Evening Ritual"
+        dark
+        steps={[
+          { n: 1, label: "CHIAREL Essence™" },
+          { n: 2, label: "Recovery Masque™" },
+          { n: 3, label: "N1 Neck & Décolleté Renewal Emulsion™" },
+        ]}
+        slugs={eveningRoute}
+      />
+    </div>
 
+    <div className="mx-auto max-w-6xl px-6 pb-16">
       <section id="optional-preparation" className="mt-24 border-t border-ink/10 pt-14">
         <h2 className="font-serif text-2xl">Optional Preparation</h2>
         <p className="mt-2 max-w-xl text-sm text-ink/70">
@@ -172,5 +258,6 @@ export default function RitualPage() {
         </div>
       </section>
     </div>
+    </>
   );
 }
