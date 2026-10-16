@@ -502,7 +502,7 @@ function IncludedSpatula() {
       <div className="mx-auto flex max-w-2xl flex-col items-center gap-8 px-6 text-center md:flex-row md:text-left">
         <div className="relative aspect-square w-40 shrink-0 overflow-hidden bg-champagne/20">
           <Image
-            src="/assets/products/applicator-spatula.png"
+            src="/assets/products/applicator-spatula.jpg"
             alt="CHIAREL Spatula, Champagne Gold"
             fill
             sizes="160px"
