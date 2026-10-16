@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { launchRitualProducts, productImageAlt, isPurchasable } from "@/lib/products";
+import { launchRitualProducts, getProduct, productImageAlt, isPurchasable } from "@/lib/products";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { useCart, unitPrice } from "@/lib/cart-context";
 
@@ -13,11 +13,18 @@ export default function BuildYourRitualPage() {
   // rendered below as a non-selectable, clearly labeled "coming soon" tile,
   // excluded from the toggle set, the subtotal, and the add-to-bag loop so
   // the builder never attempts to price or cart a priceless product.
-  const selectableProducts = launchRitualProducts.filter(isPurchasable);
+  // Eye Contour is an OPTIONAL add-on, not a launchRitual step: selectable,
+  // but never selected by default (see `selected` below).
+  const eye = getProduct("eye-contour-concentrate");
+  const optionalSlugs = new Set(eye && isPurchasable(eye) ? [eye.slug] : []);
+  const selectableProducts = [
+    ...launchRitualProducts,
+    ...(eye && optionalSlugs.has(eye.slug) ? [eye] : []),
+  ].filter(isPurchasable);
   const comingSoonProducts = launchRitualProducts.filter((p) => !isPurchasable(p));
 
   const [selected, setSelected] = useState<Set<string>>(
-    new Set(selectableProducts.map((p) => p.slug))
+    new Set(selectableProducts.filter((p) => !optionalSlugs.has(p.slug)).map((p) => p.slug))
   );
   const [adding, setAdding] = useState(false);
 
@@ -94,7 +101,7 @@ export default function BuildYourRitualPage() {
               </div>
               <div>
                 <p className="text-[11px] uppercase tracking-[0.14em] text-ink/65">
-                  {p.timeOfUse} · {p.descriptor}
+                  {optionalSlugs.has(p.slug) ? "Optional · The Eye Step" : `${p.timeOfUse} · ${p.descriptor}`}
                 </p>
                 <p className="mt-1 text-sm font-medium leading-tight">
                   {p.name}
