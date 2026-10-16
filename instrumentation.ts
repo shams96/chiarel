@@ -15,5 +15,7 @@ export async function register() {
     });
     const { startDisputeMonitorSchedule } = await import("@/lib/dispute-alert-scheduler");
     startDisputeMonitorSchedule();
+    const { startCartPruneSchedule } = await import("@/lib/cart-prune");
+    startCartPruneSchedule();
   }
 }
