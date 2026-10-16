@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { radioTargetIndex } from "@/lib/radio-nav";
+import { useState, type KeyboardEvent } from "react";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { purchaseOptionSummary, perDayPrice } from "@/lib/pricing";
@@ -36,6 +37,16 @@ export default function PurchaseOptions({
     setTier(next);
   };
   const { add } = useCart();
+
+  // Radio pattern: one tab stop (the selected option); arrows move and select.
+  const TIERS: Tier[] = ["ninetyDay", "single", "oneTime"];
+  const onGroupKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    const target = radioTargetIndex(TIERS.length, TIERS.indexOf(tier), e.key);
+    if (target === null) return;
+    e.preventDefault();
+    chooseTier(TIERS[target]);
+    e.currentTarget.querySelector<HTMLElement>(`[data-tier="${TIERS[target]}"]`)?.focus();
+  };
 
   const summary = purchaseOptionSummary(slug, subscription, oneTime);
 
@@ -93,11 +104,13 @@ export default function PurchaseOptions({
 
       {/* role="radiogroup"/"radio": a mutually exclusive choice; aria-checked
           carries the same state sighted users get from the ochre border. */}
-      <div role="radiogroup" aria-label="Purchase plan" className="mt-4 space-y-2">
+      <div role="radiogroup" aria-label="Purchase plan" onKeyDown={onGroupKeyDown} className="mt-4 space-y-2">
         <button
           type="button"
           role="radio"
           aria-checked={tier === "ninetyDay"}
+          data-tier="ninetyDay"
+          tabIndex={tier === "ninetyDay" ? 0 : -1}
           onClick={() => chooseTier("ninetyDay")}
           className={optionClass(tier === "ninetyDay")}
         >
@@ -121,6 +134,8 @@ export default function PurchaseOptions({
           type="button"
           role="radio"
           aria-checked={tier === "single"}
+          data-tier="single"
+          tabIndex={tier === "single" ? 0 : -1}
           onClick={() => chooseTier("single")}
           className={optionClass(tier === "single")}
         >
@@ -149,6 +164,8 @@ export default function PurchaseOptions({
           type="button"
           role="radio"
           aria-checked={tier === "oneTime"}
+          data-tier="oneTime"
+          tabIndex={tier === "oneTime" ? 0 : -1}
           onClick={() => chooseTier("oneTime")}
           className={optionClass(tier === "oneTime")}
         >
