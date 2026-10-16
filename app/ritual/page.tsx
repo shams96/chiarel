@@ -44,7 +44,7 @@ export default function RitualPage() {
 
       <nav aria-label="Jump to a routine" className="mt-8 flex gap-3">
         <a href="#morning" className="inline-flex min-h-[44px] items-center border border-ink/30 px-5 text-[11px] uppercase tracking-[0.2em] text-ink/80 transition hover:border-ochre hover:text-ochre">Morning</a>
-        <a href="#evening" className="inline-flex min-h-[44px] items-center border border-garden bg-garden px-5 text-[11px] uppercase tracking-[0.2em] text-ivory transition hover:bg-garden/90">Evening</a>
+        <a href="#evening" className="inline-flex min-h-[44px] items-center border border-ink/30 px-5 text-[11px] uppercase tracking-[0.2em] text-ink/80 transition hover:border-ochre hover:text-ochre">Evening</a>
       </nav>
     </div>
 

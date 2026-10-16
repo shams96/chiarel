@@ -57,8 +57,8 @@ describe("home ritual bands", () => {
     expect(band(home, "home-morning")).not.toContain(EYE_LABEL);
   });
 
-  it("evening is the dark band and morning the light one", () => {
-    expect(band(home, "home-evening")).toContain("bg-garden text-ivory");
+  it("evening is the cool light band and morning the warm one", () => {
+    expect(band(home, "home-evening")).toContain("border-y border-ink/20 bg-cloud text-ink");
     expect(band(home, "home-morning")).toContain("bg-champagne/25");
   });
 

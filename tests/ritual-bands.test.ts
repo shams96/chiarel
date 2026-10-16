@@ -12,9 +12,9 @@ describe("ritual page: Morning and Evening are distinct bands", () => {
     expect(src).toContain("The Morning Ritual");
     expect(src).toContain("The Evening Ritual");
   });
-  it("evening is the dark variant, morning the light one", () => {
+  it("evening is the cool light variant, morning the warm one", () => {
     expect(src).toMatch(/id="evening"[\s\S]*?dark/);
-    expect(src).toContain("bg-garden text-ivory");
+    expect(src).toContain("border-y border-ink/20 bg-cloud text-ink");
     expect(src).toContain("bg-champagne/25");
   });
   it("keeps the real step order for each routine", () => {
