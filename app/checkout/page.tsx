@@ -15,6 +15,21 @@ const modeLabel: Record<string, string> = {
   oneTime: "One-time",
 };
 
+const INPUT = "mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre";
+
+// A visible label bound to its control, so screen readers announce it and a tap
+// on the label focuses the field.
+function Field({ label, id, children }: { label: string; id: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <label htmlFor={id} className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
+        {label}
+      </label>
+      {children}
+    </div>
+  );
+}
+
 export default function CheckoutPage() {
   const { lines, subtotal, savings } = useCart();
   const [submitting, setSubmitting] = useState(false);
@@ -103,52 +118,39 @@ export default function CheckoutPage() {
         {/* Left: form. Payment is taken on Stripe's hosted Checkout page. */}
         <div>
           <form className="space-y-5" onSubmit={handleSubmit}>
-            <div>
-              <label className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
-                Email
-              </label>
+            <Field label="Email" id="co-email">
               <input
+                id="co-email"
                 name="email"
                 type="email"
+                inputMode="email"
+                autoComplete="email"
+                autoCapitalize="none"
+                spellCheck={false}
                 required
-                className="mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
+                className={INPUT}
                 placeholder="you@example.com"
               />
-            </div>
+            </Field>
 
             <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
-                  First Name
-                </label>
-                <input
-                  name="firstName"
-                  required
-                  className="mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
-                />
-              </div>
-              <div>
-                <label className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
-                  Last Name
-                </label>
-                <input
-                  name="lastName"
-                  required
-                  className="mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
-                />
-              </div>
+              <Field label="First Name" id="co-first">
+                <input id="co-first" name="firstName" autoComplete="shipping given-name" required className={INPUT} />
+              </Field>
+              <Field label="Last Name" id="co-last">
+                <input id="co-last" name="lastName" autoComplete="shipping family-name" required className={INPUT} />
+              </Field>
             </div>
 
-            <div>
-              <label className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
-                Country
-              </label>
+            <Field label="Country" id="co-country">
               <select
+                id="co-country"
                 name="country"
+                autoComplete="shipping country"
                 required
                 value={countryCode}
                 onChange={(e) => setCountryCode(e.target.value as CountryCode)}
-                className="mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
+                className={INPUT}
               >
                 {ENABLED_COUNTRIES.map((c) => (
                   <option key={c.code} value={c.code}>
@@ -156,41 +158,38 @@ export default function CheckoutPage() {
                   </option>
                 ))}
               </select>
-            </div>
+            </Field>
 
-            <div>
-              <label className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
-                Shipping Address
-              </label>
+            <Field label="Shipping Address" id="co-address">
               <input
+                id="co-address"
                 name="address"
+                autoComplete="shipping street-address"
                 required
-                className="mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
-                placeholder="Address"
+                className={INPUT}
+                placeholder="Street and number"
               />
-            </div>
+            </Field>
 
             <div className={`grid gap-4 ${country.requiresState ? "grid-cols-3" : "grid-cols-2"}`}>
-              <input
-                name="city"
-                required
-                className="border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
-                placeholder="City"
-              />
+              <Field label="City" id="co-city">
+                <input id="co-city" name="city" autoComplete="shipping address-level2" required className={INPUT} />
+              </Field>
               {country.requiresState && (
-                <input
-                  name="state"
-                  required
-                  className="border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
-                  placeholder="State"
-                />
+                <Field label="State" id="co-state">
+                  <input id="co-state" name="state" autoComplete="shipping address-level1" required className={INPUT} />
+                </Field>
               )}
-              <input
-                name="zip"
-                required
-                className="border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre"
-                placeholder={country.postalLabel}
-              />
+              <Field label={country.postalLabel} id="co-zip">
+                <input
+                  id="co-zip"
+                  name="zip"
+                  autoComplete="shipping postal-code"
+                  inputMode={countryCode === "US" || countryCode === "IT" ? "numeric" : "text"}
+                  required
+                  className={INPUT}
+                />
+              </Field>
             </div>
 
             {hasSubscription && (
@@ -230,7 +229,7 @@ export default function CheckoutPage() {
             </label>
 
             {error && (
-              <p className="text-[12px] text-ochre" role="alert">
+              <p id="co-error" className="text-[12px] text-ochre" role="alert">
                 {error}
               </p>
             )}
