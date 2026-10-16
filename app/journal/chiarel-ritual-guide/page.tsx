@@ -19,7 +19,7 @@ const faqs = [
   },
   {
     q: "Can I use CHIAREL products around the eyes?",
-    a: "Yes — CHIAREL Eye Contour Concentrate™ is formulated specifically for the eye contour and is applied nightly as part of the evening routine. Avoid layering the day or night moisturizer over it at the lash line.",
+    a: "Yes — CHIAREL Eye Treatment™ is formulated specifically for the eye contour and is applied nightly as part of the evening routine. Avoid layering the day or night moisturizer over it at the lash line.",
   },
   {
     q: "What is the correct order of the CHIAREL Four-Product Ritual?",
@@ -129,7 +129,7 @@ export default function RitualGuidePage() {
       <section className="mt-14 border-t border-ink/10 pt-10">
         <h2 className="font-serif text-2xl">Eye Area Guidance</h2>
         <p className="mt-4 text-sm leading-relaxed text-ink/75">
-          CHIAREL Eye Contour Concentrate™ is formulated for the delicate eye
+          CHIAREL Eye Treatment™ is formulated for the delicate eye
           area and is applied nightly, after Recovery Masque™, with a light
           touch around the orbital bone — avoid the immediate lash line.
         </p>
@@ -172,7 +172,7 @@ export default function RitualGuidePage() {
           href="/shop/eye-contour-concentrate"
           className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
         >
-          Shop Eye Contour Concentrate™
+          Shop Eye Treatment™
         </Link>
         <Link
           href="/assessment"

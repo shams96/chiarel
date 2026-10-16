@@ -39,9 +39,9 @@ const HOVER_TRANSFORM_BY_STEP: Record<string, string> = {
     "[@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.02]",
   // Standalone (Lip Concentrate) — a precise tool, not a ritual step: crisp, quick.
   Standalone: "[@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.02]",
-  // Eye Contour — a precise concentrate dosed in small amounts, same crisp
+  // Eye Treatment — a precise concentrate dosed in small amounts, same crisp
   // register as the serum rather than a heavier jar-settle gesture.
-  "Eye Contour": "[@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.03]",
+  "Eye Treatment": "[@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.03]",
 };
 const DEFAULT_HOVER_TRANSFORM =
   "[@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.03]";

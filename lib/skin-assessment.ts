@@ -178,7 +178,7 @@ const AXIS_TO_SKU: Record<Axis, { slug: string; reason: string }> = {
   reactivity: {
     slug: "cellular-cleanser",
     reason:
-      "Your skin shows signs of reactivity. Cellular Cleanser™ is pH 5.0 with a prebiotic complex — formulated to cleanse without disrupting a sensitized barrier.",
+      "Your skin shows signs of reactivity. Cellular Cleanser™ is pH 5.0 — formulated to cleanse without disrupting a sensitized barrier.",
   },
   pigment: {
     slug: "chiarel-essence",

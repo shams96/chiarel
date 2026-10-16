@@ -16,8 +16,8 @@ export const metadata: Metadata = {
 // products are listed explicitly, with every other current product
 // (Cleanser, Mist, Lip Concentrate, and both existing sets) shown below,
 // unpublished from nothing. The launch lineup is five products: the
-// four-step AM/PM ritual (launchRitual === true) plus Eye Contour
-// Concentrate™, a real priced launch product that stands outside the ritual
+// four-step AM/PM ritual (launchRitual === true) plus Eye
+// Treatment™, a real priced launch product that stands outside the ritual
 // sequence itself (see data/products.json's launchRole: "standalone") —
 // it's part of the launch, not part of the ritual's 4 steps.
 const ritualSkus = products.filter((p) => p.launchRitual === true);
@@ -136,8 +136,8 @@ export default function PressPage() {
         {/* DRAFT — OWNER / REGULATORY APPROVAL REQUIRED */}
         <p className="mt-2 max-w-xl text-sm text-ink/70">
           Five launch products: a focused four-product ritual led by a
-          dedicated neck and décolleté treatment, plus CHIAREL Eye Contour
-          Concentrate™, a standalone nightly treatment.
+          dedicated neck and décolleté treatment, plus CHIAREL Eye
+          Treatment™, a standalone nightly treatment.
         </p>
         <ul className="mt-8 grid gap-4 sm:grid-cols-2">
           {launchSkus.map((p) => (
