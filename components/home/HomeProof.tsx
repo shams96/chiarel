@@ -84,21 +84,6 @@ export default function HomeProof() {
                 Published research, PubMed (NIH) →
               </a>
             </li>
-            <li className="border-l-2 border-ochre pl-5">
-              <p className="text-ink/70">
-                Low molecular weight Hyaluronic Acid (used in Cellular Mist™)
-                is studied for fast-absorbing surface hydration ahead of
-                treatment.
-              </p>
-              <a
-                href="https://pubmed.ncbi.nlm.nih.gov/?term=low+molecular+weight+hyaluronic+acid+skin+hydration"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={pubmedLink}
-              >
-                Published research, PubMed (NIH) →
-              </a>
-            </li>
           </ul>
           <p className="mx-auto mt-6 max-w-xl text-[12px] leading-relaxed text-ink/60">
             N1 Neck &amp; Décolleté Renewal Emulsion has no product-specific

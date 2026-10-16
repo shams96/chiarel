@@ -99,7 +99,7 @@ describe("eye contour stays optional", () => {
     expect(heads).toEqual([
       "CHIAREL Essence™",
       "Recovery Masque™",
-      "CHIAREL Eye Contour Concentrate™",
+      "CHIAREL Eye Treatment™",
       "N1 Neck & Décolleté Renewal Emulsion™",
     ]);
   });

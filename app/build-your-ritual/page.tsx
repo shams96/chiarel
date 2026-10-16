@@ -13,7 +13,7 @@ export default function BuildYourRitualPage() {
   // rendered below as a non-selectable, clearly labeled "coming soon" tile,
   // excluded from the toggle set, the subtotal, and the add-to-bag loop so
   // the builder never attempts to price or cart a priceless product.
-  // Eye Contour is an OPTIONAL add-on, not a launchRitual step: selectable,
+  // Eye Treatment is an OPTIONAL add-on, not a launchRitual step: selectable,
   // but never selected by default (see `selected` below).
   const eye = getProduct("eye-contour-concentrate");
   const optionalSlugs = new Set(eye && isPurchasable(eye) ? [eye.slug] : []);

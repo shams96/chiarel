@@ -5,7 +5,7 @@ const fitGuidance = [
   {
     concern: "Barrier feels reactive, tight, or easily irritated",
     fit: "Cellular Cleanser™ + Terra Radiance Crème™",
-    why: "Ceramide NP and a prebiotic complex are formulated to support barrier function rather than strip it.",
+    why: "A gentle cleanse and a Ceramide NP crème, formulated to support barrier function rather than strip it.",
   },
   {
     concern: "Skin looks dull, uneven, or has lost visible firmness",

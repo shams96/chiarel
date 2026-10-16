@@ -31,7 +31,7 @@ describe("pdpSections (accordions beside the buy box)", () => {
     expect(pdpSections(bySlug("the-ritual-set"))).toEqual([]);
   });
 
-  it("N1 and Eye Contour carry a draft INCI list but no key ingredients, so no ingredient section shows", () => {
+  it("N1 and Eye Treatment carry a draft INCI list but no key ingredients, so no ingredient section shows", () => {
     for (const slug of ["n1-neck-decollete", "eye-contour-concentrate"]) {
       const ids = pdpSections(bySlug(slug)).map((x) => x.id);
       expect(ids).not.toContain("actives");

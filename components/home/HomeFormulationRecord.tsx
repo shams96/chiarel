@@ -2,6 +2,8 @@ import Reveal from "@/components/Reveal";
 import EvidenceGrid from "@/components/EvidenceGrid";
 import { products } from "@/lib/products";
 
+import { FREE_FROM_SENTENCE, formulationLine } from "@/lib/formulation-line";
+
 const formulationApproach = [
   {
     dimension: "Active ingredient approach",
@@ -50,6 +52,9 @@ export default function HomeFormulationRecord() {
   return (
     <section className="section-y bg-white" id="formulation-record">
       <div className="section-x">
+        <p className="mb-8 max-w-2xl text-sm leading-relaxed text-ink/70" data-formulation-statement>
+          {formulationLine()} {FREE_FROM_SENTENCE}
+        </p>
         <details className="group border-y border-ink/10">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-6 font-serif text-2xl leading-snug text-ink md:text-3xl">
             <span>

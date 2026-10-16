@@ -9,8 +9,8 @@ import StickyPurchaseBar from "@/components/StickyPurchaseBar";
 import ProductGallery from "@/components/ProductGallery";
 import ProductAccordions from "@/components/ProductAccordions";
 import AddPairButton from "@/components/AddPairButton";
-import CellularHydrationCascade from "@/components/CellularHydrationCascade";
 import Reveal from "@/components/Reveal";
+import { FREE_FROM_SENTENCE, formulationLine, isLaunchFormula } from "@/lib/formulation-line";
 import EditorialFeature from "@/components/EditorialFeature";
 import AmbientVideo from "@/components/AmbientVideo";
 import { productJsonLd, productPageTitle, breadcrumbJsonLd } from "@/lib/seo";
@@ -251,7 +251,7 @@ export default async function ProductPage({
         />
       )}
 
-      <BrandStatement />
+      <BrandStatement launch={isLaunchFormula(p.slug)} />
 
       {/* N1 gets its own structured "what it's for / what it feels like"
           module instead of the generic KeyBenefits heading, matching the
@@ -386,7 +386,7 @@ function BenefitPills({
 // per product: the copy draws only on facts already established and vetted
 // elsewhere on the site (the origin story, Grazia Savoriti, Natural You Srl,
 // the disclosure ethos) — see /journal/three-skins-one-house for the source.
-function BrandStatement() {
+function BrandStatement({ launch }: { launch: boolean }) {
   return (
     <Reveal className="border-t border-ink/10 bg-white py-20">
       <div className="mx-auto max-w-xl px-6 text-center">
@@ -415,6 +415,11 @@ function BrandStatement() {
             not manufactured ahead of demand and held in standing
             inventory.
           </p>
+          {launch && (
+            <p data-formulation-statement>
+              {formulationLine()} {FREE_FROM_SENTENCE}
+            </p>
+          )}
           <p>
             That is CHIAREL Intelligence™: start with the biology in front
             of you, formulate it properly, and name the ingredients the
@@ -830,11 +835,6 @@ const mechanismBySlug: Record<string, { step: string; text: string }[]> = {
       text: "Designed to support hydration, comfort, and a smoother-looking appearance in the skin below the jawline.",
     },
   ],
-  "cellular-cleanser": [
-    { step: "01", text: "A postbiotic lysate supports the skin's surface microbiome balance during cleansing." },
-    { step: "02", text: "A prebiotic complex feeds that same microbial balance, rather than stripping it." },
-    { step: "03", text: "Together, they let the cleanse step support the barrier instead of working against it." },
-  ],
   "chiarel-essence": [
     { step: "01", text: "Peptides including Acetyl Hexapeptide-8 and Palmitoyl Tripeptide-1 are studied for supporting the skin's structural proteins." },
     { step: "02", text: "Bifida Ferment Lysate, a postbiotic, is studied for upregulating the proteins that hold the barrier together." },
@@ -852,50 +852,31 @@ const mechanismBySlug: Record<string, { step: string; text: string }[]> = {
   ],
 };
 
-// Slugs with a dedicated visualization instead of the plain numbered-step
-// list — currently just Cellular Mist™, whose Low MW Hyaluronic Acid
-// mechanism (fast surface absorption) is what the hydration-cascade diagram
-// actually depicts. Not applied elsewhere: the visual would overclaim for
-// products whose real mechanism isn't a hydration-diffusion story.
-const visualizationBySlug: Record<string, () => JSX.Element> = {
-  "cellular-mist": CellularHydrationCascade,
-};
-
 function TheScience({ complex, slug }: { complex: string; slug: string }) {
-  const Visualization = visualizationBySlug[slug];
   const steps = mechanismBySlug[slug];
-  if (!Visualization && !steps) return null;
+  if (!steps) return null;
   return (
     <div className="border-t border-ink/10 bg-ink py-20 text-ivory">
       <div className="mx-auto max-w-2xl px-6">
         <h2 className="text-center font-serif text-2xl text-champagne">
           The science of {complex}
         </h2>
-        {Visualization ? (
-          <div className="mt-12">
-            <Visualization />
-          </div>
-        ) : (
-          <div className="relative mt-12 space-y-10 border-l border-champagne/25 pl-8">
-            {steps!.map((s, i) => (
-              <div key={s.step} className="relative">
-                <span className="absolute -left-[41px] top-0 flex h-6 w-6 items-center justify-center rounded-full border border-champagne/40 bg-ink text-[11px] text-champagne">
-                  {i + 1}
-                </span>
-                <p className="text-sm leading-relaxed text-ivory/75">{s.text}</p>
-              </div>
-            ))}
-          </div>
-        )}
+        <div className="relative mt-12 space-y-10 border-l border-champagne/25 pl-8">
+          {steps.map((s, i) => (
+            <div key={s.step} className="relative">
+              <span className="absolute -left-[41px] top-0 flex h-6 w-6 items-center justify-center rounded-full border border-champagne/40 bg-ink text-[11px] text-champagne">
+                {i + 1}
+              </span>
+              <p className="text-sm leading-relaxed text-ivory/75">{s.text}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
 const scienceLinksBySlug: Record<string, { label: string; href: string }[]> = {
-  "cellular-cleanser": [
-    { label: "Bifida Ferment Lysate, Explained", href: "/science/bifida-ferment-lysate" },
-  ],
   "chiarel-essence": [
     { label: "Bifida Ferment Lysate, Explained", href: "/science/bifida-ferment-lysate" },
     { label: "Building a More Resilient Skin Barrier", href: "/science/barrier-resilience" },
