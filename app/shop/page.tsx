@@ -16,7 +16,7 @@ const nightRitual = ["chiarel-essence", "recovery-masque", "n1-neck-decollete"];
 // not part of the four-step AM/PM sequence, but a real launch product, so it gets
 // its own section rather than sitting with the unpriced "coming soon" items below.
 const launchCollection = ["eye-contour-concentrate"];
-const comingSoon = ["cellular-cleanser", "cellular-mist", "lip-concentrate"];
+const moreFromTheHouse = ["cellular-cleanser", "cellular-mist", "lip-concentrate"];
 const existingSets = ["the-founding-pair", "the-ritual-set"];
 
 function ProductGrid({ slugs }: { slugs: string[] }) {
@@ -85,11 +85,12 @@ export default function ShopPage() {
       </section>
 
       <section className="mt-16 border-t border-ink/10 pt-12">
-        <h2 className="font-serif text-2xl">Coming Soon</h2>
+        <h2 className="font-serif text-2xl">More from the House</h2>
         <p className="mt-1 max-w-xl text-[13px] leading-relaxed text-ink/65">
-          Additional CHIAREL products, outside the core launch ritual.
+          Additional CHIAREL products, available now, outside the core
+          launch ritual.
         </p>
-        <ProductGrid slugs={comingSoon} />
+        <ProductGrid slugs={moreFromTheHouse} />
       </section>
 
       <section className="mt-16 border-t border-ink/10 pt-12">

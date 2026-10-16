@@ -126,6 +126,23 @@ describe("checkout: request validation", () => {
     expect((await checkout({ ...validBody, email: "nope" })).status).toBe(400);
   });
 
+  it("makes the postal code optional for the UAE only", async () => {
+    const ae = { ...validBody, country: "AE", state: undefined, zip: "" };
+    expect((await checkout(ae)).status).toBe(201);
+    expect(orderCreate.mock.calls[0][0].data.zip).toBe("");
+    const addr = customersCreate.mock.calls[0][0].address;
+    expect(addr.postal_code).toBeUndefined();
+    expect(addr.country).toBe("AE");
+    expect((await checkout({ ...ae, zip: undefined })).status).toBe(201);
+    expect((await checkout({ ...validBody, country: "CA", zip: "" })).status).toBe(400);
+    expect((await checkout({ ...ae, zip: 12345 })).status).toBe(400);
+  });
+
+  it("still sends a UAE postal code when one is given", async () => {
+    expect((await checkout({ ...validBody, country: "AE", state: undefined, zip: "00000" })).status).toBe(201);
+    expect(customersCreate.mock.calls[0][0].address.postal_code).toBe("00000");
+  });
+
   it("requires terms acceptance on the server", async () => {
     expect((await checkout({ ...validBody, termsAccepted: false })).status).toBe(400);
     expect((await checkout({ ...validBody, termsAccepted: "true" })).status).toBe(400);

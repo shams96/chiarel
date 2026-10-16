@@ -29,6 +29,8 @@ export type Product = {
   // "Price to be announced" state instead of a number.
   price?: { subscription: number; oneTime: number };
   image: string;
+  /** Optional share-card image (og:image) when the hero is a single item, e.g. for sets. */
+  og?: string;
   /**
    * Optional multi-image gallery. Absent for every product today — the PDP
    * falls back to a single-image gallery built from `image`/`imageIsPlaceholder`

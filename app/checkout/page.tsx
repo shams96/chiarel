@@ -186,7 +186,7 @@ export default function CheckoutPage() {
                   name="zip"
                   autoComplete="shipping postal-code"
                   inputMode={countryCode === "US" || countryCode === "IT" ? "numeric" : "text"}
-                  required
+                  required={country.postalRequired}
                   className={INPUT}
                 />
               </Field>
@@ -195,8 +195,8 @@ export default function CheckoutPage() {
             {hasSubscription && (
               <div className="border border-champagne/60 bg-champagne/10 p-4 text-[12px] leading-relaxed text-ink/70">
                 Subscription items renew and ship every 45 days at the price
-                shown, until paused or cancelled from your account. No
-                commitment — adjust anytime.
+                shown, until paused or cancelled. No commitment — write to
+                orders@chiarel.com to adjust anytime.
               </div>
             )}
 

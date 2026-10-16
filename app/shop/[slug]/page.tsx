@@ -60,7 +60,7 @@ export async function generateMetadata({
     title: productPageTitle(p.name, p.descriptor),
     description: p.blurb,
     alternates: { canonical: `/shop/${p.slug}` },
-    openGraph: { images: [{ url: p.image }] },
+    openGraph: { images: [{ url: p.og ?? p.image }] },
   };
 }
 

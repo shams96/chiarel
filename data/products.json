@@ -308,6 +308,7 @@
       "oneTime": 327
     },
     "image": "/assets/products/chiarel-essence-jar.png",
+    "og": "/assets/editorial/hero-shore-duo.jpg",
     "gallery": [
       { "src": "/assets/products/chiarel-essence-jar.png", "alt": "CHIAREL Essence", "role": "hero" },
       { "src": "/assets/products/n1-neck-decollete-jar.png", "alt": "N1 Neck & Décolleté Renewal Emulsion", "role": "application" }
@@ -343,6 +344,7 @@
       "oneTime": 533
     },
     "image": "/assets/products/cellular-cleanser-bottle.png",
+    "og": "/assets/editorial/hero-shore-duo.jpg",
     "gallery": [
       { "src": "/assets/products/cellular-cleanser-bottle.png", "alt": "Cellular Cleanser", "role": "hero" },
       { "src": "/assets/products/cellular-mist-bottle.png", "alt": "Cellular Mist", "role": "application" },

@@ -12,6 +12,8 @@ export type Country = {
   requiresState: boolean;
   /** Label for the postal-code input — not every country calls it "ZIP". */
   postalLabel: string;
+  /** False for countries with no postal-code system (e.g. UAE): the field is then optional. */
+  postalRequired: boolean;
   /**
    * Whether this country is live in the checkout country selector. Italy is
    * built but left off until the EU Responsible Person question (see
@@ -35,6 +37,7 @@ export const COUNTRIES: Record<CountryCode, Country> = {
     name: "United States",
     requiresState: true,
     postalLabel: "ZIP",
+    postalRequired: true,
     enabled: true,
     currency: "USD",
     approxUsdRate: 1,
@@ -44,6 +47,7 @@ export const COUNTRIES: Record<CountryCode, Country> = {
     name: "Canada",
     requiresState: true,
     postalLabel: "Postal Code",
+    postalRequired: true,
     enabled: true,
     currency: "CAD",
     approxUsdRate: 1.36,
@@ -53,6 +57,7 @@ export const COUNTRIES: Record<CountryCode, Country> = {
     name: "Italy",
     requiresState: false,
     postalLabel: "Postal Code",
+    postalRequired: true,
     enabled: true,
     currency: "EUR",
     approxUsdRate: 0.92,
@@ -61,7 +66,8 @@ export const COUNTRIES: Record<CountryCode, Country> = {
     code: "AE",
     name: "United Arab Emirates",
     requiresState: false,
-    postalLabel: "PO Box / Postal Code",
+    postalLabel: "PO Box / Postal Code (optional)",
+    postalRequired: false,
     enabled: true,
     currency: "AED",
     approxUsdRate: 3.67,
