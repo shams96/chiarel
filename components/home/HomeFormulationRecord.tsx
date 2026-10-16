@@ -10,7 +10,7 @@ const formulationApproach = [
   },
   {
     dimension: "Ingredient naming",
-    chiarel: "Key ingredients named on each product page",
+    chiarel: "Key ingredients named across our product pages",
     categoryNorm: "Often described only as a branded \"complex\"",
   },
   {

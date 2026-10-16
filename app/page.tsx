@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: `${SITE_NAME} — The Ritual, Formulated in Isola del Liri`,
     description:
-      "A focused morning and evening skincare ritual built around CHIAREL Essence™, made fresh to order in Isola del Liri, Italy. Key ingredients named on every product page.",
+      "A focused morning and evening skincare ritual built around CHIAREL Essence™, made fresh to order in Isola del Liri, Italy. Key ingredients named across our product pages.",
     url: SITE_URL,
     images: [{ url: "/assets/editorial/hero-shore-duo.jpg", width: 1536, height: 934 }],
     publishedTime: HOMEPAGE_PUBLISHED,
@@ -130,7 +130,7 @@ export default function Home() {
               url: SITE_URL,
               name: "CHIAREL™ — The Ritual, Formulated in Isola del Liri",
               description:
-                "CHIAREL's focused morning and evening ritual, built around CHIAREL Essence and including N1 Neck & Décolleté Renewal Emulsion. Skincare formulated in Isola del Liri, Italy, with key ingredients named on each product page.",
+                "CHIAREL's focused morning and evening ritual, built around CHIAREL Essence and including N1 Neck & Décolleté Renewal Emulsion. Skincare formulated in Isola del Liri, Italy, with key ingredients named across our product pages.",
             })
           ),
         }}
