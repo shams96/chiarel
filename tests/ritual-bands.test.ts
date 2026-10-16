@@ -1,7 +1,9 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
-const src = readFileSync("app/ritual/page.tsx", "utf8");
+const page = readFileSync("app/ritual/page.tsx", "utf8");
+const band = readFileSync("components/RoutineBand.tsx", "utf8");
+const src = page + band;
 
 describe("ritual page: Morning and Evening are distinct bands", () => {
   it("renders two full-width routine bands with anchors and their own headings", () => {
