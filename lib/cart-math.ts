@@ -1,4 +1,5 @@
 import { computeLineSavings, computeUnitPrice, type CartMode } from "@/lib/pricing";
+import { MAX_LINE_QTY } from "@/lib/cart-limits";
 import { getProduct, isPurchasable } from "@/lib/products";
 
 // Optimistic cart updates: the same arithmetic the server does (shared pricing
@@ -43,7 +44,7 @@ export function withTotals<S extends Snapshot>(snap: S): S | null {
 }
 
 export function setLineQty<S extends Snapshot>(snap: S, lineId: string, qty: number): S | null {
-  if (!Number.isInteger(qty) || qty < 1) return null;
+  if (!Number.isInteger(qty) || qty < 1 || qty > MAX_LINE_QTY) return null;
   if (!snap.lines.some((l) => l.id === lineId)) return null;
   return withTotals({ ...snap, lines: snap.lines.map((l) => (l.id === lineId ? { ...l, qty } : l)) });
 }

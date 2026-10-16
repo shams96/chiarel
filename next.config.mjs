@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Do not advertise the framework in every response.
+  poweredByHeader: false,
   // Standalone output: Hostinger's Node.js Web App runner (and most
   // container-based Node hosts) expects one self-contained entry file it
   // runs directly, not `next start` against the full build + node_modules.

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { getCartWithTotals, getOrCreateCart, type CartMode } from "@/lib/cart-server";
 import { withApiErrorHandling } from "@/lib/api-error";
+import { isRateLimited, clientIp } from "@/lib/rate-limit";
+import { MAX_LINE_QTY } from "@/lib/cart-limits";
 
 const VALID_MODES: CartMode[] = ["ninetyDay", "subscription", "oneTime"];
 
@@ -11,6 +13,11 @@ export const GET = withApiErrorHandling(async () => {
 });
 
 export const POST = withApiErrorHandling(async (req: NextRequest) => {
+  // Every first add creates a cart row, so an unthrottled loop fills the table.
+  // Far above what a shopper does (a few adds a minute).
+  if (isRateLimited(`cart-add:${clientIp(req)}`, 60, 60_000)) {
+    return NextResponse.json({ error: "Too many requests. Please slow down." }, { status: 429 });
+  }
   const body = await req.json().catch(() => null);
   const slug = body?.slug;
   const mode = body?.mode;
@@ -42,7 +49,7 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
       where: { id: existing.id },
       data:
         existing.mode === mode
-          ? { qty: existing.qty + 1 }
+          ? { qty: Math.min(existing.qty + 1, MAX_LINE_QTY) }
           : { mode },
     });
   } else {
