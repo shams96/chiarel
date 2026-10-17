@@ -15,8 +15,16 @@ export default function HomeHero() {
   return (
     <section
       className="relative w-full overflow-hidden [--hero-h:min(780px,calc(100svh-5rem))]"
-      style={{ background: "linear-gradient(100deg, #EFEBDD 0%, #F4F1E8 45%, #F8F6F1 100%)" }}
+      style={{ background: "linear-gradient(90deg, #F5F1E5 0%, #F5F1E5 55%, #E9E6DA 100%)" }}
     >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 hidden md:block"
+        style={{
+          background:
+            "radial-gradient(ellipse 38% 70% at 76% 48%, rgba(238,214,176,0.55) 0%, rgba(238,214,176,0) 70%)",
+        }}
+      />
       <div className="product-reveal relative mx-auto w-full max-w-[420px] px-6 md:absolute md:inset-y-0 md:right-0 md:mx-0 md:w-1/2 md:max-w-none md:px-0">
         <div className="hero-photo-mask-lg relative h-full w-full md:overflow-hidden">
           {/* Mobile: the photo sits above the copy at its own aspect ratio.
@@ -54,7 +62,7 @@ export default function HomeHero() {
           <p className="text-[11px] uppercase tracking-[0.4em] text-ochre md:text-[12px] md:tracking-[0.5em]">
             CHIAREL™ · The House of Clarity™
           </p>
-          <h1 className="mt-3 font-serif text-[clamp(2rem,1.3rem+3.6vw,4rem)] leading-[1.05] tracking-[-0.02em] text-ink md:mt-6">
+          <h1 className="mt-3 font-serif text-[clamp(2rem,1.3rem+3vw,3.5rem)] leading-[1.05] tracking-[-0.02em] text-ink md:mt-6">
             The ritual continues below the jawline.
           </h1>
           <p className="mt-3 max-w-sm text-[14px] leading-relaxed text-ink/70 md:mt-6 md:text-[15px]">
