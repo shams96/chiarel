@@ -14,17 +14,18 @@ export default function HomeHero() {
 
   return (
     <section
-      className="relative w-full overflow-hidden"
+      className="relative w-full overflow-hidden [--hero-h:min(780px,calc(100svh-5rem))]"
       style={{ background: "linear-gradient(100deg, #EFEBDD 0%, #F4F1E8 45%, #F8F6F1 100%)" }}
     >
       <div className="product-reveal relative mx-auto w-full max-w-[420px] px-6 md:absolute md:inset-y-0 md:right-0 md:mx-0 md:w-1/2 md:max-w-none md:px-0">
         <div className="hero-photo-mask-lg relative h-full w-full md:overflow-hidden">
           {/* Mobile: the photo sits above the copy at its own aspect ratio.
-              Desktop: it fills the right half edge to edge, scaled to the
-              column width and cropped top and bottom, so the label overlay
-              keeps image-relative percentages inside the same scaled box. */}
+              Desktop: it bleeds off the right edge, scaled to the column
+              width but never wider than 1.1x the hero height, so the whole
+              bottle (30-76% of the photo's height) stays inside the crop.
+              The label overlay keeps image-relative percentages. */}
           <div
-            className="hero-photo-mask relative mx-auto aspect-[1116/1700] h-[min(52svh,460px)] md:absolute md:left-0 md:top-1/2 md:mx-0 md:h-auto md:w-full md:-translate-y-1/2"
+            className="hero-photo-mask relative mx-auto aspect-[1116/1700] h-[min(52svh,460px)] md:absolute md:right-0 md:top-1/2 md:mx-0 md:h-auto md:w-[min(100%,calc(var(--hero-h)*1.1))] md:-translate-y-1/2"
             style={{ containerType: "inline-size" }}
           >
             <Image
@@ -48,7 +49,7 @@ export default function HomeHero() {
         </div>
       </div>
 
-      <div className="relative mx-auto grid w-full max-w-6xl items-center px-6 pb-8 pt-2 md:min-h-[min(780px,calc(100svh-5rem))] md:grid-cols-2 md:py-10">
+      <div className="relative mx-auto grid w-full max-w-6xl items-center px-6 pb-8 pt-2 md:min-h-[var(--hero-h)] md:grid-cols-2 md:py-10">
         <div className="hero-in max-w-xl">
           <p className="text-[11px] uppercase tracking-[0.4em] text-ochre md:text-[12px] md:tracking-[0.5em]">
             CHIAREL™ · The House of Clarity™
