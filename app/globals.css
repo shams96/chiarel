@@ -412,3 +412,23 @@ summary:focus-visible {
     scroll-behavior: auto !important;
   }
 }
+
+/* Home hero photo: on mobile the photo box feathers all four edges into the
+   section tint; on desktop it bleeds off the right edge of the viewport, so the
+   wrapper feathers only left/top/bottom. */
+@media (max-width: 767px) {
+  .hero-photo-mask {
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 14%, #000 66%, transparent 100%), linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(90deg, transparent 0%, #000 14%, #000 66%, transparent 100%), linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    mask-composite: intersect;
+  }
+}
+@media (min-width: 768px) {
+  .hero-photo-mask-lg {
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 100%), linear-gradient(180deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 100%), linear-gradient(180deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+    mask-composite: intersect;
+  }
+}
