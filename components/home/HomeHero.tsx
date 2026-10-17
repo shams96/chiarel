@@ -18,7 +18,7 @@ export default function HomeHero() {
       style={{ background: "linear-gradient(100deg, #EFEBDD 0%, #F4F1E8 45%, #F8F6F1 100%)" }}
     >
       <div className="relative mx-auto grid w-full max-w-6xl items-center gap-2 px-6 pb-8 pt-2 md:min-h-[min(760px,calc(100svh-5rem))] md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-6 md:py-10">
-        <div className="product-reveal relative mx-auto w-full max-w-[420px] md:mx-0 md:justify-self-start">
+        <div className="product-reveal relative mx-auto w-full max-w-[420px] md:order-2 md:mx-0 md:justify-self-end">
           <div
             className="relative mx-auto aspect-[1116/1700] h-[min(52svh,460px)] md:h-[min(78svh,720px)]"
             style={{
@@ -53,7 +53,7 @@ export default function HomeHero() {
           </div>
         </div>
 
-        <div className="hero-in max-w-xl md:justify-self-start md:pl-4">
+        <div className="hero-in max-w-xl md:order-1 md:justify-self-start">
           <p className="text-[11px] uppercase tracking-[0.4em] text-ochre md:text-[12px] md:tracking-[0.5em]">
             CHIAREL™ · The House of Clarity™
           </p>
