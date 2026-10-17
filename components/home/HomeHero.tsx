@@ -17,28 +17,22 @@ export default function HomeHero() {
       className="relative w-full overflow-hidden"
       style={{ background: "linear-gradient(100deg, #EFEBDD 0%, #F4F1E8 45%, #F8F6F1 100%)" }}
     >
-      <div className="relative mx-auto grid w-full max-w-6xl items-center gap-2 px-6 pb-8 pt-2 md:min-h-[min(760px,calc(100svh-5rem))] md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-6 md:py-10">
-        <div className="product-reveal relative mx-auto w-full max-w-[420px] md:order-2 md:mx-0 md:justify-self-end">
+      <div className="product-reveal relative mx-auto w-full max-w-[420px] px-6 md:absolute md:inset-y-0 md:right-0 md:mx-0 md:w-1/2 md:max-w-none md:px-0">
+        <div className="hero-photo-mask-lg relative h-full w-full md:overflow-hidden">
+          {/* Mobile: the photo sits above the copy at its own aspect ratio.
+              Desktop: it fills the right half edge to edge, scaled to the
+              column width and cropped top and bottom, so the label overlay
+              keeps image-relative percentages inside the same scaled box. */}
           <div
-            className="relative mx-auto aspect-[1116/1700] h-[min(52svh,460px)] md:h-[min(78svh,720px)]"
-            style={{
-              // Feather all four edges into the section tint so the photo reads
-              // as a light-filled scene, not a rectangle pasted on the page.
-              WebkitMaskImage:
-                "linear-gradient(90deg, transparent 0%, #000 14%, #000 66%, transparent 100%), linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%)",
-              WebkitMaskComposite: "source-in",
-              maskImage:
-                "linear-gradient(90deg, transparent 0%, #000 14%, #000 66%, transparent 100%), linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%)",
-              maskComposite: "intersect",
-              containerType: "inline-size",
-            }}
+            className="hero-photo-mask relative mx-auto aspect-[1116/1700] h-[min(52svh,460px)] md:absolute md:left-0 md:top-1/2 md:mx-0 md:h-auto md:w-full md:-translate-y-1/2"
+            style={{ containerType: "inline-size" }}
           >
             <Image
               src="/assets/home/hero-hands-n1.jpg"
               alt="Two hands presenting the CHIAREL Neck & Décolleté Renewal Emulsion in its 40 ml green glass bottle"
               fill
               priority
-              sizes="(max-width: 768px) 80vw, 480px"
+              sizes="(max-width: 768px) 80vw, 50vw"
               className="object-cover"
             />
             <div
@@ -52,17 +46,19 @@ export default function HomeHero() {
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="hero-in max-w-xl md:order-1 md:justify-self-start">
+      <div className="relative mx-auto grid w-full max-w-6xl items-center px-6 pb-8 pt-2 md:min-h-[min(780px,calc(100svh-5rem))] md:grid-cols-2 md:py-10">
+        <div className="hero-in max-w-xl">
           <p className="text-[11px] uppercase tracking-[0.4em] text-ochre md:text-[12px] md:tracking-[0.5em]">
             CHIAREL™ · The House of Clarity™
           </p>
           <h1 className="mt-3 font-serif text-[clamp(2rem,1.3rem+3.6vw,4rem)] leading-[1.05] tracking-[-0.02em] text-ink md:mt-6">
-            Skin clarity, made fresh in Isola del Liri.
+            The ritual continues below the jawline.
           </h1>
           <p className="mt-3 max-w-sm text-[14px] leading-relaxed text-ink/70 md:mt-6 md:text-[15px]">
-            A focused morning and evening ritual, built around CHIAREL
-            Essence™. Key ingredients named across our product pages.
+            N1 Neck &amp; Décolleté Renewal Emulsion™, a nightly emulsion for the
+            neck, jawline and décolleté, made fresh to order in Isola del Liri.
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-x-8 gap-y-3 md:mt-8">
             <Link
