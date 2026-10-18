@@ -14,6 +14,7 @@
 // script lists them so you can ask for them explicitly. Needs git and gh (logged in).
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
+import { createRequire } from "node:module";
 import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, posix } from "node:path";
@@ -143,7 +144,8 @@ try {
 // closer to the new version than to the one that was on main before?".
 const RASTER = /\.(jpe?g|png|webp|avif|gif)$/i;
 async function thumb(buf) {
-  const { default: sharp } = await import("sharp");
+  // resolve sharp from the repo being published, not from wherever this script sits
+  const sharp = createRequire(join(ROOT, "package.json"))("sharp");
   return sharp(buf).resize(128, 128, { fit: "fill" }).ensureAlpha().raw().toBuffer();
 }
 const meanDiff = (a, b) => a.reduce((s, v, i) => s + Math.abs(v - b[i]), 0) / a.length;
