@@ -32,6 +32,19 @@ const nextConfig = {
   // on a real compile error.
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
+  // Images in /assets are replaced in place under the same filename (see
+  // scripts/publish-images.mjs). A long-lived cache header would keep serving
+  // the old file to anyone who already loaded it, so these revalidate on every
+  // request instead: the browser sends If-None-Match and gets a cheap 304 when
+  // the file is unchanged, or the new bytes the moment it is.
+  async headers() {
+    return [
+      {
+        source: "/assets/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=0, must-revalidate" }],
+      },
+    ];
+  },
   // instrumentation.ts (dispute-rate monitor, see lib/dispute-alert-scheduler.ts)
   // is picked up by default on Next 15; the old experimental.instrumentationHook
   // flag is rejected as an unknown key and only prints a warning.

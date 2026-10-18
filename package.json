@@ -12,6 +12,7 @@
     "start": "node .next/standalone/server.js",
     "lint": "next lint",
     "smoke": "node scripts/smoke.mjs",
+    "publish:images": "node scripts/publish-images.mjs",
     "test": "dotenv -e .env.local -e .env -- vitest run",
     "postinstall": "prisma generate",
     "db:seed": "dotenv -e .env.local -e .env -- tsx prisma/seed.ts",
