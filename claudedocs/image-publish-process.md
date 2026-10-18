@@ -9,7 +9,8 @@ npm run publish:images
 
 It lists what it found (replaced / new / deleted), commits only the replaced files on a
 throwaway branch, opens a PR, waits for the required `check`, merges, then polls the live
-URL until the served file is byte-identical to yours.
+URL until the served image is the new one. (The host's CDN re-encodes images, so it compares
+decoded pixels against the previous version, not bytes.)
 
 - `-- --dry-run` shows the list and changes nothing.
 - `-- --include-new` also publishes brand-new files (they only matter if something references them).
@@ -19,9 +20,12 @@ URL until the served file is byte-identical to yours.
 Why a command is needed: the site builds from GitHub `main`, so a file saved in the folder is
 not live until it is merged and rebuilt (about 5-10 minutes).
 
-Why same-name swaps show up: `/assets/*` is served with `Cache-Control: public, max-age=0,
-must-revalidate` (`next.config.mjs`), so browsers re-check on every load. Next's image
-optimiser is off (`images.unoptimized`), so the file on disk is exactly what visitors get.
-If the host's CDN ever caches past that header, the script's byte comparison will show it.
+Same-name swaps and caching: tested 2026-10-18 with a 3% brightness change on
+`lip-gloss-bottle.png`. A fresh request got the new pixels right after the rebuild, so the
+host serves the replaced file. Visitors whose browser already cached the old file may keep it:
+the host's CDN still sends `Cache-Control: max-age=31536000` on /assets even though
+`next.config.mjs` asks for `max-age=0, must-revalidate`, so the header is overridden upstream.
+If a swap must reach returning visitors, change the filename (or add a version query) and
+update the reference.
 
 Keep files small (the site serves them as-is). The script warns above 1.5 MB.

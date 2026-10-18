@@ -73,6 +73,16 @@ if (dry) process.exit(0);
 
 // 2. commit them on a fresh branch off origin/main in a throwaway worktree
 git(["fetch", "-q", "origin", "main"]);
+// what is on main now, so the live check can tell "new" from "still the old file"
+const before = new Map(
+  files.map((f) => {
+    try {
+      return [f, execFileSync("git", ["show", `origin/main:${f}`], { cwd: ROOT, maxBuffer: 256 * 1048576 })];
+    } catch {
+      return [f, null];
+    }
+  }),
+);
 const stamp = new Date().toISOString().replace(/[-:T]/g, "").slice(0, 12);
 const branch = `images/${stamp}`;
 const wt = join(tmpdir(), `chiarel-images-${stamp}`);
@@ -128,16 +138,36 @@ try {
   } catch {}
 }
 
-// 4. wait until the live file is byte-identical to the local one
+// 4. wait until the live file is the new one. The host's CDN re-encodes images,
+// so bytes never match; compare decoded pixels instead and ask "is the live file
+// closer to the new version than to the one that was on main before?".
+const RASTER = /\.(jpe?g|png|webp|avif|gif)$/i;
+async function thumb(buf) {
+  const { default: sharp } = await import("sharp");
+  return sharp(buf).resize(128, 128, { fit: "fill" }).ensureAlpha().raw().toBuffer();
+}
+const meanDiff = (a, b) => a.reduce((s, v, i) => s + Math.abs(v - b[i]), 0) / a.length;
+async function isNew(f, liveBuf, newBuf, oldBuf) {
+  if (sha256(liveBuf) === sha256(newBuf)) return true;
+  if (!RASTER.test(f)) return liveBuf.length === newBuf.length && !oldBuf; // video/svg: exact size match, new files only
+  const [l, n] = [await thumb(liveBuf), await thumb(newBuf)];
+  if (!oldBuf) return meanDiff(l, n) < 2;
+  const dNew = meanDiff(l, n);
+  const dOld = meanDiff(l, await thumb(oldBuf));
+  return dNew < dOld || dNew < 0.05;
+}
+function sha256(b) {
+  return createHash("sha256").update(b).digest("hex");
+}
 if (merged) {
-  const pending = new Map(files.map((f) => [f, sha(join(ROOT, f))]));
+  const pending = new Map(files.map((f) => [f, { now: readFileSync(join(ROOT, f)), before: before.get(f) }]));
   const stop = Date.now() + 25 * 60_000;
   while (pending.size && Date.now() < stop) {
-    for (const [f, want] of [...pending]) {
+    for (const [f, { now, before: old }] of [...pending]) {
       const live = `${SITE}/${posix.relative("public", f).split("/").map(encodeURIComponent).join("/")}?cb=${Date.now()}`;
       try {
-        const res = await fetch(live, { cache: "no-store" });
-        if (res.ok && createHash("sha256").update(Buffer.from(await res.arrayBuffer())).digest("hex") === want) {
+        const res = await fetch(live, { cache: "no-store", headers: { "Cache-Control": "no-cache" } });
+        if (res.ok && (await isNew(f, Buffer.from(await res.arrayBuffer()), now, old))) {
           console.log("LIVE:", f);
           pending.delete(f);
         }
