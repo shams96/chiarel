@@ -31,7 +31,7 @@ import { motion, useReducedMotion } from "framer-motion";
 // back-navigation mid-sequence can't retrigger it.
 const SESSION_FLAG = "chiarel-hero-intro-v7-seen";
 
-const HOLD_MS = 5800; // mount to the start of the exit fade: wordmark settles ~4.5s, then holds ~1.3s
+const HOLD_MS = 6200; // mount to the start of the exit fade: wordmark settles ~4.5s, then holds ~1.7s
 const EXIT_MS = 400; // overlay fade-out duration
 
 // Timeline (seconds from mount)
@@ -41,7 +41,7 @@ const IMPACT_AT = 2.3; // drop meets the pool
 const WORDMARK_AT = 3.3; // wordmark starts rising out of the pool
 const DROP_TRAVEL = -210; // px the drop hangs above the pool
 
-const RING_COUNT = 6;
+const RING_COUNT = 5;
 
 // useLayoutEffect warns "does nothing on the server" during Next.js SSR;
 // aliasing to useEffect there only silences the warning.
@@ -216,32 +216,32 @@ export default function HeroIntro() {
               cx="320"
               cy="110"
               initial={{ rx: 8, ry: 2.4, opacity: 0 }}
-              animate={{ rx: 270, ry: 81, opacity: [0, 0.8, 0.45, 0] }}
+              animate={{ rx: 560, ry: 168, opacity: [0, 0.8, 0.35, 0] }}
               transition={{
                 delay: IMPACT_AT,
-                rx: { duration: 3.1, ease: "easeOut" },
-                ry: { duration: 3.1, ease: "easeOut" },
-                opacity: { duration: 3.1, times: [0, 0.2, 0.6, 1], ease: "easeOut" },
+                rx: { duration: 3.4, ease: [0.25, 0.55, 0.55, 1] },
+                ry: { duration: 3.4, ease: [0.25, 0.55, 0.55, 1] },
+                opacity: { duration: 3.4, times: [0, 0.15, 0.6, 1], ease: "easeOut" },
               }}
               fill="url(#hi-sheen)"
             />
 
             {Array.from({ length: RING_COUNT }, (_, i) => {
-              const end = 300 - i * 30; // nested: later rings stop a little short
-              const start = IMPACT_AT + i * 0.2;
-              const peak = 1 - i * 0.09;
+              const end = 600; // every ring runs past the screen edge and leaves, like a real ripple
+              const start = IMPACT_AT + i * 0.28;
+              const peak = 1 - i * 0.12;
               return (
                 <g key={i}>
                   <motion.ellipse
                     cx="320"
                     cy="110"
                     initial={{ rx: 6, ry: 1.8, opacity: 0 }}
-                    animate={{ rx: end, ry: end * 0.3, opacity: [0, peak, peak * 0.55, 0] }}
+                    animate={{ rx: end, ry: end * 0.3, opacity: [0, peak, peak * 0.75, 0] }}
                     transition={{
                       delay: start,
-                      rx: { duration: 2.2, ease: [0.2, 0.7, 0.3, 1] },
-                      ry: { duration: 2.2, ease: [0.2, 0.7, 0.3, 1] },
-                      opacity: { duration: 2.2, times: [0, 0.12, 0.6, 1], ease: "easeOut" },
+                      rx: { duration: 2.8, ease: [0.2, 0.4, 0.6, 0.85] },
+                      ry: { duration: 2.8, ease: [0.2, 0.4, 0.6, 0.85] },
+                      opacity: { duration: 2.8, times: [0, 0.1, 0.7, 1], ease: "easeOut" },
                     }}
                     fill="none"
                     stroke="url(#hi-ring)"
@@ -251,12 +251,12 @@ export default function HeroIntro() {
                     cx="320"
                     cy="108.6"
                     initial={{ rx: 6, ry: 1.8, opacity: 0 }}
-                    animate={{ rx: end, ry: end * 0.3, opacity: [0, peak * 0.8, peak * 0.4, 0] }}
+                    animate={{ rx: end, ry: end * 0.3, opacity: [0, peak * 0.8, peak * 0.55, 0] }}
                     transition={{
                       delay: start,
-                      rx: { duration: 2.2, ease: [0.2, 0.7, 0.3, 1] },
-                      ry: { duration: 2.2, ease: [0.2, 0.7, 0.3, 1] },
-                      opacity: { duration: 2.2, times: [0, 0.12, 0.6, 1], ease: "easeOut" },
+                      rx: { duration: 2.8, ease: [0.2, 0.4, 0.6, 0.85] },
+                      ry: { duration: 2.8, ease: [0.2, 0.4, 0.6, 0.85] },
+                      opacity: { duration: 2.8, times: [0, 0.1, 0.7, 1], ease: "easeOut" },
                     }}
                     fill="none"
                     stroke="#FFF4CF"
