@@ -21,7 +21,7 @@ export default function HomeN1Feature() {
     <section className="section-y border-y border-ink/10 bg-cloud/40">
       <div className="section-x grid items-center gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
         <Reveal>
-          <div className="relative mx-auto aspect-[2/3] w-full max-w-sm overflow-hidden">
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden">
             <Image
               src="/assets/products/n1-neck-decollete-marble-roses.jpg"
               alt={productImageAlt(n1)}
