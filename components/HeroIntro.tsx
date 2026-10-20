@@ -38,16 +38,16 @@ import { animate, motion, useMotionTemplate, useMotionValue, useReducedMotion, u
 // back-navigation mid-sequence can't retrigger it.
 const SESSION_FLAG = "chiarel-hero-intro-v8-seen";
 
-const HOLD_MS = 7000; // mount to the start of the exit fade
+const HOLD_MS = 6800; // mount to the start of the exit fade
 const EXIT_MS = 500; // overlay fade-out duration
 
 // Timeline (seconds from mount)
 const SKIN_IN = 1.1; // skin fades up out of the ivory
-const SWELL_AT = 0.4; // drop forms at the top
-const FALL_AT = 1.6; // drop lets go
-const IMPACT_AT = 2.5; // drop meets the skin
+const SWELL_AT = 0.25; // drop forms at the top
+const FALL_AT = 0.45; // drop lets go while it is still forming: no hang
+const IMPACT_AT = 2.3; // drop meets the skin
 const WAVE_S = 4.2; // wave travel time, centre to past the screen edges
-const WORDMARK_AT = 4.3; // wordmark rises as the wave passes the centre
+const WORDMARK_AT = 4.1; // wordmark rises as the wave passes the centre
 
 const WAVE_START = -14; // vmax; negative so nothing shows before impact
 const WAVE_END = 112; // vmax; beyond every screen corner at the 0.62 ellipse
@@ -211,8 +211,10 @@ export default function HeroIntro() {
   // overlay, so the first thing ever painted is a clear page.
   const showContent = phase === "playing" || phase === "exiting";
 
-  // Drop travel keyframes: hang, fall on a gravity curve, squash into the skin.
-  const fallSpan = IMPACT_AT + 0.2;
+  // Gravity: distance grows with the square of time, so the drop is moving the
+  // moment it lets go and arrives fast. One curve for the whole fall.
+  const GRAVITY = [0.55, 0.085, 0.68, 0.53] as const;
+  const squashSpan = IMPACT_AT + 0.2;
 
   return (
     <div
@@ -277,8 +279,8 @@ export default function HeroIntro() {
             initial={{ opacity: 0, scale: 0.3 }}
             animate={{ opacity: [0, 0, 0.5, 0], scale: [0.3, 0.3, 1, 1.5] }}
             transition={{
-              duration: fallSpan + 0.4,
-              times: [0, FALL_AT / (fallSpan + 0.4), IMPACT_AT / (fallSpan + 0.4), 1],
+              duration: squashSpan + 0.4,
+              times: [0, FALL_AT / (squashSpan + 0.4), IMPACT_AT / (squashSpan + 0.4), 1],
               ease: "easeOut",
             }}
             className="pointer-events-none absolute h-[2.2vmax] w-[7vmax] rounded-full"
@@ -306,27 +308,29 @@ export default function HeroIntro() {
             }}
           />
 
-          {/* The drop. Outer element does the travel: it hangs, then falls
-              on a gravity curve (slow start, fast arrival), stretching as it
-              speeds up, and is taken into the skin on arrival.
-              transform-origin sits at the base so the squash reads as the
-              drop sinking in. */}
+          {/* The drop. The outer element only travels: one continuous fall
+              on a gravity curve from the moment it lets go (no hold, no
+              change of curve mid-fall), so the motion reads as smooth.
+              The middle element does the stretch and the squash into the
+              skin, with its base as the pivot so the squash reads as the drop
+              sinking in. */}
           <motion.div
             aria-hidden="true"
-            initial={{ y: "-38vh", scaleY: 1, opacity: 1 }}
-            animate={{
-              y: ["-38vh", "-38vh", "0vh", "0vh"],
-              scaleY: [1, 1, 1.22, 0.1],
-              opacity: [1, 1, 1, 0],
-            }}
-            transition={{
-              duration: fallSpan,
-              times: [0, FALL_AT / fallSpan, IMPACT_AT / fallSpan, 1],
-              ease: ["linear", [0.5, 0, 0.9, 0.55], "easeOut"],
-            }}
-            className="absolute"
-            style={{ transformOrigin: "50% 100%" }}
+            initial={{ y: "-34vh" }}
+            animate={{ y: "0vh" }}
+            transition={{ delay: FALL_AT, duration: IMPACT_AT - FALL_AT, ease: GRAVITY }}
+            className="absolute will-change-transform"
           >
+            <motion.div
+              initial={{ scaleY: 1, opacity: 1 }}
+              animate={{ scaleY: [1, 1, 1.18, 0.12], opacity: [1, 1, 1, 0] }}
+              transition={{
+                duration: squashSpan,
+                times: [0, FALL_AT / squashSpan, IMPACT_AT / squashSpan, 1],
+                ease: ["linear", GRAVITY, "easeOut"],
+              }}
+              style={{ transformOrigin: "50% 100%" }}
+            >
             {/* Inner element does the swell: the drop gathers at its tip
                 (origin top) before it lets go. */}
             <motion.svg
@@ -334,7 +338,7 @@ export default function HeroIntro() {
               className="block h-[76px] w-[54px] overflow-visible md:h-[100px] md:w-[71px]"
               initial={{ scale: 0.25, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1.1, delay: SWELL_AT, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.9, delay: SWELL_AT, ease: [0.16, 1, 0.3, 1] }}
               style={{ transformOrigin: "50% 0%", filter: "drop-shadow(0 8px 18px rgba(154,98,8,0.4))" }}
             >
               <defs>
@@ -364,6 +368,7 @@ export default function HeroIntro() {
               <ellipse cx="19" cy="52" rx="4.2" ry="11" transform="rotate(14 19 52)" fill="#FFFFFF" opacity="0.78" />
               <circle cx="24" cy="36" r="1.8" fill="#FFFFFF" opacity="0.7" />
             </motion.svg>
+            </motion.div>
           </motion.div>
 
           {/* Wordmark: same styling as the live header, so the crossfade into
