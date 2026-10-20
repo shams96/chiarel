@@ -48,6 +48,8 @@ const FALL_AT = 0.45; // drop lets go while it is still forming: no hang
 const IMPACT_AT = 2.3; // drop meets the skin
 const WAVE_S = 4.2; // wave travel time, centre to past the screen edges
 const WORDMARK_AT = 4.1; // wordmark rises as the wave passes the centre
+const ECHO_DELAY = 0.5; // the second, fainter wave trails the first by this much
+const PUSH_IN_S = 6; // slow camera push-in over the whole sequence
 
 const WAVE_START = -14; // vmax; negative so nothing shows before impact
 const WAVE_END = 112; // vmax; beyond every screen corner at the 0.62 ellipse
@@ -71,7 +73,14 @@ const MOTTLE = svgUri(
 // Skin tones are built from Peach Dust (#FAD6C9) and Champagne Gold (#D6C5A0),
 // both ratified colours, warmed and lightened so the screen stays ivory-led.
 const SKIN_DULL = `${MOTTLE}, ${GRAIN}, radial-gradient(ellipse at 50% 46%, #F0DDD0 0%, #E9D0C2 65%, #E3C8B9 100%)`;
-const SKIN_RADIANT = `${GRAIN}, radial-gradient(ellipse at 50% 50%, rgba(246,208,140,0.34) 0%, rgba(246,208,140,0) 55%), radial-gradient(ellipse at 50% 50%, #FCEFE3 0%, #F8E1D0 55%, #F3D6C3 100%)`;
+const SKIN_RADIANT = `${GRAIN}, radial-gradient(ellipse at 50% 50%, rgba(246,208,140,0.44) 0%, rgba(246,208,140,0) 62%), radial-gradient(ellipse at 50% 50%, #FDF2E8 0%, #F9E4D4 55%, #F4D9C7 100%)`;
+
+// Lighting over the whole skin stack: a soft key light from the upper left, a
+// gentle vignette, and a slow sheen that drifts across, so the skin reads as a
+// lit surface under a camera, not a flat fill.
+const KEY_LIGHT = "radial-gradient(ellipse 85% 75% at 26% 14%, rgba(255,250,242,0.55) 0%, rgba(255,250,242,0) 62%)";
+const VIGNETTE = "radial-gradient(ellipse 75% 70% at 50% 50%, rgba(120,76,58,0) 55%, rgba(120,76,58,0.2) 100%)";
+const SHEEN = "linear-gradient(112deg, rgba(255,248,236,0) 36%, rgba(255,248,236,0.3) 50%, rgba(255,248,236,0) 64%)";
 
 // useLayoutEffect warns "does nothing on the server" during Next.js SSR;
 // aliasing to useEffect there only silences the warning.
@@ -99,11 +108,21 @@ export default function HeroIntro() {
   const shadowPeak = useTransform(wave, (v) => v - 7);
   const crestAt = useTransform(wave, (v) => v);
   const crestEnd = useTransform(wave, (v) => v + 7);
+  const crestIn = useTransform(wave, (v) => v - 1.4);
+  const crestOut = useTransform(wave, (v) => v + 1.4);
   const glowMid = useTransform(wave, (v) => Math.max(v * 0.6, 0));
   const glowEnd = useTransform(wave, (v) => Math.max(v * 0.95, 0));
   const revealMask = useMotionTemplate`radial-gradient(${ELLIPSE}, #000 ${maskInner}vmax, transparent ${maskOuter}vmax)`;
-  const crest = useMotionTemplate`radial-gradient(${ELLIPSE}, transparent ${shadowAt}vmax, rgba(138,84,62,0.18) ${shadowPeak}vmax, rgba(255,247,226,0.9) ${crestAt}vmax, rgba(255,247,226,0) ${crestEnd}vmax)`;
+  const crest = useMotionTemplate`radial-gradient(${ELLIPSE}, transparent ${shadowAt}vmax, rgba(138,84,62,0.18) ${shadowPeak}vmax, rgba(255,247,226,0.9) ${crestIn}vmax, rgba(255,255,255,0.95) ${crestAt}vmax, rgba(255,247,226,0.8) ${crestOut}vmax, rgba(255,247,226,0) ${crestEnd}vmax)`;
   const depth = useMotionTemplate`radial-gradient(${ELLIPSE}, rgba(226,128,100,0.34) 0vmax, rgba(226,128,100,0.2) ${glowMid}vmax, rgba(226,128,100,0) ${glowEnd}vmax)`;
+  // The echo: a second, fainter wave that trails the first.
+  const echo = useMotionValue(WAVE_START);
+  const echoShadow = useTransform(echo, (v) => v - 10);
+  const echoPeak = useTransform(echo, (v) => v - 5);
+  const echoCrest = useTransform(echo, (v) => v);
+  const echoEnd = useTransform(echo, (v) => v + 6);
+  const echoBand = useMotionTemplate`radial-gradient(${ELLIPSE}, transparent ${echoShadow}vmax, rgba(138,84,62,0.08) ${echoPeak}vmax, rgba(255,247,226,0.55) ${echoCrest}vmax, rgba(255,247,226,0) ${echoEnd}vmax)`;
+  const echoOpacity = useTransform(echo, [WAVE_START, 0, 60, WAVE_END], [0, 0.85, 0.45, 0]);
   const crestOpacity = useTransform(wave, [WAVE_START, 0, 60, WAVE_END], [0, 1, 0.65, 0]);
   const depthOpacity = useTransform(wave, [WAVE_START, 0, 70, WAVE_END], [0, 1, 0.75, 0]);
 
@@ -157,13 +176,22 @@ export default function HeroIntro() {
   useEffect(() => {
     if (phase !== "playing") return;
     wave.set(WAVE_START);
+    echo.set(WAVE_START);
     const controls = animate(wave, WAVE_END, {
       delay: IMPACT_AT,
       duration: WAVE_S,
       ease: [0.3, 0.45, 0.55, 1],
     });
-    return () => controls.stop();
-  }, [phase, wave]);
+    const echoControls = animate(echo, WAVE_END, {
+      delay: IMPACT_AT + ECHO_DELAY,
+      duration: WAVE_S,
+      ease: [0.3, 0.45, 0.55, 1],
+    });
+    return () => {
+      controls.stop();
+      echoControls.stop();
+    };
+  }, [phase, wave, echo]);
 
   useEffect(() => {
     if (phase !== "playing" && phase !== "exiting") return;
@@ -235,42 +263,79 @@ export default function HeroIntro() {
     >
       {showContent && (
         <>
-          {/* Skin, before: a little uneven in tone and texture, like skin
-              under a macro lens. Fades up out of the ivory. */}
+          {/* The skin and everything that moves across it sit in one layer
+              that pushes in slowly (a camera settling), about the centre so the
+              point of impact never moves. */}
           <motion.div
             aria-hidden="true"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: SKIN_IN, ease: "easeOut" }}
-            className="absolute inset-0"
-            style={{ backgroundImage: SKIN_DULL }}
-          />
+            initial={{ scale: 1.07 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: PUSH_IN_S, ease: [0.22, 0.6, 0.3, 1] }}
+            className="absolute inset-0 will-change-transform"
+          >
+            {/* Skin, before: a little uneven in tone and texture, like skin
+                under a macro lens. Fades up out of the ivory. */}
+            <motion.div
+              aria-hidden="true"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: SKIN_IN, ease: "easeOut" }}
+              className="absolute inset-0"
+              style={{ backgroundImage: SKIN_DULL }}
+            />
 
-          {/* Warmth beneath the surface: a soft rose-amber glow that follows
-              the wave at about half its radius, so the skin seems to hold
-              light below as well as on top. Glow only, never a cross-section. */}
-          <motion.div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0"
-            style={{ backgroundImage: depth, opacity: depthOpacity, mixBlendMode: "multiply" }}
-          />
+            {/* Warmth beneath the surface: a soft rose-amber glow that follows
+                the wave at about half its radius, so the skin seems to hold
+                light below as well as on top. Glow only, never a cross-section. */}
+            <motion.div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0"
+              style={{ backgroundImage: depth, opacity: depthOpacity, mixBlendMode: "multiply" }}
+            />
 
-          {/* Skin, after: smoother, warmer, lit. Revealed from the point of
-              impact outward by the same wave radius. */}
-          <motion.div
-            aria-hidden="true"
-            className="absolute inset-0"
-            style={{ backgroundImage: SKIN_RADIANT, maskImage: revealMask, WebkitMaskImage: revealMask }}
-          />
+            {/* Skin, after: smoother, warmer, lit. Revealed from the point of
+                impact outward by the same wave radius. */}
+            <motion.div
+              aria-hidden="true"
+              className="absolute inset-0"
+              style={{ backgroundImage: SKIN_RADIANT, maskImage: revealMask, WebkitMaskImage: revealMask }}
+            />
 
-          {/* The wave front: a shallow shadow on the inside edge and a
-              crest of light on the outside, which is what makes a flat image
-              read as a surface moving. */}
-          <motion.div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0"
-            style={{ backgroundImage: crest, opacity: crestOpacity }}
-          />
+            {/* The wave front: a shallow shadow on the inside edge and a
+                crest of light on the outside, which is what makes a flat image
+                read as a surface moving. */}
+            <motion.div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0"
+              style={{ backgroundImage: crest, opacity: crestOpacity }}
+            />
+
+            {/* The echo: a second, fainter wave trailing the first. */}
+            <motion.div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0"
+              style={{ backgroundImage: echoBand, opacity: echoOpacity }}
+            />
+
+            {/* Lighting: key light from the upper left, a vignette, and a
+                slow sheen drifting across the skin. */}
+            <motion.div
+              aria-hidden="true"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: SKIN_IN + 0.4, ease: "easeOut" }}
+              className="pointer-events-none absolute inset-0"
+              style={{ backgroundImage: `${KEY_LIGHT}, ${VIGNETTE}` }}
+            />
+            <motion.div
+              aria-hidden="true"
+              initial={{ x: "-14%", opacity: 0 }}
+              animate={{ x: "14%", opacity: 1 }}
+              transition={{ duration: PUSH_IN_S + 1, ease: "linear", opacity: { duration: 1.6 } }}
+              className="pointer-events-none absolute -inset-x-[20%] inset-y-0"
+              style={{ backgroundImage: SHEEN }}
+            />
+          </motion.div>
 
           {/* Contact shadow: the drop's shadow gathers on the skin just before
               it lands. */}
@@ -308,6 +373,35 @@ export default function HeroIntro() {
             }}
           />
 
+          {/* Light cast by the drop: as it nears, a warm gold light gathers on
+              the skin beneath it (a reflection), and releases at impact. */}
+          <motion.div
+            aria-hidden="true"
+            initial={{ opacity: 0, scale: 0.4 }}
+            animate={{ opacity: [0, 0, 0.55, 0], scale: [0.4, 0.4, 1, 1.4] }}
+            transition={{
+              duration: squashSpan + 0.8,
+              times: [0, FALL_AT / (squashSpan + 0.8), IMPACT_AT / (squashSpan + 0.8), 1],
+              ease: "easeOut",
+            }}
+            className="pointer-events-none absolute h-[16vmax] w-[26vmax] rounded-full"
+            style={{ background: "radial-gradient(ellipse, rgba(255,226,150,0.55) 0%, rgba(240,190,90,0.22) 40%, rgba(240,190,90,0) 70%)" }}
+          />
+
+          {/* Impact rings: two thin gold rings leave the point of contact before
+              the large wave, so the touch has weight. */}
+          {[0, 0.14].map((d, i) => (
+            <motion.div
+              key={i}
+              aria-hidden="true"
+              initial={{ opacity: 0, scale: 0.15 }}
+              animate={{ opacity: [0, 0.9 - i * 0.3, 0], scale: [0.15, 1, 1.5] }}
+              transition={{ duration: 1.3, delay: IMPACT_AT + d, times: [0, 0.2, 1], ease: "easeOut" }}
+              className="pointer-events-none absolute h-[7vmax] w-[11vmax] rounded-full"
+              style={{ border: "1.5px solid rgba(232,184,84,0.9)", boxShadow: "0 0 14px rgba(240,196,100,0.5)" }}
+            />
+          ))}
+
           {/* The drop. The outer element only travels: one continuous fall
               on a gravity curve from the moment it lets go (no hold, no
               change of curve mid-fall), so the motion reads as smooth.
@@ -335,7 +429,7 @@ export default function HeroIntro() {
                 (origin top) before it lets go. */}
             <motion.svg
               viewBox="0 0 60 84"
-              className="block h-[76px] w-[54px] overflow-visible md:h-[100px] md:w-[71px]"
+              className="block h-[98px] w-[70px] overflow-visible md:h-[130px] md:w-[92px]"
               initial={{ scale: 0.25, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.9, delay: SWELL_AT, ease: [0.16, 1, 0.3, 1] }}
