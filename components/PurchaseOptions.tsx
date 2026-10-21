@@ -218,7 +218,7 @@ export default function PurchaseOptions({
           </li>
         )}
         <li>
-          Complimentary samples with every order.{" "}
+          Complimentary shipping on every order.{" "}
           <Link href="/terms" className="tap-area underline decoration-ink/30 hover:text-ochre">
             Full shipping &amp; returns policy
           </Link>

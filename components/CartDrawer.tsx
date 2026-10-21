@@ -218,9 +218,6 @@ export default function CartDrawer() {
               >
                 Checkout — ${estimatedTotal}
               </Link>
-              <p className="mt-3 text-center text-[11px] text-ink/65">
-                Complimentary samples included with every order.
-              </p>
             </div>
           </>
         )}

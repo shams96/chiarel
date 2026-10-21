@@ -7,7 +7,7 @@ import { useCart, type CartLine } from "@/lib/cart-context";
 import { getProduct, isPurchasable } from "@/lib/products";
 import { planOptions } from "@/lib/pricing";
 import CartIncludedNote from "@/components/CartIncludedNote";
-import { FREE_SHIP_THRESHOLD, shippingFor, shippingNote } from "@/lib/shipping";
+import { shippingFor } from "@/lib/shipping";
 
 // The bag as its own page: one row per product with a plan selector, and a
 // summary panel beside it. Same numbers as the drawer and /checkout (shared
@@ -243,13 +243,8 @@ export default function CartPageContent() {
                 <dd className="font-serif text-xl">${total}</dd>
               </div>
             </dl>
-            {shipping > 0 && (
-              <p className="mt-3 text-[12px] text-ink/65">
-                {shippingNote(subtotal, lines)}
-              </p>
-            )}
             <p className="mt-3 text-[12px] leading-relaxed text-ink/65">
-              Taxes are calculated at payment. Complimentary samples are included with every order.
+              Taxes are calculated at payment.
             </p>
 
             <div className="mt-6">
@@ -257,8 +252,7 @@ export default function CartPageContent() {
               <InfoItem title="Shipping & handling">
                 Made to order in Isola del Liri, Italy. Allow standard processing time before
                 dispatch; shipping options and timing are shown at checkout. Shipping is
-                complimentary on the Ritual Plan, on subscriptions, and on bags of ${FREE_SHIP_THRESHOLD} or
-                more.
+                complimentary on every order.
               </InfoItem>
               <InfoItem title="Payment & sales tax">
                 You enter your card details on the next screen, securely processed by Stripe. Sales

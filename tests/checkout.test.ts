@@ -159,15 +159,12 @@ describe("checkout: request validation", () => {
 });
 
 describe("checkout: totals", () => {
-  it("charges 12 shipping under the free-shipping threshold", async () => {
+  it("ships every order free, with no Shipping line item", async () => {
     setCart([line({ unitPrice: 100 })]);
     await checkout(validBody);
     const data = orderCreate.mock.calls[0][0].data;
-    expect(data).toMatchObject({ subtotal: 100, shipping: 12, total: 112, bonusSample: false });
-    const items = sessionsCreate.mock.calls[0][0].line_items;
-    expect(items).toHaveLength(2);
-    expect(items[1].price_data).toMatchObject({ unit_amount: 1200 });
-    expect(items[1].price_data.product_data.name).toBe("Shipping");
+    expect(data).toMatchObject({ subtotal: 100, shipping: 0, total: 100 });
+    expect(sessionsCreate.mock.calls[0][0].line_items).toHaveLength(1);
   });
 
   it("ships a subscription under 150 free (no Shipping line item)", async () => {
@@ -189,16 +186,6 @@ describe("checkout: totals", () => {
     const data = orderCreate.mock.calls[0][0].data;
     expect(data).toMatchObject({ shipping: 0, total: 150 });
     expect(sessionsCreate.mock.calls[0][0].line_items).toHaveLength(1);
-  });
-
-  it("adds the bonus sample at 250 and not before", async () => {
-    setCart([line({ unitPrice: 249 })]);
-    await checkout(validBody);
-    expect(orderCreate.mock.calls[0][0].data.bonusSample).toBe(false);
-    orderCreate.mockClear();
-    setCart([line({ unitPrice: 250 })]);
-    await checkout(validBody);
-    expect(orderCreate.mock.calls[0][0].data.bonusSample).toBe(true);
   });
 
   it("sends Stripe the server-computed price in cents, not anything from the request", async () => {
