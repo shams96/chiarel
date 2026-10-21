@@ -4,8 +4,7 @@ import { describe, expect, it } from "vitest";
 const read = (p: string) => readFileSync(p, "utf8");
 
 // Every interactive element in the site chrome must keep a >=44px hit area
-// (min-h-[44px], h-11, or the .tap-area pseudo-element expansion), and the
-// announcement bar must never be a nowrap/marquee that clips copy on phones.
+// (min-h-[44px], h-11, or the .tap-area pseudo-element expansion).
 describe("site chrome tap targets", () => {
   // Normalise whitespace so the checks don't depend on line endings/indent.
   const flat = (p: string) => read(p).replace(/\s+/g, " ");
@@ -35,13 +34,6 @@ describe("site chrome tap targets", () => {
       expect(i, needle).toBeGreaterThan(-1);
       expect(cart.slice(i, i + 260)).toMatch(bigEnough);
     }
-  });
-
-  it("announcement bar wraps instead of scrolling or clipping", () => {
-    expect(header).not.toMatch(/marquee/);
-    const bar = header.slice(header.indexOf("The Founding Members: one hundred"), header.indexOf("<Ticker />"));
-    expect(bar).not.toMatch(/whitespace-nowrap/);
-    expect(css).toMatch(/\.ticker-msg[\s\S]*?animation: none/);
   });
 });
 

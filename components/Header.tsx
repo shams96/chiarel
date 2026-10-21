@@ -2,11 +2,8 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useCart } from "@/lib/cart-context";
 import { useDialog } from "@/lib/use-dialog";
-
-const FOUNDING_100_PAGES = ["/", "/founding-100", "/shop/recovery-masque"];
 
 const nav = [
   { href: "/shop", label: "Shop" },
@@ -18,78 +15,14 @@ const nav = [
   { href: "/account", label: "Account" },
 ];
 
-// These become children of the already-keyed <span key={i}> in TickerHalf's
-// .map() below, not siblings rendered directly from this array, so they
-// don't need their own keys.
-/* eslint-disable react/jsx-key */
-const tickerMessages = [
-  "The Founding Members · One hundred numbered places",
-  "Meet every new formula 48 hours before anyone else",
-  <span className="text-champagne">Become a Founding Member →</span>,
-];
-/* eslint-enable react/jsx-key */
-
-// One message at a time (CSS cross-fade, see .ticker-rotor in globals.css);
-// wraps instead of clipping on narrow screens. Under reduced motion every
-// message shows at once, separated by the dots.
-function Ticker() {
-  return (
-    <span className="ticker-rotor text-[11px] font-medium uppercase leading-snug tracking-[0.16em]">
-      {tickerMessages.map((msg, i) => (
-        <span
-          key={i}
-          className="ticker-msg"
-          style={{ "--i": i } as React.CSSProperties}
-        >
-          {msg}
-          {i < tickerMessages.length - 1 && (
-            <span className="ticker-sep text-champagne/40" aria-hidden="true">·</span>
-          )}
-        </span>
-      ))}
-    </span>
-  );
-}
-
 export default function Header() {
   const { count, open } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLElement>(null);
   useDialog(menuOpen, menuRef, () => setMenuOpen(false));
-  const [tickerPaused, setTickerPaused] = useState(false);
-  const pathname = usePathname();
-  const showFounding100Ticker = FOUNDING_100_PAGES.includes(pathname ?? "");
   return (
     <>
       <header className="site-header sticky top-0 z-50 overflow-x-hidden border-b border-ink/10">
-      {showFounding100Ticker && (
-        <div className={`relative border-b border-champagne/30 bg-ink ${tickerPaused ? "ticker-paused" : ""}`}>
-          <Link
-            href="/founding-100"
-            aria-label="The Founding Members: one hundred numbered places, with a 48-hour early look at every new formula. Become a Founding Member."
-            className="relative flex min-h-[44px] items-center justify-center gap-3 overflow-hidden px-14 py-2 text-champagne transition hover:bg-ink/90"
-          >
-            <span className="relative flex h-2 w-2 shrink-0">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-champagne opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-champagne" />
-            </span>
-            <Ticker />
-          </Link>
-          {/* The messages change by themselves, so there has to be a way to stop
-              them (WCAG 2.2.2). A sibling of the link, never inside it. */}
-          <button
-            type="button"
-            onClick={() => setTickerPaused((v) => !v)}
-            aria-pressed={tickerPaused}
-            aria-label={tickerPaused ? "Resume announcement rotation" : "Pause announcement rotation"}
-            className="absolute right-0 top-0 flex h-full min-h-[44px] w-11 items-center justify-center text-champagne/80 transition hover:text-champagne"
-          >
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true">
-              {tickerPaused ? <path d="M3 1.5v9l7.5-4.5z" /> : <path d="M2.5 1.5h2.6v9H2.5zM6.9 1.5h2.6v9H6.9z" />}
-            </svg>
-          </button>
-        </div>
-      )}
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex min-h-[44px] flex-col justify-center leading-none">
           <span className="font-serif text-2xl tracking-[0.35em] text-ink">
