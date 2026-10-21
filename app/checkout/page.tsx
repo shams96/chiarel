@@ -303,9 +303,6 @@ export default function CheckoutPage() {
               </p>
             )}
           </div>
-          <p className="mt-4 text-[11px] text-ink/65">
-            Complimentary samples included, chosen by the House.
-          </p>
         </aside>
       </div>
     </div>

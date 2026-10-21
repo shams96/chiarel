@@ -65,8 +65,8 @@ export default function TermsPage() {
           <p className="mt-3">
             Because each order is formulated and produced to order in Isola
             del Liri, Italy, please allow standard processing time before
-            dispatch. Shipping timelines and destinations available at
-            checkout may change without notice.
+            dispatch. Shipping is complimentary on every order. Shipping timelines
+            and destinations available at checkout may change without notice.
           </p>
         </section>
 

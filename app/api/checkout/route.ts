@@ -7,7 +7,7 @@ import { withApiErrorHandling } from "@/lib/api-error";
 import { getCountry } from "@/lib/countries";
 import { getProductOrThrow } from "@/lib/products";
 import { isRateLimited, clientIp } from "@/lib/rate-limit";
-import { EXTRA_SAMPLE_THRESHOLD, shippingFor } from "@/lib/shipping";
+import { shippingFor } from "@/lib/shipping";
 import { trustedOrigin } from "@/lib/site-origin";
 
 // Throttle by IP: checkout creates a pending Order row and a Stripe Checkout
@@ -108,7 +108,6 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
       savings: cart.savings,
       shipping,
       total,
-      bonusSample: cart.subtotal >= EXTRA_SAMPLE_THRESHOLD,
       status: "pending",
       termsAcceptedAt: new Date(),
       termsVersion,
@@ -146,18 +145,6 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
     },
     quantity: line.qty,
   }));
-
-  if (shipping > 0) {
-    lineItems.push({
-      price_data: {
-        currency: "usd",
-        unit_amount: shipping * 100,
-        tax_behavior: "exclusive",
-        product_data: { name: "Shipping" },
-      },
-      quantity: 1,
-    });
-  }
 
   // A Stripe Customer with the collected shipping address, so Stripe Tax
   // (enabled below) has a jurisdiction to calculate against — automatic_tax

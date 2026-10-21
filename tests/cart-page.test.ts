@@ -1,36 +1,26 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { computeUnitPrice, planOptions } from "@/lib/pricing";
-import { EXTRA_SAMPLE_THRESHOLD, FREE_SHIP_THRESHOLD, SHIPPING_COST, shippingFor, shippingNote } from "@/lib/shipping";
+import { shippingFor, shippingNote } from "@/lib/shipping";
 import { isPurchasable, products } from "@/lib/products";
 
 describe("shippingFor (shared by checkout, drawer and cart page)", () => {
-  const oneTime = [{ mode: "oneTime" }];
-
-  it("one-time bags ship free at or above the threshold and pay a flat charge below it", () => {
-    expect(shippingFor(FREE_SHIP_THRESHOLD, oneTime)).toBe(0);
-    expect(shippingFor(FREE_SHIP_THRESHOLD - 1, oneTime)).toBe(SHIPPING_COST);
-    expect(shippingFor(138, oneTime)).toBe(SHIPPING_COST);
-  });
-
-  it("the Ritual Plan and subscriptions ship free at any size", () => {
+  it("ships every order free, whatever the bag size or purchase mode", () => {
+    expect(shippingFor(40, [{ mode: "oneTime" }])).toBe(0);
+    expect(shippingFor(138, [{ mode: "oneTime" }])).toBe(0);
     expect(shippingFor(118, [{ mode: "subscription" }])).toBe(0);
     expect(shippingFor(40, [{ mode: "ninetyDay" }])).toBe(0);
-    expect(shippingFor(40, [{ mode: "oneTime" }, { mode: "subscription" }])).toBe(0);
-  });
-
-  it("charges nothing for an empty bag", () => {
     expect(shippingFor(0, [])).toBe(0);
   });
 
-  it("the note tells a one-time bag how to unlock free shipping, and confirms it once unlocked", () => {
-    expect(shippingNote(138, oneTime)).toMatch(/Ritual Plan or a subscription, or add \$12 more/);
-    expect(shippingNote(138, [{ mode: "ninetyDay" }])).toBe("Complimentary shipping included.");
-    expect(shippingNote(150, oneTime)).toBe("Complimentary shipping included.");
+  it("the note says shipping is complimentary on every order", () => {
+    expect(shippingNote(138, [{ mode: "oneTime" }])).toBe("Complimentary shipping on every order.");
   });
 
-  it("keeps the bonus-sample threshold above the free-shipping threshold", () => {
-    expect(EXTRA_SAMPLE_THRESHOLD).toBeGreaterThan(FREE_SHIP_THRESHOLD);
+  it("makes no sample promise anywhere a customer buys (until INCI and filling are settled)", () => {
+    for (const f of ["app/checkout/page.tsx", "components/CartDrawer.tsx", "components/CartPageContent.tsx", "components/PurchaseOptions.tsx", "lib/shipping.ts"]) {
+      expect(readFileSync(f, "utf8")).not.toMatch(/Complimentary samples/i);
+    }
   });
 });
 
