@@ -58,13 +58,13 @@ export const metadata: Metadata = {
     title: `${SITE_NAME} — The House of Clarity™`,
     description,
     url: SITE_URL,
-    images: [{ url: "/assets/editorial/hero-shore-duo.jpg", width: 1536, height: 934 }],
+    images: [{ url: "/assets/editorial/og-n1-hands.jpg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE_NAME} — The House of Clarity™`,
     description,
-    images: ["/assets/editorial/hero-shore-duo.jpg"],
+    images: ["/assets/editorial/og-n1-hands.jpg"],
   },
   robots: rootRobotsMetadata(),
 };

@@ -10,6 +10,13 @@ export const metadata: Metadata = {
   description:
     "One hundred numbered places in the CHIAREL 90-Day Ritual, with early access to every new formula.",
   alternates: { canonical: "/founding-100" },
+  openGraph: {
+    title: "The Founding Members — CHIAREL",
+    description:
+      "One hundred numbered places in the CHIAREL 90-Day Ritual, with early access to every new formula.",
+    url: "/founding-100",
+    images: [{ url: "/assets/editorial/og-n1-hands.jpg", width: 1200, height: 630 }],
+  },
 };
 
 export const dynamic = "force-dynamic";

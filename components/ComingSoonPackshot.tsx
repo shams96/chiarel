@@ -61,20 +61,37 @@ function ComingSoonPackshotInner({
       ? `${window.location.origin}/founding-100?ref=${encodeURIComponent(name || "a-friend")}`
       : "";
 
-  async function handleShare() {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: "The Founding Members — CHIAREL",
-          text: "One hundred numbered places, with early access to every new CHIAREL formula.",
-          url: shareUrl,
-        });
-        return;
-      } catch {
-        // user cancelled or share failed — fall through to copy
-      }
+  // Plain links for WhatsApp, email and Facebook work on every device, with or
+  // without an installed app or a system share sheet (the browser share sheet
+  // on a desktop often offers nothing usable). Copy link falls back to a hidden
+  // field when the clipboard API is unavailable.
+  const shareMessage = "I have a place with the CHIAREL Founding Members: one hundred numbered places, with early access to every new formula.";
+  const encodedUrl = encodeURIComponent(shareUrl);
+  const shareLinks = [
+    { label: "WhatsApp", href: `https://wa.me/?text=${encodeURIComponent(`${shareMessage} ${shareUrl}`)}` },
+    {
+      label: "Email",
+      href: `mailto:?subject=${encodeURIComponent("The CHIAREL Founding Members")}&body=${encodeURIComponent(`${shareMessage}
+
+${shareUrl}`)}`,
+    },
+    { label: "Facebook", href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}` },
+  ];
+
+  async function handleCopy() {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+    } catch {
+      const field = document.createElement("textarea");
+      field.value = shareUrl;
+      field.setAttribute("readonly", "");
+      field.style.position = "fixed";
+      field.style.opacity = "0";
+      document.body.appendChild(field);
+      field.select();
+      document.execCommand("copy");
+      document.body.removeChild(field);
     }
-    await navigator.clipboard.writeText(shareUrl);
     setShareCopied(true);
     setTimeout(() => setShareCopied(false), 2500);
   }
@@ -86,14 +103,28 @@ function ComingSoonPackshotInner({
           You&rsquo;re on the list — welcome to the House.
         </p>
         <p className="max-w-xs text-[13px] leading-relaxed text-ink/60">
-          Know someone who&rsquo;d love this? Share your link with them.
+          Know someone who&rsquo;d love this? Send them your link.
         </p>
-        <button
-          onClick={handleShare}
-          className="btn-press w-full max-w-xs border border-ochre px-4 py-3 text-[12px] uppercase tracking-[0.2em] text-ochre transition hover:bg-ochre hover:text-white"
-        >
-          {shareCopied ? "Link copied" : "Share with a friend"}
-        </button>
+        <div className="grid w-full max-w-xs grid-cols-2 gap-2">
+          {shareLinks.map((l) => (
+            <a
+              key={l.label}
+              href={l.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-press flex min-h-[44px] items-center justify-center border border-ochre px-3 py-3 text-[11px] uppercase tracking-[0.2em] text-ochre transition hover:bg-ochre hover:text-white"
+            >
+              {l.label}
+            </a>
+          ))}
+          <button
+            type="button"
+            onClick={handleCopy}
+            className="btn-press flex min-h-[44px] items-center justify-center border border-ochre px-3 py-3 text-[11px] uppercase tracking-[0.2em] text-ochre transition hover:bg-ochre hover:text-white"
+          >
+            {shareCopied ? "Link copied" : "Copy link"}
+          </button>
+        </div>
       </div>
     );
   }

@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     description:
       "A focused morning and evening skincare ritual built around CHIAREL Essence™, made fresh to order in Isola del Liri, Italy. Key ingredients named across our product pages.",
     url: SITE_URL,
-    images: [{ url: "/assets/editorial/hero-shore-duo.jpg", width: 1536, height: 934 }],
+    images: [{ url: "/assets/editorial/og-n1-hands.jpg", width: 1200, height: 630 }],
     publishedTime: HOMEPAGE_PUBLISHED,
     modifiedTime: HOMEPAGE_LAST_UPDATED,
     authors: [FORMULATOR_EXTERNAL_URL],
