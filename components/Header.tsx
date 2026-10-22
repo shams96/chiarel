@@ -7,7 +7,7 @@ import { useDialog } from "@/lib/use-dialog";
 
 const nav = [
   { href: "/shop", label: "Shop" },
-  { href: "/shop/n1-neck-decollete", label: "Neck & Décolleté" },
+  { href: "/shop/n1-neck-decollete", label: "Clarity Neck & Décolleté Crème" },
   { href: "/ritual", label: "The Ritual" },
   { href: "/science", label: "The Science" },
   { href: "/house", label: "The House" },
