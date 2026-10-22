@@ -1,7 +1,7 @@
 import { products, publishedInci } from "@/lib/products";
 
-// The five launch formulas the free-from statement is scoped to. Cellular
-// Cleanser and Cellular Mist are NOT in the v2 formula workbook, so nothing
+// The five launch formulas the free-from statement is scoped to. Any other
+// products outside these five are not in the v2 formula workbook, so nothing
 // about their composition is claimed.
 export const LAUNCH_FORMULA_SLUGS = [
   "chiarel-essence",
@@ -26,7 +26,7 @@ export const FREE_FROM_CATEGORIES = [
 ] as const;
 
 export const FREE_FROM_SENTENCE =
-  "The five launch formulas (Essence, Terra Radiance Crème, Recovery Masque, N1 and Eye Treatment) are formulated without parabens, sulfates, mineral oil, silicones or denatured alcohol.";
+  "The five launch formulas (Clarity Essence, Day Crème, Night Crème, Neck & Décolleté Crème and Eye Contour Concentrate) are formulated without parabens, sulfates, mineral oil, silicones or denatured alcohol.";
 
 /**
  * "Formulation first. Every ingredient has a job." The "listed in full"

@@ -9,7 +9,7 @@ const entries = [
     title: "How to Use the CHIAREL Daily Ritual",
     tag: "The Ritual",
     excerpt:
-      "The complete guide — morning and evening order, why Terra Radiance Crème and Recovery Masque feel different by design, and how to apply each for best results.",
+      "The complete guide — morning and evening order, why Day Crème and Night Crème feel different by design, and how to apply each for best results.",
   },
   {
     slug: "three-skins-one-house",

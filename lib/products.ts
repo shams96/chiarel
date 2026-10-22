@@ -42,8 +42,8 @@ export type Product = {
   blurb: string;
   role?: string;
   badge?: string;
+  /** No catalog product is a set any more; kept optional only so app/press/page.tsx (WS-C) still type-checks. */
   set?: boolean;
-  includes?: string[];
   icon: boolean;
   // Key ingredient NAMES only. No percentages are stored or published
   // anywhere on the site (owner decision).
@@ -59,11 +59,9 @@ export type Product = {
     | "preparation"
     | "day-foundation"
     | "night-treatment"
-    | "deferred"
-    | "standalone"
-    | "legacy-set";
+    | "standalone";
   timeOfUse?: "AM" | "PM" | "AM/PM" | "standalone";
-  launchStatus?: "launch" | "deferred" | "legacy";
+  launchStatus?: "launch";
   productColorToken?: string;
   /** True only for N1 today — its `image` is a labeled placeholder graphic, not real photography. */
   imageIsPlaceholder?: boolean;
@@ -125,12 +123,10 @@ export const ritualProducts = products
   .sort((a, b) => (a.ritualOrder as number) - (b.ritualOrder as number));
 
 /**
- * The focused four-product launch ritual (CHIAREL Essence, Terra Radiance
- * Crème, Recovery Masque, N1) — distinct from the legacy `ritualProducts`
- * array above, which stays exactly as it was for any surface not yet
- * migrated to the launch structure (e.g. CartDrawer's upsell). Deliberately
- * a separate selector rather than a mutation of `ritualProducts`, so no
- * existing consumer's behavior changes by adding this.
+ * The launch ritual selector (Clarity Essence, Day Crème, Night Crème,
+ * Neck & Décolleté Crème; Eye Contour Concentrate is placed in the evening by
+ * the ritual pages, not flagged here) — distinct from `ritualProducts` above,
+ * which orders all five catalog products (CartDrawer's upsell).
  */
 export const launchRitualProducts = products
   .filter((p) => p.launchRitual === true)

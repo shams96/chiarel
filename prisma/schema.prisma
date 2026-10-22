@@ -89,7 +89,7 @@ model Order {
   termsVersion    String?
   // Founding 100 credit-back ledger (claudedocs/specs/international-launch/,
   // N1/Founding 100 fold): the promised 25%-of-checkout store credit for
-  // Founding 100 orders (Recovery Masque, N1) wasn't tracked anywhere before
+  // Founding 100 orders (Night Crème, Neck & Décolleté Crème) wasn't tracked anywhere before
   // this — an unenforced promise. null = not a Founding 100 order. A non-null
   // amount with issuedAt still null = owed but not yet redeemed.
   founding100Credit         Int?

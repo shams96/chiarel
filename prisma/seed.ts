@@ -28,9 +28,8 @@ type SeedProduct = {
   blurb: string;
   role?: string;
   badge?: string;
-  set?: boolean;
   icon: boolean;
-  actives?: { name: string; percent: string | null }[];
+  actives?: { name: string }[];
 };
 
 async function main() {
@@ -68,7 +67,7 @@ async function main() {
         blurb: p.blurb,
         role: p.role ?? null,
         badge: p.badge ?? null,
-        isSet: p.set ?? false,
+        isSet: false,
         isIcon: p.icon,
         actives: p.actives ? JSON.stringify(p.actives) : undefined,
       },
@@ -91,7 +90,7 @@ async function main() {
         blurb: p.blurb,
         role: p.role ?? null,
         badge: p.badge ?? null,
-        isSet: p.set ?? false,
+        isSet: false,
         isIcon: p.icon,
         actives: p.actives ? JSON.stringify(p.actives) : undefined,
       },
