@@ -2,28 +2,28 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "CHIAREL Ritual Guide: Day vs. Night Texture Explained",
+  title: "How to Use the CHIAREL Daily Ritual",
   description:
-    "Learn the CHIAREL daily ritual. Discover why Clarity Day Crème feels light for day and Clarity Night Crème feels richer at night — intentional barrier support, formulated by design.",
+    "The CHIAREL daily ritual in five products: Clarity Essence, Clarity Day Crème and SPF in the morning; Essence, Eye Contour Concentrate, Night Crème and Neck & Décolleté Crème in the evening. Lightest texture first.",
   alternates: { canonical: "/journal/chiarel-ritual-guide" },
 };
 
 const faqs = [
   {
-    q: "Why does my CHIAREL night product feel heavier than the day crème?",
-    a: "Clarity Night Crème is formulated with a richer, more occlusive profile to support overnight barrier recovery. The soft presence or cushion you feel is the intentional lipid film reducing water loss and holding actives against the skin while you rest. Clarity Day Crème is designed lighter for daytime wearability under sunscreen and makeup.",
+    q: "Why does my CHIAREL night product feel richer than the day crème?",
+    a: "Clarity Night Crème has a richer texture than Clarity Day Crème, made for the evening when there is no sunscreen or makeup to layer under. Clarity Day Crème is lighter, for daytime wear under SPF and makeup. The cushioned feel of the Night Crème is the texture, not excess product.",
   },
   {
-    q: "Is the richer texture of Clarity Night Crème normal?",
-    a: "Yes. The presence is a deliberate feature of the overnight recovery formula, not a sign of excess product or poor absorption. Warm a small amount between fingertips and apply to damp skin for the smoothest integration.",
+    q: "How much Clarity Night Crème should I use?",
+    a: "A small amount. Warm it between fingertips and press it onto slightly damp skin after the Essence, for the smoothest finish.",
   },
   {
     q: "Can I use CHIAREL products around the eyes?",
-    a: "Yes — Clarity Eye Contour Concentrate is formulated specifically for the eye contour. It is made for the evening, and it may be used morning or night. Avoid layering the day or night crème over it at the lash line.",
+    a: "Yes. Clarity Eye Contour Concentrate is formulated for the eye contour. It is made for the evening and may be used morning or night. Keep the crèmes away from the lash line.",
   },
   {
     q: "What is the correct order of the CHIAREL ritual?",
-    a: "Mornings: Clarity Essence → Clarity Day Crème, then SPF. Evenings: Clarity Essence → Clarity Eye Contour Concentrate → Clarity Night Crème → Clarity Neck & Décolleté Crème. Order follows the texture, lightest first.",
+    a: "Morning: Clarity Essence, then Clarity Day Crème, then SPF. Evening: Clarity Essence, Clarity Eye Contour Concentrate, Clarity Night Crème, then Clarity Neck & Décolleté Crème. Order follows the texture, lightest first.",
   },
 ];
 
@@ -49,7 +49,7 @@ export default function RitualGuidePage() {
         ← Journal
       </Link>
       <h1 className="mt-2 font-serif text-4xl leading-tight">
-        How to Use the CHIAREL Ritual
+        How to Use the CHIAREL Daily Ritual
       </h1>
       <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink/75">
         The CHIAREL ritual is five products across two moments in the day:
@@ -62,17 +62,22 @@ export default function RitualGuidePage() {
           <h3 className="font-serif text-lg">Morning ritual</h3>
           <ol className="mt-3 space-y-2 text-sm text-ink/80">
             <li>1. Clarity Essence</li>
-            <li>2. Clarity Day Crème — follow with SPF</li>
+            <li>2. Clarity Day Crème</li>
+            <li>3. SPF</li>
           </ol>
         </div>
         <div>
           <h3 className="font-serif text-lg">Evening ritual</h3>
           <ol className="mt-3 space-y-2 text-sm text-ink/80">
             <li>1. Clarity Essence</li>
-            <li>2. Clarity Eye Contour Concentrate — may be used morning or night</li>
+            <li>2. Clarity Eye Contour Concentrate</li>
             <li>3. Clarity Night Crème</li>
             <li>4. Clarity Neck &amp; Décolleté Crème</li>
           </ol>
+          <p className="mt-3 text-[12px] text-ink/65">
+            The eye product is made for the evening and may be used morning or
+            night.
+          </p>
         </div>
       </section>
 
@@ -85,22 +90,21 @@ export default function RitualGuidePage() {
             <strong className="text-ink">
               Clarity Day Crème (Day):
             </strong>{" "}
-            formulated as a lighter daily treatment. It supports radiance and
-            the barrier while leaving a soft, wearable finish that layers
-            comfortably under sunscreen and makeup.
+            a lighter daily crème, for the look of comfortable, hydrated skin.
+            It leaves a soft, wearable finish that layers comfortably under
+            sunscreen and makeup.
           </p>
           <p>
             <strong className="text-ink">Clarity Night Crème (Night):</strong>{" "}
-            an overnight recovery treatment with a richer, more occlusive
-            character. The cushion or subtle sheen you feel is the lipid film
-            at work — helping reduce overnight transepidermal water loss and
-            supporting recovery while you sleep.
+            an evening crème with a richer texture. The cushion or subtle
+            sheen you feel is the texture of the crème itself, made for the
+            look of smoother, more hydrated skin by morning.
           </p>
           <p>
-            This difference is by design, not inconsistency. Day formulas
-            prioritize wearability; night formulas prioritize sustained
-            barrier support. The richer texture of Clarity Night Crème is
-            intentional formulation, not residue.
+            This difference is by design, not inconsistency. The day crème
+            prioritises wearability; the night crème is made richer. The
+            texture of Clarity Night Crème is intentional formulation, not
+            residue.
           </p>
         </div>
       </section>
@@ -110,11 +114,10 @@ export default function RitualGuidePage() {
           How to Apply Clarity Night Crème for Best Results
         </h2>
         <ul className="mt-5 space-y-2 text-sm text-ink/75">
-          <li>· Use a small amount — approximately lentil-sized for the full face</li>
-          <li>· Warm thoroughly between fingertips to improve spread</li>
-          <li>· Press and smooth onto slightly damp skin after Clarity Essence</li>
-          <li>· Allow 15–30 minutes for the film to integrate</li>
-          <li>· Wake to skin that feels supported and recovered</li>
+          <li>· Use a small amount for the full face</li>
+          <li>· Warm it between fingertips to improve spread</li>
+          <li>· Press and smooth onto slightly damp skin, after Clarity Essence and Clarity Eye Contour Concentrate</li>
+          <li>· Finish the neck and chest with Clarity Neck &amp; Décolleté Crème</li>
         </ul>
       </section>
 

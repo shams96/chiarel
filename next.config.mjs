@@ -77,6 +77,7 @@ const nextConfig = {
       })),
       { source: "/science/ectoine", destination: "/science", permanent: true },
       { source: "/science/synergy", destination: "/science", permanent: true },
+      { source: "/science/comparison", destination: "/science", permanent: true },
     ];
   },
   // instrumentation.ts (dispute-rate monitor, see lib/dispute-alert-scheduler.ts)

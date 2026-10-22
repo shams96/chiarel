@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "How to Apply CHIAREL",
   description:
-    "Application technique matters as much as formulation. How to apply Clarity Essence, Clarity Day Crème and Clarity Night Crème, from lightest texture to richest.",
+    "Application technique matters as much as formulation. The morning and evening order for all five Clarity products, from lightest texture to richest.",
   alternates: { canonical: "/science/application" },
 };
 
@@ -15,11 +15,15 @@ const faqs = [
   },
   {
     q: "How much product should I use?",
-    a: "A pea-sized amount for Clarity Essence; a small amount warmed between fingertips for Clarity Day Crème or Clarity Night Crème. More product is not better — even distribution matters more than volume.",
+    a: "A pea-sized amount for Clarity Essence; a small amount warmed between fingertips for Clarity Day Crème, Clarity Night Crème or Clarity Neck & Décolleté Crème. More product is not better — even distribution matters more than volume.",
+  },
+  {
+    q: "In what order do I apply the products?",
+    a: "Morning: Clarity Essence, then Clarity Day Crème, then SPF. Evening: Clarity Essence, Clarity Eye Contour Concentrate, Clarity Night Crème, then Clarity Neck & Décolleté Crème. Clarity Eye Contour Concentrate is made for the evening and may be used morning or night.",
   },
   {
     q: "Should I wait between steps?",
-    a: "A brief pause (10-30 seconds) between the Essence and the crème step lets each layer settle before the next is applied.",
+    a: "A brief pause (10 to 30 seconds) between steps lets each layer settle before the next is applied.",
   },
 ];
 
@@ -52,6 +56,30 @@ export default function ApplicationPage() {
         part of the formulation story, not a footnote.
       </p>
 
+      <section className="mt-12 grid gap-10 sm:grid-cols-2">
+        <div>
+          <h2 className="font-serif text-2xl">Morning</h2>
+          <ol className="mt-3 space-y-2 text-sm text-ink/80">
+            <li>1. Clarity Essence</li>
+            <li>2. Clarity Day Crème</li>
+            <li>3. SPF</li>
+          </ol>
+        </div>
+        <div>
+          <h2 className="font-serif text-2xl">Evening</h2>
+          <ol className="mt-3 space-y-2 text-sm text-ink/80">
+            <li>1. Clarity Essence</li>
+            <li>2. Clarity Eye Contour Concentrate</li>
+            <li>3. Clarity Night Crème</li>
+            <li>4. Clarity Neck &amp; Décolleté Crème</li>
+          </ol>
+          <p className="mt-3 text-[12px] text-ink/65">
+            The eye product is made for the evening and may be used morning or
+            night.
+          </p>
+        </div>
+      </section>
+
       <section className="mt-12 space-y-8">
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-2xl">Apply to damp skin</h2>
@@ -62,9 +90,10 @@ export default function ApplicationPage() {
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-2xl">Warm before applying</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
-            Warm Clarity Day Crème or Clarity Night Crème between
-            fingertips before pressing into skin — this softens the texture
-            for smoother, more even distribution.
+            Warm Clarity Day Crème, Clarity Night Crème or Clarity Neck
+            &amp; Décolleté Crème between fingertips before pressing into
+            skin — this softens the texture for smoother, more even
+            distribution.
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
@@ -81,7 +110,7 @@ export default function ApplicationPage() {
             <Link href="/shop/chiarel-essence" className="border-b border-ochre text-ochre">
               Essence
             </Link>{" "}
-            step and the crème step lets each layer settle before the next is
+            step and each crème step lets each layer settle before the next is
             added.
           </p>
         </div>

@@ -37,9 +37,9 @@ export default function ReadingLabelPage() {
           the formulation cannot guarantee?
         </p>
         <p>
-          <strong className="text-ink">Outcome language</strong> says a
-          formulation <em>supports</em> or <em>optimizes</em> — it describes
-          a mechanism doing its job.{" "}
+          <strong className="text-ink">Outcome language</strong> describes{" "}
+          <em>the look of</em> something — smoother texture, an even
+          surface, comfortable skin.{" "}
           <strong className="text-ink">Promise language</strong> says a
           product <em>fixes</em>, <em>repairs</em>, or performs a{" "}
           <em>miracle</em> — it claims a guaranteed result no formulation,
@@ -62,10 +62,10 @@ export default function ReadingLabelPage() {
 
         <p>
           One more habit worth knowing: CHIAREL never names an ingredient in
-          a product title. A serum is named for what it does — CHIAREL
+          a product title. A product is named for what it is for — Clarity
           Essence™, not &ldquo;Peptide Serum.&rdquo; The formulation science
-          lives in the ingredient list and in pages like this one, where it
-          can be examined properly, not compressed into a headline.
+          lives in pages like this one, where it can be examined properly,
+          not compressed into a headline.
         </p>
       </div>
 

@@ -10,7 +10,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/ritual",
     "/shop",
     "/science",
-    "/science/comparison",
     "/science/barrier-resilience",
     "/science/lasting-hydration",
     "/science/application",
