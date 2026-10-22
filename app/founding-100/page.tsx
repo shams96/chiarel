@@ -30,7 +30,7 @@ export default async function Founding100Page() {
   return (
     <div>
       {/* Hero — image-led gateway moment. The capture card is the page's
-          entire job, so it gets the visual weight; the program mechanics
+          entire job, so it gets the visual weight; the programme mechanics
           and legal terms live below, for whoever scrolls to them. */}
       <section className="relative overflow-hidden bg-ink text-ivory">
         <div className="mx-auto grid max-w-6xl gap-0 lg:grid-cols-2">

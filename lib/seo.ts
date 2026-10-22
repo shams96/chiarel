@@ -83,16 +83,16 @@ export function webPageJsonLd(opts: {
   };
 }
 
-// Describes the on-page "Backed by Published Research" editorial section as
+// Describes the on-page "The Ingredients Behind the Formulas" editorial section as
 // an Article, distinct from the WebPage schema for the page as a whole —
 // some crawlers specifically look for Article/BlogPosting to credit
 // datePublished/author signals rather than reading them off WebPage.
 export const researchArticleJsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "CHIAREL Formulation Science: Backed by Published Research",
+  headline: "CHIAREL Formulation Science: The Ingredients Behind the Formulas",
   description:
-    "The published, peer-reviewed research behind CHIAREL's active ingredients — peptides, niacinamide, hyaluronic acid, ceramides, bakuchiol and caffeine.",
+    "The key ingredients behind CHIAREL's formulas, and what each is there for: peptides, niacinamide, hyaluronic acid, ceramides, bakuchiol and caffeine.",
   datePublished: HOMEPAGE_PUBLISHED,
   dateModified: HOMEPAGE_LAST_UPDATED,
   author: {

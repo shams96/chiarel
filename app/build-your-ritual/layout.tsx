@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Build Your Ritual",
   description:
-    "Choose exactly the CHIAREL™ steps your skin needs — cleanse, tone, serum, and moisturize, priced and delivered individually.",
+    "Choose exactly the CHIAREL™ steps your skin needs — cleanse, tone, serum, and moisturise, priced and delivered individually.",
   alternates: { canonical: "/build-your-ritual" },
 };
 

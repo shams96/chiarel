@@ -3,9 +3,9 @@ import Reveal from "@/components/Reveal";
 
 const fitGuidance = [
   {
-    concern: "Barrier feels reactive, tight, or easily irritated",
+    concern: "Skin feels tight or easily unsettled",
     fit: "Clarity Day Crème",
-    why: "Ceramides, cholesterol and squalane, formulated to help skin feel comfortable and hydrated through the working day.",
+    why: "Ceramides, cholesterol and squalane, formulated for skin that feels comfortable and hydrated through the working day.",
   },
   {
     concern: "Skin looks dull, uneven, or has lost visible firmness",
@@ -20,7 +20,7 @@ const fitGuidance = [
   {
     concern: "Shows texture after a long day",
     fit: "Clarity Night Crème",
-    why: "Bakuchiol, a plant-derived alternative to retinol, with peptides and niacinamide, to smooth the look of texture overnight.",
+    why: "Bakuchiol with peptides and niacinamide, for the look of smoother texture overnight.",
   },
 ];
 
