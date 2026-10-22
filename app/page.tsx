@@ -11,7 +11,7 @@ import HomeProvenance from "@/components/home/HomeProvenance";
 import HomeProof from "@/components/home/HomeProof";
 import HomeFormulationRecord from "@/components/home/HomeFormulationRecord";
 import HomeFaq from "@/components/home/HomeFaq";
-import { HomeBeyondRitual, HomeFinalCta, HomePhilosophy } from "@/components/home/HomeClosing";
+import { HomeFinalCta, HomePhilosophy } from "@/components/home/HomeClosing";
 import {
   faqJsonLd,
   offerCatalogJsonLd,
@@ -179,7 +179,6 @@ export default function Home() {
       <HomeProof />
       <HomePhilosophy />
       <HomeFormulationRecord />
-      <HomeBeyondRitual />
       <HomeFaq faqs={faqs} />
       <HomeFinalCta />
       <div className="mx-auto max-w-xl px-6 pb-10">

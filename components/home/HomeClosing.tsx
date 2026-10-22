@@ -4,13 +4,6 @@ import Reveal from "@/components/Reveal";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { getProductOrThrow, productImageAlt } from "@/lib/products";
 
-// The catalog is the five ritual products, so there is no "beyond the ritual"
-// block any more. The export stays only so app/page.tsx still compiles until
-// its import and <HomeBeyondRitual /> usage are removed (WS-B owns that file).
-export function HomeBeyondRitual() {
-  return null;
-}
-
 // Final CTA: begin the ritual with the Essence and the Day Crème, the two morning
 // steps. Slot for an email-signup component: add it directly after this section
 // in app/page.tsx.

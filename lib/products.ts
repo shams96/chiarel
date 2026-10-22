@@ -42,8 +42,6 @@ export type Product = {
   blurb: string;
   role?: string;
   badge?: string;
-  /** No catalog product is a set any more; kept optional only so app/press/page.tsx (WS-C) still type-checks. */
-  set?: boolean;
   icon: boolean;
   // Key ingredient NAMES only. No percentages are stored or published
   // anywhere on the site (owner decision).

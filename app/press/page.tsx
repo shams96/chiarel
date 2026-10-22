@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 // Crème, Neck & Décolleté Crème, Eye Contour Concentrate), all part of the
 // two-moment ritual. Any other catalog entry would list under "Also Available".
 const launchSkus = products.filter((p) => p.launchStatus === "launch");
-const otherSkus = products.filter((p) => !p.set && p.launchStatus !== "launch");
+const otherSkus = products.filter((p) => p.launchStatus !== "launch");
 
 const assets = [
   {
