@@ -45,6 +45,27 @@ const nextConfig = {
       },
     ];
   },
+  // Permanent redirects for pages that left the site. Products removed from the
+  // catalog go to the shop (their database rows stay, orders reference them);
+  // the Ectoine and synergy science pages go to the science index.
+  async redirects() {
+    const removedProducts = [
+      "cellular-cleanser",
+      "cellular-mist",
+      "lip-concentrate",
+      "the-founding-pair",
+      "the-ritual-set",
+    ];
+    return [
+      ...removedProducts.map((slug) => ({
+        source: `/shop/${slug}`,
+        destination: "/shop",
+        permanent: true,
+      })),
+      { source: "/science/ectoine", destination: "/science", permanent: true },
+      { source: "/science/synergy", destination: "/science", permanent: true },
+    ];
+  },
   // instrumentation.ts (dispute-rate monitor, see lib/dispute-alert-scheduler.ts)
   // is picked up by default on Next 15; the old experimental.instrumentationHook
   // flag is rejected as an unknown key and only prints a warning.

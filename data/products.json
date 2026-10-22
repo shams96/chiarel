@@ -1,83 +1,17 @@
 [
   {
-    "slug": "cellular-cleanser",
-    "sku": "01",
-    "name": "Cellular Cleanser™",
-    "descriptor": "Adaptive Purifying Cleanser",
-    "step": "Cleanse",
-    "ritualOrder": 1,
-    "family": "CHIAREL Cloud™",
-    "color": {
-      "name": "Cloud Dancer",
-      "hex": "#F0F2EB"
-    },
-    "complex": "The Cascata Complex™",
-    "line": "Adapt™",
-    "size": "120 ml / 4.0 fl. oz.",
-    "price": {
-      "subscription": 78,
-      "oneTime": 98
-    },
-    "image": "/assets/products/cellular-cleanser-bottle.png",
-    "blurb": "A gentle daily cleanser that supports the skin barrier while lifting away impurities — the first gesture of the ritual.",
-    "benefits": [
-      "Cleanses without disrupting the skin's natural barrier",
-      "Formulated to be gentle on the skin barrier",
-      "Leaves skin feeling calm — never tight or stripped"
-    ],
-    "icon": true,
-    "launchRitual": false,
-    "launchRitualOrder": null,
-    "launchRole": "deferred",
-    "launchStatus": "deferred",
-    "productColorToken": "Cloud Dancer"
-  },
-  {
-    "slug": "cellular-mist",
-    "sku": "02",
-    "name": "Cellular Mist™",
-    "descriptor": "Conditioning Preparation Mist",
-    "step": "Tone",
-    "ritualOrder": 2,
-    "family": "CHIAREL Cloud™",
-    "color": {
-      "name": "Cloud Dancer",
-      "hex": "#F0F2EB"
-    },
-    "complex": "Terra Shield Complex™",
-    "line": "Adapt™",
-    "size": "120 ml / 4.0 fl. oz.",
-    "price": {
-      "subscription": 70,
-      "oneTime": 88
-    },
-    "image": "/assets/products/cellular-mist-bottle.png",
-    "blurb": "A conditioning mist that optimizes skin receptivity, preparing the complexion for treatment.",
-    "benefits": [
-      "Delivers a fine, fast-absorbing layer of hydration",
-      "Prepares skin to receive the treatment steps that follow",
-      "Refreshes throughout the day without residue"
-    ],
-    "icon": false,
-    "launchRitual": false,
-    "launchRitualOrder": null,
-    "launchRole": "deferred",
-    "launchStatus": "deferred",
-    "productColorToken": "Cloud Dancer"
-  },
-  {
     "slug": "chiarel-essence",
     "sku": "03",
-    "name": "CHIAREL Essence™",
-    "descriptor": "Cellular Clarity Concentrate",
-    "step": "Serum",
-    "ritualOrder": 3,
+    "name": "Clarity Essence™",
+    "descriptor": "For fine lines and firmness",
+    "step": "Essence",
+    "ritualOrder": 1,
     "family": "CHIAREL Rose™",
     "color": {
       "name": "Peach Dust",
       "hex": "#FAD6C9"
     },
-    "complex": "Cellular Intelligence Complex™",
+    "complex": "",
     "line": "Restore™",
     "size": "40 ml / 1.4 fl. oz.",
     "price": {
@@ -86,33 +20,35 @@
     },
     "image": "/assets/products/chiarel-essence-jar.png",
     "gallery": [
-      { "src": "/assets/products/chiarel-essence-jar.png", "alt": "CHIAREL Essence", "role": "hero" },
-      { "src": "/assets/products/chiarel-essence-studio.jpg", "alt": "CHIAREL Essence held in soft studio light", "role": "application" }
+      {
+        "src": "/assets/products/chiarel-essence-jar.png",
+        "alt": "Clarity Essence",
+        "role": "hero"
+      },
+      {
+        "src": "/assets/products/chiarel-essence-studio.jpg",
+        "alt": "Clarity Essence held in soft studio light",
+        "role": "application"
+      }
     ],
-    "blurb": "The Signature Serum of the House. A concentrated treatment that supports Cellular Clarity™ at the heart of the ritual.",
-    "role": "Signature Serum of the House",
-    "badge": "Signature Serum",
+    "blurb": "Four peptides with niacinamide and hyaluronic acid, to smooth the look of fine lines and visibly firm. Hydrolyzed collagen for surface hydration.",
+    "role": "Signature Essence of the House",
+    "badge": "Signature Essence",
     "benefits": [
-      "Supports the skin's visible firmness and texture",
-      "Reinforces barrier function with a postbiotic complex",
-      "The concentrated treatment layer at the heart of the ritual"
+      "Smooths the look of fine lines",
+      "Visibly firms",
+      "Hydrolyzed collagen for surface hydration"
     ],
     "icon": true,
     "actives": [
       {
-        "name": "Acetyl Hexapeptide-8"
-      },
-      {
-        "name": "Palmitoyl Tripeptide-1"
-      },
-      {
-        "name": "Palmitoyl Tetrapeptide-7"
-      },
-      {
-        "name": "Bifida Ferment Lysate"
+        "name": "Peptides"
       },
       {
         "name": "Niacinamide"
+      },
+      {
+        "name": "Hyaluronic Acid"
       }
     ],
     "launchRitual": true,
@@ -156,16 +92,16 @@
   {
     "slug": "terra-radiance-creme",
     "sku": "04",
-    "name": "Terra Radiance Crème™",
-    "descriptor": "Daily Radiance Treatment",
-    "step": "Moisturize AM",
-    "ritualOrder": 4,
+    "name": "Clarity Day Crème™",
+    "descriptor": "For dry skin under daily stress",
+    "step": "Day Crème",
+    "ritualOrder": 2,
     "family": "CHIAREL Terra™",
     "color": {
       "name": "Red Ochre",
       "hex": "#9B4722"
     },
-    "complex": "Dermal Support Complex™",
+    "complex": "",
     "line": "Restore™",
     "size": "50 g / 1.7 fl. oz.",
     "price": {
@@ -174,25 +110,40 @@
     },
     "image": "/assets/products/terra-radiance-creme-jar.png",
     "gallery": [
-      { "src": "/assets/products/terra-radiance-creme-jar.png", "alt": "Terra Radiance Crème", "role": "hero" },
-      { "src": "/assets/products/terra-radiance-creme-studio.jpg", "alt": "Terra Radiance Crème held in soft studio light", "role": "application" },
-      { "src": "/assets/products/terra-radiance-creme-capri.jpg", "alt": "Terra Radiance Crème on sunlit limestone above the Faraglioni of Capri", "role": "lifestyle" }
+      {
+        "src": "/assets/products/terra-radiance-creme-jar.png",
+        "alt": "Clarity Day Crème",
+        "role": "hero"
+      },
+      {
+        "src": "/assets/products/terra-radiance-creme-studio.jpg",
+        "alt": "Clarity Day Crème held in soft studio light",
+        "role": "application"
+      },
+      {
+        "src": "/assets/products/terra-radiance-creme-capri.jpg",
+        "alt": "Clarity Day Crème on sunlit limestone above the Faraglioni of Capri",
+        "role": "lifestyle"
+      }
     ],
-    "blurb": "The Icon Product of the House. A daily barrier-comfort crème that supports hydration and a refined, comfortable day finish against Modern Biological Stress™.",
-    "role": "Icon Product",
-    "badge": "Icon of the House",
+    "blurb": "Three ceramides with cholesterol and squalane, to help skin feel comfortable and hydrated. Niacinamide supports the look of an even, healthy surface.",
+    "role": "Day Crème",
+    "badge": "Day Crème",
     "benefits": [
-      "Supports barrier comfort with ceramide and niacinamide",
-      "Helps improve the appearance of dryness across the day",
-      "Leaves skin feeling hydrated and comfortable, with a refined finish"
+      "Helps skin feel comfortable and hydrated through the working day",
+      "Three ceramides with cholesterol and squalane",
+      "Niacinamide supports the look of an even, healthy surface"
     ],
     "icon": true,
     "actives": [
       {
-        "name": "Ceramide NP"
+        "name": "Ceramides"
       },
       {
-        "name": "Niacinamide"
+        "name": "Cholesterol"
+      },
+      {
+        "name": "Squalane"
       }
     ],
     "launchRitual": true,
@@ -245,16 +196,16 @@
   {
     "slug": "recovery-masque",
     "sku": "04N",
-    "name": "Recovery Masque™",
-    "descriptor": "Overnight Recovery Treatment",
-    "step": "Moisturize PM",
-    "ritualOrder": 5,
+    "name": "Clarity Night Crème™",
+    "descriptor": "For smoother-looking texture",
+    "step": "Night Crème",
+    "ritualOrder": 4,
     "family": "CHIAREL Verde™",
     "color": {
       "name": "Formal Garden",
       "hex": "#1F5129"
     },
-    "complex": "Contour Renewal Complex™",
+    "complex": "",
     "line": "Strengthen™",
     "size": "50 g / 1.7 fl. oz.",
     "price": {
@@ -263,25 +214,40 @@
     },
     "image": "/assets/products/recovery-masque-jar.png",
     "gallery": [
-      { "src": "/assets/products/recovery-masque-jar.png", "alt": "Recovery Masque", "role": "hero" },
-      { "src": "/assets/products/recovery-masque-studio.jpg", "alt": "Recovery Masque held in soft studio light", "role": "application" },
-      { "src": "/assets/products/recovery-masque-jar.jpg", "alt": "Recovery Masque on sunlit rock above the Capri coastline", "role": "lifestyle" }
+      {
+        "src": "/assets/products/recovery-masque-jar.png",
+        "alt": "Clarity Night Crème",
+        "role": "hero"
+      },
+      {
+        "src": "/assets/products/recovery-masque-studio.jpg",
+        "alt": "Clarity Night Crème held in soft studio light",
+        "role": "application"
+      },
+      {
+        "src": "/assets/products/recovery-masque-jar.jpg",
+        "alt": "Clarity Night Crème on sunlit rock above the Capri coastline",
+        "role": "lifestyle"
+      }
     ],
-    "blurb": "An overnight masque that strengthens and supports facial recovery while you rest — the evening ritual's face-recovery step, followed by N1 Neck & Décolleté Renewal Emulsion™.",
-    "role": "Night Recovery Hero",
-    "badge": "Night Icon",
+    "blurb": "Bakuchiol, a plant-derived alternative to retinol, with peptides and niacinamide, to smooth the look of texture overnight.",
+    "role": "Night Crème",
+    "badge": "Night Crème",
     "benefits": [
-      "Supports overnight facial recovery while you rest",
-      "Panthenol helps soothe and replenish moisture",
-      "The evening ritual's face-recovery step, before N1"
+      "Smooths the look of texture overnight",
+      "Bakuchiol, a plant-derived alternative to retinol",
+      "Peptides and niacinamide"
     ],
     "icon": true,
     "actives": [
       {
-        "name": "L-Ornithine"
+        "name": "Bakuchiol"
       },
       {
-        "name": "Panthenol"
+        "name": "Peptides"
+      },
+      {
+        "name": "Niacinamide"
       }
     ],
     "launchRitual": true,
@@ -331,129 +297,19 @@
     "howToUse": [
       "Use a small amount — approximately lentil-sized for the full face.",
       "Warm thoroughly between your fingertips.",
-      "Press and smooth onto slightly damp skin after CHIAREL Essence™.",
-      "Allow 15–30 minutes for the film to integrate.",
+      "Press and smooth onto slightly damp skin after Clarity Essence™.",
       "Use in the evening."
     ],
     "howToUseSource": "app/journal/chiarel-ritual-guide/page.tsx"
   },
   {
-    "slug": "lip-concentrate",
-    "sku": "05",
-    "name": "CHIAREL Lip Concentrate™",
-    "descriptor": "Dual-Action Volumizing & Radiance Lip Treatment",
-    "step": "Standalone",
-    "ritualOrder": null,
-    "family": "CHIAREL Rose™",
-    "color": {
-      "name": "Peach Dust",
-      "hex": "#FAD6C9"
-    },
-    "complex": "Contour Renewal Complex™",
-    "line": "Restore™",
-    "size": "5 ml / 0.17 fl. oz.",
-    "price": {
-      "subscription": 46,
-      "oneTime": 58
-    },
-    "image": "/assets/products/lip-gloss-bottle.png",
-    "blurb": "A dual-action treatment that supports volume and radiance. Standalone — beyond the face ritual.",
-    "benefits": [
-      "Dual-action treatment for volume and radiance",
-      "Lightweight, non-sticky wear",
-      "Complements the facial ritual, used any time"
-    ],
-    "badge": "New",
-    "icon": true,
-    "launchRitual": false,
-    "launchRitualOrder": null,
-    "launchRole": "standalone",
-    "timeOfUse": "standalone",
-    "launchStatus": "deferred",
-    "productColorToken": "Peach Dust"
-  },
-  {
-    "slug": "the-founding-pair",
-    "sku": "SET-02",
-    "name": "The Founding Pair",
-    "descriptor": "The Signature Serum & N1 — CHIAREL Essence™ + N1 Neck & Décolleté Renewal Emulsion™",
-    "step": "Founding Pair",
-    "ritualOrder": null,
-    "family": "The House",
-    "color": {
-      "name": "Champagne Gold",
-      "hex": "#D6C5A0"
-    },
-    "complex": "",
-    "line": "",
-    "size": "Two full-size treatments",
-    "price": {
-      "subscription": 269,
-      "oneTime": 327
-    },
-    "image": "/assets/products/chiarel-essence-jar.png",
-    "og": "/assets/editorial/hero-shore-duo.jpg",
-    "gallery": [
-      { "src": "/assets/products/chiarel-essence-jar.png", "alt": "CHIAREL Essence", "role": "hero" },
-      { "src": "/assets/products/n1-neck-decollete-jar.png", "alt": "N1 Neck & Décolleté Renewal Emulsion", "role": "application" }
-    ],
-    "blurb": "The Signature Serum of the House paired with N1 Neck & Décolleté Renewal Emulsion™ — CHIAREL Essence™ and N1™, delivered together every 45 days. Face and décolleté, in two gestures.",
-    "badge": "Founding Pair",
-    "set": true,
-    "icon": false,
-    "includes": ["chiarel-essence", "n1-neck-decollete"],
-    "launchRitual": false,
-    "launchRitualOrder": null,
-    "launchRole": "legacy-set",
-    "launchStatus": "legacy",
-    "productColorToken": "Champagne Gold"
-  },
-  {
-    "slug": "the-ritual-set",
-    "sku": "SET-01",
-    "name": "The Ritual Set",
-    "descriptor": "The Original Morning Ritual — Cleanse · Tone · Serum · Moisturize AM",
-    "step": "Original Ritual",
-    "ritualOrder": null,
-    "family": "The House",
-    "color": {
-      "name": "Champagne Gold",
-      "hex": "#D6C5A0"
-    },
-    "complex": "",
-    "line": "",
-    "size": "Four full-size treatments",
-    "price": {
-      "subscription": 372,
-      "oneTime": 533
-    },
-    "image": "/assets/products/cellular-cleanser-bottle.png",
-    "og": "/assets/editorial/hero-shore-duo.jpg",
-    "gallery": [
-      { "src": "/assets/products/cellular-cleanser-bottle.png", "alt": "Cellular Cleanser", "role": "hero" },
-      { "src": "/assets/products/cellular-mist-bottle.png", "alt": "Cellular Mist", "role": "application" },
-      { "src": "/assets/products/chiarel-essence-jar.png", "alt": "CHIAREL Essence", "role": "application" },
-      { "src": "/assets/products/terra-radiance-creme-jar.png", "alt": "Terra Radiance Crème", "role": "application" }
-    ],
-    "blurb": "The House's original four-step morning ritual, delivered together on your rhythm — Cellular Cleanser™, Cellular Mist™, CHIAREL Essence™, and Terra Radiance Crème™. For the evening ritual featuring N1, see The Founding Pair or the four-product ritual.",
-    "badge": "The Original Ritual",
-    "set": true,
-    "icon": false,
-    "includes": ["cellular-cleanser", "cellular-mist", "chiarel-essence", "terra-radiance-creme"],
-    "launchRitual": false,
-    "launchRitualOrder": null,
-    "launchRole": "legacy-set",
-    "launchStatus": "legacy",
-    "productColorToken": "Champagne Gold"
-  },
-  {
     "slug": "n1-neck-decollete",
     "sku": "N1-R",
-    "name": "N1 Neck & Décolleté Renewal Emulsion™",
-    "descriptor": "Nightly Neck & Décolleté Renewal Emulsion",
-    "role": "The Neck & Décolleté Treatment",
-    "step": "Renew PM",
-    "ritualOrder": null,
+    "name": "Clarity Neck & Décolleté Crème™",
+    "descriptor": "For crepey-looking skin on the neck and chest",
+    "role": "Neck & Décolleté Crème",
+    "step": "Neck & Décolleté",
+    "ritualOrder": 5,
     "family": "CHIAREL Verde™",
     "color": {
       "name": "Formal Garden",
@@ -470,16 +326,32 @@
     "image": "/assets/products/n1-neck-decollete-jar.png",
     "imageIsPlaceholder": false,
     "gallery": [
-      { "src": "/assets/products/n1-neck-decollete-jar.png", "alt": "N1 Neck & Décolleté Renewal Emulsion", "role": "hero" },
-      { "src": "/assets/products/n1-neck-decollete-marble-roses.jpg", "alt": "N1 on a dark marble plinth with dried roses and twigs, the Isola del Liri waterfall and castle behind", "role": "lifestyle" },
-      { "src": "/assets/products/n1-neck-decollete-honeycomb.jpg", "alt": "N1 on a reflective surface with water droplets and a honeycomb pattern", "role": "detail" },
-      { "src": "/assets/products/serum-drop-macro.jpg", "alt": "A single clear droplet resting on a deep green glossy surface", "role": "detail" }
+      {
+        "src": "/assets/products/n1-neck-decollete-jar.png",
+        "alt": "Clarity Neck & Décolleté Crème",
+        "role": "hero"
+      },
+      {
+        "src": "/assets/products/n1-neck-decollete-marble-roses.jpg",
+        "alt": "Clarity Neck & Décolleté Crème on a dark marble plinth with dried roses and twigs, the Isola del Liri waterfall and castle behind",
+        "role": "lifestyle"
+      },
+      {
+        "src": "/assets/products/n1-neck-decollete-honeycomb.jpg",
+        "alt": "Clarity Neck & Décolleté Crème on a reflective surface with water droplets and a honeycomb pattern",
+        "role": "detail"
+      },
+      {
+        "src": "/assets/products/serum-drop-macro.jpg",
+        "alt": "A single clear droplet resting on a deep green glossy surface",
+        "role": "detail"
+      }
     ],
-    "blurb": "A nightly emulsion for the neck, jawline, and décolleté — designed to help the appearance of dryness, crepey-looking texture, and fine lines feel and look more comfortable, smooth, and supple with continued use. N1 is finished with a delicate CHIAREL accord.",
+    "blurb": "Copper peptide with ceramides and squalane, to smooth the look of crepey texture and keep the neck and chest hydrated.",
     "benefits": [
-      "Helps improve the appearance of dryness across the neck and décolleté",
-      "Designed for crepey-looking texture and the visible appearance of fine lines",
-      "Supports a comfortable, hydrated skin feel with a cushioning, low-drag, satin finish"
+      "Smooths the look of crepey texture on the neck and chest",
+      "Keeps the neck and chest hydrated",
+      "Copper peptide with ceramides and squalane"
     ],
     "icon": true,
     "launchRitual": true,
@@ -525,17 +397,28 @@
     "howToUse": [
       "Apply across the neck, jawline, décolleté, and upper chest.",
       "Use upward, sweeping movements.",
-      "Use at night, as the closing step of the evening ritual."
+      "Use in the evening, as the closing step of the evening ritual."
     ],
-    "howToUseSource": "app/shop/[slug]/page.tsx (N1HowToUse, pre-existing)"
+    "howToUseSource": "app/shop/[slug]/page.tsx (N1HowToUse, pre-existing)",
+    "actives": [
+      {
+        "name": "Copper Peptide"
+      },
+      {
+        "name": "Ceramides"
+      },
+      {
+        "name": "Squalane"
+      }
+    ]
   },
   {
     "slug": "eye-contour-concentrate",
     "sku": "7A",
-    "name": "CHIAREL Eye Treatment™",
-    "descriptor": "Nightly Eye Treatment",
-    "step": "Eye Treatment",
-    "ritualOrder": null,
+    "name": "Clarity Eye Contour Concentrate™",
+    "descriptor": "For puffiness, dark circles and fine lines",
+    "step": "Eye Contour",
+    "ritualOrder": 3,
     "family": "CHIAREL Verde™",
     "color": {
       "name": "Formal Garden",
@@ -543,18 +426,18 @@
     },
     "complex": "",
     "line": "",
-    "size": "15 ml / 0.5 fl. oz.",
+    "size": "40 ml / 1.35 fl. oz.",
     "price": {
       "subscription": 151,
       "oneTime": 189
     },
     "image": "/assets/products/eye-contour-concentrate-jar.png",
     "imageIsPlaceholder": false,
-    "blurb": "A nightly concentrate for the eye contour — designed to comfort this delicate area and help it look smoother and more rested.",
+    "blurb": "Caffeine and peptides, to reduce the look of puffiness and dark circles. Hyaluronic acid hydrates, and light-reflecting mica brightens the look of the eye area.",
     "benefits": [
-      "Helps comfort the delicate eye contour area",
-      "Supports a smoother-looking, more hydrated appearance",
-      "A lightweight, fast-absorbing finish"
+      "Reduces the look of puffiness and dark circles",
+      "Hyaluronic acid hydrates",
+      "Light-reflecting mica brightens the look of the eye area"
     ],
     "icon": true,
     "launchRitual": false,
@@ -591,9 +474,20 @@
     "launchStatus": "launch",
     "productColorToken": "Formal Garden",
     "howToUse": [
-      "Apply nightly, after Recovery Masque™.",
+      "Made for the evening, after Clarity Essence™; it may be used morning or night.",
       "Use a light touch around the orbital bone — avoid the immediate lash line."
     ],
-    "howToUseSource": "app/journal/chiarel-ritual-guide/page.tsx"
+    "howToUseSource": "app/journal/chiarel-ritual-guide/page.tsx",
+    "actives": [
+      {
+        "name": "Caffeine"
+      },
+      {
+        "name": "Peptides"
+      },
+      {
+        "name": "Hyaluronic Acid"
+      }
+    ]
   }
 ]

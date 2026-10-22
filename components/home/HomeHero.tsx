@@ -22,7 +22,7 @@ export default function HomeHero() {
         >
           <Image
             src="/assets/home/hero-hands-n1-wide.jpg"
-            alt="Two hands presenting the CHIAREL Neck & Décolleté Renewal Emulsion in its 40 ml green glass bottle"
+            alt="Two hands presenting the Clarity Neck & Décolleté Crème in its 40 ml green glass bottle"
             fill
             priority
             sizes="(max-width: 768px) 260vw, 100vw"
@@ -59,7 +59,7 @@ export default function HomeHero() {
             The ritual continues below the jawline.
           </h1>
           <p className="mt-4 max-w-[24rem] text-[14px] leading-[1.7] text-ink/70 md:mt-6 md:text-[15px]">
-            N1 Neck &amp; Décolleté Renewal Emulsion™, a nightly emulsion for the
+            Clarity Neck &amp; Décolleté Crème™, an evening crème for the
             neck, jawline and décolleté, made fresh to order in Isola del Liri.
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3 md:mt-9">

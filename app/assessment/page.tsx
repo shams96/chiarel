@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { QUESTIONS, scoreAxes, recommend } from "@/lib/skin-assessment";
-import { getProduct, getProductOrThrow } from "@/lib/products";
+import { getProduct } from "@/lib/products";
 import { useCart } from "@/lib/cart-context";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { track } from "@/lib/analytics";
@@ -33,7 +33,7 @@ export default function AssessmentPage() {
 
   if (done) {
     const axisScores = scoreAxes(answers);
-    const { recommendations, bundleEligible } = recommend(axisScores);
+    const { recommendations } = recommend(axisScores);
 
     return (
       <div className="mx-auto max-w-3xl px-6 py-16">
@@ -89,24 +89,6 @@ export default function AssessmentPage() {
               </div>
             );
           })}
-
-          {bundleEligible && (
-            <div className="border border-champagne bg-champagne/10 p-5">
-              <p className="text-[11px] uppercase tracking-[0.16em] text-ochre">
-                Two needs identified
-              </p>
-              <p className="mt-1 text-sm text-ink/70">
-                Your results point to more than one concern. The Founding Pair
-                delivers both recommended treatments together, every 45 days.
-              </p>
-              <Link
-                href="/shop/the-founding-pair"
-                className="mt-3 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
-              >
-                View The Founding Pair — ${getProductOrThrow("the-founding-pair").price!.subscription}
-              </Link>
-            </div>
-          )}
         </div>
 
         <button

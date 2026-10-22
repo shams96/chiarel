@@ -13,29 +13,30 @@ describe("pdpSections (accordions beside the buy box)", () => {
     expect(s.map((x) => x.id)).toEqual(["benefits", "how-to-use", "actives"]);
     const actives = s.find((x) => x.id === "actives");
     expect(actives && "actives" in actives && actives.actives).toEqual([
-      { name: "Acetyl Hexapeptide-8" },
-      { name: "Palmitoyl Tripeptide-1" },
-      { name: "Palmitoyl Tetrapeptide-7" },
-      { name: "Bifida Ferment Lysate" },
+      { name: "Peptides" },
       { name: "Niacinamide" },
+      { name: "Hyaluronic Acid" },
     ]);
     expect(actives && "title" in actives && actives.title).toBe("Key ingredients");
   });
 
-  it("N1 has no disclosed actives, so no actives or ingredients accordion is invented", () => {
-    const ids = pdpSections(bySlug("n1-neck-decollete")).map((x) => x.id);
-    expect(ids).toEqual(["benefits", "how-to-use"]);
+  it("Neck & Décolleté and Eye Contour name their key ingredients, and the hidden draft INCI never renders", () => {
+    const named = {
+      "n1-neck-decollete": ["Copper Peptide", "Ceramides", "Squalane"],
+      "eye-contour-concentrate": ["Caffeine", "Peptides", "Hyaluronic Acid"],
+    };
+    for (const [slug, names] of Object.entries(named)) {
+      const s = pdpSections(bySlug(slug));
+      const actives = s.find((x) => x.id === "actives");
+      expect(actives && "actives" in actives && actives.actives.map((a) => a.name)).toEqual(names);
+      expect(s.map((x) => x.id)).not.toContain("ingredients");
+    }
   });
 
-  it("a product with no data gets no sections at all", () => {
-    expect(pdpSections(bySlug("the-ritual-set"))).toEqual([]);
-  });
-
-  it("N1 and Eye Treatment carry a draft INCI list but no key ingredients, so no ingredient section shows", () => {
-    for (const slug of ["n1-neck-decollete", "eye-contour-concentrate"]) {
-      const ids = pdpSections(bySlug(slug)).map((x) => x.id);
-      expect(ids).not.toContain("actives");
-      expect(ids).not.toContain("ingredients");
+  it("every catalog product has a name starting with Clarity and no removed-product wording", () => {
+    for (const p of products) {
+      expect(p.name).toMatch(/^Clarity /);
+      expect(JSON.stringify([p.name, p.descriptor, p.blurb, p.role, p.badge, p.step, p.benefits, p.howToUse, p.gallery?.map((g) => g.alt)])).not.toMatch(/Masque|Emulsion|Eye Treatment|Complex™|vegan|airless|cruelty/i);
     }
   });
 

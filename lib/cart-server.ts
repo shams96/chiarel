@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { db } from "@/lib/db";
 import { computeUnitPrice, computeLineSavings, type CartMode } from "@/lib/pricing";
 import { getProduct } from "@/lib/products";
+import { filterCatalogItems } from "@/lib/cart-catalog-filter";
 
 export type { CartMode };
 
@@ -49,11 +50,16 @@ export async function getCartWithTotals(knownCart?: { id: string }) {
   if (!cart) {
     return { cartId: null as string | null, lines: [], count: 0, subtotal: 0, savings: 0 };
   }
-  const items = await db.cartItem.findMany({
-    where: { cartId: cart.id },
-    include: { product: true },
-    orderBy: { id: "asc" },
-  });
+  // Lines for products that left the catalog stay in the database but are
+  // dropped here, so they are never shown, totalled or checked out.
+  const items = filterCatalogItems(
+    await db.cartItem.findMany({
+      where: { cartId: cart.id },
+      include: { product: true },
+      orderBy: { id: "asc" },
+    }),
+    (i) => i.productSlug
+  );
 
   let subtotal = 0;
   let savings = 0;
