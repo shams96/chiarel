@@ -2,29 +2,33 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { launchRitualProducts, getProduct, productImageAlt, isPurchasable } from "@/lib/products";
+import { getProduct, productImageAlt, isPurchasable, type Product } from "@/lib/products";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { useCart, unitPrice } from "@/lib/cart-context";
 
+// Ritual order: morning first, then the evening steps, lightest texture first.
+const RITUAL_SLUGS = [
+  "chiarel-essence",
+  "terra-radiance-creme",
+  "eye-contour-concentrate",
+  "recovery-masque",
+  "n1-neck-decollete",
+];
+
 export default function BuildYourRitualPage() {
   const { add } = useCart();
-  // Only priced launch products are selectable by default — N1 has no
-  // price yet (see CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §1) and is
-  // rendered below as a non-selectable, clearly labeled "coming soon" tile,
-  // excluded from the toggle set, the subtotal, and the add-to-bag loop so
-  // the builder never attempts to price or cart a priceless product.
-  // Eye Treatment is an OPTIONAL add-on, not a launchRitual step: selectable,
-  // but never selected by default (see `selected` below).
-  const eye = getProduct("eye-contour-concentrate");
-  const optionalSlugs = new Set(eye && isPurchasable(eye) ? [eye.slug] : []);
-  const selectableProducts = [
-    ...launchRitualProducts,
-    ...(eye && optionalSlugs.has(eye.slug) ? [eye] : []),
-  ].filter(isPurchasable);
-  const comingSoonProducts = launchRitualProducts.filter((p) => !isPurchasable(p));
+  // All five products are first-class ritual steps (Eye is a full step;
+  // not an add-on). Only priced products are selectable; an unpriced one renders
+  // as a non-selectable "coming soon" tile, excluded from the toggle set, the
+  // subtotal and the add-to-bag loop.
+  const ritualProducts = RITUAL_SLUGS.map((slug) => getProduct(slug)).filter(
+    (p): p is Product => Boolean(p)
+  );
+  const selectableProducts = ritualProducts.filter(isPurchasable);
+  const comingSoonProducts = ritualProducts.filter((p) => !isPurchasable(p));
 
   const [selected, setSelected] = useState<Set<string>>(
-    new Set(selectableProducts.filter((p) => !optionalSlugs.has(p.slug)).map((p) => p.slug))
+    new Set(selectableProducts.map((p) => p.slug))
   );
   const [adding, setAdding] = useState(false);
 
@@ -58,8 +62,8 @@ export default function BuildYourRitualPage() {
         Build Your Ritual
       </h1>
       <p className="mt-4 max-w-xl text-sm text-ink/70">
-        Choose exactly the steps your skin needs from the CHIAREL Four-Product
-        Ritual. Each is priced and delivered on its own — nothing is bundled
+        Choose exactly the steps your skin needs from the five-product CHIAREL
+        ritual. Each is priced and delivered on its own — nothing is bundled
         into a set price, so what you leave out costs you nothing.
       </p>
 
@@ -101,7 +105,7 @@ export default function BuildYourRitualPage() {
               </div>
               <div>
                 <p className="text-[11px] uppercase tracking-[0.14em] text-ink/65">
-                  {optionalSlugs.has(p.slug) ? "Optional · The Eye Step" : `${p.timeOfUse} · ${p.descriptor}`}
+                  {p.timeOfUse} · {p.descriptor}
                 </p>
                 <p className="mt-1 text-sm font-medium leading-tight">
                   {p.name}

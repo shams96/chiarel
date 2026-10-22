@@ -91,7 +91,7 @@ export const researchArticleJsonLd = {
   "@type": "Article",
   headline: "CHIAREL Formulation Science: Backed by Published Research",
   description:
-    "The published, peer-reviewed research behind CHIAREL's active ingredients — the Essence peptide complex (Acetyl Hexapeptide-8, Palmitoyl Tripeptide-1, Palmitoyl Tetrapeptide-7), Ceramide NP, Niacinamide, and Bifida Ferment Lysate.",
+    "The published, peer-reviewed research behind CHIAREL's active ingredients — peptides, niacinamide, hyaluronic acid, ceramides, bakuchiol and caffeine.",
   datePublished: HOMEPAGE_PUBLISHED,
   dateModified: HOMEPAGE_LAST_UPDATED,
   author: {
@@ -105,8 +105,8 @@ export const researchArticleJsonLd = {
   mainEntityOfPage: SITE_URL,
 };
 
-// Mirrors the visible numbered AM/PM steps on the homepage's Four-Product
-// Ritual section exactly — schema must match on-page content, not add
+// Mirrors the visible numbered AM/PM steps on the homepage's five-product
+// ritual section exactly — schema must match on-page content, not add
 // structure the page doesn't actually show.
 export function howToJsonLd(opts: {
   name: string;

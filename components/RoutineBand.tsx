@@ -5,35 +5,37 @@ import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { productHoverClass } from "@/lib/motion";
 
 // Shared by /ritual (full variant) and the home page (compact variant) so the
-// two surfaces can never drift on route order. Cellular Cleanser™ and Cellular
-// Mist™ stay "optional preparation", linked from both pages, never removed.
+// two surfaces can never drift on route order. Five products, two moments:
+// the evening runs lightest texture first (Essence, Eye, Night, Neck).
 export const morningRoute = ["chiarel-essence", "terra-radiance-creme"];
-export const eveningRoute = ["chiarel-essence", "recovery-masque", "n1-neck-decollete"];
+export const eveningRoute = [
+  "chiarel-essence",
+  "eye-contour-concentrate",
+  "recovery-masque",
+  "n1-neck-decollete",
+];
 
-// Eye Contour is an OPTIONAL evening step, not part of the numbered ritual and
-// not a launchRitual product: it is shown after Recovery Masque and before N1
-// ("Apply nightly, after Recovery Masque™" in its howToUse).
-export const eyeOptional = { slug: "eye-contour-concentrate", before: "n1-neck-decollete" } as const;
-export const EYE_LABEL = "Optional · The Eye Step";
-
-// Tile size by position, not superlative: Essence leads both bands, N1 closes
-// the evening band. Terra and Recovery Masque stay standard size.
+// Tile size by position, not superlative: Essence leads both bands, the Neck &
+// Décolleté Crème closes the evening band.
 const LEAD_SLUGS = new Set(["chiarel-essence", "n1-neck-decollete"]);
 
-export type Step = { n: number; label: string };
-type Entry = { product: Product; optional: boolean; lead: boolean };
+// `slug`, `purpose`, `ingredients` and `note` carry the ritual page's owner
+// copy; the compact home variant shows labels only.
+export type Step = {
+  n: number;
+  label: string;
+  slug?: string;
+  purpose?: string;
+  ingredients?: string;
+  note?: string;
+};
+type Entry = { product: Product; lead: boolean };
 
-function entriesFor(slugs: string[], withEye: boolean): Entry[] {
+function entriesFor(slugs: string[]): Entry[] {
   const out: Entry[] = [];
   for (const slug of slugs) {
-    if (withEye && slug === eyeOptional.before) {
-      const eye = getProduct(eyeOptional.slug);
-      if (eye && eye.launchStatus === "launch" && isPurchasable(eye)) {
-        out.push({ product: eye, optional: true, lead: false });
-      }
-    }
     const p = getProduct(slug);
-    if (p) out.push({ product: p, optional: false, lead: LEAD_SLUGS.has(slug) });
+    if (p) out.push({ product: p, lead: LEAD_SLUGS.has(slug) });
   }
   return out;
 }
@@ -80,17 +82,17 @@ export function MoonMark() {
   );
 }
 
-function RoutineRow({ entries, dark = false }: { entries: Entry[]; dark?: boolean }) {
+function RoutineRow({ entries, steps }: { entries: Entry[]; steps: Step[] }) {
   const body = "text-ink/75";
   const sub = "text-ink/65";
-  const tag = "text-ochre";
   const cta = "border border-ink hover:border-ochre hover:text-ochre";
   return (
     <div className="mt-12 space-y-16">
-      {entries.map(({ product: p, optional }, i) => (
+      {entries.map(({ product: p }, i) => {
+        const st = steps.find((x) => x.slug === p.slug);
+        return (
         <section
           key={p.slug}
-          data-optional={optional ? "true" : undefined}
           className={`flex flex-col items-center gap-10 md:flex-row ${
             i % 2 ? "md:flex-row-reverse" : ""
           }`}
@@ -108,16 +110,21 @@ function RoutineRow({ entries, dark = false }: { entries: Entry[]; dark?: boolea
             />
           </div>
           <div className="w-full md:w-1/2">
-            {optional && (
-              <p className={`mb-3 text-[11px] font-medium uppercase tracking-[0.24em] ${tag}`}>
-                {EYE_LABEL}
-              </p>
+            <h3 className="font-serif text-3xl">{st?.label ?? p.name}</h3>
+            {st ? (
+              <>
+                {st.purpose && <p className={`mt-2 max-w-md text-sm ${body}`}>{st.purpose}</p>}
+                {st.ingredients && <p className={`mt-2 max-w-md text-sm ${sub}`}>{st.ingredients}</p>}
+                {st.note && <p className={`mt-2 max-w-md text-sm ${body}`}>{st.note}</p>}
+              </>
+            ) : (
+              <>
+                <p className={`mt-1 text-[12px] uppercase tracking-[0.14em] ${sub}`}>
+                  {p.descriptor}
+                </p>
+                <p className={`mt-4 max-w-md text-sm ${body}`}>{p.blurb}</p>
+              </>
             )}
-            <h3 className="font-serif text-3xl">{p.name}</h3>
-            <p className={`mt-1 text-[12px] uppercase tracking-[0.14em] ${sub}`}>
-              {p.descriptor}
-            </p>
-            <p className={`mt-4 max-w-md text-sm ${body}`}>{p.blurb}</p>
             <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
               {isPurchasable(p) ? (
                 <>
@@ -142,26 +149,26 @@ function RoutineRow({ entries, dark = false }: { entries: Entry[]; dark?: boolea
             </div>
           </div>
         </section>
-      ))}
+        );
+      })}
     </div>
   );
 }
 
 // One short row of tiles. md+: a single flex row where lead tiles grow wider.
 // `data-size` makes the hierarchy assertable.
-function CompactRow({ entries, dark = false }: { entries: Entry[]; dark?: boolean }) {
+function CompactRow({ entries }: { entries: Entry[] }) {
   const sub = "text-ink/65";
   const tag = "text-ochre";
   const spans = mobileSpans(entries);
   return (
     <ul className="mt-8 grid grid-cols-2 gap-4 md:flex md:items-start md:gap-6">
-      {entries.map(({ product: p, optional, lead }, i) => {
-        const label = optional ? EYE_LABEL : p.badge;
+      {entries.map(({ product: p, lead }, i) => {
+        const label = p.badge;
         return (
           <li
             key={p.slug}
             data-size={lead ? "lead" : "standard"}
-            data-optional={optional ? "true" : undefined}
             className={`${spans[i] ? "col-span-2" : ""} ${lead ? "md:flex-[1.3]" : "md:flex-1"} min-w-0`}
           >
             <Link
@@ -208,7 +215,6 @@ export function RoutineBand({
   slugs,
   dark = false,
   variant = "full",
-  withEye = false,
 }: {
   id: string;
   time: "Morning" | "Evening";
@@ -217,10 +223,8 @@ export function RoutineBand({
   slugs: string[];
   dark?: boolean;
   variant?: "full" | "compact";
-  /** Insert the optional Eye Contour step (never numbered) before N1. */
-  withEye?: boolean;
 }) {
-  const entries = entriesFor(slugs, withEye);
+  const entries = entriesFor(slugs);
   const compact = variant === "compact";
   // Compact bands sit inside a page section that owns the h2.
   const Heading = compact ? "h3" : "h2";
@@ -249,7 +253,7 @@ export function RoutineBand({
             </li>
           ))}
         </ol>
-        {compact ? <CompactRow entries={entries} dark={dark} /> : <RoutineRow entries={entries} dark={dark} />}
+        {compact ? <CompactRow entries={entries} /> : <RoutineRow entries={entries} steps={steps} />}
       </div>
     </section>
   );
