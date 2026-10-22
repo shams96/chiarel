@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { productImageAlt, type Product } from "@/lib/products";
+import { productImageAlt, type Product, productHref } from "@/lib/products";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { productHoverClass } from "@/lib/motion";
 
@@ -25,7 +25,7 @@ export default function RitualCarousel({ products }: { products: Product[] }) {
       {products.map((p) => (
         <Link
           key={p.slug}
-          href={`/shop/${p.slug}`}
+          href={productHref(p.slug)}
           className="group w-[72vw] flex-none snap-start sm:w-[min(42vw,464px)] md:w-[min(30vw,331px)] lg:w-[min(24vw,265px)]"
         >
           <div

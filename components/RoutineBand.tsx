@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getProduct, productImageAlt, isPurchasable, type Product } from "@/lib/products";
+import { getProduct, productImageAlt, isPurchasable, type Product, productHref } from "@/lib/products";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { productHoverClass } from "@/lib/motion";
 
@@ -129,7 +129,7 @@ function RoutineRow({ entries, steps }: { entries: Entry[]; steps: Step[] }) {
               {isPurchasable(p) ? (
                 <>
                   <Link
-                    href={`/shop/${p.slug}`}
+                    href={productHref(p.slug)}
                     className={`inline-flex min-h-[44px] items-center px-6 text-[11px] uppercase tracking-[0.2em] transition ${cta}`}
                   >
                     ${p.price.subscription} — Subscribe
@@ -140,7 +140,7 @@ function RoutineRow({ entries, steps }: { entries: Entry[]; steps: Step[] }) {
                 </>
               ) : (
                 <Link
-                  href={`/shop/${p.slug}`}
+                  href={productHref(p.slug)}
                   className={`inline-flex min-h-[44px] items-center px-6 text-[11px] uppercase tracking-[0.2em] transition ${cta}`}
                 >
                   See product page — price to be announced
@@ -172,7 +172,7 @@ function CompactRow({ entries }: { entries: Entry[] }) {
             className={`${spans[i] ? "col-span-2" : ""} ${lead ? "md:flex-[1.3]" : "md:flex-1"} min-w-0`}
           >
             <Link
-              href={`/shop/${p.slug}`}
+              href={productHref(p.slug)}
               className="group block min-h-[44px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ochre"
             >
               <div

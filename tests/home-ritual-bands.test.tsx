@@ -3,6 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import HomeRitual from "@/components/home/HomeRitual";
 import { RoutineBand, eveningRoute, morningRoute } from "@/components/RoutineBand";
+import { products } from "@/lib/products";
 
 const home = renderToStaticMarkup(<HomeRitual />);
 const unesc = (t: string) => t.replace(/&amp;/g, "&").replace(/&#x27;/g, "'");
@@ -17,7 +18,7 @@ const tiles = (html: string) =>
   [...html.matchAll(/<li data-size="(lead|standard)"([^>]*)>[\s\S]*?href="\/shop\/([a-z0-9-]+)"/g)].map((m) => ({
     size: m[1],
     optional: m[2].includes('data-optional="true"'),
-    slug: m[3],
+    slug: products.find((p) => p.path === m[3])?.slug ?? m[3],
   }));
 
 describe("home ritual bands", () => {

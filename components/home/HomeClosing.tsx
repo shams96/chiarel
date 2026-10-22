@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
-import { getProductOrThrow, productImageAlt } from "@/lib/products";
+import { getProductOrThrow, productImageAlt, productHref } from "@/lib/products";
 
 // Final CTA: begin the ritual with the Essence and the Day Crème, the two morning
 // steps. Slot for an email-signup component: add it directly after this section
@@ -46,7 +46,7 @@ export function HomeFinalCta() {
           </p>
           <div className="mt-6 flex items-center gap-6">
             <Link
-              href="/shop/chiarel-essence"
+              href={productHref("chiarel-essence")}
               className="btn-press inline-block border border-ink px-8 py-3 text-[12px] uppercase tracking-[0.25em] transition hover:border-ochre hover:text-ochre"
             >
               Begin the Ritual

@@ -1,19 +1,20 @@
 [
   {
     "slug": "chiarel-essence",
+    "path": "clarity-essence",
     "sku": "03",
     "name": "Clarity Essence™",
     "descriptor": "For fine lines and firmness",
     "step": "Essence",
     "ritualOrder": 1,
-    "family": "CHIAREL Rose™",
+    "family": "Glass bottle",
     "color": {
-      "name": "Peach Dust",
-      "hex": "#FAD6C9"
+      "name": "Red Ochre",
+      "hex": "#9B4722"
     },
     "complex": "",
     "line": "Restore™",
-    "size": "40 ml / 1.4 fl. oz.",
+    "size": "40 ml bottle",
     "price": {
       "subscription": 151,
       "oneTime": 189
@@ -81,7 +82,7 @@
     ],
     "ingredientsInciStatus": "draft-v2",
     "launchStatus": "launch",
-    "productColorToken": "Peach Dust",
+    "productColorToken": "Red Ochre",
     "howToUse": [
       "Use a pea-sized amount.",
       "Apply to slightly damp skin, morning and evening.",
@@ -91,19 +92,20 @@
   },
   {
     "slug": "terra-radiance-creme",
+    "path": "clarity-day-creme",
     "sku": "04",
     "name": "Clarity Day Crème™",
     "descriptor": "For dry skin under daily stress",
     "step": "Day Crème",
     "ritualOrder": 2,
-    "family": "CHIAREL Terra™",
+    "family": "Glass jar",
     "color": {
       "name": "Red Ochre",
       "hex": "#9B4722"
     },
     "complex": "",
     "line": "Restore™",
-    "size": "50 g / 1.7 fl. oz.",
+    "size": "50 g jar",
     "price": {
       "subscription": 126,
       "oneTime": 158
@@ -195,19 +197,20 @@
   },
   {
     "slug": "recovery-masque",
+    "path": "clarity-night-creme",
     "sku": "04N",
     "name": "Clarity Night Crème™",
     "descriptor": "For smoother-looking texture",
     "step": "Night Crème",
     "ritualOrder": 4,
-    "family": "CHIAREL Verde™",
+    "family": "Glass jar",
     "color": {
       "name": "Formal Garden",
       "hex": "#1F5129"
     },
     "complex": "",
     "line": "Strengthen™",
-    "size": "50 g / 1.7 fl. oz.",
+    "size": "50 g jar",
     "price": {
       "subscription": 118,
       "oneTime": 148
@@ -304,20 +307,21 @@
   },
   {
     "slug": "n1-neck-decollete",
+    "path": "clarity-neck-decollete-creme",
     "sku": "N1-R",
     "name": "Clarity Neck & Décolleté Crème™",
     "descriptor": "For crepey-looking skin on the neck and chest",
     "role": "Neck & Décolleté Crème",
     "step": "Neck & Décolleté",
     "ritualOrder": 5,
-    "family": "CHIAREL Verde™",
+    "family": "Glass bottle",
     "color": {
       "name": "Formal Garden",
       "hex": "#1F5129"
     },
     "complex": "",
     "line": "",
-    "size": "40 ml / 1.35 fl. oz.",
+    "size": "40 ml bottle",
     "price": {
       "subscription": 118,
       "oneTime": 138
@@ -414,19 +418,20 @@
   },
   {
     "slug": "eye-contour-concentrate",
+    "path": "clarity-eye-contour-concentrate",
     "sku": "7A",
     "name": "Clarity Eye Contour Concentrate™",
     "descriptor": "For puffiness, dark circles and fine lines",
     "step": "Eye Contour",
     "ritualOrder": 3,
-    "family": "CHIAREL Verde™",
+    "family": "Glass bottle",
     "color": {
-      "name": "Formal Garden",
-      "hex": "#1F5129"
+      "name": "Peach Dust",
+      "hex": "#FAD6C9"
     },
     "complex": "",
     "line": "",
-    "size": "40 ml / 1.35 fl. oz.",
+    "size": "40 ml bottle",
     "price": {
       "subscription": 151,
       "oneTime": 189
@@ -472,7 +477,7 @@
     ],
     "ingredientsInciStatus": "draft-v2",
     "launchStatus": "launch",
-    "productColorToken": "Formal Garden",
+    "productColorToken": "Peach Dust",
     "howToUse": [
       "Made for the evening, after Clarity Essence™; it may be used morning or night.",
       "Use a light touch around the orbital bone — avoid the immediate lash line."

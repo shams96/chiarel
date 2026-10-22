@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Product } from "@/lib/products";
+import { productHref } from "@/lib/products";
 
 /**
  * The honest counterpart to a clinical-percentage stat grid: CHIAREL has no
@@ -24,7 +25,7 @@ export default function EvidenceGrid({ products }: { products: Product[] }) {
       {entries.map((e) => (
         <Link
           key={`${e.productSlug}-${e.activeName}`}
-          href={`/shop/${e.productSlug}`}
+          href={productHref(e.productSlug)}
           className="card-elevated group block rounded-md bg-white p-6 text-center transition hover:-translate-y-0.5"
         >
           <p className="font-serif text-2xl leading-snug text-ochre transition group-hover:text-ink">

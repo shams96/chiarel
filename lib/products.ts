@@ -10,7 +10,10 @@ export type ProductGalleryImage = {
 };
 
 export type Product = {
+  /** Internal key (DB, cart, analytics). Never shown in a URL: use `path` / `productHref()`. */
   slug: string;
+  /** Public URL key: the product page lives at /shop/<path>. */
+  path: string;
   sku: string;
   name: string;
   descriptor: string;
@@ -132,6 +135,16 @@ export const launchRitualProducts = products
 
 export const getProduct = (slug: string) =>
   products.find((p) => p.slug === slug);
+
+/** Resolve a public /shop/<path> segment to its product (undefined for anything else, including old slugs). */
+export const getProductByPath = (path: string) =>
+  products.find((p) => p.path === path);
+
+/** The single source for a product page URL. Takes the internal slug. */
+export function productHref(slug: string): string {
+  const p = getProduct(slug);
+  return p ? `/shop/${p.path}` : "/shop";
+}
 
 /** Accessible alt text that discloses placeholder imagery instead of presenting it as real product photography. */
 export function productImageAlt(p: Product): string {
