@@ -30,7 +30,7 @@ export default async function Founding100Page() {
   return (
     <div>
       {/* Hero — image-led gateway moment. The capture card is the page's
-          entire job, so it gets the visual weight; the program mechanics
+          entire job, so it gets the visual weight; the programme mechanics
           and legal terms live below, for whoever scrolls to them. */}
       <section className="relative overflow-hidden bg-ink text-ivory">
         <div className="mx-auto grid max-w-6xl gap-0 lg:grid-cols-2">
@@ -103,7 +103,7 @@ export default async function Founding100Page() {
           <ol className="mt-3 max-w-xl space-y-3 text-sm leading-relaxed text-ink/75">
             <li>
               <strong className="text-ink">1. Join.</strong> Choose your ritual
-              at its published price. The 90-day Ritual Plan, paid once,
+              at its published price. The 90-day plan, paid once,
               arrives in a single package.
             </li>
             <li>
@@ -130,7 +130,7 @@ export default async function Founding100Page() {
             <li>
               <strong className="text-ink/80">Founding Members.</strong> Limited
               to the first 100 qualifying orders. A qualifying order is one
-              90-day Ritual Plan purchase of an enrolled product at its
+              90-day plan purchase of an enrolled product at its
               published price. Limit one enrolment per household. The benefits
               are those listed on this page; CHIAREL may change them for future
               members without affecting existing members.

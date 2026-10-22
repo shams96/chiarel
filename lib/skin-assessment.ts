@@ -34,9 +34,9 @@ export const QUESTIONS: Question[] = [
     id: "q1",
     axis: "sebum",
     prompt: "By midday, my skin generally feels…",
-    why: "Sebum activity determines whether a formulation should reinforce lipids or stay lightweight.",
+    why: "Sebum activity determines whether a formulation should be richer or stay lightweight.",
     options: [
-      { label: "Tight and dry, even with moisturizer", value: 1 },
+      { label: "Tight and dry, even with moisturiser", value: 1 },
       { label: "Comfortable, a little dry in spots", value: 2 },
       { label: "Balanced", value: 3 },
       { label: "Slightly shiny in the T-zone", value: 4 },
@@ -47,7 +47,7 @@ export const QUESTIONS: Question[] = [
     id: "q2",
     axis: "sebum",
     prompt: "After cleansing, before applying anything else, my skin feels…",
-    why: "Post-cleanse tightness is a direct barrier-lipid signal, independent of daily oil production.",
+    why: "Post-cleanse tightness is a clear signal of dryness, independent of daily oil production.",
     options: [
       { label: "Tight for 20+ minutes", value: 1 },
       { label: "Mildly tight, resolves quickly", value: 2 },
@@ -73,7 +73,7 @@ export const QUESTIONS: Question[] = [
     id: "q4",
     axis: "reactivity",
     prompt: "Weather changes, fragrance, or fabric contact…",
-    why: "Environmental reactivity is a second, independent marker of barrier resilience (per BSTI methodology).",
+    why: "Environmental reactivity is a second, independent marker of how easily skin is unsettled (per BSTI methodology).",
     options: [
       { label: "Frequently trigger visible redness or discomfort", value: 1 },
       { label: "Sometimes trigger a reaction", value: 2 },
@@ -112,7 +112,7 @@ export const QUESTIONS: Question[] = [
     id: "q7",
     axis: "structure",
     prompt: "When I gently press or stretch my skin, I notice…",
-    why: "Tissue bounce is a direct, in-the-moment read on structural/collagen support — not an age assumption.",
+    why: "Tissue bounce is an in-the-moment read on how firm skin looks and feels, not an age assumption.",
     options: [
       { label: "Fine lines or a loss of bounce", value: 1 },
       { label: "A slight change from a few years ago", value: 2 },
@@ -173,22 +173,22 @@ const AXIS_TO_SKU: Record<Axis, { slug: string; reason: string }> = {
   sebum: {
     slug: "terra-radiance-creme",
     reason:
-      "Your answers point to a barrier that could use lipid support. Clarity Day Crème™ pairs three ceramides with cholesterol and squalane, to help skin feel comfortable and hydrated.",
+      "Your answers point to skin that could use richer comfort. Clarity Day Crème™ pairs ceramides with cholesterol and squalane, for skin that feels comfortable and hydrated.",
   },
   reactivity: {
     slug: "terra-radiance-creme",
     reason:
-      "Your skin shows signs of reactivity. Clarity Day Crème™ is made to help skin feel comfortable and hydrated through the day.",
+      "Your skin shows signs of reactivity. Clarity Day Crème™ is made for skin that feels comfortable and hydrated through the day.",
   },
   pigment: {
     slug: "chiarel-essence",
     reason:
-      "Uneven tone is a signal for Clarity Essence™, which pairs niacinamide with four peptides and hyaluronic acid to support the look of clarity.",
+      "Uneven tone is a signal for Clarity Essence™, which pairs niacinamide with peptides and hyaluronic acid, for the look of clarity.",
   },
   structure: {
     slug: "chiarel-essence",
     reason:
-      "Structural concerns are best met by Clarity Essence™, four peptides with niacinamide and hyaluronic acid, to smooth the look of fine lines and visibly firm.",
+      "Concerns about firmness are best met by Clarity Essence™, peptides with niacinamide and hyaluronic acid, for the look of smoother fine lines and firmer-looking skin.",
   },
 };
 

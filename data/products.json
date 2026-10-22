@@ -31,13 +31,13 @@
         "role": "application"
       }
     ],
-    "blurb": "Four peptides with niacinamide and hyaluronic acid, to smooth the look of fine lines and visibly firm. Hydrolyzed collagen for surface hydration.",
+    "blurb": "Peptides with niacinamide and hyaluronic acid, for the look of smoother fine lines and firmer-looking skin. Hydrolysed collagen for surface hydration.",
     "role": "Signature Essence of the House",
     "badge": "Signature Essence",
     "benefits": [
-      "Smooths the look of fine lines",
+      "The look of smoother fine lines",
       "The look of firmer skin",
-      "Hydrolyzed collagen for surface hydration"
+      "Hydrolysed collagen for surface hydration"
     ],
     "icon": true,
     "actives": [
@@ -85,7 +85,7 @@
     "howToUse": [
       "Use a pea-sized amount.",
       "Apply to slightly damp skin, morning and evening.",
-      "Pause 10–30 seconds before your moisturizer step."
+      "Pause 10–30 seconds before your moisturiser step."
     ],
     "howToUseSource": "app/science/application/page.tsx; app/journal/chiarel-ritual-guide/page.tsx"
   },
@@ -126,13 +126,13 @@
         "role": "lifestyle"
       }
     ],
-    "blurb": "Three ceramides with cholesterol and squalane, to help skin feel comfortable and hydrated. Niacinamide supports the look of an even, healthy surface.",
+    "blurb": "Ceramides with cholesterol and squalane, for skin that feels comfortable and hydrated. Niacinamide for the look of an even surface.",
     "role": "Day Crème",
     "badge": "Day Crème",
     "benefits": [
-      "Helps skin feel comfortable and hydrated through the working day",
-      "Three ceramides with cholesterol and squalane",
-      "Niacinamide supports the look of an even, healthy surface"
+      "Skin that feels comfortable and hydrated through the working day",
+      "Ceramides with cholesterol and squalane",
+      "Niacinamide for the look of an even surface"
     ],
     "icon": true,
     "actives": [
@@ -189,7 +189,8 @@
     "howToUse": [
       "Warm a small amount between your fingertips.",
       "Press, don’t rub, onto slightly damp skin after Clarity Essence™.",
-      "Use in the morning."
+      "Use in the morning.",
+      "Follow with SPF."
     ],
     "howToUseSource": "app/science/application/page.tsx; app/journal/chiarel-ritual-guide/page.tsx"
   },
@@ -230,12 +231,12 @@
         "role": "lifestyle"
       }
     ],
-    "blurb": "Bakuchiol, a plant-derived alternative to retinol, with peptides and niacinamide, to smooth the look of texture overnight.",
+    "blurb": "Bakuchiol with peptides and niacinamide, for the look of smoother texture overnight.",
     "role": "Night Crème",
     "badge": "Night Crème",
     "benefits": [
-      "Smooths the look of texture overnight",
-      "Bakuchiol, a plant-derived alternative to retinol",
+      "The look of smoother texture overnight",
+      "Bakuchiol",
       "Peptides and niacinamide"
     ],
     "icon": true,
@@ -347,10 +348,10 @@
         "role": "detail"
       }
     ],
-    "blurb": "Copper peptide with ceramides and squalane, to smooth the look of crepey texture and keep the neck and chest hydrated.",
+    "blurb": "Copper peptide with ceramides and squalane, for the look of smoother, less crepey texture and hydration for the neck and chest.",
     "benefits": [
-      "Smooths the look of crepey texture on the neck and chest",
-      "Keeps the neck and chest hydrated",
+      "The look of smoother, less crepey texture on the neck and chest",
+      "Hydration for the neck and chest",
       "Copper peptide with ceramides and squalane"
     ],
     "icon": true,
@@ -433,11 +434,11 @@
     },
     "image": "/assets/products/eye-contour-concentrate-jar.png",
     "imageIsPlaceholder": false,
-    "blurb": "Caffeine and peptides, to reduce the look of puffiness and dark circles. Hyaluronic acid hydrates, and light-reflecting mica brightens the look of the eye area.",
+    "blurb": "Caffeine and peptides, for the look of less puffiness and dark circles. Hyaluronic acid for hydration, and light-reflecting mica for a brighter-looking eye area.",
     "benefits": [
-      "Reduces the look of puffiness and dark circles",
-      "Hyaluronic acid hydrates",
-      "Light-reflecting mica brightens the look of the eye area"
+      "The look of less puffiness and dark circles",
+      "Hyaluronic acid for hydration",
+      "Light-reflecting mica for a brighter-looking eye area"
     ],
     "icon": true,
     "launchRitual": false,
