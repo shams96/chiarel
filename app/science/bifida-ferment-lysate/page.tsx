@@ -15,7 +15,7 @@ const faqs = [
   },
   {
     q: "What does a postbiotic do for skin?",
-    a: "Postbiotics are studied for their role in supporting the skin's surface microbiome balance and, in the case of this lysate, for its role in supporting the skin barrier.",
+    a: "Postbiotics are a studied ingredient category in skincare. In our formulas the lysate sits alongside ceramides, niacinamide and hyaluronic acid, which are chosen for the look and feel of a comfortable, even surface.",
   },
   {
     q: "Is this different from a probiotic?",
@@ -52,9 +52,8 @@ export default function BifidaPage() {
         Bifida Ferment Lysate, Explained
       </h1>
       <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/75">
-        A postbiotic with a specific, studied role in supporting the skin
-        barrier. Explained here in the third
-        person, as an educational reference.
+        A postbiotic ingredient, explained here in the third person as an
+        educational reference.
       </p>
 
       <section className="mt-12 space-y-10">
@@ -70,8 +69,8 @@ export default function BifidaPage() {
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-2xl">How it works</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
-            Studied for its role in supporting the skin barrier and a
-            balanced surface microbiome.
+            A studied ingredient category, used here for the look and feel of a
+            comfortable surface.
           </p>
           <p className="mt-3 text-[12px] text-ink/65">
             Source:{" "}

@@ -36,7 +36,7 @@
     "badge": "Signature Essence",
     "benefits": [
       "Smooths the look of fine lines",
-      "Visibly firms",
+      "The look of firmer skin",
       "Hydrolyzed collagen for surface hydration"
     ],
     "icon": true,
@@ -188,7 +188,7 @@
     "productColorToken": "Red Ochre",
     "howToUse": [
       "Warm a small amount between your fingertips.",
-      "Press, don’t rub, onto slightly damp skin after CHIAREL Essence™.",
+      "Press, don’t rub, onto slightly damp skin after Clarity Essence™.",
       "Use in the morning."
     ],
     "howToUseSource": "app/science/application/page.tsx; app/journal/chiarel-ritual-guide/page.tsx"

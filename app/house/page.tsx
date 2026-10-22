@@ -38,15 +38,15 @@ export default function HousePage() {
           </p>
         </section>
         <section>
-          <h2 className="font-serif text-2xl text-ink">Modern Biological Stress™</h2>
+          <h2 className="font-serif text-2xl text-ink">Modern Biological Stressâ„¢</h2>
           <p className="mt-2 max-w-2xl">
             A working woman&rsquo;s day asks a great deal of her body and her
             skin. Early starts, deadlines, screens, commutes, dry indoor air
             and too little sleep add up. We call this Modern Biological
-            Stress™. Skin shows it first: it feels tighter, looks duller and
-            lines look more defined. CHIAREL™ is made to help skin look and
+            Stressâ„¢. Skin shows it first: it feels tighter, looks duller and
+            lines look more defined. CHIARELâ„¢ is made to help skin look and
             feel clear, comfortable and rested through that day. This is our
-            mission, Advancing Cellular Clarity™.
+            mission, Advancing Cellular Clarityâ„¢.
           </p>
         </section>
         <section>

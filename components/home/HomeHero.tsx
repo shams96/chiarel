@@ -35,7 +35,7 @@ export default function HomeHero() {
           >
             <span>Neck &amp; Décolleté</span>
             <span className="my-[0.35em] block h-px w-[110%] bg-[#E9D79F]/60" />
-            <span>Renewal Emulsion</span>
+            <span>Crème</span>
           </div>
         </div>
         {/* A whisper of warm light so the product glows against the field */}
