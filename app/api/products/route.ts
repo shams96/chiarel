@@ -1,11 +1,16 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { withApiErrorHandling } from "@/lib/api-error";
+import { filterCatalogItems } from "@/lib/cart-catalog-filter";
 
 export const dynamic = "force-dynamic";
 
 export const GET = withApiErrorHandling(async () => {
-  const products = await db.product.findMany({ orderBy: { ritualOrder: "asc" } });
+  // Removed products keep their database rows (orders reference them) but are not exposed.
+  const products = filterCatalogItems(
+    await db.product.findMany({ orderBy: { ritualOrder: "asc" } }),
+    (p) => p.slug
+  );
 
   const shaped = products.map((p) => ({
     slug: p.slug,
