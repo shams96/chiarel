@@ -7,20 +7,13 @@ import { SITE_URL } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Press Kit",
   description:
-    "CHIAREL™ press kit: brand fact sheet, a five-product launch lineup led by a dedicated neck and décolleté treatment, downloadable wordmarks and monogram, and press contact information.",
+    "CHIAREL™ press kit: brand fact sheet, the five Clarity launch products, downloadable wordmarks and monogram, and press contact information.",
   alternates: { canonical: "/press" },
 };
 
-// Launch-lineup framing per CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §12 —
-// no automatically derived product count is stated publicly; the launch
-// products are listed explicitly, with every other current product
-// (Cleanser, Mist, Lip Concentrate, and both existing sets) shown below,
-// unpublished from nothing. The launch lineup is five products: the
-// four-step AM/PM ritual (launchRitual === true) plus Eye
-// Treatment™, a real priced launch product that stands outside the ritual
-// sequence itself (see data/products.json's launchRole: "standalone") —
-// it's part of the launch, not part of the ritual's 4 steps.
-const ritualSkus = products.filter((p) => p.launchRitual === true);
+// The launch lineup is the five Clarity products (Essence, Day Crème, Night
+// Crème, Neck & Décolleté Crème, Eye Contour Concentrate), all part of the
+// two-moment ritual. Any other catalog entry would list under "Also Available".
 const launchSkus = products.filter((p) => p.launchStatus === "launch");
 const otherSkus = products.filter((p) => !p.set && p.launchStatus !== "launch");
 
@@ -135,9 +128,8 @@ export default function PressPage() {
         <h2 className="font-serif text-2xl text-ink">The Launch Lineup</h2>
         {/* DRAFT — OWNER / REGULATORY APPROVAL REQUIRED */}
         <p className="mt-2 max-w-xl text-sm text-ink/70">
-          Five launch products: a focused four-product ritual led by a
-          dedicated neck and décolleté treatment, plus CHIAREL Eye
-          Treatment™, a standalone nightly treatment.
+          Five formulations, each made for one purpose and carrying the name
+          of our mission: Clarity.
         </p>
         <ul className="mt-8 grid gap-4 sm:grid-cols-2">
           {launchSkus.map((p) => (
@@ -157,19 +149,18 @@ export default function PressPage() {
                 <p className="mt-1 text-[13px] text-ink/60">{p.descriptor}</p>
                 <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-ink/65">
                   {p.color.name} · {p.family}
-                  {ritualSkus.some((r) => r.slug === p.slug)
-                    ? " · Four-Product Ritual"
-                    : " · Standalone"}
                 </p>
               </div>
             </li>
           ))}
         </ul>
 
+        {otherSkus.length > 0 && (
+        <>
         <h3 className="mt-12 font-serif text-lg text-ink">Also Available</h3>
         <p className="mt-2 max-w-xl text-sm text-ink/70">
           Additional CHIAREL products, outside the five-product launch
-          lineup — fully available, never discontinued.
+          lineup.
         </p>
         <ul className="mt-6 grid gap-4 sm:grid-cols-2">
           {otherSkus.map((p) => (
@@ -194,6 +185,8 @@ export default function PressPage() {
             </li>
           ))}
         </ul>
+        </>
+        )}
         <Link
           href="/shop"
           className="mt-6 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"

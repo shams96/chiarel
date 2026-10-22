@@ -5,7 +5,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "A Town Built Around a Waterfall",
   description:
-    "Isola del Liri, the karst-spring confluence behind The Cascata Complex™, and why CHIAREL's provenance shapes how every formulation is made.",
+    "Isola del Liri, the karst-spring confluence at the heart of the town, and why CHIAREL's provenance shapes how every formulation is made.",
   alternates: { canonical: "/journal/isola-del-liri-waterfall" },
 };
 
@@ -40,13 +40,12 @@ export default function WaterfallPage() {
           middle of daily life, beside the Boncompagni-Viscogliosi castle.
         </p>
         <p>
-          The height is not what makes the water here worth naming a
-          formulation after. Just before the Liri reaches the town, it is
+          The height is not what makes the water here worth knowing. Just before the Liri reaches the town, it is
           joined by the Fibreno — a river with no surface source of its
           own, fed entirely by limestone karst springs a few kilometers
           upstream. Water that arrives newly filtered through stone, not
-          run off the surface. That confluence, not the drop, is what The
-          Cascata Complex™ is named for.
+          run off the surface. That confluence, not the drop, is what makes
+          the place worth knowing.
         </p>
         <p>
           The town&rsquo;s relationship with that water goes back further

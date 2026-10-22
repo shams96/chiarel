@@ -15,9 +15,9 @@ type Row = {
 };
 
 const serumTable = {
-  title: "The Signature Serum",
+  title: "The Essence",
   columns: [
-    "CHIAREL Essence™",
+    "Clarity Essence",
     "SkinCeuticals C E Ferulic",
     "Dr. Barbara Sturm Hyaluronic Serum",
     "La Prairie Skin Caviar Liquid Lift",
@@ -54,9 +54,9 @@ const serumTable = {
 };
 
 const cremeTable = {
-  title: "The Daily Crème",
+  title: "The Day Crème",
   columns: [
-    "Terra Radiance Crème™",
+    "Clarity Day Crème",
     "La Mer Rejuvenating Night Cream",
     "Augustinus Bader The Rich Cream",
   ],
@@ -177,14 +177,13 @@ export default function ComparisonPage() {
           Mass-market brands talk about the ingredient. Clinical brands
           compete on efficacy claims alone. CHIAREL formulates for a third
           thing: explaining the mechanism, naming the key ingredients, and
-          delivering them inside a lipid/occlusive vehicle designed for
-          sustained release. Ingredients like Bifida Ferment Lysate and
-          L-Ornithine are established, industry-wide INCI names — CHIAREL
-          does not claim exclusivity over them. What we describe and stand
-          behind is our formulation approach and the outcomes it is
+          disclosing every active ingredient. Ingredients like niacinamide,
+          ceramides and peptides are established, industry-wide names —
+          CHIAREL does not claim exclusivity over them. What we describe and
+          stand behind is our formulation approach and the outcomes it is
           designed to support.{" "}
-          <Link href="/science/synergy" className="border-b border-ochre text-ochre">
-            See the full synergy
+          <Link href="/science" className="border-b border-ochre text-ochre">
+            See how each formulation answers Modern Biological Stress™
           </Link>
           .
         </p>
