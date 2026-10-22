@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getProduct, getProductOrThrow, productImageAlt } from "@/lib/products";
+import { getProduct, getProductOrThrow, productImageAlt, productHref } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 
@@ -47,7 +47,7 @@ export default function ShopPage() {
           <h2 className="mt-2 font-serif text-3xl leading-snug">{n1.name}</h2>
           <p className="mt-2 max-w-md text-sm leading-relaxed text-ink/70">{n1.blurb}</p>
           <Link
-            href={`/shop/${n1.slug}`}
+            href={productHref(n1.slug)}
             className="btn-press mt-6 inline-block border border-ink px-8 py-3 text-[12px] uppercase tracking-[0.25em] transition hover:border-ochre hover:text-ochre"
           >
             Discover the Crème

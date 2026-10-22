@@ -37,8 +37,8 @@ const checks = [
   ["GET / -> 200", async () => expectStatus((await call("GET", "/")).res, 200)],
   ["GET /shop -> 200", async () => expectStatus((await call("GET", "/shop")).res, 200)],
   [
-    "GET /shop/chiarel-essence -> 200",
-    async () => expectStatus((await call("GET", "/shop/chiarel-essence")).res, 200),
+    "GET /shop/clarity-essence -> 200",
+    async () => expectStatus((await call("GET", "/shop/clarity-essence")).res, 200),
   ],
   [
     "POST /api/admin/auth/login (bad creds) -> 401 JSON",

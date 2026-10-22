@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { products, isPurchasable } from "@/lib/products";
+import { products, isPurchasable, productHref } from "@/lib/products";
 import HeroIntro from "@/components/HeroIntro";
 import EmailSignup from "@/components/EmailSignup";
 import HomeHero from "@/components/home/HomeHero";
@@ -170,7 +170,7 @@ export default function Home() {
         kicker="The Icon Product"
         headline="The daily crème of the morning ritual."
         body="Clarity Day Crème: the moisturising step of the AM ritual, finished in Italian light."
-        href="/shop/terra-radiance-creme"
+        href={productHref("terra-radiance-creme")}
         cta="Discover Clarity Day Crème"
       />
       <HomeFitGuidance />

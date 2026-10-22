@@ -1,3 +1,4 @@
+import { productHref } from "@/lib/products";
 export const SITE_URL = "https://chiarel.com";
 export const SITE_NAME = "CHIAREL™";
 
@@ -158,7 +159,7 @@ export function offerCatalogJsonLd(
     itemListElement: products.map((p) => ({
       "@type": "Offer",
       name: p.name,
-      url: `${SITE_URL}/shop/${p.slug}`,
+      url: `${SITE_URL}${productHref(p.slug)}`,
       priceCurrency: "USD",
       price: p.price.oneTime,
       itemCondition: "https://schema.org/NewCondition",
@@ -210,14 +211,14 @@ export function productJsonLd(p: {
     "@type": "Product",
     name: p.name,
     sku: p.sku,
-    url: `${SITE_URL}/shop/${p.slug}`,
+    url: `${SITE_URL}${productHref(p.slug)}`,
     description: p.blurb,
     image: `${SITE_URL}${p.image}`,
     brand: { "@type": "Brand", name: "CHIAREL" },
     color: p.color.name,
     offers: {
       "@type": "Offer",
-      url: `${SITE_URL}/shop/${p.slug}`,
+      url: `${SITE_URL}${productHref(p.slug)}`,
       priceCurrency: "USD",
       price: p.price.oneTime,
       itemCondition: "https://schema.org/NewCondition",

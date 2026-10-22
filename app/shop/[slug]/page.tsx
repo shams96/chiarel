@@ -2,7 +2,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getProduct, products, productImageAlt, isPurchasable, publishedInci, type Product } from "@/lib/products";
+import { getProduct, getProductByPath, productHref, products, productImageAlt, isPurchasable, publishedInci, type Product } from "@/lib/products";
 import PurchaseOptions from "@/components/PurchaseOptions";
 import TrackViewItem from "@/components/TrackViewItem";
 import StickyPurchaseBar from "@/components/StickyPurchaseBar";
@@ -35,7 +35,7 @@ function productFactSummary(p: Product): string {
 }
 
 export function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
+  return products.map((p) => ({ slug: p.path }));
 }
 
 export async function generateMetadata({
@@ -44,12 +44,12 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const p = getProduct(slug);
+  const p = getProductByPath(slug);
   if (!p) return {};
   return {
     title: productPageTitle(p.name, p.descriptor),
     description: p.blurb,
-    alternates: { canonical: `/shop/${p.slug}` },
+    alternates: { canonical: productHref(p.slug) },
     openGraph: { images: [{ url: p.og ?? p.image }] },
   };
 }
@@ -60,7 +60,7 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const p = getProduct(slug);
+  const p = getProductByPath(slug);
   if (!p) notFound();
 
   return (
@@ -84,7 +84,7 @@ export default async function ProductPage({
             breadcrumbJsonLd([
               { name: "Home", path: "/" },
               { name: "Shop", path: "/shop" },
-              { name: p.name, path: `/shop/${p.slug}` },
+              { name: p.name, path: productHref(p.slug) },
             ])
           ),
         }}
@@ -175,15 +175,11 @@ export default async function ProductPage({
                 <dd>{p.step}</dd>
               </div>
               <div className="flex gap-1.5">
-                <dt className="text-ink/65">Family:</dt>
-                <dd>{p.family}</dd>
-              </div>
-              <div className="flex gap-1.5">
                 <dt className="text-ink/65">Size:</dt>
                 <dd>{p.size}</dd>
               </div>
               <div className="flex items-center gap-1.5">
-                <dt className="text-ink/65">Color:</dt>
+                <dt className="text-ink/65">Glass colour:</dt>
                 <dd className="flex items-center gap-1.5">
                   <span
                     className="inline-block h-2.5 w-2.5 rounded-full border border-ink/20"
@@ -646,7 +642,7 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
                   </span>
                 ) : (
                   <Link
-                    href={`/shop/${slug}`}
+                    href={productHref(slug)}
                     className="tap-area text-sm text-ink/70 hover:text-ochre"
                   >
                     {item.name}
@@ -679,7 +675,7 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
                 key={item.slug}
                 className="flex flex-col gap-3 rounded-sm border border-ink/10 p-4 transition hover:border-ochre"
               >
-                <Link href={`/shop/${item.slug}`} className="flex items-center gap-4">
+                <Link href={productHref(item.slug)} className="flex items-center gap-4">
                   <div
                     className="relative h-16 w-16 shrink-0 overflow-hidden"
                     style={{ backgroundColor: NEUTRAL_FRAME_BG }}

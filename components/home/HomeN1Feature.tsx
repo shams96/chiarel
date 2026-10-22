@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
-import { getProductOrThrow, productImageAlt } from "@/lib/products";
+import { getProductOrThrow, productImageAlt, productHref } from "@/lib/products";
 
 // Neck & Décolleté Crème as the featured new product (merges the former hero copy, the
 // "what it is designed for" list and the "below the jawline" explainer).
@@ -56,7 +56,7 @@ export default function HomeN1Feature() {
             ))}
           </ul>
           <Link
-            href="/shop/n1-neck-decollete"
+            href={productHref("n1-neck-decollete")}
             className="btn-press mt-8 inline-block border border-ink px-8 py-3 text-[12px] uppercase tracking-[0.3em] text-ink transition hover:border-ochre hover:text-ochre"
           >
             Discover the Crème

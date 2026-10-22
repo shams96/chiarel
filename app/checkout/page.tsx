@@ -10,7 +10,7 @@ import RefundPolicyContent, { REFUND_POLICY_VERSION } from "@/components/RefundP
 import { ENABLED_COUNTRIES, getCountry, approxConverted, type CountryCode } from "@/lib/countries";
 
 const modeLabel: Record<string, string> = {
-  ninetyDay: "The Ritual Plan",
+  ninetyDay: "90-day plan",
   subscription: "Subscription",
   oneTime: "One-time",
 };

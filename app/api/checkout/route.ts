@@ -18,7 +18,7 @@ const CHECKOUT_MAX_ATTEMPTS = 20;
 const CHECKOUT_WINDOW_MS = 10 * 60 * 1000;
 
 const modeLabel: Record<string, string> = {
-  ninetyDay: "The Ritual Plan · 90-day supply, one delivery",
+  ninetyDay: "90-day plan · one delivery",
   subscription: "Subscription · every 45 days",
   oneTime: "One-time purchase",
 };

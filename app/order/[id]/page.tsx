@@ -7,7 +7,7 @@ import { getOrCreateCart } from "@/lib/cart-server";
 import TrackPurchase from "@/components/TrackPurchase";
 
 const modeLabel: Record<string, string> = {
-  ninetyDay: "The Ritual Plan",
+  ninetyDay: "90-day plan",
   subscription: "Subscription",
   oneTime: "One-time",
 };

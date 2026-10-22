@@ -1,13 +1,14 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { productHref } from "@/lib/products";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { useDialog } from "@/lib/use-dialog";
 
 const nav = [
   { href: "/shop", label: "Shop" },
-  { href: "/shop/n1-neck-decollete", label: "Clarity Neck & Décolleté Crème" },
+  { href: productHref("n1-neck-decollete"), label: "Clarity Neck & Décolleté Crème" },
   { href: "/ritual", label: "The Ritual" },
   { href: "/science", label: "The Science" },
   { href: "/house", label: "The House" },

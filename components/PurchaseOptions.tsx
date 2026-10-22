@@ -116,7 +116,7 @@ export default function PurchaseOptions({
         >
           <span className="min-w-0">
             <span className="block text-[12px] uppercase tracking-[0.16em] text-ochre">
-              The Ritual Plan
+              90-day plan
             </span>
             <span className="mt-0.5 block text-[13px] leading-snug text-ink/70">
               90-day supply, paid once, one delivery
