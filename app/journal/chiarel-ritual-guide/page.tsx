@@ -147,25 +147,25 @@ export default function RitualGuidePage() {
 
       <div className="mt-16 flex flex-wrap gap-6 border-t border-ink/10 pt-10">
         <Link
-          href="/shop/terra-radiance-creme"
+          href="/shop/clarity-day-creme"
           className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
         >
           Shop Clarity Day Crème
         </Link>
         <Link
-          href="/shop/recovery-masque"
+          href="/shop/clarity-night-creme"
           className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
         >
           Shop Clarity Night Crème
         </Link>
         <Link
-          href="/shop/n1-neck-decollete"
+          href="/shop/clarity-neck-decollete-creme"
           className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
         >
           Discover Clarity Neck &amp; Décolleté Crème
         </Link>
         <Link
-          href="/shop/eye-contour-concentrate"
+          href="/shop/clarity-eye-contour-concentrate"
           className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
         >
           Shop Clarity Eye Contour Concentrate

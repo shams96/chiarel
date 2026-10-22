@@ -107,7 +107,7 @@ export default function ApplicationPage() {
           <h2 className="font-serif text-2xl">Let each step set</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             A brief pause between the{" "}
-            <Link href="/shop/chiarel-essence" className="border-b border-ochre text-ochre">
+            <Link href="/shop/clarity-essence" className="border-b border-ochre text-ochre">
               Essence
             </Link>{" "}
             step and each crème step lets each layer settle before the next is

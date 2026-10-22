@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { productHref } from "@/lib/products";
 
 export const metadata = { title: "The Science", alternates: { canonical: "/science" } };
 
@@ -62,7 +63,7 @@ export default function SciencePage() {
             </p>
             <p className="mt-2 max-w-xl text-sm text-ink/70">{e.science}</p>
             <Link
-              href={`/shop/${e.slug}`}
+              href={productHref(e.slug)}
               className="mt-3 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
             >
               See the formulation →
