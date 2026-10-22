@@ -35,7 +35,7 @@ export default function WaterfallPage() {
           An hour and a half from Rome, in the Liri valley of central Italy,
           sits a town almost no other in Europe can claim to resemble: Isola
           del Liri, named for the island formed where two arms of the Liri
-          river split around its historic center — and fall, together, as
+          river split around its historic centre — and fall, together, as
           the Cascata Grande, a 27-meter waterfall that drops through the
           middle of daily life, beside the Boncompagni-Viscogliosi castle.
         </p>
@@ -83,7 +83,7 @@ export default function WaterfallPage() {
           It is also where La Bella Figura lives most naturally — the
           Italian discipline of presenting one&rsquo;s best self, quietly,
           without announcement. A town that has had a waterfall running
-          through its center for centuries does not need to raise its voice
+          through its centre for centuries does not need to raise its voice
           about it.
         </p>
       </div>

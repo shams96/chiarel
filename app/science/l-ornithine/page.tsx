@@ -4,22 +4,22 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "L-Ornithine, Explained",
   description:
-    "What L-Ornithine is, its role in the skin's Natural Moisturizing Factor, and where CHIAREL uses it: Clarity Night Crème. A transparent, third-person explainer.",
+    "What L-Ornithine is, its role in the skin's Natural Moisturising Factor, and where CHIAREL uses it: Clarity Night Crème only. A transparent, third-person explainer.",
   alternates: { canonical: "/science/l-ornithine" },
 };
 
 const faqs = [
   {
     q: "What is L-Ornithine?",
-    a: "L-Ornithine is an amino acid and a natural component of skin's Natural Moisturizing Factor (NMF). It is an established INCI ingredient, not a CHIAREL-exclusive ingredient.",
+    a: "L-Ornithine is an amino acid and a natural component of skin's Natural Moisturising Factor (NMF). It is an established ingredient, not a CHIAREL-exclusive ingredient.",
   },
   {
     q: "What does it do for skin?",
-    a: "It is linked to the urea cycle and polyamine pathways involved in barrier maintenance, and is understood to contribute to hydration-feel and softness as part of the skin's own moisture-regulation system.",
+    a: "It is used here for the look and feel of soft, hydrated skin.",
   },
   {
     q: "Which CHIAREL product contains it?",
-    a: "Clarity Night Crème, alongside bakuchiol, peptides and niacinamide, to smooth the look of texture overnight.",
+    a: "Clarity Night Crème only, alongside bakuchiol, peptides and niacinamide, for the look of smoother texture overnight.",
   },
 ];
 
@@ -57,27 +57,15 @@ export default function LOrnithinePage() {
           <h2 className="font-serif text-2xl">What it is</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             An amino acid and component of the skin&rsquo;s Natural
-            Moisturizing Factor (NMF) — the mix of small molecules the
-            skin itself produces to hold hydration.
+            Moisturising Factor (NMF) — the mix of small molecules the
+            skin itself produces.
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-2xl">How it works</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
-            Linked to the urea cycle and polyamine pathways associated with
-            collagen and barrier maintenance — supporting processes skin
-            already runs, rather than introducing a synthetic mechanism.
-          </p>
-          <p className="mt-3 text-[12px] text-ink/65">
-            Source:{" "}
-            <a
-              href="https://pubmed.ncbi.nlm.nih.gov/?term=ornithine+skin+barrier"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border-b border-ink/30 hover:border-ochre hover:text-ochre"
-            >
-              Published research on Ornithine and skin barrier function, PubMed (NIH)
-            </a>
+            Used in Clarity Night Crème for the look and feel of soft,
+            hydrated skin.
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
@@ -90,8 +78,8 @@ export default function LOrnithinePage() {
         <div className="border-l-2 border-ochre pl-6">
           <h2 className="font-serif text-2xl">How CHIAREL formulates with it</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
-            Found in Clarity Night Crème, alongside bakuchiol, peptides and
-            niacinamide, to smooth the look of texture overnight. See{" "}
+            Found in Clarity Night Crème only, alongside bakuchiol, peptides and
+            niacinamide, for the look of smoother texture overnight. See{" "}
             <Link href="/science" className="border-b border-ochre text-ochre">
               The Science
             </Link>
@@ -101,9 +89,9 @@ export default function LOrnithinePage() {
       </section>
 
       <p className="mt-14 max-w-2xl text-[11px] leading-relaxed text-ink/65">
-        L-Ornithine is an INCI ingredient name, not a CHIAREL trademark. This
-        page reflects published cosmetic-science understanding of the
-        ingredient category and is not a guarantee of individual results.
+        L-Ornithine is an ingredient name, not a CHIAREL trademark. This
+        page is an educational reference and is not a guarantee of individual
+        results.
       </p>
 
       <div className="mt-8 flex flex-wrap gap-6 border-t border-ink/10 pt-8 text-[12px] uppercase tracking-[0.16em]">
