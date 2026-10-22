@@ -2,10 +2,10 @@ import { readFileSync } from "node:fs";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import HomeRitual from "@/components/home/HomeRitual";
-import { RoutineBand, eveningRoute, morningRoute, EYE_LABEL } from "@/components/RoutineBand";
-import { launchRitualProducts, getProduct } from "@/lib/products";
+import { RoutineBand, eveningRoute, morningRoute } from "@/components/RoutineBand";
 
 const home = renderToStaticMarkup(<HomeRitual />);
+const unesc = (t: string) => t.replace(/&amp;/g, "&").replace(/&#x27;/g, "'");
 const pageSrc = readFileSync("app/page.tsx", "utf8");
 
 function band(html: string, id: string) {
@@ -21,40 +21,37 @@ const tiles = (html: string) =>
   }));
 
 describe("home ritual bands", () => {
-  it("keeps the section anchor and the optional preparation link", () => {
+  it("keeps the section anchor and drops the optional preparation link", () => {
     expect(home).toContain('id="four-product-ritual"');
-    expect(home).toContain('href="/ritual#optional-preparation"');
+    expect(home).not.toContain("optional-preparation");
+    expect(home).not.toMatch(/Cleanser|Cellular Mist|Lip Concentrate/);
   });
 
-  it("morning and evening tile order match the real routes (Eye between Masque and N1)", () => {
+  it("morning and evening tile order match the real routes (Eye second in the evening)", () => {
     expect(tiles(band(home, "home-morning")).map((t) => t.slug)).toEqual(morningRoute);
     expect(tiles(band(home, "home-evening")).map((t) => t.slug)).toEqual([
       "chiarel-essence",
-      "recovery-masque",
       "eye-contour-concentrate",
+      "recovery-masque",
       "n1-neck-decollete",
     ]);
   });
 
-  it("Essence leads both bands and N1 closes the evening band, by size", () => {
+  it("Essence leads both bands and the Neck & Décolleté Crème closes the evening band, by size", () => {
     expect(tiles(band(home, "home-morning")).map((t) => t.size)).toEqual(["lead", "standard"]);
     expect(tiles(band(home, "home-evening")).map((t) => t.size)).toEqual(["lead", "standard", "standard", "lead"]);
   });
 
-  it("keeps the existing badges and avoids superlative wording", () => {
-    for (const label of ["Signature Serum", "Icon of the House", "Night Icon"]) {
-      expect(home).toContain(label);
-    }
-    expect(home).not.toMatch(/\b(best|hero)\b/i);
+  it("avoids superlative wording", () => {
+    expect(home).not.toMatch(/(best|hero)/i);
   });
 
-  it("Eye is optional, labelled, and not a numbered step", () => {
+  it("Eye is a normal numbered evening step, not optional", () => {
     const pm = band(home, "home-evening");
-    expect(pm).toContain(EYE_LABEL);
-    expect(pm.match(/Step \d/g)).toHaveLength(3);
-    const steps = pm.slice(pm.indexOf("<ol"), pm.indexOf("</ol>"));
-    expect(steps).not.toContain("Eye");
-    expect(band(home, "home-morning")).not.toContain(EYE_LABEL);
+    expect(pm).not.toContain("Optional");
+    expect(pm).not.toContain("data-optional");
+    expect(pm.match(/Step \d/g)).toHaveLength(4);
+    expect(band(home, "home-morning").match(/Step \d/g)).toHaveLength(2);
   });
 
   it("evening is the cool light band and morning the warm one", () => {
@@ -67,46 +64,54 @@ describe("home ritual bands", () => {
     expect(home).toContain("background-color");
   });
 
-  it("JSON-LD HowTo steps match the visible numbered steps and exclude Eye", () => {
+  it("JSON-LD HowTo steps match the visible numbered steps", () => {
     const visible = (id: string) =>
-      [...band(home, id).matchAll(/Step (\d)<\/span> ([^<]+)</g)].map((m) => [m[1], m[2].replace(/&amp;/g, "&").trim()]);
+      [...band(home, id).matchAll(/Step (\d)<\/span> ([^<]+)</g)].map((m) => [m[1], unesc(m[2]).trim()]);
     expect(visible("home-morning")).toEqual([
-      ["1", "CHIAREL Essence™"],
-      ["2", "Terra Radiance Crème™"],
+      ["1", "Clarity Essence"],
+      ["2", "Clarity Day Crème"],
     ]);
     expect(visible("home-evening")).toEqual([
-      ["1", "CHIAREL Essence™"],
-      ["2", "Recovery Masque™"],
-      ["3", "N1 Neck & Décolleté Renewal Emulsion™"],
+      ["1", "Clarity Essence"],
+      ["2", "Clarity Eye Contour Concentrate"],
+      ["3", "Clarity Night Crème"],
+      ["4", "Clarity Neck & Décolleté Crème"],
     ]);
     const howTo = pageSrc.slice(pageSrc.indexOf("const amRitualHowTo"), pageSrc.indexOf("export default function Home"));
-    for (const [, name] of [...visible("home-morning"), ...visible("home-evening")]) {
-      expect(howTo).toContain(`name: "${name}"`);
-    }
-    expect(howTo).not.toMatch(/Eye/);
+    const am = howTo.slice(0, howTo.indexOf("const pmRitualHowTo"));
+    const pm = howTo.slice(howTo.indexOf("const pmRitualHowTo"));
+    const names = (src: string) => [...src.matchAll(/name: "([^"]+)", text:/g)].map((m) => m[1]);
+    expect(names(am)).toEqual(visible("home-morning").map(([, n]) => n));
+    expect(names(pm)).toEqual(visible("home-evening").map(([, n]) => n));
   });
 });
 
-describe("eye contour stays optional", () => {
-  it("is not a launchRitual product; full variant also places it between Masque and N1", () => {
-    expect(launchRitualProducts.map((p) => p.slug)).not.toContain("eye-contour-concentrate");
-    expect(getProduct("eye-contour-concentrate")?.launchStatus).toBe("launch");
+describe("full ritual band", () => {
+  it("renders the evening route in order with the owner copy", () => {
     const full = renderToStaticMarkup(
-      <RoutineBand id="evening" time="Evening" title="x" dark steps={[{ n: 1, label: "a" }]} slugs={eveningRoute} withEye />
+      <RoutineBand
+        id="evening"
+        time="Evening"
+        title="x"
+        dark
+        steps={[
+          { n: 1, label: "Clarity Essence", slug: "chiarel-essence" },
+          { n: 2, label: "Clarity Eye Contour Concentrate", slug: "eye-contour-concentrate", purpose: "For puffiness.", note: "Made for the evening, and it may be used morning or night." },
+        ]}
+        slugs={eveningRoute}
+      />
     );
-    expect(full).toContain(EYE_LABEL);
-    const heads = [...full.matchAll(/<h3[^>]*>([^<]+)</g)].map((m) => m[1].replace(/&amp;/g, "&"));
-    expect(heads).toEqual([
-      "CHIAREL Essence™",
-      "Recovery Masque™",
-      "CHIAREL Eye Treatment™",
-      "N1 Neck & Décolleté Renewal Emulsion™",
-    ]);
+    expect(full).not.toContain("Optional");
+    const heads = [...full.matchAll(/<h3[^>]*>([^<]+)</g)].map((m) => unesc(m[1]));
+    expect(heads[0]).toBe("Clarity Essence");
+    expect(heads[1]).toBe("Clarity Eye Contour Concentrate");
+    expect(heads).toHaveLength(4);
+    expect(full).toContain("Made for the evening, and it may be used morning or night.");
   });
 
-  it("build-your-ritual offers Eye as unselected-by-default optional", () => {
+  it("build-your-ritual treats Eye as a normal step, not an optional add-on", () => {
     const src = readFileSync("app/build-your-ritual/page.tsx", "utf8");
-    expect(src).toContain('getProduct("eye-contour-concentrate")');
-    expect(src).toContain("!optionalSlugs.has(p.slug)");
+    expect(src).toContain('"eye-contour-concentrate"');
+    expect(src).not.toMatch(/optional|Optional/);
   });
 });

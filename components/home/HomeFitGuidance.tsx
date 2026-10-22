@@ -4,23 +4,23 @@ import Reveal from "@/components/Reveal";
 const fitGuidance = [
   {
     concern: "Barrier feels reactive, tight, or easily irritated",
-    fit: "Cellular Cleanser™ + Terra Radiance Crème™",
-    why: "A gentle cleanse and a Ceramide NP crème, formulated to support barrier function rather than strip it.",
+    fit: "Clarity Day Crème",
+    why: "Ceramides, cholesterol and squalane, formulated to help skin feel comfortable and hydrated through the working day.",
   },
   {
     concern: "Skin looks dull, uneven, or has lost visible firmness",
-    fit: "CHIAREL Essence™",
-    why: "Built around a peptide complex with Bifida Ferment Lysate and Niacinamide, the concentrated treatment layer of the ritual.",
+    fit: "Clarity Essence",
+    why: "Four peptides with niacinamide and hyaluronic acid, the concentrated layer of the ritual.",
   },
   {
     concern: "Neck, jawline, and décolleté show dryness or crepey-looking texture",
-    fit: "N1 Neck & Décolleté Renewal Emulsion™",
-    why: "Formulated specifically for the skin below the jawline, not repurposed face cream.",
+    fit: "Clarity Neck & Décolleté Crème",
+    why: "Copper peptide with ceramides and squalane, formulated specifically for the skin below the jawline.",
   },
   {
-    concern: "Wants overnight recovery without a heavy routine",
-    fit: "Recovery Masque™",
-    why: "L-Ornithine and Panthenol formulated as the ritual's closing facial gesture, before N1.",
+    concern: "Shows texture after a long day",
+    fit: "Clarity Night Crème",
+    why: "Bakuchiol, a plant-derived alternative to retinol, with peptides and niacinamide, to smooth the look of texture overnight.",
   },
 ];
 

@@ -6,18 +6,10 @@ import { NEUTRAL_FRAME_BG } from "@/lib/color";
 
 export const metadata = { title: "Shop", alternates: { canonical: "/shop" } };
 
-// Category-grouped, launch-led Shop page — restructured per
-// CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §8. Every current product
-// remains listed; nothing is hidden or unpublished, only regrouped for
-// purchase-path priority.
+// The five launch products, grouped by the moment of the day they belong to
+// (the same order as The Ritual: lightest texture first).
 const dayRitual = ["chiarel-essence", "terra-radiance-creme"];
-const nightRitual = ["chiarel-essence", "recovery-masque", "n1-neck-decollete"];
-// Confirmed, priced launch formula (7A per CHIAREL_Launch_Formulas_Register.pdf) —
-// not part of the four-step AM/PM sequence, but a real launch product, so it gets
-// its own section rather than sitting with the unpriced "coming soon" items below.
-const launchCollection = ["eye-contour-concentrate"];
-const moreFromTheHouse = ["cellular-cleanser", "cellular-mist", "lip-concentrate"];
-const existingSets = ["the-founding-pair", "the-ritual-set"];
+const nightRitual = ["chiarel-essence", "eye-contour-concentrate", "recovery-masque", "n1-neck-decollete"];
 
 function ProductGrid({ slugs }: { slugs: string[] }) {
   const items = slugs.map((slug) => getProduct(slug)).filter((p) => p !== undefined);
@@ -50,7 +42,7 @@ export default function ShopPage() {
         </div>
         <div>
           <p className="text-[11px] uppercase tracking-[0.18em] text-ochre">
-            The Neck &amp; Décolleté Treatment
+            Neck &amp; Décolleté Crème
           </p>
           <h2 className="mt-2 font-serif text-3xl leading-snug">{n1.name}</h2>
           <p className="mt-2 max-w-md text-sm leading-relaxed text-ink/70">{n1.blurb}</p>
@@ -58,44 +50,21 @@ export default function ShopPage() {
             href={`/shop/${n1.slug}`}
             className="btn-press mt-6 inline-block border border-ink px-8 py-3 text-[12px] uppercase tracking-[0.25em] transition hover:border-ochre hover:text-ochre"
           >
-            Discover N1
+            Discover the Crème
           </Link>
         </div>
       </section>
 
       <section className="mt-16">
-        <h2 className="font-serif text-2xl">The Day Ritual</h2>
+        <h2 className="font-serif text-2xl">The Morning Ritual</h2>
         <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/65">Morning</p>
         <ProductGrid slugs={dayRitual} />
       </section>
 
       <section className="mt-16 border-t border-ink/10 pt-12">
-        <h2 className="font-serif text-2xl">The Night Ritual</h2>
+        <h2 className="font-serif text-2xl">The Evening Ritual</h2>
         <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/65">Evening</p>
         <ProductGrid slugs={nightRitual} />
-      </section>
-
-      <section className="mt-16 border-t border-ink/10 pt-12">
-        <h2 className="font-serif text-2xl">The Launch Collection</h2>
-        <p className="mt-1 max-w-xl text-[13px] leading-relaxed text-ink/65">
-          Confirmed for this launch alongside the four-product ritual —
-          available now.
-        </p>
-        <ProductGrid slugs={launchCollection} />
-      </section>
-
-      <section className="mt-16 border-t border-ink/10 pt-12">
-        <h2 className="font-serif text-2xl">More from the House</h2>
-        <p className="mt-1 max-w-xl text-[13px] leading-relaxed text-ink/65">
-          Additional CHIAREL products, available now, outside the core
-          launch ritual.
-        </p>
-        <ProductGrid slugs={moreFromTheHouse} />
-      </section>
-
-      <section className="mt-16 border-t border-ink/10 pt-12">
-        <h2 className="font-serif text-2xl">Existing Sets</h2>
-        <ProductGrid slugs={existingSets} />
       </section>
     </div>
   );

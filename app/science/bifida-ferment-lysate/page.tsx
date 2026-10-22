@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Bifida Ferment Lysate, Explained",
   description:
-    "What Bifida Ferment Lysate is, how it supports barrier proteins and microbiome balance, and how CHIAREL formulates with it. A transparent, third-person explainer.",
+    "What Bifida Ferment Lysate is and where CHIAREL uses it: Clarity Essence, Clarity Day Crème, Clarity Neck & Décolleté Crème and Clarity Eye Contour Concentrate. A transparent, third-person explainer.",
   alternates: { canonical: "/science/bifida-ferment-lysate" },
 };
 
@@ -15,11 +15,15 @@ const faqs = [
   },
   {
     q: "What does a postbiotic do for skin?",
-    a: "Postbiotics are studied for their role in supporting the skin's surface microbiome balance and, in the case of this lysate, for upregulating barrier proteins such as filaggrin, involucrin, and tight-junction components.",
+    a: "Postbiotics are a studied ingredient category in skincare. In our formulas the lysate sits alongside ceramides, niacinamide and hyaluronic acid, which are chosen for the look and feel of a comfortable, even surface.",
   },
   {
     q: "Is this different from a probiotic?",
     a: "Yes. A probiotic is a live microorganism; a postbiotic like a ferment lysate is the (non-living) byproduct of fermentation — often better suited to shelf-stable formulation.",
+  },
+  {
+    q: "Which CHIAREL products contain it?",
+    a: "Clarity Essence, Clarity Day Crème, Clarity Neck & Décolleté Crème and Clarity Eye Contour Concentrate. It is not in Clarity Night Crème.",
   },
 ];
 
@@ -48,9 +52,8 @@ export default function BifidaPage() {
         Bifida Ferment Lysate, Explained
       </h1>
       <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/75">
-        A postbiotic with a specific, studied role: supporting the proteins
-        that hold the skin barrier together. Explained here in the third
-        person, as an educational reference.
+        A postbiotic ingredient, explained here in the third person as an
+        educational reference.
       </p>
 
       <section className="mt-12 space-y-10">
@@ -66,9 +69,8 @@ export default function BifidaPage() {
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-2xl">How it works</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
-            Studied for its role in upregulating barrier proteins —
-            filaggrin, involucrin, and tight-junction components — and
-            modulating inflammatory signaling associated with reactivity.
+            A studied ingredient category, used here for the look and feel of a
+            comfortable surface.
           </p>
           <p className="mt-3 text-[12px] text-ink/65">
             Source:{" "}
@@ -85,21 +87,20 @@ export default function BifidaPage() {
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-2xl">Associated outcomes</h2>
           <ul className="mt-2 max-w-xl list-disc space-y-1 pl-5 text-sm leading-relaxed text-ink/70">
-            <li>Stronger, more cohesive barrier</li>
-            <li>Reduced sensitivity and reactivity</li>
-            <li>Improved moisture retention and recovery</li>
+            <li>Skin that feels comfortable and balanced</li>
+            <li>The look of a healthy, even surface</li>
           </ul>
         </div>
         <div className="border-l-2 border-ochre pl-6">
           <h2 className="font-serif text-2xl">How CHIAREL formulates with it</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
-            Delivered inside our occlusive vehicle, which is designed to
-            protect the newly reinforced barrier while the postbiotic works
-            underneath. See{" "}
-            <Link href="/science/barrier-resilience" className="border-b border-ochre text-ochre">
-              Barrier Resilience
+            Found in Clarity Essence, Clarity Day Crème, Clarity Neck &amp;
+            Décolleté Crème and Clarity Eye Contour Concentrate, alongside
+            the ingredients that define each one. See{" "}
+            <Link href="/science" className="border-b border-ochre text-ochre">
+              The Science
             </Link>{" "}
-            for the full mechanism.
+            for what each formulation answers.
           </p>
         </div>
       </section>
@@ -115,8 +116,8 @@ export default function BifidaPage() {
         <Link href="/science/l-ornithine" className="border-b border-ochre pb-0.5 text-ochre">
           L-Ornithine, Explained →
         </Link>
-        <Link href="/shop/recovery-masque" className="border-b border-ink/30 pb-0.5 text-ink/60">
-          Shop Recovery Masque™
+        <Link href="/shop/chiarel-essence" className="border-b border-ink/30 pb-0.5 text-ink/60">
+          Shop Clarity Essence
         </Link>
       </div>
     </div>

@@ -1,11 +1,8 @@
-import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import { RoutineBand, morningRoute, eveningRoute } from "@/components/RoutineBand";
 
 // The visible Step lists below must stay in sync with amRitualHowTo /
 // pmRitualHowTo in app/page.tsx (HowTo JSON-LD mirrors this copy exactly).
-// The optional Eye step in the Evening band is deliberately NOT a numbered
-// step and is not in the JSON-LD.
 export default function HomeRitual() {
   return (
     <section id="four-product-ritual" className="bg-ivory">
@@ -13,8 +10,7 @@ export default function HomeRitual() {
         <Reveal>
           <h2 className="font-serif text-3xl">The CHIAREL Ritual</h2>
           <p className="mt-4 max-w-2xl text-sm text-ink/70">
-            A focused morning and evening practice for hydration, comfort,
-            renewal, and the skin below the jawline.
+            Five products, two moments in the day: prepare for it, then let it go.
           </p>
         </Reveal>
       </div>
@@ -24,8 +20,8 @@ export default function HomeRitual() {
         time="Morning"
         title="The Morning Ritual"
         steps={[
-          { n: 1, label: "CHIAREL Essence™" },
-          { n: 2, label: "Terra Radiance Crème™" },
+          { n: 1, label: "Clarity Essence" },
+          { n: 2, label: "Clarity Day Crème" },
         ]}
         slugs={morningRoute}
       />
@@ -35,23 +31,15 @@ export default function HomeRitual() {
         time="Evening"
         title="The Evening Ritual"
         dark
-        withEye
         steps={[
-          { n: 1, label: "CHIAREL Essence™" },
-          { n: 2, label: "Recovery Masque™" },
-          { n: 3, label: "N1 Neck & Décolleté Renewal Emulsion™" },
+          { n: 1, label: "Clarity Essence" },
+          { n: 2, label: "Clarity Eye Contour Concentrate" },
+          { n: 3, label: "Clarity Night Crème" },
+          { n: 4, label: "Clarity Neck & Décolleté Crème" },
         ]}
         slugs={eveningRoute}
       />
-      <div className="section-x py-8 md:py-10">
-        <p className="max-w-2xl text-[13px] leading-relaxed text-ink/65">
-          Cellular Cleanser™ and Cellular Mist™ remain available as{" "}
-          <Link href="/ritual#optional-preparation" className="border-b border-ochre text-ochre">
-            optional preparation
-          </Link>{" "}
-          ahead of either routine.
-        </p>
-      </div>
+      <div className="section-x py-6 md:py-8" />
     </section>
   );
 }

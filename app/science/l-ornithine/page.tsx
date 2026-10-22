@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "L-Ornithine, Explained",
   description:
-    "What L-Ornithine is, its role in the skin's Natural Moisturizing Factor, and how CHIAREL formulates with it. A transparent, third-person explainer.",
+    "What L-Ornithine is, its role in the skin's Natural Moisturizing Factor, and where CHIAREL uses it: Clarity Night Crème. A transparent, third-person explainer.",
   alternates: { canonical: "/science/l-ornithine" },
 };
 
@@ -15,11 +15,11 @@ const faqs = [
   },
   {
     q: "What does it do for skin?",
-    a: "It is linked to the urea cycle and polyamine pathways involved in barrier maintenance, and is understood to contribute to hydration-feel, softness, and texture as part of the skin's own moisture-regulation system.",
+    a: "It is linked to the urea cycle and polyamine pathways involved in barrier maintenance, and is understood to contribute to hydration-feel and softness as part of the skin's own moisture-regulation system.",
   },
   {
-    q: "Why pair an amino acid with an extremolyte and a postbiotic?",
-    a: "Each addresses a different layer of barrier and hydration support — cellular water organization, barrier-protein expression, and NMF-level nourishment. CHIAREL formulates all three inside one delivery vehicle rather than relying on a single mechanism.",
+    q: "Which CHIAREL product contains it?",
+    a: "Clarity Night Crème, alongside bakuchiol, peptides and niacinamide, to smooth the look of texture overnight.",
   },
 ];
 
@@ -83,19 +83,17 @@ export default function LOrnithinePage() {
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-2xl">Associated outcomes</h2>
           <ul className="mt-2 max-w-xl list-disc space-y-1 pl-5 text-sm leading-relaxed text-ink/70">
-            <li>Enhanced hydration feel and softness</li>
-            <li>Support for barrier integrity</li>
-            <li>Contribution to smoother texture and resilience</li>
+            <li>Hydration feel and softness</li>
+            <li>The look of smoother texture</li>
           </ul>
         </div>
         <div className="border-l-2 border-ochre pl-6">
           <h2 className="font-serif text-2xl">How CHIAREL formulates with it</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
-            Positioned as the completing layer of the hydration–barrier–repair
-            cascade, delivered inside the same occlusive vehicle as Ectoine
-            and Bifida Ferment Lysate. See the{" "}
-            <Link href="/science/barrier-resilience" className="border-b border-ochre text-ochre">
-              full synergy
+            Found in Clarity Night Crème, alongside bakuchiol, peptides and
+            niacinamide, to smooth the look of texture overnight. See{" "}
+            <Link href="/science" className="border-b border-ochre text-ochre">
+              The Science
             </Link>
             .
           </p>
@@ -109,11 +107,11 @@ export default function LOrnithinePage() {
       </p>
 
       <div className="mt-8 flex flex-wrap gap-6 border-t border-ink/10 pt-8 text-[12px] uppercase tracking-[0.16em]">
-        <Link href="/science/synergy" className="border-b border-ochre pb-0.5 text-ochre">
-          The Synergy →
+        <Link href="/science/bifida-ferment-lysate" className="border-b border-ochre pb-0.5 text-ochre">
+          Bifida Ferment Lysate, Explained →
         </Link>
-        <Link href="/shop/chiarel-essence" className="border-b border-ink/30 pb-0.5 text-ink/60">
-          Shop CHIAREL Essence™
+        <Link href="/shop/recovery-masque" className="border-b border-ink/30 pb-0.5 text-ink/60">
+          Shop Clarity Night Crème
         </Link>
       </div>
     </div>

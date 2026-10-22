@@ -17,7 +17,7 @@ describe("content QA polish", () => {
   it("shop does not label purchasable products Coming Soon", () => {
     const src = read("app/shop/page.tsx");
     expect(src).not.toMatch(/Coming Soon/);
-    expect(src).toContain("More from the House");
+    expect(src).toContain("The Evening Ritual");
   });
 
   it("account page names no third-party platform and shows no fake preview", () => {
@@ -27,11 +27,11 @@ describe("content QA polish", () => {
     expect(src).toContain("index: false");
   });
 
-  it("sets use the brand hero as og:image, and the file exists", () => {
-    for (const slug of ["the-founding-pair", "the-ritual-set"]) {
-      const p = (products as { slug: string; og?: string }[]).find((x) => x.slug === slug);
-      expect(p?.og).toBe("/assets/editorial/hero-shore-duo.jpg");
-      expect(() => readFileSync(join(process.cwd(), "public", p!.og!))).not.toThrow();
-    }
+  it("the catalog is exactly the five launch products, in ritual order", () => {
+    const list = products as { slug: string; ritualOrder: number | null }[];
+    expect(list.map((p) => p.slug).sort()).toEqual(
+      ["chiarel-essence", "eye-contour-concentrate", "n1-neck-decollete", "recovery-masque", "terra-radiance-creme"],
+    );
+    expect(list.every((p) => p.ritualOrder !== null)).toBe(true);
   });
 });

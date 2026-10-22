@@ -11,7 +11,7 @@ import HomeProvenance from "@/components/home/HomeProvenance";
 import HomeProof from "@/components/home/HomeProof";
 import HomeFormulationRecord from "@/components/home/HomeFormulationRecord";
 import HomeFaq from "@/components/home/HomeFaq";
-import { HomeBeyondRitual, HomeFinalCta, HomePhilosophy } from "@/components/home/HomeClosing";
+import { HomeFinalCta, HomePhilosophy } from "@/components/home/HomeClosing";
 import {
   faqJsonLd,
   offerCatalogJsonLd,
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: `${SITE_NAME} — The Ritual, Formulated in Isola del Liri`,
     description:
-      "A focused morning and evening skincare ritual built around CHIAREL Essence™, made fresh to order in Isola del Liri, Italy. Key ingredients named across our product pages.",
+      "A five-product morning and evening skincare ritual built around Clarity Essence, made fresh to order in Isola del Liri, Italy. Key ingredients named across our product pages.",
     url: SITE_URL,
     images: [{ url: "/assets/editorial/og-n1-hands.jpg", width: 1200, height: 630 }],
     publishedTime: HOMEPAGE_PUBLISHED,
@@ -62,12 +62,12 @@ const faqs = [
   {
     question: "What is CHIAREL made of?",
     answer:
-      "Each product page names its key ingredients. CHIAREL Essence™ is built around a peptide complex (Acetyl Hexapeptide-8, Palmitoyl Tripeptide-1, Palmitoyl Tetrapeptide-7) with Bifida Ferment Lysate and Niacinamide; Terra Radiance Crème™ carries Ceramide NP and Niacinamide; Recovery Masque™ is built around L-Ornithine and Panthenol.",
+      "Each product page names its key ingredients. Clarity Essence pairs peptides with niacinamide and hyaluronic acid; Clarity Day Crème carries ceramides, cholesterol and squalane; Clarity Night Crème is built around bakuchiol, peptides and niacinamide; Clarity Neck & Décolleté Crème pairs copper peptide with ceramides and squalane; Clarity Eye Contour Concentrate combines caffeine, peptides and hyaluronic acid.",
   },
   {
     question: "Who formulates CHIAREL?",
     answer:
-      "CHIAREL is formulated by Grazia Savoriti, a pharmacist specializing in cosmetic and nutraceutical research. She develops every formulation directly, from CHIAREL Essence™'s peptide complex to Terra Radiance Crème™'s barrier-support blend. Each batch is then produced fresh, to order, in Isola del Liri, Italy — never manufactured in bulk ahead of demand. Savoriti also reviews the published, peer-reviewed research behind each active ingredient before it's formulated into a product.",
+      "CHIAREL is formulated by Grazia Savoriti, a pharmacist specializing in cosmetic and nutraceutical research. She develops every formulation directly, from Clarity Essence's peptides to Clarity Day Crème's ceramides. Each batch is then produced fresh, to order, in Isola del Liri, Italy — never manufactured in bulk ahead of demand. Savoriti also reviews the published, peer-reviewed research behind each active ingredient before it's formulated into a product.",
   },
   {
     question: "Where can I buy CHIAREL?",
@@ -82,12 +82,12 @@ const faqs = [
   {
     question: "Where is CHIAREL made?",
     answer:
-      "CHIAREL formulas are produced in Isola del Liri, Italy, with manufacturing partner Natural You Srl. Formulation uses water drawn where the Liri meets the Fibreno — a river fed entirely by limestone karst springs, with no surface tributaries of its own. That confluence of newly filtered spring water gives The Cascata Complex™ its name. Formulation happens on-site, so every CHIAREL batch is produced fresh, to order — never held in standing inventory.",
+      "CHIAREL formulas are produced in Isola del Liri, Italy, with manufacturing partner Natural You Srl. Formulation uses water drawn where the Liri meets the Fibreno — a river fed entirely by limestone karst springs, with no surface tributaries of its own. Formulation happens on-site, so every CHIAREL batch is produced fresh, to order — never held in standing inventory.",
   },
   {
-    question: "What is the CHIAREL Four-Product Ritual?",
+    question: "What is the CHIAREL ritual?",
     answer:
-      "A focused morning and evening practice: mornings pair CHIAREL Essence™ with Terra Radiance Crème™; evenings pair CHIAREL Essence™ with Recovery Masque™ and N1 Neck & Décolleté Renewal Emulsion™. Cellular Cleanser™ and Cellular Mist™ remain available as optional preparation steps, and CHIAREL Lip Concentrate™ remains available beyond the core ritual.",
+      "Five products, two moments in the day. Mornings pair Clarity Essence with Clarity Day Crème, followed by SPF. Evenings run lightest texture first: Clarity Essence, Clarity Eye Contour Concentrate (made for the evening, and it may be used morning or night), Clarity Night Crème, then Clarity Neck & Décolleté Crème.",
   },
 ];
 
@@ -97,20 +97,21 @@ const faqs = [
 const amRitualHowTo = howToJsonLd({
   name: "CHIAREL Morning Ritual",
   description:
-    "The CHIAREL morning routine: CHIAREL Essence™ followed by Terra Radiance Crème™.",
+    "The CHIAREL morning routine: Clarity Essence followed by Clarity Day Crème.",
   steps: [
-    { name: "CHIAREL Essence™", text: "Apply CHIAREL Essence™ as the treatment serum step." },
-    { name: "Terra Radiance Crème™", text: "Follow with Terra Radiance Crème™ for daytime barrier support." },
+    { name: "Clarity Essence", text: "Apply Clarity Essence, for fine lines and firmness." },
+    { name: "Clarity Day Crème", text: "Follow with Clarity Day Crème, for dry skin under daily stress, then SPF." },
   ],
 });
 const pmRitualHowTo = howToJsonLd({
   name: "CHIAREL Evening Ritual",
   description:
-    "The CHIAREL evening routine: CHIAREL Essence™, then Recovery Masque™, then N1 Neck & Décolleté Renewal Emulsion™.",
+    "The CHIAREL evening routine, lightest texture first: Clarity Essence, Clarity Eye Contour Concentrate, Clarity Night Crème, then Clarity Neck & Décolleté Crème.",
   steps: [
-    { name: "CHIAREL Essence™", text: "Apply CHIAREL Essence™ as the treatment serum step." },
-    { name: "Recovery Masque™", text: "Follow with Recovery Masque™ as the evening face-recovery step, before N1." },
-    { name: "N1 Neck & Décolleté Renewal Emulsion™", text: "Finish with N1 Neck & Décolleté Renewal Emulsion™ on the neck and décolleté." },
+    { name: "Clarity Essence", text: "Apply Clarity Essence." },
+    { name: "Clarity Eye Contour Concentrate", text: "Follow with Clarity Eye Contour Concentrate, for puffiness, dark circles and fine lines. Made for the evening, and it may be used morning or night." },
+    { name: "Clarity Night Crème", text: "Follow with Clarity Night Crème, for smoother-looking texture." },
+    { name: "Clarity Neck & Décolleté Crème", text: "Finish with Clarity Neck & Décolleté Crème, for crepey-looking skin on the neck and chest." },
   ],
 });
 
@@ -130,7 +131,7 @@ export default function Home() {
               url: SITE_URL,
               name: "CHIAREL™ — The Ritual, Formulated in Isola del Liri",
               description:
-                "CHIAREL's focused morning and evening ritual, built around CHIAREL Essence and including N1 Neck & Décolleté Renewal Emulsion. Skincare formulated in Isola del Liri, Italy, with key ingredients named across our product pages.",
+                "CHIAREL's focused morning and evening ritual, five products, two moments in the day, built around Clarity Essence. Skincare formulated in Isola del Liri, Italy, with key ingredients named across our product pages.",
             })
           ),
         }}
@@ -165,12 +166,12 @@ export default function Home() {
       <HomeRitual />
       <EditorialFeature
         src="/assets/products/terra-radiance-creme-editorial.jpg"
-        alt="A woman holding Terra Radiance Crème against the Capri coastline"
+        alt="A woman holding Clarity Day Crème against the Capri coastline"
         kicker="The Icon Product"
         headline="The daily crème of the morning ritual."
-        body="Terra Radiance Crème: the moisturising step of the AM ritual, finished in Italian light."
+        body="Clarity Day Crème: the moisturising step of the AM ritual, finished in Italian light."
         href="/shop/terra-radiance-creme"
-        cta="Discover Terra Radiance Crème"
+        cta="Discover Clarity Day Crème"
       />
       <HomeFitGuidance />
       <HomeN1Feature />
@@ -178,7 +179,6 @@ export default function Home() {
       <HomeProof />
       <HomePhilosophy />
       <HomeFormulationRecord />
-      <HomeBeyondRitual />
       <HomeFaq faqs={faqs} />
       <HomeFinalCta />
       <div className="mx-auto max-w-xl px-6 pb-10">

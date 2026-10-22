@@ -3,8 +3,8 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import { getProductOrThrow, productImageAlt } from "@/lib/products";
 
-// N1 as the featured new product (merges the former N1 hero copy, the
-// "what N1 is designed for" list and the "below the jawline" explainer).
+// Neck & Décolleté Crème as the featured new product (merges the former hero copy, the
+// "what it is designed for" list and the "below the jawline" explainer).
 // Cosmetic, non-medical language only.
 // DRAFT — OWNER / REGULATORY APPROVAL REQUIRED (unchanged from prior copy).
 const concerns = [
@@ -40,11 +40,11 @@ export default function HomeN1Feature() {
             Most routines stop at the jawline. The neck and décolleté are
             treated, at best, as an afterthought of whatever face cream is
             left on the fingertips — not formulated for on their own terms.
-            N1 is CHIAREL&rsquo;s answer: a dedicated nightly step for the
-            skin most routines forget, finished with a delicate CHIAREL
-            accord.
+            Clarity Neck &amp; Décolleté Crème is CHIAREL&rsquo;s answer: a
+            dedicated evening step for the skin most routines forget,
+            finished with a delicate CHIAREL accord.
           </p>
-          <h3 className="mt-8 font-serif text-xl">What N1 Is Designed For</h3>
+          <h3 className="mt-8 font-serif text-xl">What It Is Designed For</h3>
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">
             {concerns.map((concern) => (
               <li
@@ -59,7 +59,7 @@ export default function HomeN1Feature() {
             href="/shop/n1-neck-decollete"
             className="btn-press mt-8 inline-block border border-ink px-8 py-3 text-[12px] uppercase tracking-[0.3em] text-ink transition hover:border-ochre hover:text-ochre"
           >
-            Discover N1
+            Discover the Crème
           </Link>
         </Reveal>
       </div>

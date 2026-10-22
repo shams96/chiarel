@@ -4,26 +4,26 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "CHIAREL Ritual Guide: Day vs. Night Texture Explained",
   description:
-    "Learn the official CHIAREL daily ritual. Discover why Terra Radiance Crème feels light for day and Recovery Masque feels richer at night — intentional barrier support, formulated by design.",
+    "Learn the CHIAREL daily ritual. Discover why Clarity Day Crème feels light for day and Clarity Night Crème feels richer at night — intentional barrier support, formulated by design.",
   alternates: { canonical: "/journal/chiarel-ritual-guide" },
 };
 
 const faqs = [
   {
     q: "Why does my CHIAREL night product feel heavier than the day crème?",
-    a: "Recovery Masque™ is formulated with a richer, more occlusive profile to support overnight barrier recovery. The soft presence or cushion you feel is the intentional lipid film reducing water loss and holding actives against the skin while you rest. Terra Radiance Crème™ is designed lighter for daytime wearability under sunscreen and makeup.",
+    a: "Clarity Night Crème is formulated with a richer, more occlusive profile to support overnight barrier recovery. The soft presence or cushion you feel is the intentional lipid film reducing water loss and holding actives against the skin while you rest. Clarity Day Crème is designed lighter for daytime wearability under sunscreen and makeup.",
   },
   {
-    q: "Is the richer texture of Recovery Masque™ normal?",
+    q: "Is the richer texture of Clarity Night Crème normal?",
     a: "Yes. The presence is a deliberate feature of the overnight recovery formula, not a sign of excess product or poor absorption. Warm a small amount between fingertips and apply to damp skin for the smoothest integration.",
   },
   {
     q: "Can I use CHIAREL products around the eyes?",
-    a: "Yes — CHIAREL Eye Treatment™ is formulated specifically for the eye contour and is applied nightly as part of the evening routine. Avoid layering the day or night moisturizer over it at the lash line.",
+    a: "Yes — Clarity Eye Contour Concentrate is formulated specifically for the eye contour. It is made for the evening, and it may be used morning or night. Avoid layering the day or night crème over it at the lash line.",
   },
   {
-    q: "What is the correct order of the CHIAREL Four-Product Ritual?",
-    a: "Mornings: CHIAREL Essence™ → Terra Radiance Crème™. Evenings: CHIAREL Essence™ → Recovery Masque™ → N1 Neck & Décolleté Renewal Emulsion™. Cellular Cleanser™ and Cellular Mist™ remain available as an optional cleanse-and-tone step ahead of either routine.",
+    q: "What is the correct order of the CHIAREL ritual?",
+    a: "Mornings: Clarity Essence → Clarity Day Crème, then SPF. Evenings: Clarity Essence → Clarity Eye Contour Concentrate → Clarity Night Crème → Clarity Neck & Décolleté Crème. Order follows the texture, lightest first.",
   },
 ];
 
@@ -49,56 +49,48 @@ export default function RitualGuidePage() {
         ← Journal
       </Link>
       <h1 className="mt-2 font-serif text-4xl leading-tight">
-        How to Use the CHIAREL Four-Product Ritual
+        How to Use the CHIAREL Ritual
       </h1>
       <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink/75">
-        The CHIAREL Four-Product Ritual is a focused morning and evening
-        practice for hydration, comfort, renewal, and the skin below the
-        jawline. Each step prepares the skin for the next.
+        The CHIAREL ritual is five products across two moments in the day:
+        prepare for it, then let it go. Order follows the texture, lightest
+        first.
       </p>
 
       <section className="mt-12 grid gap-10 sm:grid-cols-2">
         <div>
           <h3 className="font-serif text-lg">Morning ritual</h3>
           <ol className="mt-3 space-y-2 text-sm text-ink/80">
-            <li>1. CHIAREL Essence™ — Signature Serum of the House</li>
-            <li>2. Terra Radiance Crème™ — daytime radiance treatment</li>
+            <li>1. Clarity Essence</li>
+            <li>2. Clarity Day Crème — follow with SPF</li>
           </ol>
         </div>
         <div>
           <h3 className="font-serif text-lg">Evening ritual</h3>
           <ol className="mt-3 space-y-2 text-sm text-ink/80">
-            <li>1. CHIAREL Essence™</li>
-            <li>2. Recovery Masque™ — overnight recovery treatment</li>
-            <li>3. N1 Neck &amp; Décolleté Renewal Emulsion™ — neck and décolleté renewal</li>
+            <li>1. Clarity Essence</li>
+            <li>2. Clarity Eye Contour Concentrate — may be used morning or night</li>
+            <li>3. Clarity Night Crème</li>
+            <li>4. Clarity Neck &amp; Décolleté Crème</li>
           </ol>
         </div>
       </section>
 
-      <section className="mt-12 border-t border-ink/10 pt-10">
-        <h3 className="font-serif text-lg">Optional preparation</h3>
-        <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/75">
-          Cellular Cleanser™ and Cellular Mist™ remain fully available as an
-          optional cleanse-and-tone step ahead of either routine above — not
-          part of the core four-product ritual, never discontinued.
-        </p>
-      </section>
-
       <section className="mt-14 border-t border-ink/10 pt-10">
         <h2 className="font-serif text-2xl">
-          Why Day Crème and Night Masque Feel Different
+          Why Day Crème and Night Crème Feel Different
         </h2>
         <div className="mt-5 space-y-5 text-sm leading-relaxed text-ink/75">
           <p>
             <strong className="text-ink">
-              Terra Radiance Crème™ (Day):
+              Clarity Day Crème (Day):
             </strong>{" "}
             formulated as a lighter daily treatment. It supports radiance and
             the barrier while leaving a soft, wearable finish that layers
             comfortably under sunscreen and makeup.
           </p>
           <p>
-            <strong className="text-ink">Recovery Masque™ (Night):</strong>{" "}
+            <strong className="text-ink">Clarity Night Crème (Night):</strong>{" "}
             an overnight recovery treatment with a richer, more occlusive
             character. The cushion or subtle sheen you feel is the lipid film
             at work — helping reduce overnight transepidermal water loss and
@@ -107,7 +99,7 @@ export default function RitualGuidePage() {
           <p>
             This difference is by design, not inconsistency. Day formulas
             prioritize wearability; night formulas prioritize sustained
-            barrier support. The richer texture of Recovery Masque™ is
+            barrier support. The richer texture of Clarity Night Crème is
             intentional formulation, not residue.
           </p>
         </div>
@@ -115,12 +107,12 @@ export default function RitualGuidePage() {
 
       <section className="mt-14 border-t border-ink/10 pt-10">
         <h2 className="font-serif text-2xl">
-          How to Apply Recovery Masque™ for Best Results
+          How to Apply Clarity Night Crème for Best Results
         </h2>
         <ul className="mt-5 space-y-2 text-sm text-ink/75">
           <li>· Use a small amount — approximately lentil-sized for the full face</li>
           <li>· Warm thoroughly between fingertips to improve spread</li>
-          <li>· Press and smooth onto slightly damp skin after CHIAREL Essence™</li>
+          <li>· Press and smooth onto slightly damp skin after Clarity Essence</li>
           <li>· Allow 15–30 minutes for the film to integrate</li>
           <li>· Wake to skin that feels supported and recovered</li>
         </ul>
@@ -129,9 +121,10 @@ export default function RitualGuidePage() {
       <section className="mt-14 border-t border-ink/10 pt-10">
         <h2 className="font-serif text-2xl">Eye Area Guidance</h2>
         <p className="mt-4 text-sm leading-relaxed text-ink/75">
-          CHIAREL Eye Treatment™ is formulated for the delicate eye
-          area and is applied nightly, after Recovery Masque™, with a light
-          touch around the orbital bone — avoid the immediate lash line.
+          Clarity Eye Contour Concentrate is formulated for the delicate eye
+          area. It sits in the evening ritual, right after Clarity Essence, and
+          may be used morning or night. Use a light touch around the orbital
+          bone — avoid the immediate lash line.
         </p>
       </section>
 
@@ -154,25 +147,25 @@ export default function RitualGuidePage() {
           href="/shop/terra-radiance-creme"
           className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
         >
-          Shop Terra Radiance Crème™
+          Shop Clarity Day Crème
         </Link>
         <Link
           href="/shop/recovery-masque"
           className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
         >
-          Shop Recovery Masque™
+          Shop Clarity Night Crème
         </Link>
         <Link
           href="/shop/n1-neck-decollete"
           className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
         >
-          Discover N1
+          Discover Clarity Neck &amp; Décolleté Crème
         </Link>
         <Link
           href="/shop/eye-contour-concentrate"
           className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
         >
-          Shop Eye Treatment™
+          Shop Clarity Eye Contour Concentrate
         </Link>
         <Link
           href="/assessment"

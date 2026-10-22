@@ -4,6 +4,7 @@ import { getCartWithTotals, getOrCreateCart, type CartMode } from "@/lib/cart-se
 import { withApiErrorHandling } from "@/lib/api-error";
 import { isRateLimited, clientIp } from "@/lib/rate-limit";
 import { MAX_LINE_QTY } from "@/lib/cart-limits";
+import { isCatalogSlug } from "@/lib/cart-catalog-filter";
 
 const VALID_MODES: CartMode[] = ["ninetyDay", "subscription", "oneTime"];
 
@@ -29,7 +30,8 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
     );
   }
 
-  const product = await db.product.findUnique({ where: { slug } });
+  // Only catalog products can be added; database rows for removed products stay but are not sellable.
+  const product = isCatalogSlug(slug) ? await db.product.findUnique({ where: { slug } }) : null;
   if (!product) {
     return NextResponse.json({ error: "Unknown product" }, { status: 404 });
   }

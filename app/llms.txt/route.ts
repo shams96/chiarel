@@ -22,8 +22,8 @@ function buildLlmsTxt(): string {
 
 - [Homepage](${SITE_URL}/): brand overview, FAQ (pricing, formulation, sourcing, availability), and the core product lineup.
 - [The Shop](${SITE_URL}/shop): full product catalog with pricing.
-- [The Ritual](${SITE_URL}/ritual): the CHIAREL Four-Product Ritual — a focused morning and evening practice led by N1 Neck & Décolleté Renewal Emulsion.
-- [The Science](${SITE_URL}/science): ingredient mechanism explainers (Ectoine, Bifida Ferment Lysate, L-Ornithine) and formulation rationale, each with cited third-party research.
+- [The Ritual](${SITE_URL}/ritual): five products, two moments in the day: Clarity Essence and Clarity Day Crème in the morning; Clarity Essence, Clarity Eye Contour Concentrate, Clarity Night Crème and Clarity Neck & Décolleté Crème in the evening.
+- [The Science](${SITE_URL}/science): what each formulation answers, naming its real ingredients.
 - [The House](${SITE_URL}/house): brand origin and philosophy, Isola del Liri, Italy.
 - [Journal](${SITE_URL}/journal): editorial long-form content on sourcing and formulation.
 - [Skin Assessment](${SITE_URL}/assessment): guided product-fit quiz.

@@ -25,9 +25,9 @@ export default function HomeProvenance() {
             Grande, it is met by the Fibreno — a river fed entirely by
             limestone karst springs, with no surface tributaries of its
             own. That confluence, water arriving newly filtered rather than
-            run off the surface, is what gives The Cascata Complex™ its
-            name and its place: formulated here, with our manufacturing
-            partner Natural You Srl, rather than sourced from a distance.
+            run off the surface, is what gives this place its character:
+            formulated here, with our manufacturing partner Natural You
+            Srl, rather than sourced from a distance.
           </p>
           <Link
             href="/journal/isola-del-liri-waterfall"
@@ -56,9 +56,7 @@ export default function HomeProvenance() {
           <p className="mx-auto mt-6 max-w-lg text-sm leading-relaxed text-ivory/75">
             Every CHIAREL™ formulation is developed under her guidance and
             produced in small, fresh batches in Isola del Liri — made to
-            order rather than held in standing inventory. The Cellular
-            Intelligence Complex™ at the heart of CHIAREL Essence™ is
-            formulated to support the skin&rsquo;s own regulatory processes.
+            order rather than held in standing inventory.
           </p>
           <Link
             href="/science"

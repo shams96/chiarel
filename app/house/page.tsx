@@ -38,6 +38,25 @@ export default function HousePage() {
           </p>
         </section>
         <section>
+          <h2 className="font-serif text-2xl text-ink">Modern Biological Stress™</h2>
+          <p className="mt-2 max-w-2xl">
+            A working woman&rsquo;s day asks a great deal of her body and her
+            skin. Early starts, deadlines, screens, commutes, dry indoor air
+            and too little sleep add up. We call this Modern Biological
+            Stress™. Skin shows it first: it feels tighter, looks duller and
+            lines look more defined. CHIAREL™ is made to help skin look and
+            feel clear, comfortable and rested through that day. This is our
+            mission, Advancing Cellular Clarity™.
+          </p>
+        </section>
+        <section>
+          <h2 className="font-serif text-2xl text-ink">Clarity</h2>
+          <p className="mt-2 max-w-2xl">
+            Five formulations, each made for one purpose. Each carries the name
+            of our mission: Clarity.
+          </p>
+        </section>
+        <section>
           <h2 className="font-serif text-2xl text-ink">La Bella Figura</h2>
           <p className="mt-2 max-w-2xl">
             The Italian art of presenting one&rsquo;s best self — not vanity,
@@ -67,13 +86,8 @@ export default function HousePage() {
         <section className="border-t border-ink/10 pt-10">
           <h2 className="font-serif text-2xl text-ink">A Considered Practice</h2>
           <p className="mt-2 max-w-2xl">
-            Every formulation is produced in small, fresh batches — made to
-            order rather than held in standing inventory, reducing
-            overproduction by design. Packaging is glass, chosen for
-            recyclability and to preserve the formulation properly; delivery
-            systems are airless, protecting the actives inside and
-            minimizing waste. Ingredients are vegan-friendly and
-            cruelty-free.
+            Small, made-to-order batches. Glass bottles and jars. Every active
+            ingredient disclosed.
           </p>
         </section>
       </div>

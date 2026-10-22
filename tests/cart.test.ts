@@ -15,6 +15,7 @@ const state = {
 const products = [
   { slug: "chiarel-essence", name: "Essence", image: "/e.png", descriptor: "d", priceSub: 100, priceOneTime: 120 },
   { slug: "n1-neck-decollete", name: "N1", image: "/n.png", descriptor: "d", priceSub: 200, priceOneTime: 240 },
+  { slug: "cellular-mist", name: "Mist", image: "/m.png", descriptor: "d", priceSub: 70, priceOneTime: 88 },
 ];
 
 vi.mock("next/headers", () => ({
@@ -200,6 +201,22 @@ describe("cart: reads never write, and display fields come from the catalog", ()
     expect(cart.lines[0].product.image).toBe(catalog.image);
     expect(cart.lines[0].product.image).not.toBe("/e.png"); // the stale value the mock database holds
     expect(cart.lines[0].product.name).toBe(catalog.name);
+  });
+});
+
+describe("cart: removed products", () => {
+  it("cannot be added even though the database still has the row", async () => {
+    expect((await post({ slug: "cellular-mist", mode: "oneTime" })).status).toBe(404);
+    expect(state.items).toHaveLength(0);
+  });
+
+  it("a leftover line is dropped from the bag and the totals", async () => {
+    state.items.push({ id: "old", cartId: "cart_mine", productSlug: "cellular-mist", mode: "oneTime", qty: 2 });
+    await post({ slug: "chiarel-essence", mode: "oneTime" });
+    const cart = await (await cartRoute.GET()).json();
+    expect(cart.lines.map((l: { slug: string }) => l.slug)).toEqual(["chiarel-essence"]);
+    expect(cart.count).toBe(1);
+    expect(cart.subtotal).toBe(120);
   });
 });
 

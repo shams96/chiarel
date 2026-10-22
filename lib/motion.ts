@@ -21,35 +21,24 @@ const EASE_CLASS = "ease-[cubic-bezier(0.22,1,0.36,1)]";
 // hover transforms had zero matching CSS rules despite the classes being
 // present in the rendered DOM.
 const HOVER_TRANSFORM_BY_STEP: Record<string, string> = {
-  // Cleanse — a light upward drift, like foam lifting.
-  Cleanse:
-    "[@media(hover:hover)_and_(pointer:fine)]:group-hover:-translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.02]",
-  // Tone — mist is the lightest product in the line; barely a breath of scale.
-  Tone: "[@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.015]",
-  // Serum — the signature concentrate; the most pronounced (still subtle) lift.
-  Serum: "[@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.035]",
-  // Moisturize (AM/PM) — jars read as heavier; they settle down, not up.
-  "Moisturize AM":
+  // Essence — the signature concentrate; the most pronounced (still subtle) lift.
+  Essence: "[@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.035]",
+  // Day / Night Crème and Neck & Décolleté Crème — jars read as heavier; they
+  // settle down, not up.
+  "Day Crème":
     "[@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.02]",
-  "Moisturize PM":
+  "Night Crème":
     "[@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.02]",
-  // Renew PM (N1) — same settled weight as the other PM moisturizers, despite
-  // N1's own packaging being a 40ml bottle rather than a jar.
-  "Renew PM":
+  "Neck & Décolleté":
     "[@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.02]",
-  // Standalone (Lip Concentrate) — a precise tool, not a ritual step: crisp, quick.
-  Standalone: "[@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.02]",
-  // Eye Treatment — a precise concentrate dosed in small amounts, same crisp
-  // register as the serum rather than a heavier jar-settle gesture.
-  "Eye Treatment": "[@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.03]",
+  // Eye Contour — a precise concentrate dosed in small amounts, same crisp
+  // register as the essence rather than a heavier jar-settle gesture.
+  "Eye Contour": "[@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.03]",
 };
 const DEFAULT_HOVER_TRANSFORM =
   "[@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.03]";
 
-const DURATION_BY_STEP: Record<string, string> = {
-  Tone: "duration-500",
-  Standalone: "duration-500",
-};
+const DURATION_BY_STEP: Record<string, string> = {};
 const DEFAULT_DURATION = "duration-700";
 
 /** Tailwind classes for a product image's hover gesture — transform only, pointer-gated. */
@@ -66,7 +55,7 @@ export function productHoverClass(step?: string | null): string {
 // gestures actually worth telling apart; everything else takes a shared,
 // quieter default rather than invented variety for its own sake.
 const HERO_ENTRANCE_BY_STEP: Record<string, Variants> = {
-  Serum: {
+  Essence: {
     hidden: { opacity: 0, y: -28, scale: 0.97 },
     visible: {
       opacity: 1,
@@ -75,15 +64,15 @@ const HERO_ENTRANCE_BY_STEP: Record<string, Variants> = {
       transition: { duration: 0.8, ease: EASE },
     },
   },
-  "Moisturize AM": {
+  "Day Crème": {
     hidden: { opacity: 0, scale: 0.94 },
     visible: { opacity: 1, scale: 1, transition: { duration: 0.75, ease: EASE } },
   },
-  "Moisturize PM": {
+  "Night Crème": {
     hidden: { opacity: 0, scale: 0.94 },
     visible: { opacity: 1, scale: 1, transition: { duration: 0.75, ease: EASE } },
   },
-  "Renew PM": {
+  "Neck & Décolleté": {
     hidden: { opacity: 0, scale: 0.94 },
     visible: { opacity: 1, scale: 1, transition: { duration: 0.75, ease: EASE } },
   },

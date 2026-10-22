@@ -9,7 +9,6 @@ import { useDialog } from "@/lib/use-dialog";
 import { ritualProducts } from "@/lib/products";
 import { shippingFor, shippingNote } from "@/lib/shipping";
 import { pickUpsell } from "@/lib/cart-math";
-import CartIncludedNote from "@/components/CartIncludedNote";
 
 const modeLabel: Record<string, string> = {
   ninetyDay: "The Ritual Plan · 90-day supply, one delivery",
@@ -73,7 +72,6 @@ export default function CartDrawer() {
               <p className={`mb-4 text-[12px] ${shipping === 0 ? "text-ochre" : "text-ink/60"}`}>
                 {shippingNote(subtotal, lines)}
               </p>
-              <CartIncludedNote lines={lines} />
               <ul className="space-y-5">
                 {lines.map((line) => (
                   <li key={line.slug} className="flex gap-4">
