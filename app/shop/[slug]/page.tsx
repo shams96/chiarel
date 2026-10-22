@@ -2,7 +2,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getProduct, products, ritualProducts, productImageAlt, isPurchasable, publishedInci, type Product } from "@/lib/products";
+import { getProduct, products, productImageAlt, isPurchasable, publishedInci, type Product } from "@/lib/products";
 import PurchaseOptions from "@/components/PurchaseOptions";
 import TrackViewItem from "@/components/TrackViewItem";
 import StickyPurchaseBar from "@/components/StickyPurchaseBar";
@@ -25,15 +25,6 @@ import { productHoverClass } from "@/lib/motion";
 // and isn't part of the spec) and no efficacy language.
 function productFactSummary(p: Product): string {
   const origin = "formulated in Isola del Liri, Italy";
-
-  if (p.set && p.includes) {
-    const includedNames = p.includes
-      .map((slug) => getProduct(slug)?.name)
-      .filter((n): n is string => Boolean(n));
-    if (includedNames.length > 0) {
-      return `${p.name} combines ${includedNames.join(" and ")}, ${origin}.`;
-    }
-  }
 
   const keyIngredients = (p.actives ?? []).map((a) => a.name);
   if (keyIngredients.length > 0) {
@@ -187,12 +178,6 @@ export default async function ProductPage({
                 <dt className="text-ink/65">Family:</dt>
                 <dd>{p.family}</dd>
               </div>
-              {p.complex && (
-                <div className="flex gap-1.5">
-                  <dt className="text-ink/65">Complex:</dt>
-                  <dd>{p.complex}</dd>
-                </div>
-              )}
               <div className="flex gap-1.5">
                 <dt className="text-ink/65">Size:</dt>
                 <dd>{p.size}</dd>
@@ -226,15 +211,13 @@ export default async function ProductPage({
 
       <BenefitPills actives={p.actives} />
 
-      {p.includes && <WhatsInside slugs={p.includes} />}
-
       {p.slug === "n1-neck-decollete" && (
         <section className="section-y border-y border-ink/10 bg-ink">
           <div className="section-x">
             <AmbientVideo
               src="/assets/products/n1-neck-decollete-ambient.mp4"
               poster="/assets/products/n1-neck-decollete-honeycomb.jpg"
-              label="N1 Neck & Décolleté Renewal Emulsion, 40 ml, on a reflective surface with water droplets"
+              label="Clarity Neck & Décolleté Crème, 40 ml, on a reflective surface with water droplets"
               className="mx-auto aspect-[9/16] max-h-[80vh] w-auto max-w-full bg-ink object-cover"
             />
           </div>
@@ -244,10 +227,10 @@ export default async function ProductPage({
       {p.slug === "terra-radiance-creme" && (
         <EditorialFeature
           src="/assets/products/terra-radiance-creme-editorial.jpg"
-          alt="A woman holding Terra Radiance Crème against the Capri coastline, with the line Radiance, Elevated"
-          kicker="The Icon Product"
+          alt="A woman holding Clarity Day Crème against the Capri coastline, with the line Radiance, Elevated"
+          kicker="The Day Crème"
           headline="The daily crème of the morning ritual."
-          body="Terra Radiance Crème is the moisturising step of the AM ritual."
+          body="Clarity Day Crème is the morning crème of the ritual."
         />
       )}
 
@@ -282,19 +265,6 @@ export default async function ProductPage({
           <FullIngredientList inci={publishedInci(p)!} />
         </Reveal>
       )}
-      {/* N1 has no owner-approved formula/actives data yet — a distinct,
-          honest placeholder ships instead of reusing KeyIngredients (which
-          would either render nothing, or invent ingredients). */}
-      {p.slug === "n1-neck-decollete" && (
-        <Reveal>
-          <N1FormulaTransparencyPlaceholder />
-        </Reveal>
-      )}
-      {p.complex && (
-        <Reveal>
-          <TheScience complex={p.complex} slug={p.slug} />
-        </Reveal>
-      )}
       {p.slug === "n1-neck-decollete" && (
         <Reveal>
           <N1EvidencePlaceholder />
@@ -304,29 +274,14 @@ export default async function ProductPage({
       {/* Slot: reviews list. Renders nothing until a real review source
           exists (never fabricated). */}
       <ProductReviewsSlot slug={p.slug} />
-      {!p.set && (
-        <Reveal>
-          <UsageGuidance />
-        </Reveal>
-      )}
-      {/* Launch products (Essence, Terra Radiance Crème, Recovery Masque, N1)
-          get routine-position + pair-with guidance grounded in the real AM/PM
-          launch architecture, instead of the legacy "first other ritual
-          product" heuristic. Legacy ritual products that are NOT part of the
-          launch (Cellular Cleanser, Cellular Mist) keep the original
-          CompleteYourRitual behavior unchanged, per
-          CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §4. */}
-      {p.launchRitual ? (
-        <Reveal>
-          <LaunchRoutinePosition currentSlug={p.slug} />
-        </Reveal>
-      ) : (
-        p.ritualOrder !== null && (
-          <Reveal>
-            <CompleteYourRitual currentSlug={p.slug} />
-          </Reveal>
-        )
-      )}
+      <Reveal>
+        <UsageGuidance />
+      </Reveal>
+      {/* Routine position + pair-with guidance, grounded in the real AM/PM
+          ritual: every catalog product belongs to at least one of the two routes. */}
+      <Reveal>
+        <LaunchRoutinePosition currentSlug={p.slug} />
+      </Reveal>
       {isPurchasable(p) && (
         <StickyPurchaseBar
           slug={p.slug}
@@ -437,60 +392,6 @@ function BrandStatement({ launch }: { launch: boolean }) {
   );
 }
 
-// What's Inside — the bundle payoff module. Bundle PDPs (The Founding Pair,
-// The Ritual Set) carry no `benefits`/`actives`/`complex` of their own, so
-// without this they fall through every conditional below to a dead stop
-// right after the brand statement — the highest-AOV products on the site
-// getting the thinnest pages. Shows each included product's real name,
-// image, and one-line blurb, pulled from the product data itself.
-function WhatsInside({ slugs }: { slugs: string[] }) {
-  const items = slugs
-    .map((slug) => getProduct(slug))
-    .filter((p): p is Product => p !== undefined);
-  if (items.length === 0) return null;
-
-  return (
-    <Reveal className="border-t border-ink/10 bg-cloud/40 py-16">
-      <div className="mx-auto max-w-4xl px-6">
-        <h2 className="text-center font-serif text-2xl">What&rsquo;s Inside</h2>
-        <div className="mt-10 grid gap-6 sm:grid-cols-2">
-          {items.map((item) => (
-            <Link
-              key={item.slug}
-              href={`/shop/${item.slug}`}
-              className="group flex items-center gap-5 rounded-md border border-ink/10 bg-white p-4 transition hover:border-ochre"
-            >
-              <div
-                className="relative h-20 w-20 shrink-0 overflow-hidden"
-                style={{ backgroundColor: NEUTRAL_FRAME_BG }}
-              >
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  fill
-                  sizes="80px"
-                  className="object-cover"
-                />
-              </div>
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
-                  {item.step}
-                </p>
-                <p className="mt-1 font-serif text-lg leading-snug text-ink">
-                  {item.name}
-                </p>
-                <p className="mt-1 text-[13px] leading-relaxed text-ink/60">
-                  {item.descriptor}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </Reveal>
-  );
-}
-
 function KeyBenefits({ benefits }: { benefits: string[] }) {
   return (
     <Reveal className="border-t border-ink/10 bg-cloud/40 py-16">
@@ -587,7 +488,7 @@ function PriceToBeAnnounced() {
         </Link>{" "}
         with questions, or explore the rest of{" "}
         <Link href="/ritual" className="border-b border-ochre text-ochre">
-          The CHIAREL Four-Product Ritual
+          The CHIAREL Ritual
         </Link>
         .
       </p>
@@ -676,22 +577,6 @@ function ProductReviewsSlot(_props: { slug: string }) {
   return null;
 }
 
-// N1 PDP section 7. No formula/actives data exists yet — this is a
-// deliberately honest placeholder, not a reuse of KeyIngredients (which
-// would either render nothing or risk implying invented ingredients).
-function N1FormulaTransparencyPlaceholder() {
-  return (
-    <div className="mx-auto max-w-2xl border-t border-ink/10 px-6 py-16 text-center">
-      <h2 className="font-serif text-2xl leading-snug">Formula Transparency</h2>
-      <p className="mt-3 text-sm leading-relaxed text-ink/70">
-        Each CHIAREL product page names its key ingredients. N1&rsquo;s
-        ingredient record will be published here once the formula is
-        finalized.
-      </p>
-    </div>
-  );
-}
-
 // N1 PDP section 8. No third-party or in-house testing has been completed
 // yet — stated plainly rather than implying evidence that doesn't exist.
 function N1EvidencePlaceholder() {
@@ -700,8 +585,9 @@ function N1EvidencePlaceholder() {
       <div className="mx-auto max-w-xl px-6 text-center">
         <h2 className="font-serif text-2xl text-champagne">Testing &amp; Evidence</h2>
         <p className="mt-4 text-sm leading-relaxed text-ivory/75">
-          N1 is designed to support hydration, comfort, and a smoother-looking
-          appearance in the skin below the jawline. Product-specific testing
+          Clarity Neck &amp; Décolleté Crème is designed to support hydration,
+          comfort, and a smoother-looking appearance in the skin below the
+          jawline. Product-specific testing
           results are not yet available; this page will be updated with
           approved evidence once testing is complete.
         </p>
@@ -716,7 +602,7 @@ function N1EvidencePlaceholder() {
 // local here since it drives PDP-only routine-position/pairing copy, not
 // page layout).
 const LAUNCH_AM_ROUTE = ["chiarel-essence", "terra-radiance-creme"];
-const LAUNCH_PM_ROUTE = ["chiarel-essence", "recovery-masque", "n1-neck-decollete"];
+const LAUNCH_PM_ROUTE = ["chiarel-essence", "eye-contour-concentrate", "recovery-masque", "n1-neck-decollete"];
 
 function launchPairsFor(slug: string): string[] {
   const pairs = new Set<string>();
@@ -822,69 +708,18 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
   );
 }
 
-// N1 has no complex name yet (see N1FormulaTransparencyPlaceholder above), so
-// it never reaches TheScience's generic `p.complex` gate — this entry exists
-// for architectural consistency with the other launch products and is ready
-// to be wired in once a real complex name is approved. Draft wording matches
-// CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §11 verbatim (DRAFT — OWNER /
-// REGULATORY APPROVAL REQUIRED).
-const mechanismBySlug: Record<string, { step: string; text: string }[]> = {
-  "n1-neck-decollete": [
-    {
-      step: "01",
-      text: "Designed to support hydration, comfort, and a smoother-looking appearance in the skin below the jawline.",
-    },
-  ],
-  "chiarel-essence": [
-    { step: "01", text: "Peptides including Acetyl Hexapeptide-8 and Palmitoyl Tripeptide-1 are studied for supporting the skin's structural proteins." },
-    { step: "02", text: "Bifida Ferment Lysate, a postbiotic, is studied for upregulating the proteins that hold the barrier together." },
-    { step: "03", text: "Delivered as a concentrate, positioned as the ritual's central treatment step." },
-  ],
-  "terra-radiance-creme": [
-    { step: "01", text: "Ceramide NP helps replace lipids the skin barrier naturally loses over the day." },
-    { step: "02", text: "Niacinamide is studied for supporting barrier function and visible tone." },
-    { step: "03", text: "Formulated for daytime wear, under environmental and daily stress." },
-  ],
-  "recovery-masque": [
-    { step: "01", text: "L-Ornithine is a natural component of the skin's own moisture-regulation system." },
-    { step: "02", text: "Panthenol supports moisture replenishment and comfort overnight." },
-    { step: "03", text: "Formulated as the evening ritual's face-recovery step, before N1." },
-  ],
-};
-
-function TheScience({ complex, slug }: { complex: string; slug: string }) {
-  const steps = mechanismBySlug[slug];
-  if (!steps) return null;
-  return (
-    <div className="border-t border-ink/10 bg-ink py-20 text-ivory">
-      <div className="mx-auto max-w-2xl px-6">
-        <h2 className="text-center font-serif text-2xl text-champagne">
-          The science of {complex}
-        </h2>
-        <div className="relative mt-12 space-y-10 border-l border-champagne/25 pl-8">
-          {steps.map((s, i) => (
-            <div key={s.step} className="relative">
-              <span className="absolute -left-[41px] top-0 flex h-6 w-6 items-center justify-center rounded-full border border-champagne/40 bg-ink text-[11px] text-champagne">
-                {i + 1}
-              </span>
-              <p className="text-sm leading-relaxed text-ivory/75">{s.text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
+// Science links follow ingredient scoping: Bifida Ferment Lysate is in Essence,
+// Day, Neck & Décolleté and Eye (not Night); L-Ornithine is in Night only.
+// No Ectoine link anywhere (Ectoine is in none of the five formulas).
+const BARRIER = { label: "Building a More Resilient Skin Barrier", href: "/science/barrier-resilience" };
+const BIFIDA = { label: "Bifida Ferment Lysate, Explained", href: "/science/bifida-ferment-lysate" };
+const ORNITHINE = { label: "L-Ornithine, Explained", href: "/science/l-ornithine" };
 const scienceLinksBySlug: Record<string, { label: string; href: string }[]> = {
-  "chiarel-essence": [
-    { label: "Bifida Ferment Lysate, Explained", href: "/science/bifida-ferment-lysate" },
-    { label: "Building a More Resilient Skin Barrier", href: "/science/barrier-resilience" },
-  ],
-  "recovery-masque": [
-    { label: "L-Ornithine, Explained", href: "/science/l-ornithine" },
-    { label: "Building a More Resilient Skin Barrier", href: "/science/barrier-resilience" },
-  ],
+  "chiarel-essence": [BIFIDA, BARRIER],
+  "terra-radiance-creme": [BIFIDA, BARRIER],
+  "n1-neck-decollete": [BIFIDA],
+  "eye-contour-concentrate": [BIFIDA],
+  "recovery-masque": [ORNITHINE, BARRIER],
 };
 
 function ScienceLinks({ slug }: { slug: string }) {
@@ -973,36 +808,6 @@ function UsageGuidance() {
           .
         </p>
       </div>
-    </div>
-  );
-}
-
-function CompleteYourRitual({ currentSlug }: { currentSlug: string }) {
-  const next = ritualProducts.find((r) => r.slug !== currentSlug);
-  if (!next) return null;
-  return (
-    <div className="mx-auto mt-4 max-w-3xl border-t border-ink/10 px-6 pb-20 pt-14">
-      <h2 className="text-center font-serif text-2xl">Complete your ritual</h2>
-      <Link
-        href={`/shop/${next.slug}`}
-        className="mt-6 flex items-center gap-6 rounded-sm border border-ink/10 p-4 transition hover:border-ochre"
-      >
-        <div
-          className="relative h-24 w-24 shrink-0 overflow-hidden"
-          style={{ backgroundColor: NEUTRAL_FRAME_BG }}
-        >
-          <Image src={next.image} alt={next.name} fill sizes="96px" className="object-cover" />
-        </div>
-        <div>
-          <p className="font-serif text-lg">{next.name}</p>
-          <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-ink/65">
-            {next.step}
-          </p>
-          <p className="text-[12px] text-ink/65">
-            ${next.price!.subscription} per delivery, subscribe &amp; save
-          </p>
-        </div>
-      </Link>
     </div>
   );
 }

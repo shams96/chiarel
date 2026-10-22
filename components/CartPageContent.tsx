@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useCart, type CartLine } from "@/lib/cart-context";
 import { getProduct, isPurchasable } from "@/lib/products";
 import { planOptions } from "@/lib/pricing";
-import CartIncludedNote from "@/components/CartIncludedNote";
 import { shippingFor } from "@/lib/shipping";
 
 // The bag as its own page: one row per product with a plan selector, and a
@@ -157,7 +156,6 @@ export default function CartPageContent() {
               <span className="text-right">Total</span>
             </div>
             <div className="pt-4">
-              <CartIncludedNote lines={lines} />
             </div>
             <ul>
               {lines.map((line) => (

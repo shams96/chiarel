@@ -61,39 +61,11 @@ export function setLinePlan<S extends Snapshot>(snap: S, slug: string, mode: Car
   });
 }
 
-// Sets (e.g. The Ritual Set) list the products they include. A bag that holds a
-// set already covers those products, so they are not offered as upsells and a
-// separately added component is flagged (never auto-removed).
-
 type SlugLine = { slug: string };
 
-/** Slugs of products covered by a set that is in the bag. */
-export function slugsCoveredBySets(lines: SlugLine[]): Set<string> {
-  const covered = new Set<string>();
-  for (const l of lines) {
-    const p = getProduct(l.slug);
-    if (p?.set && p.includes) for (const s of p.includes) covered.add(s);
-  }
-  return covered;
-}
-
-/** First candidate not already in the bag and not covered by a set in it. */
+/** First candidate that is not already in the bag. */
 export function pickUpsell<P extends { slug: string }>(candidates: P[], lines: SlugLine[]): P | undefined {
-  const covered = slugsCoveredBySets(lines);
-  return candidates.find((p) => !lines.some((l) => l.slug === p.slug) && !covered.has(p.slug));
-}
-
-/** Bag lines whose product is already included in a set that is also in the bag. */
-export function redundantComponents(lines: SlugLine[]): { slug: string; name: string; setName: string }[] {
-  const out: { slug: string; name: string; setName: string }[] = [];
-  for (const l of lines) {
-    const owner = lines
-      .map((o) => getProduct(o.slug))
-      .find((p) => p?.set && p.includes?.includes(l.slug));
-    const self = getProduct(l.slug);
-    if (owner && self) out.push({ slug: l.slug, name: self.name, setName: owner.name });
-  }
-  return out;
+  return candidates.find((p) => !lines.some((l) => l.slug === p.slug));
 }
 
 export function removeLine<S extends Snapshot>(snap: S, lineId: string): S | null {

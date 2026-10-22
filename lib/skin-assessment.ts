@@ -167,34 +167,33 @@ export type Recommendation = {
  * launch SKU whose registered formulation addresses it. Only axes at or below
  * the midpoint (score < 6) are eligible — a resistant/resilient/even-toned/oily
  * result on an axis contributes no recommendation from that axis, which is why
- * most respondents get 1–2 products rather than all six.
+ * most respondents get 1–2 products rather than all five.
  */
 const AXIS_TO_SKU: Record<Axis, { slug: string; reason: string }> = {
   sebum: {
     slug: "terra-radiance-creme",
     reason:
-      "Your answers point to a barrier that could use lipid support. Terra Radiance Crème™ carries Ceramide NP and Niacinamide, formulated for daily barrier resilience.",
+      "Your answers point to a barrier that could use lipid support. Clarity Day Crème™ pairs three ceramides with cholesterol and squalane, to help skin feel comfortable and hydrated.",
   },
   reactivity: {
-    slug: "cellular-cleanser",
+    slug: "terra-radiance-creme",
     reason:
-      "Your skin shows signs of reactivity. Cellular Cleanser™ is pH 5.0 — formulated to cleanse without disrupting a sensitized barrier.",
+      "Your skin shows signs of reactivity. Clarity Day Crème™ is made to help skin feel comfortable and hydrated through the day.",
   },
   pigment: {
     slug: "chiarel-essence",
     reason:
-      "Uneven tone is a signal for CHIAREL Essence™, built on the Cellular Intelligence Complex™ to support even-looking clarity.",
+      "Uneven tone is a signal for Clarity Essence™, which pairs niacinamide with four peptides and hyaluronic acid to support the look of clarity.",
   },
   structure: {
     slug: "chiarel-essence",
     reason:
-      "Structural concerns are best met by CHIAREL Essence™ and Terra Radiance Crème™ together — the Founding Pair — supporting resilience from both the serum and moisturizer steps.",
+      "Structural concerns are best met by Clarity Essence™, four peptides with niacinamide and hyaluronic acid, to smooth the look of fine lines and visibly firm.",
   },
 };
 
 export function recommend(axisScores: AxisScore[]): {
   recommendations: Recommendation[];
-  bundleEligible: boolean;
 } {
   const concerns = axisScores
     .filter((a) => a.score < 6)
@@ -204,12 +203,11 @@ export function recommend(axisScores: AxisScore[]): {
     return {
       recommendations: [
         {
-          slug: "cellular-mist",
+          slug: "chiarel-essence",
           reason:
-            "Your skin shows no dominant concern on this assessment — a strong baseline. Cellular Mist™ is a light maintenance step to keep it that way.",
+            "Your skin shows no dominant concern on this assessment — a strong baseline. Clarity Essence™ is a simple step to keep it that way.",
         },
       ],
-      bundleEligible: false,
     };
   }
 
@@ -224,5 +222,5 @@ export function recommend(axisScores: AxisScore[]): {
     }
   }
 
-  return { recommendations, bundleEligible: top.length >= 2 && slugs.size >= 2 };
+  return { recommendations };
 }
