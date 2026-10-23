@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useId, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { track } from "@/lib/analytics";
 
@@ -31,6 +31,8 @@ function ComingSoonPackshotInner({
   source: string;
   referredBy: string;
 }) {
+  // Two of these cards render on /founding-100, so field ids must be unique per instance.
+  const uid = useId();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -140,9 +142,9 @@ ${shareUrl}`)}`,
         </p>
       )}
       <div className="grid gap-3 sm:grid-cols-2">
-        <label htmlFor="founding-first-name" className="sr-only">First name</label>
+        <label htmlFor={`founding-first-name-${uid}`} className="sr-only">First name</label>
         <input
-          id="founding-first-name"
+          id={`founding-first-name-${uid}`}
           type="text"
           autoComplete="given-name"
           required
@@ -151,9 +153,9 @@ ${shareUrl}`)}`,
           onChange={(e) => setName(e.target.value)}
           className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/65 focus:border-ochre focus:outline-none"
         />
-        <label htmlFor="founding-email" className="sr-only">Email</label>
+        <label htmlFor={`founding-email-${uid}`} className="sr-only">Email</label>
         <input
-          id="founding-email"
+          id={`founding-email-${uid}`}
           type="email"
           autoComplete="email"
           required
@@ -162,9 +164,9 @@ ${shareUrl}`)}`,
           onChange={(e) => setEmail(e.target.value)}
           className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/65 focus:border-ochre focus:outline-none"
         />
-        <label htmlFor="founding-phone" className="sr-only">Phone (optional)</label>
+        <label htmlFor={`founding-phone-${uid}`} className="sr-only">Phone (optional)</label>
         <input
-          id="founding-phone"
+          id={`founding-phone-${uid}`}
           type="tel"
           autoComplete="tel"
           placeholder="Phone (optional)"

@@ -17,7 +17,7 @@ const navColumns = [
     heading: "Shop",
     links: [
       { href: "/shop", label: "Shop All" },
-      { href: "/shop/n1-neck-decollete", label: "Neck & Décolleté" },
+      { href: "/shop/clarity-neck-decollete-creme", label: "Clarity Neck & Décolleté Crème" },
       { href: "/ritual", label: "The Ritual" },
       { href: "/science", label: "The Science" },
     ],
@@ -56,7 +56,7 @@ export default function Footer() {
             <div className="relative h-full w-full">
               <Image
                 src="/assets/products/recovery-masque-jar.png"
-                alt="CHIAREL Recovery Masque jar"
+                alt="Clarity Night Crème jar"
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-contain object-bottom p-8"
