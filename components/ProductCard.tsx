@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { productImageAlt, isPurchasable, type Product } from "@/lib/products";
+import { productImageAlt, isPurchasable, type Product, productHref } from "@/lib/products";
 import { perDayPrice } from "@/lib/pricing";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { productHoverClass } from "@/lib/motion";
@@ -13,7 +13,7 @@ export default function ProductCard({
   hidePrice?: boolean;
 }) {
   return (
-    <Link href={`/shop/${product.slug}`} className="btn-press group block">
+    <Link href={productHref(product.slug)} className="btn-press group block">
       <div
         className="product-frame aspect-square"
         style={{ backgroundColor: NEUTRAL_FRAME_BG }}

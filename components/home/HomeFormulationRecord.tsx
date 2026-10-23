@@ -1,36 +1,7 @@
-import Reveal from "@/components/Reveal";
 import EvidenceGrid from "@/components/EvidenceGrid";
 import { products } from "@/lib/products";
 
 import { FREE_FROM_SENTENCE, formulationLine } from "@/lib/formulation-line";
-
-const formulationApproach = [
-  {
-    dimension: "Active ingredient approach",
-    chiarel: "Peptide- and postbiotic-based actives (e.g. Acetyl Hexapeptide-8, Palmitoyl Tripeptide-1, Bifida Ferment Lysate)",
-    categoryNorm: "Often built around retinol or retinoid derivatives",
-  },
-  {
-    dimension: "Ingredient naming",
-    chiarel: "Key ingredients named across our product pages",
-    categoryNorm: "Often described only as a branded \"complex\"",
-  },
-  {
-    dimension: "Batch production",
-    chiarel: "Made fresh, to order, in small batches",
-    categoryNorm: "Manufactured in bulk and held in standing inventory",
-  },
-  {
-    dimension: "Sourcing",
-    chiarel: "Formulated at the water's source in Isola del Liri, Italy",
-    categoryNorm: "Formulated wherever contract manufacturing is cheapest",
-  },
-  {
-    dimension: "Distribution",
-    chiarel: "Sold directly at chiarel.com only — one price, no markup layers",
-    categoryNorm: "Sold through multiple retail markups before reaching the shelf",
-  },
-];
 
 // N1 has no key ingredients on record yet, so it does not appear in the
 // table. No percentages are shown: the site names key ingredients only.
@@ -60,8 +31,7 @@ export default function HomeFormulationRecord() {
             <span>
               See the key ingredients
               <span className="mt-1 block font-sans text-[13px] leading-relaxed text-ink/65">
-                Key ingredients by product, and how CHIAREL™ compares with
-                the category norm.
+                Key ingredients by product.
               </span>
             </span>
             <span className="ml-4 shrink-0 text-xl text-ink/50 group-open:hidden" aria-hidden="true">+</span>
@@ -124,40 +94,6 @@ export default function HomeFormulationRecord() {
                     </li>
                   ))}
               </ul>
-            </div>
-
-            <div className="mt-16">
-              <Reveal>
-                <h2 className="font-serif text-3xl">CHIAREL™ vs. the Category Norm</h2>
-                <p className="mt-4 max-w-2xl text-sm text-ink/70">
-                  CHIAREL formulates with peptide and postbiotic actives —
-                  compared to many category leaders built around retinol or
-                  retinoid derivatives, which can be harsher on sensitized skin.
-                </p>
-              </Reveal>
-              <div className="mt-8 overflow-x-auto">
-                <table className="w-full min-w-[560px] border-collapse text-left text-sm">
-                  <thead>
-                    <tr className="border-b border-ink/20 text-[11px] uppercase tracking-[0.16em] text-ink/65">
-                      <th className="py-3 pr-4 font-normal">Dimension</th>
-                      <th className="py-3 pr-4 font-normal text-ochre">CHIAREL™</th>
-                      <th className="py-3 font-normal">Category Norm</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {formulationApproach.map((row) => (
-                      <tr
-                        key={row.dimension}
-                        className="border-b border-ink/10 align-top transition-colors hover:bg-ochre/5"
-                      >
-                        <td className="py-4 pr-4 font-serif text-base text-ink">{row.dimension}</td>
-                        <td className="py-4 pr-4 text-ink/80">{row.chiarel}</td>
-                        <td className="py-4 text-ink/65">{row.categoryNorm}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
             </div>
           </div>
         </details>

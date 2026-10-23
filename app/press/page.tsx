@@ -13,9 +13,8 @@ export const metadata: Metadata = {
 
 // The launch lineup is the five Clarity products (Essence, Day Crème, Night
 // Crème, Neck & Décolleté Crème, Eye Contour Concentrate), all part of the
-// two-moment ritual. Any other catalog entry would list under "Also Available".
+// two-moment ritual.
 const launchSkus = products.filter((p) => p.launchStatus === "launch");
-const otherSkus = products.filter((p) => p.launchStatus !== "launch");
 
 const assets = [
   {
@@ -155,38 +154,6 @@ export default function PressPage() {
           ))}
         </ul>
 
-        {otherSkus.length > 0 && (
-        <>
-        <h3 className="mt-12 font-serif text-lg text-ink">Also Available</h3>
-        <p className="mt-2 max-w-xl text-sm text-ink/70">
-          Additional CHIAREL products, outside the five-product launch
-          lineup.
-        </p>
-        <ul className="mt-6 grid gap-4 sm:grid-cols-2">
-          {otherSkus.map((p) => (
-            <li
-              key={p.slug}
-              className="flex items-start gap-4 border border-ink/10 p-4"
-            >
-              <span
-                className="mt-1 inline-block h-4 w-4 shrink-0 rounded-full border border-ink/20"
-                style={{ backgroundColor: p.color.hex }}
-                aria-hidden
-              />
-              <div>
-                <p className="font-serif text-lg leading-tight text-ink">
-                  {p.name}
-                </p>
-                <p className="mt-1 text-[13px] text-ink/60">{p.descriptor}</p>
-                <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-ink/65">
-                  {p.color.name} · {p.family}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ul>
-        </>
-        )}
         <Link
           href="/shop"
           className="mt-6 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
@@ -200,7 +167,7 @@ export default function PressPage() {
         <h2 className="font-serif text-2xl text-ink">Brand Assets</h2>
         <p className="mt-2 max-w-xl text-sm text-ink/70">
           Approved wordmark and monogram files for editorial use. Please do
-          not alter colors, proportions, or the ™ symbol.
+          not alter colours, proportions, or the ™ symbol.
         </p>
         <div className="mt-8 grid gap-6 sm:grid-cols-3">
           {assets.map((a) => (

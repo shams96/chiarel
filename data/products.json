@@ -1,19 +1,20 @@
 [
   {
     "slug": "chiarel-essence",
+    "path": "clarity-essence",
     "sku": "03",
     "name": "Clarity Essence™",
     "descriptor": "For fine lines and firmness",
     "step": "Essence",
     "ritualOrder": 1,
-    "family": "CHIAREL Rose™",
+    "family": "Glass bottle",
     "color": {
-      "name": "Peach Dust",
-      "hex": "#FAD6C9"
+      "name": "Red Ochre",
+      "hex": "#9B4722"
     },
     "complex": "",
-    "line": "Restore™",
-    "size": "40 ml / 1.4 fl. oz.",
+    "line": "",
+    "size": "40 ml bottle",
     "price": {
       "subscription": 151,
       "oneTime": 189
@@ -31,13 +32,13 @@
         "role": "application"
       }
     ],
-    "blurb": "Four peptides with niacinamide and hyaluronic acid, to smooth the look of fine lines and visibly firm. Hydrolyzed collagen for surface hydration.",
+    "blurb": "Peptides with niacinamide and hyaluronic acid, for the look of smoother fine lines and firmer-looking skin. Hydrolysed collagen for surface hydration.",
     "role": "Signature Essence of the House",
     "badge": "Signature Essence",
     "benefits": [
-      "Smooths the look of fine lines",
+      "The look of smoother fine lines",
       "The look of firmer skin",
-      "Hydrolyzed collagen for surface hydration"
+      "Hydrolysed collagen for surface hydration"
     ],
     "icon": true,
     "actives": [
@@ -81,29 +82,30 @@
     ],
     "ingredientsInciStatus": "draft-v2",
     "launchStatus": "launch",
-    "productColorToken": "Peach Dust",
+    "productColorToken": "Red Ochre",
     "howToUse": [
       "Use a pea-sized amount.",
       "Apply to slightly damp skin, morning and evening.",
-      "Pause 10–30 seconds before your moisturizer step."
+      "Pause 10–30 seconds before your moisturiser step."
     ],
     "howToUseSource": "app/science/application/page.tsx; app/journal/chiarel-ritual-guide/page.tsx"
   },
   {
     "slug": "terra-radiance-creme",
+    "path": "clarity-day-creme",
     "sku": "04",
     "name": "Clarity Day Crème™",
     "descriptor": "For dry skin under daily stress",
     "step": "Day Crème",
     "ritualOrder": 2,
-    "family": "CHIAREL Terra™",
+    "family": "Glass jar",
     "color": {
       "name": "Red Ochre",
       "hex": "#9B4722"
     },
     "complex": "",
-    "line": "Restore™",
-    "size": "50 g / 1.7 fl. oz.",
+    "line": "",
+    "size": "50 g jar",
     "price": {
       "subscription": 126,
       "oneTime": 158
@@ -126,13 +128,13 @@
         "role": "lifestyle"
       }
     ],
-    "blurb": "Three ceramides with cholesterol and squalane, to help skin feel comfortable and hydrated. Niacinamide supports the look of an even, healthy surface.",
+    "blurb": "Ceramides with cholesterol and squalane, for skin that feels comfortable and hydrated. Niacinamide for the look of an even surface.",
     "role": "Day Crème",
     "badge": "Day Crème",
     "benefits": [
-      "Helps skin feel comfortable and hydrated through the working day",
-      "Three ceramides with cholesterol and squalane",
-      "Niacinamide supports the look of an even, healthy surface"
+      "Skin that feels comfortable and hydrated through the working day",
+      "Ceramides with cholesterol and squalane",
+      "Niacinamide for the look of an even surface"
     ],
     "icon": true,
     "actives": [
@@ -189,25 +191,27 @@
     "howToUse": [
       "Warm a small amount between your fingertips.",
       "Press, don’t rub, onto slightly damp skin after Clarity Essence™.",
-      "Use in the morning."
+      "Use in the morning.",
+      "Follow with SPF."
     ],
     "howToUseSource": "app/science/application/page.tsx; app/journal/chiarel-ritual-guide/page.tsx"
   },
   {
     "slug": "recovery-masque",
+    "path": "clarity-night-creme",
     "sku": "04N",
     "name": "Clarity Night Crème™",
     "descriptor": "For smoother-looking texture",
     "step": "Night Crème",
     "ritualOrder": 4,
-    "family": "CHIAREL Verde™",
+    "family": "Glass jar",
     "color": {
       "name": "Formal Garden",
       "hex": "#1F5129"
     },
     "complex": "",
-    "line": "Strengthen™",
-    "size": "50 g / 1.7 fl. oz.",
+    "line": "",
+    "size": "50 g jar",
     "price": {
       "subscription": 118,
       "oneTime": 148
@@ -230,12 +234,12 @@
         "role": "lifestyle"
       }
     ],
-    "blurb": "Bakuchiol, a plant-derived alternative to retinol, with peptides and niacinamide, to smooth the look of texture overnight.",
+    "blurb": "Bakuchiol with peptides and niacinamide, for the look of smoother texture overnight.",
     "role": "Night Crème",
     "badge": "Night Crème",
     "benefits": [
-      "Smooths the look of texture overnight",
-      "Bakuchiol, a plant-derived alternative to retinol",
+      "The look of smoother texture overnight",
+      "Bakuchiol",
       "Peptides and niacinamide"
     ],
     "icon": true,
@@ -304,20 +308,21 @@
   },
   {
     "slug": "n1-neck-decollete",
+    "path": "clarity-neck-decollete-creme",
     "sku": "N1-R",
     "name": "Clarity Neck & Décolleté Crème™",
     "descriptor": "For crepey-looking skin on the neck and chest",
     "role": "Neck & Décolleté Crème",
     "step": "Neck & Décolleté",
     "ritualOrder": 5,
-    "family": "CHIAREL Verde™",
+    "family": "Glass bottle",
     "color": {
       "name": "Formal Garden",
       "hex": "#1F5129"
     },
     "complex": "",
     "line": "",
-    "size": "40 ml / 1.35 fl. oz.",
+    "size": "40 ml bottle",
     "price": {
       "subscription": 118,
       "oneTime": 138
@@ -347,10 +352,10 @@
         "role": "detail"
       }
     ],
-    "blurb": "Copper peptide with ceramides and squalane, to smooth the look of crepey texture and keep the neck and chest hydrated.",
+    "blurb": "Copper peptide with ceramides and squalane, for the look of smoother, less crepey texture and hydration for the neck and chest.",
     "benefits": [
-      "Smooths the look of crepey texture on the neck and chest",
-      "Keeps the neck and chest hydrated",
+      "The look of smoother, less crepey texture on the neck and chest",
+      "Hydration for the neck and chest",
       "Copper peptide with ceramides and squalane"
     ],
     "icon": true,
@@ -414,30 +419,31 @@
   },
   {
     "slug": "eye-contour-concentrate",
+    "path": "clarity-eye-contour-concentrate",
     "sku": "7A",
     "name": "Clarity Eye Contour Concentrate™",
     "descriptor": "For puffiness, dark circles and fine lines",
     "step": "Eye Contour",
     "ritualOrder": 3,
-    "family": "CHIAREL Verde™",
+    "family": "Glass bottle",
     "color": {
-      "name": "Formal Garden",
-      "hex": "#1F5129"
+      "name": "Peach Dust",
+      "hex": "#FAD6C9"
     },
     "complex": "",
     "line": "",
-    "size": "40 ml / 1.35 fl. oz.",
+    "size": "40 ml bottle",
     "price": {
       "subscription": 151,
       "oneTime": 189
     },
     "image": "/assets/products/eye-contour-concentrate-jar.png",
     "imageIsPlaceholder": false,
-    "blurb": "Caffeine and peptides, to reduce the look of puffiness and dark circles. Hyaluronic acid hydrates, and light-reflecting mica brightens the look of the eye area.",
+    "blurb": "Caffeine and peptides, for the look of less puffiness and dark circles. Hyaluronic acid for hydration, and light-reflecting mica for a brighter-looking eye area.",
     "benefits": [
-      "Reduces the look of puffiness and dark circles",
-      "Hyaluronic acid hydrates",
-      "Light-reflecting mica brightens the look of the eye area"
+      "The look of less puffiness and dark circles",
+      "Hyaluronic acid for hydration",
+      "Light-reflecting mica for a brighter-looking eye area"
     ],
     "icon": true,
     "launchRitual": false,
@@ -472,7 +478,7 @@
     ],
     "ingredientsInciStatus": "draft-v2",
     "launchStatus": "launch",
-    "productColorToken": "Formal Garden",
+    "productColorToken": "Peach Dust",
     "howToUse": [
       "Made for the evening, after Clarity Essence™; it may be used morning or night.",
       "Use a light touch around the orbital bone — avoid the immediate lash line."

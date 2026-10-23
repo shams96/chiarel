@@ -87,7 +87,7 @@ export function planOptions(slug: string, priceSubscription: number, priceOneTim
   return [
     {
       mode: "ninetyDay",
-      label: "The Ritual Plan",
+      label: "90-day plan",
       detail: "90-day supply, one delivery",
       price: computeUnitPrice(priceSubscription, priceOneTime, "ninetyDay", slug),
     },

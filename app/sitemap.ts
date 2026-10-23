@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { products } from "@/lib/products";
+import { products, productHref } from "@/lib/products";
 import { SITE_URL } from "@/lib/seo";
 import { isStaging } from "@/lib/app-env";
 
@@ -10,7 +10,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/ritual",
     "/shop",
     "/science",
-    "/science/comparison",
     "/science/barrier-resilience",
     "/science/lasting-hydration",
     "/science/application",
@@ -33,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const productRoutes = products.map((p) => ({
-    url: `${SITE_URL}/shop/${p.slug}`,
+    url: `${SITE_URL}${productHref(p.slug)}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.9,

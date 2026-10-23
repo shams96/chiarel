@@ -4,7 +4,7 @@ import { MAX_LINE_QTY } from "@/lib/cart-limits";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart, type CartLine } from "@/lib/cart-context";
-import { getProduct, isPurchasable } from "@/lib/products";
+import { getProduct, isPurchasable, productHref } from "@/lib/products";
 import { planOptions } from "@/lib/pricing";
 import { shippingFor } from "@/lib/shipping";
 
@@ -13,7 +13,7 @@ import { shippingFor } from "@/lib/shipping";
 // pricing and shipping code); payment itself is still hosted by Stripe.
 
 const MODE_LABEL: Record<CartLine["mode"], string> = {
-  ninetyDay: "The Ritual Plan",
+  ninetyDay: "90-day plan",
   subscription: "Subscription",
   oneTime: "One-time",
 };
@@ -175,7 +175,7 @@ export default function CartPageContent() {
                     </div>
                     <div className="min-w-0">
                       <Link
-                        href={`/shop/${line.slug}`}
+                        href={productHref(line.slug)}
                         className="tap-area font-serif text-lg leading-tight hover:text-ochre"
                       >
                         {line.product.name}

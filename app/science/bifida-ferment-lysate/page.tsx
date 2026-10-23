@@ -11,11 +11,11 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: "What is Bifida Ferment Lysate?",
-    a: "Bifida Ferment Lysate is a postbiotic — the lysate of fermented Bifidobacterium species. It is an established INCI ingredient used across cosmetic formulation, not a CHIAREL-exclusive ingredient.",
+    a: "Bifida Ferment Lysate is a postbiotic — the lysate of fermented Bifidobacterium species. It is an established ingredient used across cosmetic formulation, not a CHIAREL-exclusive ingredient.",
   },
   {
     q: "What does a postbiotic do for skin?",
-    a: "Postbiotics are a studied ingredient category in skincare. In our formulas the lysate sits alongside ceramides, niacinamide and hyaluronic acid, which are chosen for the look and feel of a comfortable, even surface.",
+    a: "In our formulas the lysate sits alongside ceramides, niacinamide and hyaluronic acid, chosen for the look and feel of a comfortable, even surface.",
   },
   {
     q: "Is this different from a probiotic?",
@@ -60,28 +60,14 @@ export default function BifidaPage() {
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-2xl">What it is</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
-            A postbiotic lysate derived from fermented Bifidobacterium — a
-            genus long studied for its role in the gut and, increasingly, in
-            skin microbiome research. Widely used across cosmetic
-            formulation.
+            A postbiotic lysate derived from fermented Bifidobacterium.
+            Widely used across cosmetic formulation.
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-2xl">How it works</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
-            A studied ingredient category, used here for the look and feel of a
-            comfortable surface.
-          </p>
-          <p className="mt-3 text-[12px] text-ink/65">
-            Source:{" "}
-            <a
-              href="https://pubmed.ncbi.nlm.nih.gov/?term=bifidobacterium+ferment+lysate+skin"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border-b border-ink/30 hover:border-ochre hover:text-ochre"
-            >
-              Published research on Bifidobacterium ferment lysate and skin barrier proteins, PubMed (NIH)
-            </a>
+            Used here for the look and feel of a comfortable surface.
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
@@ -94,9 +80,10 @@ export default function BifidaPage() {
         <div className="border-l-2 border-ochre pl-6">
           <h2 className="font-serif text-2xl">How CHIAREL formulates with it</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
-            Found in Clarity Essence, Clarity Day Crème, Clarity Neck &amp;
-            Décolleté Crème and Clarity Eye Contour Concentrate, alongside
-            the ingredients that define each one. See{" "}
+            Found in four products: Clarity Essence, Clarity Day Crème,
+            Clarity Neck &amp; Décolleté Crème and Clarity Eye Contour
+            Concentrate, alongside the ingredients that define each one. It is
+            not in Clarity Night Crème. See{" "}
             <Link href="/science" className="border-b border-ochre text-ochre">
               The Science
             </Link>{" "}
@@ -106,17 +93,16 @@ export default function BifidaPage() {
       </section>
 
       <p className="mt-14 max-w-2xl text-[11px] leading-relaxed text-ink/65">
-        Bifida Ferment Lysate is an INCI ingredient name, not a CHIAREL
-        trademark. This page reflects published cosmetic-science
-        understanding of the ingredient category and is not a guarantee of
-        individual results.
+        Bifida Ferment Lysate is an ingredient name, not a CHIAREL
+        trademark. This page is an educational reference and is not a
+        guarantee of individual results.
       </p>
 
       <div className="mt-8 flex flex-wrap gap-6 border-t border-ink/10 pt-8 text-[12px] uppercase tracking-[0.16em]">
         <Link href="/science/l-ornithine" className="border-b border-ochre pb-0.5 text-ochre">
           L-Ornithine, Explained →
         </Link>
-        <Link href="/shop/chiarel-essence" className="border-b border-ink/30 pb-0.5 text-ink/60">
+        <Link href="/shop/clarity-essence" className="border-b border-ink/30 pb-0.5 text-ink/60">
           Shop Clarity Essence
         </Link>
       </div>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { perDayPrice, DELIVERY_DAYS } from "@/lib/pricing";
-import { getProductOrThrow, isPurchasable } from "@/lib/products";
+import { getProductOrThrow, isPurchasable, productHref } from "@/lib/products";
 
 // First-viewport hero: one continuous 2.4:1 scene (hands presenting the N1 bottle
 // on a warm cream field) with the copy set directly on it. The scene is
@@ -70,10 +70,10 @@ export default function HomeHero() {
               Begin the Ritual
             </Link>
             <Link
-              href={`/shop/${n1.slug}`}
+              href={productHref(n1.slug)}
               className="text-[11px] uppercase tracking-[0.24em] text-ink/70 underline decoration-ochre/50 underline-offset-[6px] hover:text-ochre"
             >
-              Shop N1
+              Shop Clarity Neck &amp; Décolleté Crème
             </Link>
           </div>
           {isPurchasable(n1) && (

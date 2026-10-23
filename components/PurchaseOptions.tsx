@@ -14,7 +14,7 @@ export const PURCHASE_CTA_ID = "purchase-cta";
 
 // How the three options work, as implemented by the cart and checkout
 // (lib/pricing.ts, app/api/checkout/route.ts) and stated in /terms:
-//  - The Ritual Plan: ONE payment of 2x the subscription price, a 90-day
+//  - The 90-Day Plan: ONE payment of 2x the subscription price, a 90-day
 //    supply, ONE delivery.
 //  - Subscription: the subscription price per delivery, renewing every 45
 //    days until paused or cancelled.
@@ -116,7 +116,7 @@ export default function PurchaseOptions({
         >
           <span className="min-w-0">
             <span className="block text-[12px] uppercase tracking-[0.16em] text-ochre">
-              The Ritual Plan
+              The 90-Day Plan
             </span>
             <span className="mt-0.5 block text-[13px] leading-snug text-ink/70">
               90-day supply, paid once, one delivery

@@ -2,7 +2,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getProduct, products, productImageAlt, isPurchasable, publishedInci, type Product } from "@/lib/products";
+import { getProduct, getProductByPath, productHref, products, productImageAlt, isPurchasable, publishedInci, type Product } from "@/lib/products";
 import PurchaseOptions from "@/components/PurchaseOptions";
 import TrackViewItem from "@/components/TrackViewItem";
 import StickyPurchaseBar from "@/components/StickyPurchaseBar";
@@ -35,7 +35,7 @@ function productFactSummary(p: Product): string {
 }
 
 export function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
+  return products.map((p) => ({ slug: p.path }));
 }
 
 export async function generateMetadata({
@@ -44,12 +44,12 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const p = getProduct(slug);
+  const p = getProductByPath(slug);
   if (!p) return {};
   return {
     title: productPageTitle(p.name, p.descriptor),
     description: p.blurb,
-    alternates: { canonical: `/shop/${p.slug}` },
+    alternates: { canonical: productHref(p.slug) },
     openGraph: { images: [{ url: p.og ?? p.image }] },
   };
 }
@@ -60,7 +60,7 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const p = getProduct(slug);
+  const p = getProductByPath(slug);
   if (!p) notFound();
 
   return (
@@ -84,7 +84,7 @@ export default async function ProductPage({
             breadcrumbJsonLd([
               { name: "Home", path: "/" },
               { name: "Shop", path: "/shop" },
-              { name: p.name, path: `/shop/${p.slug}` },
+              { name: p.name, path: productHref(p.slug) },
             ])
           ),
         }}
@@ -175,15 +175,11 @@ export default async function ProductPage({
                 <dd>{p.step}</dd>
               </div>
               <div className="flex gap-1.5">
-                <dt className="text-ink/65">Family:</dt>
-                <dd>{p.family}</dd>
-              </div>
-              <div className="flex gap-1.5">
                 <dt className="text-ink/65">Size:</dt>
                 <dd>{p.size}</dd>
               </div>
               <div className="flex items-center gap-1.5">
-                <dt className="text-ink/65">Color:</dt>
+                <dt className="text-ink/65">Glass colour:</dt>
                 <dd className="flex items-center gap-1.5">
                   <span
                     className="inline-block h-2.5 w-2.5 rounded-full border border-ink/20"
@@ -265,11 +261,6 @@ export default async function ProductPage({
           <FullIngredientList inci={publishedInci(p)!} />
         </Reveal>
       )}
-      {p.slug === "n1-neck-decollete" && (
-        <Reveal>
-          <N1EvidencePlaceholder />
-        </Reveal>
-      )}
       <ScienceLinks slug={p.slug} />
       {/* Slot: reviews list. Renders nothing until a real review source
           exists (never fabricated). */}
@@ -304,15 +295,12 @@ function BenefitPills({
   actives?: { name: string }[];
 }) {
   const primaryActive = actives?.[0];
-  // "Customer Tested" and "Key Ingredients Named" are only true once a
-  // product has actives on record — without that (currently just N1, whose
-  // own Formula Transparency / Testing & Evidence sections below say
-  // plainly that testing and full disclosure aren't done yet), showing
-  // these pills would contradict the page's own honest placeholder copy.
+  // "Key Ingredients Named" is only true once a product has actives on
+  // record. No testing or full-disclosure badge appears here: neither claim
+  // is on file.
   const hasActives = Boolean(actives && actives.length > 0);
   const pills = [
     primaryActive ? primaryActive.name : null,
-    hasActives ? "Customer Tested" : null,
     hasActives ? "Key Ingredients Named" : null,
     "Made to Order in Isola del Liri, Italy",
   ].filter((pill): pill is string => Boolean(pill));
@@ -577,25 +565,6 @@ function ProductReviewsSlot(_props: { slug: string }) {
   return null;
 }
 
-// N1 PDP section 8. No third-party or in-house testing has been completed
-// yet — stated plainly rather than implying evidence that doesn't exist.
-function N1EvidencePlaceholder() {
-  return (
-    <div className="border-t border-ink/10 bg-ink py-16 text-ivory">
-      <div className="mx-auto max-w-xl px-6 text-center">
-        <h2 className="font-serif text-2xl text-champagne">Testing &amp; Evidence</h2>
-        <p className="mt-4 text-sm leading-relaxed text-ivory/75">
-          Clarity Neck &amp; Décolleté Crème is designed to support hydration,
-          comfort, and a smoother-looking appearance in the skin below the
-          jawline. Product-specific testing
-          results are not yet available; this page will be updated with
-          approved evidence once testing is complete.
-        </p>
-      </div>
-    </div>
-  );
-}
-
 // The launch ritual's real AM/PM sequences, as approved in
 // CHIAREL_FOUR_PRODUCT_IMPLEMENTATION_PLAN.md §5 — the single source both
 // the homepage, /ritual, and this component draw from conceptually (kept
@@ -646,7 +615,7 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
                   </span>
                 ) : (
                   <Link
-                    href={`/shop/${slug}`}
+                    href={productHref(slug)}
                     className="tap-area text-sm text-ink/70 hover:text-ochre"
                   >
                     {item.name}
@@ -679,7 +648,7 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
                 key={item.slug}
                 className="flex flex-col gap-3 rounded-sm border border-ink/10 p-4 transition hover:border-ochre"
               >
-                <Link href={`/shop/${item.slug}`} className="flex items-center gap-4">
+                <Link href={productHref(item.slug)} className="flex items-center gap-4">
                   <div
                     className="relative h-16 w-16 shrink-0 overflow-hidden"
                     style={{ backgroundColor: NEUTRAL_FRAME_BG }}

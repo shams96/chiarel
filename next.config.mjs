@@ -56,14 +56,28 @@ const nextConfig = {
       "the-founding-pair",
       "the-ritual-set",
     ];
+    const renamedProducts = [
+      ["chiarel-essence", "clarity-essence"],
+      ["terra-radiance-creme", "clarity-day-creme"],
+      ["recovery-masque", "clarity-night-creme"],
+      ["n1-neck-decollete", "clarity-neck-decollete-creme"],
+      ["eye-contour-concentrate", "clarity-eye-contour-concentrate"],
+    ];
     return [
       ...removedProducts.map((slug) => ({
         source: `/shop/${slug}`,
         destination: "/shop",
         permanent: true,
       })),
+      // Old internal-slug product addresses -> the public /shop/<path> URLs.
+      ...renamedProducts.map(([slug, path]) => ({
+        source: `/shop/${slug}`,
+        destination: `/shop/${path}`,
+        permanent: true,
+      })),
       { source: "/science/ectoine", destination: "/science", permanent: true },
       { source: "/science/synergy", destination: "/science", permanent: true },
+      { source: "/science/comparison", destination: "/science", permanent: true },
     ];
   },
   // instrumentation.ts (dispute-rate monitor, see lib/dispute-alert-scheduler.ts)

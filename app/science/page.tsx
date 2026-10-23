@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { productHref } from "@/lib/products";
 
 export const metadata = { title: "The Science", alternates: { canonical: "/science" } };
 
@@ -8,35 +9,35 @@ const entries = [
     slug: "chiarel-essence",
     answers: "The look of fine lines and loss of firmness",
     science:
-      "Four peptides with niacinamide and hyaluronic acid, to smooth the look of fine lines and visibly firm. Hydrolyzed collagen for surface hydration.",
+      "Peptides with niacinamide and hyaluronic acid, for the look of smoother, firmer-looking skin.",
   },
   {
     name: "Clarity Day Crème",
     slug: "terra-radiance-creme",
     answers: "Dry, uncomfortable skin through the working day",
     science:
-      "Three ceramides with cholesterol and squalane, to help skin feel comfortable and hydrated. Niacinamide supports the look of an even, healthy surface.",
+      "Ceramides with cholesterol and squalane, for the look and feel of comfortable, hydrated skin. Niacinamide for the look of an even, healthy surface.",
   },
   {
     name: "Clarity Night Crème",
     slug: "recovery-masque",
     answers: "Texture that shows after a long day",
     science:
-      "Bakuchiol, a plant-derived alternative to retinol, with peptides and niacinamide, to smooth the look of texture overnight.",
+      "Bakuchiol with peptides and niacinamide, for the look of smoother texture overnight.",
   },
   {
     name: "Clarity Neck & Décolleté Crème",
     slug: "n1-neck-decollete",
     answers: "Crepey texture on the neck and chest",
     science:
-      "Copper peptide with ceramides and squalane, to smooth the look of crepey texture and keep the neck and chest hydrated.",
+      "Copper peptide with ceramides and squalane, for the look of smoother, more hydrated skin on the neck and chest.",
   },
   {
     name: "Clarity Eye Contour Concentrate",
     slug: "eye-contour-concentrate",
     answers: "Tired-looking eyes",
     science:
-      "Caffeine and peptides, to reduce the look of puffiness and dark circles. Hyaluronic acid hydrates, and light-reflecting mica brightens the look of the eye area.",
+      "Caffeine and peptides, for the look of less puffiness and dark circles. Hyaluronic acid for hydration, and light-reflecting mica for a brighter look to the eye area.",
   },
 ];
 
@@ -62,7 +63,7 @@ export default function SciencePage() {
             </p>
             <p className="mt-2 max-w-xl text-sm text-ink/70">{e.science}</p>
             <Link
-              href={`/shop/${e.slug}`}
+              href={productHref(e.slug)}
               className="mt-3 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
             >
               See the formulation →
@@ -86,9 +87,6 @@ export default function SciencePage() {
         </Link>
         <Link href="/science/l-ornithine" className="border-b border-ink/30 pb-0.5 text-ink/60">
           L-Ornithine
-        </Link>
-        <Link href="/science/comparison" className="border-b border-ink/30 pb-0.5 text-ink/60">
-          How CHIAREL Compares
         </Link>
       </div>
     </div>

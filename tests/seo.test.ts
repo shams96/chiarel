@@ -36,7 +36,7 @@ describe("product JSON-LD", () => {
       expect(ld["@context"]).toBe("https://schema.org");
       expect(ld["@type"]).toBe("Product");
       expect(ld.sku, p.slug).toBe(p.sku);
-      expect(ld.url).toBe(`${SITE_URL}/shop/${p.slug}`);
+      expect(ld.url).toBe(`${SITE_URL}/shop/${p.path}`);
       expect(ld.image.startsWith("https://"), p.slug).toBe(true);
       expect(ld.offers.priceCurrency).toBe("USD");
       expect(typeof ld.offers.price).toBe("number");

@@ -1,4 +1,4 @@
-import { products, isPurchasable } from "@/lib/products";
+import { products, isPurchasable, productHref } from "@/lib/products";
 import { SITE_URL } from "@/lib/seo";
 import { isStaging } from "@/lib/app-env";
 
@@ -10,13 +10,13 @@ function buildLlmsTxt(): string {
       const pricing = isPurchasable(p)
         ? `$${p.price.oneTime} one-time / $${p.price.subscription} on 45-day subscription`
         : "price to be announced, not yet available for purchase";
-      return `- [${p.name}](${SITE_URL}/shop/${p.slug}): ${p.descriptor} — ${pricing}.`;
+      return `- [${p.name}](${SITE_URL}${productHref(p.slug)}): ${p.descriptor} — ${pricing}.`;
     })
     .join("\n");
 
   return `# CHIAREL™
 
-> CHIAREL™ is a direct-to-consumer luxury skincare house — The House of Clarity™ — formulating customer-tested serums, moisturizers, and treatments in Isola del Liri, Italy, under pharmacist Grazia Savoriti. Each product page names its key ingredients. Products are sold exclusively at chiarel.com, either one-time or on a 45-day subscription cadence.
+> CHIAREL™ is a direct-to-consumer luxury skincare house — The House of Clarity™ — formulating serums, moisturisers, and treatments in Isola del Liri, Italy, under pharmacist Grazia Savoriti. Each product page names its key ingredients. Products are sold exclusively at chiarel.com, either one-time or on a 45-day subscription cadence.
 
 ## Key pages
 

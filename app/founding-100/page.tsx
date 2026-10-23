@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import ComingSoonPackshot from "@/components/ComingSoonPackshot";
-import { getProductOrThrow } from "@/lib/products";
+import { getProductOrThrow, productHref } from "@/lib/products";
 import { db } from "@/lib/db";
 
 export const metadata: Metadata = {
@@ -30,7 +30,7 @@ export default async function Founding100Page() {
   return (
     <div>
       {/* Hero — image-led gateway moment. The capture card is the page's
-          entire job, so it gets the visual weight; the program mechanics
+          entire job, so it gets the visual weight; the programme mechanics
           and legal terms live below, for whoever scrolls to them. */}
       <section className="relative overflow-hidden bg-ink text-ivory">
         <div className="mx-auto grid max-w-6xl gap-0 lg:grid-cols-2">
@@ -83,7 +83,7 @@ export default async function Founding100Page() {
               {full ? (
                 <p className="card-elevated rounded-md bg-white/5 p-6 text-sm leading-relaxed text-ivory/80">
                   The Founding Members are complete.{" "}
-                  <Link href="/shop/recovery-masque" className="border-b border-champagne text-champagne">
+                  <Link href={productHref("recovery-masque")} className="border-b border-champagne text-champagne">
                     Begin the 90-Day Ritual
                   </Link>{" "}
                   at its published price.
@@ -103,7 +103,7 @@ export default async function Founding100Page() {
           <ol className="mt-3 max-w-xl space-y-3 text-sm leading-relaxed text-ink/75">
             <li>
               <strong className="text-ink">1. Join.</strong> Choose your ritual
-              at its published price. The 90-day Ritual Plan, paid once,
+              at its published price. The 90-day plan, paid once,
               arrives in a single package.
             </li>
             <li>
@@ -130,7 +130,7 @@ export default async function Founding100Page() {
             <li>
               <strong className="text-ink/80">Founding Members.</strong> Limited
               to the first 100 qualifying orders. A qualifying order is one
-              90-day Ritual Plan purchase of an enrolled product at its
+              90-day plan purchase of an enrolled product at its
               published price. Limit one enrolment per household. The benefits
               are those listed on this page; CHIAREL may change them for future
               members without affecting existing members.
@@ -158,7 +158,7 @@ export default async function Founding100Page() {
       </section>
 
       <div className="mt-14 flex flex-wrap gap-6 border-t border-ink/10 pt-8 text-[12px] uppercase tracking-[0.16em]">
-        <Link href="/shop/recovery-masque" className="border-b border-ochre pb-0.5 text-ochre">
+        <Link href={productHref("recovery-masque")} className="border-b border-ochre pb-0.5 text-ochre">
           Begin the 90-Day Ritual
         </Link>
         <Link href="/science" className="border-b border-ink/30 pb-0.5 text-ink/60">

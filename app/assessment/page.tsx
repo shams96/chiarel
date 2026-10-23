@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { QUESTIONS, scoreAxes, recommend } from "@/lib/skin-assessment";
-import { getProduct } from "@/lib/products";
+import { getProduct, productHref } from "@/lib/products";
 import { useCart } from "@/lib/cart-context";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { track } from "@/lib/analytics";
@@ -73,7 +73,7 @@ export default function AssessmentPage() {
                   <p className="mt-1 max-w-md text-sm text-ink/70">{r.reason}</p>
                   <div className="mt-3 flex items-center gap-4">
                     <Link
-                      href={`/shop/${p.slug}`}
+                      href={productHref(p.slug)}
                       className="tabular-nums border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
                     >
                       View — ${p.price!.subscription} with subscription

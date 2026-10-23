@@ -9,7 +9,7 @@ const entries = [
     title: "How to Use the CHIAREL Daily Ritual",
     tag: "The Ritual",
     excerpt:
-      "The complete guide — morning and evening order, why Day Crème and Night Crème feel different by design, and how to apply each for best results.",
+      "The complete guide to the five-product ritual: morning and evening order, why Day Crème and Night Crème feel different by design, and how to apply each.",
   },
   {
     slug: "three-skins-one-house",

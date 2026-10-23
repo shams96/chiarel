@@ -11,7 +11,7 @@ import { shippingFor, shippingNote } from "@/lib/shipping";
 import { pickUpsell } from "@/lib/cart-math";
 
 const modeLabel: Record<string, string> = {
-  ninetyDay: "The Ritual Plan · 90-day supply, one delivery",
+  ninetyDay: "90-day plan · one delivery",
   subscription: "Subscription · every 45 days",
   oneTime: "One-time purchase",
 };
@@ -189,12 +189,9 @@ export default function CartDrawer() {
                 <span>Estimated total</span>
                 <span className="font-serif text-xl">${estimatedTotal}</span>
               </p>
-              {/* N1 has no testing or ingredient record yet (see its product page), so the line is not shown for a bag that contains it. */}
-              {!lines.some((l) => l.slug === "n1-neck-decollete") && (
-                <p className="mb-3 text-center text-[11px] uppercase tracking-[0.14em] text-ink/65">
-                  Customer-tested · key ingredients named
-                </p>
-              )}
+              <p className="mb-3 text-center text-[11px] uppercase tracking-[0.14em] text-ink/65">
+                Key ingredients named
+              </p>
               <Link
                 href="/cart"
                 onClick={close}
