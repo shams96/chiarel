@@ -23,7 +23,7 @@ const tiles = (html: string) =>
 
 describe("home ritual bands", () => {
   it("keeps the section anchor and drops the optional preparation link", () => {
-    expect(home).toContain('id="four-product-ritual"');
+    expect(home).toContain('id="five-product-ritual"');
     expect(home).not.toContain("optional-preparation");
     expect(home).not.toMatch(/Cleanser|Cellular Mist|Lip Concentrate/);
   });

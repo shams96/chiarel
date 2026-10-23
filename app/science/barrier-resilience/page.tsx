@@ -74,8 +74,9 @@ export default function BarrierResiliencePage() {
           <h2 className="font-serif text-2xl">Niacinamide</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             Niacinamide is chosen for the look of an even, healthy surface.
-            It is in Clarity Essence, Clarity Day Crème, Clarity Night Crème
-            and Clarity Neck &amp; Décolleté Crème.
+            It is in all five products: Clarity Essence, Clarity Day Crème,
+            Clarity Night Crème, Clarity Neck &amp; Décolleté Crème and
+            Clarity Eye Contour Concentrate.
           </p>
         </div>
         <div className="border-l-2 border-ochre pl-6">

@@ -5,7 +5,7 @@ import { RoutineBand, morningRoute, eveningRoute } from "@/components/RoutineBan
 // pmRitualHowTo in app/page.tsx (HowTo JSON-LD mirrors this copy exactly).
 export default function HomeRitual() {
   return (
-    <section id="four-product-ritual" className="bg-ivory">
+    <section id="five-product-ritual" className="bg-ivory">
       <div className="section-x pb-10 pt-20 md:pb-12 md:pt-24">
         <Reveal>
           <h2 className="font-serif text-3xl">The CHIAREL Ritual</h2>
