@@ -10,7 +10,7 @@
     "family": "Glass bottle",
     "color": {
       "name": "Red Ochre",
-      "hex": "#9B4722"
+      "hex": "#913832"
     },
     "complex": "",
     "line": "",
@@ -101,7 +101,7 @@
     "family": "Glass jar",
     "color": {
       "name": "Red Ochre",
-      "hex": "#9B4722"
+      "hex": "#913832"
     },
     "complex": "",
     "line": "",
@@ -428,7 +428,7 @@
     "family": "Glass bottle",
     "color": {
       "name": "Peach Dust",
-      "hex": "#FAD6C9"
+      "hex": "#F0D8CC"
     },
     "complex": "",
     "line": "",
