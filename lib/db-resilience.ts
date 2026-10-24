@@ -8,6 +8,12 @@ const DEFAULT_PARAMS: Record<string, string> = {
   connect_timeout: "10",
   pool_timeout: "10",
   connection_limit: "5",
+  // A connection the host or the pooler dropped silently would otherwise leave
+  // a query waiting for the operating system to give up (minutes). These make a
+  // dead socket fail fast and idle connections retire before they go stale, so
+  // the pool reconnects instead of hanging.
+  socket_timeout: "15",
+  max_idle_connection_lifetime: "20",
 };
 
 /**

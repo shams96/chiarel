@@ -10,6 +10,8 @@ describe("withConnectionDefaults", () => {
     expect(out.searchParams.get("connect_timeout")).toBe("10");
     expect(out.searchParams.get("pool_timeout")).toBe("10");
     expect(out.searchParams.get("connection_limit")).toBe("5");
+    expect(out.searchParams.get("socket_timeout")).toBe("15");
+    expect(out.searchParams.get("max_idle_connection_lifetime")).toBe("20");
   });
 
   it("never overrides a value the operator already set", () => {
