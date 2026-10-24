@@ -25,7 +25,13 @@ export async function GET(req: NextRequest) {
     }
     const t = Date.now();
     try {
-      await db.$queryRaw`select 1`;
+      // Time-boxed: a stalled connection must answer "TIMEOUT", not hang the probe.
+      await Promise.race([
+        db.$queryRaw`select 1`,
+        new Promise((_, reject) =>
+          setTimeout(() => reject(Object.assign(new Error("db check timed out"), { code: "TIMEOUT" })), 8000)
+        ),
+      ]);
       body.db = { ok: true, ms: Date.now() - t };
     } catch (err) {
       // Hostinger exposes no runtime log for this app, so a failure reports what
