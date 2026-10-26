@@ -77,7 +77,7 @@ const faqs = [
   {
     question: "How does the CHIAREL subscription work?",
     answer:
-      "Choosing subscription pricing sets a recurring delivery every 45 days, timed to how fast most people use a bottle of serum or crème, at a discounted rate. Every product is also available as a one-time purchase at full price, with no subscription required. Self-service subscription management (pause, skip, or cancel) is coming to the account experience. Until then, email orders@chiarel.com for any change.",
+      "Choosing subscription pricing sets a recurring delivery every 45 days, timed to how fast most people use a bottle of serum or crème, at a discounted rate. Every product is also available as a one-time purchase at full price, with no subscription required. To pause, skip or cancel a subscription, email orders@chiarel.com.",
   },
   {
     question: "Where is CHIAREL made?",

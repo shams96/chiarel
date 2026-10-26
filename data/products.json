@@ -19,10 +19,10 @@
       "subscription": 151,
       "oneTime": 189
     },
-    "image": "/assets/products/chiarel-essence-jar.png",
+    "image": "/assets/products/clarity-essence-bottle.png",
     "gallery": [
       {
-        "src": "/assets/products/chiarel-essence-jar.png",
+        "src": "/assets/products/clarity-essence-bottle.png",
         "alt": "Clarity Essence",
         "role": "hero"
       },
@@ -32,13 +32,13 @@
         "role": "application"
       }
     ],
-    "blurb": "Peptides with niacinamide and hyaluronic acid, for the look of smoother fine lines and firmer-looking skin. Hydrolysed collagen for surface hydration.",
+    "blurb": "Peptides with niacinamide and hyaluronic acid, for the look of smoother fine lines and firmer-looking skin. Marine-derived hydrolysed collagen for surface hydration.",
     "role": "Signature Essence of the House",
     "badge": "Signature Essence",
     "benefits": [
       "The look of smoother fine lines",
       "The look of firmer skin",
-      "Hydrolysed collagen for surface hydration"
+      "Marine-derived hydrolysed collagen for surface hydration"
     ],
     "icon": true,
     "actives": [
@@ -110,10 +110,10 @@
       "subscription": 126,
       "oneTime": 158
     },
-    "image": "/assets/products/terra-radiance-creme-jar.png",
+    "image": "/assets/products/clarity-day-creme-jar.png",
     "gallery": [
       {
-        "src": "/assets/products/terra-radiance-creme-jar.png",
+        "src": "/assets/products/clarity-day-creme-jar.png",
         "alt": "Clarity Day Crème",
         "role": "hero"
       },
@@ -216,10 +216,10 @@
       "subscription": 118,
       "oneTime": 148
     },
-    "image": "/assets/products/recovery-masque-jar.png",
+    "image": "/assets/products/clarity-night-creme-jar.png",
     "gallery": [
       {
-        "src": "/assets/products/recovery-masque-jar.png",
+        "src": "/assets/products/clarity-night-creme-jar.png",
         "alt": "Clarity Night Crème",
         "role": "hero"
       },
@@ -328,11 +328,11 @@
       "oneTime": 138
     },
     "hidePriceUntilApproved": false,
-    "image": "/assets/products/n1-neck-decollete-jar.png",
+    "image": "/assets/products/clarity-neck-decollete-creme-bottle.png",
     "imageIsPlaceholder": false,
     "gallery": [
       {
-        "src": "/assets/products/n1-neck-decollete-jar.png",
+        "src": "/assets/products/clarity-neck-decollete-creme-bottle.png",
         "alt": "Clarity Neck & Décolleté Crème",
         "role": "hero"
       },
@@ -437,7 +437,7 @@
       "subscription": 151,
       "oneTime": 189
     },
-    "image": "/assets/products/eye-contour-concentrate-jar.png",
+    "image": "/assets/products/clarity-eye-contour-concentrate-bottle.png",
     "imageIsPlaceholder": false,
     "blurb": "Caffeine and peptides, for the look of less puffiness and dark circles. Hyaluronic acid for hydration, and light-reflecting mica for a brighter-looking eye area.",
     "benefits": [

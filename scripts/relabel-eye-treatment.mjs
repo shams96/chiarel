@@ -20,7 +20,7 @@ const ROOT = execFileSync("git", ["rev-parse", "--show-toplevel"], { encoding: "
 const sharp = createRequire(join(ROOT, "package.json"))("sharp");
 
 const arg = (n, d) => (process.argv.includes(n) ? process.argv[process.argv.indexOf(n) + 1] : d);
-const SRC = resolve(ROOT, arg("--src", "public/assets/products/eye-contour-concentrate-jar.png"));
+const SRC = resolve(ROOT, arg("--src", "public/assets/products/clarity-eye-contour-concentrate-bottle.png"));
 const OUT = resolve(ROOT, arg("--out", SRC));
 const FONTS = join(ROOT, "public/fonts");
 const PY = process.env.PYTHON || "python";

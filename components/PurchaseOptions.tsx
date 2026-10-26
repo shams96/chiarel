@@ -39,7 +39,7 @@ export default function PurchaseOptions({
   const { add } = useCart();
 
   // Radio pattern: one tab stop (the selected option); arrows move and select.
-  const TIERS: Tier[] = ["ninetyDay", "single", "oneTime"];
+  const TIERS: Tier[] = ["single", "ninetyDay", "oneTime"];
   const onGroupKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     const target = radioTargetIndex(TIERS.length, TIERS.indexOf(tier), e.key);
     if (target === null) return;
@@ -56,9 +56,9 @@ export default function PurchaseOptions({
       ? {
           price: summary.ritual.total,
           perDay: perDayPrice(summary.ritual.total, 90),
-          label: "one payment · 90-day supply · one delivery",
-          saving: summary.ritual.saving,
-          savingNote: "vs. buying twice one-time",
+          label: "",
+          saving: 0,
+          savingNote: "",
         }
       : tier === "single"
         ? {
@@ -90,46 +90,25 @@ export default function PurchaseOptions({
           <span className="font-serif text-4xl leading-none">${primary.perDay}</span>
           <span className="text-[13px] text-ink/70">a day</span>
         </p>
-        <p className="mt-1.5 text-[13px] text-ink/70">
-          ${primary.price} · {primary.label}
-        </p>
-        <p className="mt-1.5 min-h-[1.25rem] text-[13px] text-ochre">
-          {primary.saving > 0
-            ? `You save $${primary.saving} ${primary.savingNote}`
-            : summary.subscription.saving > 0
-              ? `Subscribe and save $${summary.subscription.saving} per delivery`
-              : ""}
-        </p>
+        {tier !== "ninetyDay" && (
+          <>
+            <p className="mt-1.5 text-[13px] text-ink/70">
+              ${primary.price} · {primary.label}
+            </p>
+            <p className="mt-1.5 min-h-[1.25rem] text-[13px] text-ochre">
+              {primary.saving > 0
+                ? `You save $${primary.saving} ${primary.savingNote}`
+                : summary.subscription.saving > 0
+                  ? `Subscribe and save $${summary.subscription.saving} per delivery`
+                  : ""}
+            </p>
+          </>
+        )}
       </div>
 
       {/* role="radiogroup"/"radio": a mutually exclusive choice; aria-checked
           carries the same state sighted users get from the ochre border. */}
       <div role="radiogroup" aria-label="Purchase plan" onKeyDown={onGroupKeyDown} className="mt-4 space-y-2">
-        <button
-          type="button"
-          role="radio"
-          aria-checked={tier === "ninetyDay"}
-          data-tier="ninetyDay"
-          tabIndex={tier === "ninetyDay" ? 0 : -1}
-          onClick={() => chooseTier("ninetyDay")}
-          className={optionClass(tier === "ninetyDay")}
-        >
-          <span className="min-w-0">
-            <span className="block text-[12px] uppercase tracking-[0.16em] text-ochre">
-              The 90-Day Plan
-            </span>
-            <span className="mt-0.5 block text-[13px] leading-snug text-ink/70">
-              90-day supply, paid once, one delivery
-            </span>
-          </span>
-          <span className="shrink-0 text-right">
-            <span className="block font-serif text-xl leading-tight">${summary.ritual.total}</span>
-            {summary.ritual.saving > 0 && (
-              <span className="block text-[11px] text-ochre">Save ${summary.ritual.saving}</span>
-            )}
-          </span>
-        </button>
-
         <button
           type="button"
           role="radio"
@@ -156,6 +135,30 @@ export default function PurchaseOptions({
               <span className="block text-[11px] text-ochre">
                 Save ${summary.subscription.saving} each
               </span>
+            )}
+          </span>
+        </button>
+
+        <button
+          type="button"
+          role="radio"
+          aria-checked={tier === "ninetyDay"}
+          data-tier="ninetyDay"
+          tabIndex={tier === "ninetyDay" ? 0 : -1}
+          onClick={() => chooseTier("ninetyDay")}
+          className={optionClass(tier === "ninetyDay")}
+        >
+          <span className="min-w-0">
+            <span className="block text-[12px] uppercase tracking-[0.16em] text-ochre">
+              The 90-Day Plan
+            </span>
+            <span className="mt-0.5 block text-[13px] leading-snug text-ink/70">
+              90 days, paid once: ${summary.ritual.total} (2 × ${summary.subscription.perDelivery})
+            </span>
+          </span>
+          <span className="shrink-0 text-right">
+            {summary.ritual.saving > 0 && (
+              <span className="block text-[11px] text-ochre">Save ${summary.ritual.saving}</span>
             )}
           </span>
         </button>
