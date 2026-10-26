@@ -11,6 +11,11 @@ import type { ProductGalleryImage } from "@/lib/products";
 // implements. Single-image products render as one hero image; the thumbnail
 // rail and swipe track only mount once a product actually has more than one
 // gallery image.
+// Studio shots are 4:5 with the product in the middle band. On phones the
+// frame is 5:4, so anchor the crop high enough to keep the whole product.
+const studioFit = (img: ProductGalleryImage) =>
+  img.role === "studio" ? "object-[50%_45%] md:object-center" : "";
+
 export default function ProductGallery({
   images,
   step,
@@ -112,7 +117,7 @@ export default function ProductGallery({
                   fill
                   priority={i === 0}
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
+                  className={`object-cover ${studioFit(img)}`}
                   onLoad={i === 0 ? () => setLoaded(true) : undefined}
                 />
               </div>
@@ -131,7 +136,7 @@ export default function ProductGallery({
               fill
               priority
               sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover"
+              className={`object-cover ${studioFit(current)}`}
               onLoad={() => setLoaded(true)}
             />
           </motion.div>

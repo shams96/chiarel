@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getProduct, productImageAlt, isPurchasable, type Product, productHref } from "@/lib/products";
+import { getProduct, productImageAlt, isPurchasable, studioImage, type Product, productHref } from "@/lib/products";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { productHoverClass } from "@/lib/motion";
 
@@ -102,7 +102,7 @@ function RoutineRow({ entries, steps }: { entries: Entry[]; steps: Step[] }) {
             style={{ backgroundColor: NEUTRAL_FRAME_BG }}
           >
             <Image
-              src={p.image}
+              src={studioImage(p)}
               alt={productImageAlt(p)}
               fill
               sizes="(min-width: 768px) 50vw, 100vw"
@@ -176,15 +176,15 @@ function CompactRow({ entries }: { entries: Entry[] }) {
               className="group block min-h-[44px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ochre"
             >
               <div
-                className="relative h-52 overflow-hidden md:h-64"
+                className="relative aspect-[4/5] overflow-hidden"
                 style={{ backgroundColor: NEUTRAL_FRAME_BG }}
               >
                 <Image
-                  src={p.image}
+                  src={studioImage(p)}
                   alt={productImageAlt(p)}
                   fill
                   sizes={lead ? "(min-width: 768px) 30vw, 100vw" : "(min-width: 768px) 20vw, 50vw"}
-                  className={`object-contain ${productHoverClass(p.step)}`}
+                  className={`object-cover ${productHoverClass(p.step)}`}
                 />
               </div>
               {label && (

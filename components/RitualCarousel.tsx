@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { productImageAlt, type Product, productHref } from "@/lib/products";
+import { productImageAlt, studioImage, type Product, productHref } from "@/lib/products";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { productHoverClass } from "@/lib/motion";
 
@@ -33,7 +33,7 @@ export default function RitualCarousel({ products }: { products: Product[] }) {
             style={{ backgroundColor: NEUTRAL_FRAME_BG }}
           >
             <Image
-              src={p.image}
+              src={studioImage(p)}
               alt={productImageAlt(p)}
               fill
               sizes="(max-width: 640px) 72vw, (max-width: 1152px) 30vw, 331px"
