@@ -11,7 +11,7 @@ const concerns = [
   "Dryness",
   "Crepey-looking texture",
   "The appearance of horizontal lines",
-  "Reduced visible suppleness",
+  "The look of improved suppleness",
 ];
 
 export default function HomeN1Feature() {
