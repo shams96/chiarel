@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { productImageAlt, isPurchasable, type Product, productHref } from "@/lib/products";
+import { productImageAlt, isPurchasable, studioImage, type Product, productHref } from "@/lib/products";
 import { perDayPrice } from "@/lib/pricing";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { productHoverClass } from "@/lib/motion";
@@ -15,11 +15,11 @@ export default function ProductCard({
   return (
     <Link href={productHref(product.slug)} className="btn-press group block">
       <div
-        className="product-frame aspect-square"
+        className="product-frame aspect-[4/5]"
         style={{ backgroundColor: NEUTRAL_FRAME_BG }}
       >
         <Image
-          src={product.image}
+          src={studioImage(product)}
           alt={productImageAlt(product)}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"

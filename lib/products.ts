@@ -6,7 +6,7 @@ import data from "@/data/products.json";
 export type ProductGalleryImage = {
   src: string;
   alt: string;
-  role?: "hero" | "texture" | "application" | "lifestyle" | "ingredient" | "detail";
+  role?: "studio" | "hero" | "texture" | "application" | "lifestyle" | "ingredient" | "detail";
 };
 
 export type Product = {
@@ -32,6 +32,8 @@ export type Product = {
   // "Price to be announced" state instead of a number.
   price?: { subscription: number; oneTime: number };
   image: string;
+  /** Studio-staged hero (4:5): the big first picture on the product page, cards and ritual tiles. Falls back to `image`. */
+  studio?: string;
   /** Optional share-card image (og:image) when the hero is a single item, e.g. for sets. */
   og?: string;
   /**
@@ -144,6 +146,11 @@ export const getProductByPath = (path: string) =>
 export function productHref(slug: string): string {
   const p = getProduct(slug);
   return p ? `/shop/${p.path}` : "/shop";
+}
+
+/** The studio-staged 4:5 hero for big picture slots; falls back to the transparent packshot. */
+export function studioImage(p: Product): string {
+  return p.studio ?? p.image;
 }
 
 /** Accessible alt text that discloses placeholder imagery instead of presenting it as real product photography. */

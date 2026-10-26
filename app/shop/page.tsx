@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getProduct, getProductOrThrow, productImageAlt, productHref } from "@/lib/products";
+import { getProduct, getProductOrThrow, productImageAlt, productHref, studioImage } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 
@@ -34,13 +34,13 @@ export default function ShopPage() {
 
       {/* Featured category hero — standardized neutral frame, same as every other product tile */}
       <section
-        className="mt-10 flex flex-col items-center gap-8 rounded-md border border-ink/10 p-8 md:flex-row md:p-12"
+        className="mt-10 flex flex-col items-center gap-8 overflow-hidden rounded-md border border-ink/10 md:flex-row md:gap-12 md:pr-12"
         style={{ backgroundColor: NEUTRAL_FRAME_BG }}
       >
-        <div className="relative aspect-square w-full max-w-xs shrink-0 overflow-hidden">
-          <Image src={n1.image} alt={productImageAlt(n1)} fill sizes="320px" className="object-contain" />
+        <div className="relative aspect-[4/5] w-full shrink-0 overflow-hidden md:w-[44%]">
+          <Image src={studioImage(n1)} alt={productImageAlt(n1)} fill sizes="(min-width: 768px) 44vw, 100vw" className="object-cover" />
         </div>
-        <div>
+        <div className="px-8 pb-10 md:p-0">
           <p className="text-[11px] uppercase tracking-[0.18em] text-ochre">
             Neck &amp; Décolleté Crème
           </p>

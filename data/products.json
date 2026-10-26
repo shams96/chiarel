@@ -22,6 +22,11 @@
     "image": "/assets/products/clarity-essence-bottle.png",
     "gallery": [
       {
+        "src": "/assets/products/clarity-essence-hero.jpg",
+        "alt": "Clarity Essence™ bottle, studio shot",
+        "role": "studio"
+      },
+      {
         "src": "/assets/products/clarity-essence-bottle.png",
         "alt": "Clarity Essence",
         "role": "hero"
@@ -88,7 +93,9 @@
       "Apply to slightly damp skin, morning and evening.",
       "Pause 10–30 seconds before your moisturiser step."
     ],
-    "howToUseSource": "app/science/application/page.tsx; app/journal/chiarel-ritual-guide/page.tsx"
+    "howToUseSource": "app/science/application/page.tsx; app/journal/chiarel-ritual-guide/page.tsx",
+    "studio": "/assets/products/clarity-essence-hero.jpg",
+    "og": "/assets/products/clarity-essence-og.jpg"
   },
   {
     "slug": "terra-radiance-creme",
@@ -112,6 +119,11 @@
     },
     "image": "/assets/products/clarity-day-creme-jar.png",
     "gallery": [
+      {
+        "src": "/assets/products/clarity-day-creme-hero.jpg",
+        "alt": "Clarity Day Crème™ jar, studio shot",
+        "role": "studio"
+      },
       {
         "src": "/assets/products/clarity-day-creme-jar.png",
         "alt": "Clarity Day Crème",
@@ -194,7 +206,9 @@
       "Use in the morning.",
       "Follow with SPF."
     ],
-    "howToUseSource": "app/science/application/page.tsx; app/journal/chiarel-ritual-guide/page.tsx"
+    "howToUseSource": "app/science/application/page.tsx; app/journal/chiarel-ritual-guide/page.tsx",
+    "studio": "/assets/products/clarity-day-creme-hero.jpg",
+    "og": "/assets/products/clarity-day-creme-og.jpg"
   },
   {
     "slug": "recovery-masque",
@@ -218,6 +232,11 @@
     },
     "image": "/assets/products/clarity-night-creme-jar.png",
     "gallery": [
+      {
+        "src": "/assets/products/clarity-night-creme-hero.jpg",
+        "alt": "Clarity Night Crème™ jar, studio shot",
+        "role": "studio"
+      },
       {
         "src": "/assets/products/clarity-night-creme-jar.png",
         "alt": "Clarity Night Crème",
@@ -304,7 +323,9 @@
       "Press and smooth onto slightly damp skin after Clarity Essence™.",
       "Use in the evening."
     ],
-    "howToUseSource": "app/journal/chiarel-ritual-guide/page.tsx"
+    "howToUseSource": "app/journal/chiarel-ritual-guide/page.tsx",
+    "studio": "/assets/products/clarity-night-creme-hero.jpg",
+    "og": "/assets/products/clarity-night-creme-og.jpg"
   },
   {
     "slug": "n1-neck-decollete",
@@ -331,6 +352,11 @@
     "image": "/assets/products/clarity-neck-decollete-creme-bottle.png",
     "imageIsPlaceholder": false,
     "gallery": [
+      {
+        "src": "/assets/products/clarity-neck-decollete-creme-hero.jpg",
+        "alt": "Clarity Neck & Décolleté Crème™ bottle, studio shot",
+        "role": "studio"
+      },
       {
         "src": "/assets/products/clarity-neck-decollete-creme-bottle.png",
         "alt": "Clarity Neck & Décolleté Crème",
@@ -415,7 +441,9 @@
       {
         "name": "Squalane"
       }
-    ]
+    ],
+    "studio": "/assets/products/clarity-neck-decollete-creme-hero.jpg",
+    "og": "/assets/products/clarity-neck-decollete-creme-og.jpg"
   },
   {
     "slug": "eye-contour-concentrate",
@@ -493,6 +521,20 @@
       },
       {
         "name": "Hyaluronic Acid"
+      }
+    ],
+    "studio": "/assets/products/clarity-eye-contour-concentrate-hero.jpg",
+    "og": "/assets/products/clarity-eye-contour-concentrate-og.jpg",
+    "gallery": [
+      {
+        "src": "/assets/products/clarity-eye-contour-concentrate-hero.jpg",
+        "alt": "Clarity Eye Contour Concentrate™ bottle, studio shot",
+        "role": "studio"
+      },
+      {
+        "src": "/assets/products/clarity-eye-contour-concentrate-bottle.png",
+        "alt": "Clarity Eye Contour Concentrate™",
+        "role": "hero"
       }
     ]
   }

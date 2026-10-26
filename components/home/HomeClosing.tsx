@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
-import { getProductOrThrow, productImageAlt, productHref } from "@/lib/products";
+import { getProductOrThrow, productImageAlt, productHref, studioImage } from "@/lib/products";
 
 // Final CTA: begin the ritual with the Essence and the Day Crème, the two morning
 // steps. Slot for an email-signup component: add it directly after this section
@@ -19,13 +19,13 @@ export function HomeFinalCta() {
             className="card-elevated product-frame col-span-3 aspect-[4/5]"
             style={{ backgroundColor: NEUTRAL_FRAME_BG }}
           >
-            <Image src={essence.image} alt={productImageAlt(essence)} fill sizes="35vw" />
+            <Image src={studioImage(essence)} alt={productImageAlt(essence)} fill sizes="35vw" />
           </div>
           <div
             className="card-elevated product-frame col-span-2 aspect-[4/5] self-end"
             style={{ backgroundColor: NEUTRAL_FRAME_BG }}
           >
-            <Image src={day.image} alt={productImageAlt(day)} fill sizes="25vw" />
+            <Image src={studioImage(day)} alt={productImageAlt(day)} fill sizes="25vw" />
           </div>
         </Reveal>
         <Reveal delay={0.15} className="w-full md:w-2/5">
