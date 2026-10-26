@@ -18,7 +18,7 @@ export const FORMULATOR_EXTERNAL_URL = "https://www.naturalyou.it/about-us-detai
 // in webPageJsonLd and the visible "content last reviewed" line, both of
 // which are freshness signals AI systems weight for citation. Full ISO 8601
 // datetimes, not bare dates — some crawlers only recognize the full form.
-export const HOMEPAGE_LAST_UPDATED = "2026-08-24T00:00:00Z";
+export const HOMEPAGE_LAST_UPDATED = "2026-10-25T00:00:00Z";
 // The site's actual launch date (first substantive build commit) — used as
 // datePublished, distinct from the dateModified value above.
 export const HOMEPAGE_PUBLISHED = "2026-08-07T00:00:00Z";
