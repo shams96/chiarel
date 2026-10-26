@@ -55,7 +55,7 @@ export default function Footer() {
           <div className="relative min-h-[280px] overflow-hidden rounded-[1.5rem] bg-garden md:min-h-[460px]">
             <div className="relative h-full w-full">
               <Image
-                src="/assets/products/recovery-masque-jar.png"
+                src="/assets/products/clarity-night-creme-jar.png"
                 alt="Clarity Night Crème jar"
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"

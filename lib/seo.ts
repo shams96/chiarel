@@ -23,7 +23,7 @@ export const HOMEPAGE_LAST_UPDATED = "2026-08-24T00:00:00Z";
 // datePublished, distinct from the dateModified value above.
 export const HOMEPAGE_PUBLISHED = "2026-08-07T00:00:00Z";
 // Display-friendly versions of the two dates above, for visible on-page text.
-export const HOMEPAGE_LAST_UPDATED_DISPLAY = "August 24, 2026";
+export const HOMEPAGE_LAST_UPDATED_DISPLAY = "October 25, 2026";
 export const HOMEPAGE_PUBLISHED_DISPLAY = "August 7, 2026";
 
 export const organizationJsonLd = {

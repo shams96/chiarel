@@ -223,7 +223,7 @@ export default async function ProductPage({
       {p.slug === "terra-radiance-creme" && (
         <EditorialFeature
           src="/assets/products/terra-radiance-creme-editorial.jpg"
-          alt="A woman holding Clarity Day Crème against the Capri coastline, with the line Radiance, Elevated"
+          alt="A woman holding Clarity Day Crème against the Capri coastline"
           kicker="The Day Crème"
           headline="The daily crème of the morning ritual."
           body="Clarity Day Crème is the morning crème of the ritual."
@@ -498,7 +498,7 @@ function N1WhatItsForAndFeel() {
             <li>· The visible appearance of dryness</li>
             <li>· Crepey-looking texture</li>
             <li>· The appearance of horizontal lines</li>
-            <li>· Reduced visible suppleness</li>
+            <li>· The look of improved suppleness</li>
           </ul>
         </div>
         <div>

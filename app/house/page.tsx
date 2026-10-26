@@ -22,8 +22,8 @@ export default function HousePage() {
         <section>
           <h2 className="font-serif text-2xl text-ink">A Red Drawn From the Land</h2>
           <p className="mt-2 max-w-2xl">
-            Red Ochre is not a packaging color chosen from a swatch book. It is
-            the color of Isola del Liri itself — the terracotta, clay, and
+            Red Ochre is not a packaging colour chosen from a swatch book. It is
+            the colour of Isola del Liri itself — the terracotta, clay, and
             sun-warmed stone of the Liri valley — carried into the House as
             its one signature red. The water stays water. The green stays
             green. Only the red is CHIAREL&rsquo;s.
