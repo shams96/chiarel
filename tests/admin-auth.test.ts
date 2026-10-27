@@ -26,6 +26,11 @@ vi.mock("@/lib/db", () => ({
         const s = store.sessions.find((x) => x.id === where.id);
         return s ? { ...s, user: store.users.find((u) => u.id === s.userId)! } : null;
       },
+      deleteMany: async ({ where }: { where: { userId: string; id?: { not: string } } }) => {
+        store.sessions = store.sessions.filter(
+          (s) => !(s.userId === where.userId && (!where.id || s.id !== where.id.not))
+        );
+      },
       delete: async ({ where }: { where: { id: string } }) => {
         const before = store.sessions.length;
         store.sessions = store.sessions.filter((s) => s.id !== where.id);
@@ -59,6 +64,7 @@ const auth = await import("@/lib/auth");
 const usersRoute = await import("@/app/api/admin/users/route");
 const userIdRoute = await import("@/app/api/admin/users/[id]/route");
 const loginRoute = await import("@/app/api/admin/auth/login/route");
+const passwordRoute = await import("@/app/api/admin/auth/password/route");
 
 const hash = bcrypt.hashSync("correct-horse-battery", 4);
 function addUser(id: string, role: U["role"], email = `${id}@x.com`) {
@@ -311,5 +317,73 @@ describe("every admin API route is protected", () => {
     const guarded = src.match(/withRole\s*(<[^>]*>)?\s*\(/g) ?? [];
     expect(handlers.length).toBeGreaterThan(0);
     expect(guarded.length).toBe(handlers.length);
+  });
+});
+
+describe("POST /api/admin/auth/password", () => {
+  const post = async (cookie: string | undefined, body: unknown) =>
+    passwordRoute.POST(req("POST", "/api/admin/auth/password", { cookie, body }));
+  const NEW = "a-brand-new-passphrase";
+  const OLD = "correct-horse-battery";
+
+  it("requires a signed-in user", async () => {
+    expect((await post(undefined, { currentPassword: OLD, newPassword: NEW })).status).toBe(401);
+  });
+
+  it.each(["ADMIN", "MEMBER", "VIEWER"] as const)("lets a %s change their own password", async (role) => {
+    addUser("u", role);
+    const res = await post(await cookieFor("u"), { currentPassword: OLD, newPassword: NEW });
+    expect(res.status).toBe(200);
+    expect(bcrypt.compareSync(NEW, store.users[0].passwordHash)).toBe(true);
+  });
+
+  it("only ever changes the session user, whatever the body says", async () => {
+    addUser("u", "ADMIN");
+    addUser("victim", "ADMIN");
+    const res = await post(await cookieFor("u"), { currentPassword: OLD, newPassword: NEW, userId: "victim", email: "victim@x.com" });
+    expect(res.status).toBe(200);
+    expect(store.users.find((x) => x.id === "victim")!.passwordHash).toBe(hash);
+  });
+
+  it("rejects a wrong current password and leaves the hash alone", async () => {
+    addUser("u", "ADMIN");
+    const res = await post(await cookieFor("u"), { currentPassword: "wrong-wrong-wrong", newPassword: NEW });
+    expect(res.status).toBe(400);
+    expect(store.users[0].passwordHash).toBe(hash);
+  });
+
+  it("rejects missing, short and unchanged new passwords", async () => {
+    addUser("u", "ADMIN");
+    const cookie = await cookieFor("u");
+    expect((await post(cookie, { currentPassword: OLD })).status).toBe(400);
+    expect((await post(cookie, { currentPassword: OLD, newPassword: "short" })).status).toBe(400);
+    expect((await post(cookie, { currentPassword: OLD, newPassword: OLD })).status).toBe(400);
+    expect(store.users[0].passwordHash).toBe(hash);
+  });
+
+  it("rejects a new password longer than bcrypt reads (72 bytes)", async () => {
+    addUser("u", "ADMIN");
+    const res = await post(await cookieFor("u"), { currentPassword: OLD, newPassword: "x".repeat(73) });
+    expect(res.status).toBe(400);
+    expect(store.users[0].passwordHash).toBe(hash);
+  });
+
+  it("revokes the user's other sessions but keeps the current one", async () => {
+    addUser("u", "ADMIN");
+    addUser("other", "ADMIN");
+    const cookie = await cookieFor("u");
+    await cookieFor("u");
+    await cookieFor("other");
+    await post(cookie, { currentPassword: OLD, newPassword: NEW });
+    expect(store.sessions.filter((s) => s.userId === "u")).toHaveLength(1);
+    expect(store.sessions.filter((s) => s.userId === "other")).toHaveLength(1);
+    expect((await post(cookie, { currentPassword: NEW, newPassword: "yet-another-passphrase" })).status).toBe(200);
+  });
+
+  it("throttles repeated attempts", async () => {
+    addUser("u", "ADMIN");
+    const cookie = await cookieFor("u");
+    store.limited = true;
+    expect((await post(cookie, { currentPassword: OLD, newPassword: NEW })).status).toBe(429);
   });
 });

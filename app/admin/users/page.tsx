@@ -91,7 +91,10 @@ export default function AdminUsersPage() {
 
   return (
     <div style={{ maxWidth: 720, margin: "40px auto", fontFamily: "system-ui, sans-serif" }}>
-      <h1 style={{ fontSize: 20, marginBottom: 24 }}>Admin users</h1>
+      <h1 style={{ fontSize: 20, marginBottom: 8 }}>Admin users</h1>
+      <p style={{ fontSize: 13, marginBottom: 24 }}>
+        <a href="/admin/account">Change my password</a>
+      </p>
 
       {error && (
         <p style={{ color: "#b00020", fontSize: 13, marginBottom: 16 }} role="alert">
