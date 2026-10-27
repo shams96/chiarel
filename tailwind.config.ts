@@ -17,6 +17,12 @@ const config: Config = {
         champagne: "#D6C5A0",
         ivory: "#F8F6F1",
         ink: "#1C1A17",
+        // Home hero, Face/Beyond panels and closing band palette. garden,
+        // champagne, ivory and ink above already match it exactly; ochre and
+        // peach differ, so these two are separate tokens (do not repoint the
+        // sitewide ones).
+        redochre: "#913832",
+        peachdust: "#F0D8CC",
       },
       fontFamily: {
         serif: ["var(--font-serif)", "serif"],
