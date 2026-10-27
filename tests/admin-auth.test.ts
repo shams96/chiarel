@@ -8,7 +8,8 @@ process.env.ADMIN_SESSION_SECRET = "unit-test-secret-unit-test-secret";
 
 type U = { id: string; email: string; role: "ADMIN" | "MEMBER" | "VIEWER"; passwordHash: string; createdAt: Date };
 type S = { id: string; userId: string; expiresAt: Date };
-const store = { users: [] as U[], sessions: [] as S[], nextId: 1, limited: false };
+type A = Record<string, unknown> & { id: string; createdAt: Date; action: string; actorEmail: string };
+const store = { users: [] as U[], sessions: [] as S[], audit: [] as A[], nextId: 1, limited: false, failAudit: false };
 
 const pick = (u: U, select?: Record<string, boolean>) =>
   select ? Object.fromEntries(Object.keys(select).map((k) => [k, (u as Record<string, unknown>)[k]])) : u;
@@ -16,6 +17,25 @@ const pick = (u: U, select?: Record<string, boolean>) =>
 vi.mock("@/lib/rate-limit", () => ({ isRateLimited: () => store.limited, clientIp: () => "9.9.9.9" }));
 vi.mock("@/lib/db", () => ({
   db: {
+    // Array form runs the already-created operations together; callback form gets the same client.
+    $transaction: async (arg: unknown) =>
+      Array.isArray(arg) ? Promise.all(arg) : (arg as (tx: unknown) => unknown)((await import("@/lib/db")).db),
+    auditLog: {
+      create: async ({ data }: { data: Record<string, unknown> }) => {
+        if (store.failAudit) throw new Error("audit down");
+        const e = { id: `audit_${store.nextId}`, createdAt: new Date(Date.UTC(2026, 0, 1) + store.nextId++ * 1000), ...data } as A;
+        store.audit.push(e);
+        return e;
+      },
+      findMany: async ({ where, take, cursor, skip }: { where: { action?: { startsWith: string }; actorEmail?: { contains: string } }; take: number; cursor?: { id: string }; skip?: number }) => {
+        let rows = store.audit
+          .filter((e) => !where.action || e.action.startsWith(where.action.startsWith))
+          .filter((e) => !where.actorEmail || e.actorEmail.toLowerCase().includes(where.actorEmail.contains.toLowerCase()))
+          .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+        if (cursor) rows = rows.slice(rows.findIndex((e) => e.id === cursor.id) + (skip ?? 0));
+        return rows.slice(0, take);
+      },
+    },
     session: {
       create: async ({ data }: { data: Omit<S, "id"> }) => {
         const s = { id: `sess_${store.nextId++}`, ...data };
@@ -27,9 +47,11 @@ vi.mock("@/lib/db", () => ({
         return s ? { ...s, user: store.users.find((u) => u.id === s.userId)! } : null;
       },
       deleteMany: async ({ where }: { where: { userId: string; id?: { not: string } } }) => {
+        const before = store.sessions.length;
         store.sessions = store.sessions.filter(
           (s) => !(s.userId === where.userId && (!where.id || s.id !== where.id.not))
         );
+        return { count: before - store.sessions.length };
       },
       delete: async ({ where }: { where: { id: string } }) => {
         const before = store.sessions.length;
@@ -38,8 +60,11 @@ vi.mock("@/lib/db", () => ({
       },
     },
     user: {
-      findUnique: async ({ where }: { where: { id?: string; email?: string } }) =>
-        store.users.find((u) => (where.id ? u.id === where.id : u.email === where.email)) ?? null,
+      // A copy, like Prisma returns: a later update must not rewrite an already-fetched row.
+      findUnique: async ({ where }: { where: { id?: string; email?: string } }) => {
+        const u = store.users.find((x) => (where.id ? x.id === where.id : x.email === where.email));
+        return u ? { ...u } : null;
+      },
       findMany: async ({ select }: { select?: Record<string, boolean> }) => store.users.map((u) => pick(u, select)),
       count: async ({ where }: { where: { role: string; id: { not: string } } }) =>
         store.users.filter((u) => u.role === where.role && u.id !== where.id.not).length,
@@ -65,6 +90,11 @@ const usersRoute = await import("@/app/api/admin/users/route");
 const userIdRoute = await import("@/app/api/admin/users/[id]/route");
 const loginRoute = await import("@/app/api/admin/auth/login/route");
 const passwordRoute = await import("@/app/api/admin/auth/password/route");
+const logoutRoute = await import("@/app/api/admin/auth/logout/route");
+const meRoute = await import("@/app/api/admin/me/route");
+const auditRoute = await import("@/app/api/admin/audit/route");
+const sessionsRoute = await import("@/app/api/admin/users/[id]/sessions/route");
+const resetRoute = await import("@/app/api/admin/users/[id]/password/route");
 
 const hash = bcrypt.hashSync("correct-horse-battery", 4);
 function addUser(id: string, role: U["role"], email = `${id}@x.com`) {
@@ -84,8 +114,10 @@ const ctx = (id: string) => ({ params: Promise.resolve({ id }) });
 beforeEach(() => {
   store.users = [];
   store.sessions = [];
+  store.audit = [];
   store.nextId = 1;
   store.limited = false;
+  store.failAudit = false;
   vi.spyOn(console, "error").mockImplementation(() => {});
 });
 
@@ -385,5 +417,194 @@ describe("POST /api/admin/auth/password", () => {
     const cookie = await cookieFor("u");
     store.limited = true;
     expect((await post(cookie, { currentPassword: OLD, newPassword: NEW })).status).toBe(429);
+  });
+});
+
+// ---- Admin console P0: audit log, shell support, session hygiene ----
+describe("audit log", () => {
+  const OLD = "correct-horse-battery";
+  const actions = () => store.audit.map((e) => e.action);
+  const last = () => store.audit[store.audit.length - 1];
+
+  it("records user create, role change and delete with the acting admin", async () => {
+    addUser("a", "ADMIN");
+    const cookie = await cookieFor("a");
+    const created = await (await usersRoute.POST(req("POST", "/api/admin/users", { cookie, body: { email: "n@x.com", password: "twelve-chars-ok", role: "VIEWER" } }))).json();
+    await userIdRoute.PATCH(req("PATCH", "/x", { cookie, body: { role: "MEMBER" } }), ctx(created.user.id));
+    await userIdRoute.DELETE(req("DELETE", "/x", { cookie }), ctx(created.user.id));
+    expect(actions()).toEqual(["user.create", "user.role_change", "user.delete"]);
+    expect(store.audit.every((e) => e.actorEmail === "a@x.com" && e.ip === "9.9.9.9")).toBe(true);
+    expect(store.audit[1].before).toMatchObject({ role: "VIEWER" });
+    expect(store.audit[1].after).toMatchObject({ role: "MEMBER" });
+  });
+
+  it("never lets a credential reach an entry", async () => {
+    addUser("a", "ADMIN");
+    addUser("t", "MEMBER");
+    const cookie = await cookieFor("a");
+    await usersRoute.POST(req("POST", "/api/admin/users", { cookie, body: { email: "n@x.com", password: "super-secret-one-1", role: "VIEWER" } }));
+    await resetRoute.POST(req("POST", "/x", { cookie, body: { password: "super-secret-two-2" } }), ctx("t"));
+    await userIdRoute.PATCH(req("PATCH", "/x", { cookie, body: { role: "VIEWER" } }), ctx("t"));
+    await passwordRoute.POST(req("POST", "/x", { cookie, body: { currentPassword: OLD, newPassword: "super-secret-three-3" } }));
+    await loginRoute.POST(req("POST", "/x", { body: { email: "a@x.com", password: "super-secret-four-4" } }));
+    const dump = JSON.stringify(store.audit);
+    expect(store.audit.length).toBeGreaterThanOrEqual(5);
+    for (const secret of ["super-secret", "passwordHash", hash, "$2a$", "$2b$"]) expect(dump).not.toContain(secret);
+  });
+
+  it("records sign-in, failed sign-in (attempted email only) and sign-out", async () => {
+    addUser("a", "ADMIN");
+    const ok = await loginRoute.POST(req("POST", "/x", { body: { email: "a@x.com", password: OLD } }));
+    const bad = await loginRoute.POST(req("POST", "/x", { body: { email: "A@x.com", password: "wrong-wrong-wrong" } }));
+    const unknown = await loginRoute.POST(req("POST", "/x", { body: { email: "ghost@x.com", password: "whatever-whatever" } }));
+    expect([ok.status, bad.status, unknown.status]).toEqual([200, 401, 401]);
+    const cookie = ok.headers.get("set-cookie")!.split(";")[0].split("=").slice(1).join("=");
+    await logoutRoute.POST(req("POST", "/x", { cookie }));
+    expect(actions()).toEqual(["auth.login", "auth.login_failed", "auth.login_failed", "auth.logout"]);
+    expect(store.audit[2]).toMatchObject({ actorId: null, actorEmail: "ghost@x.com" });
+  });
+
+  it("does not let an audit outage block sign-in or sign-out", async () => {
+    addUser("a", "ADMIN");
+    store.failAudit = true;
+    const ok = await loginRoute.POST(req("POST", "/x", { body: { email: "a@x.com", password: OLD } }));
+    expect(ok.status).toBe(200);
+    const cookie = ok.headers.get("set-cookie")!.split(";")[0].split("=").slice(1).join("=");
+    expect((await logoutRoute.POST(req("POST", "/x", { cookie }))).status).toBe(200);
+  });
+
+  it("records a password change without the password", async () => {
+    addUser("a", "ADMIN");
+    await passwordRoute.POST(req("POST", "/x", { cookie: await cookieFor("a"), body: { currentPassword: OLD, newPassword: "a-brand-new-passphrase" } }));
+    expect(last()).toMatchObject({ action: "auth.password_changed", actorEmail: "a@x.com" });
+  });
+});
+
+describe("GET /api/admin/audit", () => {
+  const get = async (user: string | null, qs = "") =>
+    auditRoute.GET(req("GET", `/api/admin/audit${qs}`, { cookie: user ? await cookieFor(user) : undefined }));
+
+  function seed(n: number) {
+    for (let i = 0; i < n; i++) {
+      store.audit.push({ id: `seed_${i}`, createdAt: new Date(Date.UTC(2026, 0, 1) + i * 1000), action: i % 2 ? "user.create" : "auth.login", actorEmail: i % 2 ? "boss@x.com" : "other@x.com" } as A);
+    }
+  }
+
+  it("is Admin only", async () => {
+    addUser("m", "MEMBER");
+    addUser("v", "VIEWER");
+    expect((await get(null)).status).toBe(401);
+    expect((await get("m")).status).toBe(403);
+    expect((await get("v")).status).toBe(403);
+  });
+
+  it("returns newest first and pages with a cursor", async () => {
+    addUser("a", "ADMIN");
+    seed(5);
+    const first = await (await get("a", "?take=2")).json();
+    expect(first.entries.map((e: A) => e.id)).toEqual(["seed_4", "seed_3"]);
+    const second = await (await get("a", `?take=2&cursor=${first.nextCursor}`)).json();
+    expect(second.entries.map((e: A) => e.id)).toEqual(["seed_2", "seed_1"]);
+    const third = await (await get("a", `?take=2&cursor=${second.nextCursor}`)).json();
+    expect(third.entries.map((e: A) => e.id)).toEqual(["seed_0"]);
+    expect(third.nextCursor).toBeNull();
+  });
+
+  it("filters by action prefix and by person", async () => {
+    addUser("a", "ADMIN");
+    seed(6);
+    const byAction = await (await get("a", "?action=user.")).json();
+    expect(byAction.entries.length).toBe(3);
+    expect(byAction.entries.every((e: A) => e.action.startsWith("user."))).toBe(true);
+    const byActor = await (await get("a", "?actor=OTHER")).json();
+    expect(byActor.entries.length).toBe(3);
+  });
+
+  it("has no write path: the route file exports GET only", () => {
+    expect(Object.keys(auditRoute)).toEqual(["GET"]);
+  });
+});
+
+describe("GET /api/admin/me", () => {
+  it.each(["ADMIN", "MEMBER", "VIEWER"] as const)("returns the %s email and role", async (role) => {
+    addUser("u", role);
+    const res = await meRoute.GET(req("GET", "/api/admin/me", { cookie: await cookieFor("u") }));
+    expect(await res.json()).toEqual({ email: "u@x.com", role });
+  });
+
+  it("is 401 when signed out", async () => {
+    expect((await meRoute.GET(req("GET", "/api/admin/me"))).status).toBe(401);
+  });
+});
+
+describe("DELETE /api/admin/users/[id]/sessions", () => {
+  const del = async (cookie: string | undefined, id: string) =>
+    sessionsRoute.DELETE(req("DELETE", "/x", { cookie }), ctx(id));
+
+  it("signs the target out everywhere, leaves others alone, and is audited", async () => {
+    addUser("a", "ADMIN");
+    addUser("t", "MEMBER");
+    addUser("o", "MEMBER");
+    const adminCookie = await cookieFor("a");
+    const targetCookie = await cookieFor("t");
+    await cookieFor("t");
+    await cookieFor("o");
+    const res = await del(adminCookie, "t");
+    expect(await res.json()).toEqual({ ok: true, revoked: 2 });
+    expect(store.sessions.map((s) => s.userId).sort()).toEqual(["a", "o"]);
+    expect((await meRoute.GET(req("GET", "/x", { cookie: targetCookie }))).status).toBe(401);
+    expect(store.audit[0]).toMatchObject({ action: "user.sessions_revoked", entityId: "t" });
+  });
+
+  it("is Admin only, refuses yourself, and 404s an unknown user", async () => {
+    addUser("a", "ADMIN");
+    addUser("m", "MEMBER");
+    expect((await del(undefined, "a")).status).toBe(401);
+    expect((await del(await cookieFor("m"), "a")).status).toBe(403);
+    expect((await del(await cookieFor("a"), "a")).status).toBe(400);
+    expect((await del(await cookieFor("a"), "nope")).status).toBe(404);
+    expect(store.audit).toHaveLength(0);
+  });
+});
+
+describe("POST /api/admin/users/[id]/password", () => {
+  const post = async (cookie: string | undefined, id: string, body: unknown) =>
+    resetRoute.POST(req("POST", "/x", { cookie, body }), ctx(id));
+
+  it("sets a temporary password, signs the target out, and is audited", async () => {
+    addUser("a", "ADMIN");
+    addUser("t", "MEMBER");
+    const targetCookie = await cookieFor("t");
+    const res = await post(await cookieFor("a"), "t", { password: "temporary-passphrase" });
+    expect(res.status).toBe(200);
+    expect(bcrypt.compareSync("temporary-passphrase", store.users.find((u) => u.id === "t")!.passwordHash)).toBe(true);
+    expect((await meRoute.GET(req("GET", "/x", { cookie: targetCookie }))).status).toBe(401);
+    expect(store.audit[0]).toMatchObject({ action: "user.password_reset", entityId: "t" });
+    const login = await loginRoute.POST(req("POST", "/x", { body: { email: "t@x.com", password: "temporary-passphrase" } }));
+    expect(login.status).toBe(200);
+  });
+
+  it("is Admin only, refuses yourself, and validates length", async () => {
+    addUser("a", "ADMIN");
+    addUser("m", "MEMBER");
+    addUser("t", "MEMBER");
+    expect((await post(undefined, "t", { password: "temporary-passphrase" })).status).toBe(401);
+    expect((await post(await cookieFor("m"), "t", { password: "temporary-passphrase" })).status).toBe(403);
+    const a = await cookieFor("a");
+    expect((await post(a, "a", { password: "temporary-passphrase" })).status).toBe(400);
+    expect((await post(a, "t", { password: "short" })).status).toBe(400);
+    expect((await post(a, "t", { password: "x".repeat(73) })).status).toBe(400);
+    expect((await post(a, "ghost", { password: "temporary-passphrase" })).status).toBe(404);
+    expect(store.users.find((u) => u.id === "t")!.passwordHash).toBe(hash);
+    expect(store.audit).toHaveLength(0);
+  });
+});
+
+describe("user creation password cap", () => {
+  it("rejects a password longer than 72 bytes", async () => {
+    addUser("a", "ADMIN");
+    const res = await usersRoute.POST(req("POST", "/x", { cookie: await cookieFor("a"), body: { email: "n@x.com", password: "x".repeat(73), role: "VIEWER" } }));
+    expect(res.status).toBe(400);
+    expect(store.users).toHaveLength(1);
   });
 });

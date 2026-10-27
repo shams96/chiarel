@@ -14,6 +14,7 @@ const ROLES: Role[] = ["ADMIN", "MEMBER", "VIEWER"];
 export default function AdminUsersPage() {
   const [users, setUsers] = useState<AdminUser[] | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newRole, setNewRole] = useState<Role>("VIEWER");
@@ -89,6 +90,39 @@ export default function AdminUsersPage() {
     load();
   }
 
+  async function handleSignOutEverywhere(id: string, email: string) {
+    if (!window.confirm(`Sign ${email} out everywhere?`)) return;
+    setError(null);
+    setNotice(null);
+    const res = await fetch(`/api/admin/users/${id}/sessions`, { method: "DELETE" });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      setError(json.error ?? "Failed to sign the user out");
+      return;
+    }
+    setNotice(`${email} was signed out everywhere.`);
+  }
+
+  async function handleTempPassword(id: string, email: string) {
+    const password = window.prompt(
+      `Temporary password for ${email} (12+ characters). They sign in with it and change it at /admin/account.`
+    );
+    if (!password) return;
+    setError(null);
+    setNotice(null);
+    const res = await fetch(`/api/admin/users/${id}/password`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password }),
+    });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      setError(json.error ?? "Failed to set the password");
+      return;
+    }
+    setNotice(`Temporary password set for ${email}; their sessions were signed out.`);
+  }
+
   return (
     <div style={{ maxWidth: 720, margin: "40px auto", fontFamily: "system-ui, sans-serif" }}>
       <h1 style={{ fontSize: 20, marginBottom: 8 }}>Admin users</h1>
@@ -99,6 +133,11 @@ export default function AdminUsersPage() {
       {error && (
         <p style={{ color: "#b00020", fontSize: 13, marginBottom: 16 }} role="alert">
           {error}
+        </p>
+      )}
+      {notice && (
+        <p style={{ fontSize: 13, marginBottom: 16 }} role="status">
+          {notice}
         </p>
       )}
 
@@ -128,6 +167,12 @@ export default function AdminUsersPage() {
                   </select>
                 </td>
                 <td style={{ padding: 8 }}>
+                  <button type="button" onClick={() => handleTempPassword(u.id, u.email)}>
+                    Set temp password
+                  </button>{" "}
+                  <button type="button" onClick={() => handleSignOutEverywhere(u.id, u.email)}>
+                    Sign out everywhere
+                  </button>{" "}
                   <button type="button" onClick={() => handleDelete(u.id)}>
                     Delete
                   </button>

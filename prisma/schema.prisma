@@ -171,3 +171,25 @@ model EmailSubscriber {
   createdAt          DateTime  @default(now())
   unsubscribedAt     DateTime?
 }
+
+// Append-only record of every admin action (claudedocs/specs/admin-console/).
+// No relation to User on purpose: deleting a user must not delete the evidence,
+// so the actor's email is snapshotted. before/after hold whitelisted fields only,
+// never credentials. Written in the same transaction as the change it describes.
+model AuditLog {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  actorId    String?
+  actorEmail String
+  action     String
+  entityType String
+  entityId   String?
+  summary    String?
+  before     Json?
+  after      Json?
+  ip         String?
+
+  @@index([createdAt])
+  @@index([actorId, createdAt])
+  @@index([action, createdAt])
+}

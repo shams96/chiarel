@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { withRole } from "@/lib/auth";
+import { auditEntry } from "@/lib/audit";
 import { withApiErrorHandling } from "@/lib/api-error";
 
 // View access for ops staff (ADMIN + MEMBER) — matches this project's RBAC
@@ -25,7 +26,7 @@ export const GET = withApiErrorHandling(
 );
 
 export const POST = withApiErrorHandling(
-  withRole(["ADMIN"], async (req: NextRequest) => {
+  withRole(["ADMIN"], async (req: NextRequest, actor) => {
     const body = await req.json().catch(() => null);
     const orderId = typeof body?.orderId === "string" ? body.orderId : "";
     if (!orderId) {
@@ -43,11 +44,21 @@ export const POST = withApiErrorHandling(
       return NextResponse.json({ error: "Credit already marked as issued" }, { status: 409 });
     }
 
-    const updated = await db.order.update({
-      where: { id: orderId },
-      data: { founding100CreditIssuedAt: new Date() },
-      select: { id: true, founding100CreditIssuedAt: true },
-    });
+    const [updated] = await db.$transaction([
+      db.order.update({
+        where: { id: orderId },
+        data: { founding100CreditIssuedAt: new Date() },
+        select: { id: true, founding100CreditIssuedAt: true },
+      }),
+      auditEntry(req, actor, {
+        action: "founding100.credit_issued",
+        entityType: "Order",
+        entityId: orderId,
+        summary: `Marked Founding 100 credit of ${order.founding100Credit} as issued for ${order.email}`,
+        before: { founding100CreditIssuedAt: null },
+        after: { founding100Credit: order.founding100Credit, issued: true },
+      }),
+    ]);
     return NextResponse.json({ order: updated });
   })
 );
