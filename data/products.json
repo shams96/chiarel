@@ -22,8 +22,8 @@
     "image": "/assets/products/clarity-essence-bottle.png",
     "gallery": [
       {
-        "src": "/assets/products/clarity-essence-hero.jpg",
-        "alt": "Clarity Essence™ bottle, studio shot",
+        "src": "/assets/products/clarity-essence-scene.jpg",
+        "alt": "Clarity Essence™ bottle, scene shot",
         "role": "studio"
       },
       {
@@ -94,7 +94,7 @@
       "Pause 10–30 seconds before your moisturiser step."
     ],
     "howToUseSource": "app/science/application/page.tsx; app/journal/chiarel-ritual-guide/page.tsx",
-    "studio": "/assets/products/clarity-essence-hero.jpg",
+    "studio": "/assets/products/clarity-essence-scene.jpg",
     "og": "/assets/products/clarity-essence-og.jpg"
   },
   {
@@ -120,8 +120,8 @@
     "image": "/assets/products/clarity-day-creme-jar.png",
     "gallery": [
       {
-        "src": "/assets/products/clarity-day-creme-hero.jpg",
-        "alt": "Clarity Day Crème™ jar, studio shot",
+        "src": "/assets/products/clarity-day-creme-scene.jpg",
+        "alt": "Clarity Day Crème™ jar, scene shot",
         "role": "studio"
       },
       {
@@ -207,7 +207,7 @@
       "Follow with SPF."
     ],
     "howToUseSource": "app/science/application/page.tsx; app/journal/chiarel-ritual-guide/page.tsx",
-    "studio": "/assets/products/clarity-day-creme-hero.jpg",
+    "studio": "/assets/products/clarity-day-creme-scene.jpg",
     "og": "/assets/products/clarity-day-creme-og.jpg"
   },
   {
@@ -233,8 +233,8 @@
     "image": "/assets/products/clarity-night-creme-jar.png",
     "gallery": [
       {
-        "src": "/assets/products/clarity-night-creme-hero.jpg",
-        "alt": "Clarity Night Crème™ jar, studio shot",
+        "src": "/assets/products/clarity-night-creme-scene.jpg",
+        "alt": "Clarity Night Crème™ jar, scene shot",
         "role": "studio"
       },
       {
@@ -324,7 +324,7 @@
       "Use in the evening."
     ],
     "howToUseSource": "app/journal/chiarel-ritual-guide/page.tsx",
-    "studio": "/assets/products/clarity-night-creme-hero.jpg",
+    "studio": "/assets/products/clarity-night-creme-scene.jpg",
     "og": "/assets/products/clarity-night-creme-og.jpg"
   },
   {
@@ -353,8 +353,8 @@
     "imageIsPlaceholder": false,
     "gallery": [
       {
-        "src": "/assets/products/clarity-neck-decollete-creme-hero.jpg",
-        "alt": "Clarity Neck & Décolleté Crème™ bottle, studio shot",
+        "src": "/assets/products/clarity-neck-decollete-creme-scene.jpg",
+        "alt": "Clarity Neck & Décolleté Crème™ bottle, scene shot",
         "role": "studio"
       },
       {
@@ -442,7 +442,7 @@
         "name": "Squalane"
       }
     ],
-    "studio": "/assets/products/clarity-neck-decollete-creme-hero.jpg",
+    "studio": "/assets/products/clarity-neck-decollete-creme-scene.jpg",
     "og": "/assets/products/clarity-neck-decollete-creme-og.jpg"
   },
   {
@@ -523,12 +523,12 @@
         "name": "Hyaluronic Acid"
       }
     ],
-    "studio": "/assets/products/clarity-eye-contour-concentrate-hero.jpg",
+    "studio": "/assets/products/clarity-eye-contour-concentrate-scene.jpg",
     "og": "/assets/products/clarity-eye-contour-concentrate-og.jpg",
     "gallery": [
       {
-        "src": "/assets/products/clarity-eye-contour-concentrate-hero.jpg",
-        "alt": "Clarity Eye Contour Concentrate™ bottle, studio shot",
+        "src": "/assets/products/clarity-eye-contour-concentrate-scene.jpg",
+        "alt": "Clarity Eye Contour Concentrate™ bottle, scene shot",
         "role": "studio"
       },
       {

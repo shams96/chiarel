@@ -14,7 +14,7 @@ import type { ProductGalleryImage } from "@/lib/products";
 // Studio shots are 4:5 with the product in the middle band. On phones the
 // frame is 5:4, so anchor the crop high enough to keep the whole product.
 const studioFit = (img: ProductGalleryImage) =>
-  img.role === "studio" ? "object-[50%_45%] md:object-center" : "";
+  img.role === "studio" ? "object-[50%_95%] md:object-center" : "";
 
 export default function ProductGallery({
   images,
