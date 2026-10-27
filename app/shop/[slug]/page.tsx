@@ -212,7 +212,7 @@ export default async function ProductPage({
           <div className="section-x">
             <AmbientVideo
               src="/assets/products/n1-neck-decollete-ambient.mp4"
-              poster="/assets/products/clarity-neck-decollete-creme-honeycomb.jpg"
+              poster="/assets/products/n1-neck-decollete-honeycomb.jpg"
               label="Clarity Neck & Décolleté Crème, 40 ml, on a reflective surface with water droplets"
               className="mx-auto aspect-[9/16] max-h-[80vh] w-auto max-w-full bg-ink object-cover"
             />
@@ -222,7 +222,7 @@ export default async function ProductPage({
 
       {p.slug === "terra-radiance-creme" && (
         <EditorialFeature
-          src="/assets/products/clarity-day-creme-editorial.jpg"
+          src="/assets/products/terra-radiance-creme-editorial.jpg"
           alt="A woman holding Clarity Day Crème against the Capri coastline"
           kicker="The Day Crème"
           headline="The daily crème of the morning ritual."
