@@ -169,7 +169,7 @@ function CompactRow({ entries }: { entries: Entry[] }) {
           <li
             key={p.slug}
             data-size={lead ? "lead" : "standard"}
-            className={`${spans[i] ? "col-span-2" : ""} ${lead ? "md:flex-[1.3]" : "md:flex-1"} min-w-0`}
+            className={`${spans[i] ? "col-span-2" : ""} md:flex-1 min-w-0`}
           >
             <Link
               href={productHref(p.slug)}
@@ -183,7 +183,7 @@ function CompactRow({ entries }: { entries: Entry[] }) {
                   src={studioImage(p)}
                   alt={productImageAlt(p)}
                   fill
-                  sizes={lead ? "(min-width: 768px) 30vw, 100vw" : "(min-width: 768px) 20vw, 50vw"}
+                  sizes={lead ? "(min-width: 768px) 25vw, 100vw" : "(min-width: 768px) 25vw, 50vw"}
                   className={`object-cover ${productHoverClass(p.step)}`}
                 />
               </div>
