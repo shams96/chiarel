@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { getSessionIdFromRequest, withRole } from "@/lib/auth";
 import { withApiErrorHandling } from "@/lib/api-error";
 import { isRateLimited } from "@/lib/rate-limit";
+import { auditEntry } from "@/lib/audit";
 
 const MIN_LENGTH = 12;
 const MAX_BYTES = 72;
@@ -58,15 +59,20 @@ export const POST = withApiErrorHandling(
       );
     }
 
-    await db.user.update({
-      where: { id: user.id },
-      data: { passwordHash: await bcrypt.hash(newPassword, 12) },
-    });
-
     const currentSessionId = getSessionIdFromRequest(req);
-    await db.session.deleteMany({
-      where: { userId: user.id, ...(currentSessionId ? { id: { not: currentSessionId } } : {}) },
-    });
+    const passwordHash = await bcrypt.hash(newPassword, 12);
+    await db.$transaction([
+      db.user.update({ where: { id: user.id }, data: { passwordHash } }),
+      db.session.deleteMany({
+        where: { userId: user.id, ...(currentSessionId ? { id: { not: currentSessionId } } : {}) },
+      }),
+      auditEntry(req, user, {
+        action: "auth.password_changed",
+        entityType: "User",
+        entityId: user.id,
+        summary: "Changed own password; other sessions signed out",
+      }),
+    ]);
 
     return NextResponse.json({ ok: true });
   })

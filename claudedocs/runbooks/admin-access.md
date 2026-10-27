@@ -7,6 +7,15 @@ Tier 2, assisted triage: an agent can diagnose and propose, a human approves any
 - Sign in at `https://chiarel.com/admin/login` (local: `http://localhost:3000/admin/login`).
 - Change your own password at `/admin/account` (linked from `/admin/users`). Needs the current password, new one at least 12 characters. Other sessions are signed out.
 - Admins add or remove accounts at `/admin/users`. There is no self-signup and no emailed reset.
+- On `/admin/users` an Admin can **Set temp password** for another person (they are signed out everywhere and change it at `/admin/account`) or **Sign out everywhere** (a lost device, someone leaving). Neither works on your own account.
+- **Audit log** at `/admin/audit` (Admin only): who signed in, failed to sign in, created, changed or deleted users, reset passwords, issued Founding 100 credits, with time and IP. Filter by type or person. It is append-only: there is no way to edit or delete entries from the console. Passwords and hashes are never recorded.
+
+## Investigating "who did that?"
+
+1. `/admin/audit`, filter by type (Users, Founding 100) or search the person's email.
+2. Repeated "Failed sign-in attempt" entries for one email, or many for different emails, mean someone is guessing. The login limiter (5 per 15 min per IP, 30 total) already slows it; if it looks real, reset that account's password and **Sign out everywhere**.
+3. An unexpected "Changed ... role" or "Created ... account" entry: the row shows who did it and from which IP. If it was not them, treat the account as compromised: reset its password, sign it out everywhere, and rotate `ADMIN_SESSION_SECRET` (signs out everyone).
+4. If the audit table itself errors, sign-in still works (auth events are best-effort). Data changes in the console will fail until the table is back, by design: a change without a record is not allowed.
 
 ## Symptoms and fixes
 

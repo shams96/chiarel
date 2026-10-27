@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { withRole } from "@/lib/auth";
+import { auditEntry, userSnapshot } from "@/lib/audit";
 import { withApiErrorHandling } from "@/lib/api-error";
 
 const ROLES = ["ADMIN", "MEMBER", "VIEWER"] as const;
@@ -36,11 +37,21 @@ export const PATCH = withApiErrorHandling(
       }
     }
 
-    const updated = await db.user.update({
-      where: { id: params.id },
-      data: { role },
-      select: { id: true, email: true, role: true, createdAt: true },
-    });
+    const [updated] = await db.$transaction([
+      db.user.update({
+        where: { id: params.id },
+        data: { role },
+        select: { id: true, email: true, role: true, createdAt: true },
+      }),
+      auditEntry(req, currentUser, {
+        action: "user.role_change",
+        entityType: "User",
+        entityId: target.id,
+        summary: `Changed ${target.email} from ${target.role} to ${role}`,
+        before: userSnapshot(target),
+        after: { ...userSnapshot(target), role },
+      }),
+    ]);
     return NextResponse.json({ user: updated });
   })
 );
@@ -57,7 +68,16 @@ export const DELETE = withApiErrorHandling(
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    await db.user.delete({ where: { id: params.id } });
+    await db.$transaction([
+      db.user.delete({ where: { id: params.id } }),
+      auditEntry(_req, currentUser, {
+        action: "user.delete",
+        entityType: "User",
+        entityId: target.id,
+        summary: `Deleted ${target.role} account ${target.email}`,
+        before: userSnapshot(target),
+      }),
+    ]);
     return NextResponse.json({ ok: true });
   })
 );

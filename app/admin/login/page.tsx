@@ -30,7 +30,7 @@ export default function AdminLoginPage() {
         setSubmitting(false);
         return;
       }
-      router.push("/admin/users");
+      router.push("/admin");
     } catch {
       setError("Something went wrong. Please try again.");
       setSubmitting(false);

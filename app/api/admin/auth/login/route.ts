@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { db } from "@/lib/db";
 import { createSession, setSessionCookie } from "@/lib/auth";
+import { recordAuthEvent } from "@/lib/audit";
 import { withApiErrorHandling } from "@/lib/api-error";
 import { isRateLimited, clientIp } from "@/lib/rate-limit";
 
@@ -44,13 +45,27 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
   // Deliberately identical response whether the email doesn't exist or the
   // password is wrong — distinguishing the two would let a caller enumerate
   // which admin emails are registered.
-  const invalid = () => NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
+  const invalid = async () => {
+    // Logged for the owner's eyes only (the response stays identical). Bounded
+    // by the login rate limits above, so it cannot be used to flood the table.
+    await recordAuthEvent(
+      req,
+      { id: null, email: email.slice(0, 254) },
+      { action: "auth.login_failed", entityType: "User", entityId: user?.id ?? null }
+    );
+    return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
+  };
 
   const matches = await bcrypt.compare(password, user?.passwordHash ?? DUMMY_HASH);
   if (!user) return invalid();
   if (!matches) return invalid();
 
   const signedSession = await createSession(user.id);
+  await recordAuthEvent(
+    req,
+    { id: user.id, email: user.email },
+    { action: "auth.login", entityType: "User", entityId: user.id }
+  );
   const res = NextResponse.json({ email: user.email, role: user.role });
   setSessionCookie(res, signedSession);
   return res;
