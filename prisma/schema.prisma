@@ -106,6 +106,19 @@ model Order {
   disputeAmount   Int?
   disputeOpenedAt DateTime?
   disputeClosedAt DateTime?
+
+  // Fulfilment is tracked apart from `status` (the payment state, which the
+  // customer order page, Stripe webhook and dispute monitor all read).
+  // unfulfilled -> packed -> shipped -> delivered, or cancelled. Admin console
+  // P1 (claudedocs/specs/admin-console/P1-ORDERS-PLAN.md); history is in AuditLog.
+  fulfilmentStatus String    @default("unfulfilled")
+  trackingCarrier  String?
+  trackingNumber   String?
+  shippedAt        DateTime?
+  deliveredAt      DateTime?
+  internalNote     String?
+
+  @@index([createdAt])
 }
 
 model OrderItem {
