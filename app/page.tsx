@@ -6,7 +6,7 @@ import HomeHero from "@/components/home/HomeHero";
 import EditorialFeature from "@/components/EditorialFeature";
 import HomeRitual from "@/components/home/HomeRitual";
 import HomeFitGuidance from "@/components/home/HomeFitGuidance";
-import HomeFaceBeyond from "@/components/home/HomeFaceBeyond";
+import HomeN1Feature from "@/components/home/HomeN1Feature";
 import HomeProvenance from "@/components/home/HomeProvenance";
 import HomeProof from "@/components/home/HomeProof";
 import HomeFormulationRecord from "@/components/home/HomeFormulationRecord";
@@ -32,8 +32,6 @@ import {
 // now lead with CHIAREL Essence and the ritual (owner decision, 2026-10-14);
 // N1 is the featured new product further down the page.
 export const metadata: Metadata = {
-  description:
-    "CHIAREL™ begins with the face and continues to the neck and décolleté. Five formulations, made fresh to order in Isola del Liri, Italy.",
   authors: [{ name: "Grazia Savoriti", url: FORMULATOR_EXTERNAL_URL }],
   openGraph: {
     type: "article",
@@ -165,10 +163,9 @@ export default function Home() {
           -> proof -> philosophy -> formulation record (collapsed) -> FAQ
           -> final CTA. */}
       <HomeHero />
-      <HomeFaceBeyond />
       <HomeRitual />
       <EditorialFeature
-        src="/assets/products/clarity-day-creme-editorial.jpg"
+        src="/assets/products/terra-radiance-creme-editorial.jpg"
         alt="A woman holding Clarity Day Crème against the Capri coastline"
         kicker="The Icon Product"
         headline="The daily crème of the morning ritual."
@@ -177,6 +174,7 @@ export default function Home() {
         cta="Discover Clarity Day Crème"
       />
       <HomeFitGuidance />
+      <HomeN1Feature />
       <HomeProvenance />
       <HomeProof />
       <HomePhilosophy />

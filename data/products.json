@@ -32,7 +32,7 @@
         "role": "hero"
       },
       {
-        "src": "/assets/products/clarity-essence-studio.jpg",
+        "src": "/assets/products/chiarel-essence-studio.jpg",
         "alt": "Clarity Essence held in soft studio light",
         "role": "application"
       }
@@ -130,12 +130,12 @@
         "role": "hero"
       },
       {
-        "src": "/assets/products/clarity-day-creme-studio.jpg",
+        "src": "/assets/products/terra-radiance-creme-studio.jpg",
         "alt": "Clarity Day Crème held in soft studio light",
         "role": "application"
       },
       {
-        "src": "/assets/products/clarity-day-creme-capri.jpg",
+        "src": "/assets/products/terra-radiance-creme-capri.jpg",
         "alt": "Clarity Day Crème on sunlit limestone above the Faraglioni of Capri",
         "role": "lifestyle"
       }
@@ -243,12 +243,12 @@
         "role": "hero"
       },
       {
-        "src": "/assets/products/clarity-night-creme-studio.jpg",
+        "src": "/assets/products/recovery-masque-studio.jpg",
         "alt": "Clarity Night Crème held in soft studio light",
         "role": "application"
       },
       {
-        "src": "/assets/products/clarity-night-creme-capri.jpg",
+        "src": "/assets/products/recovery-masque-jar.jpg",
         "alt": "Clarity Night Crème on sunlit rock above the Capri coastline",
         "role": "lifestyle"
       }
@@ -363,12 +363,12 @@
         "role": "hero"
       },
       {
-        "src": "/assets/products/clarity-neck-decollete-creme-marble-roses.jpg",
+        "src": "/assets/products/n1-neck-decollete-marble-roses.jpg",
         "alt": "Clarity Neck & Décolleté Crème on a dark marble plinth with dried roses and twigs, the Isola del Liri waterfall and castle behind",
         "role": "lifestyle"
       },
       {
-        "src": "/assets/products/clarity-neck-decollete-creme-honeycomb.jpg",
+        "src": "/assets/products/n1-neck-decollete-honeycomb.jpg",
         "alt": "Clarity Neck & Décolleté Crème on a reflective surface with water droplets and a honeycomb pattern",
         "role": "detail"
       },
