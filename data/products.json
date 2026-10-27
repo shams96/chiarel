@@ -120,7 +120,7 @@
     "image": "/assets/products/clarity-day-creme-jar.png",
     "gallery": [
       {
-        "src": "/assets/products/clarity-day-creme-scene.jpg",
+        "src": "/assets/products/clarity-day-creme-ribbon-scene.jpg",
         "alt": "Clarity Day Crème™ jar, scene shot",
         "role": "studio"
       },
@@ -207,7 +207,7 @@
       "Follow with SPF."
     ],
     "howToUseSource": "app/science/application/page.tsx; app/journal/chiarel-ritual-guide/page.tsx",
-    "studio": "/assets/products/clarity-day-creme-scene.jpg",
+    "studio": "/assets/products/clarity-day-creme-ribbon-scene.jpg",
     "og": "/assets/products/clarity-day-creme-og.jpg"
   },
   {
