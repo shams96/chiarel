@@ -13,6 +13,7 @@ type Me = { email: string; role: Role };
 
 const NAV: { href: string; label: string; roles: Role[] }[] = [
   { href: "/admin", label: "Dashboard", roles: ["ADMIN", "MEMBER", "VIEWER"] },
+  { href: "/admin/orders", label: "Orders", roles: ["ADMIN", "MEMBER", "VIEWER"] },
   { href: "/admin/founding100-credits", label: "Founding 100 credits", roles: ["ADMIN", "MEMBER"] },
   { href: "/admin/users", label: "Users", roles: ["ADMIN"] },
   { href: "/admin/audit", label: "Audit log", roles: ["ADMIN"] },
@@ -67,16 +68,19 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
           fontSize: 13,
         }}
       >
-        {NAV.filter((n) => me && n.roles.includes(me.role)).map((n) => (
-          <Link
-            key={n.href}
-            href={n.href}
-            aria-current={pathname === n.href ? "page" : undefined}
-            style={{ fontWeight: pathname === n.href ? 700 : 400, textDecoration: "none", color: "inherit" }}
-          >
-            {n.label}
-          </Link>
-        ))}
+        {NAV.filter((n) => me && n.roles.includes(me.role)).map((n) => {
+          const here = pathname === n.href || (n.href !== "/admin" && pathname.startsWith(`${n.href}/`));
+          return (
+            <Link
+              key={n.href}
+              href={n.href}
+              aria-current={here ? "page" : undefined}
+              style={{ fontWeight: here ? 700 : 400, textDecoration: "none", color: "inherit" }}
+            >
+              {n.label}
+            </Link>
+          );
+        })}
         <span style={{ marginLeft: "auto" }}>
           {me ? `${me.email} · ${me.role}` : ""}
         </span>
