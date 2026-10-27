@@ -44,7 +44,7 @@ Builds on `small-business:social-content-engine` (cadence, formats) and `design`
 - **Formats:** feed 4:5 (1080×1350), Reels and Stories 9:16 (1080×1920), carousel cover and slides 4:5. Keep key content inside the central safe area; Reels crop top and bottom.
 - **Image rules:** packshots are transparent 1400×1400 PNGs; never bake a background into one. Every pack and label shows CHIAREL / **ITALIA**. Do not use any image that still reads ROME (Pomelli renders, the Copilot group shot, Amalfi Essence, old N1 jar scenes, `Hands holding_Neck & Decollete.png`) until it is relettered.
 - **AI-generated imagery:** label photorealistic AI images with Instagram's AI label. Never present an AI-generated image as a customer or a real result.
-- **Usable assets:** `public/assets/home/hero-hands-n1-wide.jpg` (hands and N1), `public/assets/products/n1-neck-decollete-marble-roses.jpg` (N1 with the Isola del Liri falls), `n1-neck-decollete-honeycomb.jpg`, `n1-neck-decollete-ambient.mp4`, the packshots, `chiarel-essence-studio.jpg`, `terra-radiance-creme-editorial.jpg` and `-capri.jpg`, `recovery-masque-studio.jpg`. Check the file reads ITALIA before use.
+- **Usable assets:** `public/assets/home/hero-hands-n1-wide.jpg` (hands and N1), `public/assets/products/clarity-neck-decollete-creme-marble-roses.jpg` (N1 with the Isola del Liri falls), `clarity-neck-decollete-creme-honeycomb.jpg`, `n1-neck-decollete-ambient.mp4`, the packshots, `clarity-essence-studio.jpg`, `clarity-day-creme-editorial.jpg` and `-capri.jpg`, `clarity-night-creme-studio.jpg`. Check the file reads ITALIA before use.
 
 ## 4. Content pillars (rotate, no more than two of the same in a row)
 

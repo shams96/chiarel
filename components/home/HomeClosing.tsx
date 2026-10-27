@@ -12,7 +12,7 @@ export function HomeFinalCta() {
   const day = getProductOrThrow("terra-radiance-creme");
 
   return (
-    <section className="section-y bg-champagne/25">
+    <section className="section-y bg-redochre text-ivory">
       <div className="section-x flex flex-col items-center gap-10 md:flex-row">
         <Reveal className="grid w-full grid-cols-5 gap-4 md:w-3/5">
           <div
@@ -29,9 +29,9 @@ export function HomeFinalCta() {
           </div>
         </Reveal>
         <Reveal delay={0.15} className="w-full md:w-2/5">
-          <h2 className="font-serif text-3xl">Begin the Ritual</h2>
-          <p className="mt-2 text-sm text-ink/60">Five formulations, each made for one purpose</p>
-          <p className="mt-3 max-w-md text-sm text-ink/70">
+          <h2 className="font-serif text-3xl">Begin with the face. Do not stop there.</h2>
+          <p className="mt-2 text-sm">Five formulations, each made for one purpose</p>
+          <p className="mt-3 max-w-md text-sm">
             Start with Clarity Essence and Clarity Day Crème, the two steps
             of the morning.
           </p>
@@ -39,7 +39,7 @@ export function HomeFinalCta() {
             <span className="tabular-nums font-serif text-2xl">
               ${essence.price!.subscription}
             </span>
-            <span className="ml-2 text-[12px] text-ink/65">
+            <span className="ml-2 text-[12px]">
               Clarity Essence, every 45 days with subscription · $
               {essence.price!.oneTime} one-time
             </span>
@@ -47,18 +47,18 @@ export function HomeFinalCta() {
           <div className="mt-6 flex items-center gap-6">
             <Link
               href={productHref("chiarel-essence")}
-              className="btn-press inline-block border border-ink px-8 py-3 text-[12px] uppercase tracking-[0.25em] transition hover:border-ochre hover:text-ochre"
+              className="btn-press inline-block border border-ivory bg-ivory px-8 py-3 text-[12px] uppercase tracking-[0.25em] text-ink transition hover:bg-peachdust"
             >
               Begin the Ritual
             </Link>
             <Link
               href="/shop"
-              className="btn-press border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
+              className="btn-press border-b border-ivory pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ivory"
             >
               See the full House
             </Link>
           </div>
-          <p className="mt-6 text-[11px] uppercase tracking-[0.14em] text-ink/65">
+          <p className="mt-6 text-[11px] uppercase tracking-[0.14em]">
             Available online only at chiarel.com — not sold in retail
             stores or through other sellers.
           </p>
