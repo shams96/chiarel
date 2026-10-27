@@ -14,6 +14,9 @@ type Me = { email: string; role: Role };
 const NAV: { href: string; label: string; roles: Role[] }[] = [
   { href: "/admin", label: "Dashboard", roles: ["ADMIN", "MEMBER", "VIEWER"] },
   { href: "/admin/orders", label: "Orders", roles: ["ADMIN", "MEMBER", "VIEWER"] },
+  { href: "/admin/customers", label: "Customers", roles: ["ADMIN", "MEMBER", "VIEWER"] },
+  { href: "/admin/subscribers", label: "Subscribers", roles: ["ADMIN", "MEMBER", "VIEWER"] },
+  { href: "/admin/disputes", label: "Disputes", roles: ["ADMIN", "MEMBER"] },
   { href: "/admin/founding100-credits", label: "Founding 100 credits", roles: ["ADMIN", "MEMBER"] },
   { href: "/admin/users", label: "Users", roles: ["ADMIN"] },
   { href: "/admin/audit", label: "Audit log", roles: ["ADMIN"] },
