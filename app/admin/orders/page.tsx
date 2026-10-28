@@ -4,6 +4,20 @@
 // shape); this page only renders what it is given.
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import {
+  PageShell,
+  PageHeader,
+  Alert,
+  Badge,
+  Button,
+  EmptyState,
+  Field,
+  inputClass,
+  Loading,
+  statusTone,
+  Table,
+  tdClass,
+} from "@/components/admin/ui";
 
 type Row = {
   id: string;
@@ -19,7 +33,6 @@ type Row = {
 };
 
 const FULFILMENT = ["", "unfulfilled", "packed", "shipped", "delivered", "cancelled"];
-const cell = { padding: 8 } as const;
 
 export default function AdminOrdersPage() {
   const [rows, setRows] = useState<Row[]>([]);
@@ -78,95 +91,103 @@ export default function AdminOrdersPage() {
   }, [load, q, ready]);
 
   return (
-    <div style={{ maxWidth: 1040, margin: "40px auto", padding: "0 16px", fontFamily: "system-ui, sans-serif" }}>
-      <h1 style={{ fontSize: 20, marginBottom: 16 }}>Orders</h1>
-      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "flex-end", marginBottom: 16, fontSize: 12 }}>
-        <label>
-          Fulfilment
-          <select value={fulfilment} onChange={(e) => setFulfilment(e.target.value)} style={{ display: "block", padding: 4 }}>
+    <PageShell>
+      <PageHeader
+        eyebrow="Fulfilment"
+        title="Orders"
+        subtitle="Find an order, then pack it, ship it with tracking, and see it through to delivery."
+        actions={
+          canExport && (
+            <Button variant="secondary" onClick={() => window.location.assign("/api/admin/orders/export")}>
+              Export to ship (CSV)
+            </Button>
+          )
+        }
+      />
+
+      <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-[repeat(4,minmax(0,1fr))_minmax(0,2fr)]">
+        <Field label="Fulfilment">
+          <select value={fulfilment} onChange={(e) => setFulfilment(e.target.value)} className={inputClass}>
             {FULFILMENT.map((f) => (
               <option key={f} value={f}>
                 {f || "All"}
               </option>
             ))}
           </select>
-        </label>
-        <label>
-          Payment
-          <select value={payment} onChange={(e) => setPayment(e.target.value)} style={{ display: "block", padding: 4 }}>
+        </Field>
+        <Field label="Payment">
+          <select value={payment} onChange={(e) => setPayment(e.target.value)} className={inputClass}>
             <option value="">All</option>
             <option value="paid">Paid</option>
             <option value="pending">Pending</option>
           </select>
-        </label>
-        <label>
-          From
-          <input type="date" value={from} onChange={(e) => setFrom(e.target.value)} style={{ display: "block", padding: 4 }} />
-        </label>
-        <label>
-          To
-          <input type="date" value={to} onChange={(e) => setTo(e.target.value)} style={{ display: "block", padding: 4 }} />
-        </label>
-        <label style={{ flex: "1 1 200px" }}>
-          Search
+        </Field>
+        <Field label="From">
+          <input type="date" value={from} onChange={(e) => setFrom(e.target.value)} className={inputClass} />
+        </Field>
+        <Field label="To">
+          <input type="date" value={to} onChange={(e) => setTo(e.target.value)} className={inputClass} />
+        </Field>
+        <Field label="Search" className="sm:col-span-2 lg:col-span-1">
           <input
             type="search"
             value={q}
             placeholder="Order id, email, surname, tracking"
             onChange={(e) => setQ(e.target.value)}
-            style={{ display: "block", padding: 4, width: "100%" }}
+            className={inputClass}
           />
-        </label>
-        {canExport && (
-          <button type="button" onClick={() => window.location.assign("/api/admin/orders/export")}>
-            Export to ship (CSV)
-          </button>
-        )}
+        </Field>
       </div>
 
-      {error && (
-        <p style={{ color: "#b00020", fontSize: 13 }} role="alert">
-          {error}
-        </p>
-      )}
-      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-        <thead>
-          <tr style={{ textAlign: "left", borderBottom: "1px solid #ccc" }}>
-            <th style={cell}>Order</th>
-            <th style={cell}>Placed</th>
-            <th style={cell}>Customer</th>
-            <th style={cell}>Country</th>
-            <th style={cell}>Total</th>
-            <th style={cell}>Payment</th>
-            <th style={cell}>Fulfilment</th>
-          </tr>
-        </thead>
-        <tbody>
+      {error && <Alert kind="error">{error}</Alert>}
+
+      {rows.length > 0 && (
+        <Table head={["Order", "Placed", "Customer", "Country", "Total", "Payment", "Fulfilment"]}>
           {rows.map((o) => (
-            <tr key={o.id} style={{ borderBottom: "1px solid #eee" }}>
-              <td style={cell}>
-                <Link href={`/admin/orders/${o.id}`}>{o.id.slice(-8)}</Link>
-                {o.disputeStatus && <span style={{ color: "#b00020" }}> · dispute</span>}
+            <tr key={o.id}>
+              <td className={`${tdClass} whitespace-nowrap`}>
+                <Link href={`/admin/orders/${o.id}`} className="font-medium text-garden underline underline-offset-4 hover:text-redochre">
+                  {o.id.slice(-8)}
+                </Link>
+                {o.disputeStatus && (
+                  <span className="ml-2 align-middle">
+                    <Badge tone="danger">dispute</Badge>
+                  </span>
+                )}
               </td>
-              <td style={{ ...cell, whiteSpace: "nowrap" }}>{new Date(o.createdAt).toLocaleDateString()}</td>
-              <td style={cell}>
+              <td className={`${tdClass} whitespace-nowrap`}>{new Date(o.createdAt).toLocaleDateString()}</td>
+              <td className={tdClass}>
                 {o.name ? `${o.name} ` : ""}
-                <span style={{ color: "#666" }}>{o.email}</span>
+                <span className="text-ink/75">{o.email}</span>
               </td>
-              <td style={cell}>{o.country}</td>
-              <td style={cell}>${o.total}</td>
-              <td style={cell}>{o.status}</td>
-              <td style={cell}>{o.fulfilmentStatus}</td>
+              <td className={tdClass}>{o.country}</td>
+              <td className={`${tdClass} font-serif text-[16px] tabular-nums`}>${o.total}</td>
+              <td className={tdClass}>
+                <Badge tone={statusTone(o.status)}>{o.status}</Badge>
+              </td>
+              <td className={tdClass}>
+                <Badge tone={statusTone(o.fulfilmentStatus)}>{o.fulfilmentStatus}</Badge>
+              </td>
             </tr>
           ))}
-        </tbody>
-      </table>
-      {!loading && rows.length === 0 && !error && <p style={{ fontSize: 13 }}>No orders match.</p>}
-      {cursor && (
-        <button type="button" onClick={() => load(cursor)} disabled={loading} style={{ marginTop: 16 }}>
-          {loading ? "Loading…" : "Load older"}
-        </button>
+        </Table>
       )}
-    </div>
+
+      {!loading && rows.length === 0 && !error && (
+        <EmptyState
+          title="No orders match"
+          text="New orders show up here the moment they are placed. Try clearing a filter or the search."
+        />
+      )}
+      {loading && rows.length === 0 && <Loading />}
+
+      {cursor && (
+        <div className="mt-6">
+          <Button variant="secondary" onClick={() => load(cursor)} disabled={loading}>
+            {loading ? "Loading…" : "Load older"}
+          </Button>
+        </div>
+      )}
+    </PageShell>
   );
 }

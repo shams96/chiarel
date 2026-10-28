@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import HideOnAdmin from "@/components/HideOnAdmin";
 import CartDrawer from "@/components/CartDrawer";
 import { CartProvider } from "@/lib/cart-context";
 import StagingBanner from "@/components/StagingBanner";
@@ -82,9 +83,13 @@ export default function RootLayout({
       </head>
       <body className={`${serif.variable} ${sans.variable}`}>
         <CartProvider>
-          <Header />
+          <HideOnAdmin>
+            <Header />
+          </HideOnAdmin>
           <main className="min-h-screen">{children}</main>
-          <Footer />
+          <HideOnAdmin>
+            <Footer />
+          </HideOnAdmin>
           <CartDrawer />
           <StagingBanner />
           <Analytics />

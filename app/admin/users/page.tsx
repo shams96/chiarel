@@ -5,6 +5,21 @@
 // same for anyone who loads it, but a Member/Viewer's requests will 401/403 from
 // the API regardless of what this page shows. See claudedocs/specs/admin-rbac/.
 import { useEffect, useState } from "react";
+import {
+  Alert,
+  Button,
+  Card,
+  EmptyState,
+  Field,
+  Loading,
+  LinkButton,
+  PageHeader,
+  PageShell,
+  SectionTitle,
+  Table,
+  inputClass,
+  tdClass,
+} from "@/components/admin/ui";
 
 type Role = "ADMIN" | "MEMBER" | "VIEWER";
 type AdminUser = { id: string; email: string; role: Role; createdAt: string };
@@ -124,102 +139,100 @@ export default function AdminUsersPage() {
   }
 
   return (
-    <div style={{ maxWidth: 720, margin: "40px auto", fontFamily: "system-ui, sans-serif" }}>
-      <h1 style={{ fontSize: 20, marginBottom: 8 }}>Admin users</h1>
-      <p style={{ fontSize: 13, marginBottom: 24 }}>
-        <a href="/admin/account">Change my password</a>
-      </p>
+    <PageShell>
+      <PageHeader
+        eyebrow="People"
+        title="Admin users"
+        subtitle="Who can sign in to this console, and what they can do. Admins manage people and prices, Members run day-to-day operations, Viewers can look but not change."
+        actions={
+          <LinkButton href="/admin/account" variant="secondary">
+            Change my password
+          </LinkButton>
+        }
+      />
 
-      {error && (
-        <p style={{ color: "#b00020", fontSize: 13, marginBottom: 16 }} role="alert">
-          {error}
-        </p>
-      )}
-      {notice && (
-        <p style={{ fontSize: 13, marginBottom: 16 }} role="status">
-          {notice}
-        </p>
-      )}
+      {error && <Alert kind="error">{error}</Alert>}
+      {notice && <Alert kind="success">{notice}</Alert>}
 
-      {users && (
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13, marginBottom: 32 }}>
-          <thead>
-            <tr style={{ textAlign: "left", borderBottom: "1px solid #ccc" }}>
-              <th style={{ padding: 8 }}>Email</th>
-              <th style={{ padding: 8 }}>Role</th>
-              <th style={{ padding: 8 }}></th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((u) => (
-              <tr key={u.id} style={{ borderBottom: "1px solid #eee" }}>
-                <td style={{ padding: 8 }}>{u.email}</td>
-                <td style={{ padding: 8 }}>
-                  <select
-                    value={u.role}
-                    onChange={(e) => handleRoleChange(u.id, e.target.value as Role)}
-                  >
-                    {ROLES.map((r) => (
-                      <option key={r} value={r}>
-                        {r}
-                      </option>
-                    ))}
-                  </select>
-                </td>
-                <td style={{ padding: 8 }}>
-                  <button type="button" onClick={() => handleTempPassword(u.id, u.email)}>
+      {users === null && !error && <Loading />}
+      {users && users.length === 0 && (
+        <EmptyState title="No users yet" text="Create the first account with the form below." />
+      )}
+      {users && users.length > 0 && (
+        <Table head={["Email", "Role", "Actions"]}>
+          {users.map((u) => (
+            <tr key={u.id}>
+              <td className={`${tdClass} min-w-[12rem] break-words font-medium`}>{u.email}</td>
+              <td className={tdClass}>
+                <select
+                  value={u.role}
+                  aria-label={`Role for ${u.email}`}
+                  onChange={(e) => handleRoleChange(u.id, e.target.value as Role)}
+                  className={`${inputClass} !w-auto min-w-[9rem]`}
+                >
+                  {ROLES.map((r) => (
+                    <option key={r} value={r}>
+                      {r}
+                    </option>
+                  ))}
+                </select>
+              </td>
+              <td className={tdClass}>
+                <div className="flex min-w-[33rem] flex-wrap gap-2">
+                  <Button variant="secondary" small onClick={() => handleTempPassword(u.id, u.email)}>
                     Set temp password
-                  </button>{" "}
-                  <button type="button" onClick={() => handleSignOutEverywhere(u.id, u.email)}>
+                  </Button>
+                  <Button variant="secondary" small onClick={() => handleSignOutEverywhere(u.id, u.email)}>
                     Sign out everywhere
-                  </button>{" "}
-                  <button type="button" onClick={() => handleDelete(u.id)}>
+                  </Button>
+                  <Button variant="danger" small onClick={() => handleDelete(u.id)}>
                     Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  </Button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </Table>
       )}
 
-      <h2 style={{ fontSize: 16, marginBottom: 12 }}>Create user</h2>
-      <form onSubmit={handleCreate} style={{ display: "flex", gap: 8, alignItems: "flex-end" }}>
-        <label style={{ fontSize: 12 }}>
-          Email
-          <input
-            type="email"
-            required
-            value={newEmail}
-            onChange={(e) => setNewEmail(e.target.value)}
-            style={{ display: "block", padding: 6 }}
-          />
-        </label>
-        <label style={{ fontSize: 12 }}>
-          Password
-          <input
-            type="password"
-            required
-            minLength={12}
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            style={{ display: "block", padding: 6 }}
-          />
-        </label>
-        <label style={{ fontSize: 12 }}>
-          Role
-          <select value={newRole} onChange={(e) => setNewRole(e.target.value as Role)}>
-            {ROLES.map((r) => (
-              <option key={r} value={r}>
-                {r}
-              </option>
-            ))}
-          </select>
-        </label>
-        <button type="submit" disabled={submitting} style={{ padding: 8 }}>
-          {submitting ? "Creating…" : "Create"}
-        </button>
-      </form>
-    </div>
+      <SectionTitle hint="Passwords need at least 12 characters. They can change it themselves afterwards.">
+        Create user
+      </SectionTitle>
+      <Card tone="peach">
+        <form onSubmit={handleCreate} className="grid items-end gap-4 md:grid-cols-[2fr_2fr_1fr_auto]">
+          <Field label="Email">
+            <input
+              type="email"
+              required
+              value={newEmail}
+              onChange={(e) => setNewEmail(e.target.value)}
+              className={inputClass}
+            />
+          </Field>
+          <Field label="Password">
+            <input
+              type="password"
+              required
+              minLength={12}
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              className={inputClass}
+            />
+          </Field>
+          <Field label="Role">
+            <select value={newRole} onChange={(e) => setNewRole(e.target.value as Role)} className={inputClass}>
+              {ROLES.map((r) => (
+                <option key={r} value={r}>
+                  {r}
+                </option>
+              ))}
+            </select>
+          </Field>
+          <Button type="submit" disabled={submitting}>
+            {submitting ? "Creating…" : "Create"}
+          </Button>
+        </form>
+      </Card>
+    </PageShell>
   );
 }

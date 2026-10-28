@@ -3,6 +3,16 @@
 // Audit log viewer (Admin only; the API enforces it). Read-only.
 import { useCallback, useEffect, useState } from "react";
 import { auditLabel } from "@/components/admin/auditLabel";
+import {
+  Alert,
+  Button,
+  EmptyState,
+  PageHeader,
+  PageShell,
+  Table,
+  inputClass,
+  tdClass,
+} from "@/components/admin/ui";
 
 type Entry = {
   id: string;
@@ -56,19 +66,24 @@ export default function AdminAuditPage() {
   }, [load]);
 
   return (
-    <div style={{ maxWidth: 960, margin: "40px auto", padding: "0 16px", fontFamily: "system-ui, sans-serif" }}>
-      <h1 style={{ fontSize: 20, marginBottom: 16 }}>Audit log</h1>
-      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 16, fontSize: 13 }}>
+    <PageShell>
+      <PageHeader
+        eyebrow="Accountability"
+        title="Audit log"
+        subtitle="A permanent record of who did what, and when. Entries can be read here but never edited or removed. Passwords are never recorded."
+      />
+
+      <div className="mb-5 flex flex-wrap items-center gap-2">
         {FILTERS.map((f) => (
-          <button
+          <Button
             key={f.label}
-            type="button"
+            small
+            variant={action === f.value ? "primary" : "secondary"}
             onClick={() => setAction(f.value)}
             aria-pressed={action === f.value}
-            style={{ fontWeight: action === f.value ? 700 : 400 }}
           >
             {f.label}
-          </button>
+          </Button>
         ))}
         <input
           type="search"
@@ -76,51 +91,47 @@ export default function AdminAuditPage() {
           value={actor}
           onChange={(e) => setActor(e.target.value)}
           aria-label="Filter by person"
-          style={{ padding: 4, marginLeft: "auto" }}
+          className={`${inputClass} !w-full sm:ml-auto sm:!w-72`}
         />
       </div>
-      {error && (
-        <p style={{ color: "#b00020", fontSize: 13 }} role="alert">
-          {error}
-        </p>
-      )}
-      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-        <thead>
-          <tr style={{ textAlign: "left", borderBottom: "1px solid #ccc" }}>
-            <th style={{ padding: 8 }}>When</th>
-            <th style={{ padding: 8 }}>Who</th>
-            <th style={{ padding: 8 }}>What</th>
-            <th style={{ padding: 8 }}>IP</th>
-          </tr>
-        </thead>
-        <tbody>
+
+      {error && <Alert kind="error">{error}</Alert>}
+
+      {entries.length > 0 && (
+        <Table head={["When", "Who", "What", "IP"]}>
           {entries.map((e) => (
-            <tr key={e.id} style={{ borderBottom: "1px solid #eee", verticalAlign: "top" }}>
-              <td style={{ padding: 8, whiteSpace: "nowrap" }}>{new Date(e.createdAt).toLocaleString()}</td>
-              <td style={{ padding: 8 }}>{e.actorEmail}</td>
-              <td style={{ padding: 8 }}>
-                {auditLabel(e)}
-                <div style={{ color: "#666", fontSize: 11 }}>{e.action}</div>
+            <tr key={e.id}>
+              <td className={`${tdClass} whitespace-nowrap text-ink/80`}>{new Date(e.createdAt).toLocaleString()}</td>
+              <td className={`${tdClass} min-w-[12rem] break-words`}>{e.actorEmail}</td>
+              <td className={`${tdClass} min-w-[16rem] break-words`}>
+                <span className="font-medium">{auditLabel(e)}</span>
+                <div className="mt-0.5 break-words text-[11px] uppercase tracking-[0.14em] text-ink/70">{e.action}</div>
                 {(e.before != null || e.after != null) && (
-                  <details style={{ marginTop: 4 }}>
-                    <summary>Details</summary>
-                    <pre style={{ fontSize: 11, whiteSpace: "pre-wrap" }}>
+                  <details className="mt-2">
+                    <summary className="cursor-pointer text-[12px] uppercase tracking-[0.2em] text-redochre underline underline-offset-4">
+                      Details
+                    </summary>
+                    <pre className="mt-2 max-w-full overflow-x-auto whitespace-pre-wrap break-words border border-champagne bg-peachdust/40 p-3 text-[12px] leading-relaxed text-ink">
                       {JSON.stringify({ before: e.before, after: e.after }, null, 2)}
                     </pre>
                   </details>
                 )}
               </td>
-              <td style={{ padding: 8 }}>{e.ip ?? ""}</td>
+              <td className={`${tdClass} whitespace-nowrap text-ink/80`}>{e.ip ?? ""}</td>
             </tr>
           ))}
-        </tbody>
-      </table>
-      {!loading && entries.length === 0 && !error && <p style={{ fontSize: 13 }}>No entries match.</p>}
-      {cursor && (
-        <button type="button" onClick={() => load(cursor)} disabled={loading} style={{ marginTop: 16 }}>
-          {loading ? "Loading…" : "Load older"}
-        </button>
+        </Table>
       )}
-    </div>
+      {!loading && entries.length === 0 && !error && (
+        <EmptyState title="No entries match" text="Try a different filter, or clear the person search." />
+      )}
+      {cursor && (
+        <div className="mt-6">
+          <Button variant="secondary" onClick={() => load(cursor)} disabled={loading}>
+            {loading ? "Loading…" : "Load older"}
+          </Button>
+        </div>
+      )}
+    </PageShell>
   );
 }
