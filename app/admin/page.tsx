@@ -20,6 +20,9 @@ type Dash = {
 
 const SECTIONS: { href: string; title: string; text: string; roles: Role[] }[] = [
   { href: "/admin/orders", title: "Orders", text: "Find, pack, ship and track orders.", roles: ["ADMIN", "MEMBER", "VIEWER"] },
+  { href: "/admin/customers", title: "Customers", text: "Who buys, how often, lifetime value.", roles: ["ADMIN", "MEMBER", "VIEWER"] },
+  { href: "/admin/subscribers", title: "Subscribers", text: "Newsletter list and opt-outs.", roles: ["ADMIN", "MEMBER", "VIEWER"] },
+  { href: "/admin/disputes", title: "Disputes", text: "Chargebacks, evidence checklist, dispute rate.", roles: ["ADMIN", "MEMBER"] },
   { href: "/admin/founding100-credits", title: "Founding 100 credits", text: "Credits owed and issued.", roles: ["ADMIN", "MEMBER"] },
   { href: "/admin/users", title: "Users", text: "Add people, change roles, reset access.", roles: ["ADMIN"] },
   { href: "/admin/audit", title: "Audit log", text: "Who changed what, and when.", roles: ["ADMIN"] },
@@ -104,7 +107,12 @@ export default function AdminHomePage() {
               href="/admin/orders?fulfilment=unfulfilled&payment=paid"
             />
             <Tile label="Packed, not shipped" value={String(dash.fulfilment.packedNotShipped)} href="/admin/orders?fulfilment=packed&payment=paid" />
-            <Tile label="Open disputes" value={String(dash.disputes.open)} sub={dash.disputes.open ? money(dash.disputes.amount) : undefined} />
+            <Tile
+              label="Open disputes"
+              value={String(dash.disputes.open)}
+              sub={dash.disputes.open ? money(dash.disputes.amount) : undefined}
+              href={role === "VIEWER" ? undefined : "/admin/disputes"}
+            />
             {(role === "ADMIN" || role === "MEMBER") && (
               <Tile
                 label="Founding 100 credits owed"
@@ -117,7 +125,7 @@ export default function AdminHomePage() {
 
           <h2 style={{ fontSize: 15, margin: "24px 0 8px" }}>Audience</h2>
           <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))" }}>
-            <Tile label="Subscribers" value={String(dash.subscribers.active)} />
+            <Tile label="Subscribers" value={String(dash.subscribers.active)} href="/admin/subscribers" />
             <Tile label="New, last 30 days" value={String(dash.subscribers.newLast30)} />
             <Tile label="Unsubscribed, last 30 days" value={String(dash.subscribers.unsubscribedLast30)} />
             <Tile label="Shipped, last 30 days" value={String(dash.fulfilment.shippedLast30)} />
