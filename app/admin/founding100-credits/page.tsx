@@ -6,6 +6,7 @@
 // claudedocs/specs/international-launch/ (N1/Founding 100 fold) for why this
 // exists: the 25%-credit-back promise had no tracking anywhere before it.
 import { useEffect, useState } from "react";
+import { Alert, Badge, Button, EmptyState, Loading, PageHeader, PageShell, Stat, StatGrid, Table, tdClass } from "@/components/admin/ui";
 
 type CreditOrder = {
   id: string;
@@ -56,65 +57,86 @@ export default function FoundingCreditsPage() {
   const owedTotal = owed.reduce((sum, o) => sum + o.founding100Credit, 0);
 
   return (
-    <div style={{ maxWidth: 820, margin: "40px auto", fontFamily: "system-ui, sans-serif" }}>
-      <h1 style={{ fontSize: 20, marginBottom: 8 }}>Founding 100 credits</h1>
-      <p style={{ fontSize: 13, color: "#555", marginBottom: 24 }}>
-        {orders ? `${owed.length} credit(s) outstanding, $${owedTotal} owed` : "Loading…"}
-      </p>
+    <PageShell>
+      <PageHeader
+        eyebrow="Founding 100"
+        title="Founding 100 credits"
+        subtitle={orders ? `${owed.length} credit(s) outstanding, $${owedTotal} owed` : "Loading…"}
+      />
 
-      {error && (
-        <p style={{ color: "#b00020", fontSize: 13, marginBottom: 16 }} role="alert">
-          {error}
-        </p>
-      )}
+      {error && <Alert kind="error">{error}</Alert>}
 
       {orders && (
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-          <thead>
-            <tr style={{ textAlign: "left", borderBottom: "1px solid #ccc" }}>
-              <th style={{ padding: 8 }}>Order</th>
-              <th style={{ padding: 8 }}>Email</th>
-              <th style={{ padding: 8 }}>Placed</th>
-              <th style={{ padding: 8 }}>Credit owed</th>
-              <th style={{ padding: 8 }}>Status</th>
-              <th style={{ padding: 8 }}></th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((o) => (
-              <tr key={o.id} style={{ borderBottom: "1px solid #eee" }}>
-                <td style={{ padding: 8, fontFamily: "monospace" }}>{o.id.slice(0, 8)}</td>
-                <td style={{ padding: 8 }}>{o.email}</td>
-                <td style={{ padding: 8 }}>{new Date(o.createdAt).toLocaleDateString()}</td>
-                <td style={{ padding: 8 }}>${o.founding100Credit}</td>
-                <td style={{ padding: 8 }}>
-                  {o.founding100CreditIssuedAt
-                    ? `Issued ${new Date(o.founding100CreditIssuedAt).toLocaleDateString()}`
-                    : "Owed"}
-                </td>
-                <td style={{ padding: 8 }}>
-                  {!o.founding100CreditIssuedAt && (
-                    <button
-                      type="button"
-                      disabled={issuingId === o.id}
-                      onClick={() => markIssued(o.id)}
-                    >
-                      {issuingId === o.id ? "Marking…" : "Mark issued"}
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))}
-            {orders.length === 0 && (
-              <tr>
-                <td colSpan={6} style={{ padding: 8, color: "#777" }}>
-                  No Founding 100 orders yet.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+        <div className="mb-8">
+          <StatGrid>
+            <Stat label="Outstanding" value={owed.length} tone={owed.length > 0 ? "redochre" : "white"} sub="credits still to issue" />
+            <Stat label="Owed" value={`$${owedTotal}`} tone="peach" sub="to Founding 100 customers" />
+            <Stat label="Issued" value={orders.length - owed.length} tone="garden" sub="credits already issued" />
+          </StatGrid>
+        </div>
       )}
-    </div>
+
+      {orders === null && !error && <Loading />}
+
+      {orders && orders.length > 0 && (
+        <>
+          <ul className="grid gap-3 md:hidden">
+            {orders.map((o) => (
+              <li key={o.id} className="border border-champagne bg-white p-4">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="font-mono text-[13px]">{o.id.slice(0, 8)}</span>
+                  <span className="font-serif text-lg">${o.founding100Credit}</span>
+                </div>
+                <p className="mt-1 [overflow-wrap:anywhere] text-[13px] text-ink/75">
+                  {o.email} · placed {new Date(o.createdAt).toLocaleDateString()}
+                </p>
+                <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+                  {o.founding100CreditIssuedAt ? (
+                    <Badge tone="ok">{`Issued ${new Date(o.founding100CreditIssuedAt).toLocaleDateString()}`}</Badge>
+                  ) : (
+                    <Badge tone="warn">Owed</Badge>
+                  )}
+                  {!o.founding100CreditIssuedAt && (
+                    <Button variant="champagne" small disabled={issuingId === o.id} onClick={() => markIssued(o.id)}>
+                      {issuingId === o.id ? "Marking…" : "Mark issued"}
+                    </Button>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+          <div className="hidden md:block">
+            <Table head={["Order", "Email", "Placed", "Credit owed", "Status", ""]}>
+              {orders.map((o) => (
+                <tr key={o.id}>
+                  <td className={`${tdClass} font-mono text-[13px]`}>{o.id.slice(0, 8)}</td>
+                  <td className={tdClass}>{o.email}</td>
+                  <td className={`${tdClass} whitespace-nowrap`}>{new Date(o.createdAt).toLocaleDateString()}</td>
+                  <td className={tdClass}>${o.founding100Credit}</td>
+                  <td className={tdClass}>
+                    {o.founding100CreditIssuedAt ? (
+                      <Badge tone="ok">{`Issued ${new Date(o.founding100CreditIssuedAt).toLocaleDateString()}`}</Badge>
+                    ) : (
+                      <Badge tone="warn">Owed</Badge>
+                    )}
+                  </td>
+                  <td className={`${tdClass} text-right`}>
+                    {!o.founding100CreditIssuedAt && (
+                      <Button variant="champagne" small disabled={issuingId === o.id} onClick={() => markIssued(o.id)}>
+                        {issuingId === o.id ? "Marking…" : "Mark issued"}
+                      </Button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </Table>
+          </div>
+        </>
+      )}
+
+      {orders && orders.length === 0 && (
+        <EmptyState title="No Founding 100 orders yet." text="When a Founding 100 order is placed, the credit we owe the customer appears here until you mark it issued." />
+      )}
+    </PageShell>
   );
 }

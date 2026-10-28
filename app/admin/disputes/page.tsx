@@ -5,6 +5,23 @@
 // and Member.
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import {
+  Alert,
+  Badge,
+  Button,
+  Card,
+  EmptyState,
+  Field,
+  Loading,
+  PageHeader,
+  PageShell,
+  Stat,
+  StatGrid,
+  Table,
+  inputClass,
+  statusTone,
+  tdClass,
+} from "@/components/admin/ui";
 
 type Evidence = { key: string; label: string; present: boolean; detail: string | null };
 type Dispute = {
@@ -41,9 +58,34 @@ type Payload = {
   nextCursor: string | null;
 };
 
+const words = (v: string) => v.replace(/_/g, " ");
 const pct = (r: number) => `${(r * 100).toFixed(2)}%`;
 const TIER: Record<string, string> = { ok: "OK", approaching: "Approaching the limit", "over-threshold": "Over the limit" };
-const cell = { padding: 8 } as const;
+
+function EvidenceDetails({ d }: { d: Dispute }) {
+  return (
+    <details>
+      <summary className={`cursor-pointer ${d.evidenceComplete ? "text-garden" : "font-medium text-redochre"}`}>
+        {d.evidenceComplete ? "Complete" : `${d.missing.length} missing`}
+      </summary>
+      <ul className="mt-2 grid gap-1 pl-4">
+        {d.evidence.map((e) => (
+          <li key={e.key} className={e.present ? "list-disc text-garden" : "list-disc font-medium text-redochre"}>
+            {e.present ? "Have" : "Missing"}: {e.label}
+            {e.detail ? ` (${e.detail})` : ""}
+          </li>
+        ))}
+      </ul>
+      {d.stripeUrl && (
+        <p className="mt-3">
+          <a href={d.stripeUrl} target="_blank" rel="noopener noreferrer" className="text-garden underline underline-offset-4">
+            Open in Stripe
+          </a>
+        </p>
+      )}
+    </details>
+  );
+}
 
 export default function AdminDisputesPage() {
   const [data, setData] = useState<Payload | null>(null);
@@ -74,95 +116,124 @@ export default function AdminDisputesPage() {
   }, [load]);
 
   const r = data?.report;
+  const rateText = r && (
+    <>
+      <strong>Dispute rate: {TIER[r.overallTier] ?? r.overallTier}.</strong> {r.disputesThisMonth} dispute(s) opened this month against{" "}
+      {r.paymentsLastMonth} payment(s) last month. Visa {pct(r.visaRatio)} (limit 0.50%), Mastercard {pct(r.mastercardRatio)} (limit 1.50%).
+    </>
+  );
+
   return (
-    <div style={{ maxWidth: 960, margin: "40px auto", padding: "0 16px", fontFamily: "system-ui, sans-serif", fontSize: 13 }}>
-      <h1 style={{ fontSize: 20, marginBottom: 16 }}>Disputes</h1>
-      {error && (
-        <p style={{ color: "#b00020" }} role="alert">
-          {error}
-        </p>
-      )}
+    <PageShell>
+      <PageHeader
+        eyebrow="Payments"
+        title="Disputes"
+        subtitle="Chargebacks and how ready we are to answer them. Respond to a dispute in Stripe; this page shows what evidence we hold."
+      />
+
+      {error && <Alert kind="error">{error}</Alert>}
 
       {data && r && (
+        <div className="mb-8">
+          {r.overallTier === "ok" ? (
+            <Alert kind="success">{rateText}</Alert>
+          ) : r.overallTier === "approaching" ? (
+            <Card tone="champagne" className="mb-5 border-l-8 border-garden">
+              <p className="mb-1 text-[11px] uppercase tracking-[0.28em]">Watch closely</p>
+              <p className="text-[15px] leading-relaxed">{rateText}</p>
+            </Card>
+          ) : (
+            <Card tone="redochre" className="mb-5">
+              <p className="mb-1 text-[11px] uppercase tracking-[0.28em]">Action needed</p>
+              <p className="text-[15px] leading-relaxed">{rateText}</p>
+            </Card>
+          )}
+          <StatGrid>
+            <Stat label="Open" value={data.summary.open} tone={data.summary.open > 0 ? "redochre" : "white"} />
+            <Stat label="At stake" value={`$${data.summary.openAmount}`} tone="peach" />
+            <Stat label="Closed" value={data.summary.closed} />
+          </StatGrid>
+        </div>
+      )}
+
+      <div className="mb-6 max-w-[12rem]">
+        <Field label="Show">
+          <select value={status} onChange={(e) => setStatus(e.target.value)} className={inputClass}>
+            <option value="all">All</option>
+            <option value="open">Open</option>
+            <option value="closed">Closed</option>
+          </select>
+        </Field>
+      </div>
+
+      {rows.length > 0 ? (
         <>
-          <p style={r.overallTier === "ok" ? undefined : { background: "#fff4d6", padding: 8 }}>
-            <strong>Dispute rate: {TIER[r.overallTier] ?? r.overallTier}.</strong> {r.disputesThisMonth} dispute(s) opened this month against{" "}
-            {r.paymentsLastMonth} payment(s) last month. Visa {pct(r.visaRatio)} (limit 0.50%), Mastercard {pct(r.mastercardRatio)} (limit 1.50%).
-          </p>
-          <p>
-            Open: <strong>{data.summary.open}</strong> (${data.summary.openAmount} at stake) · Closed: <strong>{data.summary.closed}</strong>
-          </p>
+          <ul className="grid gap-3 md:hidden">
+            {rows.map((d) => (
+              <li key={d.orderId} className="border border-champagne bg-white p-4">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <Link href={`/admin/orders/${d.orderId}`} className="text-redochre underline underline-offset-4">
+                    {d.orderId.slice(-8)}
+                  </Link>
+                  <span className="font-serif text-lg">{d.amount != null ? `$${d.amount}` : ""}</span>
+                </div>
+                <p className="mt-1 [overflow-wrap:anywhere] text-[13px] text-ink/75">
+                  {d.customer} {d.email}
+                  {d.openedAt ? ` · opened ${new Date(d.openedAt).toLocaleDateString()}` : ""}
+                </p>
+                <div className="mt-3 flex flex-wrap items-center gap-2">
+                  <Badge tone={statusTone(d.status ?? "")}>{words(d.status ?? "unknown")}</Badge>
+                  <Badge tone={d.open ? "danger" : "muted"}>{d.open ? "open" : "closed"}</Badge>
+                  {d.reason ? <span className="text-[13px] text-ink/70">{words(d.reason)}</span> : null}
+                </div>
+                <div className="mt-3">
+                  <EvidenceDetails d={d} />
+                </div>
+              </li>
+            ))}
+          </ul>
+          <div className="hidden md:block">
+            <Table head={["Order", "Opened", "Customer", "Amount", "Status", "Evidence"]}>
+              {rows.map((d) => (
+                <tr key={d.orderId}>
+                  <td className={tdClass}>
+                    <Link href={`/admin/orders/${d.orderId}`} className="text-redochre underline underline-offset-4">
+                      {d.orderId.slice(-8)}
+                    </Link>
+                  </td>
+                  <td className={`${tdClass} whitespace-nowrap`}>{d.openedAt ? new Date(d.openedAt).toLocaleDateString() : ""}</td>
+                  <td className={tdClass}>
+                    {d.customer} <span className="text-ink/70">{d.email}</span>
+                  </td>
+                  <td className={tdClass}>{d.amount != null ? `$${d.amount}` : ""}</td>
+                  <td className={tdClass}>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <Badge tone={statusTone(d.status ?? "")}>{words(d.status ?? "unknown")}</Badge>
+                      <Badge tone={d.open ? "danger" : "muted"}>{d.open ? "open" : "closed"}</Badge>
+                    </div>
+                    {d.reason ? <div className="mt-1 text-ink/70">{words(d.reason)}</div> : null}
+                  </td>
+                  <td className={`${tdClass} min-w-[14rem]`}>
+                    <EvidenceDetails d={d} />
+                  </td>
+                </tr>
+              ))}
+            </Table>
+          </div>
         </>
+      ) : loading ? (
+        <Loading />
+      ) : (
+        !error && <EmptyState title="No disputes." text="Good news: no one has disputed a payment. If that changes, the order appears here with a checklist of the evidence we hold." />
       )}
 
-      <label style={{ display: "inline-block", margin: "8px 0 16px" }}>
-        Show{" "}
-        <select value={status} onChange={(e) => setStatus(e.target.value)}>
-          <option value="all">All</option>
-          <option value="open">Open</option>
-          <option value="closed">Closed</option>
-        </select>
-      </label>
-
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
-        <thead>
-          <tr style={{ textAlign: "left", borderBottom: "1px solid #ccc" }}>
-            <th style={cell}>Order</th>
-            <th style={cell}>Opened</th>
-            <th style={cell}>Customer</th>
-            <th style={cell}>Amount</th>
-            <th style={cell}>Status</th>
-            <th style={cell}>Evidence</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((d) => (
-            <tr key={d.orderId} style={{ borderBottom: "1px solid #eee", verticalAlign: "top" }}>
-              <td style={cell}>
-                <Link href={`/admin/orders/${d.orderId}`}>{d.orderId.slice(-8)}</Link>
-              </td>
-              <td style={{ ...cell, whiteSpace: "nowrap" }}>{d.openedAt ? new Date(d.openedAt).toLocaleDateString() : ""}</td>
-              <td style={cell}>
-                {d.customer} <span style={{ color: "#666" }}>{d.email}</span>
-              </td>
-              <td style={cell}>{d.amount != null ? `$${d.amount}` : ""}</td>
-              <td style={cell}>
-                {d.status ?? "unknown"}
-                {d.reason ? <div style={{ color: "#666" }}>{d.reason}</div> : null}
-                <div style={{ color: d.open ? "#b00020" : "#666" }}>{d.open ? "open" : "closed"}</div>
-              </td>
-              <td style={cell}>
-                <details>
-                  <summary style={{ color: d.evidenceComplete ? undefined : "#b00020" }}>
-                    {d.evidenceComplete ? "Complete" : `${d.missing.length} missing`}
-                  </summary>
-                  <ul style={{ margin: "4px 0 0", paddingLeft: 16 }}>
-                    {d.evidence.map((e) => (
-                      <li key={e.key} style={{ color: e.present ? undefined : "#b00020" }}>
-                        {e.present ? "Have" : "Missing"}: {e.label}
-                        {e.detail ? ` (${e.detail})` : ""}
-                      </li>
-                    ))}
-                  </ul>
-                  {d.stripeUrl && (
-                    <p style={{ margin: "4px 0 0" }}>
-                      <a href={d.stripeUrl} target="_blank" rel="noopener noreferrer">
-                        Open in Stripe
-                      </a>
-                    </p>
-                  )}
-                </details>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      {!loading && rows.length === 0 && !error && <p>No disputes.</p>}
       {data?.nextCursor && (
-        <button type="button" onClick={() => load(data.nextCursor)} disabled={loading} style={{ marginTop: 16 }}>
-          {loading ? "Loading…" : "Load more"}
-        </button>
+        <div className="mt-6">
+          <Button variant="secondary" onClick={() => load(data.nextCursor)} disabled={loading}>
+            {loading ? "Loading…" : "Load more"}
+          </Button>
+        </div>
       )}
-    </div>
+    </PageShell>
   );
 }

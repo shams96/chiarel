@@ -5,6 +5,19 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import {
+  PageShell,
+  PageHeader,
+  Alert,
+  Badge,
+  Button,
+  Card,
+  Field,
+  inputClass,
+  Loading,
+  SectionTitle,
+  statusTone,
+} from "@/components/admin/ui";
 
 type Item = { id: string; productName: string; mode: string; qty: number; unitPrice: number };
 type Order = {
@@ -104,107 +117,217 @@ export default function AdminOrderPage() {
     patch(body, `Order is now ${to}.`);
   }
 
-  if (error && !order) return <p style={{ padding: 32, fontFamily: "system-ui, sans-serif" }}>{error}</p>;
-  if (!order) return <p style={{ padding: 32, fontFamily: "system-ui, sans-serif", fontSize: 13 }}>Loading…</p>;
+  if (error && !order) {
+    return (
+      <PageShell narrow>
+        <Alert kind="error">{error}</Alert>
+        <Link href="/admin/orders" className="text-garden underline underline-offset-4">
+          Back to orders
+        </Link>
+      </PageShell>
+    );
+  }
+  if (!order) {
+    return (
+      <PageShell>
+        <Loading />
+      </PageShell>
+    );
+  }
 
   const editable = !order.redacted;
   const showTracking = next.includes("shipped") || order.fulfilmentStatus === "shipped" || order.fulfilmentStatus === "delivered";
-  const field = { display: "block", padding: 6, width: "100%" } as const;
 
   return (
-    <div style={{ maxWidth: 760, margin: "40px auto", padding: "0 16px", fontFamily: "system-ui, sans-serif", fontSize: 13 }}>
-      <p>
-        <Link href="/admin/orders">Back to orders</Link>
+    <PageShell>
+      <p className="mb-4 text-[13px]">
+        <Link href="/admin/orders" className="text-garden underline underline-offset-4 hover:text-redochre">
+          Back to orders
+        </Link>
       </p>
-      <h1 style={{ fontSize: 20, margin: "12px 0" }}>Order {order.id.slice(-8)}</h1>
-      {order.redacted && <p style={{ color: "#666" }}>Read-only view: customer details are hidden for your role.</p>}
-      {error && <p style={{ color: "#b00020" }} role="alert">{error}</p>}
-      {notice && <p role="status">{notice}</p>}
+      <PageHeader
+        eyebrow="Order"
+        title={order.id.slice(-8)}
+        subtitle={
+          <span className="flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span>Placed {new Date(order.createdAt).toLocaleString()}</span>
+            <span className="flex items-center gap-2">
+              Payment: <Badge tone={statusTone(order.status)}>{order.status}</Badge>
+            </span>
+            <span className="flex items-center gap-2">
+              Fulfilment: <Badge tone={statusTone(order.fulfilmentStatus)}>{order.fulfilmentStatus}</Badge>
+            </span>
+            {order.disputeStatus && (
+              <span className="flex items-center gap-2">
+                Dispute: <Badge tone="danger">{order.disputeStatus}</Badge>
+              </span>
+            )}
+          </span>
+        }
+      />
 
-      <p>
-        Placed {new Date(order.createdAt).toLocaleString()} · Payment: <strong>{order.status}</strong> · Fulfilment:{" "}
-        <strong>{order.fulfilmentStatus}</strong>
-        {order.disputeStatus && <span style={{ color: "#b00020" }}> · Dispute: {order.disputeStatus}</span>}
-      </p>
+      {order.redacted && <Alert kind="info">Read-only view: customer details are hidden for your role.</Alert>}
+      {error && <Alert kind="error">{error}</Alert>}
+      {notice && <Alert kind="success">{notice}</Alert>}
 
-      <h2 style={{ fontSize: 15, marginTop: 24 }}>Customer</h2>
-      <p>
-        {order.firstName} {order.lastName}
-        <br />
-        {order.email}
-        {!order.redacted && (
-          <>
-            <br />
-            {order.address}, {order.city}
-            {order.state ? `, ${order.state}` : ""} {order.zip ?? ""}, {order.country}
-          </>
-        )}
-        {order.redacted && <> · {order.country}</>}
-      </p>
-
-      <h2 style={{ fontSize: 15, marginTop: 24 }}>Items</h2>
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
-        <tbody>
-          {order.items?.map((i) => (
-            <tr key={i.id} style={{ borderBottom: "1px solid #eee" }}>
-              <td style={{ padding: 6 }}>{i.qty} x {i.productName}</td>
-              <td style={{ padding: 6 }}>{i.mode}</td>
-              <td style={{ padding: 6, textAlign: "right" }}>${i.unitPrice}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <p>
-        Subtotal ${order.subtotal} · Savings ${order.savings} · Shipping ${order.shipping} · <strong>Total ${order.total}</strong>
-        {order.bonusSample && <> · Include the bonus sample</>}
-      </p>
-      {order.founding100Credit != null && (
-        <p>
-          Founding 100 credit: ${order.founding100Credit} ({order.founding100CreditIssuedAt ? "issued" : "owed"})
-        </p>
-      )}
-
-      {editable && (
-        <>
-          <h2 style={{ fontSize: 15, marginTop: 24 }}>Fulfilment</h2>
-          {order.status !== "paid" && next.length > 0 && <p style={{ color: "#666" }}>Unpaid: it cannot be packed or shipped yet.</p>}
-          {showTracking && (
-            <div style={{ display: "grid", gap: 8, gridTemplateColumns: "1fr 1fr", maxWidth: 420, marginBottom: 12 }}>
-              <label>
-                Carrier
-                <input value={carrier} onChange={(e) => setCarrier(e.target.value)} maxLength={80} style={field} disabled={order.fulfilmentStatus === "delivered"} />
-              </label>
-              <label>
-                Tracking number
-                <input value={tracking} onChange={(e) => setTracking(e.target.value)} maxLength={80} style={field} disabled={order.fulfilmentStatus === "delivered"} />
-              </label>
-              {order.fulfilmentStatus === "shipped" && (
-                <button type="button" disabled={busy} onClick={() => patch({ trackingCarrier: carrier, trackingNumber: tracking }, "Tracking saved.")}>
-                  Save tracking
-                </button>
-              )}
-            </div>
-          )}
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            {next
-              .filter((n) => order.status === "paid" || n === "cancelled" || n === "unfulfilled")
-              .map((n) => (
-                <button key={n} type="button" disabled={busy} onClick={() => move(n)}>
-                  {LABEL[n] ?? n}
-                </button>
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+        <div>
+          <Card>
+            <h2 className="font-serif text-[1.4rem] text-garden">Items</h2>
+            <ul className="mt-4 divide-y divide-champagne/50">
+              {order.items?.map((i) => (
+                <li key={i.id} className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-3">
+                  <span className="text-[15px]">
+                    {i.qty} x {i.productName}
+                  </span>
+                  <span className="flex items-baseline gap-4 text-[14px]">
+                    <span className="text-ink/75">{i.mode}</span>
+                    <span className="font-serif text-[17px] tabular-nums">${i.unitPrice}</span>
+                  </span>
+                </li>
               ))}
-            {next.length === 0 && <span style={{ color: "#666" }}>This order is {order.fulfilmentStatus}; no further steps.</span>}
-          </div>
-          {order.shippedAt && <p>Shipped {new Date(order.shippedAt).toLocaleString()}</p>}
-          {order.deliveredAt && <p>Delivered {new Date(order.deliveredAt).toLocaleString()}</p>}
+            </ul>
+            <dl className="mt-4 grid gap-1 border-t border-champagne pt-4 text-[14px]">
+              <div className="flex justify-between">
+                <dt>Subtotal</dt>
+                <dd className="tabular-nums">${order.subtotal}</dd>
+              </div>
+              <div className="flex justify-between">
+                <dt>Savings</dt>
+                <dd className="tabular-nums">${order.savings}</dd>
+              </div>
+              <div className="flex justify-between">
+                <dt>Shipping</dt>
+                <dd className="tabular-nums">${order.shipping}</dd>
+              </div>
+              <div className="flex justify-between pt-2 font-serif text-[1.4rem] text-garden">
+                <dt>Total</dt>
+                <dd className="tabular-nums">${order.total}</dd>
+              </div>
+            </dl>
+            {order.bonusSample && (
+              <p className="mt-4">
+                <Badge tone="warn">Include the bonus sample</Badge>
+              </p>
+            )}
+            {order.founding100Credit != null && (
+              <p className="mt-4 text-[14px]">
+                Founding 100 credit: <span className="font-serif tabular-nums">${order.founding100Credit}</span>{" "}
+                <Badge tone={order.founding100CreditIssuedAt ? "ok" : "warn"}>{order.founding100CreditIssuedAt ? "issued" : "owed"}</Badge>
+              </p>
+            )}
+          </Card>
 
-          <h2 style={{ fontSize: 15, marginTop: 24 }}>Internal note</h2>
-          <textarea value={note} onChange={(e) => setNote(e.target.value)} rows={3} maxLength={1000} style={{ ...field, fontFamily: "inherit" }} />
-          <button type="button" disabled={busy} onClick={() => patch({ internalNote: note }, "Note saved.")} style={{ marginTop: 8 }}>
-            Save note
-          </button>
-        </>
-      )}
-    </div>
+          {editable && (
+            <>
+              <SectionTitle>Internal note</SectionTitle>
+              <Card tone="peach">
+                <Field label="Note (staff only)">
+                  <textarea
+                    value={note}
+                    onChange={(e) => setNote(e.target.value)}
+                    rows={3}
+                    maxLength={1000}
+                    className={inputClass}
+                  />
+                </Field>
+                <div className="mt-4">
+                  <Button variant="secondary" disabled={busy} onClick={() => patch({ internalNote: note }, "Note saved.")}>
+                    Save note
+                  </Button>
+                </div>
+              </Card>
+            </>
+          )}
+        </div>
+
+        <div className="grid content-start gap-6">
+          <Card tone="peach">
+            <h2 className="font-serif text-[1.4rem] text-garden">Customer</h2>
+            <p className="mt-3 text-[15px] leading-relaxed">
+              {order.firstName} {order.lastName}
+              <br />
+              {order.email}
+              {!order.redacted && (
+                <>
+                  <br />
+                  {order.address}, {order.city}
+                  {order.state ? `, ${order.state}` : ""} {order.zip ?? ""}, {order.country}
+                </>
+              )}
+              {order.redacted && <> · {order.country}</>}
+            </p>
+          </Card>
+
+          {editable && (
+            <Card tone="garden">
+              <h2 className="font-serif text-[1.4rem]">Fulfilment</h2>
+              {order.status !== "paid" && next.length > 0 && (
+                <p className="mt-3 text-[14px] text-ivory/90">Unpaid: it cannot be packed or shipped yet.</p>
+              )}
+              {showTracking && (
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  <label className="block text-[11px] uppercase tracking-[0.24em] text-ivory/90">
+                    Carrier
+                    <input
+                      value={carrier}
+                      onChange={(e) => setCarrier(e.target.value)}
+                      maxLength={80}
+                      disabled={order.fulfilmentStatus === "delivered"}
+                      className={`${inputClass} mt-1.5 normal-case tracking-normal disabled:opacity-70`}
+                    />
+                  </label>
+                  <label className="block text-[11px] uppercase tracking-[0.24em] text-ivory/90">
+                    Tracking number
+                    <input
+                      value={tracking}
+                      onChange={(e) => setTracking(e.target.value)}
+                      maxLength={80}
+                      disabled={order.fulfilmentStatus === "delivered"}
+                      className={`${inputClass} mt-1.5 normal-case tracking-normal disabled:opacity-70`}
+                    />
+                  </label>
+                  {order.fulfilmentStatus === "shipped" && (
+                    <div className="sm:col-span-2">
+                      <Button
+                        variant="champagne"
+                        disabled={busy}
+                        onClick={() => patch({ trackingCarrier: carrier, trackingNumber: tracking }, "Tracking saved.")}
+                      >
+                        Save tracking
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              )}
+              <div className="mt-5 flex flex-wrap gap-3">
+                {next
+                  .filter((n) => order.status === "paid" || n === "cancelled" || n === "unfulfilled")
+                  .map((n) => (
+                    <Button
+                      key={n}
+                      variant={n === "cancelled" ? "danger" : "champagne"}
+                      disabled={busy}
+                      onClick={() => move(n)}
+                      className={n === "cancelled" ? "border-ivory" : undefined}
+                    >
+                      {LABEL[n] ?? n}
+                    </Button>
+                  ))}
+                {next.length === 0 && (
+                  <span className="text-[14px] text-ivory/90">This order is {order.fulfilmentStatus}; no further steps.</span>
+                )}
+              </div>
+              {(order.shippedAt || order.deliveredAt) && (
+                <div className="mt-5 grid gap-1 border-t border-ivory/30 pt-4 text-[14px]">
+                  {order.shippedAt && <p>Shipped {new Date(order.shippedAt).toLocaleString()}</p>}
+                  {order.deliveredAt && <p>Delivered {new Date(order.deliveredAt).toLocaleString()}</p>}
+                </div>
+              )}
+            </Card>
+          )}
+        </div>
+      </div>
+    </PageShell>
   );
 }
