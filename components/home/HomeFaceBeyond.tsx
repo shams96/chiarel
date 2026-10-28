@@ -2,18 +2,37 @@ import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
-// Two panels directly under the hero: the face first, then the neck and
-// décolleté. Replaces the former "below the jawline" feature section; its
-// "What It Is Designed For" list lives in the second panel.
-// Cosmetic, non-medical language only.
+// Two panels under the hero: the face first (four product cards, each a scene
+// photograph), then the neck and décolleté (the festive Neck scene, with the
+// "What It Is Designed For" list). Cosmetic, non-medical language only.
 const faceProducts = [
-  { name: "Clarity Essence™", concern: "For fine lines and firmness", href: "/shop/clarity-essence" },
-  { name: "Clarity Day Crème™", concern: "For dry skin under daily stress", href: "/shop/clarity-day-creme" },
-  { name: "Clarity Night Crème™", concern: "For smoother-looking texture", href: "/shop/clarity-night-creme" },
+  {
+    name: "Clarity Essence™",
+    concern: "For fine lines and firmness",
+    href: "/shop/clarity-essence",
+    image: "/assets/products/clarity-essence-ribbon-scene-2.jpg",
+    alt: "Clarity Essence™ bottle on a plinth with a frosted flower and a green CHIAREL velvet ribbon",
+  },
+  {
+    name: "Clarity Day Crème™",
+    concern: "For dry skin under daily stress",
+    href: "/shop/clarity-day-creme",
+    image: "/assets/products/clarity-day-creme-ribbon-scene.jpg",
+    alt: "Clarity Day Crème™ jar on travertine with a green CHIAREL velvet ribbon",
+  },
+  {
+    name: "Clarity Night Crème™",
+    concern: "For smoother-looking texture",
+    href: "/shop/clarity-night-creme",
+    image: "/assets/products/clarity-night-creme-ribbon-scene.jpg",
+    alt: "Clarity Night Crème™ jar among moss and ferns with a Red Ochre CHIAREL velvet ribbon",
+  },
   {
     name: "Clarity Eye Contour Concentrate™",
     concern: "For puffiness, dark circles and fine lines",
     href: "/shop/clarity-eye-contour-concentrate",
+    image: "/assets/products/clarity-eye-contour-concentrate-ribbon-scene.jpg",
+    alt: "Clarity Eye Contour Concentrate™ bottle among blush petals with a green CHIAREL velvet ribbon",
   },
 ];
 
@@ -24,73 +43,89 @@ const concerns = [
   "The look of improved suppleness",
 ];
 
+const gutter = "px-[clamp(1.5rem,4.5vw,7rem)]";
+
 export default function HomeFaceBeyond() {
   return (
-    <section className="grid md:grid-cols-2">
-      <div className="bg-peachdust px-6 py-14 text-ink md:px-12 md:py-20">
-        <Reveal className="mx-auto max-w-[34rem] md:mx-0">
-          <div className="border-t border-redochre pt-6">
-            <h2 className="font-serif text-3xl leading-snug text-redochre">The Face, First</h2>
-            <p className="mt-2 font-serif text-lg italic">We begin where you are most seen.</p>
-            <p className="mt-4 text-sm leading-relaxed">Four formulas, each made for one purpose.</p>
+    <section className="grid lg:grid-cols-2">
+      <div className={`bg-peachdust ${gutter} py-16 text-ink md:py-24`}>
+        <Reveal className="mx-auto max-w-[56rem]">
+          <div className="border-t border-redochre pt-7">
+            <h2 className="font-serif text-[clamp(2rem,1.1rem+2.2vw,3.8rem)] leading-tight text-redochre">
+              The Face, First
+            </h2>
+            <p className="mt-3 font-serif text-[clamp(1.15rem,0.9rem+0.7vw,1.9rem)] italic">
+              We begin where you are most seen.
+            </p>
+            <p className="mt-4 text-[clamp(1rem,0.85rem+0.35vw,1.3rem)] leading-relaxed">
+              Four formulas, each made for one purpose.
+            </p>
           </div>
-          <div className="relative mx-auto mt-8 aspect-square w-full max-w-[16rem]">
-            <Image
-              src="/assets/products/clarity-essence-bottle.png"
-              alt="Clarity Essence™ in its glass bottle"
-              fill
-              sizes="(max-width: 768px) 60vw, 256px"
-              className="object-contain"
-            />
-          </div>
-          <ul className="mt-8 grid gap-5">
+
+          <ul className="mt-10 grid grid-cols-2 gap-x-[clamp(1rem,2vw,2.5rem)] gap-y-[clamp(1.75rem,3vw,3.5rem)]">
             {faceProducts.map((p) => (
               <li key={p.href}>
-                <Link href={p.href} className="font-serif text-xl text-redochre underline underline-offset-4">
-                  {p.name}
+                <Link href={p.href} className="group block">
+                  <div className="relative aspect-[4/5] overflow-hidden bg-ivory">
+                    <Image
+                      src={p.image}
+                      alt={p.alt}
+                      fill
+                      sizes="(max-width: 1024px) 45vw, 22vw"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    />
+                  </div>
+                  <h3 className="mt-4 font-serif text-[clamp(1.05rem,0.85rem+0.6vw,1.65rem)] leading-snug text-redochre underline decoration-redochre/0 underline-offset-4 transition group-hover:decoration-redochre">
+                    {p.name}
+                  </h3>
+                  <p className="mt-1 text-[clamp(0.9rem,0.8rem+0.25vw,1.15rem)] leading-snug">{p.concern}</p>
                 </Link>
-                <p className="mt-1 text-sm">{p.concern}</p>
               </li>
             ))}
           </ul>
+
           <Link
             href="/shop"
-            className="mt-8 inline-block text-[12px] uppercase tracking-[0.3em] text-redochre underline underline-offset-[6px]"
+            className="mt-12 inline-block text-[clamp(12px,0.65rem+0.3vw,15px)] uppercase tracking-[0.3em] text-redochre underline underline-offset-[6px]"
           >
             Shop the face
           </Link>
         </Reveal>
       </div>
 
-      <div className="bg-garden px-6 py-14 text-ivory md:px-12 md:py-20">
-        <Reveal delay={0.1} className="mx-auto max-w-[34rem] md:mx-0">
-          <h2 className="font-serif text-3xl leading-snug">Beyond the Face</h2>
-          <p className="mt-2 font-serif text-lg italic">
+      <div className={`bg-garden ${gutter} py-16 text-ivory md:py-24`}>
+        <Reveal delay={0.1} className="mx-auto max-w-[56rem]">
+          <Link href="/shop/clarity-neck-decollete-creme" className="group block">
+            <div className="relative aspect-[4/5] w-full overflow-hidden bg-peachdust">
+              <Image
+                src="/assets/products/clarity-neck-decollete-creme-festive-scene.jpg"
+                alt="Clarity Neck & Décolleté Crème™ in its green glass bottle, framed by a frosted flower and Red Ochre CHIAREL velvet ribbon"
+                fill
+                sizes="(max-width: 1024px) 100vw, 45vw"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+              />
+            </div>
+          </Link>
+
+          <h2 className="mt-10 font-serif text-[clamp(2rem,1.1rem+2.2vw,3.8rem)] leading-tight">
+            Beyond the Face
+          </h2>
+          <p className="mt-3 font-serif text-[clamp(1.15rem,0.9rem+0.7vw,1.9rem)] italic">
             The neck and décolleté are the skin most routines forget.
           </p>
-          <p className="mt-4 text-sm leading-relaxed">
+          <p className="mt-4 text-[clamp(1rem,0.85rem+0.35vw,1.3rem)] leading-relaxed">
             Clarity Neck &amp; Décolleté Crème™ gives the skin below the jaw the
             same discipline as the face, for crepey-looking skin on the neck
             and chest. One ritual, one standard, from the cheekbone to the
             collarbone.
           </p>
-          <div className="mx-auto mt-8 flex aspect-square w-full max-w-[16rem] items-center justify-center bg-peachdust p-6">
-            <div className="relative h-full w-full">
-              <Image
-                src="/assets/products/clarity-neck-decollete-creme-bottle.png"
-                alt="Clarity Neck & Décolleté Crème™ in its green glass bottle"
-                fill
-                sizes="(max-width: 768px) 60vw, 256px"
-                className="object-contain"
-              />
-            </div>
-          </div>
-          <h3 className="mt-8 font-serif text-xl">What It Is Designed For</h3>
-          <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+
+          <h3 className="mt-10 font-serif text-[clamp(1.25rem,1rem+0.7vw,2rem)]">What It Is Designed For</h3>
+          <ul className="mt-5 grid gap-3 sm:grid-cols-2">
             {concerns.map((concern) => (
               <li
                 key={concern}
-                className="border border-champagne px-4 py-3 font-serif text-base leading-snug"
+                className="border border-champagne px-5 py-4 font-serif text-[clamp(1rem,0.85rem+0.35vw,1.3rem)] leading-snug"
               >
                 {concern}
               </li>
@@ -98,7 +133,7 @@ export default function HomeFaceBeyond() {
           </ul>
           <Link
             href="/shop/clarity-neck-decollete-creme"
-            className="btn-press mt-8 inline-block bg-champagne px-8 py-3 text-[12px] uppercase tracking-[0.3em] text-ink"
+            className="btn-press mt-10 inline-block bg-champagne px-[clamp(2rem,3vw,3.25rem)] py-[clamp(0.9rem,1.1vw,1.3rem)] text-[clamp(11px,0.6rem+0.3vw,14px)] uppercase tracking-[0.3em] text-ink"
           >
             Shop Clarity Neck &amp; Décolleté Crème™
           </Link>

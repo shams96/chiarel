@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import RibbonBand from "@/components/home/RibbonBand";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { getProductOrThrow, productImageAlt, productHref, studioImage } from "@/lib/products";
 
@@ -12,8 +13,10 @@ export function HomeFinalCta() {
   const day = getProductOrThrow("terra-radiance-creme");
 
   return (
+    <>
+    <RibbonBand tone="green" />
     <section className="section-y bg-redochre text-ivory">
-      <div className="section-x flex flex-col items-center gap-10 md:flex-row">
+      <div className="mx-auto flex max-w-[96rem] flex-col items-center gap-10 px-[clamp(1.5rem,4.5vw,7rem)] md:flex-row md:gap-[clamp(2.5rem,5vw,7rem)]">
         <Reveal className="grid w-full grid-cols-5 gap-4 md:w-3/5">
           <div
             className="card-elevated product-frame col-span-3 aspect-[4/5]"
@@ -29,17 +32,19 @@ export function HomeFinalCta() {
           </div>
         </Reveal>
         <Reveal delay={0.15} className="w-full md:w-2/5">
-          <h2 className="font-serif text-3xl">Begin with the face. Do not stop there.</h2>
-          <p className="mt-2 text-sm">Five formulations, each made for one purpose</p>
-          <p className="mt-3 max-w-md text-sm">
+          <h2 className="font-serif text-[clamp(2rem,1rem+2.8vw,4.4rem)] leading-[1.08]">
+            Begin with the face. Do not stop there.
+          </h2>
+          <p className="mt-3 text-[clamp(1rem,0.85rem+0.4vw,1.4rem)]">Five formulations, each made for one purpose</p>
+          <p className="mt-3 max-w-xl text-[clamp(1rem,0.85rem+0.4vw,1.4rem)] leading-relaxed">
             Start with Clarity Essence and Clarity Day Crème, the two steps
             of the morning.
           </p>
-          <p className="mt-4 text-sm">
-            <span className="tabular-nums font-serif text-2xl">
+          <p className="mt-5 text-[clamp(0.95rem,0.8rem+0.4vw,1.3rem)]">
+            <span className="tabular-nums font-serif text-[clamp(1.5rem,1.1rem+1vw,2.5rem)]">
               ${essence.price!.subscription}
             </span>
-            <span className="ml-2 text-[12px]">
+            <span className="ml-2 text-[clamp(12px,0.65rem+0.3vw,16px)]">
               Clarity Essence, every 45 days with subscription · $
               {essence.price!.oneTime} one-time
             </span>
@@ -65,6 +70,7 @@ export function HomeFinalCta() {
         </Reveal>
       </div>
     </section>
+    </>
   );
 }
 
