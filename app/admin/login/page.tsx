@@ -46,7 +46,7 @@ export default function AdminLoginPage() {
       <div className="grid flex-1 md:grid-cols-2">
         <div className="relative hidden md:block">
           <Image
-            src="/assets/products/clarity-essence-festive-scene.jpg"
+            src="/assets/products/clarity-essence-festive-scene-v2.jpg"
             alt=""
             fill
             priority

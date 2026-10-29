@@ -63,7 +63,7 @@ export default function HomeHero() {
 
         <div className="relative aspect-[4/5] w-full md:aspect-auto">
           <Image
-            src="/assets/products/clarity-essence-festive-scene.jpg"
+            src="/assets/products/clarity-essence-festive-scene-v2.jpg"
             alt="Clarity Essence™ in its glass bottle on a plinth, framed by a frosted flower and green CHIAREL velvet ribbon"
             fill
             priority
