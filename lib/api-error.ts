@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { retryDb } from "@/lib/db-resilience";
+import { dbGeneration, recoverFromEnginePanic } from "@/lib/db-client";
+import { isEnginePanic, retryDb } from "@/lib/db-resilience";
 
 /**
  * Wraps a route handler so a thrown error (most commonly the database being
@@ -19,7 +20,16 @@ export function withApiErrorHandling<Args extends unknown[]>(
     const first = args[0] as { method?: string } | undefined;
     const readOnly = !first?.method || first.method === "GET";
     try {
-      return await retryDb(() => handler(...args), { readOnly, retries: readOnly ? 1 : 0 });
+      return await retryDb(
+        () => {
+          const generation = dbGeneration();
+          return handler(...args).catch((err) => {
+            if (isEnginePanic(err)) recoverFromEnginePanic(generation);
+            throw err;
+          });
+        },
+        { readOnly, retries: readOnly ? 1 : 0 }
+      );
     } catch (err) {
       console.error("[api error]", err);
       return NextResponse.json(

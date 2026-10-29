@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import { db } from "@/lib/db";
+import { dbGeneration, recoverFromEnginePanic } from "@/lib/db-client";
+import { isEnginePanic } from "@/lib/db-resilience";
 import { clientIp, isRateLimited } from "@/lib/rate-limit";
 
 // Liveness and readiness in one place, so an outage can be told apart quickly:
@@ -24,6 +26,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ ...body, ok: false, error: "rate limited" }, { status: 429 });
     }
     const t = Date.now();
+    const generation = dbGeneration();
     try {
       // Time-boxed: a stalled connection must answer "TIMEOUT", not hang the probe.
       await Promise.race([
@@ -38,6 +41,7 @@ export async function GET(req: NextRequest) {
       // it can safely: the Prisma/Node error code or class name (never the
       // message, which can contain connection details) and whether the database
       // settings are present at all.
+      if (isEnginePanic(err)) recoverFromEnginePanic(generation);
       const e = err as { code?: unknown; name?: unknown };
       const code = typeof e?.code === "string" ? e.code : typeof e?.name === "string" ? e.name : "unknown";
       return NextResponse.json(
