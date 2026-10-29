@@ -1,6 +1,6 @@
 # Home page: a personality for every section (SPEC, phase 1: what and why)
 
-Status: DRAFT for owner approval (2026-10-29). No code until approved. Next phases: PLAN, TASKS, implement, converge.
+Status: APPROVED and implemented (2026-10-29). Owner answers below. Built in one pass, so plan and tasks are the section map and the per-section notes in the PR.
 
 ## Problem
 The live Home page (reviewed section by section at 1440 px, 2026-10-28) has two halves.
@@ -54,8 +54,12 @@ Header/footer, product pages, copy rewrites, new sections, the checkout path, th
 - Schema and tests unchanged and passing; Lighthouse accessibility and performance not lower.
 - Owner approves the screenshots before merge.
 
-## Decisions needed from the owner
-1. Backgrounds for #4 and #5: proposal is #4 Peach Dust panel, #5 Ivory with Peach Dust cards. Agree?
-2. Philosophy photograph: the Isola del Liri bridge photo, or the illustration?
-3. Can you supply a real portrait of Grazia Savoriti, or ship typographic-only?
-4. Keep Ink for "Who formulates", or move it to Formal Garden (then "Where is it made" changes)?
+## Decisions (owner, 2026-10-29) and how they were applied
+1. Backgrounds for #4 and #5: agreed. #4 Peach Dust panel, #5 Ivory with Peach Dust cards.
+2. Philosophy image: left to design judgement. Chose the Isola del Liri bridge photograph; the watercolour illustration already carries "Where is CHIAREL made", so a photograph keeps the two apart.
+3. Portrait of Grazia: owner pointed to the Natural You about-us photo and asked for the background to be removed and branded. Cut out with BiRefNet, cropped above the coat badge (no Natural You branding shown), set on Ink with the printed Red Ochre ribbon. Open item: written permission from Natural You to use the photograph.
+4. "Who formulates" colour: left to design judgement. Kept Ink (the page's one dark authority moment; Formal Garden would sit against the green "Where is CHIAREL made" band directly above). Separated from that band by a Red Ochre ribbon.
+
+## Deviations from the proposal
+- Liri flow pattern not used behind the ingredients: it is still marked DRAFT, pending review, in `globals.css`. Champagne hairlines carry the section instead.
+- The Final CTA already opens with its own ribbon band, so no extra band was added there. Ribbons: into the icon product (green), into Who formulates (Red Ochre), into the final CTA (existing).
