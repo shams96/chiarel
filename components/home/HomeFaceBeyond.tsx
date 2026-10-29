@@ -10,28 +10,28 @@ const faceProducts = [
     name: "Clarity Essence™",
     concern: "For fine lines and firmness",
     href: "/shop/clarity-essence",
-    image: "/assets/products/clarity-essence-ribbon-scene-2.jpg",
+    image: "/assets/products/clarity-essence-ribbon-scene-2-v2.jpg",
     alt: "Clarity Essence™ bottle on a plinth with a frosted flower and a green CHIAREL velvet ribbon",
   },
   {
     name: "Clarity Day Crème™",
     concern: "For dry skin under daily stress",
     href: "/shop/clarity-day-creme",
-    image: "/assets/products/clarity-day-creme-ribbon-scene.jpg",
+    image: "/assets/products/clarity-day-creme-ribbon-scene-v2.jpg",
     alt: "Clarity Day Crème™ jar on travertine with a green CHIAREL velvet ribbon",
   },
   {
     name: "Clarity Night Crème™",
     concern: "For smoother-looking texture",
     href: "/shop/clarity-night-creme",
-    image: "/assets/products/clarity-night-creme-ribbon-scene.jpg",
+    image: "/assets/products/clarity-night-creme-ribbon-scene-v2.jpg",
     alt: "Clarity Night Crème™ jar among moss and ferns with a Red Ochre CHIAREL velvet ribbon",
   },
   {
     name: "Clarity Eye Contour Concentrate™",
     concern: "For puffiness, dark circles and fine lines",
     href: "/shop/clarity-eye-contour-concentrate",
-    image: "/assets/products/clarity-eye-contour-concentrate-ribbon-scene.jpg",
+    image: "/assets/products/clarity-eye-contour-concentrate-ribbon-scene-v2.jpg",
     alt: "Clarity Eye Contour Concentrate™ bottle among blush petals with a green CHIAREL velvet ribbon",
   },
 ];
@@ -98,7 +98,7 @@ export default function HomeFaceBeyond() {
           <Link href="/shop/clarity-neck-decollete-creme" className="group block">
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-peachdust">
               <Image
-                src="/assets/products/clarity-neck-decollete-creme-festive-scene.jpg"
+                src="/assets/products/clarity-neck-decollete-creme-festive-scene-v2.jpg"
                 alt="Clarity Neck & Décolleté Crème™ in its green glass bottle, framed by a frosted flower and Red Ochre CHIAREL velvet ribbon"
                 fill
                 sizes="(max-width: 1024px) 100vw, 45vw"

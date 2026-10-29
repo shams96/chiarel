@@ -112,7 +112,7 @@ export default function AdminHomePage() {
         </div>
         <div className="relative hidden min-h-[18rem] md:block">
           <Image
-            src="/assets/products/clarity-neck-decollete-creme-festive-scene.jpg"
+            src="/assets/products/clarity-neck-decollete-creme-festive-scene-v2.jpg"
             alt=""
             fill
             priority

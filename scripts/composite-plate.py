@@ -2,7 +2,10 @@
 usage: python scripts/composite-plate.py plate.png cutout.png out.jpg '{"x":450,"y":790,"h":440,...}'
 x,y = where the foot of the product touches the surface (plate pixels); h = product height in pixels.
 Optional: refl (0-1), refl_blur, shadow [r,g,b], shadow_dir (px shift of the cast shadow, +right),
-tint [r,g,b] and tint_amt (colour wash matching the scene light), rim [r,g,b], rim_amt, grain.
+tint [r,g,b] and tint_amt (colour wash matching the scene light), rim [r,g,b], rim_amt, grain,
+contact (0-1, dark line under the foot so it rests on the surface), erode (px, trims a cutout's edge halo),
+solid_foot (true: cut the faint strip below the real foot), trim_bottom (cutout px, extra cut at the foot).
+Keep refl at 0 on matte surfaces (cloth, stone, snow): a reflection there makes the product look like it floats.
 """
 import sys, json, numpy as np
 from PIL import Image
@@ -26,7 +29,22 @@ a_ = np.asarray(prod)[..., 3]
 ys, xs = np.where(a_ > 70)
 prod = prod.crop((xs.min(), ys.min(), xs.max() + 1, ys.max() + 1))
 r = ph / prod.height
-prod = prod.resize((int(prod.width * r), int(ph)), Image.LANCZOS)
+# A cutout often ends in a faint low-alpha shadow strip (or a white halo) below the real
+# foot, which pushes the product up off the surface by that much. solid_foot cuts the
+# strip below the last solid row; trim_bottom (cutout px) removes anything beyond that.
+trim_src = cfg.get("trim_bottom", 0)
+if cfg.get("solid_foot"):
+    rows = (np.asarray(prod)[..., 3] >= 250).sum(1)
+    last = np.where(rows > rows.max() * 0.2)[0].max()
+    trim_src = max(trim_src, prod.height - 1 - last)
+keep = prod.height - trim_src
+prod = prod.crop((0, 0, prod.width, keep)).resize((int(prod.width * r), max(1, int(keep * r))), Image.LANCZOS)
+erode =cfg.get("erode", 0)  # px; trims the light halo a packshot cutout leaves on its edge
+if erode:
+    from scipy.ndimage import minimum_filter
+    pa = np.array(prod)
+    pa[..., 3] = minimum_filter(pa[..., 3], size=int(erode) * 2 + 1)
+    prod = Image.fromarray(pa)
 pw, ph = prod.size
 px, py = int(x0 - pw / 2), int(y0 - ph)
 
@@ -49,6 +67,20 @@ def paste(layer_rgb, layer_a, x, y, out):
     out[ya:yb, xa:xb] = out[ya:yb, xa:xb] * (1 - la) + lr * la
 
 yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+
+# reflection on the surface under the product. Drawn BEFORE the shadows so it can
+# never sit on top of the contact shadow: a bright mirrored band right under the
+# foot makes the product look like it hovers. Only for genuinely glossy surfaces.
+refl = cfg.get("refl", 0.0)
+if refl > 0:
+    rf = prod.transpose(Image.FLIP_TOP_BOTTOM)
+    ra = np.asarray(rf)[..., 3].astype(np.float32) / 255.0
+    rr = np.asarray(rf)[..., :3].astype(np.float32)
+    fade = np.linspace(1, 0, ra.shape[0]) ** cfg.get("refl_fade", 1.8)
+    ra = gaussian_filter(ra * fade[:, None] * refl, (cfg.get("refl_blur", 2.2) * S, 1.2 * S))
+    rr = np.stack([gaussian_filter(rr[..., c], (2 * S, 1 * S)) for c in range(3)], -1)
+    paste(rr, ra, px, int(y0) + 2, canvas)
+
 # contact shadow + soft cast shadow
 sh = np.zeros((H, W), np.float32)
 ex, ey = pw * 0.55, max(6, ph * 0.03)
@@ -60,16 +92,14 @@ sc = np.array(cfg.get("shadow", [20, 14, 10]), np.float32)
 sa = np.clip(sh, 0, 0.9)[..., None] * cfg.get("shadow_amt", 0.9)
 canvas = canvas * (1 - sa) + sc * sa
 
-# reflection on the surface under the product
-refl = cfg.get("refl", 0.0)
-if refl > 0:
-    rf = prod.transpose(Image.FLIP_TOP_BOTTOM)
-    ra = np.asarray(rf)[..., 3].astype(np.float32) / 255.0
-    rr = np.asarray(rf)[..., :3].astype(np.float32)
-    fade = np.linspace(1, 0, ra.shape[0]) ** cfg.get("refl_fade", 1.8)
-    ra = gaussian_filter(ra * fade[:, None] * refl, (cfg.get("refl_blur", 2.2) * S, 1.2 * S))
-    rr = np.stack([gaussian_filter(rr[..., c], (2 * S, 1 * S)) for c in range(3)], -1)
-    paste(rr, ra, px, int(y0) + 2, canvas)
+# tight, dark contact line hugging the foot (flat-ended, like a square base). This is
+# what makes the product read as resting on the surface.
+contact = cfg.get("contact", 0.0)
+if contact > 0:
+    ct = np.exp(-((np.abs(xx - x0) / (pw * 0.54)) ** 6 + ((yy - (y0 - 1)) / max(3.0, ph * 0.011)) ** 2))
+    ct = gaussian_filter(ct.astype(np.float32), 1.4 * S)
+    ca = np.clip(ct, 0, 1)[..., None] * contact
+    canvas = canvas * (1 - ca) + sc * ca
 
 # rim / bloom behind the glass (light wrapping)
 bloom = np.exp(-(((xx - x0) / (pw * 1.1)) ** 2 + ((yy - (y0 - ph * 0.45)) / (ph * 0.6)) ** 2) * 1.5)
