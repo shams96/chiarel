@@ -40,7 +40,15 @@ export function withConnectionDefaults(url: string | undefined): string | undefi
 const NEVER_EXECUTED = new Set(["P1001", "P2024"]);
 const MAYBE_EXECUTED = new Set(["P1002", "P1008", "P1017"]);
 
+/** The Prisma query engine crashed (PrismaClientRustPanicError). */
+export function isEnginePanic(err: unknown): boolean {
+  const e = err as { name?: unknown; code?: unknown } | null;
+  return e?.name === "PrismaClientRustPanicError" || e?.code === "PrismaClientRustPanicError";
+}
+
 export function isRetryableDbError(err: unknown, readOnly: boolean): boolean {
+  // A panic can strike mid-statement, so only reads retry (on the replaced client).
+  if (isEnginePanic(err)) return readOnly;
   const code = (err as { code?: unknown } | null)?.code;
   if (typeof code !== "string") return false;
   return NEVER_EXECUTED.has(code) || (readOnly && MAYBE_EXECUTED.has(code));
