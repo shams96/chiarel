@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { animate, motion, useMotionTemplate, useMotionValue, useReducedMotion, useTransform } from "framer-motion";
+import Image from "next/image";
 
 // The one signature, once-per-session moment on the site (per craft-floor
 // convention set in globals.css: "one authored moment, not scattered
@@ -475,8 +476,14 @@ export default function HeroIntro() {
               transition={{ duration: 0.9, delay: WORDMARK_AT, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-col items-center leading-none"
             >
-              <span className="font-serif text-3xl tracking-[0.35em] text-ink md:text-4xl">CHIAREL</span>
-              <span className="mt-2 text-[10px] uppercase tracking-[0.28em] text-ochre">The House of Clarity™</span>
+              <Image
+                src="/assets/brand/logo/chiarel-intro-house-ink.png"
+                alt=""
+                width={760}
+                height={179}
+                priority
+                className="h-auto w-[250px] md:w-[320px]"
+              />
             </motion.div>
 
             <motion.p

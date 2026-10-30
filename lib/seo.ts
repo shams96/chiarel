@@ -32,7 +32,7 @@ export const organizationJsonLd = {
   name: "CHIAREL",
   legalName: "1HubSolutions, LLC",
   url: SITE_URL,
-  logo: `${SITE_URL}/assets/brand/CHIAREL_Favicon_Monogram.svg`,
+  logo: `${SITE_URL}/icon-512.png`,
   description:
     "CHIAREL™ — The House of Clarity™. Advancing Cellular Clarity™. Formulated in Isola del Liri, Italy, with Natural You Srl.",
   slogan: "The House of Clarity™",
