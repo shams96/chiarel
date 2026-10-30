@@ -46,6 +46,26 @@ export function isEnginePanic(err: unknown): boolean {
   return e?.name === "PrismaClientRustPanicError" || e?.code === "PrismaClientRustPanicError";
 }
 
+// The database could not be reached or answered too slowly, as opposed to the
+// database answering with an error about the query. These are the failures that
+// trip the circuit breaker (lib/db-breaker.ts); TIMEOUT is the health probe's.
+const CONNECTIVITY_CODES = new Set(["P1001", "P1002", "P1008", "P1017", "P2024", "TIMEOUT"]);
+
+export function isConnectivityError(err: unknown): boolean {
+  if (isEnginePanic(err)) return true;
+  const e = err as { name?: unknown; code?: unknown } | null;
+  if (e?.name === "PrismaClientInitializationError") return true;
+  return typeof e?.code === "string" && CONNECTIVITY_CODES.has(e.code);
+}
+
+/** Thrown instead of touching the network while the breaker is open. */
+export class DbUnavailableError extends Error {
+  constructor(readonly retryAfterSeconds: number) {
+    super("The database is temporarily unavailable");
+    this.name = "DbUnavailableError";
+  }
+}
+
 export function isRetryableDbError(err: unknown, readOnly: boolean): boolean {
   // A panic can strike mid-statement, so only reads retry (on the replaced client).
   if (isEnginePanic(err)) return readOnly;
