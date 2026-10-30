@@ -7,6 +7,10 @@
 // in a middleware context, where setInterval/Prisma access isn't meaningful.
 export async function register() {
   if (process.env.NEXT_RUNTIME === "nodejs") {
+    // Before anything loads the Prisma engine: cap its worker threads (the host
+    // has a hard process/thread limit shared by every site on the plan).
+    const { capEngineThreads } = await import("@/lib/db-engine-limits");
+    capEngineThreads();
     // A fire-and-forget promise that rejects would otherwise terminate the Node
     // process (Node 15+), and the host does not necessarily restart it. Log and
     // keep serving.

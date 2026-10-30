@@ -1,14 +1,22 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { NextResponse } from "next/server";
-import { isEnginePanic, isRetryableDbError } from "@/lib/db-resilience";
+import { isConnectivityError, isEnginePanic, isRetryableDbError } from "@/lib/db-resilience";
 
-const created: { id: number; $disconnect: ReturnType<typeof vi.fn>; marker: string }[] = [];
+const created: { $disconnect: ReturnType<typeof vi.fn>; marker: string }[] = [];
+const behaviour: { error: unknown } = { error: null };
+let queries = 0;
 
 vi.mock("@prisma/client", () => ({
   PrismaClient: class {
-    id = created.length;
     marker = `client-${created.length}`;
     $disconnect = vi.fn().mockResolvedValue(undefined);
+    user = {
+      findFirst: async () => {
+        queries += 1;
+        if (behaviour.error) throw behaviour.error;
+        return { id: 1 };
+      },
+    };
     constructor() {
       created.push(this as never);
     }
@@ -16,8 +24,21 @@ vi.mock("@prisma/client", () => ({
 }));
 
 const panic = () => Object.assign(new Error("engine died"), { name: "PrismaClientRustPanicError" });
+const unreachable = () => Object.assign(new Error("can't reach"), { code: "P1001" });
+const unique = () => Object.assign(new Error("unique"), { code: "P2002" });
 
-describe("isEnginePanic / isRetryableDbError", () => {
+function reset() {
+  created.length = 0;
+  queries = 0;
+  behaviour.error = null;
+  delete (globalThis as { prisma?: unknown }).prisma;
+  delete (globalThis as { prismaGeneration?: unknown }).prismaGeneration;
+  vi.resetModules();
+  vi.restoreAllMocks();
+  vi.spyOn(console, "error").mockImplementation(() => {});
+}
+
+describe("error classification", () => {
   it("recognises the engine panic by name or code", () => {
     expect(isEnginePanic(panic())).toBe(true);
     expect(isEnginePanic({ code: "PrismaClientRustPanicError" })).toBe(true);
@@ -29,23 +50,26 @@ describe("isEnginePanic / isRetryableDbError", () => {
     expect(isRetryableDbError(panic(), true)).toBe(true);
     expect(isRetryableDbError(panic(), false)).toBe(false);
   });
+
+  it("treats unreachable, pool, initialization, timeout and panic as connectivity, not query errors", () => {
+    expect(isConnectivityError(unreachable())).toBe(true);
+    expect(isConnectivityError({ code: "P2024" })).toBe(true);
+    expect(isConnectivityError({ code: "TIMEOUT" })).toBe(true);
+    expect(isConnectivityError({ name: "PrismaClientInitializationError" })).toBe(true);
+    expect(isConnectivityError(panic())).toBe(true);
+    expect(isConnectivityError(unique())).toBe(false);
+    expect(isConnectivityError(new Error("plain"))).toBe(false);
+  });
 });
 
-describe("recoverFromEnginePanic", () => {
-  beforeEach(() => {
-    created.length = 0;
-    delete (globalThis as { prisma?: unknown }).prisma;
-    delete (globalThis as { prismaGeneration?: unknown }).prismaGeneration;
-    vi.resetModules();
-    vi.restoreAllMocks();
-  });
+describe("replaceDbClient", () => {
+  beforeEach(reset);
 
   it("swaps the client behind db and disconnects the dead one", async () => {
-    const { db, dbGeneration, recoverFromEnginePanic } = await import("@/lib/db-client");
+    const { db, dbGeneration, replaceDbClient } = await import("@/lib/db-client");
     expect((db as unknown as { marker: string }).marker).toBe("client-0");
-    vi.spyOn(console, "error").mockImplementation(() => {});
 
-    recoverFromEnginePanic(dbGeneration());
+    replaceDbClient(dbGeneration());
 
     expect(dbGeneration()).toBe(1);
     expect((db as unknown as { marker: string }).marker).toBe("client-1");
@@ -53,41 +77,52 @@ describe("recoverFromEnginePanic", () => {
   });
 
   it("replaces only once when several requests fail on the same dead client", async () => {
-    const { db, dbGeneration, recoverFromEnginePanic } = await import("@/lib/db-client");
+    const { db, dbGeneration, replaceDbClient } = await import("@/lib/db-client");
     void (db as unknown as { marker: string }).marker;
-    vi.spyOn(console, "error").mockImplementation(() => {});
-    const exit = vi.spyOn(process, "exit").mockImplementation((() => undefined) as never);
-
     const startedOn = dbGeneration();
-    recoverFromEnginePanic(startedOn);
-    recoverFromEnginePanic(startedOn);
-
+    replaceDbClient(startedOn);
+    replaceDbClient(startedOn);
     expect(created).toHaveLength(2);
-    expect(exit).not.toHaveBeenCalled();
   });
 
-  it("exits when a fresh client panics again right away, so the host restarts the app", async () => {
-    const { db, dbGeneration, recoverFromEnginePanic } = await import("@/lib/db-client");
+  it("never exits the process, and rate-limits replacement instead", async () => {
+    const { db, dbGeneration, replaceDbClient } = await import("@/lib/db-client");
     void (db as unknown as { marker: string }).marker;
-    vi.spyOn(console, "error").mockImplementation(() => {});
     const exit = vi.spyOn(process, "exit").mockImplementation((() => undefined) as never);
 
-    recoverFromEnginePanic(dbGeneration());
-    recoverFromEnginePanic(dbGeneration());
+    replaceDbClient(dbGeneration());
+    replaceDbClient(dbGeneration()); // the fresh client failed straight away
 
-    expect(exit).toHaveBeenCalledWith(1);
+    expect(exit).not.toHaveBeenCalled();
+    expect(created).toHaveLength(2); // second replacement refused inside the interval
+  });
+
+  it("caps the engine's worker threads before any client exists", async () => {
+    delete process.env.TOKIO_WORKER_THREADS;
+    await import("@/lib/db-client");
+    expect(process.env.TOKIO_WORKER_THREADS).toBe("2");
   });
 });
 
-describe("withApiErrorHandling with a panicking engine", () => {
+describe("withApiErrorHandling and the circuit breaker", () => {
   beforeEach(() => {
-    created.length = 0;
-    delete (globalThis as { prisma?: unknown }).prisma;
-    delete (globalThis as { prismaGeneration?: unknown }).prismaGeneration;
-    vi.resetModules();
-    vi.restoreAllMocks();
-    vi.spyOn(console, "error").mockImplementation(() => {});
+    reset();
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-10-29T12:00:00Z"));
   });
+  afterEach(() => vi.useRealTimers());
+
+  async function setup() {
+    const { withApiErrorHandling } = await import("@/lib/api-error");
+    const { db, dbBreaker } = await import("@/lib/db-client");
+    const usesDb = withApiErrorHandling(async (_req: Request) => {
+      await db.user.findFirst();
+      return NextResponse.json({ ok: true });
+    });
+    const noDb = withApiErrorHandling(async (_req: Request) => NextResponse.json({ ok: true }));
+    const post = () => new Request("http://x/api", { method: "POST" });
+    return { usesDb, noDb, post, dbBreaker };
+  }
 
   it("replaces the client and retries a read, which then succeeds", async () => {
     const { withApiErrorHandling } = await import("@/lib/api-error");
@@ -96,6 +131,7 @@ describe("withApiErrorHandling with a panicking engine", () => {
       .fn()
       .mockRejectedValueOnce(panic())
       .mockResolvedValueOnce(NextResponse.json({ ok: true }));
+    vi.useRealTimers();
 
     const res = await withApiErrorHandling(handler)(new Request("http://x/api", { method: "GET" }));
 
@@ -104,15 +140,69 @@ describe("withApiErrorHandling with a panicking engine", () => {
     expect(dbGeneration()).toBe(1);
   });
 
-  it("replaces the client after a failed write but does not repeat the write", async () => {
+  it("does not repeat a write after a panic", async () => {
     const { withApiErrorHandling } = await import("@/lib/api-error");
-    const { dbGeneration } = await import("@/lib/db-client");
     const handler = vi.fn().mockRejectedValue(panic());
-
     const res = await withApiErrorHandling(handler)(new Request("http://x/api", { method: "POST" }));
-
     expect(res.status).toBe(503);
     expect(handler).toHaveBeenCalledTimes(1);
-    expect(dbGeneration()).toBe(1);
+  });
+
+  it("opens after repeated connectivity failures, then refuses at once without touching the database", async () => {
+    const { usesDb, post, dbBreaker } = await setup();
+    behaviour.error = unreachable();
+    for (let i = 0; i < 3; i++) expect((await usesDb(post())).status).toBe(503);
+    expect(dbBreaker.state()).toBe("open");
+    const before = queries;
+
+    const res = await usesDb(post());
+
+    expect(res.status).toBe(503);
+    expect(queries).toBe(before);
+    expect(Number(res.headers.get("Retry-After"))).toBeGreaterThan(0);
+    expect((await res.json()).code).toBe("temporarily_unavailable");
+  });
+
+  it("does not block a request that never uses the database while the breaker is open", async () => {
+    const { usesDb, noDb, post, dbBreaker } = await setup();
+    behaviour.error = unreachable();
+    for (let i = 0; i < 3; i++) await usesDb(post());
+    expect(dbBreaker.state()).toBe("open");
+
+    expect((await noDb(post())).status).toBe(200);
+    expect(dbBreaker.state()).toBe("open"); // and it did not close the breaker by succeeding
+  });
+
+  it("probes after the cooldown and closes when the database is back", async () => {
+    const { usesDb, post, dbBreaker } = await setup();
+    behaviour.error = unreachable();
+    for (let i = 0; i < 3; i++) await usesDb(post());
+    vi.advanceTimersByTime(16_000);
+    behaviour.error = null;
+
+    expect((await usesDb(post())).status).toBe(200);
+    expect(dbBreaker.state()).toBe("closed");
+    expect((await usesDb(post())).status).toBe(200);
+  });
+
+  it("re-opens for a full cooldown when the probe fails", async () => {
+    const { usesDb, post, dbBreaker } = await setup();
+    behaviour.error = unreachable();
+    for (let i = 0; i < 3; i++) await usesDb(post());
+    vi.advanceTimersByTime(16_000);
+    const before = queries;
+
+    expect((await usesDb(post())).status).toBe(503);
+    expect(queries).toBe(before + 1); // the probe did reach the database
+    expect(dbBreaker.state()).toBe("open");
+    expect((await usesDb(post())).status).toBe(503);
+    expect(queries).toBe(before + 1); // and the next request was refused again
+  });
+
+  it("does not count a query error (the database answered) against the breaker", async () => {
+    const { usesDb, post, dbBreaker } = await setup();
+    behaviour.error = unique();
+    for (let i = 0; i < 6; i++) await usesDb(post());
+    expect(dbBreaker.state()).toBe("closed");
   });
 });
