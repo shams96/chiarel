@@ -206,3 +206,35 @@ describe("withApiErrorHandling and the circuit breaker", () => {
     expect(dbBreaker.state()).toBe("closed");
   });
 });
+
+describe("error code on admin 503s", () => {
+  beforeEach(reset);
+
+  it("labels the failure on /api/admin routes with a safe code, never the message", async () => {
+    const { withApiErrorHandling } = await import("@/lib/api-error");
+    const secret = withApiErrorHandling(async (_req: Request) => {
+      throw new Error("ADMIN_SESSION_SECRET is not set");
+    });
+    const prisma = withApiErrorHandling(async (_req: Request) => {
+      throw Object.assign(new Error("Unique constraint failed on host db.secret-host.example"), { code: "P2002" });
+    });
+    const admin = (path: string) => new Request(`http://x${path}`, { method: "POST" });
+
+    const a = await (await secret(admin("/api/admin/auth/login"))).json();
+    expect(a.code).toBe("config_missing_admin_session_secret");
+    const b = await prisma(admin("/api/admin/auth/login"));
+    expect(b.status).toBe(503);
+    const body = await b.json();
+    expect(body.code).toBe("P2002");
+    expect(JSON.stringify(body)).not.toContain("secret-host");
+  });
+
+  it("returns no code on public routes", async () => {
+    const { withApiErrorHandling } = await import("@/lib/api-error");
+    const failing = withApiErrorHandling(async (_req: Request) => {
+      throw Object.assign(new Error("boom"), { code: "P2002" });
+    });
+    const body = await (await failing(new Request("http://x/api/cart", { method: "POST" }))).json();
+    expect(body).toEqual({ error: "Something went wrong on our end. Please try again in a moment." });
+  });
+});

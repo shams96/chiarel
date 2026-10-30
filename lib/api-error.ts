@@ -5,6 +5,32 @@ import { DbUnavailableError, isEnginePanic, retryDb } from "@/lib/db-resilience"
 const MESSAGE = "Something went wrong on our end. Please try again in a moment.";
 
 /**
+ * A short, safe label for what failed: a Prisma/Node error code or class name, or
+ * a fixed label for a known misconfiguration. Never the message, which can carry
+ * connection details. Hostinger exposes no runtime log, so without this a 503
+ * cannot be told apart from another. Only returned on /api/admin routes.
+ */
+export function safeErrorCode(err: unknown): string {
+  const e = err as { code?: unknown; name?: unknown; message?: unknown } | null;
+  if (typeof e?.message === "string" && e.message.includes("ADMIN_SESSION_SECRET")) {
+    return "config_missing_admin_session_secret";
+  }
+  if (typeof e?.code === "string" && /^[A-Za-z0-9_]{1,40}$/.test(e.code)) return e.code;
+  if (typeof e?.name === "string" && /^[A-Za-z0-9_]{1,60}$/.test(e.name)) return e.name;
+  return "unknown";
+}
+
+function isAdminRequest(first: unknown): boolean {
+  const url = (first as { url?: unknown } | undefined)?.url;
+  if (typeof url !== "string") return false;
+  try {
+    return new URL(url).pathname.startsWith("/api/admin/");
+  } catch {
+    return false;
+  }
+}
+
+/**
  * Wraps a route handler so a thrown error (most commonly the database being
  * unreachable, e.g. a Supabase pooler outage) returns a JSON body the client
  * can show the customer, instead of Next's bare empty-body 500 that leaves
@@ -48,7 +74,10 @@ export function withApiErrorHandling<Args extends unknown[]>(
         );
       }
       console.error("[api error]", err);
-      return NextResponse.json({ error: MESSAGE }, { status: 503 });
+      return NextResponse.json(
+        isAdminRequest(first) ? { error: MESSAGE, code: safeErrorCode(err) } : { error: MESSAGE },
+        { status: 503 }
+      );
     }
   };
 }
