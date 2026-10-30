@@ -74,40 +74,54 @@ export function HomeFinalCta() {
   );
 }
 
-// Philosophy + House note, merged into one closing block.
+// Philosophy + House note, merged into one closing block. A photograph of the
+// town on one side and the quote, set large, on the other.
 export function HomePhilosophy() {
   return (
-    <Reveal className="section-y-lg mx-auto max-w-3xl px-6 text-center">
-      <section>
-        <h2 className="font-serif text-lg text-ink/65">The Philosophy</h2>
-        <p className="mt-5 font-serif text-3xl leading-relaxed text-ink">
-          &ldquo;Skin is not one thing. A house built to serve it should not
-          pretend otherwise.&rdquo;
-        </p>
-        <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-ink/70">
-          CHIAREL Intelligence™ began as a question at a kitchen table —
-          the working method still holds: start with the biology in front
-          of you, formulate it properly, and name the ingredients that
-          matter. Advancing Cellular Clarity™ against Modern Biological
-          Stress™ is the mission behind every formula. It is
-          the same discipline behind La Bella Figura — presenting one&rsquo;s
-          best self, quietly, without announcement.
-        </p>
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-7">
-          <Link
-            href="/journal/three-skins-one-house"
-            className="btn-press inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
-          >
-            Read the Origin Story
-          </Link>
-          <Link
-            href="/house"
-            className="btn-press inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
-          >
-            Discover the House
-          </Link>
-        </div>
-      </section>
-    </Reveal>
+    <section className="bg-ivory">
+      <div className="mx-auto grid max-w-[84rem] items-center gap-10 px-[clamp(1.5rem,3vw,3rem)] py-20 md:grid-cols-[0.8fr_1.2fr] md:gap-20 md:py-28">
+        <Reveal>
+          <div className="relative mx-auto aspect-[3/4] w-full max-w-[26rem] overflow-hidden">
+            <Image
+              src="/assets/journal/isola-del-liri-bridge.jpg"
+              alt="A woman in white on the old bridge at Isola del Liri, with the Cascata Grande and the castle behind her"
+              fill
+              sizes="(max-width: 768px) 90vw, 26rem"
+              className="object-cover"
+            />
+          </div>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <h2 className="text-[11px] font-normal uppercase tracking-[0.3em] text-redochre">The Philosophy</h2>
+          <p className="mt-6 border-l-4 border-redochre pl-6 font-serif text-[clamp(1.75rem,1.1rem+2.2vw,3.1rem)] leading-[1.2] text-garden">
+            &ldquo;Skin is not one thing. A house built to serve it should not
+            pretend otherwise.&rdquo;
+          </p>
+          <p className="mt-8 max-w-xl text-[15px] leading-relaxed text-ink/80">
+            CHIAREL Intelligence™ began as a question at a kitchen table —
+            the working method still holds: start with the biology in front
+            of you, formulate it properly, and name the ingredients that
+            matter. Advancing Cellular Clarity™ against Modern Biological
+            Stress™ is the mission behind every formula. It is
+            the same discipline behind La Bella Figura — presenting one&rsquo;s
+            best self, quietly, without announcement.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-7">
+            <Link
+              href="/journal/three-skins-one-house"
+              className="btn-press inline-block border-b border-redochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-redochre"
+            >
+              Read the Origin Story
+            </Link>
+            <Link
+              href="/house"
+              className="btn-press inline-block border-b border-redochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-redochre"
+            >
+              Discover the House
+            </Link>
+          </div>
+        </Reveal>
+      </div>
+    </section>
   );
 }

@@ -3,7 +3,7 @@ import { products, isPurchasable, productHref } from "@/lib/products";
 import HeroIntro from "@/components/HeroIntro";
 import EmailSignup from "@/components/EmailSignup";
 import HomeHero from "@/components/home/HomeHero";
-import EditorialFeature from "@/components/EditorialFeature";
+import HomeIconProduct from "@/components/home/HomeIconProduct";
 import HomeRitual from "@/components/home/HomeRitual";
 import HomeFitGuidance from "@/components/home/HomeFitGuidance";
 import HomeFaceBeyond from "@/components/home/HomeFaceBeyond";
@@ -167,7 +167,7 @@ export default function Home() {
       <HomeHero />
       <HomeFaceBeyond />
       <HomeRitual />
-      <EditorialFeature
+      <HomeIconProduct
         src="/assets/products/clarity-day-creme-editorial.jpg"
         alt="A woman holding Clarity Day Crème against the Capri coastline"
         kicker="The Icon Product"
