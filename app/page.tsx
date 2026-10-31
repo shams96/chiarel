@@ -7,6 +7,7 @@ import HomeIconProduct from "@/components/home/HomeIconProduct";
 import HomeRitual from "@/components/home/HomeRitual";
 import HomeFitGuidance from "@/components/home/HomeFitGuidance";
 import HomeFaceBeyond from "@/components/home/HomeFaceBeyond";
+import HomeObservations from "@/components/home/HomeObservations";
 import HomeIntro from "@/components/home/HomeIntro";
 import HomeJournal from "@/components/home/HomeJournal";
 import HomeItaly from "@/components/home/HomeItaly";
@@ -165,8 +166,8 @@ export default function Home() {
 
       {/* Order follows the owner brief (2026-10-31): hero, philosophy, rituals,
           product discovery, science, Made in Italy, formulator, house,
-          journal, then FAQ and final CTA. Section 07 (clinical observations)
-          is intentionally absent until the owner supplies approved wording. */}
+          journal, then FAQ and final CTA. Section 07 (clinical observations) is
+          a visible placeholder until Grazia Savoriti supplies the content. */}
       <HomeHero />
       <HomeIntro />
       <HomeRitual />
@@ -183,6 +184,7 @@ export default function Home() {
       <HomeFitGuidance />
       <HomeProof />
       <HomeFormulationRecord />
+      <HomeObservations />
       <HomeItaly />
       <HomeFormulator />
       <HomePhilosophy />
