@@ -155,26 +155,43 @@ function RoutineRow({ entries, steps }: { entries: Entry[]; steps: Step[] }) {
   );
 }
 
-// One short row of tiles. md+: a single flex row where lead tiles grow wider.
-// `data-size` makes the hierarchy assertable.
-function CompactRow({ entries }: { entries: Entry[] }) {
+// Compact (home) composition, one per time of day so the two rituals read as
+// two distinct places. Both sit on the shared 4 / 8 / 12 column grid and show
+// a ruled numeral per step. `data-size` keeps the hierarchy assertable.
+//   Morning: asymmetric pair, Essence large, Day Crème offset below it.
+//   Evening: a descending sequence, Essence large, Eye and Night beside it,
+//            the Neck & Décolleté Crème large on the right of the second row.
+function tileSpan(time: "Morning" | "Evening", lead: boolean, i: number, last: boolean) {
+  if (time === "Morning") {
+    return lead ? "md:col-span-5 lg:col-span-7" : "md:col-span-3 lg:col-span-5 lg:mt-24";
+  }
+  if (lead && last) return "md:col-span-4 lg:col-span-6 lg:col-start-7";
+  return lead ? "md:col-span-4 lg:col-span-6" : "md:col-span-4 lg:col-span-3";
+}
+
+function CompactRow({ entries, time }: { entries: Entry[]; time: "Morning" | "Evening" }) {
   const sub = "text-ink/65";
   const tag = "text-ochre";
   const spans = mobileSpans(entries);
   return (
-    <ul className="mt-8 grid grid-cols-2 gap-4 md:flex md:items-start md:gap-6">
+    <ul className="grid-12 mt-10 gap-y-10 md:mt-12 md:gap-y-12">
       {entries.map(({ product: p, lead }, i) => {
         const label = p.badge;
+        const last = i === entries.length - 1;
         return (
           <li
             key={p.slug}
             data-size={lead ? "lead" : "standard"}
-            className={`${spans[i] ? "col-span-2" : ""} md:flex-1 min-w-0`}
+            className={`${spans[i] ? "col-span-4" : "col-span-2"} ${tileSpan(time, lead, i, last)} min-w-0`}
           >
             <Link
               href={productHref(p.slug)}
               className="group block min-h-[44px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ochre"
             >
+              <p aria-hidden="true" className="mb-3 flex items-center gap-3 text-eyebrow text-ink/60">
+                <span>{String(i + 1).padStart(2, "0")}</span>
+                <span className="h-px flex-1 bg-ink/20" />
+              </p>
               <div
                 className="relative aspect-[4/5] overflow-hidden"
                 style={{ backgroundColor: NEUTRAL_FRAME_BG }}
@@ -183,19 +200,19 @@ function CompactRow({ entries }: { entries: Entry[] }) {
                   src={studioImage(p)}
                   alt={productImageAlt(p)}
                   fill
-                  sizes={lead ? "(min-width: 768px) 25vw, 100vw" : "(min-width: 768px) 25vw, 50vw"}
+                  sizes={lead ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"}
                   className={`object-cover ${productHoverClass(p.step)}`}
                 />
               </div>
               {label && (
-                <p className={`mt-3 text-[12px] font-medium uppercase tracking-[0.2em] ${tag}`}>{label}</p>
+                <p className={`mt-3 text-eyebrow uppercase ${tag}`}>{label}</p>
               )}
-              <p className={`${label ? "mt-1" : "mt-3"} font-serif ${lead ? "text-2xl" : "text-xl"} leading-tight`}>
+              <p className={`${label ? "mt-1" : "mt-3"} font-serif ${lead ? "text-h3" : "text-h4"} leading-tight`}>
                 {p.name}
               </p>
-              <p className={`mt-1 text-[12px] ${sub}`}>{p.descriptor}</p>
+              <p className={`mt-1 text-caption ${sub}`}>{p.descriptor}</p>
               {isPurchasable(p) && (
-                <p className={`mt-1 text-[12px] ${sub}`}>${p.price.subscription} with subscription</p>
+                <p className={`mt-1 text-caption ${sub}`}>${p.price.subscription} with subscription</p>
               )}
             </Link>
           </li>
@@ -235,12 +252,12 @@ export function RoutineBand({
       data-variant={variant}
       className={`scroll-mt-20 ${dark ? "border-y border-ink/20 bg-cloud text-ink" : "border-y border-champagne/50 bg-champagne/25 text-ink"}`}
     >
-      <div className={`mx-auto max-w-6xl px-6 ${compact ? "py-12 md:py-14" : "py-16 md:py-20"}`}>
+      <div className={`mx-auto w-full max-w-container px-margin ${compact ? "py-16 md:py-24" : "py-16 md:py-20"}`}>
         <div className={`flex items-center gap-4 ${"text-ochre"}`}>
-          {dark ? <MoonMark /> : <SunMark />}
-          <p className="text-[12px] font-medium uppercase tracking-[0.3em]">{time}</p>
+          {!compact && (dark ? <MoonMark /> : <SunMark />)}
+          <p className="text-eyebrow uppercase">{time}</p>
         </div>
-        <Heading id={`${id}-title`} className={`mt-4 font-serif leading-tight ${compact ? "text-3xl md:text-4xl" : "text-4xl md:text-5xl"}`}>
+        <Heading id={`${id}-title`} className={`mt-4 font-serif leading-tight ${compact ? "text-h2" : "text-4xl md:text-5xl"}`}>
           {title}
         </Heading>
         <ol className={`mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 font-serif text-xl ${"text-ink/85"}`}>
@@ -253,7 +270,7 @@ export function RoutineBand({
             </li>
           ))}
         </ol>
-        {compact ? <CompactRow entries={entries} /> : <RoutineRow entries={entries} steps={steps} />}
+        {compact ? <CompactRow entries={entries} time={time} /> : <RoutineRow entries={entries} steps={steps} />}
       </div>
     </section>
   );

@@ -17,11 +17,6 @@ const config: Config = {
         champagne: "#D6C5A0",
         ivory: "#F8F6F1",
         ink: "#1C1A17",
-        // Retired: the home-only second red (#913832) was folded into the
-        // brand Red Ochre (#9B4722) on 2026-10-31 (ruling D3). The alias stays
-        // only so existing `*-redochre` classes keep compiling; migrate them to
-        // `ochre` and delete this line.
-        redochre: "#9B4722",
         peachdust: "#F0D8CC",
       },
       // One family, site-wide. `sans` is an alias of `serif` so classes that

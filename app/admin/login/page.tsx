@@ -58,7 +58,7 @@ export default function AdminLoginPage() {
           <div className="w-full max-w-md">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/assets/brand/CHIAREL_Wordmark_RedOchre.svg" alt="CHIAREL" className="h-9 w-auto" />
-            <p className="mt-8 text-[12px] uppercase tracking-[0.34em] text-redochre">Admin console</p>
+            <p className="mt-8 text-[12px] uppercase tracking-[0.34em] text-ochre">Admin console</p>
             <h1 className="mt-2 font-serif text-[clamp(2rem,1.4rem+1.6vw,3rem)] leading-tight text-garden">Welcome back.</h1>
             <p className="mt-2 text-[15px] text-ink/75">Sign in to look after the House.</p>
 

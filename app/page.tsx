@@ -7,7 +7,11 @@ import HomeIconProduct from "@/components/home/HomeIconProduct";
 import HomeRitual from "@/components/home/HomeRitual";
 import HomeFitGuidance from "@/components/home/HomeFitGuidance";
 import HomeFaceBeyond from "@/components/home/HomeFaceBeyond";
-import HomeProvenance from "@/components/home/HomeProvenance";
+import HomeObservations from "@/components/home/HomeObservations";
+import HomeIntro from "@/components/home/HomeIntro";
+import HomeJournal from "@/components/home/HomeJournal";
+import HomeItaly from "@/components/home/HomeItaly";
+import HomeFormulator from "@/components/home/HomeFormulator";
 import HomeProof from "@/components/home/HomeProof";
 import HomeFormulationRecord from "@/components/home/HomeFormulationRecord";
 import HomeFaq from "@/components/home/HomeFaq";
@@ -160,13 +164,14 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(pmRitualHowTo) }}
       />
 
-      {/* Emotion first, proof second:
-          hero -> ritual -> featured new product -> provenance & formulator
-          -> proof -> philosophy -> formulation record (collapsed) -> FAQ
-          -> final CTA. */}
+      {/* Order follows the owner brief (2026-10-31): hero, philosophy, rituals,
+          product discovery, science, Made in Italy, formulator, house,
+          journal, then FAQ and final CTA. Section 07 (clinical observations) is
+          a visible placeholder until Grazia Savoriti supplies the content. */}
       <HomeHero />
-      <HomeFaceBeyond />
+      <HomeIntro />
       <HomeRitual />
+      <HomeFaceBeyond />
       <HomeIconProduct
         src="/assets/products/clarity-day-creme-editorial.jpg"
         alt="A woman holding Clarity Day Crème against the Capri coastline"
@@ -177,10 +182,13 @@ export default function Home() {
         cta="Discover Clarity Day Crème"
       />
       <HomeFitGuidance />
-      <HomeProvenance />
       <HomeProof />
-      <HomePhilosophy />
       <HomeFormulationRecord />
+      <HomeObservations />
+      <HomeItaly />
+      <HomeFormulator />
+      <HomePhilosophy />
+      <HomeJournal />
       <HomeFaq faqs={faqs} />
       <HomeFinalCta />
       <div className="mx-auto max-w-xl px-6 pb-10">

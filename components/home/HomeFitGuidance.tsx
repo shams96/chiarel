@@ -51,7 +51,7 @@ export default function HomeFitGuidance() {
           <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-ink/80">
             Best for matching a product to what your skin is showing you,
             not the shelf. Not sure? Take the{" "}
-            <Link href="/assessment" className="border-b border-redochre text-redochre">
+            <Link href="/assessment" className="border-b border-ochre text-ochre">
               Skin Assessment
             </Link>
             .
@@ -63,7 +63,7 @@ export default function HomeFitGuidance() {
               <Reveal delay={i * 0.08} className="h-full">
                 <Link
                   href={productHref(row.slug)}
-                  className="group flex h-full flex-col border-t-2 border-redochre bg-peachdust transition-transform duration-300 ease-out hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                  className="group flex h-full flex-col border-t-2 border-ochre bg-ivory transition-transform duration-300 ease-out hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                 >
                   <div className="relative aspect-[4/5] overflow-hidden">
                     <Image
@@ -77,7 +77,7 @@ export default function HomeFitGuidance() {
                   <div className="flex flex-1 flex-col p-6">
                     <p className="text-[12px] uppercase tracking-[0.16em] text-ink/75">Best for skin that…</p>
                     <p className="mt-2 font-serif text-xl italic leading-snug text-ink">{row.concern}</p>
-                    <p className="mt-5 text-[12px] uppercase tracking-[0.16em] text-redochre">{row.fit}</p>
+                    <p className="mt-5 text-[12px] uppercase tracking-[0.16em] text-ochre">{row.fit}</p>
                     <p className="mt-2 text-[14px] leading-relaxed text-ink/80">{row.why}</p>
                   </div>
                 </Link>

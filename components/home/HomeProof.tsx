@@ -45,7 +45,7 @@ export default function HomeProof() {
           {ingredients.map((item, i) => (
             <li key={item.name} className="bg-ivory">
               <Reveal delay={i * 0.08} className="flex h-full flex-col p-7 md:p-8">
-                <span aria-hidden="true" className="font-serif text-[13px] tracking-[0.2em] text-redochre">
+                <span aria-hidden="true" className="font-serif text-[13px] tracking-[0.2em] text-ochre">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <p className="mt-6 text-[14px] leading-relaxed text-ink/80">
@@ -64,7 +64,7 @@ export default function HomeProof() {
                 {item.link && (
                   <Link
                     href={item.link.href}
-                    className="mt-4 inline-block self-start border-b border-redochre text-[12px] text-redochre"
+                    className="mt-4 inline-block self-start border-b border-ochre text-[12px] text-ochre"
                   >
                     {item.link.label}
                   </Link>

@@ -30,7 +30,7 @@ Stacked PRs, one per phase. No merge without "merge N". PRs #109 and #86 untouch
 - [ ] JSON-LD parity check; claim-audit; gate; screenshots at 7 widths
 
 ## Phase 4: Product pages (PR 3)
-- [ ] Split PDP into `components/pdp/*`, no data-flow change
+- [ ] Keep the PDP in its file; reorder in place; add only the new Formulation and Ingredient-notes blocks
 - [ ] Brief order; Formulation block; Ingredient notes; related; expandable sections
 - [ ] Update `pdp-sections.test.ts`; verify JSON-LD, analytics, tiers, sticky bar; PDP video band light
 - [ ] Gate + screenshots for all five products

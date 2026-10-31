@@ -20,7 +20,7 @@ Design test for every major decision (brief): "Does this make CHIAREL look and f
 Preserve: JSON-LD parity, FAQ and HowTo text, ritual markup contract, anchors. Validate at 375/390/430/768/1024/1440/1920.
 
 ## Phase 4: Product pages (PR 3) [brief section 7]
-One architecture for all five: photography (large, dominant) > name > positioning > price and purchase > description > key benefits > how to use > ingredients > formulation > relevant science ("Ingredient notes", internal /science links only) > related. Expandable sections for long parts. No change to names, formulas, INCI, prices, claims, JSON-LD, analytics, purchase tiers.
+Edit `app/shop/[slug]/page.tsx` in place (no split into a new component tree; the brief says do not replace working components). One architecture for all five: photography (large, dominant) > name > positioning > price and purchase > description > key benefits > how to use > ingredients > formulation > relevant science ("Ingredient notes", internal /science links only) > related. Expandable sections for long parts. No change to names, formulas, INCI, prices, claims, JSON-LD, analytics, purchase tiers.
 
 ## Phase 5: Remaining pages (PR 4) [brief section 11]
 Science (index + 5), House (About), Journal (index + 4), Press, Ritual, Build-your-ritual, Founding-100, Cart/Checkout on the shared shells; copy untouched; guarded wording and counters preserved; dark blocks made light.
