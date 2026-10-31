@@ -34,7 +34,7 @@ export function PageHeader({
   return (
     <header className="mb-8 flex flex-wrap items-end justify-between gap-4 border-b border-champagne pb-6">
       <div className="max-w-3xl">
-        {eyebrow && <p className="text-[12px] uppercase tracking-[0.34em] text-redochre">{eyebrow}</p>}
+        {eyebrow && <p className="text-[12px] uppercase tracking-[0.34em] text-ochre">{eyebrow}</p>}
         <h1 className="mt-2 font-serif text-[clamp(1.9rem,1.2rem+2vw,3rem)] leading-tight text-garden">{title}</h1>
         {subtitle && <p className="mt-2 text-[15px] leading-relaxed text-ink/75">{subtitle}</p>}
       </div>
@@ -48,7 +48,7 @@ const TONES = {
   white: "bg-white text-ink border border-champagne/70",
   peach: "bg-peachdust text-ink",
   garden: "bg-garden text-ivory",
-  redochre: "bg-redochre text-ivory",
+  redochre: "bg-ochre text-ivory",
   champagne: "bg-champagne text-ink",
 } as const;
 export type Tone = keyof typeof TONES;
@@ -107,8 +107,8 @@ const BTN = {
   primary: "bg-garden text-ivory hover:bg-garden/90 border border-garden",
   secondary: "bg-transparent text-garden border border-garden hover:bg-garden/10",
   champagne: "bg-champagne text-ink border border-champagne hover:bg-champagne/80",
-  danger: "bg-redochre text-ivory border border-redochre hover:bg-redochre/90",
-  ghost: "bg-transparent text-redochre border border-transparent underline underline-offset-4 hover:bg-redochre/10",
+  danger: "bg-ochre text-ivory border border-ochre hover:bg-ochre/90",
+  ghost: "bg-transparent text-ochre border border-transparent underline underline-offset-4 hover:bg-ochre/10",
 } as const;
 export type ButtonVariant = keyof typeof BTN;
 
@@ -183,7 +183,7 @@ export const tdClass = "px-4 py-3 align-top";
 const BADGE = {
   ok: "bg-garden text-ivory",
   warn: "bg-champagne text-ink",
-  danger: "bg-redochre text-ivory",
+  danger: "bg-ochre text-ivory",
   muted: "bg-ink/10 text-ink",
 } as const;
 export function Badge({ tone = "muted", children }: { tone?: keyof typeof BADGE; children: ReactNode }) {
@@ -193,7 +193,7 @@ export function Badge({ tone = "muted", children }: { tone?: keyof typeof BADGE;
 }
 
 const ALERT = {
-  error: "border-redochre bg-redochre/10 text-redochre",
+  error: "border-ochre bg-ochre/10 text-ochre",
   success: "border-garden bg-garden/10 text-garden",
   info: "border-champagne bg-champagne/30 text-ink",
 } as const;

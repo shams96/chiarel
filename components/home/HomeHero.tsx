@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { perDayPrice, DELIVERY_DAYS } from "@/lib/pricing";
 import { getProductOrThrow, isPurchasable } from "@/lib/products";
-import RibbonBand from "@/components/home/RibbonBand";
 
 // First-viewport hero: Red Ochre text panel on the left, the festive Clarity
 // Essence scene (frosted flower, CHIAREL velvet ribbon) filling the right half
@@ -15,9 +14,9 @@ export default function HomeHero() {
   return (
     <>
       <section className="grid w-full md:grid-cols-[5fr_6fr]">
-        <div className="bg-redochre px-[clamp(1.5rem,4.5vw,7rem)] py-14 text-ivory md:flex md:min-h-[min(880px,calc(100svh-5rem))] md:items-center md:py-20">
+        <div className="bg-ochre px-[clamp(1.5rem,4.5vw,7rem)] py-14 text-ivory md:flex md:min-h-[min(880px,calc(100svh-5rem))] md:items-center md:py-20">
           <div className="hero-in max-w-[46rem]">
-            <p className="text-[clamp(11px,0.55rem+0.35vw,15px)] uppercase tracking-[0.42em] md:tracking-[0.5em]">
+            <p className="text-[clamp(12px,0.55rem+0.35vw,15px)] uppercase tracking-[0.42em] md:tracking-[0.5em]">
               CHIAREL™ · The House of Clarity™
             </p>
             <h1 className="mt-5 font-serif text-[clamp(2.4rem,1rem+4.2vw,6.6rem)] leading-[1.04] tracking-[-0.015em] md:mt-8">
@@ -34,7 +33,7 @@ export default function HomeHero() {
             <div className="mt-9 flex flex-wrap items-center gap-x-9 gap-y-5 md:mt-11">
               <Link
                 href="/ritual"
-                className="btn-press inline-block border border-ivory bg-ivory px-[clamp(2.25rem,3vw,3.5rem)] py-[clamp(1rem,1.2vw,1.4rem)] text-[clamp(11px,0.6rem+0.3vw,14px)] uppercase tracking-[0.34em] text-ink transition hover:bg-peachdust"
+                className="btn-press inline-block border border-ivory bg-ivory px-[clamp(2.25rem,3vw,3.5rem)] py-[clamp(1rem,1.2vw,1.4rem)] text-[clamp(12px,0.6rem+0.3vw,14px)] uppercase tracking-[0.34em] text-ink transition hover:bg-peachdust"
               >
                 Begin the Ritual
               </Link>
@@ -72,7 +71,6 @@ export default function HomeHero() {
           />
         </div>
       </section>
-      <RibbonBand tone="green" />
     </>
   );
 }

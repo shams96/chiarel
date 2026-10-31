@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
-import RibbonBand from "@/components/home/RibbonBand";
 import Section from "@/components/layout/Section";
 import Grid from "@/components/layout/Grid";
 import Eyebrow from "@/components/layout/Eyebrow";
@@ -17,8 +16,7 @@ export function HomeFinalCta() {
 
   return (
     <>
-    <RibbonBand tone="green" />
-    <section className="section-y bg-redochre text-ivory">
+    <section className="section-y bg-ochre text-ivory">
       <div className="mx-auto flex max-w-[96rem] flex-col items-center gap-10 px-[clamp(1.5rem,4.5vw,7rem)] md:flex-row md:gap-[clamp(2.5rem,5vw,7rem)]">
         <Reveal className="grid w-full grid-cols-5 gap-4 md:w-3/5">
           <div

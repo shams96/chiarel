@@ -184,7 +184,7 @@ export default function AdminHomePage() {
           <li key={x.href}>
             <Link
               href={x.href}
-              className="group block h-full border border-champagne border-t-redochre bg-white p-5 transition-transform duration-300 ease-out hover:-translate-y-0.5"
+              className="group block h-full border border-champagne border-t-ochre bg-white p-5 transition-transform duration-300 ease-out hover:-translate-y-0.5"
             >
               <span className="font-serif text-xl text-garden group-hover:underline group-hover:decoration-champagne group-hover:underline-offset-4">
                 {x.title}

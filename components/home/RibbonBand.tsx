@@ -2,7 +2,7 @@
 // ribbon), used as a full-width divider between Home sections. Decorative only.
 // Green sits on Red Ochre and Peach Dust, Red Ochre sits on Formal Garden.
 const FILES = { green: "ribbon-green.png", redochre: "ribbon-redochre.png" } as const;
-const FALLBACK = { green: "#1F5129", redochre: "#913832" } as const;
+const FALLBACK = { green: "#1F5129", redochre: "#9B4722" } as const;
 
 export default function RibbonBand({ tone = "green" }: { tone?: keyof typeof FILES }) {
   return (

@@ -48,10 +48,10 @@ const gutter = "px-[clamp(1.5rem,4.5vw,7rem)]";
 export default function HomeFaceBeyond() {
   return (
     <section className="grid lg:grid-cols-2">
-      <div className={`bg-peachdust ${gutter} py-16 text-ink md:py-24`}>
+      <div className={`bg-ivory ${gutter} py-16 text-ink md:py-24`}>
         <Reveal className="mx-auto max-w-[56rem]">
-          <div className="border-t border-redochre pt-7">
-            <h2 className="font-serif text-[clamp(2rem,1.1rem+2.2vw,3.8rem)] leading-tight text-redochre">
+          <div className="border-t border-ochre pt-7">
+            <h2 className="font-serif text-[clamp(2rem,1.1rem+2.2vw,3.8rem)] leading-tight text-ochre">
               The Face, First
             </h2>
             <p className="mt-3 font-serif text-[clamp(1.15rem,0.9rem+0.7vw,1.9rem)] italic">
@@ -75,7 +75,7 @@ export default function HomeFaceBeyond() {
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                     />
                   </div>
-                  <h3 className="mt-4 font-serif text-[clamp(1.05rem,0.85rem+0.6vw,1.65rem)] leading-snug text-redochre underline decoration-redochre/0 underline-offset-4 transition group-hover:decoration-redochre">
+                  <h3 className="mt-4 font-serif text-[clamp(1.05rem,0.85rem+0.6vw,1.65rem)] leading-snug text-ochre underline decoration-ochre/0 underline-offset-4 transition group-hover:decoration-ochre">
                     {p.name}
                   </h3>
                   <p className="mt-1 text-[clamp(0.9rem,0.8rem+0.25vw,1.15rem)] leading-snug">{p.concern}</p>
@@ -86,17 +86,17 @@ export default function HomeFaceBeyond() {
 
           <Link
             href="/shop"
-            className="mt-12 inline-block text-[clamp(12px,0.65rem+0.3vw,15px)] uppercase tracking-[0.3em] text-redochre underline underline-offset-[6px]"
+            className="mt-12 inline-block text-[clamp(12px,0.65rem+0.3vw,15px)] uppercase tracking-[0.3em] text-ochre underline underline-offset-[6px]"
           >
             Shop the face
           </Link>
         </Reveal>
       </div>
 
-      <div className={`bg-garden ${gutter} py-16 text-ivory md:py-24`}>
+      <div className={`bg-cloud ${gutter} py-16 text-ink md:py-24 lg:border-l lg:border-ink/15`}>
         <Reveal delay={0.1} className="mx-auto max-w-[56rem]">
           <Link href="/shop/clarity-neck-decollete-creme" className="group block">
-            <div className="relative aspect-[4/5] w-full overflow-hidden bg-peachdust">
+            <div className="relative aspect-[4/5] w-full overflow-hidden bg-ivory">
               <Image
                 src="/assets/products/clarity-neck-decollete-creme-festive-scene-v2.jpg"
                 alt="Clarity Neck & Décolleté Crème™ in its green glass bottle, framed by a frosted flower and Red Ochre CHIAREL velvet ribbon"
@@ -125,7 +125,7 @@ export default function HomeFaceBeyond() {
             {concerns.map((concern) => (
               <li
                 key={concern}
-                className="border border-champagne px-5 py-4 font-serif text-[clamp(1rem,0.85rem+0.35vw,1.3rem)] leading-snug"
+                className="border border-ink/20 px-5 py-4 font-serif text-[clamp(1rem,0.85rem+0.35vw,1.3rem)] leading-snug"
               >
                 {concern}
               </li>
@@ -133,7 +133,7 @@ export default function HomeFaceBeyond() {
           </ul>
           <Link
             href="/shop/clarity-neck-decollete-creme"
-            className="btn-press mt-10 inline-block bg-champagne px-[clamp(2rem,3vw,3.25rem)] py-[clamp(0.9rem,1.1vw,1.3rem)] text-[clamp(11px,0.6rem+0.3vw,14px)] uppercase tracking-[0.3em] text-ink"
+            className="btn-press mt-10 inline-block bg-garden px-[clamp(2rem,3vw,3.25rem)] py-[clamp(0.9rem,1.1vw,1.3rem)] text-[clamp(12px,0.6rem+0.3vw,14px)] uppercase tracking-[0.3em] text-ivory"
           >
             Shop Clarity Neck &amp; Décolleté Crème™
           </Link>
