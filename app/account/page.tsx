@@ -14,7 +14,7 @@ export default function AccountPage() {
       </p>
 
       <div className="mt-10 border border-ink/15 p-6">
-        <p className="text-[11px] uppercase tracking-[0.16em] text-ink/65">
+        <p className="text-[12px] uppercase tracking-[0.16em] text-ink/65">
           Subscription Care
         </p>
         <p className="mt-3 text-sm leading-relaxed text-ink/80">

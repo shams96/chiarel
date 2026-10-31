@@ -94,7 +94,7 @@ export default function LastingHydrationPage() {
         </div>
       </section>
 
-      <p className="mt-14 max-w-2xl text-[11px] leading-relaxed text-ink/65">
+      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink/65">
         Hyaluronic acid, ceramides and squalane are established
         ingredients, not CHIAREL trademarks or proprietary technologies. This
         page describes CHIAREL&rsquo;s formulation approach — not a guarantee

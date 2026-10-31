@@ -45,7 +45,7 @@ export default async function Founding100Page() {
             />
           </div>
           <div className="flex flex-col justify-center px-6 py-16 md:px-12 lg:py-20">
-            <p className="text-[11px] uppercase tracking-[0.4em] text-champagne">
+            <p className="text-[12px] uppercase tracking-[0.4em] text-champagne">
               By invitation · The House Opens
             </p>
             <h1 className="mt-5 font-serif text-5xl leading-[0.98] tracking-[-0.01em] md:text-6xl">

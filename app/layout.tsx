@@ -24,22 +24,20 @@ export const revalidate = 3600;
 // container can't reach Google's servers — confirmed on Hostinger's build
 // environment. Files downloaded once from the same Google Fonts CDN
 // (fonts.gstatic.com) that next/font/google would have fetched at build
-// time; both Libre Bodoni and Jost are variable fonts, so one physical file
-// per subset serves every declared weight via the font's own weight axis —
-// mirrors exactly what Google's own generated CSS does.
+// time; Libre Bodoni is a variable font, so one physical file per subset
+// serves every declared weight via the font's own weight axis — mirrors
+// exactly what Google's own generated CSS does.
+// Libre Bodoni is the sole family site-wide (owner brief 2026-10-31, ruling
+// D1). `font-sans` in Tailwind resolves to this same variable, so unclassed
+// text, UI chrome and admin inherit it. The Jost files stay in public/fonts
+// only because scripts/relabel-eye-treatment.mjs draws jar-label glyphs from
+// them; the site no longer loads them.
 const serif = localFont({
   src: [
     { path: "../public/fonts/libre-bodoni-latin.woff2", weight: "400 600", style: "normal" },
     { path: "../public/fonts/libre-bodoni-latin-ext.woff2", weight: "400 600", style: "normal" },
   ],
   variable: "--font-serif",
-});
-const sans = localFont({
-  src: [
-    { path: "../public/fonts/jost-latin.woff2", weight: "300 500", style: "normal" },
-    { path: "../public/fonts/jost-latin-ext.woff2", weight: "300 500", style: "normal" },
-  ],
-  variable: "--font-sans",
 });
 
 const description =
@@ -81,7 +79,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
       </head>
-      <body className={`${serif.variable} ${sans.variable}`}>
+      <body className={serif.variable}>
         <CartProvider>
           <HideOnAdmin>
             <Header />

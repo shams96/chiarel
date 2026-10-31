@@ -149,7 +149,7 @@ export default function CartPageContent() {
         <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_360px] lg:gap-12">
           <section aria-label="Items in your bag">
             {/* Column heads on desktop only; on phones each row labels itself. */}
-            <div className="hidden grid-cols-[1fr_230px_120px_72px] gap-6 border-b border-ink/15 pb-3 text-[11px] uppercase tracking-[0.16em] text-ink/65 lg:grid">
+            <div className="hidden grid-cols-[1fr_230px_120px_72px] gap-6 border-b border-ink/15 pb-3 text-[12px] uppercase tracking-[0.16em] text-ink/65 lg:grid">
               <span>Product</span>
               <span>Plan</span>
               <span>Quantity</span>
@@ -185,7 +185,7 @@ export default function CartPageContent() {
                         type="button"
                         onClick={() => remove(line.slug)}
                         aria-label={`Remove ${line.product.name}`}
-                        className="tap-area mt-2 text-[11px] uppercase tracking-[0.14em] text-ink/70 underline underline-offset-4 hover:text-ochre"
+                        className="tap-area mt-2 text-[12px] uppercase tracking-[0.14em] text-ink/70 underline underline-offset-4 hover:text-ochre"
                       >
                         <span aria-hidden="true">Remove</span>
                       </button>
@@ -216,7 +216,7 @@ export default function CartPageContent() {
             >
               Checkout — ${total}
             </Link>
-            <p className="mt-3 text-center text-[11px] text-ink/65">
+            <p className="mt-3 text-center text-[12px] text-ink/65">
               Secure payment, processed by Stripe.
             </p>
 

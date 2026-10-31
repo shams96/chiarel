@@ -47,7 +47,7 @@ export default function AssessmentPage() {
         <dl className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
           {axisScores.map((a) => (
             <div key={a.axis} className="card-elevated rounded-md bg-white p-3 text-center">
-              <dt className="text-[10px] uppercase tracking-[0.14em] text-ink/65">
+              <dt className="text-[12px] uppercase tracking-[0.14em] text-ink/65">
                 {a.axis}
               </dt>
               <dd className="mt-1 font-serif text-lg">{a.pole}</dd>
@@ -80,7 +80,7 @@ export default function AssessmentPage() {
                     </Link>
                     <button
                       onClick={() => add(p.slug, "subscription")}
-                      className="border border-ink px-5 py-2 text-[11px] uppercase tracking-[0.16em] transition hover:border-ochre hover:text-ochre"
+                      className="border border-ink px-5 py-2 text-[12px] uppercase tracking-[0.16em] transition hover:border-ochre hover:text-ochre"
                     >
                       Add to Bag
                     </button>
@@ -96,12 +96,12 @@ export default function AssessmentPage() {
             setAnswers({});
             setStep(0);
           }}
-          className="mt-12 text-[11px] uppercase tracking-[0.16em] text-ink/65 hover:text-ink"
+          className="mt-12 text-[12px] uppercase tracking-[0.16em] text-ink/65 hover:text-ink"
         >
           Retake the Assessment
         </button>
 
-        <p className="mt-10 text-[11px] text-ink/65">
+        <p className="mt-10 text-[12px] text-ink/65">
           This assessment is adapted from the Baumann Skin Type Indicator, a
           published dermatological framework, for educational and product-fit
           purposes. It does not diagnose skin conditions.
@@ -120,7 +120,7 @@ export default function AssessmentPage() {
             style={{ width: `${(step / QUESTIONS.length) * 100}%` }}
           />
         </div>
-        <span className="text-[11px] text-ink/65">
+        <span className="text-[12px] text-ink/65">
           {step + 1} / {QUESTIONS.length}
         </span>
       </div>

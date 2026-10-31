@@ -93,7 +93,7 @@ export default function BuildYourRitualPage() {
                   className="object-cover"
                 />
                 <div
-                  className={`absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full border text-[11px] ${
+                  className={`absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full border text-[12px] ${
                     isSelected
                       ? "border-ochre bg-ochre text-ivory"
                       : "border-ink/30 bg-ivory/80 text-transparent"
@@ -104,7 +104,7 @@ export default function BuildYourRitualPage() {
                 </div>
               </div>
               <div>
-                <p className="text-[11px] uppercase tracking-[0.14em] text-ink/65">
+                <p className="text-[12px] uppercase tracking-[0.14em] text-ink/65">
                   {p.timeOfUse} · {p.descriptor}
                 </p>
                 <p className="mt-1 text-sm font-medium leading-tight">
@@ -135,12 +135,12 @@ export default function BuildYourRitualPage() {
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 className="object-cover"
               />
-              <span className="absolute left-2 top-2 bg-ivory/90 px-2 py-1 text-[10px] uppercase tracking-[0.16em] text-ink/70">
+              <span className="absolute left-2 top-2 bg-ivory/90 px-2 py-1 text-[12px] uppercase tracking-[0.16em] text-ink/70">
                 Coming Soon
               </span>
             </div>
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] text-ink/65">
+              <p className="text-[12px] uppercase tracking-[0.14em] text-ink/65">
                 {p.timeOfUse} · {p.descriptor}
               </p>
               <p className="mt-1 text-sm font-medium leading-tight">

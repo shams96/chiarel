@@ -130,7 +130,7 @@ function RoutineRow({ entries, steps }: { entries: Entry[]; steps: Step[] }) {
                 <>
                   <Link
                     href={productHref(p.slug)}
-                    className={`inline-flex min-h-[44px] items-center px-6 text-[11px] uppercase tracking-[0.2em] transition ${cta}`}
+                    className={`inline-flex min-h-[44px] items-center px-6 text-[12px] uppercase tracking-[0.2em] transition ${cta}`}
                   >
                     ${p.price.subscription} — Subscribe
                   </Link>
@@ -141,7 +141,7 @@ function RoutineRow({ entries, steps }: { entries: Entry[]; steps: Step[] }) {
               ) : (
                 <Link
                   href={productHref(p.slug)}
-                  className={`inline-flex min-h-[44px] items-center px-6 text-[11px] uppercase tracking-[0.2em] transition ${cta}`}
+                  className={`inline-flex min-h-[44px] items-center px-6 text-[12px] uppercase tracking-[0.2em] transition ${cta}`}
                 >
                   See product page — price to be announced
                 </Link>
@@ -188,7 +188,7 @@ function CompactRow({ entries }: { entries: Entry[] }) {
                 />
               </div>
               {label && (
-                <p className={`mt-3 text-[11px] font-medium uppercase tracking-[0.2em] ${tag}`}>{label}</p>
+                <p className={`mt-3 text-[12px] font-medium uppercase tracking-[0.2em] ${tag}`}>{label}</p>
               )}
               <p className={`${label ? "mt-1" : "mt-3"} font-serif ${lead ? "text-2xl" : "text-xl"} leading-tight`}>
                 {p.name}
@@ -238,7 +238,7 @@ export function RoutineBand({
       <div className={`mx-auto max-w-6xl px-6 ${compact ? "py-12 md:py-14" : "py-16 md:py-20"}`}>
         <div className={`flex items-center gap-4 ${"text-ochre"}`}>
           {dark ? <MoonMark /> : <SunMark />}
-          <p className="text-[11px] font-medium uppercase tracking-[0.3em]">{time}</p>
+          <p className="text-[12px] font-medium uppercase tracking-[0.3em]">{time}</p>
         </div>
         <Heading id={`${id}-title`} className={`mt-4 font-serif leading-tight ${compact ? "text-3xl md:text-4xl" : "text-4xl md:text-5xl"}`}>
           {title}

@@ -61,7 +61,7 @@ export default function StickyPurchaseBar({
             </div>
             <button
               onClick={() => add(slug, "subscription")}
-              className="btn-press whitespace-nowrap bg-ink px-6 py-2.5 text-[11px] uppercase tracking-[0.2em] text-ivory transition hover:bg-ochre"
+              className="btn-press whitespace-nowrap bg-ink px-6 py-2.5 text-[12px] uppercase tracking-[0.2em] text-ivory transition hover:bg-ochre"
             >
               Add to Bag
             </button>

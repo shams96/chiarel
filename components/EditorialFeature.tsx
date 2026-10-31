@@ -33,7 +33,7 @@ export default function EditorialFeature({
           </div>
         </Reveal>
         <Reveal delay={0.1}>
-          <p className="text-[11px] uppercase tracking-[0.3em] text-ochre">{kicker}</p>
+          <p className="text-[12px] uppercase tracking-[0.3em] text-ochre">{kicker}</p>
           <h2 className="mt-3 font-serif text-3xl leading-snug md:text-4xl">{headline}</h2>
           {body && <p className="mt-5 max-w-md text-sm leading-relaxed text-ink/70">{body}</p>}
           {href && cta && (

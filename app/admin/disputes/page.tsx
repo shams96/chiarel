@@ -139,12 +139,12 @@ export default function AdminDisputesPage() {
             <Alert kind="success">{rateText}</Alert>
           ) : r.overallTier === "approaching" ? (
             <Card tone="champagne" className="mb-5 border-l-8 border-garden">
-              <p className="mb-1 text-[11px] uppercase tracking-[0.28em]">Watch closely</p>
+              <p className="mb-1 text-[12px] uppercase tracking-[0.28em]">Watch closely</p>
               <p className="text-[15px] leading-relaxed">{rateText}</p>
             </Card>
           ) : (
             <Card tone="redochre" className="mb-5">
-              <p className="mb-1 text-[11px] uppercase tracking-[0.28em]">Action needed</p>
+              <p className="mb-1 text-[12px] uppercase tracking-[0.28em]">Action needed</p>
               <p className="text-[15px] leading-relaxed">{rateText}</p>
             </Card>
           )}

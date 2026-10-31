@@ -37,7 +37,7 @@ describe("targeted tap-target fixes", () => {
     expect(read("components/home/HomeClosing.tsx")).toMatch(/gap-x-8 gap-y-7/);
     expect(read("app/shop/[slug]/page.tsx")).toMatch(/gap-x-2 gap-y-6/);
     const prov = read("components/home/HomeProvenance.tsx");
-    expect(prov.match(/flex min-h-\[44px\] items-center text-\[11px\]/g)?.length).toBe(2);
+    expect(prov.match(/flex min-h-\[44px\] items-center text-\[12px\]/g)?.length).toBe(2);
   });
 
   it("bag and routine product links have a hit area", () => {

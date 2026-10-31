@@ -88,7 +88,7 @@ export default function LOrnithinePage() {
         </div>
       </section>
 
-      <p className="mt-14 max-w-2xl text-[11px] leading-relaxed text-ink/65">
+      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink/65">
         L-Ornithine is an ingredient name, not a CHIAREL trademark. This
         page is an educational reference and is not a guarantee of individual
         results.

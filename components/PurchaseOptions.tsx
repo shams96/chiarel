@@ -129,10 +129,10 @@ export default function PurchaseOptions({
           <span className="shrink-0 text-right">
             <span className="block font-serif text-xl leading-tight">
               ${summary.subscription.perDelivery}
-              <span className="ml-1 font-sans text-[11px] text-ink/65">/ delivery</span>
+              <span className="ml-1 font-sans text-[12px] text-ink/65">/ delivery</span>
             </span>
             {summary.subscription.saving > 0 && (
-              <span className="block text-[11px] text-ochre">
+              <span className="block text-[12px] text-ochre">
                 Save ${summary.subscription.saving} each
               </span>
             )}
@@ -158,7 +158,7 @@ export default function PurchaseOptions({
           </span>
           <span className="shrink-0 text-right">
             {summary.ritual.saving > 0 && (
-              <span className="block text-[11px] text-ochre">Save ${summary.ritual.saving}</span>
+              <span className="block text-[12px] text-ochre">Save ${summary.ritual.saving}</span>
             )}
           </span>
         </button>
@@ -227,7 +227,7 @@ export default function PurchaseOptions({
           </Link>
         </li>
       </ul>
-      <p className="mt-3 text-[11px] text-ink/65">
+      <p className="mt-3 text-[12px] text-ink/65">
         Formulated under pharmacist guidance at Natural You Srl, Isola del Liri.
       </p>
     </div>

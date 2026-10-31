@@ -187,7 +187,7 @@ export default function Home() {
         <EmailSignup source="home" />
       </div>
 
-      <p className="pb-10 pt-6 text-center text-[11px] text-ink/65">
+      <p className="pb-10 pt-6 text-center text-[12px] text-ink/65">
         Written by{" "}
         <a
           href={FORMULATOR_EXTERNAL_URL}

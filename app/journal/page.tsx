@@ -41,7 +41,7 @@ export default function JournalPage() {
       <div className="mt-10 divide-y divide-ink/10">
         {entries.map((e) => (
           <article key={e.slug} className="py-8">
-            <p className="text-[11px] uppercase tracking-[0.2em] text-ochre">
+            <p className="text-[12px] uppercase tracking-[0.2em] text-ochre">
               {e.tag}
             </p>
             <Link href={`/journal/${e.slug}`}>
