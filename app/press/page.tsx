@@ -36,8 +36,8 @@ const assets = [
 
 export default function PressPage() {
   return (
-    <div className="mx-auto max-w-4xl px-6 py-16">
-      <h1 className="font-serif text-4xl leading-tight">CHIAREL™ Press Kit</h1>
+    <div className="mx-auto w-full max-w-4xl px-margin py-16">
+      <h1 className="font-serif text-h1 leading-tight">CHIAREL™ Press Kit</h1>
       <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink/70">
         Brand facts, the launch lineup, and downloadable assets for
         journalists, editors, and press covering the House.
@@ -48,19 +48,19 @@ export default function PressPage() {
         <h2 className="font-serif text-2xl text-ink">Brand Fact Sheet</h2>
         <dl className="mt-6 space-y-5 text-sm leading-relaxed text-ink/80">
           <div>
-            <dt className="text-[12px] uppercase tracking-[0.16em] text-ink/65">
+            <dt className="text-eyebrow uppercase text-ink/65">
               Name
             </dt>
             <dd className="mt-1">CHIAREL™</dd>
           </div>
           <div>
-            <dt className="text-[12px] uppercase tracking-[0.16em] text-ink/65">
+            <dt className="text-eyebrow uppercase text-ink/65">
               Tagline
             </dt>
             <dd className="mt-1">The House of Clarity™</dd>
           </div>
           <div>
-            <dt className="text-[12px] uppercase tracking-[0.16em] text-ink/65">
+            <dt className="text-eyebrow uppercase text-ink/65">
               Mission
             </dt>
             <dd className="mt-1 max-w-xl">
@@ -70,7 +70,7 @@ export default function PressPage() {
             </dd>
           </div>
           <div>
-            <dt className="text-[12px] uppercase tracking-[0.16em] text-ink/65">
+            <dt className="text-eyebrow uppercase text-ink/65">
               Founding Story
             </dt>
             <dd className="mt-1 max-w-xl">
@@ -89,7 +89,7 @@ export default function PressPage() {
             </dd>
           </div>
           <div>
-            <dt className="text-[12px] uppercase tracking-[0.16em] text-ink/65">
+            <dt className="text-eyebrow uppercase text-ink/65">
               Provenance
             </dt>
             <dd className="mt-1 max-w-xl">
@@ -104,13 +104,13 @@ export default function PressPage() {
             </dd>
           </div>
           <div>
-            <dt className="text-[12px] uppercase tracking-[0.16em] text-ink/65">
+            <dt className="text-eyebrow uppercase text-ink/65">
               Parent Company
             </dt>
             <dd className="mt-1">1HubSolutions, LLC</dd>
           </div>
           <div>
-            <dt className="text-[12px] uppercase tracking-[0.16em] text-ink/65">
+            <dt className="text-eyebrow uppercase text-ink/65">
               Website
             </dt>
             <dd className="mt-1">
@@ -146,7 +146,7 @@ export default function PressPage() {
                   {p.name}
                 </p>
                 <p className="mt-1 text-[13px] text-ink/60">{p.descriptor}</p>
-                <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/65">
+                <p className="mt-1 text-eyebrow uppercase text-ink/65">
                   {p.color.name} · {p.family}
                 </p>
               </div>
@@ -156,7 +156,7 @@ export default function PressPage() {
 
         <Link
           href="/shop"
-          className="mt-6 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
+          className="mt-6 inline-block border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
         >
           View the full shop
         </Link>
@@ -187,7 +187,7 @@ export default function PressPage() {
               <a
                 href={`/assets/brand/${a.file}`}
                 download
-                className="mt-1 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.14em] text-ochre"
+                className="mt-1 inline-block border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
               >
                 Download SVG
               </a>

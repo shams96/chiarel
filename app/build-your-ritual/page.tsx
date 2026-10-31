@@ -57,8 +57,8 @@ export default function BuildYourRitualPage() {
   };
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-16">
-      <h1 className="max-w-2xl font-serif text-4xl leading-tight">
+    <div className="mx-auto w-full max-w-container px-margin py-16">
+      <h1 className="max-w-2xl font-serif text-h1 leading-tight">
         Build Your Ritual
       </h1>
       <p className="mt-4 max-w-xl text-sm text-ink/70">
@@ -104,7 +104,7 @@ export default function BuildYourRitualPage() {
                 </div>
               </div>
               <div>
-                <p className="text-[12px] uppercase tracking-[0.14em] text-ink/65">
+                <p className="text-eyebrow uppercase text-ink/65">
                   {p.timeOfUse} · {p.descriptor}
                 </p>
                 <p className="mt-1 text-sm font-medium leading-tight">
@@ -135,12 +135,12 @@ export default function BuildYourRitualPage() {
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 className="object-cover"
               />
-              <span className="absolute left-2 top-2 bg-ivory/90 px-2 py-1 text-[12px] uppercase tracking-[0.16em] text-ink/70">
+              <span className="absolute left-2 top-2 bg-ivory/90 px-2 py-1 text-eyebrow uppercase text-ink/70">
                 Coming Soon
               </span>
             </div>
             <div>
-              <p className="text-[12px] uppercase tracking-[0.14em] text-ink/65">
+              <p className="text-eyebrow uppercase text-ink/65">
                 {p.timeOfUse} · {p.descriptor}
               </p>
               <p className="mt-1 text-sm font-medium leading-tight">
@@ -164,7 +164,7 @@ export default function BuildYourRitualPage() {
         <button
           onClick={handleAdd}
           disabled={chosen.length === 0 || adding}
-          className="btn-press w-full bg-ink px-8 py-3 text-center text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
+          className="btn-press w-full bg-ink px-8 py-3 text-center text-eyebrow uppercase text-ivory transition hover:bg-ochre disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
         >
           {adding ? "Adding…" : "Add to Bag"}
         </button>

@@ -10,11 +10,11 @@ export const metadata: Metadata = {
 
 export default function ThreeSkinsPage() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
+    <div className="mx-auto w-full max-w-3xl px-margin py-16">
       <Link href="/journal" className="text-[12px] text-ink/65 hover:text-ochre">
         ← Journal
       </Link>
-      <h1 className="mt-2 font-serif text-4xl leading-tight">
+      <h1 className="mt-2 font-serif text-h1 leading-tight">
         Three Skins, One House
       </h1>
       <p className="mt-4 text-[13px] text-ink/65">The CHIAREL Origin Story</p>
@@ -51,7 +51,7 @@ export default function ThreeSkinsPage() {
       <div className="mt-14 border-t border-ink/10 pt-8">
         <Link
           href="/house"
-          className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
+          className="border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
         >
           Discover the House
         </Link>

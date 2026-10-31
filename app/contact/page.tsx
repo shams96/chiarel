@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <div className="mx-auto max-w-2xl px-6 py-16">
-      <h1 className="font-serif text-4xl leading-tight">Contact</h1>
+      <h1 className="font-serif text-h1 leading-tight">Contact</h1>
       <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink/70">
         CHIAREL™ is a small house — every message reaches a real person, not
         a queue.
@@ -21,7 +21,7 @@ export default function ContactPage() {
 
       <dl className="mt-12 space-y-8 text-sm leading-relaxed text-ink/80">
         <div>
-          <dt className="text-[12px] uppercase tracking-[0.16em] text-ink/65">
+          <dt className="text-eyebrow uppercase text-ink/65">
             General Inquiries
           </dt>
           <dd className="mt-2">
@@ -34,7 +34,7 @@ export default function ContactPage() {
           </dd>
         </div>
         <div>
-          <dt className="text-[12px] uppercase tracking-[0.16em] text-ink/65">
+          <dt className="text-eyebrow uppercase text-ink/65">
             Order Support
           </dt>
           <dd className="mt-2 max-w-md">
@@ -49,7 +49,7 @@ export default function ContactPage() {
           </dd>
         </div>
         <div>
-          <dt className="text-[12px] uppercase tracking-[0.16em] text-ink/65">
+          <dt className="text-eyebrow uppercase text-ink/65">
             Press
           </dt>
           <dd className="mt-2 max-w-md">
@@ -68,7 +68,7 @@ export default function ContactPage() {
           </dd>
         </div>
         <div>
-          <dt className="text-[12px] uppercase tracking-[0.16em] text-ink/65">
+          <dt className="text-eyebrow uppercase text-ink/65">
             Formulation &amp; Manufacturing
           </dt>
           <dd className="mt-2 max-w-md">

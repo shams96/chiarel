@@ -39,7 +39,7 @@ const faqJsonLd = {
 
 export default function RitualGuidePage() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
+    <div className="mx-auto w-full max-w-3xl px-margin py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
@@ -48,7 +48,7 @@ export default function RitualGuidePage() {
       <Link href="/journal" className="text-[12px] text-ink/65 hover:text-ochre">
         ← Journal
       </Link>
-      <h1 className="mt-2 font-serif text-4xl leading-tight">
+      <h1 className="mt-2 font-serif text-h1 leading-tight">
         How to Use the CHIAREL Daily Ritual
       </h1>
       <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink/75">
@@ -148,31 +148,31 @@ export default function RitualGuidePage() {
       <div className="mt-16 flex flex-wrap gap-6 border-t border-ink/10 pt-10">
         <Link
           href="/shop/clarity-day-creme"
-          className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
+          className="border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
         >
           Shop Clarity Day Crème
         </Link>
         <Link
           href="/shop/clarity-night-creme"
-          className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
+          className="border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
         >
           Shop Clarity Night Crème
         </Link>
         <Link
           href="/shop/clarity-neck-decollete-creme"
-          className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
+          className="border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
         >
           Discover Clarity Neck &amp; Décolleté Crème
         </Link>
         <Link
           href="/shop/clarity-eye-contour-concentrate"
-          className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
+          className="border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
         >
           Shop Clarity Eye Contour Concentrate
         </Link>
         <Link
           href="/assessment"
-          className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
+          className="border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
         >
           Take the Skin Assessment™
         </Link>

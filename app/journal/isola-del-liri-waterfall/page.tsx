@@ -11,11 +11,11 @@ export const metadata: Metadata = {
 
 export default function WaterfallPage() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
+    <div className="mx-auto w-full max-w-3xl px-margin py-16">
       <Link href="/journal" className="text-[12px] text-ink/65 hover:text-ochre">
         ← Journal
       </Link>
-      <h1 className="mt-2 font-serif text-4xl leading-tight">
+      <h1 className="mt-2 font-serif text-h1 leading-tight">
         A Town Built Around a Waterfall
       </h1>
 
@@ -68,7 +68,7 @@ export default function WaterfallPage() {
               className="object-cover"
             />
           </div>
-          <figcaption className="mt-2 text-[12px] uppercase tracking-[0.14em] text-ink/50">
+          <figcaption className="mt-2 text-eyebrow uppercase text-ink/50">
             Illustration, not a photograph — the town CHIAREL formulates in
           </figcaption>
         </figure>
@@ -91,13 +91,13 @@ export default function WaterfallPage() {
       <div className="mt-14 flex flex-wrap gap-6 border-t border-ink/10 pt-8">
         <Link
           href="/house"
-          className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
+          className="border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
         >
           Discover the House
         </Link>
         <Link
           href="/journal/three-skins-one-house"
-          className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
+          className="border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
         >
           Read the Origin Story
         </Link>

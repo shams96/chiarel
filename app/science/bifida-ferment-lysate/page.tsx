@@ -39,7 +39,7 @@ const faqJsonLd = {
 
 export default function BifidaPage() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
+    <div className="mx-auto w-full max-w-3xl px-margin py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
@@ -48,7 +48,7 @@ export default function BifidaPage() {
       <Link href="/science" className="text-[12px] text-ink/65 hover:text-ochre">
         ← The Science
       </Link>
-      <h1 className="mt-2 font-serif text-4xl leading-tight">
+      <h1 className="mt-2 font-serif text-h1 leading-tight">
         Bifida Ferment Lysate, Explained
       </h1>
       <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/75">
@@ -98,7 +98,7 @@ export default function BifidaPage() {
         guarantee of individual results.
       </p>
 
-      <div className="mt-8 flex flex-wrap gap-6 border-t border-ink/10 pt-8 text-[12px] uppercase tracking-[0.16em]">
+      <div className="mt-8 flex flex-wrap gap-6 border-t border-ink/10 pt-8 text-eyebrow uppercase">
         <Link href="/science/l-ornithine" className="border-b border-ochre pb-0.5 text-ochre">
           L-Ornithine, Explained →
         </Link>

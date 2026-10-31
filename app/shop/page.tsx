@@ -26,9 +26,9 @@ export default function ShopPage() {
   const n1 = getProductOrThrow("n1-neck-decollete");
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-16">
-      <h1 className="font-serif text-4xl">Shop</h1>
-      <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/65">
+    <div className="mx-auto w-full max-w-container px-margin py-16">
+      <h1 className="font-serif text-h1">Shop</h1>
+      <p className="mt-1 text-eyebrow uppercase text-ink/65">
         Consumer Collection™
       </p>
 
@@ -41,14 +41,14 @@ export default function ShopPage() {
           <Image src={studioImage(n1)} alt={productImageAlt(n1)} fill sizes="(min-width: 768px) 44vw, 100vw" className="object-cover" />
         </div>
         <div className="px-8 pb-10 md:p-0">
-          <p className="text-[12px] uppercase tracking-[0.18em] text-ochre">
+          <p className="text-eyebrow uppercase text-ochre">
             Neck &amp; Décolleté Crème
           </p>
           <h2 className="mt-2 font-serif text-3xl leading-snug">{n1.name}</h2>
           <p className="mt-2 max-w-md text-sm leading-relaxed text-ink/70">{n1.blurb}</p>
           <Link
             href={productHref(n1.slug)}
-            className="btn-press mt-6 inline-block border border-ink px-8 py-3 text-[12px] uppercase tracking-[0.25em] transition hover:border-ochre hover:text-ochre"
+            className="btn-press mt-6 inline-block border border-ink px-8 py-3 text-eyebrow uppercase transition hover:border-ochre hover:text-ochre"
           >
             Discover the Crème
           </Link>
@@ -57,13 +57,13 @@ export default function ShopPage() {
 
       <section className="mt-16">
         <h2 className="font-serif text-2xl">The Morning Ritual</h2>
-        <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/65">Morning</p>
+        <p className="mt-1 text-eyebrow uppercase text-ink/65">Morning</p>
         <ProductGrid slugs={dayRitual} />
       </section>
 
       <section className="mt-16 border-t border-ink/10 pt-12">
         <h2 className="font-serif text-2xl">The Evening Ritual</h2>
-        <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/65">Evening</p>
+        <p className="mt-1 text-eyebrow uppercase text-ink/65">Evening</p>
         <ProductGrid slugs={nightRitual} />
       </section>
     </div>
