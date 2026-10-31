@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { productHref } from "@/lib/products";
+import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { useDialog } from "@/lib/use-dialog";
@@ -25,13 +26,25 @@ export default function Header() {
     <>
       <header className="site-header sticky top-0 z-50 overflow-x-hidden border-b border-ink/10">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex min-h-[44px] flex-col justify-center leading-none">
-          <span className="font-serif text-2xl tracking-[0.35em] text-ink">
-            CHIAREL
-          </span>
-          <span className="mt-1 text-[9px] uppercase tracking-[0.28em] text-ochre">
-            The House of Clarity™
-          </span>
+        <Link href="/" className="flex min-h-[44px] shrink-0 items-center" aria-label="CHIAREL, The House of Clarity">
+          {/* The wordmark with the House line needs about 210px to stay legible, so
+              anything narrower than a desktop header gets the wordmark alone. Files: public/assets/brand/logo. */}
+          <Image
+            src="/assets/brand/logo/chiarel-header-wordmark-ink-v2.png"
+            alt="CHIAREL"
+            width={450}
+            height={72}
+            priority
+            className="h-auto w-[150px] shrink-0 lg:hidden"
+          />
+          <Image
+            src="/assets/brand/logo/chiarel-header-house-ink-v2.png"
+            alt="CHIAREL, The House of Clarity"
+            width={630}
+            height={157}
+            priority
+            className="hidden h-auto w-[210px] shrink-0 lg:block"
+          />
         </Link>
         <nav className="hidden gap-3 md:flex">
           {nav.map((n) => (
