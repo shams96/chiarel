@@ -10,6 +10,9 @@ import ProductGallery from "@/components/ProductGallery";
 import ProductAccordions from "@/components/ProductAccordions";
 import AddPairButton from "@/components/AddPairButton";
 import Reveal from "@/components/Reveal";
+import Section from "@/components/layout/Section";
+import Grid from "@/components/layout/Grid";
+import Eyebrow from "@/components/layout/Eyebrow";
 import { FREE_FROM_SENTENCE, formulationLine, isLaunchFormula } from "@/lib/formulation-line";
 import EditorialFeature from "@/components/EditorialFeature";
 import AmbientVideo from "@/components/AmbientVideo";
@@ -100,7 +103,7 @@ export default async function ProductPage({
           directly beneath it — a short image, not a full-viewport banner,
           so price and the buy CTA are reachable within roughly one
           screen-height of scroll on a phone, not two. */}
-      <div className="mx-auto max-w-6xl px-6 pt-4 md:pt-14">
+      <div className="mx-auto w-full max-w-container px-margin pt-4 md:pt-14">
         {/* Visible breadcrumb — a breadcrumbJsonLd script already exists on
             this page for search engines, but nothing rendered one for an
             actual visitor. Same typographic voice as every other small label
@@ -115,12 +118,12 @@ export default async function ProductPage({
             <li className="min-w-0 truncate text-ink" aria-current="page">{p.name}</li>
           </ol>
         </nav>
-        <div className="grid gap-6 md:grid-cols-2 md:items-start md:gap-14">
+        <div className="grid-12 gap-y-6 md:items-start">
           {/* Gallery column — see claudedocs/specs/product-image-gallery/ for
               the spec/plan. ProductGallery falls back to a single-image
               gallery built from `image`/`imageIsPlaceholder` when a product
               has no `gallery` array yet (every product today). */}
-          <div className="md:sticky md:top-24">
+          <div className="col-span-4 md:col-span-4 md:sticky md:top-24 lg:col-span-7">
             <ProductGallery
               images={
                 p.gallery ?? [{ src: p.image, alt: productImageAlt(p), role: "hero" }]
@@ -131,11 +134,11 @@ export default async function ProductPage({
           </div>
 
           {/* Buy box column */}
-          <div className="md:pt-2">
-            <h1 className="font-serif text-2xl leading-tight sm:text-3xl md:text-5xl">
+          <div className="col-span-4 md:col-span-4 md:pt-2 lg:col-span-5 lg:col-start-8">
+            <h1 className="font-serif text-h3 md:text-h2">
               {p.name}
             </h1>
-            <p className="mt-1 text-sm text-ink/60">{p.descriptor}</p>
+            <p className="mt-2 text-caption text-ink/70">{p.descriptor}</p>
             {/* Slot: star rating / review count summary. Renders nothing
                 until a real review source exists (never fabricated). */}
             <ProductRatingSlot slug={p.slug} />
@@ -155,13 +158,11 @@ export default async function ProductPage({
               )}
             </div>
 
-            <ProductAccordions product={p} />
-
-            <p className="mt-6 max-w-md text-sm leading-relaxed text-ink/75 md:mt-8">
+            <p className="mt-6 max-w-measure text-body text-ink/80 md:mt-8">
               {p.blurb}
             </p>
             {p.role && (
-              <p className="mt-4 inline-block border border-champagne px-3 py-1 text-[12px] uppercase tracking-[0.2em] text-ochre">
+              <p className="mt-4 inline-block border border-ink/20 px-3 py-1 text-eyebrow uppercase text-ochre">
                 {p.role}
               </p>
             )}
@@ -169,7 +170,9 @@ export default async function ProductPage({
               {productFactSummary(p)}
             </p>
 
-            <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-t border-ink/10 pt-6 text-[12px] text-ink/60">
+            <ProductAccordions product={p} />
+
+            <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-t border-ink/15 pt-6 text-[12px] text-ink/60">
               <div className="flex gap-1.5">
                 <dt className="text-ink/65">Step:</dt>
                 <dd>{p.step}</dd>
@@ -208,13 +211,13 @@ export default async function ProductPage({
       <BenefitPills actives={p.actives} />
 
       {p.slug === "n1-neck-decollete" && (
-        <section className="section-y border-y border-ink/10 bg-ink">
+        <section className="section-y border-y border-ink/15 bg-ivory">
           <div className="section-x">
             <AmbientVideo
               src="/assets/products/n1-neck-decollete-ambient.mp4"
               poster="/assets/products/clarity-neck-decollete-creme-honeycomb.jpg"
               label="Clarity Neck & Décolleté Crème, 40 ml, on a reflective surface with water droplets"
-              className="mx-auto aspect-[9/16] max-h-[80vh] w-auto max-w-full bg-ink object-cover"
+              className="mx-auto aspect-[9/16] max-h-[80vh] w-auto max-w-full bg-cloud object-cover"
             />
           </div>
         </section>
@@ -229,8 +232,6 @@ export default async function ProductPage({
           body="Clarity Day Crème is the morning crème of the ritual."
         />
       )}
-
-      <BrandStatement launch={isLaunchFormula(p.slug)} />
 
       {/* N1 gets its own structured "what it's for / what it feels like"
           module instead of the generic KeyBenefits heading, matching the
@@ -261,10 +262,12 @@ export default async function ProductPage({
           <FullIngredientList inci={publishedInci(p)!} />
         </Reveal>
       )}
-      <ScienceLinks slug={p.slug} />
+      {isLaunchFormula(p.slug) && <Formulation />}
+      <IngredientNotes slug={p.slug} />
       {/* Slot: reviews list. Renders nothing until a real review source
           exists (never fabricated). */}
       <ProductReviewsSlot slug={p.slug} />
+      <BrandStatement />
       <Reveal>
         <UsageGuidance />
       </Reveal>
@@ -307,7 +310,7 @@ function BenefitPills({
 
   return (
     <div className="border-b border-ink/10 bg-cloud/30">
-      <div className="mx-auto max-w-6xl px-6 py-4">
+      <div className="mx-auto w-full max-w-container px-margin py-4">
         <ul className="flex flex-wrap justify-center gap-x-8 gap-y-2 md:justify-start">
           {pills.map((pill) => (
             <li
@@ -324,88 +327,114 @@ function BenefitPills({
   );
 }
 
-// Full-width statement block — row 04 of the reference spec ("headline plus
-// five paragraphs"). Reused as-is across every PDP rather than fabricated
-// per product: the copy draws only on facts already established and vetted
+// Brand story block, reused as-is across every PDP rather than fabricated per
+// product: the copy draws only on facts already established and vetted
 // elsewhere on the site (the origin story, Grazia Savoriti, Natural You Srl,
-// the disclosure ethos) — see /journal/three-skins-one-house for the source.
-function BrandStatement({ launch }: { launch: boolean }) {
+// the disclosure ethos). The formulation statement now lives in <Formulation>.
+function BrandStatement() {
   return (
-    <Reveal className="border-t border-ink/10 bg-white py-20">
-      <div className="mx-auto max-w-xl px-6 text-center">
-        <h2 className="font-serif text-3xl leading-snug text-ink">
-          A House Built on One Rule
-        </h2>
-        <div className="mt-8 space-y-5 text-sm leading-relaxed text-ink/70">
-          <p>
-            The question started at a kitchen table, not a lab — one
-            household, three different skin types, and a bathroom cabinet
-            that couldn&rsquo;t keep up with any of them.
-          </p>
-          <p>
-            That question needed a real answer. It led to Isola del Liri,
-            Italy, and to a partnership with Natural You Srl, where every
-            CHIAREL™ formulation is developed under the guidance of
-            pharmacist Grazia Savoriti.
-          </p>
-          <p>
-            Skin is not one thing, and a house built to serve it
-            shouldn&rsquo;t pretend otherwise. This page names the key
-            ingredients behind the formula.
-          </p>
-          <p>
-            Each formula is produced fresh, to order, in small batches —
-            not manufactured ahead of demand and held in standing
-            inventory.
-          </p>
-          {launch && (
-            <p data-formulation-statement>
-              {formulationLine()} {FREE_FROM_SENTENCE}
-            </p>
-          )}
-          <p>
-            That is CHIAREL Intelligence™: start with the biology in front
-            of you, formulate it properly, and name the ingredients the
-            formula is built around.
-          </p>
-        </div>
-        <Link
-          href="/journal/three-skins-one-house"
-          className="mt-8 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
-        >
-          Read the Origin Story
-        </Link>
+    <PdpBlock id="house" title="A House Built on One Rule">
+      <div className="max-w-measure space-y-5 text-body text-ink/80">
+        <p>
+          The question started at a kitchen table, not a lab — one
+          household, three different skin types, and a bathroom cabinet
+          that couldn&rsquo;t keep up with any of them.
+        </p>
+        <p>
+          That question needed a real answer. It led to Isola del Liri,
+          Italy, and to a partnership with Natural You Srl, where every
+          CHIAREL™ formulation is developed under the guidance of
+          pharmacist Grazia Savoriti.
+        </p>
+        <p>
+          Skin is not one thing, and a house built to serve it
+          shouldn&rsquo;t pretend otherwise. This page names the key
+          ingredients behind the formula.
+        </p>
+        <p>
+          Each formula is produced fresh, to order, in small batches —
+          not manufactured ahead of demand and held in standing
+          inventory.
+        </p>
+        <p>
+          That is CHIAREL Intelligence™: start with the biology in front
+          of you, formulate it properly, and name the ingredients the
+          formula is built around.
+        </p>
       </div>
+      <Link
+        href="/journal/three-skins-one-house"
+        className="mt-8 inline-block border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
+      >
+        Read the Origin Story
+      </Link>
+    </PdpBlock>
+  );
+}
+
+// One block of the product page: title in the left columns, content on the
+// shared 12-column grid, hairline above. Used for every long-form section so
+// they align with each other and with the homepage.
+function PdpBlock({
+  id,
+  title,
+  children,
+}: {
+  id?: string;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <Reveal>
+      <Section id={id} rule labelledBy={id ? `${id}-title` : undefined}>
+        <Grid className="gap-y-6">
+          <div className="col-span-4 md:col-span-3 lg:col-span-3">
+            <h2 id={id ? `${id}-title` : undefined} className="font-serif text-h3">
+              {title}
+            </h2>
+          </div>
+          <div className="col-span-4 md:col-span-5 lg:col-span-8 lg:col-start-5">
+            {children}
+          </div>
+        </Grid>
+      </Section>
     </Reveal>
+  );
+}
+
+// Formulation (launch formulas only): the approved formulation line and the
+// scoped free-from sentence, moved here from the brand story so it sits with
+// the ingredient sections. No percentages, no per-product claims.
+function Formulation() {
+  return (
+    <PdpBlock id="formulation" title="Formulation">
+      <p data-formulation-statement className="max-w-measure text-body text-ink/80">
+        {formulationLine()} {FREE_FROM_SENTENCE}
+      </p>
+    </PdpBlock>
   );
 }
 
 function KeyBenefits({ benefits }: { benefits: string[] }) {
   return (
-    <Reveal className="border-t border-ink/10 bg-cloud/40 py-16">
-      <div className="mx-auto max-w-3xl px-6">
-        <h2 className="text-center font-serif text-2xl">Key benefits</h2>
-        <div className="mt-8 grid gap-5 sm:grid-cols-3">
-          {benefits.map((b, i) => (
-            <div
-              key={b}
-              className="card-elevated rounded-md bg-white p-6 text-sm leading-relaxed text-ink/75"
-            >
-              <span className="font-serif text-3xl text-ochre/80">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <p className="mt-3">{b}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </Reveal>
+    <PdpBlock id="key-benefits" title="Key benefits">
+      <ul className="grid gap-x-[var(--gutter)] gap-y-8 sm:grid-cols-3">
+        {benefits.map((b, i) => (
+          <li key={b} className="border-t border-ink/20 pt-4 text-body text-ink/80">
+            <span className="font-serif text-h4 text-ochre">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <p className="mt-3">{b}</p>
+          </li>
+        ))}
+      </ul>
+    </PdpBlock>
   );
 }
 
 function IncludedSpatula() {
   return (
-    <Reveal className="border-t border-ink/10 bg-white py-16">
+    <Reveal className="border-t border-ink/10 bg-ivory py-16">
       <div className="mx-auto flex max-w-2xl flex-col items-center gap-8 px-6 text-center md:flex-row md:text-left">
         <div className="relative aspect-square w-40 shrink-0 overflow-hidden bg-champagne/20">
           <Image
@@ -438,25 +467,18 @@ function KeyIngredients({
   if (actives.length === 0) return null;
 
   return (
-    <div className="mx-auto max-w-4xl border-t border-ink/10 px-6 py-16">
-      <div className="grid gap-10 md:grid-cols-[1fr_1.2fr] md:items-start md:gap-14">
-        <div>
-          <h2 className="font-serif text-2xl leading-snug">
-            Key ingredients
-          </h2>
-          <p className="mt-3 text-sm leading-relaxed text-ink/70">
-            The ingredients this formula is built around, named plainly.
-          </p>
-        </div>
-        <div className="grid gap-8 sm:grid-cols-2">
-          {actives.map((a) => (
-            <div key={a.name}>
-              <p className="font-serif text-2xl leading-snug text-ochre">{a.name}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+    <PdpBlock id="key-ingredients" title="Key ingredients">
+      <p className="max-w-measure text-body text-ink/80">
+        The ingredients this formula is built around, named plainly.
+      </p>
+      <ul className="mt-6 grid gap-x-[var(--gutter)] gap-y-5 sm:grid-cols-2">
+        {actives.map((a) => (
+          <li key={a.name} className="border-t border-ink/20 pt-3">
+            <p className="font-serif text-h4 text-ochre">{a.name}</p>
+          </li>
+        ))}
+      </ul>
+    </PdpBlock>
   );
 }
 
@@ -490,7 +512,7 @@ function PriceToBeAnnounced() {
 // product is promoted at scale (DRAFT — OWNER / REGULATORY APPROVAL REQUIRED).
 function N1WhatItsForAndFeel() {
   return (
-    <Reveal className="border-t border-ink/10 bg-cloud/40 py-16">
+    <Reveal className="border-t border-ink/10 bg-ivory py-16">
       <div className="mx-auto grid max-w-3xl gap-10 px-6 sm:grid-cols-2">
         <div>
           <h2 className="font-serif text-2xl">What it&rsquo;s for</h2>
@@ -518,22 +540,18 @@ function N1WhatItsForAndFeel() {
 // Directions for use, rendered only for products whose data/products.json
 // entry carries `howToUse` (each line already published elsewhere on the
 // site — see `howToUseSource`). General cosmetic application guidance only.
-// This replaced the N1-only block; N1's copy is unchanged, now in the data.
 function HowToUse({ steps }: { steps: string[] }) {
   return (
-    <div className="border-t border-ink/10 bg-white py-16">
-      <div className="mx-auto max-w-2xl px-6 text-center">
-        <h2 className="font-serif text-2xl">How to use</h2>
-        <ol className="mx-auto mt-5 max-w-md space-y-2 text-left text-sm leading-relaxed text-ink/75">
-          {steps.map((step, i) => (
-            <li key={step} className="flex gap-3">
-              <span className="font-serif text-ochre" aria-hidden="true">{i + 1}.</span>
-              <span>{step}</span>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </div>
+    <PdpBlock id="how-to-use" title="How to use">
+      <ol className="max-w-measure space-y-3 text-body text-ink/80">
+        {steps.map((step, i) => (
+          <li key={step} className="flex gap-4 border-t border-ink/15 pt-3">
+            <span className="font-serif text-ochre" aria-hidden="true">{i + 1}.</span>
+            <span>{step}</span>
+          </li>
+        ))}
+      </ol>
+    </PdpBlock>
   );
 }
 
@@ -542,16 +560,16 @@ function HowToUse({ steps }: { steps: string[] }) {
 // Grazia / supplier declarations). Names only, in order, never percentages.
 function FullIngredientList({ inci }: { inci: string[] }) {
   return (
-    <div className="mx-auto max-w-2xl border-t border-ink/10 px-6 py-16">
-      <details className="group">
-        <summary className="flex cursor-pointer list-none items-center justify-between font-serif text-2xl">
-          Full ingredient list
+    <PdpBlock id="full-ingredients" title="Full ingredient list">
+      <details className="group max-w-measure">
+        <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between text-eyebrow uppercase text-ink/80">
+          Show the full list
           <span className="ml-4 text-xl text-ink/50 group-open:hidden" aria-hidden="true">+</span>
           <span className="ml-4 hidden text-xl text-ink/50 group-open:inline" aria-hidden="true">−</span>
         </summary>
-        <p className="mt-4 text-[13px] leading-relaxed text-ink/70">{inci.join(", ")}</p>
+        <p className="mt-4 text-caption leading-relaxed text-ink/75">{inci.join(", ")}</p>
       </details>
-    </div>
+    </PdpBlock>
   );
 }
 
@@ -691,23 +709,32 @@ const scienceLinksBySlug: Record<string, { label: string; href: string }[]> = {
   "recovery-masque": [ORNITHINE, BARRIER],
 };
 
-function ScienceLinks({ slug }: { slug: string }) {
+// Ingredient notes: links to the existing /science explainers for ingredients in
+// this formula. These pages explain ingredients; they are not test results for
+// the finished product, and the block says so.
+function IngredientNotes({ slug }: { slug: string }) {
   const links = scienceLinksBySlug[slug];
   if (!links) return null;
   return (
-    <div className="mx-auto mt-8 max-w-2xl px-6 text-center">
-      <p className="text-[12px] text-ink/65">
-        Formulated with:{" "}
-        {links.map((l, i) => (
-          <span key={l.href}>
-            <Link href={l.href} className="border-b border-ochre text-ochre">
-              {l.label}
-            </Link>
-            {i < links.length - 1 ? " · " : ""}
-          </span>
-        ))}
+    <PdpBlock id="ingredient-notes" title="Ingredient notes">
+      <p className="max-w-measure text-body text-ink/80">
+        Plain-language explainers for ingredients in this formula. They
+        describe the ingredients, not test results for this product.
       </p>
-    </div>
+      <ul className="mt-6 max-w-measure divide-y divide-ink/15 border-y border-ink/15">
+        {links.map((l) => (
+          <li key={l.href}>
+            <Link
+              href={l.href}
+              className="flex min-h-[44px] items-center justify-between py-3 text-body text-ochre hover:text-ink"
+            >
+              {l.label}
+              <span aria-hidden="true">→</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </PdpBlock>
   );
 }
 

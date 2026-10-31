@@ -91,10 +91,23 @@ describe("pdpSections (accordions beside the buy box)", () => {
 describe("product page wiring", () => {
   const page = readFileSync("app/shop/[slug]/page.tsx", "utf8");
 
-  it("renders the accordions directly under the buy box, before the blurb", () => {
+  it("renders the description under the buy box and the accordions after it (brief order)", () => {
     const accordions = page.indexOf("<ProductAccordions");
-    expect(accordions).toBeGreaterThan(page.indexOf("<PurchaseOptions"));
-    expect(accordions).toBeLessThan(page.indexOf("{p.blurb}"));
+    expect(page.indexOf("{p.blurb}")).toBeGreaterThan(page.indexOf("<PurchaseOptions"));
+    expect(accordions).toBeGreaterThan(page.indexOf("{p.blurb}"));
+  });
+
+  it("long-form sections follow the brief order: benefits, how to use, ingredients, formulation, notes, related", () => {
+    const order = [
+      "<KeyBenefits",
+      "<HowToUse",
+      "<KeyIngredients",
+      "<Formulation />",
+      "<IngredientNotes",
+      "<LaunchRoutinePosition",
+    ].map((m) => page.indexOf(m));
+    expect(order.every((i) => i > 0)).toBe(true);
+    expect([...order].sort((a, b) => a - b)).toEqual(order);
   });
 
   it("paired products on the regimen cards have an Add to bag button, not a link wrapping a button", () => {
