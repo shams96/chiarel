@@ -7,7 +7,8 @@ import HomeIconProduct from "@/components/home/HomeIconProduct";
 import HomeRitual from "@/components/home/HomeRitual";
 import HomeFitGuidance from "@/components/home/HomeFitGuidance";
 import HomeFaceBeyond from "@/components/home/HomeFaceBeyond";
-import HomeProvenance from "@/components/home/HomeProvenance";
+import HomeItaly from "@/components/home/HomeItaly";
+import HomeFormulator from "@/components/home/HomeFormulator";
 import HomeProof from "@/components/home/HomeProof";
 import HomeFormulationRecord from "@/components/home/HomeFormulationRecord";
 import HomeFaq from "@/components/home/HomeFaq";
@@ -177,7 +178,8 @@ export default function Home() {
         cta="Discover Clarity Day Crème"
       />
       <HomeFitGuidance />
-      <HomeProvenance />
+      <HomeItaly />
+      <HomeFormulator />
       <HomeProof />
       <HomePhilosophy />
       <HomeFormulationRecord />
