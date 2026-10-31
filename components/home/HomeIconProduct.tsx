@@ -32,7 +32,7 @@ export default function HomeIconProduct({
           <Image src={src} alt={alt} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-[50%_22%]" />
         </div>
         <Reveal className="flex flex-col justify-center px-[clamp(1.5rem,5vw,6rem)] py-16 md:py-24">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-redochre">{kicker}</p>
+          <p className="text-[12px] uppercase tracking-[0.3em] text-redochre">{kicker}</p>
           <h2 className="mt-4 font-serif text-[clamp(2.25rem,1.2rem+3.2vw,4.5rem)] leading-[1.05] text-garden">
             {headline}
           </h2>

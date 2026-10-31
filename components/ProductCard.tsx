@@ -26,14 +26,14 @@ export default function ProductCard({
           className={productHoverClass(product.step)}
         />
         {product.badge && (
-          <span className="absolute left-3 top-3 bg-ivory/90 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-ochre">
+          <span className="absolute left-3 top-3 bg-ivory/90 px-2.5 py-1 text-[12px] uppercase tracking-[0.18em] text-ochre">
             {product.badge}
           </span>
         )}
       </div>
       <div className="mt-4">
         <h3 className="font-serif text-xl">{product.name}</h3>
-        <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-ink/65">
+        <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/65">
           {product.step}
         </p>
         <p className="mt-1 text-[13px] text-ink/60">{product.descriptor}</p>

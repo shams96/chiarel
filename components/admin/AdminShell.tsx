@@ -74,14 +74,14 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
           <Link href="/admin" className="flex items-baseline gap-3" aria-label="CHIAREL admin home">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/assets/brand/CHIAREL_Wordmark_PeachDust.svg" alt="CHIAREL" className="h-6 w-auto md:h-7" />
-            <span className="text-[10px] uppercase tracking-[0.34em] text-champagne">Admin</span>
+            <span className="text-[12px] uppercase tracking-[0.34em] text-champagne">Admin</span>
           </Link>
           <div className="ml-auto flex items-center gap-4 text-[12px]">
             <span className="hidden text-ivory/85 sm:inline">{me ? `${me.email} · ${me.role}` : ""}</span>
             <button
               type="button"
               onClick={signOut}
-              className="btn-press border border-champagne px-4 py-2 text-[11px] uppercase tracking-[0.24em] text-champagne transition hover:bg-champagne hover:text-ink"
+              className="btn-press border border-champagne px-4 py-2 text-[12px] uppercase tracking-[0.24em] text-champagne transition hover:bg-champagne hover:text-ink"
             >
               Sign out
             </button>
@@ -95,7 +95,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                   href={n.href}
                   aria-current={here ? "page" : undefined}
                   className={
-                    "whitespace-nowrap px-4 py-2 text-[11px] uppercase tracking-[0.22em] transition " +
+                    "whitespace-nowrap px-4 py-2 text-[12px] uppercase tracking-[0.22em] transition " +
                     (here ? "bg-champagne text-ink" : "text-ivory/90 hover:bg-ivory/10")
                   }
                 >
@@ -108,7 +108,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
       </header>
       <RibbonBand tone="redochre" />
       <main>{children}</main>
-      <footer className="mt-16 border-t border-champagne px-6 py-8 text-center text-[11px] uppercase tracking-[0.3em] text-ink/60">
+      <footer className="mt-16 border-t border-champagne px-6 py-8 text-center text-[12px] uppercase tracking-[0.3em] text-ink/60">
         CHIAREL™ · The House of Clarity™ · Admin
       </footer>
     </div>

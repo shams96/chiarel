@@ -267,7 +267,7 @@ export default function AdminOrderPage() {
               )}
               {showTracking && (
                 <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                  <label className="block text-[11px] uppercase tracking-[0.24em] text-ivory/90">
+                  <label className="block text-[12px] uppercase tracking-[0.24em] text-ivory/90">
                     Carrier
                     <input
                       value={carrier}
@@ -277,7 +277,7 @@ export default function AdminOrderPage() {
                       className={`${inputClass} mt-1.5 normal-case tracking-normal disabled:opacity-70`}
                     />
                   </label>
-                  <label className="block text-[11px] uppercase tracking-[0.24em] text-ivory/90">
+                  <label className="block text-[12px] uppercase tracking-[0.24em] text-ivory/90">
                     Tracking number
                     <input
                       value={tracking}

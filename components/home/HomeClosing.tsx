@@ -63,7 +63,7 @@ export function HomeFinalCta() {
               See the full House
             </Link>
           </div>
-          <p className="mt-6 text-[11px] uppercase tracking-[0.14em]">
+          <p className="mt-6 text-[12px] uppercase tracking-[0.14em]">
             Available online only at chiarel.com — not sold in retail
             stores or through other sellers.
           </p>
@@ -92,7 +92,7 @@ export function HomePhilosophy() {
           </div>
         </Reveal>
         <Reveal delay={0.1}>
-          <h2 className="text-[11px] font-normal uppercase tracking-[0.3em] text-redochre">The Philosophy</h2>
+          <h2 className="text-[12px] font-normal uppercase tracking-[0.3em] text-redochre">The Philosophy</h2>
           <p className="mt-6 border-l-4 border-redochre pl-6 font-serif text-[clamp(1.75rem,1.1rem+2.2vw,3.1rem)] leading-[1.2] text-garden">
             &ldquo;Skin is not one thing. A house built to serve it should not
             pretend otherwise.&rdquo;

@@ -79,7 +79,7 @@ function EmailSignupForm({
         </p>
       ) : (
         <form onSubmit={onSubmit} noValidate className="mt-5 max-w-md">
-          <label htmlFor={`${id}-email`} className={`block text-[11px] uppercase tracking-[0.16em] ${muted}`}>
+          <label htmlFor={`${id}-email`} className={`block text-[12px] uppercase tracking-[0.16em] ${muted}`}>
             Email address
           </label>
           <div className="mt-2 flex flex-col gap-3 sm:flex-row">

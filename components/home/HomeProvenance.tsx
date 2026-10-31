@@ -43,7 +43,7 @@ export default function HomeProvenance() {
       <section className="overflow-hidden bg-ink text-ivory">
         <div className="mx-auto grid max-w-[84rem] items-end gap-12 px-[clamp(1.5rem,3vw,3rem)] pt-20 md:grid-cols-[1.15fr_0.85fr] md:gap-16 md:pt-28">
           <Reveal className="pb-4 md:pb-28">
-            <h2 className="text-[11px] font-normal uppercase tracking-[0.3em] text-champagne">
+            <h2 className="text-[12px] font-normal uppercase tracking-[0.3em] text-champagne">
               Who Formulates CHIAREL™?
             </h2>
             <p className="mt-5 font-serif text-[clamp(2.75rem,1.4rem+5vw,6rem)] italic leading-[0.98] text-ivory">
@@ -67,7 +67,7 @@ export default function HomeProvenance() {
             </Link>
             <Link
               href="/house"
-              className="mt-3 flex min-h-[44px] items-center text-[11px] uppercase tracking-[0.16em] text-ivory/85 hover:text-champagne"
+              className="mt-3 flex min-h-[44px] items-center text-[12px] uppercase tracking-[0.16em] text-ivory/85 hover:text-champagne"
             >
               Read her full bio →
             </Link>
@@ -75,7 +75,7 @@ export default function HomeProvenance() {
               href={FORMULATOR_EXTERNAL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex min-h-[44px] items-center text-[11px] uppercase tracking-[0.16em] text-ivory/80 hover:text-champagne"
+              className="flex min-h-[44px] items-center text-[12px] uppercase tracking-[0.16em] text-ivory/80 hover:text-champagne"
             >
               Verified profile at Natural You Srl →
             </a>

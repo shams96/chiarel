@@ -106,7 +106,7 @@ export default async function ProductPage({
             actual visitor. Same typographic voice as every other small label
             on the site (11px uppercase tracked, ink/65 -> ochre on hover),
             not a new pattern. */}
-        <nav aria-label="Breadcrumb" className="mb-4 text-[11px] uppercase tracking-[0.14em] text-ink/65 md:mb-6">
+        <nav aria-label="Breadcrumb" className="mb-4 text-[12px] uppercase tracking-[0.14em] text-ink/65 md:mb-6">
           <ol className="flex items-center gap-2">
             <li>
               <Link href="/shop" className="tap-area hover:text-ochre">Shop</Link>
@@ -161,7 +161,7 @@ export default async function ProductPage({
               {p.blurb}
             </p>
             {p.role && (
-              <p className="mt-4 inline-block border border-champagne px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ochre">
+              <p className="mt-4 inline-block border border-champagne px-3 py-1 text-[12px] uppercase tracking-[0.2em] text-ochre">
                 {p.role}
               </p>
             )}
@@ -312,7 +312,7 @@ function BenefitPills({
           {pills.map((pill) => (
             <li
               key={pill}
-              className="flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-ink/60"
+              className="flex items-center gap-2 text-[12px] uppercase tracking-[0.14em] text-ink/60"
             >
               <span className="inline-block h-1 w-1 rounded-full bg-ochre" aria-hidden="true" />
               {pill}
@@ -601,7 +601,7 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
   function RouteStrip({ label, route }: { label: string; route: string[] }) {
     return (
       <div>
-        <p className="text-[11px] uppercase tracking-[0.16em] text-ink/65">{label}</p>
+        <p className="text-[12px] uppercase tracking-[0.16em] text-ink/65">{label}</p>
         <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-6">
           {route.map((slug, i) => {
             const item = getProduct(slug);
@@ -639,7 +639,7 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
       </div>
       {pairs.length > 0 && (
         <div className="mt-10 border-t border-ink/10 pt-8">
-          <p className="text-center text-[11px] uppercase tracking-[0.16em] text-ink/65">
+          <p className="text-center text-[12px] uppercase tracking-[0.16em] text-ink/65">
             Complete your regimen
           </p>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -657,7 +657,7 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
                   </div>
                   <div>
                     <p className="font-serif text-base leading-snug">{item.name}</p>
-                    <p className="mt-0.5 text-[11px] uppercase tracking-[0.16em] text-ink/65">
+                    <p className="mt-0.5 text-[12px] uppercase tracking-[0.16em] text-ink/65">
                       {item.step}
                     </p>
                     {isPurchasable(item) && (

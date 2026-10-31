@@ -116,7 +116,7 @@ export default function ApplicationPage() {
         </div>
       </section>
 
-      <p className="mt-14 max-w-2xl text-[11px] leading-relaxed text-ink/65">
+      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink/65">
         Application guidance reflects general formulation principles and is
         not a guarantee of individual results.
       </p>

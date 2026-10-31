@@ -516,7 +516,7 @@ export default function HeroIntro() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.3 }}
             aria-label="Skip intro animation"
-            className="absolute bottom-3 right-3 flex min-h-[44px] min-w-[44px] items-center justify-center px-3 text-[10px] uppercase tracking-[0.3em] text-ink/65 transition hover:text-ochre focus:text-ochre focus:outline focus:outline-1 focus:outline-offset-4 focus:outline-ochre"
+            className="absolute bottom-3 right-3 flex min-h-[44px] min-w-[44px] items-center justify-center px-3 text-[12px] uppercase tracking-[0.3em] text-ink/65 transition hover:text-ochre focus:text-ochre focus:outline focus:outline-1 focus:outline-offset-4 focus:outline-ochre"
           >
             Skip
           </motion.button>

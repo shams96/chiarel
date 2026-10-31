@@ -41,7 +41,7 @@ export default function ShopPage() {
           <Image src={studioImage(n1)} alt={productImageAlt(n1)} fill sizes="(min-width: 768px) 44vw, 100vw" className="object-cover" />
         </div>
         <div className="px-8 pb-10 md:p-0">
-          <p className="text-[11px] uppercase tracking-[0.18em] text-ochre">
+          <p className="text-[12px] uppercase tracking-[0.18em] text-ochre">
             Neck &amp; Décolleté Crème
           </p>
           <h2 className="mt-2 font-serif text-3xl leading-snug">{n1.name}</h2>

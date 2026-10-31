@@ -64,7 +64,7 @@ export default function HomeFormulationRecord() {
                 <div className="mt-8 overflow-x-auto">
                   <table className="w-full min-w-[560px] border-collapse text-left text-sm">
                     <thead>
-                      <tr className="border-b border-ink/20 text-[11px] uppercase tracking-[0.16em] text-ink/75">
+                      <tr className="border-b border-ink/20 text-[12px] uppercase tracking-[0.16em] text-ink/75">
                         <th className="py-3 pr-4 font-normal">Product</th>
                         <th className="py-3 font-normal">Key Ingredient</th>
                       </tr>

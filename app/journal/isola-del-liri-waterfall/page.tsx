@@ -68,7 +68,7 @@ export default function WaterfallPage() {
               className="object-cover"
             />
           </div>
-          <figcaption className="mt-2 text-[11px] uppercase tracking-[0.14em] text-ink/50">
+          <figcaption className="mt-2 text-[12px] uppercase tracking-[0.14em] text-ink/50">
             Illustration, not a photograph — the town CHIAREL formulates in
           </figcaption>
         </figure>

@@ -114,7 +114,7 @@ ${shareUrl}`)}`,
               href={l.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-press flex min-h-[44px] items-center justify-center border border-ochre px-3 py-3 text-[11px] uppercase tracking-[0.2em] text-ochre transition hover:bg-ochre hover:text-white"
+              className="btn-press flex min-h-[44px] items-center justify-center border border-ochre px-3 py-3 text-[12px] uppercase tracking-[0.2em] text-ochre transition hover:bg-ochre hover:text-white"
             >
               {l.label}
             </a>
@@ -122,7 +122,7 @@ ${shareUrl}`)}`,
           <button
             type="button"
             onClick={handleCopy}
-            className="btn-press flex min-h-[44px] items-center justify-center border border-ochre px-3 py-3 text-[11px] uppercase tracking-[0.2em] text-ochre transition hover:bg-ochre hover:text-white"
+            className="btn-press flex min-h-[44px] items-center justify-center border border-ochre px-3 py-3 text-[12px] uppercase tracking-[0.2em] text-ochre transition hover:bg-ochre hover:text-white"
           >
             {shareCopied ? "Link copied" : "Copy link"}
           </button>

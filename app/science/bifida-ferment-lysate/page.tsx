@@ -92,7 +92,7 @@ export default function BifidaPage() {
         </div>
       </section>
 
-      <p className="mt-14 max-w-2xl text-[11px] leading-relaxed text-ink/65">
+      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink/65">
         Bifida Ferment Lysate is an ingredient name, not a CHIAREL
         trademark. This page is an educational reference and is not a
         guarantee of individual results.
