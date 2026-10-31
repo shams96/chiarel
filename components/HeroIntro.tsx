@@ -477,10 +477,10 @@ export default function HeroIntro() {
               className="flex flex-col items-center leading-none"
             >
               <Image
-                src="/assets/brand/logo/chiarel-intro-house-ink.png"
+                src="/assets/brand/logo/chiarel-intro-house-ink-v2.png"
                 alt=""
-                width={760}
-                height={179}
+                width={960}
+                height={240}
                 priority
                 className="h-auto w-[250px] md:w-[320px]"
               />

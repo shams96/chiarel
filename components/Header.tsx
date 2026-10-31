@@ -30,18 +30,18 @@ export default function Header() {
           {/* The wordmark with the House line needs about 210px to stay legible, so
               anything narrower than a desktop header gets the wordmark alone. Files: public/assets/brand/logo. */}
           <Image
-            src="/assets/brand/logo/chiarel-header-wordmark-ink.png"
+            src="/assets/brand/logo/chiarel-header-wordmark-ink-v2.png"
             alt="CHIAREL"
-            width={360}
-            height={62}
+            width={450}
+            height={72}
             priority
             className="h-auto w-[150px] shrink-0 lg:hidden"
           />
           <Image
-            src="/assets/brand/logo/chiarel-header-house-ink.png"
+            src="/assets/brand/logo/chiarel-header-house-ink-v2.png"
             alt="CHIAREL, The House of Clarity"
-            width={520}
-            height={122}
+            width={630}
+            height={157}
             priority
             className="hidden h-auto w-[210px] shrink-0 lg:block"
           />
