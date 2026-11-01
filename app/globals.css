@@ -413,20 +413,11 @@ summary:focus-visible {
   .hero-scene-in { animation: none; }
 }
 
-/* Footer wordmark: two tinted copies clipped to their own card. Stacked
-   (phones): top 46% over the green card, rest over the red. Side by side
-   (md+): left card is (100% - 1.25rem gap) / 3 of the grid width. */
-.wordmark[data-tone="garden"] {
+/* Footer wordmark below md: two copies of the word split at the seam between
+   the stacked cards, so it reads across the green and the red. */
+.wordmark-seam-top {
   clip-path: inset(0 0 54% 0);
 }
-.wordmark[data-tone="ochre"] {
+.wordmark-seam-bottom {
   clip-path: inset(46% 0 0 0);
-}
-@media (min-width: 768px) {
-  .wordmark[data-tone="garden"] {
-    clip-path: inset(0 calc(100% - (100% - 1.25rem) / 3) 0 0);
-  }
-  .wordmark[data-tone="ochre"] {
-    clip-path: inset(0 0 0 calc((100% - 1.25rem) / 3 + 1.25rem));
-  }
 }
