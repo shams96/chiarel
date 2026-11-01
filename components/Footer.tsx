@@ -67,17 +67,17 @@ export default function Footer() {
           {/* Right card — Red Ochre, all footer content */}
           <div className="relative flex min-h-[460px] flex-col justify-between overflow-hidden rounded-[1.5rem] bg-ochre p-8 text-cloud max-md:pt-14 sm:p-10 md:p-12">
             <div className="relative z-10">
-              <h2 className="font-serif text-3xl leading-tight sm:text-4xl">
+              <h2 className="font-serif text-3xl leading-tight sm:text-4xl md:ml-[calc(14.71vw-2.625rem)] md:mt-[calc(7.2vw+1.5rem)]">
                 <Link
                   href="/contact"
-                  className="tap-area inline-flex items-center gap-3 border-b border-champagne pb-0.5 text-cloud transition hover:text-champagne md:-ml-5"
+                  className="tap-area inline-flex items-center gap-3 border-b border-champagne pb-0.5 text-cloud transition hover:text-champagne"
                 >
                   Write to the House <span aria-hidden="true">→</span>
                 </Link>
               </h2>
             </div>
 
-            <nav className="relative z-10 mt-10 grid grid-cols-2 gap-x-8 gap-y-8 pb-6 text-[13px] sm:grid-cols-3 md:mt-28">
+            <nav className="relative z-10 mt-10 grid grid-cols-2 gap-x-8 gap-y-8 pb-6 text-[13px] sm:grid-cols-3">
               {navColumns.map((col) => (
                 <div key={col.heading} className="flex flex-col">
                   <p className="mb-1 text-[11px] uppercase tracking-[0.14em] text-cloud/60">
@@ -107,6 +107,9 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* The heading above starts just past the L of the wordmark (the word spans
+              39.91vw from its left edge; L ends 14.71vw - 0.625rem into the red
+              card) and sits just under the letters (0.8em below the word's top). */}
           {/* Engraved wordmark — one word, two tonal treatments split at the
               card boundary. Positioned so the R (2.8em from the word's left edge,
               em = 9vw) is centred on the seam between the cards: seam =
