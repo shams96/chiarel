@@ -25,7 +25,7 @@ export default function Header() {
   return (
     <>
       <header className="site-header sticky top-0 z-50 overflow-x-hidden border-b border-ink/10">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex w-full max-w-container items-center justify-between px-margin py-4">
         <Link href="/" className="flex min-h-[44px] shrink-0 items-center" aria-label="CHIAREL, The House of Clarity">
           {/* The wordmark with the House line needs about 210px to stay legible, so
               anything narrower than a desktop header gets the wordmark alone. Files: public/assets/brand/logo. */}
@@ -46,12 +46,12 @@ export default function Header() {
             className="hidden h-auto w-[210px] shrink-0 lg:block"
           />
         </Link>
-        <nav className="hidden gap-3 md:flex">
+        <nav className="hidden gap-1 xl:flex">
           {nav.map((n) => (
             <Link
               key={n.href}
               href={n.href}
-              className="inline-flex min-h-[44px] items-center px-2 text-[12px] uppercase tracking-[0.18em] text-ink/80 transition hover:text-ochre"
+              className="inline-flex min-h-[44px] items-center whitespace-nowrap px-2 text-eyebrow uppercase text-ink/80 transition hover:text-ochre"
             >
               {n.label}
             </Link>
@@ -61,7 +61,7 @@ export default function Header() {
           {/* Mobile: direct path to Shop without opening the menu */}
           <Link
             href="/shop"
-            className="btn-press inline-flex min-h-[44px] items-center px-2 text-[12px] uppercase tracking-[0.18em] text-ink/80 transition hover:text-ochre md:hidden"
+            className="btn-press inline-flex min-h-[44px] items-center px-2 text-[12px] uppercase tracking-[0.18em] text-ink/80 transition hover:text-ochre xl:hidden"
           >
             Shop
           </Link>
@@ -82,7 +82,7 @@ export default function Header() {
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
-            className="btn-press relative flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden"
+            className="btn-press relative flex h-11 w-11 flex-col items-center justify-center gap-1.5 xl:hidden"
           >
             <span
               className={`block h-px w-5 bg-ink transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
@@ -105,7 +105,7 @@ export default function Header() {
           own box instead of the viewport, collapsing the overlay into a
           small box pinned near the top instead of a full-height panel. */}
       <div
-        className={`fixed inset-0 z-[80] bg-ink/40 transition-opacity md:hidden ${
+        className={`fixed inset-0 z-[80] bg-ink/40 transition-opacity xl:hidden ${
           menuOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
         onClick={() => setMenuOpen(false)}
@@ -117,7 +117,7 @@ export default function Header() {
         aria-modal="true"
         aria-label="Menu"
         id="mobile-menu"
-        className={`cart-panel fixed right-0 top-0 z-[90] flex h-full w-full max-w-xs flex-col bg-ivory transition-transform md:hidden ${
+        className={`cart-panel fixed right-0 top-0 z-[90] flex h-full w-full max-w-xs flex-col bg-ivory transition-transform xl:hidden ${
           menuOpen ? "translate-x-0 shadow-2xl" : "translate-x-full"
         }`}
       >

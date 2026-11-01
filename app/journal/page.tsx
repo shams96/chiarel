@@ -7,9 +7,10 @@ export const metadata = { title: "Journal", alternates: { canonical: "/journal" 
 
 export default function JournalPage() {
   return (
-    <div className="mx-auto w-full max-w-4xl px-margin py-16">
-      <h1 className="font-serif text-h1">Notes from the House</h1>
-      <div className="mt-10 divide-y divide-ink/10">
+    <div className="grid-12 mx-auto w-full max-w-container px-margin py-section">
+      <h1 className="font-serif text-h1 col-span-full lg:col-span-4">Notes from the House</h1>
+      <div className="col-span-full lg:col-span-8">
+      <div className="divide-y divide-ink/10">
         {entries.map((e) => (
           <article key={e.slug} className="py-8">
             <p className="text-eyebrow uppercase text-ochre">
@@ -32,6 +33,7 @@ export default function JournalPage() {
       </div>
       <div className="mt-6 border-t border-ink/10 pt-12">
         <EmailSignup source="journal" />
+      </div>
       </div>
     </div>
   );

@@ -43,7 +43,8 @@ const entries = [
 
 export default function SciencePage() {
   return (
-    <div className="mx-auto w-full max-w-4xl px-margin py-16">
+    <div className="grid-12 mx-auto w-full max-w-container px-margin py-section">
+      <header className="col-span-full lg:col-span-4">
       <h1 className="font-serif text-h1">The Science</h1>
       <p className="mt-1 text-eyebrow uppercase text-ink/65">
         CHIAREL Intelligence™
@@ -53,8 +54,10 @@ export default function SciencePage() {
         woman&rsquo;s body and skin. Each CHIAREL formulation answers one part
         of it.
       </p>
+      </header>
 
-      <div className="mt-12 space-y-8">
+      <div className="col-span-full lg:col-span-8">
+      <div className="space-y-8">
         {entries.map((e) => (
           <div key={e.slug} className="border-l-2 border-champagne pl-6">
             <h2 className="font-serif text-2xl">{e.name}</h2>
@@ -88,6 +91,7 @@ export default function SciencePage() {
         <Link href="/science/l-ornithine" className="border-b border-ink/30 pb-0.5 text-ink/60">
           L-Ornithine
         </Link>
+      </div>
       </div>
     </div>
   );
