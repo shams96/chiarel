@@ -20,11 +20,11 @@ const retired = [
 
 export default function ReadingLabelPage() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
+    <div className="mx-auto w-full max-w-3xl px-margin py-16">
       <Link href="/journal" className="text-[12px] text-ink/65 hover:text-ochre">
         ← Journal
       </Link>
-      <h1 className="mt-2 font-serif text-4xl leading-tight">
+      <h1 className="mt-2 font-serif text-h1 leading-tight">
         Reading a Label Like the House Does
       </h1>
 
@@ -54,7 +54,7 @@ export default function ReadingLabelPage() {
         </p>
 
         <div className="border border-ink/10 bg-white/60 p-5">
-          <p className="text-[12px] uppercase tracking-[0.16em] text-ink/65">
+          <p className="text-eyebrow uppercase text-ink/65">
             Words you will not find on a CHIAREL label
           </p>
           <p className="mt-2 text-sm text-ink/70">{retired.join(" · ")}</p>
@@ -72,7 +72,7 @@ export default function ReadingLabelPage() {
       <div className="mt-14 border-t border-ink/10 pt-8">
         <Link
           href="/science"
-          className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
+          className="border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
         >
           Explore The Science
         </Link>

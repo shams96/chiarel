@@ -22,7 +22,7 @@ const INPUT = "mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm out
 function Field({ label, id, children }: { label: string; id: string; children: React.ReactNode }) {
   return (
     <div>
-      <label htmlFor={id} className="text-[12px] uppercase tracking-[0.16em] text-ink/65">
+      <label htmlFor={id} className="text-eyebrow uppercase text-ink/65">
         {label}
       </label>
       {children}
@@ -102,7 +102,7 @@ export default function CheckoutPage() {
         <h1 className="font-serif text-3xl">Your bag is empty</h1>
         <Link
           href="/ritual"
-          className="mt-6 inline-block border border-ink px-8 py-3 text-[12px] uppercase tracking-[0.25em] transition hover:border-ochre hover:text-ochre"
+          className="mt-6 inline-block border border-ink px-8 py-3 text-eyebrow uppercase transition hover:border-ochre hover:text-ochre"
         >
           Begin the Ritual
         </Link>
@@ -111,7 +111,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-12">
+    <div className="mx-auto w-full max-w-container px-margin py-12">
       <h1 className="font-serif text-3xl">Complete your order</h1>
 
       <div className="mt-10 grid gap-14 lg:grid-cols-[1fr_400px]">
@@ -237,7 +237,7 @@ export default function CheckoutPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="btn-press mt-2 w-full bg-ink py-4 text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre disabled:cursor-wait disabled:opacity-60"
+              className="btn-press mt-2 w-full bg-ink py-4 text-eyebrow uppercase text-ivory transition hover:bg-ochre disabled:cursor-wait disabled:opacity-60"
             >
               {submitting ? "Continuing to payment…" : `Continue to Payment — $${total}`}
             </button>
@@ -250,7 +250,7 @@ export default function CheckoutPage() {
 
         {/* Right: order summary */}
         <aside className="card-elevated h-fit rounded-md bg-white p-6">
-          <p className="text-[12px] uppercase tracking-[0.18em] text-ink/65">
+          <p className="text-eyebrow uppercase text-ink/65">
             Order Summary
           </p>
           <ul className="mt-4 space-y-4">

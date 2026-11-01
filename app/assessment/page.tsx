@@ -36,8 +36,8 @@ export default function AssessmentPage() {
     const { recommendations } = recommend(axisScores);
 
     return (
-      <div className="mx-auto max-w-3xl px-6 py-16">
-        <h1 className="font-serif text-4xl">Your Results</h1>
+      <div className="mx-auto w-full max-w-3xl px-margin py-16">
+        <h1 className="font-serif text-h1">Your Results</h1>
         <p className="mt-3 max-w-xl text-sm text-ink/70">
           Based on a four-axis dermatological framework (barrier &amp; sebum,
           reactivity, pigment tendency, structural resilience), here is what
@@ -47,7 +47,7 @@ export default function AssessmentPage() {
         <dl className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
           {axisScores.map((a) => (
             <div key={a.axis} className="card-elevated rounded-md bg-white p-3 text-center">
-              <dt className="text-[12px] uppercase tracking-[0.14em] text-ink/65">
+              <dt className="text-eyebrow uppercase text-ink/65">
                 {a.axis}
               </dt>
               <dd className="mt-1 font-serif text-lg">{a.pole}</dd>
@@ -74,13 +74,13 @@ export default function AssessmentPage() {
                   <div className="mt-3 flex items-center gap-4">
                     <Link
                       href={productHref(p.slug)}
-                      className="tabular-nums border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
+                      className="tabular-nums border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
                     >
                       View — ${p.price!.subscription} with subscription
                     </Link>
                     <button
                       onClick={() => add(p.slug, "subscription")}
-                      className="border border-ink px-5 py-2 text-[12px] uppercase tracking-[0.16em] transition hover:border-ochre hover:text-ochre"
+                      className="border border-ink px-5 py-2 text-eyebrow uppercase transition hover:border-ochre hover:text-ochre"
                     >
                       Add to Bag
                     </button>
@@ -96,7 +96,7 @@ export default function AssessmentPage() {
             setAnswers({});
             setStep(0);
           }}
-          className="mt-12 text-[12px] uppercase tracking-[0.16em] text-ink/65 hover:text-ink"
+          className="mt-12 text-eyebrow uppercase text-ink/65 hover:text-ink"
         >
           Retake the Assessment
         </button>

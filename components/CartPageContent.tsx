@@ -81,7 +81,7 @@ function QuantityStepper({ line }: { line: CartLine }) {
 function InfoItem({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <details className="group border-t border-ink/10 py-1">
-      <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between text-[12px] uppercase tracking-[0.14em] text-ink/80">
+      <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between text-eyebrow uppercase text-ink/80">
         {title}
         <span className="ml-4 text-lg text-ink/50 group-open:hidden" aria-hidden="true">+</span>
         <span className="ml-4 hidden text-lg text-ink/50 group-open:inline" aria-hidden="true">−</span>
@@ -97,8 +97,8 @@ export default function CartPageContent() {
   const total = subtotal + shipping;
 
   return (
-    <div className="mx-auto max-w-7xl px-6 py-10 md:py-14">
-      <h1 className="text-center font-serif text-3xl md:text-4xl">
+    <div className="mx-auto w-full max-w-container px-margin py-10 md:py-14">
+      <h1 className="text-center font-serif text-3xl md:text-h1">
         Your Ritual Bag{count > 0 ? ` (${count})` : ""}
       </h1>
 
@@ -134,13 +134,13 @@ export default function CartPageContent() {
           <p className="text-sm text-ink/70">Your bag is empty.</p>
           <Link
             href="/ritual"
-            className="btn-press inline-block bg-ink px-8 py-3.5 text-[12px] uppercase tracking-[0.3em] text-ivory transition hover:bg-ochre"
+            className="btn-press inline-block bg-ink px-8 py-3.5 text-eyebrow uppercase text-ivory transition hover:bg-ochre"
           >
             Begin the Ritual
           </Link>
           <Link
             href="/shop"
-            className="tap-area text-[12px] uppercase tracking-[0.18em] text-ochre underline underline-offset-4"
+            className="tap-area text-eyebrow uppercase text-ochre underline underline-offset-4"
           >
             Continue shopping
           </Link>
@@ -149,7 +149,7 @@ export default function CartPageContent() {
         <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_360px] lg:gap-12">
           <section aria-label="Items in your bag">
             {/* Column heads on desktop only; on phones each row labels itself. */}
-            <div className="hidden grid-cols-[1fr_230px_120px_72px] gap-6 border-b border-ink/15 pb-3 text-[12px] uppercase tracking-[0.16em] text-ink/65 lg:grid">
+            <div className="hidden grid-cols-[1fr_230px_120px_72px] gap-6 border-b border-ink/15 pb-3 text-eyebrow uppercase text-ink/65 lg:grid">
               <span>Product</span>
               <span>Plan</span>
               <span>Quantity</span>
@@ -185,7 +185,7 @@ export default function CartPageContent() {
                         type="button"
                         onClick={() => remove(line.slug)}
                         aria-label={`Remove ${line.product.name}`}
-                        className="tap-area mt-2 text-[12px] uppercase tracking-[0.14em] text-ink/70 underline underline-offset-4 hover:text-ochre"
+                        className="tap-area mt-2 text-eyebrow uppercase text-ink/70 underline underline-offset-4 hover:text-ochre"
                       >
                         <span aria-hidden="true">Remove</span>
                       </button>
@@ -203,7 +203,7 @@ export default function CartPageContent() {
             </ul>
             <Link
               href="/shop"
-              className="tap-area mt-6 inline-block text-[12px] uppercase tracking-[0.18em] text-ink/70 underline underline-offset-4 hover:text-ochre"
+              className="tap-area mt-6 inline-block text-eyebrow uppercase text-ink/70 underline underline-offset-4 hover:text-ochre"
             >
               Continue shopping
             </Link>
@@ -212,7 +212,7 @@ export default function CartPageContent() {
           <aside className="h-fit bg-cloud/40 p-6 lg:sticky lg:top-28" aria-label="Order summary">
             <Link
               href="/checkout"
-              className="btn-press block w-full bg-ink py-4 text-center text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre"
+              className="btn-press block w-full bg-ink py-4 text-center text-eyebrow uppercase text-ivory transition hover:bg-ochre"
             >
               Checkout — ${total}
             </Link>

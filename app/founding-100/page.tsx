@@ -32,7 +32,7 @@ export default async function Founding100Page() {
       {/* Hero — image-led gateway moment. The capture card is the page's
           entire job, so it gets the visual weight; the programme mechanics
           and legal terms live below, for whoever scrolls to them. */}
-      <section className="relative overflow-hidden bg-ink text-ivory">
+      <section className="relative overflow-hidden bg-ivory text-ink">
         <div className="mx-auto grid max-w-6xl gap-0 lg:grid-cols-2">
           <div className="relative aspect-[4/5] w-full lg:aspect-auto">
             <Image
@@ -45,13 +45,13 @@ export default async function Founding100Page() {
             />
           </div>
           <div className="flex flex-col justify-center px-6 py-16 md:px-12 lg:py-20">
-            <p className="text-[12px] uppercase tracking-[0.4em] text-champagne">
+            <p className="text-eyebrow uppercase text-ochre">
               By invitation · The House Opens
             </p>
-            <h1 className="mt-5 font-serif text-5xl leading-[0.98] tracking-[-0.01em] md:text-6xl">
+            <h1 className="mt-5 font-serif text-h1 leading-[0.98] tracking-[-0.01em] md:text-6xl">
               The Founding Members
             </h1>
-            <p className="mt-6 max-w-md text-[15px] leading-relaxed text-ivory/75">
+            <p className="mt-6 max-w-md text-[15px] leading-relaxed text-ink/75">
               One hundred places, each one numbered. We are opening the House
               to its first hundred members, and they will meet every new
               formula before anyone else.
@@ -60,10 +60,10 @@ export default async function Founding100Page() {
             {/* Real scarcity, not decoration — this number is the actual
                 count of saved signups, not a fabricated countdown. */}
             <div className="mt-8 flex items-baseline gap-3">
-              <span className="tabular-nums font-serif text-4xl text-champagne">
+              <span className="tabular-nums font-serif text-4xl text-ochre">
                 {remaining}
               </span>
-              <span className="text-[12px] uppercase leading-tight tracking-[0.14em] text-ivory/60">
+              <span className="text-[12px] uppercase leading-tight tracking-[0.14em] text-ink/65">
                 {full ? (
                   <>places left on the list
                   <br />
@@ -74,16 +74,16 @@ export default async function Founding100Page() {
               </span>
             </div>
 
-            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-1 border-t border-ivory/10 pt-5 text-[12px] text-ivory/55">
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-1 border-t border-ink/15 pt-5 text-[12px] text-ink/65">
               <span>Formulated by Grazia Savoriti, Pharmacist</span>
               <span>Built around L-Ornithine and Panthenol</span>
             </div>
 
             <div className="mt-8">
               {full ? (
-                <p className="card-elevated rounded-md bg-white/5 p-6 text-sm leading-relaxed text-ivory/80">
+                <p className="card-elevated rounded-md bg-cloud p-6 text-sm leading-relaxed text-ink/80">
                   The Founding Members are complete.{" "}
-                  <Link href={productHref("recovery-masque")} className="border-b border-champagne text-champagne">
+                  <Link href={productHref("recovery-masque")} className="border-b border-ochre text-ochre">
                     Begin the 90-Day Ritual
                   </Link>{" "}
                   at its published price.
@@ -96,7 +96,7 @@ export default async function Founding100Page() {
         </div>
       </section>
 
-      <div className="mx-auto max-w-3xl px-6 py-16">
+      <div className="mx-auto w-full max-w-3xl px-margin py-16">
       <section className="space-y-10">
         <div className="border-l-2 border-ochre pl-6">
           <h2 className="font-serif text-2xl">How it works</h2>
@@ -157,7 +157,7 @@ export default async function Founding100Page() {
         </div>
       </section>
 
-      <div className="mt-14 flex flex-wrap gap-6 border-t border-ink/10 pt-8 text-[12px] uppercase tracking-[0.16em]">
+      <div className="mt-14 flex flex-wrap gap-6 border-t border-ink/10 pt-8 text-eyebrow uppercase">
         <Link href={productHref("recovery-masque")} className="border-b border-ochre pb-0.5 text-ochre">
           Begin the 90-Day Ritual
         </Link>

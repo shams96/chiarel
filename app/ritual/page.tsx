@@ -8,8 +8,8 @@ export const metadata = { title: "The Ritual", alternates: { canonical: "/ritual
 export default function RitualPage() {
   return (
     <>
-    <div className="mx-auto max-w-6xl px-6 pt-16">
-      <h1 className="max-w-2xl font-serif text-4xl leading-tight">
+    <div className="mx-auto w-full max-w-container px-margin pt-16">
+      <h1 className="max-w-2xl font-serif text-h1 leading-tight">
         Five products, two moments in the day: prepare for it, then let it go.
       </h1>
       <p className="mt-4 max-w-xl text-sm text-ink/70">
@@ -23,21 +23,21 @@ export default function RitualPage() {
       <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
         <Link
           href="/assessment"
-          className="inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
+          className="inline-block border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
         >
           Take the Skin Assessment&trade; to find your starting point
         </Link>
         <Link
           href="/build-your-ritual"
-          className="inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
+          className="inline-block border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
         >
           Or build your own ritual, step by step
         </Link>
       </div>
 
       <nav aria-label="Jump to a routine" className="mt-8 flex gap-3">
-        <a href="#morning" className="inline-flex min-h-[44px] items-center border border-ink/30 px-5 text-[12px] uppercase tracking-[0.2em] text-ink/80 transition hover:border-ochre hover:text-ochre">Morning</a>
-        <a href="#evening" className="inline-flex min-h-[44px] items-center border border-ink/30 px-5 text-[12px] uppercase tracking-[0.2em] text-ink/80 transition hover:border-ochre hover:text-ochre">Evening</a>
+        <a href="#morning" className="inline-flex min-h-[44px] items-center border border-ink/30 px-5 text-eyebrow uppercase text-ink/80 transition hover:border-ochre hover:text-ochre">Morning</a>
+        <a href="#evening" className="inline-flex min-h-[44px] items-center border border-ink/30 px-5 text-eyebrow uppercase text-ink/80 transition hover:border-ochre hover:text-ochre">Evening</a>
       </nav>
     </div>
 

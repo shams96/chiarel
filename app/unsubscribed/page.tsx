@@ -15,7 +15,7 @@ export default async function UnsubscribedPage({
   const ok = status === "ok";
   return (
     <div className="mx-auto max-w-2xl px-6 py-16">
-      <h1 className="font-serif text-4xl leading-tight">
+      <h1 className="font-serif text-h1 leading-tight">
         {ok ? "You are unsubscribed" : "That link did not work"}
       </h1>
       <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink/70">
@@ -25,7 +25,7 @@ export default async function UnsubscribedPage({
       </p>
       <Link
         href="/contact"
-        className="mt-8 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
+        className="mt-8 inline-block border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
       >
         Contact
       </Link>

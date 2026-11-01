@@ -79,7 +79,7 @@ function EmailSignupForm({
         </p>
       ) : (
         <form onSubmit={onSubmit} noValidate className="mt-5 max-w-md">
-          <label htmlFor={`${id}-email`} className={`block text-[12px] uppercase tracking-[0.16em] ${muted}`}>
+          <label htmlFor={`${id}-email`} className={`block text-eyebrow uppercase ${muted}`}>
             Email address
           </label>
           <div className="mt-2 flex flex-col gap-3 sm:flex-row">
@@ -98,7 +98,7 @@ function EmailSignupForm({
             <button
               type="submit"
               disabled={status === "loading"}
-              className={`btn-press min-h-[44px] px-6 py-3 text-[12px] uppercase tracking-[0.2em] transition disabled:cursor-wait disabled:opacity-60 ${button}`}
+              className={`btn-press min-h-[44px] px-6 py-3 text-eyebrow uppercase transition disabled:cursor-wait disabled:opacity-60 ${button}`}
             >
               {status === "loading" ? "Joining…" : "Join"}
             </button>
