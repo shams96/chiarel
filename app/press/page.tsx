@@ -36,15 +36,18 @@ const assets = [
 
 export default function PressPage() {
   return (
-    <div className="mx-auto w-full max-w-4xl px-margin py-16">
+    <div className="grid-12 mx-auto w-full max-w-container px-margin py-section">
+      <header className="col-span-full mb-8 lg:col-span-4 lg:mb-0">
       <h1 className="font-serif text-h1 leading-tight">CHIAREL™ Press Kit</h1>
       <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink/70">
         Brand facts, the launch lineup, and downloadable assets for
         journalists, editors, and press covering the House.
       </p>
+      </header>
 
+      <div className="col-span-full lg:col-span-8">
       {/* Brand Fact Sheet */}
-      <section className="mt-14">
+      <section>
         <h2 className="font-serif text-2xl text-ink">Brand Fact Sheet</h2>
         <dl className="mt-6 space-y-5 text-sm leading-relaxed text-ink/80">
           <div>
@@ -145,7 +148,7 @@ export default function PressPage() {
                 <p className="font-serif text-lg leading-tight text-ink">
                   {p.name}
                 </p>
-                <p className="mt-1 text-[13px] text-ink/60">{p.descriptor}</p>
+                <p className="mt-1 text-[13px] text-ink/70">{p.descriptor}</p>
                 <p className="mt-1 text-eyebrow uppercase text-ink/65">
                   {p.color.name} · {p.family}
                 </p>
@@ -210,6 +213,7 @@ export default function PressPage() {
           press@chiarel.com
         </a>
       </section>
+      </div>
     </div>
   );
 }

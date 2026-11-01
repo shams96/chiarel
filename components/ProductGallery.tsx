@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import { motion, useReducedMotion } from "framer-motion";
 import { getHeroEntrance } from "@/lib/motion";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
@@ -111,10 +111,9 @@ export default function ProductGallery({
                 aria-label={`${i + 1} of ${images.length}`}
                 aria-hidden={i !== active}
               >
-                <Image
+                <ResponsiveImage
                   src={img.src}
                   alt={img.alt}
-                  fill
                   priority={i === 0}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className={`object-cover ${studioFit(img)}`}
@@ -130,10 +129,9 @@ export default function ProductGallery({
             animate={loaded ? "visible" : "hidden"}
             variants={reduceMotion ? undefined : variants}
           >
-            <Image
+            <ResponsiveImage
               src={current.src}
               alt={current.alt}
-              fill
               priority
               sizes="(max-width: 768px) 100vw, 50vw"
               className={`object-cover ${studioFit(current)}`}
@@ -197,7 +195,7 @@ export default function ProductGallery({
               }`}
               style={{ backgroundColor: NEUTRAL_FRAME_BG }}
             >
-              <Image src={img.src} alt="" fill sizes="64px" className="object-cover" />
+              <ResponsiveImage src={img.src} alt="" sizes="64px" className="object-cover" />
             </button>
           ))}
         </div>

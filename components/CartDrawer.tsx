@@ -57,7 +57,7 @@ export default function CartDrawer() {
 
         {lines.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-3 px-6 text-center">
-            <p className="text-sm text-ink/60">Your bag is empty.</p>
+            <p className="text-sm text-ink/70">Your bag is empty.</p>
             <Link
               href="/ritual"
               onClick={close}
@@ -69,7 +69,7 @@ export default function CartDrawer() {
         ) : (
           <>
             <div className="flex-1 overflow-y-auto px-6 py-4">
-              <p className={`mb-4 text-[12px] ${shipping === 0 ? "text-ochre" : "text-ink/60"}`}>
+              <p className={`mb-4 text-[12px] ${shipping === 0 ? "text-ochre" : "text-ink/70"}`}>
                 {shippingNote(subtotal, lines)}
               </p>
               <ul className="space-y-5">
@@ -98,7 +98,7 @@ export default function CartDrawer() {
                               onClick={() => setQty(line.id, line.qty - 1)}
                               disabled={line.qty <= 1}
                               aria-label={`Decrease quantity of ${line.product.name}`}
-                              className="btn-press tap-area flex h-7 w-7 items-center justify-center text-sm text-ink/60 transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-ink/60"
+                              className="btn-press tap-area flex h-7 w-7 items-center justify-center text-sm text-ink/70 transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-ink/70"
                             >
                               −
                             </button>
@@ -109,7 +109,7 @@ export default function CartDrawer() {
                               onClick={() => setQty(line.id, line.qty + 1)}
                               disabled={line.qty >= MAX_LINE_QTY}
                               aria-label={`Increase quantity of ${line.product.name}`}
-                              className="btn-press tap-area flex h-7 w-7 items-center justify-center text-sm text-ink/60 transition hover:text-ochre"
+                              className="btn-press tap-area flex h-7 w-7 items-center justify-center text-sm text-ink/70 transition hover:text-ochre"
                             >
                               +
                             </button>
@@ -153,7 +153,7 @@ export default function CartDrawer() {
                       <p className="mt-0.5 truncate text-[12px] uppercase tracking-[0.14em] text-ink/65">
                         {nextStep.step}
                       </p>
-                      <p className="mt-0.5 text-[12px] text-ink/50">
+                      <p className="mt-0.5 text-[12px] text-ink/70">
                         Subscription · renews every 45 days
                       </p>
                     </div>

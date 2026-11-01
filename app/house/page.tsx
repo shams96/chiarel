@@ -2,16 +2,16 @@ export const metadata = { title: "The House", alternates: { canonical: "/house" 
 
 export default function HousePage() {
   return (
-    <div className="liri-flow-page mx-auto w-full max-w-4xl px-margin py-16">
-      <h1 className="font-serif text-h1">The House</h1>
+    <div className="grid-12 mx-auto w-full max-w-container px-margin py-section">
+      <h1 className="font-serif text-h1 col-span-full mb-8 lg:col-span-4 lg:mb-0">The House</h1>
 
       {/* No real photo of Isola del Liri exists in the asset library — the prior
           image here ("hero.png") was a mislabeled product-jar mockup, not a place
           photo. Deliberately text-only until real location photography exists. */}
 
-      <div className="mt-12 space-y-10 text-sm leading-relaxed text-ink/80">
+      <div className="space-y-10 text-body text-ink/80 col-span-full lg:col-span-8">
         <section>
-          <h2 className="font-serif text-2xl text-ink">Isola del Liri</h2>
+          <h2 className="font-serif text-h3 text-ink">Isola del Liri</h2>
           <p className="mt-2 max-w-2xl">
             An hour and a half from Rome, in the Liri valley of central Italy,
             stands a town built around a waterfall — the Cascata Grande falls
@@ -20,7 +20,7 @@ export default function HousePage() {
           </p>
         </section>
         <section>
-          <h2 className="font-serif text-2xl text-ink">A Red Drawn From the Land</h2>
+          <h2 className="font-serif text-h3 text-ink">A Red Drawn From the Land</h2>
           <p className="mt-2 max-w-2xl">
             Red Ochre is not a packaging colour chosen from a swatch book. It is
             the colour of Isola del Liri itself — the terracotta, clay, and
@@ -30,7 +30,7 @@ export default function HousePage() {
           </p>
         </section>
         <section>
-          <h2 className="font-serif text-2xl text-ink">Mission</h2>
+          <h2 className="font-serif text-h3 text-ink">Mission</h2>
           <p className="mt-2 max-w-2xl">
             Advancing Cellular Clarity™ — supporting the skin&rsquo;s own
             intelligence against Modern Biological Stress™, with restraint,
@@ -38,7 +38,7 @@ export default function HousePage() {
           </p>
         </section>
         <section>
-          <h2 className="font-serif text-2xl text-ink">Modern Biological Stress™</h2>
+          <h2 className="font-serif text-h3 text-ink">Modern Biological Stress™</h2>
           <p className="mt-2 max-w-2xl">
             A working woman&rsquo;s day asks a great deal of her body and her
             skin. Early starts, deadlines, screens, commutes, dry indoor air
@@ -50,14 +50,14 @@ export default function HousePage() {
           </p>
         </section>
         <section>
-          <h2 className="font-serif text-2xl text-ink">Clarity</h2>
+          <h2 className="font-serif text-h3 text-ink">Clarity</h2>
           <p className="mt-2 max-w-2xl">
             Five formulations, each made for one purpose. Each carries the name
             of our mission: Clarity.
           </p>
         </section>
         <section>
-          <h2 className="font-serif text-2xl text-ink">La Bella Figura</h2>
+          <h2 className="font-serif text-h3 text-ink">La Bella Figura</h2>
           <p className="mt-2 max-w-2xl">
             The Italian art of presenting one&rsquo;s best self — not vanity,
             but discipline and quiet confidence. It is the cultural philosophy
@@ -66,7 +66,7 @@ export default function HousePage() {
           </p>
         </section>
         <section className="border-t border-ink/10 pt-10">
-          <h2 className="font-serif text-2xl text-ink">Formulated By</h2>
+          <h2 className="font-serif text-h3 text-ink">Formulated By</h2>
           <p className="mt-2 max-w-2xl">
             Natural You Srl is guided by Grazia Savoriti, a pharmacist with
             deep expertise in cosmetic and nutraceutical research and
@@ -84,7 +84,7 @@ export default function HousePage() {
           </p>
         </section>
         <section className="border-t border-ink/10 pt-10">
-          <h2 className="font-serif text-2xl text-ink">A Considered Practice</h2>
+          <h2 className="font-serif text-h3 text-ink">A Considered Practice</h2>
           <p className="mt-2 max-w-2xl">
             Small, made-to-order batches. Glass bottles and jars. Every active
             ingredient disclosed.

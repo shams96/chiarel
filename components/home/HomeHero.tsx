@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import Link from "next/link";
 import { perDayPrice, DELIVERY_DAYS } from "@/lib/pricing";
 import { getProductOrThrow, isPurchasable } from "@/lib/products";
@@ -53,13 +53,12 @@ export default function HomeHero() {
       </div>
 
       <div className="relative aspect-[4/5] w-full md:aspect-auto">
-        <Image
+        <ResponsiveImage
           src="/assets/products/clarity-essence-festive-scene-v2.jpg"
           alt="Clarity Essence™ in its glass bottle on a plinth, framed by a frosted flower and green CHIAREL velvet ribbon"
-          fill
-          priority
           sizes="(max-width: 768px) 100vw, 55vw"
-          className="object-cover md:object-[50%_62%]"
+          priority
+          className="md:object-[50%_62%] object-cover"
         />
       </div>
     </section>

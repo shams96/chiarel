@@ -98,7 +98,7 @@ export default function LOrnithinePage() {
         <Link href="/science/bifida-ferment-lysate" className="border-b border-ochre pb-0.5 text-ochre">
           Bifida Ferment Lysate, Explained →
         </Link>
-        <Link href="/shop/clarity-night-creme" className="border-b border-ink/30 pb-0.5 text-ink/60">
+        <Link href="/shop/clarity-night-creme" className="border-b border-ink/30 pb-0.5 text-ink/70">
           Shop Clarity Night Crème
         </Link>
       </div>

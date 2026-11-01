@@ -98,14 +98,23 @@ export default function CheckoutPage() {
 
   if (lines.length === 0) {
     return (
-      <div className="mx-auto max-w-lg px-6 py-24 text-center">
-        <h1 className="font-serif text-3xl">Your bag is empty</h1>
-        <Link
-          href="/ritual"
-          className="mt-6 inline-block border border-ink px-8 py-3 text-eyebrow uppercase transition hover:border-ochre hover:text-ochre"
-        >
-          Begin the Ritual
-        </Link>
+      <div className="mx-auto w-full max-w-container px-margin py-12 md:py-14">
+        <h1 className="text-center font-serif text-3xl md:text-h1">Your Ritual Bag</h1>
+        <div className="mt-16 flex flex-col items-center gap-4 text-center">
+          <p className="text-sm text-ink/70">Your bag is empty.</p>
+          <Link
+            href="/ritual"
+            className="btn-press inline-block bg-ink px-8 py-3.5 text-eyebrow uppercase text-ivory transition hover:bg-ochre"
+          >
+            Begin the Ritual
+          </Link>
+          <Link
+            href="/shop"
+            className="tap-area text-eyebrow uppercase text-ochre underline underline-offset-4"
+          >
+            Continue shopping
+          </Link>
+        </div>
       </div>
     );
   }
@@ -209,8 +218,8 @@ export default function CheckoutPage() {
             <details className="group border border-ink/15 bg-cloud/20 px-4 py-3 text-[13px] leading-relaxed text-ink/75">
               <summary className="flex cursor-pointer list-none items-center justify-between font-medium text-ink">
                 Refund Policy &amp; Terms
-                <span className="ml-4 text-lg text-ink/50 group-open:hidden" aria-hidden="true">+</span>
-                <span className="ml-4 hidden text-lg text-ink/50 group-open:inline" aria-hidden="true">−</span>
+                <span className="ml-4 text-lg text-ink/70 group-open:hidden" aria-hidden="true">+</span>
+                <span className="ml-4 hidden text-lg text-ink/70 group-open:inline" aria-hidden="true">−</span>
               </summary>
               <div className="mt-3 space-y-3">
                 <RefundPolicyContent />
@@ -298,7 +307,7 @@ export default function CheckoutPage() {
               <span className="font-serif text-xl">${total}</span>
             </div>
             {country.currency !== "USD" && (
-              <p className="text-right text-[12px] text-ink/50">
+              <p className="text-right text-[12px] text-ink/70">
                 {approxConverted(total, country)} — charged in USD, see Terms
               </p>
             )}

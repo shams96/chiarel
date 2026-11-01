@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
@@ -67,10 +67,9 @@ export default function HomeFaceBeyond() {
               <li key={p.href}>
                 <Link href={p.href} className="group block">
                   <div className="relative aspect-[4/5] overflow-hidden bg-ivory">
-                    <Image
+                    <ResponsiveImage
                       src={p.image}
                       alt={p.alt}
-                      fill
                       sizes="(max-width: 1024px) 45vw, 22vw"
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                     />
@@ -97,10 +96,9 @@ export default function HomeFaceBeyond() {
         <Reveal delay={0.1} className="mx-auto max-w-[56rem]">
           <Link href="/shop/clarity-neck-decollete-creme" className="group block">
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-ivory">
-              <Image
+              <ResponsiveImage
                 src="/assets/products/clarity-neck-decollete-creme-festive-scene-v2.jpg"
                 alt="Clarity Neck & Décolleté Crème™ in its green glass bottle, framed by a frosted flower and Red Ochre CHIAREL velvet ribbon"
-                fill
                 sizes="(max-width: 1024px) 100vw, 45vw"
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
               />

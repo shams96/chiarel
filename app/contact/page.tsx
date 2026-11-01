@@ -88,11 +88,11 @@ export default function ContactPage() {
 
       <p className="mt-16 max-w-xl text-[12px] leading-relaxed text-ink/65">
         CHIAREL™ is operated by 1HubSolutions, LLC. See our{" "}
-        <Link href="/privacy" className="border-b border-ink/30 text-ink/60">
+        <Link href="/privacy" className="border-b border-ink/30 text-ink/70">
           Privacy Policy
         </Link>{" "}
         and{" "}
-        <Link href="/terms" className="border-b border-ink/30 text-ink/60">
+        <Link href="/terms" className="border-b border-ink/30 text-ink/70">
           Terms of Service
         </Link>
         .
