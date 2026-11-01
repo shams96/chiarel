@@ -35,7 +35,7 @@ export default function ProductCard({
         <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/65">
           {product.step}
         </p>
-        <p className="mt-1 text-[13px] text-ink/60">{product.descriptor}</p>
+        <p className="mt-1 text-[13px] text-ink/70">{product.descriptor}</p>
         {!hidePrice && (
           <p className="mt-2 text-sm">
             {isPurchasable(product) ? (

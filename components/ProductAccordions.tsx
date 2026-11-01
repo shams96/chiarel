@@ -15,8 +15,8 @@ export default function ProductAccordions({ product }: { product: Product }) {
         <details key={s.id} className="group border-t border-ink/10">
           <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between text-[12px] uppercase tracking-[0.16em] text-ink/80">
             {s.title}
-            <span className="ml-4 text-lg text-ink/50 group-open:hidden" aria-hidden="true">+</span>
-            <span className="ml-4 hidden text-lg text-ink/50 group-open:inline" aria-hidden="true">−</span>
+            <span className="ml-4 text-lg text-ink/70 group-open:hidden" aria-hidden="true">+</span>
+            <span className="ml-4 hidden text-lg text-ink/70 group-open:inline" aria-hidden="true">−</span>
           </summary>
           <div className="pb-4 text-[13px] leading-relaxed text-ink/75">
             {s.kind === "list" && (

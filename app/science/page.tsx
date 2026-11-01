@@ -82,13 +82,13 @@ export default function SciencePage() {
         <Link href="/science/lasting-hydration" className="border-b border-ochre pb-0.5 text-ochre">
           Lasting Hydration →
         </Link>
-        <Link href="/science/application" className="border-b border-ink/30 pb-0.5 text-ink/60">
+        <Link href="/science/application" className="border-b border-ink/30 pb-0.5 text-ink/70">
           Application Guide
         </Link>
-        <Link href="/science/bifida-ferment-lysate" className="border-b border-ink/30 pb-0.5 text-ink/60">
+        <Link href="/science/bifida-ferment-lysate" className="border-b border-ink/30 pb-0.5 text-ink/70">
           Bifida Ferment Lysate
         </Link>
-        <Link href="/science/l-ornithine" className="border-b border-ink/30 pb-0.5 text-ink/60">
+        <Link href="/science/l-ornithine" className="border-b border-ink/30 pb-0.5 text-ink/70">
           L-Ornithine
         </Link>
       </div>

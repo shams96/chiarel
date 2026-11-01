@@ -25,7 +25,7 @@ export default function Error({
       <h1 className="mt-6 font-serif text-3xl text-ink">
         Something went wrong on our end
       </h1>
-      <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink/60">
+      <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink/70">
         This page hit an unexpected error — often a brief connection issue.
         Trying again usually resolves it.
       </p>

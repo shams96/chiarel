@@ -18,8 +18,8 @@ Evidence tags: **verified** (run or seen this session), **inferred**, **not veri
 | Restrained motion, intro at or under 1.5s | Met, verified | Intro clears about 1.5s after load; sticky bar and hero respect reduced motion |
 | No new fonts or dependencies; integrations, URLs, SEO preserved | Met, verified | `package.json` and lockfile unchanged on the branch; JSON-LD untouched; no API, DB, auth or payment code changed |
 | Tests | Met, verified | tsc, ESLint (repo config), 501 tests, build, local smoke test 8 of 8 |
-| Responsive image delivery | Partly met | Hero has 640w/960w variants. Other scene images (300 to 440 KB) are single-size. See Open items |
-| Lighthouse before and after | Not verified | Not run |
+| Responsive image delivery | Met, verified | 16 scene photos have 640w/960w copies and a real srcSet through `ResponsiveImage` (20 of 25 homepage images). Variants are remade by `npm run publish:images`; `tests/image-variants.test.ts` fails if one is missing or stale |
+| Lighthouse before and after (mobile, throttled, local production build, 1 run each; scores move a few points run to run) | Met, verified | Home 49 to 74-78, LCP 10.7s to about 5s, page weight 2.77 MB to 735 KB. Product page 72 to 80-81, LCP 7.0s to 4.2-5.1s. Journal 91 to 94. Accessibility 96 to 100 on all three after raising `text-ink/50` and `/60` (below 4.5:1 on Cloud) to `/70`. Best practices 100 and SEO 100 before and after |
 | Clinical Observations content | Placeholder | Needs Grazia Savoriti's wording |
 | Formulator portrait, lab photography | Not met | Needs Natural You permission and photography |
 | Relevant scientific references | Partly met | Ingredient notes link to existing Science pages only; real citations needed |
@@ -32,12 +32,11 @@ Evidence tags: **verified** (run or seen this session), **inferred**, **not veri
   - Next 15.5.27, critical: unauthenticated RCE in the Image Optimization API (SVG) and Server Actions DoS. The optimizer route returns 404 here (`images.unoptimized: true`) and the app has no server actions, so neither is reachable in this configuration (verified). Upgrading Next is still the fix; it is a dependency change outside this redesign.
   - PostCSS (high, transitive): build-time stylesheet processing only, not a runtime path.
   - nodemailer (moderate, direct): address-parsing advisories; worth a look wherever user-supplied addresses reach it.
-- **Not verified:** `/admin` returns 200 without a login cookie; its HTML contains no admin data and its data APIs return 401, but I have not confirmed it renders a login form (client-side). Pre-existing code.
+- **`/admin` without a session (verified in the browser):** the shell redirects to `/admin/login` and shows only the sign-in form; `/api/admin/me` returns 401.
 - **Organisational gaps a formal audit would need (not code):** incident-response note, access reviews, vendor risk assessments. No certification is claimed.
 
 ## Open items
 
-1. Responsive images beyond the hero: needs a decision (pre-generated variants go stale when the owner replaces an image under the same filename, see `scripts/publish-images.mjs`).
-2. Lighthouse before and after: needs a go-ahead to run an external tool.
-3. Upgrade Next (and nodemailer) to the patched versions, in its own PR.
-4. Owner inputs: Clinical Observations wording, Formulator permission and photography, citations, testimonial consents, stock-licence check.
+1. LCP is still about 4 to 5s on a throttled phone. Lighthouse's remaining items: render-blocking CSS (about 300 ms), PNG packshots on product pages (about 330 KB), no WebP/AVIF, and about 30 KB of unused JavaScript.
+2. Upgrade Next and nodemailer: in its own PR.
+3. Owner inputs: Clinical Observations wording, Formulator permission and photography, citations, testimonial consents, stock-licence check.

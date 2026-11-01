@@ -218,8 +218,8 @@ export default function CheckoutPage() {
             <details className="group border border-ink/15 bg-cloud/20 px-4 py-3 text-[13px] leading-relaxed text-ink/75">
               <summary className="flex cursor-pointer list-none items-center justify-between font-medium text-ink">
                 Refund Policy &amp; Terms
-                <span className="ml-4 text-lg text-ink/50 group-open:hidden" aria-hidden="true">+</span>
-                <span className="ml-4 hidden text-lg text-ink/50 group-open:inline" aria-hidden="true">−</span>
+                <span className="ml-4 text-lg text-ink/70 group-open:hidden" aria-hidden="true">+</span>
+                <span className="ml-4 hidden text-lg text-ink/70 group-open:inline" aria-hidden="true">−</span>
               </summary>
               <div className="mt-3 space-y-3">
                 <RefundPolicyContent />
@@ -307,7 +307,7 @@ export default function CheckoutPage() {
               <span className="font-serif text-xl">${total}</span>
             </div>
             {country.currency !== "USD" && (
-              <p className="text-right text-[12px] text-ink/50">
+              <p className="text-right text-[12px] text-ink/70">
                 {approxConverted(total, country)} — charged in USD, see Terms
               </p>
             )}

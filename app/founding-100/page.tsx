@@ -126,7 +126,7 @@ export default async function Founding100Page() {
 
         <div className="border-l-2 border-ink/20 pl-6">
           <h2 className="font-serif text-2xl">Terms</h2>
-          <ul className="mt-3 max-w-xl list-disc space-y-2 pl-5 text-[13px] leading-relaxed text-ink/60">
+          <ul className="mt-3 max-w-xl list-disc space-y-2 pl-5 text-[13px] leading-relaxed text-ink/70">
             <li>
               <strong className="text-ink/80">Founding Members.</strong> Limited
               to the first 100 qualifying orders. A qualifying order is one
@@ -161,7 +161,7 @@ export default async function Founding100Page() {
         <Link href={productHref("recovery-masque")} className="border-b border-ochre pb-0.5 text-ochre">
           Begin the 90-Day Ritual
         </Link>
-        <Link href="/science" className="border-b border-ink/30 pb-0.5 text-ink/60">
+        <Link href="/science" className="border-b border-ink/30 pb-0.5 text-ink/70">
           The Science
         </Link>
       </div>

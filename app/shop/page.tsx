@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import Link from "next/link";
 import { getProduct, getProductOrThrow, productImageAlt, productHref, studioImage } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
@@ -38,7 +38,7 @@ export default function ShopPage() {
         style={{ backgroundColor: NEUTRAL_FRAME_BG }}
       >
         <div className="relative aspect-[4/5] w-full shrink-0 overflow-hidden md:w-[44%]">
-          <Image src={studioImage(n1)} alt={productImageAlt(n1)} fill sizes="(min-width: 768px) 44vw, 100vw" className="object-cover" />
+          <ResponsiveImage src={studioImage(n1)} alt={productImageAlt(n1)} sizes="(min-width: 768px) 44vw, 100vw" className="object-cover" />
         </div>
         <div className="px-8 pb-10 md:p-0">
           <p className="text-eyebrow uppercase text-ochre">

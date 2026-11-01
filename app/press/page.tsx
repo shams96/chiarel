@@ -148,7 +148,7 @@ export default function PressPage() {
                 <p className="font-serif text-lg leading-tight text-ink">
                   {p.name}
                 </p>
-                <p className="mt-1 text-[13px] text-ink/60">{p.descriptor}</p>
+                <p className="mt-1 text-[13px] text-ink/70">{p.descriptor}</p>
                 <p className="mt-1 text-eyebrow uppercase text-ink/65">
                   {p.color.name} · {p.family}
                 </p>

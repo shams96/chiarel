@@ -172,7 +172,7 @@ export default async function ProductPage({
 
             <ProductAccordions product={p} />
 
-            <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-t border-ink/15 pt-6 text-[12px] text-ink/60">
+            <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-t border-ink/15 pt-6 text-[12px] text-ink/70">
               <div className="flex gap-1.5">
                 <dt className="text-ink/65">Step:</dt>
                 <dd>{p.step}</dd>
@@ -315,7 +315,7 @@ function BenefitPills({
           {pills.map((pill) => (
             <li
               key={pill}
-              className="flex items-center gap-2 text-[12px] uppercase tracking-[0.14em] text-ink/60"
+              className="flex items-center gap-2 text-[12px] uppercase tracking-[0.14em] text-ink/70"
             >
               <span className="inline-block h-1 w-1 rounded-full bg-ochre" aria-hidden="true" />
               {pill}
@@ -564,8 +564,8 @@ function FullIngredientList({ inci }: { inci: string[] }) {
       <details className="group max-w-measure">
         <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between text-eyebrow uppercase text-ink/80">
           Show the full list
-          <span className="ml-4 text-xl text-ink/50 group-open:hidden" aria-hidden="true">+</span>
-          <span className="ml-4 hidden text-xl text-ink/50 group-open:inline" aria-hidden="true">−</span>
+          <span className="ml-4 text-xl text-ink/70 group-open:hidden" aria-hidden="true">+</span>
+          <span className="ml-4 hidden text-xl text-ink/70 group-open:inline" aria-hidden="true">−</span>
         </summary>
         <p className="mt-4 text-caption leading-relaxed text-ink/75">{inci.join(", ")}</p>
       </details>
@@ -764,8 +764,8 @@ function UsageGuidance() {
           <details className="group py-5">
             <summary className="flex cursor-pointer list-none items-center justify-between font-serif text-lg text-ink">
               Patch test first
-              <span className="ml-4 text-xl text-ink/50 group-open:hidden" aria-hidden="true">+</span>
-              <span className="ml-4 hidden text-xl text-ink/50 group-open:inline" aria-hidden="true">−</span>
+              <span className="ml-4 text-xl text-ink/70 group-open:hidden" aria-hidden="true">+</span>
+              <span className="ml-4 hidden text-xl text-ink/70 group-open:inline" aria-hidden="true">−</span>
             </summary>
             <p className="mt-3 text-sm leading-relaxed text-ink/70">
               Apply a small amount to the inner forearm and wait 24 hours
@@ -776,8 +776,8 @@ function UsageGuidance() {
           <details className="group py-5">
             <summary className="flex cursor-pointer list-none items-center justify-between font-serif text-lg text-ink">
               Using alongside retinoids or acids
-              <span className="ml-4 text-xl text-ink/50 group-open:hidden" aria-hidden="true">+</span>
-              <span className="ml-4 hidden text-xl text-ink/50 group-open:inline" aria-hidden="true">−</span>
+              <span className="ml-4 text-xl text-ink/70 group-open:hidden" aria-hidden="true">+</span>
+              <span className="ml-4 hidden text-xl text-ink/70 group-open:inline" aria-hidden="true">−</span>
             </summary>
             <p className="mt-3 text-sm leading-relaxed text-ink/70">
               If your routine already includes a retinoid or an exfoliating
