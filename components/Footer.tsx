@@ -55,7 +55,7 @@ const navColumns = [
 export default function Footer() {
   return (
     <footer className="border-t border-ink/10 bg-cloud">
-      <div className="mx-auto w-full max-w-container px-margin py-10 sm:py-14">
+      <div className="mx-auto w-full max-w-container px-margin py-14 sm:py-20">
         <div className="relative grid grid-cols-1 gap-1 [container-type:inline-size] md:grid-cols-[1fr_2fr] md:gap-5">
           {/* Left card — Formal Garden, product shot */}
           <div className="relative h-[280px] overflow-hidden rounded-[1.5rem] bg-garden md:h-auto md:min-h-[460px]">
@@ -65,13 +65,13 @@ export default function Footer() {
                 alt="Clarity Night Crème jar"
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-contain object-bottom p-8 pb-[calc(2rem+7cqw)] md:pb-8 md:pt-[calc(1rem+12cqw)]"
+                className="object-contain object-bottom p-8 pb-[calc(2rem+7cqw)] md:pb-8 md:pt-[calc(2rem+12cqw)]"
               />
             </div>
           </div>
 
           {/* Right card — Red Ochre, all footer content */}
-          <div className="relative flex min-h-[460px] flex-col justify-between overflow-hidden rounded-[1.5rem] bg-ochre p-8 pt-[calc(2rem+7cqw)] text-cloud sm:p-10 sm:pt-[calc(2.5rem+7cqw)] md:p-12 md:pt-[calc(1rem+12cqw+1.5rem)]">
+          <div className="relative flex min-h-[460px] flex-col justify-between overflow-hidden rounded-[1.5rem] bg-ochre p-8 pt-[calc(2rem+7cqw)] text-cloud sm:p-10 sm:pt-[calc(2.5rem+7cqw)] md:p-12 md:pt-[calc(2rem+12cqw+1.5rem)]">
             <div className="relative z-10">
               <h2 className="font-serif text-h3">
                 <Link
@@ -120,14 +120,14 @@ export default function Footer() {
               capitals. */}
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-20 overflow-hidden">
             <p
-              className="wordmark absolute left-0 top-[calc(282px-6.44cqw)] w-full whitespace-nowrap font-serif text-[14cqw] leading-none tracking-[0.35em] text-transparent md:top-4"
+              className="wordmark absolute left-0 top-[calc(282px-6.44cqw)] w-full whitespace-nowrap font-serif text-[14cqw] leading-none tracking-[0.35em] text-transparent md:top-8"
               style={{ WebkitTextStroke: "1px rgba(214,197,160,0.6)" }}
               data-tone="garden"
             >
               CHIAREL
             </p>
             <p
-              className="wordmark absolute left-0 top-[calc(282px-6.44cqw)] w-full whitespace-nowrap font-serif text-[14cqw] leading-none tracking-[0.35em] text-transparent md:top-4"
+              className="wordmark absolute left-0 top-[calc(282px-6.44cqw)] w-full whitespace-nowrap font-serif text-[14cqw] leading-none tracking-[0.35em] text-transparent md:top-8"
               style={{ WebkitTextStroke: "1px rgba(240,242,235,0.5)" }}
               data-tone="ochre"
             >
