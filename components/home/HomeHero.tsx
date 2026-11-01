@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { perDayPrice, DELIVERY_DAYS } from "@/lib/pricing";
 import { getProductOrThrow, isPurchasable } from "@/lib/products";
@@ -53,13 +52,19 @@ export default function HomeHero() {
       </div>
 
       <div className="relative aspect-[4/5] w-full md:aspect-auto">
-        <Image
+        {/* Plain <img>: images.unoptimized is on (no runtime resizer), so the
+            responsive set is pre-generated at rest and listed in srcSet. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src="/assets/products/clarity-essence-festive-scene-v2.jpg"
-          alt="Clarity Essence™ in its glass bottle on a plinth, framed by a frosted flower and green CHIAREL velvet ribbon"
-          fill
-          priority
+          srcSet="/assets/products/clarity-essence-festive-scene-v2-640.jpg 640w, /assets/products/clarity-essence-festive-scene-v2-960.jpg 960w, /assets/products/clarity-essence-festive-scene-v2.jpg 1500w"
           sizes="(max-width: 768px) 100vw, 55vw"
-          className="object-cover md:object-[50%_62%]"
+          width={1500}
+          height={1792}
+          alt="Clarity Essence™ in its glass bottle on a plinth, framed by a frosted flower and green CHIAREL velvet ribbon"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover md:object-[50%_62%]"
         />
       </div>
     </section>

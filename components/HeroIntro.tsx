@@ -37,20 +37,20 @@ import Image from "next/image";
 //
 // The session flag is set the moment we decide to play, so a refresh or
 // back-navigation mid-sequence can't retrigger it.
-const SESSION_FLAG = "chiarel-hero-intro-v8-seen";
+const SESSION_FLAG = "chiarel-hero-intro-v9-seen";
 
-const HOLD_MS = 6800; // mount to the start of the exit fade
-const EXIT_MS = 500; // overlay fade-out duration
+const HOLD_MS = 1200; // mount to the start of the exit fade
+const EXIT_MS = 300; // overlay fade-out duration (hold + exit = 1.5s)
 
 // Timeline (seconds from mount)
-const SKIN_IN = 1.1; // skin fades up out of the ivory
-const SWELL_AT = 0.25; // drop forms at the top
-const FALL_AT = 0.45; // drop lets go while it is still forming: no hang
-const IMPACT_AT = 2.3; // drop meets the skin
-const WAVE_S = 4.2; // wave travel time, centre to past the screen edges
-const WORDMARK_AT = 4.1; // wordmark rises as the wave passes the centre
-const ECHO_DELAY = 0.5; // the second, fainter wave trails the first by this much
-const PUSH_IN_S = 6; // slow camera push-in over the whole sequence
+const SKIN_IN = 0.25; // skin fades up out of the ivory
+const SWELL_AT = 0.02; // drop forms at the top
+const FALL_AT = 0.06; // drop lets go while it is still forming: no hang
+const IMPACT_AT = 0.45; // drop meets the skin
+const WAVE_S = 0.85; // wave travel time, centre to past the screen edges
+const WORDMARK_AT = 0.6; // wordmark rises as the wave passes the centre
+const ECHO_DELAY = 0.1; // the second, fainter wave trails the first by this much
+const PUSH_IN_S = 1.4; // slow camera push-in over the whole sequence
 
 const WAVE_START = -14; // vmax; negative so nothing shows before impact
 const WAVE_END = 112; // vmax; beyond every screen corner at the 0.62 ellipse
@@ -243,7 +243,7 @@ export default function HeroIntro() {
   // Gravity: distance grows with the square of time, so the drop is moving the
   // moment it lets go and arrives fast. One curve for the whole fall.
   const GRAVITY = [0.55, 0.085, 0.68, 0.53] as const;
-  const squashSpan = IMPACT_AT + 0.2;
+  const squashSpan = IMPACT_AT + 0.1;
 
   return (
     <div
@@ -324,7 +324,7 @@ export default function HeroIntro() {
               aria-hidden="true"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: SKIN_IN + 0.4, ease: "easeOut" }}
+              transition={{ duration: SKIN_IN + 0.15, ease: "easeOut" }}
               className="pointer-events-none absolute inset-0"
               style={{ backgroundImage: `${KEY_LIGHT}, ${VIGNETTE}` }}
             />
@@ -332,7 +332,7 @@ export default function HeroIntro() {
               aria-hidden="true"
               initial={{ x: "-14%", opacity: 0 }}
               animate={{ x: "14%", opacity: 1 }}
-              transition={{ duration: PUSH_IN_S + 1, ease: "linear", opacity: { duration: 1.6 } }}
+              transition={{ duration: PUSH_IN_S + 0.2, ease: "linear", opacity: { duration: 0.5 } }}
               className="pointer-events-none absolute -inset-x-[20%] inset-y-0"
               style={{ backgroundImage: SHEEN }}
             />
@@ -345,8 +345,8 @@ export default function HeroIntro() {
             initial={{ opacity: 0, scale: 0.3 }}
             animate={{ opacity: [0, 0, 0.5, 0], scale: [0.3, 0.3, 1, 1.5] }}
             transition={{
-              duration: squashSpan + 0.4,
-              times: [0, FALL_AT / (squashSpan + 0.4), IMPACT_AT / (squashSpan + 0.4), 1],
+              duration: squashSpan + 0.2,
+              times: [0, FALL_AT / (squashSpan + 0.2), IMPACT_AT / (squashSpan + 0.2), 1],
               ease: "easeOut",
             }}
             className="pointer-events-none absolute h-[2.2vmax] w-[7vmax] rounded-full"
@@ -359,7 +359,7 @@ export default function HeroIntro() {
             aria-hidden="true"
             initial={{ opacity: 0, scale: 0.2 }}
             animate={{ opacity: [0, 0.55, 0], scale: [0.2, 1, 1.25] }}
-            transition={{ duration: 1.8, delay: IMPACT_AT, times: [0, 0.18, 1], ease: "easeOut" }}
+            transition={{ duration: 0.6, delay: IMPACT_AT, times: [0, 0.18, 1], ease: "easeOut" }}
             className="pointer-events-none absolute h-[6vmax] w-[9vmax] rounded-full"
             style={{ background: "radial-gradient(ellipse, rgba(150,96,66,0.5) 0%, rgba(150,96,66,0) 70%)" }}
           />
@@ -367,7 +367,7 @@ export default function HeroIntro() {
             aria-hidden="true"
             initial={{ opacity: 0, scale: 0.15 }}
             animate={{ opacity: [0, 0.95, 0.7, 0], scale: [0.15, 1, 1.1, 1.2] }}
-            transition={{ duration: 2.2, delay: IMPACT_AT, times: [0, 0.14, 0.5, 1], ease: "easeOut" }}
+            transition={{ duration: 0.7, delay: IMPACT_AT, times: [0, 0.14, 0.5, 1], ease: "easeOut" }}
             className="pointer-events-none absolute h-[4vmax] w-[6vmax] rounded-full"
             style={{
               background: "radial-gradient(ellipse, rgba(255,236,170,0.95) 0%, rgba(236,176,70,0.75) 38%, rgba(214,160,60,0) 72%)",
@@ -381,8 +381,8 @@ export default function HeroIntro() {
             initial={{ opacity: 0, scale: 0.4 }}
             animate={{ opacity: [0, 0, 0.55, 0], scale: [0.4, 0.4, 1, 1.4] }}
             transition={{
-              duration: squashSpan + 0.8,
-              times: [0, FALL_AT / (squashSpan + 0.8), IMPACT_AT / (squashSpan + 0.8), 1],
+              duration: squashSpan + 0.3,
+              times: [0, FALL_AT / (squashSpan + 0.3), IMPACT_AT / (squashSpan + 0.3), 1],
               ease: "easeOut",
             }}
             className="pointer-events-none absolute h-[16vmax] w-[26vmax] rounded-full"
@@ -397,7 +397,7 @@ export default function HeroIntro() {
               aria-hidden="true"
               initial={{ opacity: 0, scale: 0.15 }}
               animate={{ opacity: [0, 0.9 - i * 0.3, 0], scale: [0.15, 1, 1.5] }}
-              transition={{ duration: 1.3, delay: IMPACT_AT + d, times: [0, 0.2, 1], ease: "easeOut" }}
+              transition={{ duration: 0.5, delay: IMPACT_AT + d * 0.4, times: [0, 0.2, 1], ease: "easeOut" }}
               className="pointer-events-none absolute h-[7vmax] w-[11vmax] rounded-full"
               style={{ border: "1.5px solid rgba(232,184,84,0.9)", boxShadow: "0 0 14px rgba(240,196,100,0.5)" }}
             />
@@ -433,7 +433,7 @@ export default function HeroIntro() {
               className="block h-[98px] w-[70px] overflow-visible md:h-[130px] md:w-[92px]"
               initial={{ scale: 0.25, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.9, delay: SWELL_AT, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.3, delay: SWELL_AT, ease: [0.16, 1, 0.3, 1] }}
               style={{ transformOrigin: "50% 0%", filter: "drop-shadow(0 8px 18px rgba(154,98,8,0.4))" }}
             >
               <defs>
@@ -473,7 +473,7 @@ export default function HeroIntro() {
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: WORDMARK_AT, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.4, delay: WORDMARK_AT, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-col items-center leading-none"
             >
               <Image
@@ -489,7 +489,7 @@ export default function HeroIntro() {
             <motion.p
               initial={{ y: 12, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: WORDMARK_AT + 0.3, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.35, delay: WORDMARK_AT + 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="mt-6 font-serif text-xl tracking-[-0.01em] text-ink/80 md:text-2xl"
             >
               Advancing Cellular Clarity™
@@ -498,7 +498,7 @@ export default function HeroIntro() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: WORDMARK_AT + 0.55 }}
+              transition={{ duration: 0.3, delay: WORDMARK_AT + 0.2 }}
               className="mt-4 max-w-xs text-[12px] leading-relaxed text-ink/70"
             >
               Intelligent formulations, precision-made in Isola del Liri, Italy.
@@ -514,7 +514,7 @@ export default function HeroIntro() {
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
+            transition={{ duration: 0.2, delay: 0.1 }}
             aria-label="Skip intro animation"
             className="absolute bottom-3 right-3 flex min-h-[44px] min-w-[44px] items-center justify-center px-3 text-[12px] uppercase tracking-[0.3em] text-ink/65 transition hover:text-ochre focus:text-ochre focus:outline focus:outline-1 focus:outline-offset-4 focus:outline-ochre"
           >
