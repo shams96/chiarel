@@ -70,14 +70,14 @@ export default function Footer() {
               <h2 className="font-serif text-3xl leading-tight sm:text-4xl">
                 <Link
                   href="/contact"
-                  className="tap-area inline-flex items-center gap-3 border-b border-champagne pb-0.5 text-cloud transition hover:text-champagne"
+                  className="tap-area inline-flex items-center gap-3 border-b border-champagne pb-0.5 text-cloud transition hover:text-champagne md:-ml-5"
                 >
                   Write to the House <span aria-hidden="true">→</span>
                 </Link>
               </h2>
             </div>
 
-            <nav className="relative z-10 mt-10 grid grid-cols-2 gap-x-8 gap-y-8 text-[13px] sm:grid-cols-3">
+            <nav className="relative z-10 mt-10 grid grid-cols-2 gap-x-8 gap-y-8 pb-6 text-[13px] sm:grid-cols-3 md:mt-28">
               {navColumns.map((col) => (
                 <div key={col.heading} className="flex flex-col">
                   <p className="mb-1 text-[11px] uppercase tracking-[0.14em] text-cloud/60">
@@ -108,25 +108,27 @@ export default function Footer() {
           </div>
 
           {/* Engraved wordmark — one word, two tonal treatments split at the
-              card boundary (~1/3 : 2/3, matching the grid columns above) */}
+              card boundary. Positioned so the R (2.8em from the word's left edge,
+              em = 9vw) is centred on the seam between the cards: seam =
+              (100% - gap) / 3 + gap / 2, and the tints switch exactly there. */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 z-20 hidden overflow-hidden md:block"
           >
             <p
-              className="absolute left-[2%] top-14 whitespace-nowrap font-serif text-[9vw] leading-none tracking-tight text-transparent"
+              className="absolute left-[calc((100%-1.25rem)/3+0.625rem-25.2vw)] top-14 whitespace-nowrap font-serif text-[9vw] leading-none tracking-tight text-transparent"
               style={{
                 WebkitTextStroke: "1px rgba(214,197,160,0.5)",
-                clipPath: "inset(0 66.666% 0 0)",
+                clipPath: "inset(0 calc(100% - 25.2vw) 0 0)",
               }}
             >
               CHIAREL
             </p>
             <p
-              className="absolute left-[2%] top-14 whitespace-nowrap font-serif text-[9vw] leading-none tracking-tight text-transparent"
+              className="absolute left-[calc((100%-1.25rem)/3+0.625rem-25.2vw)] top-14 whitespace-nowrap font-serif text-[9vw] leading-none tracking-tight text-transparent"
               style={{
                 WebkitTextStroke: "1px rgba(240,242,235,0.4)",
-                clipPath: "inset(0 0 0 33.333%)",
+                clipPath: "inset(0 0 0 25.2vw)",
               }}
             >
               CHIAREL
