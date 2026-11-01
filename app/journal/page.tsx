@@ -8,7 +8,7 @@ export const metadata = { title: "Journal", alternates: { canonical: "/journal" 
 export default function JournalPage() {
   return (
     <div className="grid-12 mx-auto w-full max-w-container px-margin py-section">
-      <h1 className="font-serif text-h1 col-span-full lg:col-span-4">Notes from the House</h1>
+      <h1 className="font-serif text-h1 col-span-full mb-4 lg:col-span-4 lg:mb-0">Notes from the House</h1>
       <div className="col-span-full lg:col-span-8">
       <div className="divide-y divide-ink/10">
         {entries.map((e) => (

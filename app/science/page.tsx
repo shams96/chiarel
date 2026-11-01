@@ -44,7 +44,7 @@ const entries = [
 export default function SciencePage() {
   return (
     <div className="grid-12 mx-auto w-full max-w-container px-margin py-section">
-      <header className="col-span-full lg:col-span-4">
+      <header className="col-span-full mb-8 lg:col-span-4 lg:mb-0">
       <h1 className="font-serif text-h1">The Science</h1>
       <p className="mt-1 text-eyebrow uppercase text-ink/65">
         CHIAREL Intelligence™

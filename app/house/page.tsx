@@ -3,7 +3,7 @@ export const metadata = { title: "The House", alternates: { canonical: "/house" 
 export default function HousePage() {
   return (
     <div className="grid-12 mx-auto w-full max-w-container px-margin py-section">
-      <h1 className="font-serif text-h1 col-span-full lg:col-span-4">The House</h1>
+      <h1 className="font-serif text-h1 col-span-full mb-8 lg:col-span-4 lg:mb-0">The House</h1>
 
       {/* No real photo of Isola del Liri exists in the asset library — the prior
           image here ("hero.png") was a mislabeled product-jar mockup, not a place
