@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import Link from "next/link";
 import { productImageAlt, isPurchasable, studioImage, type Product, productHref } from "@/lib/products";
 import { perDayPrice } from "@/lib/pricing";
@@ -18,10 +18,9 @@ export default function ProductCard({
         className="product-frame aspect-[4/5]"
         style={{ backgroundColor: NEUTRAL_FRAME_BG }}
       >
-        <Image
+        <ResponsiveImage
           src={studioImage(product)}
           alt={productImageAlt(product)}
-          fill
           sizes="(max-width: 768px) 100vw, 33vw"
           className={productHoverClass(product.step)}
         />

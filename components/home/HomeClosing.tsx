@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import Section from "@/components/layout/Section";
@@ -23,13 +23,13 @@ export function HomeFinalCta() {
             className="card-elevated product-frame col-span-3 aspect-[4/5]"
             style={{ backgroundColor: NEUTRAL_FRAME_BG }}
           >
-            <Image src={studioImage(essence)} alt={productImageAlt(essence)} fill sizes="35vw" />
+            <ResponsiveImage src={studioImage(essence)} alt={productImageAlt(essence)} sizes="35vw" />
           </div>
           <div
             className="card-elevated product-frame col-span-2 aspect-[4/5] self-end"
             style={{ backgroundColor: NEUTRAL_FRAME_BG }}
           >
-            <Image src={studioImage(day)} alt={productImageAlt(day)} fill sizes="25vw" />
+            <ResponsiveImage src={studioImage(day)} alt={productImageAlt(day)} sizes="25vw" />
           </div>
         </Reveal>
         <Reveal delay={0.15} className="w-full md:w-2/5">
@@ -83,10 +83,9 @@ export function HomePhilosophy() {
       <Grid className="items-center gap-y-10">
         <Reveal className="col-span-4 md:col-span-3 lg:col-span-4">
           <div className="relative mx-auto aspect-[3/4] w-full max-w-[26rem] overflow-hidden bg-ivory">
-            <Image
+            <ResponsiveImage
               src="/assets/journal/isola-del-liri-bridge.jpg"
               alt="A woman in white on the old bridge at Isola del Liri, with the Cascata Grande and the castle behind her"
-              fill
               sizes="(max-width: 768px) 90vw, 26rem"
               className="object-cover"
             />

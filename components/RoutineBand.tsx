@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import Link from "next/link";
 import { getProduct, productImageAlt, isPurchasable, studioImage, type Product, productHref } from "@/lib/products";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
@@ -101,10 +101,9 @@ function RoutineRow({ entries, steps }: { entries: Entry[]; steps: Step[] }) {
             className="relative aspect-square w-full overflow-hidden md:w-1/2"
             style={{ backgroundColor: NEUTRAL_FRAME_BG }}
           >
-            <Image
+            <ResponsiveImage
               src={studioImage(p)}
               alt={productImageAlt(p)}
-              fill
               sizes="(min-width: 768px) 50vw, 100vw"
               className="object-cover"
             />
@@ -196,10 +195,9 @@ function CompactRow({ entries, time }: { entries: Entry[]; time: "Morning" | "Ev
                 className="relative aspect-[4/5] overflow-hidden"
                 style={{ backgroundColor: NEUTRAL_FRAME_BG }}
               >
-                <Image
+                <ResponsiveImage
                   src={studioImage(p)}
                   alt={productImageAlt(p)}
-                  fill
                   sizes={lead ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"}
                   className={`object-cover ${productHoverClass(p.step)}`}
                 />
