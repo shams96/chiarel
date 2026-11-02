@@ -218,7 +218,7 @@ export default async function ProductPage({
             <AmbientVideo
               src="/assets/products/n1-neck-decollete-ambient.mp4"
               poster="/assets/products/clarity-neck-decollete-creme-honeycomb.jpg"
-              label="Clarity Neck & Décolleté Crème, 40 ml, on a reflective surface with water droplets"
+              label="Clarity Neck & Décolleté Crème on a reflective surface with a gold honeycomb pattern and water droplets"
               className="mx-auto aspect-[9/16] max-h-[80vh] w-auto max-w-full bg-cloud object-cover"
             />
           </div>

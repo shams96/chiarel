@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import { RoutineBand, morningRoute, eveningRoute } from "@/components/RoutineBand";
 
 export const metadata = {
@@ -44,6 +45,17 @@ export default function RitualPage() {
         <a href="#morning" className="inline-flex min-h-[44px] items-center border border-ink/30 px-5 text-eyebrow uppercase text-ink/80 transition hover:border-ochre hover:text-ochre">Morning</a>
         <a href="#evening" className="inline-flex min-h-[44px] items-center border border-ink/30 px-5 text-eyebrow uppercase text-ink/80 transition hover:border-ochre hover:text-ochre">Evening</a>
       </nav>
+    </div>
+
+    <div className="mx-auto mt-12 w-full max-w-container px-margin">
+      <div className="relative mx-auto aspect-square w-full max-w-2xl overflow-hidden">
+        <ResponsiveImage
+          src="/assets/products/clarity-ritual-group.jpg"
+          alt="The five Clarity products in a row on a travertine plinth: Essence, Day Crème, Night Crème, Neck & Décolleté Crème and Eye Contour Concentrate"
+          sizes="(max-width: 768px) 92vw, 672px"
+          className="object-cover"
+        />
+      </div>
     </div>
 
     <div className="mt-14 pb-16">

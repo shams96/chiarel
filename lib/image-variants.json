@@ -35,7 +35,7 @@
     ]
   },
   "/assets/products/clarity-day-creme-editorial.jpg": {
-    "width": 1024,
+    "width": 1536,
     "widths": [
       640,
       960
@@ -148,6 +148,27 @@
   },
   "/assets/products/clarity-essence-mirror-scene.jpg": {
     "width": 1400,
+    "widths": [
+      640,
+      960
+    ]
+  },
+  "/assets/products/clarity-ritual-group.jpg": {
+    "width": 1600,
+    "widths": [
+      640,
+      960
+    ]
+  },
+  "/assets/products/clarity-neck-decollete-creme-waterfall.jpg": {
+    "width": 1080,
+    "widths": [
+      640,
+      960
+    ]
+  },
+  "/assets/products/clarity-neck-decollete-creme-honeycomb.jpg": {
+    "width": 1080,
     "widths": [
       640,
       960
