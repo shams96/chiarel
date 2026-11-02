@@ -26,8 +26,10 @@ export default function HomeIconProduct({
   return (
     <>
       <section className="grid bg-cloud md:grid-cols-2">
-        <div className="relative min-h-[26rem] md:min-h-[48rem]">
-          <ResponsiveImage src={src} alt={alt} sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-[50%_22%]" />
+        <div className="flex items-center justify-center px-6 py-12 md:px-[clamp(1.5rem,4vw,5rem)] md:py-24">
+          <div className="relative aspect-[2/3] w-full max-w-[30rem] overflow-hidden">
+            <ResponsiveImage src={src} alt={alt} sizes="(max-width: 768px) 90vw, 480px" className="object-cover" />
+          </div>
         </div>
         <Reveal className="flex flex-col justify-center px-[clamp(1.5rem,5vw,6rem)] py-16 md:py-24">
           <p className="text-[12px] uppercase tracking-[0.3em] text-ochre">{kicker}</p>
