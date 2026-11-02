@@ -125,8 +125,8 @@
     "image": "/assets/products/clarity-day-creme-jar.png",
     "gallery": [
       {
-        "src": "/assets/products/clarity-day-creme-studio-scene.jpg",
-        "alt": "Clarity Day Crème™ jar on a pale plinth in a soft peach studio, framed by a green CHIAREL velvet ribbon and drifting petals",
+        "src": "/assets/products/clarity-day-creme-capri.jpg",
+        "alt": "Clarity Day Crème on sunlit limestone above the Faraglioni of Capri",
         "role": "studio"
       },
       {
@@ -138,16 +138,6 @@
         "src": "/assets/products/clarity-day-creme-studio.jpg",
         "alt": "Clarity Day Crème held in soft studio light",
         "role": "application"
-      },
-      {
-        "src": "/assets/products/clarity-day-creme-capri.jpg",
-        "alt": "Clarity Day Crème on sunlit limestone above the Faraglioni of Capri",
-        "role": "lifestyle"
-      },
-      {
-        "src": "/assets/products/clarity-day-creme-ribbon-scene-v2.jpg",
-        "alt": "Clarity Day Crème™ jar on travertine against a terracotta wall with a green CHIAREL velvet ribbon",
-        "role": "lifestyle"
       }
     ],
     "blurb": "Ceramides with cholesterol and squalane, for skin that feels comfortable and hydrated. Niacinamide for the look of an even surface.",
@@ -217,7 +207,7 @@
       "Follow with SPF."
     ],
     "howToUseSource": "app/science/application/page.tsx; app/journal/chiarel-ritual-guide/page.tsx",
-    "studio": "/assets/products/clarity-day-creme-studio-scene.jpg",
+    "studio": "/assets/products/clarity-day-creme-capri.jpg",
     "og": "/assets/products/clarity-day-creme-og.jpg"
   },
   {
@@ -243,8 +233,8 @@
     "image": "/assets/products/clarity-night-creme-jar.png",
     "gallery": [
       {
-        "src": "/assets/products/clarity-night-creme-ribbon-scene-v2.jpg",
-        "alt": "Clarity Night Crème™ jar, scene shot",
+        "src": "/assets/products/clarity-night-creme-capri.jpg",
+        "alt": "Clarity Night Crème on sunlit rock above the Capri coastline",
         "role": "studio"
       },
       {
@@ -256,11 +246,6 @@
         "src": "/assets/products/clarity-night-creme-studio.jpg",
         "alt": "Clarity Night Crème held in soft studio light",
         "role": "application"
-      },
-      {
-        "src": "/assets/products/clarity-night-creme-capri.jpg",
-        "alt": "Clarity Night Crème on sunlit rock above the Capri coastline",
-        "role": "lifestyle"
       }
     ],
     "blurb": "Bakuchiol with peptides and niacinamide, for the look of smoother texture overnight.",
@@ -334,7 +319,7 @@
       "Use in the evening."
     ],
     "howToUseSource": "app/journal/chiarel-ritual-guide/page.tsx",
-    "studio": "/assets/products/clarity-night-creme-ribbon-scene-v2.jpg",
+    "studio": "/assets/products/clarity-night-creme-capri.jpg",
     "og": "/assets/products/clarity-night-creme-og.jpg"
   },
   {
@@ -538,12 +523,12 @@
         "name": "Hyaluronic Acid"
       }
     ],
-    "studio": "/assets/products/clarity-eye-contour-concentrate-ribbon-scene-v2.jpg",
+    "studio": "/assets/products/clarity-eye-contour-concentrate-detail.jpg",
     "og": "/assets/products/clarity-eye-contour-concentrate-og.jpg",
     "gallery": [
       {
-        "src": "/assets/products/clarity-eye-contour-concentrate-ribbon-scene-v2.jpg",
-        "alt": "Clarity Eye Contour Concentrate™ bottle, scene shot",
+        "src": "/assets/products/clarity-eye-contour-concentrate-detail.jpg",
+        "alt": "Clarity Eye Contour Concentrate™ bottle on a pearl-pink satin plinth with frosted peach petals and droplets",
         "role": "studio"
       },
       {
@@ -555,11 +540,6 @@
         "src": "/assets/products/clarity-eye-contour-concentrate-studio.jpg",
         "alt": "A woman resting her chin on her forearms behind the Clarity Eye Contour Concentrate™ bottle, in soft studio light",
         "role": "application"
-      },
-      {
-        "src": "/assets/products/clarity-eye-contour-concentrate-detail.jpg",
-        "alt": "Clarity Eye Contour Concentrate™ bottle on a pearl-pink satin plinth with frosted peach petals and droplets",
-        "role": "detail"
       }
     ]
   }

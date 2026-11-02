@@ -17,22 +17,22 @@ const faceProducts = [
     name: "Clarity Day Crème™",
     concern: "For dry skin under daily stress",
     href: "/shop/clarity-day-creme",
-    image: "/assets/products/clarity-day-creme-studio-scene.jpg",
-    alt: "Clarity Day Crème™ jar on a pale plinth in a soft peach studio with a green CHIAREL velvet ribbon",
+    image: "/assets/products/clarity-day-creme-capri.jpg",
+    alt: "Clarity Day Crème™ on sunlit limestone above the Faraglioni of Capri",
   },
   {
     name: "Clarity Night Crème™",
     concern: "For smoother-looking texture",
     href: "/shop/clarity-night-creme",
-    image: "/assets/products/clarity-night-creme-ribbon-scene-v2.jpg",
-    alt: "Clarity Night Crème™ jar among moss and ferns with a Red Ochre CHIAREL velvet ribbon",
+    image: "/assets/products/clarity-night-creme-capri.jpg",
+    alt: "Clarity Night Crème™ on sunlit rock above the Capri coastline",
   },
   {
     name: "Clarity Eye Contour Concentrate™",
     concern: "For puffiness, dark circles and fine lines",
     href: "/shop/clarity-eye-contour-concentrate",
-    image: "/assets/products/clarity-eye-contour-concentrate-ribbon-scene-v2.jpg",
-    alt: "Clarity Eye Contour Concentrate™ bottle among blush petals with a green CHIAREL velvet ribbon",
+    image: "/assets/products/clarity-eye-contour-concentrate-detail.jpg",
+    alt: "Clarity Eye Contour Concentrate™ bottle on a pearl-pink satin plinth with frosted peach petals and droplets",
   },
 ];
 

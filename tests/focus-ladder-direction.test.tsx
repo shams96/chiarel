@@ -179,7 +179,7 @@ describe("Gallery rail (image treatment D)", () => {
         expect(existsSync(`public/assets/products/${f.replace(".jpg", "-640.jpg")}`), f).toBe(true);
       }
     }
-    expect(list.find((p) => p.path === "clarity-eye-contour-concentrate")?.gallery?.length).toBeGreaterThanOrEqual(4);
+    expect(list.find((p) => p.path === "clarity-eye-contour-concentrate")?.gallery?.length).toBeGreaterThanOrEqual(3);
   });
   it("every product ships a gallery of two or more published photographs that exist on disk", () => {
     const products = JSON.parse(src("data/products.json")) as { path: string; gallery?: { src: string }[] }[];
@@ -207,29 +207,31 @@ describe("Primary buttons meet the 44px tap-target contract (found by the page m
   });
 });
 
-describe("Day Crème studio scene (replaced the terracotta scene as the shared hero image)", () => {
-  const NEW = "/assets/products/clarity-day-creme-studio-scene.jpg";
-  const OLD = "/assets/products/clarity-day-creme-ribbon-scene-v2.jpg";
-  const products = JSON.parse(src("data/products.json")) as { path: string; studio?: string; gallery?: { src: string; alt: string }[] }[];
-  const list = Array.isArray(products) ? products : (products as unknown as { products: typeof products }).products;
-  const day = list.find((p) => p.path === "clarity-day-creme");
-  it("is the product's studio image and its first gallery image; the terracotta scene stays as a later gallery image", () => {
-    expect(day?.studio).toBe(NEW);
-    expect(day?.gallery?.[0].src).toBe(NEW);
-    expect(day?.gallery?.map((g) => g.src)).toContain(OLD);
-    expect(existsSync("public" + NEW)).toBe(true);
-    expect(existsSync("public" + NEW.replace(".jpg", "-640.jpg"))).toBe(true);
-  });
-  it("is used by the home tiles, and the old scene is no longer hard-coded in any component", () => {
-    expect(src("components/home/HomeFaceBeyond.tsx")).toContain(NEW);
-    expect(src("components/home/HomeFitGuidance.tsx")).toContain(NEW);
-    for (const f of ["components/home/HomeFaceBeyond.tsx", "components/home/HomeFitGuidance.tsx", "components/home/HomeClosing.tsx", "components/RoutineBand.tsx"]) {
-      expect(src(f), f).not.toContain(OLD);
+describe("ribbons appear only on the two hero products (Essence, Neck & Décolleté)", () => {
+  const RIBBON_FILES = [
+    "clarity-day-creme-studio-scene.jpg",
+    "clarity-day-creme-ribbon-scene-v2.jpg",
+    "clarity-night-creme-ribbon-scene-v2.jpg",
+    "clarity-eye-contour-concentrate-ribbon-scene-v2.jpg",
+  ];
+  const raw = JSON.parse(src("data/products.json")) as { path: string; studio?: string; gallery?: { src: string; alt: string }[] }[];
+  const others = raw.filter((p) => !["clarity-essence", "clarity-neck-decollete-creme"].includes(p.path));
+  it("Day, Night and Eye use no ribbon image in data", () => {
+    for (const p of others) {
+      const used = [p.studio, ...(p.gallery ?? []).map((g) => g.src)].filter(Boolean) as string[];
+      for (const f of RIBBON_FILES) expect(used.join(" "), p.path).not.toContain(f);
+      for (const g of p.gallery ?? []) expect(g.alt, p.path).not.toMatch(/ribbon/i);
     }
   });
-  it("has descriptive alt text that implies no results", () => {
-    expect(day?.gallery?.[0].alt).toMatch(/jar on a pale plinth in a soft peach studio/);
-    expect(day?.gallery?.[0].alt).not.toMatch(/before|after|results|younger|wrinkle/i);
+  it("home tiles for the other products no longer name or show a ribbon", () => {
+    for (const f of ["components/home/HomeFaceBeyond.tsx", "components/home/HomeFitGuidance.tsx"]) {
+      const s = src(f);
+      for (const file of RIBBON_FILES) expect(s, f).not.toContain(file);
+      for (const alt of s.match(/(?:alt|imageAlt): "[^"]*"/g) ?? []) {
+        if (/Essence|Neck/.test(alt)) continue;
+        expect(alt, alt).not.toMatch(/ribbon/i);
+      }
+    }
   });
 });
 
