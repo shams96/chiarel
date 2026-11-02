@@ -11,6 +11,7 @@ The app defends itself (ADR-0001):
 - **Circuit breaker** (`lib/db-breaker.ts`): after 3 connectivity failures in 30 s, database routes answer 503 + `Retry-After` in milliseconds instead of hanging. After 15 s one probe request tries the database; success closes the breaker.
 - **Client replacement** (`lib/db-client.ts`): every connectivity failure replaces the Prisma client (new engine, new pool), at most once per 10 s. It never exits the process; the host does not reliably restart it.
 - **Thread cap** (`lib/db-engine-limits.ts`): the Prisma engine starts 2 worker threads, not one per host core.
+- **Google sign-in** (`/api/auth/google/*`, when enabled): `/admin/login` and `/api/auth/google/start` need no database and keep working. The callback runs under the breaker and is never auto-retried (the code is single use): during an outage it shows a plain "Sign-in is temporarily unavailable" page with 503 + `Retry-After`. Password sign-in is the same 503. See `social-login.md`.
 - **Repair by polling**: `/api/health?db=1` bypasses the breaker, replaces the client on failure and closes the breaker on success. An external monitor on that URL both alerts and nudges recovery.
 
 ## Tier 2: diagnose (assisted triage, 2 minutes, read-only)

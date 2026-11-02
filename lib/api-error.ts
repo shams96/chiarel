@@ -47,11 +47,14 @@ function isAdminRequest(first: unknown): boolean {
  * scarce processes.
  */
 export function withApiErrorHandling<Args extends unknown[]>(
-  handler: (...args: Args) => Promise<NextResponse>
+  handler: (...args: Args) => Promise<NextResponse>,
+  // noRetry: for a GET that consumes something single-use (an OAuth code), where
+  // a re-run of the handler would fail or repeat work.
+  options: { noRetry?: boolean } = {}
 ): (...args: Args) => Promise<NextResponse> {
   return async (...args: Args) => {
     const first = args[0] as { method?: string } | undefined;
-    const readOnly = !first?.method || first.method === "GET";
+    const readOnly = !options.noRetry && (!first?.method || first.method === "GET");
     try {
       return await withDbBreaker(() =>
         retryDb(

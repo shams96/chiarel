@@ -159,6 +159,24 @@ model User {
   passwordHash String
   role         Role
   sessions     Session[]
+  identities   Identity[]
+}
+
+// A sign-in method linked to a User (Google, Phase A of claudedocs/specs/social-signin/).
+// The (provider, subject) pair is the stable identity; email is kept only as the
+// address seen at link time. Role and access never come from the provider: they
+// are read from User. Additive: User.passwordHash stays required.
+model Identity {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  provider  String
+  subject   String
+  email     String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, subject])
+  @@index([userId])
 }
 
 // DB-backed rather than a stateless JWT so a role change or account cutoff takes
