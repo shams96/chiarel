@@ -13,6 +13,7 @@
     "lint": "next lint",
     "smoke": "node scripts/smoke.mjs",
     "publish:images": "node scripts/publish-images.mjs",
+    "make:variants": "node scripts/make-image-variants.mjs",
     "test": "dotenv -e .env.local -e .env -- vitest run",
     "postinstall": "prisma generate",
     "db:seed": "dotenv -e .env.local -e .env -- tsx prisma/seed.ts",

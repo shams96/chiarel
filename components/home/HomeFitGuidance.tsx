@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import { productHref } from "@/lib/products";
@@ -11,7 +11,7 @@ const fitGuidance = [
     fit: "Clarity Day Crème",
     why: "Ceramides, cholesterol and squalane, formulated for skin that feels comfortable and hydrated through the working day.",
     slug: "terra-radiance-creme",
-    image: "/assets/products/clarity-day-creme-ribbon-scene-v2.jpg",
+    image: "/assets/products/clarity-day-creme-studio-scene.jpg",
     imageAlt: "Clarity Day Crème on a travertine plinth with a green CHIAREL ribbon",
   },
   {
@@ -66,10 +66,9 @@ export default function HomeFitGuidance() {
                   className="group flex h-full flex-col border-t-2 border-ochre bg-ivory transition-transform duration-300 ease-out hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                 >
                   <div className="relative aspect-[4/5] overflow-hidden">
-                    <Image
+                    <ResponsiveImage
                       src={row.image}
                       alt={row.imageAlt}
-                      fill
                       sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 22vw"
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                     />

@@ -35,6 +35,11 @@
         "src": "/assets/products/clarity-essence-studio.jpg",
         "alt": "Clarity Essence held in soft studio light",
         "role": "application"
+      },
+      {
+        "src": "/assets/products/clarity-essence-detail.jpg",
+        "alt": "Clarity Essence™ bottle resting on a pale stone in clear running water at golden hour",
+        "role": "lifestyle"
       }
     ],
     "blurb": "Peptides with niacinamide and hyaluronic acid, for the look of smoother fine lines and firmer-looking skin. Marine-derived hydrolysed collagen for surface hydration.",
@@ -120,8 +125,8 @@
     "image": "/assets/products/clarity-day-creme-jar.png",
     "gallery": [
       {
-        "src": "/assets/products/clarity-day-creme-ribbon-scene-v2.jpg",
-        "alt": "Clarity Day Crème™ jar, scene shot",
+        "src": "/assets/products/clarity-day-creme-studio-scene.jpg",
+        "alt": "Clarity Day Crème™ jar on a pale plinth in a soft peach studio, framed by a green CHIAREL velvet ribbon and drifting petals",
         "role": "studio"
       },
       {
@@ -137,6 +142,11 @@
       {
         "src": "/assets/products/clarity-day-creme-capri.jpg",
         "alt": "Clarity Day Crème on sunlit limestone above the Faraglioni of Capri",
+        "role": "lifestyle"
+      },
+      {
+        "src": "/assets/products/clarity-day-creme-ribbon-scene-v2.jpg",
+        "alt": "Clarity Day Crème™ jar on travertine against a terracotta wall with a green CHIAREL velvet ribbon",
         "role": "lifestyle"
       }
     ],
@@ -207,7 +217,7 @@
       "Follow with SPF."
     ],
     "howToUseSource": "app/science/application/page.tsx; app/journal/chiarel-ritual-guide/page.tsx",
-    "studio": "/assets/products/clarity-day-creme-ribbon-scene-v2.jpg",
+    "studio": "/assets/products/clarity-day-creme-studio-scene.jpg",
     "og": "/assets/products/clarity-day-creme-og.jpg"
   },
   {
@@ -361,6 +371,11 @@
         "src": "/assets/products/clarity-neck-decollete-creme-bottle.png",
         "alt": "Clarity Neck & Décolleté Crème",
         "role": "hero"
+      },
+      {
+        "src": "/assets/products/clarity-neck-decollete-creme-studio.jpg",
+        "alt": "A woman resting her chin on her forearms behind the Clarity Neck & Décolleté Crème™ bottle, in soft studio light",
+        "role": "application"
       },
       {
         "src": "/assets/products/clarity-neck-decollete-creme-marble-roses.jpg",
@@ -535,6 +550,16 @@
         "src": "/assets/products/clarity-eye-contour-concentrate-bottle.png",
         "alt": "Clarity Eye Contour Concentrate™",
         "role": "hero"
+      },
+      {
+        "src": "/assets/products/clarity-eye-contour-concentrate-studio.jpg",
+        "alt": "A woman resting her chin on her forearms behind the Clarity Eye Contour Concentrate™ bottle, in soft studio light",
+        "role": "application"
+      },
+      {
+        "src": "/assets/products/clarity-eye-contour-concentrate-detail.jpg",
+        "alt": "Clarity Eye Contour Concentrate™ bottle on a pearl-pink satin plinth with frosted peach petals and droplets",
+        "role": "detail"
       }
     ]
   }
