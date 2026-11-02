@@ -1,15 +1,20 @@
+import PageHead from "@/components/layout/PageHead";
+import Container from "@/components/layout/Container";
+
 export const metadata = { title: "The House", alternates: { canonical: "/house" } };
 
 export default function HousePage() {
   return (
-    <div className="grid-12 mx-auto w-full max-w-container px-margin py-section">
-      <h1 className="font-serif text-h1 col-span-full mb-8 lg:col-span-4 lg:mb-0">The House</h1>
+    <>
+      <PageHead eyebrow="CHIAREL™" lines={["The House"]} />
+      <Container className="pb-section">
+      <div className="grid-12">
 
       {/* No real photo of Isola del Liri exists in the asset library — the prior
           image here ("hero.png") was a mislabeled product-jar mockup, not a place
           photo. Deliberately text-only until real location photography exists. */}
 
-      <div className="space-y-10 text-body text-ink/80 col-span-full lg:col-span-8">
+      <div className="space-y-10 text-body text-ink/80 col-span-full lg:col-span-8 lg:col-start-5">
         <section>
           <h2 className="font-serif text-h3 text-ink">Isola del Liri</h2>
           <p className="mt-2 max-w-2xl">
@@ -91,6 +96,8 @@ export default function HousePage() {
           </p>
         </section>
       </div>
-    </div>
+      </div>
+      </Container>
+    </>
   );
 }

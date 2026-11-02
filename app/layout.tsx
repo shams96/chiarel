@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HideOnAdmin from "@/components/HideOnAdmin";
 import CartDrawer from "@/components/CartDrawer";
+import GridGuides from "@/components/GridGuides";
 import { CartProvider } from "@/lib/cart-context";
 import StagingBanner from "@/components/StagingBanner";
 import Analytics from "@/components/Analytics";
@@ -89,6 +90,7 @@ export default function RootLayout({
             <Footer />
           </HideOnAdmin>
           <CartDrawer />
+          <GridGuides />
           <StagingBanner />
           <Analytics />
         </CartProvider>

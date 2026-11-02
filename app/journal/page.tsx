@@ -1,15 +1,19 @@
 import Link from "next/link";
 import EmailSignup from "@/components/EmailSignup";
 import { journalEntries as entries } from "@/lib/journal-entries";
+import PageHead from "@/components/layout/PageHead";
+import Container from "@/components/layout/Container";
 
 export const metadata = { title: "Journal", alternates: { canonical: "/journal" } };
 
 
 export default function JournalPage() {
   return (
-    <div className="grid-12 mx-auto w-full max-w-container px-margin py-section">
-      <h1 className="font-serif text-h1 col-span-full mb-4 lg:col-span-4 lg:mb-0">Notes from the House</h1>
-      <div className="col-span-full lg:col-span-8">
+    <>
+      <PageHead eyebrow="The Journal" lines={["Notes from", "the House"]} />
+      <Container className="pb-section">
+      <div className="grid-12">
+      <div className="col-span-full lg:col-span-8 lg:col-start-5">
       <div className="divide-y divide-ink/10">
         {entries.map((e) => (
           <article key={e.slug} className="py-8">
@@ -35,6 +39,8 @@ export default function JournalPage() {
         <EmailSignup source="journal" />
       </div>
       </div>
-    </div>
+      </div>
+      </Container>
+    </>
   );
 }

@@ -421,3 +421,45 @@ summary:focus-visible {
 .wordmark-seam-bottom {
   clip-path: inset(46% 0 0 0);
 }
+
+/* ---- Focus Ladder direction (Phase 7) ----
+   Outlined display type is decorative and aria-hidden at every use; the same
+   words exist as real text nearby. Outlines only at 48px and above. */
+.out { color: transparent; -webkit-text-stroke: 1px currentColor; }
+/* the ladder: one word at falling sizes, hairline outline to solid. Sizes are
+   container-query units of .ladder-wrap so it scales with its own column. */
+.ladder-wrap { container-type: inline-size; }
+.ladder { margin: 0; font-weight: 400; line-height: 0.88; letter-spacing: -0.02em; }
+.ladder > span {
+  display: block; white-space: nowrap; font-size: var(--s);
+  color: color-mix(in srgb, currentColor var(--fill), transparent);
+  -webkit-text-stroke: 1px currentColor;
+  animation: ladder-rise 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--i) * 90ms);
+}
+.ladder > span:nth-child(1) { --s: 26cqw;   --fill: 0%;   --i: 0; }
+.ladder > span:nth-child(2) { --s: 18cqw;   --fill: 12%;  --i: 1; }
+.ladder > span:nth-child(3) { --s: 12.5cqw; --fill: 32%;  --i: 2; }
+.ladder > span:nth-child(4) { --s: 8.8cqw;  --fill: 58%;  --i: 3; }
+.ladder > span:nth-child(5) { --s: 6.2cqw;  --fill: 82%;  --i: 4; }
+.ladder > span:nth-child(6) { --s: 4.4cqw;  --fill: 100%; --i: 5; -webkit-text-stroke-width: 0; }
+@keyframes ladder-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ladder > span { animation: none; }
+}
+/* vertical directional word (once per page) */
+.vert-word { writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; }
+/* staggered display: later lines step right on the 12-column grid */
+.stagger { display: grid; grid-template-columns: subgrid; grid-column: 1 / -1; }
+.stagger > * { grid-column: 1 / -1; }
+@media (min-width: 768px) { .stagger > :nth-child(2) { grid-column: 3 / -1; } .stagger > :nth-child(3) { grid-column: 5 / -1; } }
+@media (min-width: 1024px) { .stagger > :nth-child(2) { grid-column: 4 / -1; } .stagger > :nth-child(3) { grid-column: 7 / -1; } }
+/* visible grid guides, toggled with the G key (components/GridGuides.tsx) */
+.grid-guides { position: fixed; inset: 0; z-index: 60; pointer-events: none; }
+.grid-guides i { border-inline: 1px solid rgb(155 71 34 / 0.18); display: none; }
+.grid-guides i:nth-child(-n + 4) { display: block; }
+@media (min-width: 768px) { .grid-guides i:nth-child(-n + 8) { display: block; } }
+@media (min-width: 1024px) { .grid-guides i:nth-child(-n + 12) { display: block; } }

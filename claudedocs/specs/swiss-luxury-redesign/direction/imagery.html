@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CHIAREL direction: image treatments (rendition)</title>
+<meta name="robots" content="noindex">
+<style>
+@font-face { font-family: "Libre Bodoni"; src: url("assets/libre-bodoni-latin.woff2") format("woff2"); font-weight: 400 600; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+:root { --cloud:#F0F2EB; --ivory:#F8F6F1; --ink:#1C1A17; --ochre:#9B4722; --margin:1.25rem; --gutter:1rem; --container:80rem; --section:4.5rem; --hair:rgb(28 26 23 / .15); }
+@media (min-width:768px){:root{--margin:2rem;--gutter:1.5rem;--section:6rem}}
+@media (min-width:1024px){:root{--margin:3rem;--gutter:2rem;--section:7rem}}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--cloud);color:var(--ink);font-family:"Libre Bodoni",serif;font-size:1.0625rem;line-height:1.65}
+img{display:block;max-width:100%}
+.wrap{width:100%;max-width:var(--container);margin-inline:auto;padding-inline:var(--margin)}
+.g{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:var(--gutter)}
+@media(min-width:768px){.g{grid-template-columns:repeat(8,minmax(0,1fr))}}
+@media(min-width:1024px){.g{grid-template-columns:repeat(12,minmax(0,1fr))}}
+.eyebrow{font-size:.75rem;line-height:1.4;letter-spacing:.16em;text-transform:uppercase;font-weight:500;margin:0}
+h1,h2,h3{font-weight:400;margin:0}
+h1{font-size:clamp(2.5rem,1.1rem + 6.2vw,6.5rem);line-height:1.02;letter-spacing:-.02em}
+h2{font-size:clamp(2rem,1.4rem + 2vw,2.75rem);line-height:1.12;letter-spacing:-.01em}
+.top{padding-block:3.5rem 2rem;border-bottom:1px solid var(--hair)}
+.top p{max-width:36rem;margin:1.25rem 0 0}
+section.t{padding-block:var(--section);border-bottom:1px solid var(--hair)}
+.head{row-gap:.75rem;margin-bottom:2.5rem}
+.head .num{grid-column:1/-1;margin:0;font-size:clamp(3.5rem,2rem + 4vw,6rem);line-height:.85;letter-spacing:-.03em;color:transparent;-webkit-text-stroke:1px var(--ink)}
+.head .txt{grid-column:1/-1}
+@media(min-width:1024px){.head .num{grid-column:1/4}.head .txt{grid-column:4/-1;max-width:40rem}}
+.head p{margin:.5rem 0 0}
+.cap{font-size:.8125rem;line-height:1.5;margin:.75rem 0 0}
+
+/* A: the plate, one per product form (spray = tall, jar = squat) */
+.plates{grid-column:1/-1;display:grid;grid-template-columns:1fr;gap:var(--gutter)}
+@media(min-width:768px){.plates{grid-template-columns:5fr 7fr}}
+@media(min-width:1024px){.plates{grid-column:1/10}}
+.plate{margin:0}
+.plate .ground{background:var(--ivory);border:1px solid var(--hair);position:relative;overflow:hidden}
+.plate.spray .ground{aspect-ratio:4/5}
+.plate.jar .ground{aspect-ratio:7/5}
+.plate img{position:absolute;left:50%;width:auto;max-width:none;filter:drop-shadow(14px 18px 0 rgb(28 26 23 / .10))}
+.plate.spray img{bottom:-3%;height:94%;transform:translateX(-50%) rotate(7deg);transform-origin:50% 100%}
+.plate.jar img{top:50%;height:84%;transform:translate(-50%,-50%) rotate(-4deg)}
+.plate .eyebrow{position:absolute;left:1rem;top:1rem}
+.plate figcaption{display:flex;justify-content:space-between;gap:1rem;margin-top:.75rem;border-top:1px solid var(--ink);padding-top:.5rem;font-size:.8125rem}
+.plate-side{grid-column:1/-1;margin-top:1.5rem}
+@media(min-width:1024px){.plate-side{grid-column:10/-1;margin-top:0;align-self:end}}
+
+/* B: the lens (circular crop = a focus lens) */
+.lenses{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gutter);grid-column:1/-1}
+@media(min-width:768px){.lenses{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.lens{margin:0}
+.lens .disc{aspect-ratio:1/1;border-radius:50%;overflow:hidden;border:1px solid var(--ink);outline:6px solid var(--ochre);outline-offset:-1px;background:var(--ivory)}
+.lens img{width:100%;height:100%;object-fit:cover}
+.lens figcaption{margin-top:1.25rem;display:flex;justify-content:space-between;gap:.5rem;font-size:.8125rem;border-top:1px solid var(--ink);padding-top:.5rem}
+
+/* C: the contact sheet (modular grid, hairline gaps, index numerals) */
+.sheet{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--ink);border:1px solid var(--ink)}
+@media(min-width:768px){.sheet{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.sheet .cell{position:relative;background:var(--cloud);aspect-ratio:4/5;overflow:hidden}
+.sheet img{width:100%;height:100%;object-fit:cover}
+.sheet .n{position:absolute;left:.75rem;top:.5rem;font-size:clamp(3rem,2rem + 3vw,4.5rem);line-height:.85;letter-spacing:-.03em;color:transparent;-webkit-text-stroke:1px var(--ivory)}
+.sheet .wide{grid-column:span 2;aspect-ratio:auto}
+@media(min-width:768px){.sheet .wide{aspect-ratio:8/5}}
+.sheet .wide img{object-position:50% 40%}
+
+/* D: the gallery strip (thumbnail rail on the grid) */
+.gal{grid-column:1/-1;display:grid;grid-template-columns:4.5rem 1fr;gap:var(--gutter)}
+@media(min-width:1024px){.gal{grid-column:1/8}}
+.rail{display:grid;gap:.5rem;align-content:start}
+.rail img{aspect-ratio:4/5;object-fit:cover;border:1px solid var(--hair);width:100%}
+.rail img.on{border-color:var(--ink)}
+.main{border:1px solid var(--hair);aspect-ratio:4/5;overflow:hidden;background:var(--ivory)}
+.main img{width:100%;height:100%;object-fit:cover}
+.gal-side{grid-column:1/-1;margin-top:1.5rem}
+@media(min-width:1024px){.gal-side{grid-column:9/-1;margin-top:0}}
+
+.note{padding-block:3rem 5rem}.note p{margin:0;max-width:44rem;font-size:.8125rem}
+</style>
+</head>
+<body>
+<main>
+<header class="top"><div class="wrap"><p class="eyebrow" style="color:var(--ochre)">Focus Ladder direction · Image treatments</p>
+<h1>Four ways to frame the bottle</h1>
+<p>Ideas taken from how other luxury skincare houses present product (observed on drsturm.com, first screens and one product page), re-drawn here on the CHIAREL grid with CHIAREL's own photographs. Nothing is copied. A static preview: not the live site.</p></div></header>
+
+<section class="t"><div class="wrap">
+  <div class="g head"><p class="num" aria-hidden="true">A</p><div class="txt"><h2>The plate</h2><p>One packshot, large, on a flat ground with a single hard shadow. Borrowed from the macro lead image on a product page, where the product was a dropper bottle. CHIAREL's products are a spray and cream jars, so the plate is drawn per form: tall and vertical for the spray, low and wide for the jars. The ground is Ivory and the shadow is flat ink at 10 percent, not a soft blur.</p></div></div>
+  <div class="g"><div class="plates">
+    <figure class="plate spray"><div class="ground"><span class="eyebrow">The spray</span><img src="assets/essence-spray.png" alt="Clarity Essence™ spray bottle, standing tall and tilted slightly"></div><figcaption><span>Clarity Essence™</span><span>Vertical, full height</span></figcaption></figure>
+    <figure class="plate jar"><div class="ground"><span class="eyebrow">The jar</span><img src="assets/day-creme-jar.png" alt="Clarity Day Crème™ jar with its gold cap"></div><figcaption><span>Clarity Day Crème™</span><span>Low and wide, centred</span></figcaption></figure>
+  </div>
+  <div class="plate-side"><p class="eyebrow">Use</p><p class="cap">The first image on a product page and the specification sheet. The spray is tall, so it stands full height; the jars are low and wide, so they sit centred. Both use a flat Ivory ground and one hard shadow. A top-down photograph of a jar lid would make a natural circle for treatment B; none exists in the library, and I did not draw one.</p></div></div></section>
+
+<section class="t"><div class="wrap">
+  <div class="g head"><p class="num" aria-hidden="true">B</p><div class="txt"><h2>The lens</h2><p>A circular crop with a Red Ochre ring. Taken from circular product tiles on a homepage carousel. For CHIAREL the circle reads as a lens, the literal object that brings something into focus, and it echoes the round jars. It earns its place in a direction built on clarity. Used once per page, never as a repeating pattern.</p></div></div>
+  <div class="g"><div class="lenses">
+    <figure class="lens"><div class="disc"><img src="assets/clarity-essence-scene-v2-640.jpg" alt="Clarity Essence™ in its scene"></div><figcaption><span>Clarity Essence™</span><span>01</span></figcaption></figure>
+    <figure class="lens"><div class="disc"><img src="assets/clarity-day-creme-ribbon-scene-v2-640.jpg" alt="Clarity Day Crème™ in its scene"></div><figcaption><span>Clarity Day Crème™</span><span>02</span></figcaption></figure>
+    <figure class="lens"><div class="disc"><img src="assets/clarity-night-creme-ribbon-scene-v2-640.jpg" alt="Clarity Night Crème™ in its scene"></div><figcaption><span>Clarity Night Crème™</span><span>03</span></figcaption></figure>
+  </div></div>
+</div></section>
+
+<section class="t"><div class="wrap">
+  <div class="g head"><p class="num" aria-hidden="true">C</p><div class="txt"><h2>The contact sheet</h2><p>A tight modular grid of scene photographs, one cell larger, with hairline gaps and outline index numerals. Borrowed from the tiled collage on a homepage hero, made Swiss: equal modules, ruled, numbered. Uses only product scenes; no model photography exists yet.</p></div></div>
+  <div class="g"><div class="sheet">
+    <div class="cell wide"><span class="n" aria-hidden="true">01</span><img src="assets/clarity-essence-festive-scene-v2-960.jpg" alt="Clarity Essence™ on a plinth with a frosted flower and green ribbon"></div>
+    <div class="cell"><span class="n" aria-hidden="true">02</span><img src="assets/clarity-day-creme-ribbon-scene-v2-640.jpg" alt="Clarity Day Crème™ in its scene"></div>
+    <div class="cell"><span class="n" aria-hidden="true">03</span><img src="assets/clarity-eye-contour-concentrate-ribbon-scene-v2-640.jpg" alt="Clarity Eye Contour Concentrate™ in its scene"></div>
+    <div class="cell"><span class="n" aria-hidden="true">04</span><img src="assets/clarity-night-creme-ribbon-scene-v2-640.jpg" alt="Clarity Night Crème™ in its scene"></div>
+    <div class="cell"><span class="n" aria-hidden="true">05</span><img src="assets/clarity-neck-decollete-creme-scene-v2-640.jpg" alt="Clarity Neck &amp; Décolleté Crème™ in its scene"></div>
+  </div></div>
+</div></section>
+
+<section class="t"><div class="wrap">
+  <div class="g head"><p class="num" aria-hidden="true">D</p><div class="txt"><h2>The gallery rail</h2><p>A thumbnail rail beside one large image, mixing packshot, macro, scene and detail in the same 4:5 module. Taken from the product-page gallery structure: a mixed sequence tells the product's story in order. Here the rail sits on two grid columns and the active frame takes an ink border.</p></div></div>
+  <div class="g"><div class="gal">
+    <div class="rail"><img class="on" src="assets/clarity-essence-festive-scene-v2-960.jpg" alt=""><img src="assets/clarity-essence-scene-v2-640.jpg" alt=""><img src="assets/clarity-day-creme-ribbon-scene-v2-640.jpg" alt=""><img src="assets/clarity-night-creme-ribbon-scene-v2-640.jpg" alt=""></div>
+    <div class="main"><img src="assets/clarity-essence-festive-scene-v2-960.jpg" alt="Clarity Essence™ on a plinth with a frosted flower and green ribbon"></div>
+  </div><div class="gal-side"><p class="eyebrow">Use</p><p class="cap">Already how the product-page gallery works; the change is the module, the rail position and the active border.</p></div></div>
+</div></section>
+
+<section class="note"><div class="wrap"><p class="eyebrow" style="margin-bottom:.75rem">What was not borrowed</p>
+<p>Promotions and discount pop-ups, the sticky chat widget, props and snow-and-mountain backdrops, and model photography. CHIAREL does not discount, and has no model imagery to use.</p></div></section>
+</main>
+</body>
+</html>

@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/lib/products";
 import { SITE_URL } from "@/lib/seo";
+import PageHead from "@/components/layout/PageHead";
+import Container from "@/components/layout/Container";
 
 export const metadata: Metadata = {
   title: "Press Kit",
@@ -36,16 +38,17 @@ const assets = [
 
 export default function PressPage() {
   return (
-    <div className="grid-12 mx-auto w-full max-w-container px-margin py-section">
-      <header className="col-span-full mb-8 lg:col-span-4 lg:mb-0">
-      <h1 className="font-serif text-h1 leading-tight">CHIAREL™ Press Kit</h1>
-      <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink/70">
-        Brand facts, the launch lineup, and downloadable assets for
-        journalists, editors, and press covering the House.
-      </p>
-      </header>
+    <>
+      <PageHead eyebrow="Press" lines={["CHIAREL™", "Press Kit"]}>
+        <p>
+          Brand facts, the launch lineup, and downloadable assets for
+          journalists, editors, and press covering the House.
+        </p>
+      </PageHead>
 
-      <div className="col-span-full lg:col-span-8">
+      <Container className="pb-section pt-6">
+      <div className="grid-12">
+      <div className="col-span-full lg:col-span-8 lg:col-start-5">
       {/* Brand Fact Sheet */}
       <section>
         <h2 className="font-serif text-2xl text-ink">Brand Fact Sheet</h2>
@@ -214,6 +217,8 @@ export default function PressPage() {
         </a>
       </section>
       </div>
-    </div>
+      </div>
+      </Container>
+    </>
   );
 }

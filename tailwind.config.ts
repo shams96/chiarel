@@ -42,6 +42,10 @@ const config: Config = {
         h2: ["clamp(2rem, 1.4rem + 2vw, 2.75rem)", { lineHeight: "1.12", letterSpacing: "-0.01em" }],
         h1: ["clamp(2.5rem, 1.6rem + 3.4vw, 4rem)", { lineHeight: "1.06", letterSpacing: "-0.015em" }],
         display: ["clamp(3rem, 1.8rem + 5vw, 5.5rem)", { lineHeight: "1.02", letterSpacing: "-0.02em" }],
+        // Focus Ladder direction (Phase 7): poster-scale display and numerals.
+        mega: ["clamp(2.5rem, 1.1rem + 6.2vw, 6.5rem)", { lineHeight: "1.02", letterSpacing: "-0.02em" }],
+        "numeral-sm": ["clamp(3.5rem, 2rem + 4vw, 6rem)", { lineHeight: "0.85", letterSpacing: "-0.03em" }],
+        numeral: ["clamp(3.5rem, 2rem + 7vw, 9.5rem)", { lineHeight: "0.85", letterSpacing: "-0.03em" }],
       },
       // One container and one gutter system (values live in globals.css :root).
       maxWidth: {

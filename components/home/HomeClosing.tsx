@@ -16,7 +16,7 @@ export function HomeFinalCta() {
 
   return (
     <>
-    <section className="section-y bg-ochre text-ivory">
+    <section className="section-y bg-ivory text-ink">
       <div className="mx-auto flex max-w-[96rem] flex-col items-center gap-10 px-[clamp(1.5rem,4.5vw,7rem)] md:flex-row md:gap-[clamp(2.5rem,5vw,7rem)]">
         <Reveal className="grid w-full grid-cols-5 gap-4 md:w-3/5">
           <div
@@ -53,13 +53,13 @@ export function HomeFinalCta() {
           <div className="mt-6 flex items-center gap-6">
             <Link
               href={productHref("chiarel-essence")}
-              className="btn-press inline-block border border-ivory bg-ivory px-8 py-3 text-[12px] uppercase tracking-[0.25em] text-ink transition hover:bg-peachdust"
+              className="btn-press inline-block bg-ink px-8 py-3 text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre"
             >
               Begin the Ritual
             </Link>
             <Link
               href="/shop"
-              className="btn-press border-b border-ivory pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ivory"
+              className="btn-press border-b border-ink pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ink"
             >
               See the full House
             </Link>

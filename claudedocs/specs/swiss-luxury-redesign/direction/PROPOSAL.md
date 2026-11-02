@@ -91,3 +91,13 @@ All copy, product names, descriptors, sizes and photographs already exist on chi
 2. Visible grid lines on the live hero: yes, no, or on a toggle?
 3. Is one full-bleed ochre field with vertical type per page the right amount?
 4. Should the hero keep its Red Ochre panel, or move to the Cloud ground used here?
+
+## 9. Image treatments (added after reviewing a competitor's product pictures)
+
+`imagery.html` redraws four ideas seen on drsturm.com (first screens and one product page; observed, not copied) on the CHIAREL grid with CHIAREL photographs:
+1. **The plate:** a large packshot on a flat Ivory ground with one hard shadow. Drawn per product form, because CHIAREL's products are a spray (the Essence) and cream jars, not droppers: the spray stands tall, the jars sit low and wide.
+2. **The lens:** a circular crop with a Red Ochre ring, used once per page. The circle suits a direction about clarity and echoes the round jars. A top-down jar-lid photograph would be the natural source; none exists, so none is drawn.
+3. **The contact sheet:** a modular grid of scene photographs with hairline gaps and outline index numerals.
+4. **The gallery rail:** a thumbnail rail on two grid columns beside one large image, with an ink border on the active frame.
+
+Not borrowed: promotions and discount pop-ups, the chat widget, snow-and-mountain backdrops and props, and model photography (none exists).

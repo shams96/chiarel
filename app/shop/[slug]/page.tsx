@@ -172,21 +172,23 @@ export default async function ProductPage({
 
             <ProductAccordions product={p} />
 
-            <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-t border-ink/15 pt-6 text-[12px] text-ink/70">
-              <div className="flex gap-1.5">
-                <dt className="text-ink/65">Step:</dt>
-                <dd>{p.step}</dd>
+            {/* Specification sheet: ruled rows, tracked labels, values at lead size */}
+            <dl className="mt-8 border-t border-ink">
+              <div className="grid grid-cols-[7.5rem_1fr] items-baseline gap-gutter border-b border-ink/25 py-3">
+                <dt className="text-eyebrow uppercase text-ink/70">Step</dt>
+                <dd className="text-lead">{p.step}</dd>
               </div>
-              <div className="flex gap-1.5">
-                <dt className="text-ink/65">Size:</dt>
-                <dd>{p.size}</dd>
+              <div className="grid grid-cols-[7.5rem_1fr] items-baseline gap-gutter border-b border-ink/25 py-3">
+                <dt className="text-eyebrow uppercase text-ink/70">Size</dt>
+                <dd className="text-lead">{p.size}</dd>
               </div>
-              <div className="flex items-center gap-1.5">
-                <dt className="text-ink/65">Glass colour:</dt>
-                <dd className="flex items-center gap-1.5">
+              <div className="grid grid-cols-[7.5rem_1fr] items-baseline gap-gutter border-b border-ink py-3">
+                <dt className="text-eyebrow uppercase text-ink/70">Glass colour</dt>
+                <dd className="flex items-center gap-2 text-lead">
                   <span
-                    className="inline-block h-2.5 w-2.5 rounded-full border border-ink/20"
+                    className="inline-block h-3 w-3 border border-ink/30"
                     style={{ backgroundColor: p.color.hex }}
+                    aria-hidden="true"
                   />
                   {p.color.name}
                 </dd>

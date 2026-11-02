@@ -5,6 +5,8 @@ import Image from "next/image";
 import { getProduct, productImageAlt, isPurchasable, type Product } from "@/lib/products";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { useCart, unitPrice } from "@/lib/cart-context";
+import PageHead from "@/components/layout/PageHead";
+import Container from "@/components/layout/Container";
 
 // Ritual order: morning first, then the evening steps, lightest texture first.
 const RITUAL_SLUGS = [
@@ -57,15 +59,15 @@ export default function BuildYourRitualPage() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-container px-margin py-16">
-      <h1 className="max-w-2xl font-serif text-h1 leading-tight">
-        Build Your Ritual
-      </h1>
-      <p className="mt-4 max-w-xl text-sm text-ink/70">
-        Choose exactly the steps your skin needs from the five-product CHIAREL
-        ritual. Each is priced and delivered on its own — nothing is bundled
-        into a set price, so what you leave out costs you nothing.
-      </p>
+    <>
+      <PageHead eyebrow="The Ritual" lines={["Build Your", "Ritual"]}>
+        <p>
+          Choose exactly the steps your skin needs from the five-product CHIAREL
+          ritual. Each is priced and delivered on its own — nothing is bundled
+          into a set price, so what you leave out costs you nothing.
+        </p>
+      </PageHead>
+      <Container className="pb-section pt-6">
 
       <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {selectableProducts.map((p) => {
@@ -169,6 +171,7 @@ export default function BuildYourRitualPage() {
           {adding ? "Adding…" : "Add to Bag"}
         </button>
       </div>
-    </div>
+      </Container>
+    </>
   );
 }
