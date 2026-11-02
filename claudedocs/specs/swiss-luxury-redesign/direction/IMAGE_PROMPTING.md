@@ -52,6 +52,12 @@ Rejected: one Eye Contour detail (dark lettering, pump nozzle), one Eye Contour 
 2. **Model likeness.** The studio shots use one recurring model. The new shots keep the same face. Confirm the rights and release for that likeness.
 3. **No implied results.** These are product-and-mood pictures; none shows before/after skin. Keep it that way (the site's claims tests ban before/after in home and shop).
 
-## Video (not yet generated)
+## Video
 
-fal offers image-to-video from a still (sourced): Kling 2.5 Turbo Pro (about $0.35 for 5 seconds), Kling 3.0 Pro, Seedance 2.0, Veo 3.1 (listed prices vary by model and audio). Video models are worse than image models at keeping small label text stable, so clips should keep the camera and subject slow, the label facing the lens, and be reviewed frame by frame. Proposed clips and prompts are in the owner message that accompanies this document.
+`scripts/fal-clip.mjs <clip>` turns an approved still into a 5-second clip with fal's Kling 2.5 Turbo Pro image-to-video (`fal-ai/kling-video/v2.5-turbo/pro/image-to-video`, about $0.35 per 5 seconds, sourced). Other image-to-video models on fal (sourced): Seedance 2.0, Veo 3.1, Kling 3.0 Pro; prices vary by model and audio.
+
+Prompt rules that carry over from the stills: one slow camera move; the product and its label declared perfectly still and sharp; all motion given to everything that is not the product (petals, droplets, satin or water, light); a negative prompt that names the failure modes (morphing, warped letters, flicker, shake, cuts); `cfg_scale` 0.6. Two clips are defined: `eye-petals` and `essence-water`.
+
+**Pilot, verified:** `eye-petals` (from the approved Eye Contour detail still) came back 1288x1608, 24 fps, 5.04 s. The first, middle and last frames were compared at zoom: every label line (CHIAREL / ITALIA / CLARITY EYE CONTOUR CONCENTRATE / For puffiness, dark circles and fine lines / 40ml) is identical in all three, and the bottle shape and gold finish hold. Not verified: every frame between those three, so a clip should still be scrubbed before it goes live.
+
+Before any clip goes on the site it needs a player treatment like the existing N1 ambient video (muted, looping, no autoplay for reduced motion, a still as poster) and a size check.
