@@ -435,7 +435,8 @@ summary:focus-visible {
 .ladder { margin: 0; font-weight: 400; line-height: 0.88; letter-spacing: -0.02em; }
 .ladder > span {
   display: block; white-space: nowrap; font-size: var(--s);
-  color: rgb(28 26 23 / var(--fill));
+  color: rgb(28 26 23);
+  -webkit-text-fill-color: rgb(28 26 23 / var(--fill));
   -webkit-text-stroke: 1px rgb(28 26 23);
   animation: ladder-rise 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: calc(var(--i) * 90ms);
@@ -446,6 +447,8 @@ summary:focus-visible {
 .ladder > span:nth-child(4) { --s: 8.8cqw;  --fill: 58%;  --i: 3; }
 .ladder > span:nth-child(5) { --s: 6.2cqw;  --fill: 82%;  --i: 4; }
 .ladder > span:nth-child(6) { --s: 4.4cqw;  --fill: 100%; --i: 5; -webkit-text-stroke-width: 0; }
+/* the word itself is generated content (not a text node): see FocusLadder.tsx */
+.ladder > span::before { content: attr(data-w); }
 @keyframes ladder-rise {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: none; }

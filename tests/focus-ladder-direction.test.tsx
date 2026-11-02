@@ -16,10 +16,13 @@ describe("Focus Ladder component", () => {
   it("is decorative: aria-hidden, no heading, six rows ending in the trademarked word", () => {
     expect(html).toContain('aria-hidden="true"');
     expect(html).not.toMatch(/<h[1-6]/);
-    const rows = [...html.matchAll(/<span>([^<]+)<\/span>/g)].map((m) => m[1]);
+    const rows = [...html.matchAll(/<span data-w="([^"]+)"><\/span>/g)].map((m) => m[1]);
     expect(rows).toHaveLength(6);
     expect(rows.slice(0, 5).every((r) => r === "Clarity")).toBe(true);
     expect(rows[5]).toBe("Clarity™");
+    // the words are generated content, not text nodes: nothing for crawlers or contrast checkers to read
+    expect(html.replace(/<[^>]+>/g, "").trim()).toBe("");
+    expect(src("app/globals.css")).toContain(".ladder > span::before { content: attr(data-w); }");
   });
   it("styles the six rows with falling sizes and rising fill, and stops the motion for reduced-motion", () => {
     const css = src("app/globals.css");
@@ -218,6 +221,11 @@ describe("Outlined display type has a visible stroke (regression: it was transpa
     const rule = css.match(/\.out \{[^}]*\}/)?.[0] ?? "";
     expect(rule).toContain("-webkit-text-stroke: 1px var(--out-stroke, rgb(28 26 23))");
     expect(rule).not.toMatch(/currentColor/i);
+  });
+  it("the ladder keeps an opaque text colour and paints its faint fill with text-fill-color", () => {
+    const rule = css.match(/\.ladder > span \{[^}]*\}/)?.[0] ?? "";
+    expect(rule).toContain("color: rgb(28 26 23);");
+    expect(rule).toContain("-webkit-text-fill-color: rgb(28 26 23 / var(--fill))");
   });
   it("the ladder hard-codes an opaque ink stroke", () => {
     expect(css).toMatch(/\.ladder > span \{[^}]*-webkit-text-stroke: 1px rgb\(28 26 23\)/);
