@@ -50,7 +50,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-ink/10 bg-cloud">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
-        <div className="relative grid grid-cols-1 gap-1 md:grid-cols-[1fr_2fr] md:gap-5">
+        <div className="relative grid grid-cols-1 gap-1 [container-type:inline-size] md:grid-cols-[1fr_2fr] md:gap-5">
           {/* Left card — Formal Garden, product shot */}
           <div className="relative h-[280px] overflow-hidden rounded-[1.5rem] bg-garden md:h-auto md:min-h-[460px]">
             <div className="relative h-full w-full">
@@ -67,7 +67,7 @@ export default function Footer() {
           {/* Right card — Red Ochre, all footer content */}
           <div className="relative flex min-h-[460px] flex-col justify-between overflow-hidden rounded-[1.5rem] bg-ochre p-8 text-cloud max-md:pt-14 sm:p-10 md:p-12">
             <div className="relative z-10">
-              <h2 className="font-serif text-3xl leading-tight sm:text-4xl md:ml-[calc(14.71vw-2.625rem)] md:mt-[calc(7.2vw+1.5rem)]">
+              <h2 className="font-serif text-3xl leading-tight sm:text-4xl md:ml-[calc(14.71cqw-2.625rem)] md:mt-[calc(7.2cqw+1.5rem)]">
                 <Link
                   href="/contact"
                   className="tap-area inline-flex items-center gap-3 border-b border-champagne pb-0.5 text-cloud transition hover:text-champagne"
@@ -108,30 +108,30 @@ export default function Footer() {
           </div>
 
           {/* The heading above starts just past the L of the wordmark (the word spans
-              39.91vw from its left edge; L ends 14.71vw - 0.625rem into the red
+              39.91cqw from its left edge; L ends 14.71cqw - 0.625rem into the red
               card) and sits just under the letters (0.8em below the word's top). */}
           {/* Engraved wordmark — one word, two tonal treatments split at the
               card boundary. Positioned so the R (2.8em from the word's left edge,
-              em = 9vw) is centred on the seam between the cards: seam =
+              em = 9cqw, container width units so it scales with the card block, not the viewport) is centred on the seam between the cards: seam =
               (100% - gap) / 3 + gap / 2, and the tints switch exactly there. */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 z-20 hidden overflow-hidden md:block"
           >
             <p
-              className="absolute left-[calc((100%-1.25rem)/3+0.625rem-25.2vw)] top-14 whitespace-nowrap font-serif text-[9vw] leading-none tracking-tight text-transparent"
+              className="absolute left-[calc((100%-1.25rem)/3+0.625rem-25.2cqw)] top-14 whitespace-nowrap font-serif text-[9cqw] leading-none tracking-tight text-transparent"
               style={{
                 WebkitTextStroke: "1px rgba(214,197,160,0.5)",
-                clipPath: "inset(0 calc(100% - 25.2vw) 0 0)",
+                clipPath: "inset(0 calc(100% - 25.2cqw) 0 0)",
               }}
             >
               CHIAREL
             </p>
             <p
-              className="absolute left-[calc((100%-1.25rem)/3+0.625rem-25.2vw)] top-14 whitespace-nowrap font-serif text-[9vw] leading-none tracking-tight text-transparent"
+              className="absolute left-[calc((100%-1.25rem)/3+0.625rem-25.2cqw)] top-14 whitespace-nowrap font-serif text-[9cqw] leading-none tracking-tight text-transparent"
               style={{
                 WebkitTextStroke: "1px rgba(240,242,235,0.4)",
-                clipPath: "inset(0 0 0 25.2vw)",
+                clipPath: "inset(0 0 0 25.2cqw)",
               }}
             >
               CHIAREL
