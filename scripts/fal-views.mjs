@@ -18,7 +18,9 @@ import { createRequire } from "node:module";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = process.env.FAL_OUT ? resolve(process.env.FAL_OUT) : resolve(ROOT, "claudedocs/higgsfield/views");
-const PUB = (p) => resolve(ROOT, "public", p.replace(/^\//, ""));
+// a ref is either a site path ("/assets/...") or an absolute file path (a composition reference supplied by the owner)
+const PUB = (p) => (/^[A-Za-z]:[\\/]/.test(p) ? p : resolve(ROOT, "public", p.replace(/^\//, "")));
+const SCRATCH = process.env.FAL_REFS || "";
 
 function loadKey() {
   if (process.env.FAL_KEY) return process.env.FAL_KEY.trim();
@@ -54,6 +56,14 @@ const PRODUCTS = {
     label:
       'Printed on the front of the glass in cream-gold serif, centred, exactly these lines and nothing else: "CHIAREL" (largest), "ITALIA" (small, directly beneath), then "CLARITY DAY CRÈME" (one line, tracked capitals), then "For dry skin under daily stress" (one line, lowercase serif), and "50g" in white near the base.',
   },
+  night: {
+    pack: "/assets/products/clarity-night-creme-jar.png",
+    look:
+      "a squat square jar with softly rounded corners in deep emerald-green glass with a clear faceted acrylic over-cap and a polished gold disc lid",
+    label:
+      'Printed on the front of the glass in cream-gold serif, centred, exactly these lines and nothing else: "CHIAREL" (largest), "ITALIA" (small, directly beneath), then "CLARITY NIGHT CRÈME" (one line, tracked capitals), then "For smoother-looking texture" (one line, lowercase serif), and "50g" near the base.',
+  },
+  group: {},
   essence: {
     pack: "/assets/products/clarity-essence-bottle.png",
     look:
@@ -107,6 +117,40 @@ const VIEWS = {
       "Do NOT copy image 1's bottle or its flower; match only its softness, pastel palette, lighting quality and ribbon style. Shot on an 85mm lens, shallow depth of field, the jar's label sharp and legible. " +
       PRESERVE(p) + NO,
   },
+  // ---- remakes of the owner's earlier campaign pictures, with the real packaging (refs 17-21 are in FAL_REFS) ----
+  "group.five": {
+    aspect: "1:1",
+    refs: () => [`${SCRATCH}\\17.webp`, ...["essence", "eye", "day", "night", "neck"].map((k) => PRODUCTS[k].pack)],
+    prompt: () =>
+      "Image 1 is the composition reference only: a woman with slicked-back centre-parted dark hair, one hand resting against her cheek, bare shoulders, seated behind a polished warm wood table, a soft warm-beige blurred background, a row of products in the foreground. Create a new campaign photograph with the same composition, the same woman, the same warm light and mood, but with these FIVE products standing in one row on the table, left to right: Clarity Essence (image 2), Clarity Eye Contour Concentrate (image 3), Clarity Day Crème (image 4), Clarity Night Crème (image 5), Clarity Neck & Décolleté Crème (image 6). " +
+      "Every product must be an exact copy of its own reference image: same silhouette, glass colours, caps and gold finish, with the same label. Labels, exactly: " +
+      ["essence", "eye", "day", "night", "neck"].map((k) => `${PRODUCTS[k].label}`).join(" ") +
+      " Reproduce every letter exactly; do not add, remove, translate or rearrange any text. IGNORE all text and products in image 1: its labels are wrong and must not appear. Add no other writing anywhere, no badge, no watermark. Bottles and jars keep their true relative sizes; the jars are squat, the bottles tall; they stand with clear space between them, labels facing the camera and sharp.",
+  },
+  "day.marble": {
+    aspect: "4:5",
+    refs: () => [`${SCRATCH}\\18.webp`, "/assets/products/clarity-day-creme-jar.png"],
+    prompt: (p) =>
+      "Image 1 is the composition reference: a woman with long honey-blonde hair resting her chin on her folded hands behind a white marble table, marble-and-gold spheres, gold-leaf olive branches, a soft cream drape behind, scattered gold flakes, a squat jar in the foreground with its reflection on the marble. Create a new campaign photograph with the same composition, woman, marble, spheres, branches, soft light and mood, but replace the jar with the product from image 2. " +
+      PRESERVE(p) +
+      " Remove ALL text from the scene: the headline in the upper left of image 1 must not appear; leave that area as plain soft cream drape. No other writing, no badge. The jar's reflection on the marble is a faint, soft, unreadable mirror image." + NO,
+  },
+  "neck.waterfall": {
+    aspect: "4:5",
+    refs: () => [`${SCRATCH}\\20.jpg`, "/assets/products/clarity-neck-decollete-creme-bottle.png"],
+    prompt: (p) =>
+      "Image 1 is the composition reference: a bottle centred in the foreground on a dark marble ledge, a tall waterfall pouring down a green cliff behind it, an old stone tower and houses on the cliff, a dried burgundy rose at the lower left and a bare dark branch at the lower right, soft overcast light. Create a new photograph with the same composition, the same waterfall, tower and cliff, the same rose and branch, but replace the bottle with the product from image 2, centred, filling about 60 percent of the frame height. " +
+      PRESERVE(p) +
+      " The label must be sharp and fully legible; the packaging in image 1 has wrong text, ignore it." + NO,
+  },
+  "neck.honeycomb": {
+    aspect: "9:16",
+    refs: () => ["/assets/products/clarity-neck-decollete-creme-honeycomb.jpg", "/assets/products/clarity-neck-decollete-creme-bottle.png"],
+    prompt: (p) =>
+      "Image 1 is the mood and composition reference: a product standing centred on a glossy reflective dark-teal surface, a glowing gold honeycomb line pattern spread across the surface, clean water droplets and a small splash around its base, a soft pool of light behind, a dark teal-black background. Create a new photograph with the same composition, mood and lighting, but with the product from image 2 centred, filling about 38 percent of the frame height, standing on the surface with a clean mirror reflection beneath it (the reflection is dim, soft and fades out). A few crisp water droplets rest on the surface and in the air; none cover the label. " +
+      PRESERVE(p) +
+      " The label must be sharp and fully legible and must NOT carry any size line such as 40 ml. Do not copy the label of image 1; it is wrong." + NO,
+  },
   "essence.detail": {
     aspect: "4:5",
     refs: ["/assets/editorial/isola-spring-essence-square-1400.jpg", "/assets/products/clarity-essence-bottle.png"],
@@ -124,9 +168,10 @@ if (!view) throw new Error(`unknown view "${viewKey}" (${Object.keys(VIEWS).join
 const product = PRODUCTS[productArg];
 const count = Math.min(4, Math.max(1, Number(countArg) || 1));
 const prompt = view.prompt(product);
+const refs = typeof view.refs === "function" ? view.refs() : view.refs;
 
 if (dry) {
-  console.log(`${viewKey} x${count}\nrefs:\n  ${view.refs.join("\n  ")}\n\nPROMPT:\n${prompt}`);
+  console.log(`${viewKey} x${count}\nrefs:\n  ${refs.join("\n  ")}\n\nPROMPT:\n${prompt}`);
   process.exit(0);
 }
 
@@ -158,7 +203,7 @@ async function call(url, init) {
 }
 
 const MODEL = process.env.FAL_MODEL || "nb2";
-const imageUrls = await Promise.all(view.refs.map(dataUri));
+const imageUrls = await Promise.all(refs.map(dataUri));
 const MODELS = {
   nb2: {
     endpoint: "fal-ai/nano-banana-2/edit",
