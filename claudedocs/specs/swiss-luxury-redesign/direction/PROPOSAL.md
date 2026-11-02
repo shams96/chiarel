@@ -100,4 +100,8 @@ All copy, product names, descriptors, sizes and photographs already exist on chi
 3. **The contact sheet:** a modular grid of scene photographs with hairline gaps and outline index numerals.
 4. **The gallery rail:** a thumbnail rail on two grid columns beside one large image, with an ink border on the active frame.
 
-Not borrowed: promotions and discount pop-ups, the chat widget, snow-and-mountain backdrops and props, and model photography (none exists).
+Not borrowed: promotions and discount pop-ups, the chat widget, and snow-and-mountain backdrops and props.
+
+Correction: an earlier version of this section said no model photography exists. It does: each product has a published studio shot with a model, and the Day Crème has an editorial. Only a top-down jar-lid photograph is missing.
+
+**Chosen:** treatment D, the gallery rail, applied in Phase 7.

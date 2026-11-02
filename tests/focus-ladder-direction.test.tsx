@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import FocusLadder from "@/components/layout/FocusLadder";
@@ -117,6 +117,32 @@ describe("Ritual numerals, ochre field and specification sheet", () => {
     expect(s).toContain("{p.step}");
     expect(s).toContain("{p.size}");
     expect(s).toContain("{p.color.name}");
+  });
+});
+
+describe("Gallery rail (image treatment D)", () => {
+  const g = src("components/ProductGallery.tsx");
+  it("puts a vertical thumbnail rail on the left from lg, below the image at md", () => {
+    expect(g).toContain("lg:grid lg:grid-cols-[5rem_1fr]");
+    expect(g).toContain("lg:order-first");
+    expect(g).toContain("lg:flex-col");
+  });
+  it("uses one 4:5 module for every thumbnail and an ink border on the active frame", () => {
+    expect(g).toContain("aspect-[4/5] w-14 flex-none");
+    expect(g).toContain('i === active ? "border-ink"');
+    expect(g).not.toContain('"border-ochre"');
+  });
+  it("keeps the phone swipe track with 44px dots, and the thumbnail buttons stay labelled", () => {
+    expect(g).toContain("h-11 w-11");
+    expect(g).toContain("View image ${i + 1} of ${images.length}");
+  });
+  it("every product ships a gallery of two or more published photographs that exist on disk", () => {
+    const products = JSON.parse(src("data/products.json")) as { path: string; gallery?: { src: string }[] }[];
+    const list = Array.isArray(products) ? products : (products as unknown as { products: typeof products }).products;
+    for (const p of list) {
+      expect(p.gallery?.length ?? 0, p.path).toBeGreaterThanOrEqual(2);
+      for (const img of p.gallery ?? []) expect(existsSync(`public${img.src}`), img.src).toBe(true);
+    }
   });
 });
 

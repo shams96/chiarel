@@ -432,8 +432,8 @@ summary:focus-visible {
 .ladder { margin: 0; font-weight: 400; line-height: 0.88; letter-spacing: -0.02em; }
 .ladder > span {
   display: block; white-space: nowrap; font-size: var(--s);
-  color: color-mix(in srgb, currentColor var(--fill), transparent);
-  -webkit-text-stroke: 1px currentColor;
+  color: rgb(28 26 23 / var(--fill));
+  -webkit-text-stroke: 1px rgb(28 26 23);
   animation: ladder-rise 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: calc(var(--i) * 90ms);
 }

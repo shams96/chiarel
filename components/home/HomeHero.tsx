@@ -27,17 +27,9 @@ export default function HomeHero() {
 
         <Grid className="mt-8 gap-y-12 md:mt-12">
           <div className="hero-in col-span-4 md:col-span-8 lg:col-span-8">
-            <FocusLadder className="max-w-full" />
+            <FocusLadder className="max-w-[42rem]" />
             <h1 className="mt-8 font-serif text-h2 md:mt-10">Advancing Cellular Clarity™.</h1>
-            <p className="mt-5 max-w-measure text-body text-ink/80">
-              Exceptional skin discipline recognises no boundaries. Formulated in
-              Isola del Liri under pharmacist guidance, CHIAREL™ begins with the
-              face, where Clarity Essence™ brings peptide and postbiotic
-              precision to the look of firmer, smoother skin, and continues to
-              the neck and décolleté, where the same discipline is rarely
-              applied.
-            </p>
-            <div className="mt-8 md:mt-10">
+            <div className="mt-6 md:mt-8">
               <Link
                 href="/ritual"
                 className="btn-press inline-flex min-h-[48px] items-center bg-ink px-10 text-eyebrow uppercase text-ivory transition hover:bg-ochre"
@@ -58,6 +50,14 @@ export default function HomeHero() {
                 </span>
               </p>
             )}
+            <p className="mt-10 max-w-measure text-body text-ink/80">
+              Exceptional skin discipline recognises no boundaries. Formulated in
+              Isola del Liri under pharmacist guidance, CHIAREL™ begins with the
+              face, where Clarity Essence™ brings peptide and postbiotic
+              precision to the look of firmer, smoother skin, and continues to
+              the neck and décolleté, where the same discipline is rarely
+              applied.
+            </p>
           </div>
 
           <div className="relative col-span-4 md:col-span-5 lg:col-span-4 lg:col-start-9">
