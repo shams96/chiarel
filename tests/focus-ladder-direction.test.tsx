@@ -170,6 +170,22 @@ describe("Gallery rail (image treatment D)", () => {
   });
 });
 
+describe("Primary buttons meet the 44px tap-target contract (found by the page matrix)", () => {
+  it.each([
+    ["app/shop/page.tsx", "Discover the Crème"],
+    ["components/StickyPurchaseBar.tsx", "Add to Bag"],
+    ["app/build-your-ritual/page.tsx", "Add to Bag"],
+    ["components/home/HomeClosing.tsx", "Begin the Ritual"],
+  ])("%s: the %s control is at least 44px tall", (file, label) => {
+    const s = src(file);
+    const at = s.indexOf(label);
+    expect(at, label).toBeGreaterThan(-1);
+    // the opening tag that precedes the label carries the minimum height
+    const open = s.lastIndexOf("className=", at);
+    expect(s.slice(open, at)).toContain("min-h-[44px]");
+  });
+});
+
 describe("Day Crème studio scene (replaced the terracotta scene as the shared hero image)", () => {
   const NEW = "/assets/products/clarity-day-creme-studio-scene.jpg";
   const OLD = "/assets/products/clarity-day-creme-ribbon-scene-v2.jpg";

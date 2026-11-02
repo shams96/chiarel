@@ -53,7 +53,7 @@ export function HomeFinalCta() {
           <div className="mt-6 flex items-center gap-6">
             <Link
               href={productHref("chiarel-essence")}
-              className="btn-press inline-block bg-ink px-8 py-3 text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre"
+              className="btn-press inline-flex min-h-[44px] items-center bg-ink px-8 text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre"
             >
               Begin the Ritual
             </Link>

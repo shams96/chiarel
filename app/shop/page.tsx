@@ -48,7 +48,7 @@ export default function ShopPage() {
           <p className="mt-2 max-w-md text-sm leading-relaxed text-ink/70">{n1.blurb}</p>
           <Link
             href={productHref(n1.slug)}
-            className="btn-press mt-6 inline-block border border-ink px-8 py-3 text-eyebrow uppercase transition hover:border-ochre hover:text-ochre"
+            className="btn-press mt-6 inline-flex min-h-[44px] items-center border border-ink px-8 text-eyebrow uppercase transition hover:border-ochre hover:text-ochre"
           >
             Discover the Crème
           </Link>

@@ -166,7 +166,7 @@ export default function BuildYourRitualPage() {
         <button
           onClick={handleAdd}
           disabled={chosen.length === 0 || adding}
-          className="btn-press w-full bg-ink px-8 py-3 text-center text-eyebrow uppercase text-ivory transition hover:bg-ochre disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
+          className="btn-press min-h-[44px] w-full bg-ink px-8 text-center text-eyebrow uppercase text-ivory transition hover:bg-ochre disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
         >
           {adding ? "Adding…" : "Add to Bag"}
         </button>
