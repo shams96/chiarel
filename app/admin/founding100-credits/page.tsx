@@ -87,7 +87,7 @@ export default function FoundingCreditsPage() {
                   <span className="font-mono text-[13px]">{o.id.slice(0, 8)}</span>
                   <span className="font-serif text-lg">${o.founding100Credit}</span>
                 </div>
-                <p className="mt-1 [overflow-wrap:anywhere] text-[13px] text-ink/75">
+                <p className="mt-1 [overflow-wrap:anywhere] text-[13px] text-ink/80">
                   {o.email} · placed {new Date(o.createdAt).toLocaleDateString()}
                 </p>
                 <div className="mt-3 flex flex-wrap items-center justify-between gap-3">

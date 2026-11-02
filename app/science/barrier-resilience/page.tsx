@@ -41,13 +41,13 @@ export default function BarrierResiliencePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <Link href="/science" className="text-[12px] text-ink/65 hover:text-ochre">
+      <Link href="/science" className="text-[12px] text-ink/70 hover:text-ochre">
         ← The Science
       </Link>
       <h1 className="mt-2 font-serif text-h1 leading-tight">
         Building a More Resilient Skin Barrier
       </h1>
-      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/75">
+      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/80">
         A working woman&rsquo;s day asks a great deal of her skin. CHIAREL
         formulates for the look of comfortable, cushioned skin through it,
         using the lipids skin already knows.
@@ -89,7 +89,7 @@ export default function BarrierResiliencePage() {
         </div>
       </section>
 
-      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink/65">
+      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink/70">
         Ceramides, cholesterol and squalane are established ingredients, not
         CHIAREL trademarks or proprietary technologies. This page
         describes how CHIAREL formulates and is not a guarantee of individual

@@ -177,7 +177,7 @@ export default function AdminDisputesPage() {
                   </Link>
                   <span className="font-serif text-lg">{d.amount != null ? `$${d.amount}` : ""}</span>
                 </div>
-                <p className="mt-1 [overflow-wrap:anywhere] text-[13px] text-ink/75">
+                <p className="mt-1 [overflow-wrap:anywhere] text-[13px] text-ink/80">
                   {d.customer} {d.email}
                   {d.openedAt ? ` · opened ${new Date(d.openedAt).toLocaleDateString()}` : ""}
                 </p>
