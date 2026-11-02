@@ -48,7 +48,7 @@ const gutter = "px-[clamp(1.5rem,4.5vw,7rem)]";
 export default function HomeFaceBeyond() {
   return (
     <section className="grid lg:grid-cols-2">
-      <div className={`bg-ivory ${gutter} py-16 text-ink md:py-24`}>
+      <div className={`bg-cloud ${gutter} py-16 text-ink md:py-24`}>
         <Reveal className="mx-auto max-w-[56rem]">
           <div className="border-t border-ochre pt-7">
             <h2 className="font-serif text-[clamp(2rem,1.1rem+2.2vw,3.8rem)] leading-tight text-ochre">

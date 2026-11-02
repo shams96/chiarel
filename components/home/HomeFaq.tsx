@@ -5,7 +5,7 @@ import Reveal from "@/components/Reveal";
 // stays in view on the left while the answers open on the right.
 export default function HomeFaq({ faqs }: { faqs: { question: string; answer: string }[] }) {
   return (
-    <section id="faq" className="section-y-lg bg-ivory">
+    <section id="faq" className="section-y-lg bg-cloud">
       <div className="mx-auto grid max-w-[84rem] gap-10 px-[clamp(1.5rem,3vw,3rem)] lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
         <Reveal className="lg:sticky lg:top-28 lg:self-start">
           <h2 className="font-serif text-[clamp(2.25rem,1.4rem+2.6vw,4rem)] leading-[1.05] text-garden">

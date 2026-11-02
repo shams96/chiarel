@@ -16,7 +16,7 @@ export function HomeFinalCta() {
 
   return (
     <>
-    <section className="section-y bg-ivory text-ink">
+    <section className="section-y bg-cloud text-ink">
       <div className="mx-auto flex max-w-[96rem] flex-col items-center gap-10 px-[clamp(1.5rem,4.5vw,7rem)] md:flex-row md:gap-[clamp(2.5rem,5vw,7rem)]">
         <Reveal className="grid w-full grid-cols-5 gap-4 md:w-3/5">
           <div
