@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CHIAREL direction: full-bleed hero (rendition)</title>
+<meta name="robots" content="noindex">
+<style>
+@font-face { font-family: "Libre Bodoni"; src: url("assets/libre-bodoni-latin.woff2") format("woff2"); font-weight: 400 600; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Libre Bodoni"; src: url("assets/libre-bodoni-latin-ext.woff2") format("woff2"); font-weight: 400 600; font-style: normal; font-display: swap; unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+:root { --cloud: #F0F2EB; --ivory: #F8F6F1; --ink: #1C1A17; --ochre: #9B4722; --garden: #1F5129; --margin: clamp(1.25rem, 4.5vw, 4.5rem); }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--cloud); color: var(--ink); font-family: "Libre Bodoni", serif; font-size: 1.0625rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+.note { background: var(--ink); color: var(--cloud); font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; padding: .6rem var(--margin); }
+.note a { color: var(--cloud); }
+
+header.bar { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 0 var(--margin); min-height: 72px; border-bottom: 1px solid rgb(28 26 23 / .1); }
+header.bar img { width: 170px; height: auto; display: block; }
+header.bar nav { display: flex; gap: 1.75rem; font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; }
+header.bar nav a { text-decoration: none; display: inline-flex; min-height: 44px; align-items: center; }
+@media (max-width: 900px) { header.bar nav a:not(:last-child) { display: none; } }
+
+/* The hero: one photograph, edge to edge, one line of type, one button. */
+.hero { position: relative; isolation: isolate; background: #f3e3d6; }
+.hero picture, .hero img.bg { display: block; width: 100%; }
+.hero img.bg { height: min(82vh, 56vw); min-height: 460px; object-fit: cover; object-position: 78% 50%; }
+.hero .copy { position: absolute; left: var(--margin); top: 50%; transform: translateY(-50%); max-width: min(34rem, 46vw); }
+.hero .kicker { font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; margin: 0 0 1.6rem; }
+.hero h1 { margin: 0; font-weight: 400; font-size: clamp(2.4rem, 5.2vw, 6rem); line-height: 1.02; letter-spacing: -.01em; }
+.hero .cta { display: inline-flex; align-items: center; min-height: 48px; margin-top: 2.4rem; padding: 0 2.2rem; background: var(--ink); color: var(--cloud); text-decoration: none; font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; transition: background-color .25s; }
+.hero .cta:hover { background: var(--ochre); }
+.hero .cta:focus-visible { outline: 2px solid var(--ochre); outline-offset: 3px; }
+.hero .place { position: absolute; left: var(--margin); bottom: 1.25rem; margin: 0; font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; }
+
+@media (max-width: 720px) {
+  .hero img.bg { height: auto; min-height: 0; aspect-ratio: 1100 / 1023; object-position: 50% 50%; }
+  .hero .copy { position: static; transform: none; max-width: none; padding: 2rem var(--margin) 0.5rem; background: var(--cloud); }
+  .hero .place { position: static; padding: 0 var(--margin) 2rem; background: var(--cloud); }
+  .hero .kicker { margin-bottom: 1rem; }
+  .hero h1 { font-size: clamp(2.2rem, 10vw, 3rem); }
+  .hero .cta { margin-top: 1.6rem; }
+}
+
+/* Below the fold: the quiet part. Price and paragraph live here, not in the hero. */
+.after { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 1.5rem; padding: clamp(3rem, 8vw, 7rem) var(--margin); }
+.after .l { grid-column: 1 / span 4; font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; padding-top: .5rem; }
+.after .r { grid-column: 5 / span 7; max-width: 44rem; }
+.after p { margin: 0 0 1.4rem; }
+.after .price { font-size: 1.5rem; margin: 2rem 0 .25rem; }
+.after .price small { font-size: .75rem; letter-spacing: .08em; }
+.after .fine { font-size: .875rem; color: rgb(28 26 23 / .8); }
+@media (max-width: 720px) { .after .l, .after .r { grid-column: 1 / -1; } .after .l { margin-bottom: 1rem; } }
+</style>
+</head>
+<body>
+<div class="note">Rendition only: a proposed home hero, not the live site. Photograph generated for this page (see claudedocs/specs/swiss-luxury-redesign/direction/IMAGE_PROMPTING.md). <a href="rendition.html">Focus Ladder rendition</a></div>
+
+<header class="bar">
+  <a href="#"><img src="assets/logo.png" alt="CHIAREL, The House of Clarity" width="170" height="42"></a>
+  <nav aria-label="Primary">
+    <a href="#">Shop</a><a href="#">The Ritual</a><a href="#">The Science</a><a href="#">The House</a><a href="#">Journal</a><a href="#">Account</a><a href="#">Bag</a>
+  </nav>
+</header>
+
+<section class="hero" aria-labelledby="h">
+  <picture>
+    <source media="(max-width: 720px)" srcset="assets/essence-hero-crop-1100.jpg">
+    <source media="(max-width: 1400px)" srcset="assets/essence-hero-wide-1280.jpg">
+    <img class="bg" src="assets/essence-hero-wide-2400.jpg" width="2400" height="1340" alt="Clarity Essence™ in its glass bottle on a pale plinth, framed by looping green CHIAREL velvet ribbon and frosted petals against a soft apricot sky" fetchpriority="high">
+  </picture>
+  <div class="copy">
+    <p class="kicker">CHIAREL™ · The House of Clarity™</p>
+    <h1 id="h">Advancing Cellular Clarity™.</h1>
+    <a class="cta" href="#">Begin the Ritual</a>
+  </div>
+  <p class="place">Isola del Liri, Italy</p>
+</section>
+
+<section class="after" aria-label="Introduction">
+  <div class="l">Clarity Essence™</div>
+  <div class="r">
+    <p>Exceptional skin discipline recognises no boundaries. Formulated in Isola del Liri under pharmacist guidance, CHIAREL™ begins with the face, where Clarity Essence™ brings peptide and postbiotic precision to the look of firmer, smoother skin, and continues to the neck and décolleté, where the same discipline is rarely applied.</p>
+    <p class="price">From <strong>$3.36</strong> a day</p>
+    <p class="fine"><small>$151 every 45 days with subscription · $189 one-time</small></p>
+  </div>
+</section>
+</body>
+</html>

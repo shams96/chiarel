@@ -107,6 +107,15 @@ const VIEWS = {
       "Do NOT copy image 1's bottle or its flower; match only its softness, pastel palette, lighting quality and ribbon style. Shot on an 85mm lens, shallow depth of field, the jar's label sharp and legible. " +
       PRESERVE(p) + NO,
   },
+  "essence.hero": {
+    aspect: "16:9",
+    refs: ["/assets/products/clarity-essence-ribbon-scene-2-v2.jpg", "/assets/products/clarity-essence-bottle.png"],
+    prompt: (p) =>
+      "Create a wide, cinematic luxury skincare campaign hero image in the same family as image 1 (a soft apricot-to-ivory sky backdrop, a pale plinth, a wide green velvet ribbon looping in big graceful curves, soft diffused light), for the product in image 2. " +
+      "Composition: landscape, 16:9. The product stands upright on a pale matte plinth in the right third of the frame, about 45 percent of the frame height, with the ribbon looping around and behind it. The left 50 percent of the frame is calm, empty and smooth: only the soft apricot-to-ivory gradient and a faint horizon, with no objects, so a headline can be set there later. " +
+      "A wide Formal Garden green (#1F5129) velvet ribbon dusted with gold glitter, printed repeatedly with the word CHIAREL in gold capitals, loops in big curves around the plinth and drifts toward the empty left side as a soft out-of-focus streamer. A few frosted peach petals floating. Soft studio key light from the upper left, a cool rim light, shallow depth of field on an 85mm lens, the label sharp and legible. No flower in this image, no outdoor scenery. " +
+      PRESERVE(p) + NO,
+  },
   "essence.detail": {
     aspect: "4:5",
     refs: ["/assets/editorial/isola-spring-essence-square-1400.jpg", "/assets/products/clarity-essence-bottle.png"],
