@@ -45,17 +45,35 @@ describe("Hero", () => {
   const html = renderToStaticMarkup(<HomeHero />);
   it("keeps one h1 with the mission line, the single primary action and the price line", () => {
     expect([...html.matchAll(/<h1/g)]).toHaveLength(1);
-    expect(text(html)).toContain("Advancing Cellular Clarity™.");
+    expect(html.replace(/<[^>]+>/g, "")).toContain("Advancing Cellular Clarity™.");
     expect(html).toContain('href="/ritual"');
     expect(text(html)).toContain("Begin the Ritual");
     expect(text(html)).toMatch(/From \$[\d.]+ a day/);
     expect(text(html)).toContain("every 45 days with subscription");
   });
-  it("sets the ladder before the h1 and puts the photo on an ochre block with a priority image", () => {
-    expect(html.indexOf("ladder-wrap")).toBeLessThan(html.indexOf("<h1"));
+  it("sets the h1 as a three-word poster (big / small / big) on the column grid, with no ladder", () => {
+    expect(html).toMatch(/<h1 class="poster font-serif"><span class="poster-a">Advancing<\/span> <span class="poster-b">Cellular<\/span> <span class="poster-c">Clarity<span class="poster-tm">™<\/span>\.<\/span><\/h1>/);
+    expect(html).not.toContain("ladder-wrap");
+    const css = src("app/globals.css");
+    expect(css).toMatch(/\.poster \{[^}]*container-type: inline-size/);
+    expect(css).toMatch(/\.poster \{[^}]*background-size: calc\(100% \/ 6\) 100%/);
+    expect(css).toMatch(/\.poster-b \{[^}]*margin-left: auto/);
+  });
+  it("keeps the scale contrast of the poster: the small word is at most 40% of the big ones", () => {
+    const css = src("app/globals.css");
+    const size = (k: string) => Number(css.match(new RegExp(String.raw`\.poster-${k} \{ font-size: ([\d.]+)cqw`))?.[1]);
+    expect(size("a")).toBeGreaterThan(0);
+    expect(size("b")).toBeGreaterThan(0);
+    expect(size("b") / size("a")).toBeLessThanOrEqual(0.4);
+    expect(size("b") / size("c")).toBeLessThanOrEqual(0.4);
+  });
+  it("makes the photo the hero: a half-width frame on a deepened Red Ochre block, the jar on a mirror", () => {
     expect(html).toContain("bg-ochre");
+    expect(html).toContain("lg:col-span-6 lg:col-start-7");
+    expect(html).toContain("linear-gradient(155deg");
     expect(html).toContain('fetchPriority="high"');
-    expect(html).toContain("clarity-essence-festive-scene-v2-960.jpg");
+    expect(html).toContain("clarity-essence-mirror-scene-960.jpg");
+    expect(html).toContain("standing on a mirror");
   });
   it("does not use the previous full-bleed ochre text panel", () => {
     expect(src("components/home/HomeHero.tsx")).not.toContain("bg-ochre px-margin");

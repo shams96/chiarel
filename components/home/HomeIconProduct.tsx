@@ -25,7 +25,7 @@ export default function HomeIconProduct({
 }) {
   return (
     <>
-      <section className="grid bg-ivory md:grid-cols-2">
+      <section className="grid bg-cloud md:grid-cols-2">
         <div className="relative min-h-[26rem] md:min-h-[48rem]">
           <ResponsiveImage src={src} alt={alt} sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-[50%_22%]" />
         </div>

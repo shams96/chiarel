@@ -42,7 +42,7 @@ const fitGuidance = [
 
 export default function HomeFitGuidance() {
   return (
-    <section className="section-y-lg bg-ivory">
+    <section className="section-y-lg bg-cloud">
       <div className="mx-auto max-w-[84rem] px-[clamp(1.5rem,3vw,3rem)]">
         <Reveal>
           <h2 className="font-serif text-[clamp(2rem,1.3rem+2vw,3.4rem)] leading-tight text-garden">

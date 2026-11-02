@@ -2,16 +2,14 @@ import Link from "next/link";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import Container from "@/components/layout/Container";
 import Grid from "@/components/layout/Grid";
-import FocusLadder from "@/components/layout/FocusLadder";
 import { perDayPrice, DELIVERY_DAYS } from "@/lib/pricing";
 import { getProductOrThrow, isPurchasable } from "@/lib/products";
 
-// Section 01, Hero, in the Focus Ladder direction: the word "Clarity" steps
-// down from a hairline outline to a solid letter (decorative, aria-hidden),
-// the real h1 and the approved supporting copy sit beneath it, and the Clarity
-// Essence scene is a hard-edged plate on a Red Ochre block at the right. Cloud
-// ground, one primary action, left-weighted on the 12-column grid. Copy,
-// price line and photograph are unchanged from the previous hero.
+// Section 01, Hero: the mission line is the h1, set as a poster (big / small /
+// big on a visible column grid, each word in a hairline band), then the one
+// primary action, the price line and the approved supporting copy. The Clarity
+// Essence scene is the large plate at the right: the jar on a mirror, in a
+// hard-edged frame on a deep Red Ochre block. Cloud ground, 12-column grid.
 export default function HomeHero() {
   const essence = getProductOrThrow("chiarel-essence");
 
@@ -26,10 +24,13 @@ export default function HomeHero() {
         </Grid>
 
         <Grid className="mt-8 gap-y-12 md:mt-12">
-          <div className="hero-in col-span-4 md:col-span-8 lg:col-span-8">
-            <FocusLadder className="max-w-[42rem]" />
-            <h1 className="mt-8 font-serif text-h2 md:mt-10">Advancing Cellular Clarity™.</h1>
-            <div className="mt-6 md:mt-8">
+          <div className="hero-in col-span-4 md:col-span-8 lg:col-span-6">
+            <h1 className="poster font-serif">
+              <span className="poster-a">Advancing</span>{" "}
+              <span className="poster-b">Cellular</span>{" "}
+              <span className="poster-c">Clarity<span className="poster-tm">™</span>.</span>
+            </h1>
+            <div className="mt-8 md:mt-10">
               <Link
                 href="/ritual"
                 className="btn-press inline-flex min-h-[48px] items-center bg-ink px-10 text-eyebrow uppercase text-ivory transition hover:bg-ochre"
@@ -60,20 +61,23 @@ export default function HomeHero() {
             </p>
           </div>
 
-          <div className="relative col-span-4 md:col-span-5 lg:col-span-4 lg:col-start-9">
-            <div className="relative aspect-[4/5] w-full bg-ochre">
-              <div className="absolute -bottom-4 -right-4 left-4 top-4 border border-ink md:-bottom-5 md:-right-5 md:left-5 md:top-5">
+          <div className="relative col-span-4 md:col-span-6 lg:col-span-6 lg:col-start-7">
+            <div
+              className="relative aspect-[4/5] w-full bg-ochre lg:aspect-[100/115]"
+              style={{ backgroundImage: "linear-gradient(155deg, rgb(255 255 255 / 0.06) 0%, rgb(28 26 23 / 0.34) 100%)" }}
+            >
+              <div className="absolute -bottom-4 -right-4 left-4 top-4 border border-ink md:-bottom-6 md:-right-6 md:left-6 md:top-6 lg:-bottom-8 lg:-right-8 lg:left-12 lg:top-12">
                 <ResponsiveImage
-                  src="/assets/products/clarity-essence-festive-scene-v2.jpg"
-                  alt="Clarity Essence™ in its glass bottle on a plinth, framed by a frosted flower and green CHIAREL velvet ribbon"
-                  sizes="(max-width: 768px) 90vw, (max-width: 1024px) 45vw, 30vw"
+                  src="/assets/products/clarity-essence-mirror-scene.jpg"
+                  alt="Clarity Essence™ in its glass bottle standing on a mirror, reflected beneath it, framed by a frosted flower and green CHIAREL velvet ribbon"
+                  sizes="(max-width: 768px) 90vw, (max-width: 1024px) 50vw, 46vw"
                   priority
-                  className="object-cover object-[50%_62%]"
+                  className="object-cover object-[50%_50%]"
                 />
               </div>
               <span
                 aria-hidden="true"
-                className="vert-word absolute -right-10 top-0 hidden text-eyebrow uppercase lg:block"
+                className="vert-word absolute -right-10 top-0 hidden lg:-right-14 text-eyebrow uppercase lg:block"
               >
                 Clarity Essence™
               </span>

@@ -12,7 +12,7 @@ import { FORMULATOR_EXTERNAL_URL } from "@/lib/seo";
 // permission is confirmed (spec D8).
 export default function HomeFormulator() {
   return (
-    <Section id="formulator" rule labelledBy="formulator-heading" className="bg-ivory">
+    <Section id="formulator" rule labelledBy="formulator-heading" className="bg-cloud">
       <Grid className="items-end gap-y-10">
         <Reveal className="col-span-4 md:col-span-5 lg:col-span-6">
           <Eyebrow className="text-ochre">The Formulator</Eyebrow>

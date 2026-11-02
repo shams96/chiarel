@@ -473,3 +473,35 @@ summary:focus-visible {
 .grid-guides i:nth-child(-n + 4) { display: block; }
 @media (min-width: 768px) { .grid-guides i:nth-child(-n + 8) { display: block; } }
 @media (min-width: 1024px) { .grid-guides i:nth-child(-n + 12) { display: block; } }
+
+/* Poster headline (home hero): three words at two scales on a visible column
+   grid, each in its own hairline band, after the Swiss "big / small / big"
+   stagger. The words are real text inside the one h1; sizes are container
+   units so the block scales with its column. */
+.poster {
+  container-type: inline-size;
+  background-image: linear-gradient(to right, rgb(28 26 23 / 0.16) 1px, transparent 1px);
+  background-size: calc(100% / 6) 100%;
+  border-right: 1px solid rgb(28 26 23 / 0.16);
+}
+.poster > span {
+  display: block;
+  white-space: nowrap;
+  font-weight: 500;
+  color: rgb(28 26 23 / 0.84);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  border-top: 1px solid rgb(28 26 23 / 0.45);
+  border-bottom: 1px solid rgb(28 26 23 / 0.45);
+  padding: 0.04em 0 0.06em;
+  width: fit-content;
+}
+.poster-a { font-size: 21cqw; }
+.poster-b { font-size: 8.2cqw; margin-left: auto; margin-top: 0.7em; }
+.poster-tm { font-size: 0.26em; letter-spacing: 0; vertical-align: top; position: relative; top: 0.16em; margin-left: 0.04em; }
+.poster-c { font-size: 24cqw; margin-top: 0.55em; }
+@supports not (width: 1cqw) {
+  .poster-a { font-size: 4.4rem; }
+  .poster-b { font-size: 1.4rem; }
+  .poster-c { font-size: 4.6rem; }
+}
