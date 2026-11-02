@@ -1,18 +1,23 @@
 import Link from "next/link";
 import EmailSignup from "@/components/EmailSignup";
 import { journalEntries as entries } from "@/lib/journal-entries";
+import PageHead from "@/components/layout/PageHead";
+import Container from "@/components/layout/Container";
 
 export const metadata = { title: "Journal", alternates: { canonical: "/journal" } };
 
 
 export default function JournalPage() {
   return (
-    <div className="mx-auto max-w-4xl px-6 py-16">
-      <h1 className="font-serif text-4xl">Notes from the House</h1>
-      <div className="mt-10 divide-y divide-ink/10">
+    <>
+      <PageHead lines={["Notes from", "the House"]} />
+      <Container className="pb-section">
+      <div className="grid-12">
+      <div className="col-span-full lg:col-span-8 lg:col-start-5">
+      <div className="divide-y divide-ink/10">
         {entries.map((e) => (
           <article key={e.slug} className="py-8">
-            <p className="text-[12px] uppercase tracking-[0.2em] text-ochre">
+            <p className="text-eyebrow uppercase text-ochre">
               {e.tag}
             </p>
             <Link href={`/journal/${e.slug}`}>
@@ -23,7 +28,7 @@ export default function JournalPage() {
             <p className="mt-2 max-w-xl text-sm text-ink/70">{e.excerpt}</p>
             <Link
               href={`/journal/${e.slug}`}
-              className="mt-3 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
+              className="mt-3 inline-block border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
             >
               Read the Article
             </Link>
@@ -33,6 +38,9 @@ export default function JournalPage() {
       <div className="mt-6 border-t border-ink/10 pt-12">
         <EmailSignup source="journal" />
       </div>
-    </div>
+      </div>
+      </div>
+      </Container>
+    </>
   );
 }

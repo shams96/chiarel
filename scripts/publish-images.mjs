@@ -10,6 +10,8 @@
 //   npm run publish:images -- --dry-run     show what would be published, change nothing
 //   npm run publish:images -- <path> ...    publish exactly these files
 //
+// Images listed in lib/image-variants.json also get their 640w/960w copies remade and published.
+//
 // Deleted files are never published (a deletion could break a live page); the
 // script lists them so you can ask for them explicitly. Needs git and gh (logged in).
 import { execFileSync } from "node:child_process";
@@ -18,6 +20,7 @@ import { createRequire } from "node:module";
 import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, posix } from "node:path";
+import { makeVariants, manifest as variantManifest } from "./make-image-variants.mjs";
 
 const SITE = process.env.SITE_URL || "https://chiarel.com";
 const ROOT = execFileSync("git", ["rev-parse", "--show-toplevel"], { encoding: "utf8" }).trim();
@@ -60,6 +63,22 @@ files = files.filter((f) => {
   if (!existsSync(join(ROOT, f))) return console.log(`skip (missing on disk): ${f}`), false;
   return true;
 });
+// responsive copies (640w/960w, see lib/image-variants.json) must never be older
+// than their source: remake them for every published source and publish them too
+{
+  const listed = variantManifest();
+  const extra = [];
+  for (const f of files) {
+    const src = f.slice("public".length);
+    if (!listed[src]) continue;
+    if (dry) {
+      console.log(`would regenerate responsive copies of ${f}`);
+      continue;
+    }
+    for (const v of await makeVariants(src, { force: true })) extra.push(v);
+  }
+  for (const v of extra) if (!files.includes(v)) files.push(v);
+}
 if (!files.length) {
   console.log("\nNothing to publish.");
   process.exit(0);

@@ -45,7 +45,7 @@ export default function HomeObservations() {
                 className={`py-5 sm:px-0 ${i % 2 === 1 ? "sm:border-l sm:border-ink/15 sm:pl-6" : "sm:pr-6"} ${i > 1 ? "border-t border-ink/15" : ""} ${i === 1 ? "border-t border-ink/15 sm:border-t-0" : ""}`}
               >
                 <dt className="text-eyebrow uppercase text-ink/70">{f.label}</dt>
-                <dd className="mt-2 font-serif text-h4 text-ink/60">{PENDING}</dd>
+                <dd className="mt-2 font-serif text-h4 text-ink/70">{PENDING}</dd>
                 <dd className="mt-1 text-caption text-ink/65">{f.note}</dd>
               </div>
             ))}

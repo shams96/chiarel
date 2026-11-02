@@ -14,8 +14,8 @@ const EFFECTIVE_DATE = "October 14, 2026";
 export default function PrivacyPage() {
   return (
     <div className="mx-auto max-w-2xl px-6 py-16">
-      <h1 className="font-serif text-4xl leading-tight">Privacy Policy</h1>
-      <p className="mt-3 text-[12px] uppercase tracking-[0.16em] text-ink/65">
+      <h1 className="font-serif text-h1 leading-tight">Privacy Policy</h1>
+      <p className="mt-3 text-eyebrow uppercase text-ink/65">
         Effective {EFFECTIVE_DATE}
       </p>
 

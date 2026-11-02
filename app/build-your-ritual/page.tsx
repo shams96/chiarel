@@ -5,6 +5,8 @@ import Image from "next/image";
 import { getProduct, productImageAlt, isPurchasable, type Product } from "@/lib/products";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { useCart, unitPrice } from "@/lib/cart-context";
+import PageHead from "@/components/layout/PageHead";
+import Container from "@/components/layout/Container";
 
 // Ritual order: morning first, then the evening steps, lightest texture first.
 const RITUAL_SLUGS = [
@@ -57,17 +59,17 @@ export default function BuildYourRitualPage() {
   };
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-16">
-      <h1 className="max-w-2xl font-serif text-4xl leading-tight">
-        Build Your Ritual
-      </h1>
-      <p className="mt-4 max-w-xl text-sm text-ink/70">
-        Choose exactly the steps your skin needs from the five-product CHIAREL
-        ritual. Each is priced and delivered on its own — nothing is bundled
-        into a set price, so what you leave out costs you nothing.
-      </p>
+    <>
+      <PageHead lines={["Build Your", "Ritual"]}>
+        <p>
+          Choose exactly the steps your skin needs from the five-product CHIAREL
+          ritual. Each is priced and delivered on its own — nothing is bundled
+          into a set price, so what you leave out costs you nothing.
+        </p>
+      </PageHead>
+      <Container className="pb-section pt-6">
 
-      <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {selectableProducts.map((p) => {
           const isSelected = selected.has(p.slug);
           return (
@@ -104,7 +106,7 @@ export default function BuildYourRitualPage() {
                 </div>
               </div>
               <div>
-                <p className="text-[12px] uppercase tracking-[0.14em] text-ink/65">
+                <p className="text-eyebrow uppercase text-ink/65">
                   {p.timeOfUse} · {p.descriptor}
                 </p>
                 <p className="mt-1 text-sm font-medium leading-tight">
@@ -135,12 +137,12 @@ export default function BuildYourRitualPage() {
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 className="object-cover"
               />
-              <span className="absolute left-2 top-2 bg-ivory/90 px-2 py-1 text-[12px] uppercase tracking-[0.16em] text-ink/70">
+              <span className="absolute left-2 top-2 bg-ivory/90 px-2 py-1 text-eyebrow uppercase text-ink/70">
                 Coming Soon
               </span>
             </div>
             <div>
-              <p className="text-[12px] uppercase tracking-[0.14em] text-ink/65">
+              <p className="text-eyebrow uppercase text-ink/65">
                 {p.timeOfUse} · {p.descriptor}
               </p>
               <p className="mt-1 text-sm font-medium leading-tight">
@@ -164,11 +166,12 @@ export default function BuildYourRitualPage() {
         <button
           onClick={handleAdd}
           disabled={chosen.length === 0 || adding}
-          className="btn-press w-full bg-ink px-8 py-3 text-center text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
+          className="btn-press min-h-[44px] w-full bg-ink px-8 text-center text-eyebrow uppercase text-ivory transition hover:bg-ochre disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
         >
           {adding ? "Adding…" : "Add to Bag"}
         </button>
       </div>
-    </div>
+      </Container>
+    </>
   );
 }
