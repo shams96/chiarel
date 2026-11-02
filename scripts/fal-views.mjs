@@ -107,6 +107,14 @@ const VIEWS = {
       "Do NOT copy image 1's bottle or its flower; match only its softness, pastel palette, lighting quality and ribbon style. Shot on an 85mm lens, shallow depth of field, the jar's label sharp and legible. " +
       PRESERVE(p) + NO,
   },
+  "essence.mirror": {
+    aspect: "4:5",
+    refs: ["/assets/products/clarity-essence-festive-scene-v2.jpg", "/assets/products/clarity-essence-bottle.png"],
+    prompt: (p) =>
+      "Edit image 1 into a new campaign photograph of the same scene, keeping its soft apricot-to-ivory sky backdrop, the large frosted peach flower behind the bottle, the wide green CHIAREL velvet ribbon looping in big graceful curves, and the soft diffused light. " +
+      "Changes: (1) the bottle stands on a mirror-polished, perfectly reflective glass surface that fills the lower third of the frame, and the surface shows a clear, symmetrical, softly fading reflection of the bottle, the ribbon and the flower, as if the product stood on a mirror; the reflection is slightly dimmer and fades to nothing toward the bottom edge; (2) the bottle is larger, about 50 percent of the frame height, standing centred, so it is clearly the hero; (3) the pale plinth is replaced by the mirror surface, with a thin bright contact line where the base meets its own reflection. " +
+      PRESERVE(p) + NO,
+  },
   "essence.detail": {
     aspect: "4:5",
     refs: ["/assets/editorial/isola-spring-essence-square-1400.jpg", "/assets/products/clarity-essence-bottle.png"],
