@@ -45,14 +45,14 @@ describe("Hero", () => {
   const html = renderToStaticMarkup(<HomeHero />);
   it("keeps one h1 with the mission line, the single primary action and the price line", () => {
     expect([...html.matchAll(/<h1/g)]).toHaveLength(1);
-    expect(text(html)).toContain("Advancing Cellular Clarity™.");
+    expect(html.replace(/<[^>]+>/g, "")).toContain("Advancing Cellular Clarity™.");
     expect(html).toContain('href="/ritual"');
     expect(text(html)).toContain("Begin the Ritual");
     expect(text(html)).toMatch(/From \$[\d.]+ a day/);
     expect(text(html)).toContain("every 45 days with subscription");
   });
   it("sets the h1 as a three-word poster (big / small / big) on the column grid, with no ladder", () => {
-    expect(html).toMatch(/<h1 class="poster font-serif"><span class="poster-a">Advancing<\/span> <span class="poster-b">Cellular<\/span> <span class="poster-c">Clarity™\.<\/span><\/h1>/);
+    expect(html).toMatch(/<h1 class="poster font-serif"><span class="poster-a">Advancing<\/span> <span class="poster-b">Cellular<\/span> <span class="poster-c">Clarity<span class="poster-tm">™<\/span>\.<\/span><\/h1>/);
     expect(html).not.toContain("ladder-wrap");
     const css = src("app/globals.css");
     expect(css).toMatch(/\.poster \{[^}]*container-type: inline-size/);

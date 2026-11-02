@@ -498,6 +498,7 @@ summary:focus-visible {
 }
 .poster-a { font-size: 21cqw; }
 .poster-b { font-size: 8.2cqw; margin-left: auto; margin-top: 0.7em; }
+.poster-tm { font-size: 0.26em; letter-spacing: 0; vertical-align: top; position: relative; top: 0.16em; margin-left: 0.04em; }
 .poster-c { font-size: 24cqw; margin-top: 0.55em; }
 @supports not (width: 1cqw) {
   .poster-a { font-size: 4.4rem; }

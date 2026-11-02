@@ -28,7 +28,7 @@ export default function HomeHero() {
             <h1 className="poster font-serif">
               <span className="poster-a">Advancing</span>{" "}
               <span className="poster-b">Cellular</span>{" "}
-              <span className="poster-c">Clarity™.</span>
+              <span className="poster-c">Clarity<span className="poster-tm">™</span>.</span>
             </h1>
             <div className="mt-8 md:mt-10">
               <Link
