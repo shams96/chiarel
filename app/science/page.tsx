@@ -3,7 +3,12 @@ import { productHref } from "@/lib/products";
 import PageHead from "@/components/layout/PageHead";
 import Container from "@/components/layout/Container";
 
-export const metadata = { title: "The Science", alternates: { canonical: "/science" } };
+export const metadata = {
+  title: "The Science",
+  description:
+    "Modern Biological Stress™ is the daily load on a working woman’s body and skin. Each CHIAREL™ formulation answers one part of it.",
+  alternates: { canonical: "/science" },
+};
 
 const entries = [
   {

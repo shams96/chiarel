@@ -6,7 +6,12 @@ import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import PageHead from "@/components/layout/PageHead";
 import Container from "@/components/layout/Container";
 
-export const metadata = { title: "Shop", alternates: { canonical: "/shop" } };
+export const metadata = {
+  title: "Shop",
+  description:
+    "The CHIAREL™ Consumer Collection™: formulations for the morning and evening ritual, crafted in Isola del Liri, Italy.",
+  alternates: { canonical: "/shop" },
+};
 
 // The five launch products, grouped by the moment of the day they belong to
 // (the same order as The Ritual: lightest texture first).

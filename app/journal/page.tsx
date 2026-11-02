@@ -4,7 +4,12 @@ import { journalEntries as entries } from "@/lib/journal-entries";
 import PageHead from "@/components/layout/PageHead";
 import Container from "@/components/layout/Container";
 
-export const metadata = { title: "Journal", alternates: { canonical: "/journal" } };
+export const metadata = {
+  title: "Journal",
+  description:
+    "Notes from the House of Clarity™: the ritual, the label and the town of Isola del Liri.",
+  alternates: { canonical: "/journal" },
+};
 
 
 export default function JournalPage() {
