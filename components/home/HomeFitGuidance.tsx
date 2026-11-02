@@ -11,8 +11,8 @@ const fitGuidance = [
     fit: "Clarity Day Crème",
     why: "Ceramides, cholesterol and squalane, formulated for skin that feels comfortable and hydrated through the working day.",
     slug: "terra-radiance-creme",
-    image: "/assets/products/clarity-day-creme-studio-scene.jpg",
-    imageAlt: "Clarity Day Crème on a travertine plinth with a green CHIAREL ribbon",
+    image: "/assets/products/clarity-day-creme-capri.jpg",
+    imageAlt: "Clarity Day Crème on sunlit limestone above the Faraglioni of Capri",
   },
   {
     concern: "Skin looks dull, uneven, or has lost visible firmness",
@@ -35,8 +35,8 @@ const fitGuidance = [
     fit: "Clarity Night Crème",
     why: "Bakuchiol with peptides and niacinamide, for the look of smoother texture overnight.",
     slug: "recovery-masque",
-    image: "/assets/products/clarity-night-creme-ribbon-scene-v2.jpg",
-    imageAlt: "Clarity Night Crème on dark slate among ferns with a Red Ochre CHIAREL ribbon",
+    image: "/assets/products/clarity-night-creme-capri.jpg",
+    imageAlt: "Clarity Night Crème on sunlit rock above the Capri coastline",
   },
 ];
 
