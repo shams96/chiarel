@@ -57,7 +57,15 @@ describe("Hero", () => {
     const css = src("app/globals.css");
     expect(css).toMatch(/\.poster \{[^}]*container-type: inline-size/);
     expect(css).toMatch(/\.poster \{[^}]*background-size: calc\(100% \/ 6\) 100%/);
-    expect(css).toMatch(/\.poster-b \{[^}]*margin-left: calc\(100% \/ 6 \* 2\)/);
+    expect(css).toMatch(/\.poster-b \{[^}]*margin-left: auto/);
+  });
+  it("keeps the scale contrast of the poster: the small word is at most 40% of the big ones", () => {
+    const css = src("app/globals.css");
+    const size = (k: string) => Number(css.match(new RegExp(String.raw`\.poster-${k} \{ font-size: ([\d.]+)cqw`))?.[1]);
+    expect(size("a")).toBeGreaterThan(0);
+    expect(size("b")).toBeGreaterThan(0);
+    expect(size("b") / size("a")).toBeLessThanOrEqual(0.4);
+    expect(size("b") / size("c")).toBeLessThanOrEqual(0.4);
   });
   it("makes the photo the hero: a half-width frame on a deepened Red Ochre block, the jar on a mirror", () => {
     expect(html).toContain("bg-ochre");
