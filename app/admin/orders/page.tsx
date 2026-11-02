@@ -146,7 +146,7 @@ export default function AdminOrdersPage() {
           {rows.map((o) => (
             <tr key={o.id}>
               <td className={`${tdClass} whitespace-nowrap`}>
-                <Link href={`/admin/orders/${o.id}`} className="font-medium text-garden underline underline-offset-4 hover:text-redochre">
+                <Link href={`/admin/orders/${o.id}`} className="font-medium text-garden underline underline-offset-4 hover:text-ochre">
                   {o.id.slice(-8)}
                 </Link>
                 {o.disputeStatus && (

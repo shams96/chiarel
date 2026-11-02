@@ -142,7 +142,7 @@ export default async function OrderConfirmationPage({
 
       <Link
         href="/"
-        className="mt-10 inline-block border border-ink px-8 py-3 text-[12px] uppercase tracking-[0.25em] transition hover:border-ochre hover:text-ochre"
+        className="mt-10 inline-block border border-ink px-8 py-3 text-eyebrow uppercase transition hover:border-ochre hover:text-ochre"
       >
         Return to the House
       </Link>

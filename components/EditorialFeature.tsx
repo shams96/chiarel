@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
@@ -29,7 +29,7 @@ export default function EditorialFeature({
       <div className="section-x grid items-center gap-8 md:grid-cols-2 md:gap-16">
         <Reveal className={flip ? "md:order-2" : undefined}>
           <div className="relative mx-auto aspect-[2/3] w-full max-w-md overflow-hidden">
-            <Image src={src} alt={alt} fill sizes="(max-width: 768px) 90vw, 448px" className="object-cover" />
+            <ResponsiveImage src={src} alt={alt} sizes="(max-width: 768px) 90vw, 448px" className="object-cover" />
           </div>
         </Reveal>
         <Reveal delay={0.1}>

@@ -65,12 +65,12 @@ const TIER: Record<string, string> = { ok: "OK", approaching: "Approaching the l
 function EvidenceDetails({ d }: { d: Dispute }) {
   return (
     <details>
-      <summary className={`cursor-pointer ${d.evidenceComplete ? "text-garden" : "font-medium text-redochre"}`}>
+      <summary className={`cursor-pointer ${d.evidenceComplete ? "text-garden" : "font-medium text-ochre"}`}>
         {d.evidenceComplete ? "Complete" : `${d.missing.length} missing`}
       </summary>
       <ul className="mt-2 grid gap-1 pl-4">
         {d.evidence.map((e) => (
-          <li key={e.key} className={e.present ? "list-disc text-garden" : "list-disc font-medium text-redochre"}>
+          <li key={e.key} className={e.present ? "list-disc text-garden" : "list-disc font-medium text-ochre"}>
             {e.present ? "Have" : "Missing"}: {e.label}
             {e.detail ? ` (${e.detail})` : ""}
           </li>
@@ -172,7 +172,7 @@ export default function AdminDisputesPage() {
             {rows.map((d) => (
               <li key={d.orderId} className="border border-champagne bg-white p-4">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <Link href={`/admin/orders/${d.orderId}`} className="text-redochre underline underline-offset-4">
+                  <Link href={`/admin/orders/${d.orderId}`} className="text-ochre underline underline-offset-4">
                     {d.orderId.slice(-8)}
                   </Link>
                   <span className="font-serif text-lg">{d.amount != null ? `$${d.amount}` : ""}</span>
@@ -197,7 +197,7 @@ export default function AdminDisputesPage() {
               {rows.map((d) => (
                 <tr key={d.orderId}>
                   <td className={tdClass}>
-                    <Link href={`/admin/orders/${d.orderId}`} className="text-redochre underline underline-offset-4">
+                    <Link href={`/admin/orders/${d.orderId}`} className="text-ochre underline underline-offset-4">
                       {d.orderId.slice(-8)}
                     </Link>
                   </td>

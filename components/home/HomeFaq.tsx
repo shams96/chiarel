@@ -11,7 +11,7 @@ export default function HomeFaq({ faqs }: { faqs: { question: string; answer: st
           <h2 className="font-serif text-[clamp(2.25rem,1.4rem+2.6vw,4rem)] leading-[1.05] text-garden">
             Frequently Asked Questions
           </h2>
-          <div className="mt-6 h-px w-20 bg-redochre" aria-hidden="true" />
+          <div className="mt-6 h-px w-20 bg-ochre" aria-hidden="true" />
         </Reveal>
         <div className="divide-y divide-champagne border-y border-champagne">
           {faqs.map((faq, i) => (
@@ -19,8 +19,8 @@ export default function HomeFaq({ faqs }: { faqs: { question: string; answer: st
               <details className="group py-6">
                 <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 font-serif text-lg leading-snug text-ink md:text-xl">
                   {faq.question}
-                  <span className="ml-4 shrink-0 text-xl text-redochre group-open:hidden" aria-hidden="true">+</span>
-                  <span className="ml-4 hidden shrink-0 text-xl text-redochre group-open:inline" aria-hidden="true">−</span>
+                  <span className="ml-4 shrink-0 text-xl text-ochre group-open:hidden" aria-hidden="true">+</span>
+                  <span className="ml-4 hidden shrink-0 text-xl text-ochre group-open:inline" aria-hidden="true">−</span>
                 </summary>
                 <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-ink/80">{faq.answer}</p>
               </details>

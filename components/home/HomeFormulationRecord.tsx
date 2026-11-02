@@ -22,9 +22,9 @@ const evidenceProducts = products.filter((p) =>
 // ledger on purpose: a document, not a campaign.
 export default function HomeFormulationRecord() {
   return (
-    <section className="section-y bg-peachdust" id="formulation-record">
+    <section className="section-y bg-ivory" id="formulation-record">
       <div className="section-x">
-        <div className="border border-champagne border-l-4 border-l-redochre bg-white px-6 py-8 md:px-10 md:py-10">
+        <div className="border border-champagne border-l-4 border-l-ochre bg-white px-6 py-8 md:px-10 md:py-10">
           <p className="mb-8 max-w-2xl text-[15px] leading-relaxed text-ink/80" data-formulation-statement>
             {formulationLine()} {FREE_FROM_SENTENCE}
           </p>
@@ -36,8 +36,8 @@ export default function HomeFormulationRecord() {
                   Key ingredients by product.
                 </span>
               </span>
-              <span className="ml-4 shrink-0 text-xl text-redochre group-open:hidden" aria-hidden="true">+</span>
-              <span className="ml-4 hidden shrink-0 text-xl text-redochre group-open:inline" aria-hidden="true">−</span>
+              <span className="ml-4 shrink-0 text-xl text-ochre group-open:hidden" aria-hidden="true">+</span>
+              <span className="ml-4 hidden shrink-0 text-xl text-ochre group-open:inline" aria-hidden="true">−</span>
             </summary>
 
             <div className="pb-12 pt-4">
@@ -73,7 +73,7 @@ export default function HomeFormulationRecord() {
                       {ingredientTable.map((row, i) => (
                         <tr
                           key={`${row.product}-${row.ingredient}-${i}`}
-                          className="border-b border-ink/10 transition-colors hover:bg-peachdust/50"
+                          className="border-b border-ink/10 transition-colors hover:bg-cloud"
                         >
                           <td className="py-3 pr-4 text-ink/80">{row.product}</td>
                           <td className="py-3 text-ink/75">{row.ingredient}</td>
@@ -88,7 +88,7 @@ export default function HomeFormulationRecord() {
                     .slice(0, 6)
                     .map((row, i) => (
                       <li key={i} className="flex items-start gap-3 text-[13px] leading-relaxed text-ink/75">
-                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-redochre" aria-hidden="true" />
+                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-ochre" aria-hidden="true" />
                         <span>
                           <span className="text-ink/75">{row.product}: </span>
                           {row.benefit}
