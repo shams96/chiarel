@@ -12,7 +12,12 @@ only covers what's specific to building features *for this brand's site*.
   or new studio photography). Never generate or composite fake label text, invented ingredients, or
   placeholder jars presented as final. See project memory `chiarel-site-light-never-dark`.
 - **Light, never dark.** No dark-background sections, no evening/dusk art direction. High-key daylight
-  is the default for every visual surface. See project memory `chiarel-site-light-never-dark`.
+  is the default for every visual surface. Page ground is Cloud Dancer (#F0F2EB) with Ivory as the lighter
+  panel tier. Existing `bg-ink` bands (HomeProvenance, /founding-100 hero, PDP video band) are being
+  converted to light in the 2026-10 redesign. See `specs/swiss-luxury-redesign/DECISIONS.md`.
+- **One typeface.** Libre Bodoni only (owner brief 2026-10-31, ruling D1). No second family; small tracked
+  text never below 12px. Use the type tokens in `tailwind.config.ts` and the `components/layout/*` primitives
+  rather than ad hoc `text-[..px]` / `tracking-[..]` values.
 - **Claims discipline.** No copy, alt text, or image caption implies a claim above what's substantiated.
   Check new copy against the risk table in `CHIAREL_LAUNCH_MAPPING_AUDIT.md` (avoid "cellular turnover",
   "barrier repair", "dermal", "regeneration", "firming" without evidence, etc.) before it ships.

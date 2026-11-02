@@ -19,13 +19,13 @@ export default function Error({
 
   return (
     <div className="flex min-h-[70vh] flex-col items-center justify-center bg-ivory px-6 text-center">
-      <p className="text-[11px] uppercase tracking-[0.3em] text-ochre">
+      <p className="text-[12px] uppercase tracking-[0.3em] text-ochre">
         CHIAREL™
       </p>
       <h1 className="mt-6 font-serif text-3xl text-ink">
         Something went wrong on our end
       </h1>
-      <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink/60">
+      <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink/70">
         This page hit an unexpected error — often a brief connection issue.
         Trying again usually resolves it.
       </p>

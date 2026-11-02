@@ -40,8 +40,8 @@ export default function CartDrawer() {
         role="dialog"
         aria-modal="true"
         aria-label="Your Ritual Bag"
-        className={`cart-panel fixed right-0 top-0 z-[70] flex h-full w-full max-w-md flex-col bg-ivory transition-transform ${
-          isOpen ? "translate-x-0 shadow-2xl" : "translate-x-full"
+        className={`cart-panel fixed right-0 top-0 z-[70] flex h-full w-full max-w-md flex-col bg-ivory transition-[transform,visibility] ${
+          isOpen ? "visible translate-x-0 shadow-2xl" : "invisible translate-x-full"
         }`}
       >
         <div className="flex items-center justify-between border-b border-ink/10 px-6 py-5">
@@ -57,7 +57,7 @@ export default function CartDrawer() {
 
         {lines.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-3 px-6 text-center">
-            <p className="text-sm text-ink/60">Your bag is empty.</p>
+            <p className="text-sm text-ink/70">Your bag is empty.</p>
             <Link
               href="/ritual"
               onClick={close}
@@ -69,7 +69,7 @@ export default function CartDrawer() {
         ) : (
           <>
             <div className="flex-1 overflow-y-auto px-6 py-4">
-              <p className={`mb-4 text-[12px] ${shipping === 0 ? "text-ochre" : "text-ink/60"}`}>
+              <p className={`mb-4 text-[12px] ${shipping === 0 ? "text-ochre" : "text-ink/70"}`}>
                 {shippingNote(subtotal, lines)}
               </p>
               <ul className="space-y-5">
@@ -88,7 +88,7 @@ export default function CartDrawer() {
                       <p className="text-sm font-medium leading-tight">
                         {line.product.name}
                       </p>
-                      <p className="mt-0.5 text-[11px] uppercase tracking-[0.14em] text-ink/65">
+                      <p className="mt-0.5 text-[12px] uppercase tracking-[0.14em] text-ink/65">
                         {modeLabel[line.mode]}
                       </p>
                       <div className="mt-2 flex items-center justify-between">
@@ -98,7 +98,7 @@ export default function CartDrawer() {
                               onClick={() => setQty(line.id, line.qty - 1)}
                               disabled={line.qty <= 1}
                               aria-label={`Decrease quantity of ${line.product.name}`}
-                              className="btn-press tap-area flex h-7 w-7 items-center justify-center text-sm text-ink/60 transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-ink/60"
+                              className="btn-press tap-area flex h-7 w-7 items-center justify-center text-sm text-ink/70 transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-ink/70"
                             >
                               −
                             </button>
@@ -109,7 +109,7 @@ export default function CartDrawer() {
                               onClick={() => setQty(line.id, line.qty + 1)}
                               disabled={line.qty >= MAX_LINE_QTY}
                               aria-label={`Increase quantity of ${line.product.name}`}
-                              className="btn-press tap-area flex h-7 w-7 items-center justify-center text-sm text-ink/60 transition hover:text-ochre"
+                              className="btn-press tap-area flex h-7 w-7 items-center justify-center text-sm text-ink/70 transition hover:text-ochre"
                             >
                               +
                             </button>
@@ -121,7 +121,7 @@ export default function CartDrawer() {
                         <button
                           onClick={() => remove(line.slug)}
                           aria-label={`Remove ${line.product.name}`}
-                          className="tap-area text-[11px] uppercase tracking-[0.14em] text-ink/65 hover:text-ochre"
+                          className="tap-area text-[12px] uppercase tracking-[0.14em] text-ink/65 hover:text-ochre"
                         >
                           <span aria-hidden="true">Remove</span>
                         </button>
@@ -133,7 +133,7 @@ export default function CartDrawer() {
 
               {nextStep && (
                 <div className="mt-6 border-t border-ink/10 pt-5">
-                  <p className="mb-3 text-[11px] uppercase tracking-[0.16em] text-ink/65">
+                  <p className="mb-3 text-[12px] uppercase tracking-[0.16em] text-ink/65">
                     Complete the Ritual
                   </p>
                   <div className="flex flex-wrap items-center gap-3">
@@ -150,16 +150,16 @@ export default function CartDrawer() {
                       <p className="truncate text-sm font-medium leading-tight">
                         {nextStep.name}
                       </p>
-                      <p className="mt-0.5 truncate text-[11px] uppercase tracking-[0.14em] text-ink/65">
+                      <p className="mt-0.5 truncate text-[12px] uppercase tracking-[0.14em] text-ink/65">
                         {nextStep.step}
                       </p>
-                      <p className="mt-0.5 text-[11px] text-ink/50">
+                      <p className="mt-0.5 text-[12px] text-ink/70">
                         Subscription · renews every 45 days
                       </p>
                     </div>
                     <button
                       onClick={() => add(nextStep.slug, "subscription")}
-                      className="btn-press min-h-[44px] w-full shrink-0 border border-ink/20 px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-ink/70 transition hover:border-ochre hover:text-ochre sm:w-auto"
+                      className="btn-press min-h-[44px] w-full shrink-0 border border-ink/20 px-3 py-2 text-[12px] uppercase tracking-[0.14em] text-ink/70 transition hover:border-ochre hover:text-ochre sm:w-auto"
                     >
                       Subscribe · ${nextStep.price!.subscription}
                     </button>
@@ -189,20 +189,20 @@ export default function CartDrawer() {
                 <span>Estimated total</span>
                 <span className="font-serif text-xl">${estimatedTotal}</span>
               </p>
-              <p className="mb-3 text-center text-[11px] uppercase tracking-[0.14em] text-ink/65">
+              <p className="mb-3 text-center text-[12px] uppercase tracking-[0.14em] text-ink/65">
                 Key ingredients named
               </p>
               <Link
                 href="/cart"
                 onClick={close}
-                className="flex min-h-[44px] items-center justify-center text-center text-[11px] uppercase tracking-[0.14em] text-ink/80 underline decoration-ink/30 underline-offset-2 hover:text-ochre"
+                className="flex min-h-[44px] items-center justify-center text-center text-[12px] uppercase tracking-[0.14em] text-ink/80 underline decoration-ink/30 underline-offset-2 hover:text-ochre"
               >
                 View bag
               </Link>
               <Link
                 href="/terms#guarantee"
                 onClick={close}
-                className="flex min-h-[44px] items-center justify-center text-center text-[11px] uppercase tracking-[0.14em] text-ink/65 underline decoration-ink/20 underline-offset-2 hover:text-ochre"
+                className="flex min-h-[44px] items-center justify-center text-center text-[12px] uppercase tracking-[0.14em] text-ink/65 underline decoration-ink/20 underline-offset-2 hover:text-ochre"
               >
                 90-Day Guarantee on your first order
               </Link>

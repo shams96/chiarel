@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
@@ -29,11 +29,11 @@ export default function EditorialFeature({
       <div className="section-x grid items-center gap-8 md:grid-cols-2 md:gap-16">
         <Reveal className={flip ? "md:order-2" : undefined}>
           <div className="relative mx-auto aspect-[2/3] w-full max-w-md overflow-hidden">
-            <Image src={src} alt={alt} fill sizes="(max-width: 768px) 90vw, 448px" className="object-cover" />
+            <ResponsiveImage src={src} alt={alt} sizes="(max-width: 768px) 90vw, 448px" className="object-cover" />
           </div>
         </Reveal>
         <Reveal delay={0.1}>
-          <p className="text-[11px] uppercase tracking-[0.3em] text-ochre">{kicker}</p>
+          <p className="text-[12px] uppercase tracking-[0.3em] text-ochre">{kicker}</p>
           <h2 className="mt-3 font-serif text-3xl leading-snug md:text-4xl">{headline}</h2>
           {body && <p className="mt-5 max-w-md text-sm leading-relaxed text-ink/70">{body}</p>}
           {href && cta && (

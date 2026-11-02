@@ -12,7 +12,7 @@ export default function AddPairButton({ slug, name }: { slug: string; name: stri
       type="button"
       onClick={() => add(slug, "subscription")}
       aria-label={`Add ${name} to bag`}
-      className="btn-press min-h-[44px] w-full border border-ink/20 px-3 py-2 text-[11px] uppercase tracking-[0.16em] text-ink/80 transition hover:border-ochre hover:text-ochre sm:w-auto"
+      className="btn-press min-h-[44px] w-full border border-ink/20 px-3 py-2 text-[12px] uppercase tracking-[0.16em] text-ink/80 transition hover:border-ochre hover:text-ochre sm:w-auto"
     >
       Add to bag
     </button>

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { productHref } from "@/lib/products";
+import PageHead from "@/components/layout/PageHead";
+import Container from "@/components/layout/Container";
 
 export const metadata = { title: "The Science", alternates: { canonical: "/science" } };
 
@@ -43,28 +45,29 @@ const entries = [
 
 export default function SciencePage() {
   return (
-    <div className="mx-auto max-w-4xl px-6 py-16">
-      <h1 className="font-serif text-4xl">The Science</h1>
-      <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/65">
-        CHIAREL Intelligence™
-      </p>
-      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/75">
-        Modern Biological Stress™ is the daily load on a working
-        woman&rsquo;s body and skin. Each CHIAREL formulation answers one part
-        of it.
-      </p>
+    <>
+      <PageHead eyebrow="CHIAREL Intelligence™" lines={["The Science"]}>
+        <p>
+          Modern Biological Stress™ is the daily load on a working
+          woman&rsquo;s body and skin. Each CHIAREL formulation answers one part
+          of it.
+        </p>
+      </PageHead>
 
-      <div className="mt-12 space-y-8">
+      <Container className="pb-section pt-6">
+      <div className="grid-12">
+      <div className="col-span-full lg:col-span-8 lg:col-start-5">
+      <div className="space-y-8">
         {entries.map((e) => (
           <div key={e.slug} className="border-l-2 border-champagne pl-6">
             <h2 className="font-serif text-2xl">{e.name}</h2>
-            <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/65">
+            <p className="mt-1 text-eyebrow uppercase text-ink/65">
               {e.answers}
             </p>
             <p className="mt-2 max-w-xl text-sm text-ink/70">{e.science}</p>
             <Link
               href={productHref(e.slug)}
-              className="mt-3 inline-block border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.16em] text-ochre"
+              className="mt-3 inline-block border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
             >
               See the formulation →
             </Link>
@@ -72,23 +75,26 @@ export default function SciencePage() {
         ))}
       </div>
 
-      <div className="mt-14 flex flex-wrap gap-6 border-t border-ink/10 pt-8 text-[12px] uppercase tracking-[0.16em]">
+      <div className="mt-14 flex flex-wrap gap-6 border-t border-ink/10 pt-8 text-eyebrow uppercase">
         <Link href="/science/barrier-resilience" className="border-b border-ochre pb-0.5 text-ochre">
           Barrier Resilience →
         </Link>
         <Link href="/science/lasting-hydration" className="border-b border-ochre pb-0.5 text-ochre">
           Lasting Hydration →
         </Link>
-        <Link href="/science/application" className="border-b border-ink/30 pb-0.5 text-ink/60">
+        <Link href="/science/application" className="border-b border-ink/30 pb-0.5 text-ink/70">
           Application Guide
         </Link>
-        <Link href="/science/bifida-ferment-lysate" className="border-b border-ink/30 pb-0.5 text-ink/60">
+        <Link href="/science/bifida-ferment-lysate" className="border-b border-ink/30 pb-0.5 text-ink/70">
           Bifida Ferment Lysate
         </Link>
-        <Link href="/science/l-ornithine" className="border-b border-ink/30 pb-0.5 text-ink/60">
+        <Link href="/science/l-ornithine" className="border-b border-ink/30 pb-0.5 text-ink/70">
           L-Ornithine
         </Link>
       </div>
-    </div>
+      </div>
+      </div>
+      </Container>
+    </>
   );
 }

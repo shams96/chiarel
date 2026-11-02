@@ -138,7 +138,7 @@ export default function AdminCustomersPage() {
                       type="button"
                       onClick={() => toggle(c.email)}
                       aria-expanded={open === c.email}
-                      className="text-left text-garden underline underline-offset-4 hover:text-redochre"
+                      className="text-left text-garden underline underline-offset-4 hover:text-ochre"
                     >
                       {c.email}
                     </button>

@@ -1,7 +1,9 @@
-import Image from "next/image";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
-import RibbonBand from "@/components/home/RibbonBand";
+import Section from "@/components/layout/Section";
+import Grid from "@/components/layout/Grid";
+import Eyebrow from "@/components/layout/Eyebrow";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { getProductOrThrow, productImageAlt, productHref, studioImage } from "@/lib/products";
 
@@ -14,21 +16,20 @@ export function HomeFinalCta() {
 
   return (
     <>
-    <RibbonBand tone="green" />
-    <section className="section-y bg-redochre text-ivory">
+    <section className="section-y bg-ivory text-ink">
       <div className="mx-auto flex max-w-[96rem] flex-col items-center gap-10 px-[clamp(1.5rem,4.5vw,7rem)] md:flex-row md:gap-[clamp(2.5rem,5vw,7rem)]">
         <Reveal className="grid w-full grid-cols-5 gap-4 md:w-3/5">
           <div
             className="card-elevated product-frame col-span-3 aspect-[4/5]"
             style={{ backgroundColor: NEUTRAL_FRAME_BG }}
           >
-            <Image src={studioImage(essence)} alt={productImageAlt(essence)} fill sizes="35vw" />
+            <ResponsiveImage src={studioImage(essence)} alt={productImageAlt(essence)} sizes="35vw" />
           </div>
           <div
             className="card-elevated product-frame col-span-2 aspect-[4/5] self-end"
             style={{ backgroundColor: NEUTRAL_FRAME_BG }}
           >
-            <Image src={studioImage(day)} alt={productImageAlt(day)} fill sizes="25vw" />
+            <ResponsiveImage src={studioImage(day)} alt={productImageAlt(day)} sizes="25vw" />
           </div>
         </Reveal>
         <Reveal delay={0.15} className="w-full md:w-2/5">
@@ -52,18 +53,18 @@ export function HomeFinalCta() {
           <div className="mt-6 flex items-center gap-6">
             <Link
               href={productHref("chiarel-essence")}
-              className="btn-press inline-block border border-ivory bg-ivory px-8 py-3 text-[12px] uppercase tracking-[0.25em] text-ink transition hover:bg-peachdust"
+              className="btn-press inline-flex min-h-[44px] items-center bg-ink px-8 text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre"
             >
               Begin the Ritual
             </Link>
             <Link
               href="/shop"
-              className="btn-press border-b border-ivory pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ivory"
+              className="btn-press border-b border-ink pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ink"
             >
               See the full House
             </Link>
           </div>
-          <p className="mt-6 text-[11px] uppercase tracking-[0.14em]">
+          <p className="mt-6 text-[12px] uppercase tracking-[0.14em]">
             Available online only at chiarel.com — not sold in retail
             stores or through other sellers.
           </p>
@@ -74,30 +75,34 @@ export function HomeFinalCta() {
   );
 }
 
-// Philosophy + House note, merged into one closing block. A photograph of the
-// town on one side and the quote, set large, on the other.
+// Section 10, The House: the origin quote and philosophy, a photograph of the
+// town on one side and the quote, set large, on the other. Copy unchanged.
 export function HomePhilosophy() {
   return (
-    <section className="bg-ivory">
-      <div className="mx-auto grid max-w-[84rem] items-center gap-10 px-[clamp(1.5rem,3vw,3rem)] py-20 md:grid-cols-[0.8fr_1.2fr] md:gap-20 md:py-28">
-        <Reveal>
-          <div className="relative mx-auto aspect-[3/4] w-full max-w-[26rem] overflow-hidden">
-            <Image
+    <Section id="the-house" rule labelledBy="the-house-heading">
+      <Grid className="items-center gap-y-10">
+        <Reveal className="col-span-4 md:col-span-3 lg:col-span-4">
+          <div className="relative mx-auto aspect-[3/4] w-full max-w-[26rem] overflow-hidden bg-ivory">
+            <ResponsiveImage
               src="/assets/journal/isola-del-liri-bridge.jpg"
               alt="A woman in white on the old bridge at Isola del Liri, with the Cascata Grande and the castle behind her"
-              fill
               sizes="(max-width: 768px) 90vw, 26rem"
               className="object-cover"
             />
           </div>
         </Reveal>
-        <Reveal delay={0.1}>
-          <h2 className="text-[11px] font-normal uppercase tracking-[0.3em] text-redochre">The Philosophy</h2>
-          <p className="mt-6 border-l-4 border-redochre pl-6 font-serif text-[clamp(1.75rem,1.1rem+2.2vw,3.1rem)] leading-[1.2] text-garden">
+        <Reveal
+          delay={0.1}
+          className="col-span-4 md:col-span-5 lg:col-span-7 lg:col-start-6"
+        >
+          <Eyebrow className="text-ochre">
+            <span id="the-house-heading">The House</span>
+          </Eyebrow>
+          <p className="mt-6 border-l-2 border-ochre pl-6 font-serif text-h3 text-ink md:text-h2">
             &ldquo;Skin is not one thing. A house built to serve it should not
             pretend otherwise.&rdquo;
           </p>
-          <p className="mt-8 max-w-xl text-[15px] leading-relaxed text-ink/80">
+          <p className="mt-8 max-w-measure text-body text-ink/80">
             CHIAREL Intelligence™ began as a question at a kitchen table —
             the working method still holds: start with the biology in front
             of you, formulate it properly, and name the ingredients that
@@ -109,19 +114,19 @@ export function HomePhilosophy() {
           <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-7">
             <Link
               href="/journal/three-skins-one-house"
-              className="btn-press inline-block border-b border-redochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-redochre"
+              className="btn-press inline-block border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
             >
               Read the Origin Story
             </Link>
             <Link
               href="/house"
-              className="btn-press inline-block border-b border-redochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-redochre"
+              className="btn-press inline-block border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
             >
               Discover the House
             </Link>
           </div>
         </Reveal>
-      </div>
-    </section>
+      </Grid>
+    </Section>
   );
 }

@@ -84,7 +84,7 @@ export default function AdminHomePage() {
     <PageShell>
       <section className="grid overflow-hidden bg-garden text-ivory md:grid-cols-[3fr_2fr]">
         <div className="p-7 md:p-12">
-          <p className="text-[11px] uppercase tracking-[0.34em] text-champagne">Admin console</p>
+          <p className="text-[12px] uppercase tracking-[0.34em] text-champagne">Admin console</p>
           <h1 className="mt-3 font-serif text-[clamp(2.2rem,1.2rem+3vw,4rem)] leading-[1.05]">{hello}</h1>
           <p className="mt-4 max-w-xl text-[clamp(1rem,0.9rem+0.3vw,1.2rem)] leading-relaxed text-ivory/90">
             {dash
@@ -97,13 +97,13 @@ export default function AdminHomePage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/admin/orders?fulfilment=unfulfilled&payment=paid"
-                className="btn-press inline-flex bg-champagne px-6 py-3 text-[11px] uppercase tracking-[0.24em] text-ink transition hover:bg-champagne/85"
+                className="btn-press inline-flex bg-champagne px-6 py-3 text-[12px] uppercase tracking-[0.24em] text-ink transition hover:bg-champagne/85"
               >
                 Orders to pack
               </Link>
               <Link
                 href="/admin/orders"
-                className="btn-press inline-flex border border-champagne px-6 py-3 text-[11px] uppercase tracking-[0.24em] text-champagne transition hover:bg-champagne hover:text-ink"
+                className="btn-press inline-flex border border-champagne px-6 py-3 text-[12px] uppercase tracking-[0.24em] text-champagne transition hover:bg-champagne hover:text-ink"
               >
                 All orders
               </Link>
@@ -184,7 +184,7 @@ export default function AdminHomePage() {
           <li key={x.href}>
             <Link
               href={x.href}
-              className="group block h-full border border-champagne border-t-redochre bg-white p-5 transition-transform duration-300 ease-out hover:-translate-y-0.5"
+              className="group block h-full border border-champagne border-t-ochre bg-white p-5 transition-transform duration-300 ease-out hover:-translate-y-0.5"
             >
               <span className="font-serif text-xl text-garden group-hover:underline group-hover:decoration-champagne group-hover:underline-offset-4">
                 {x.title}

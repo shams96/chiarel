@@ -1,29 +1,56 @@
-import Image from "next/image";
 import Link from "next/link";
+import ResponsiveImage from "@/components/ResponsiveImage";
+import Container from "@/components/layout/Container";
+import Grid from "@/components/layout/Grid";
+import FocusLadder from "@/components/layout/FocusLadder";
 import { perDayPrice, DELIVERY_DAYS } from "@/lib/pricing";
 import { getProductOrThrow, isPurchasable } from "@/lib/products";
-import RibbonBand from "@/components/home/RibbonBand";
 
-// First-viewport hero: Red Ochre text panel on the left, the festive Clarity
-// Essence scene (frosted flower, CHIAREL velvet ribbon) filling the right half
-// edge to edge; stacked on phones. Type and gutters scale with the viewport so
-// the hero stays generous on wide monitors instead of sitting small in a corner.
-// A strip of the printed ribbon closes the hero.
+// Section 01, Hero, in the Focus Ladder direction: the word "Clarity" steps
+// down from a hairline outline to a solid letter (decorative, aria-hidden),
+// the real h1 and the approved supporting copy sit beneath it, and the Clarity
+// Essence scene is a hard-edged plate on a Red Ochre block at the right. Cloud
+// ground, one primary action, left-weighted on the 12-column grid. Copy,
+// price line and photograph are unchanged from the previous hero.
 export default function HomeHero() {
   const essence = getProductOrThrow("chiarel-essence");
 
   return (
-    <>
-      <section className="grid w-full md:grid-cols-[5fr_6fr]">
-        <div className="bg-redochre px-[clamp(1.5rem,4.5vw,7rem)] py-14 text-ivory md:flex md:min-h-[min(880px,calc(100svh-5rem))] md:items-center md:py-20">
-          <div className="hero-in max-w-[46rem]">
-            <p className="text-[clamp(11px,0.55rem+0.35vw,15px)] uppercase tracking-[0.42em] md:tracking-[0.5em]">
-              CHIAREL™ · The House of Clarity™
-            </p>
-            <h1 className="mt-5 font-serif text-[clamp(2.4rem,1rem+4.2vw,6.6rem)] leading-[1.04] tracking-[-0.015em] md:mt-8">
-              Advancing Cellular Clarity™.
-            </h1>
-            <p className="mt-6 text-[clamp(1rem,0.8rem+0.55vw,1.5rem)] leading-[1.65] md:mt-8">
+    <section className="pb-section pt-5 md:pt-6">
+      <Container>
+        <Grid className="items-baseline border-b border-hairline pb-5">
+          <p className="col-span-4 text-eyebrow uppercase md:col-span-4">CHIAREL™ · The House of Clarity™</p>
+          <p className="col-span-4 text-eyebrow uppercase md:col-span-4 md:col-start-5 md:text-right lg:col-span-4 lg:col-start-9">
+            Isola del Liri, Italy
+          </p>
+        </Grid>
+
+        <Grid className="mt-8 gap-y-12 md:mt-12">
+          <div className="hero-in col-span-4 md:col-span-8 lg:col-span-8">
+            <FocusLadder className="max-w-[42rem]" />
+            <h1 className="mt-8 font-serif text-h2 md:mt-10">Advancing Cellular Clarity™.</h1>
+            <div className="mt-6 md:mt-8">
+              <Link
+                href="/ritual"
+                className="btn-press inline-flex min-h-[48px] items-center bg-ink px-10 text-eyebrow uppercase text-ivory transition hover:bg-ochre"
+              >
+                Begin the Ritual
+              </Link>
+            </div>
+            {isPurchasable(essence) && (
+              <p className="mt-8 text-caption leading-relaxed">
+                From{" "}
+                <span className="tabular-nums font-serif text-h4">
+                  ${perDayPrice(essence.price.subscription)}
+                </span>{" "}
+                a day
+                <span className="mt-1 block text-ink/75">
+                  ${essence.price.subscription} every {DELIVERY_DAYS} days with
+                  subscription · ${essence.price.oneTime} one-time
+                </span>
+              </p>
+            )}
+            <p className="mt-10 max-w-measure text-body text-ink/80">
               Exceptional skin discipline recognises no boundaries. Formulated in
               Isola del Liri under pharmacist guidance, CHIAREL™ begins with the
               face, where Clarity Essence™ brings peptide and postbiotic
@@ -31,48 +58,33 @@ export default function HomeHero() {
               the neck and décolleté, where the same discipline is rarely
               applied.
             </p>
-            <div className="mt-9 flex flex-wrap items-center gap-x-9 gap-y-5 md:mt-11">
-              <Link
-                href="/ritual"
-                className="btn-press inline-block border border-ivory bg-ivory px-[clamp(2.25rem,3vw,3.5rem)] py-[clamp(1rem,1.2vw,1.4rem)] text-[clamp(11px,0.6rem+0.3vw,14px)] uppercase tracking-[0.34em] text-ink transition hover:bg-peachdust"
-              >
-                Begin the Ritual
-              </Link>
-              <Link
-                href="/shop/clarity-essence"
-                className="text-[clamp(1.2rem,1rem+0.5vw,1.7rem)] font-semibold text-champagne underline decoration-champagne underline-offset-[6px]"
-              >
-                Shop Clarity Essence
-              </Link>
-            </div>
-            {isPurchasable(essence) && (
-              <p className="mt-9 text-[clamp(13px,0.7rem+0.35vw,18px)] leading-relaxed md:mt-11">
-                From{" "}
-                <span className="tabular-nums font-serif text-[1.35em]">
-                  ${perDayPrice(essence.price.subscription)}
-                </span>{" "}
-                a day
-                <span className="block text-[0.9em]">
-                  ${essence.price.subscription} every {DELIVERY_DAYS} days with
-                  subscription · ${essence.price.oneTime} one-time
-                </span>
-              </p>
-            )}
           </div>
-        </div>
 
-        <div className="relative aspect-[4/5] w-full md:aspect-auto">
-          <Image
-            src="/assets/products/clarity-essence-festive-scene-v2.jpg"
-            alt="Clarity Essence™ in its glass bottle on a plinth, framed by a frosted flower and green CHIAREL velvet ribbon"
-            fill
-            priority
-            sizes="(max-width: 768px) 100vw, 55vw"
-            className="object-cover md:object-[50%_62%]"
-          />
-        </div>
-      </section>
-      <RibbonBand tone="green" />
-    </>
+          <div className="relative col-span-4 md:col-span-5 lg:col-span-4 lg:col-start-9">
+            <div className="relative aspect-[4/5] w-full bg-ochre">
+              <div className="absolute -bottom-4 -right-4 left-4 top-4 border border-ink md:-bottom-5 md:-right-5 md:left-5 md:top-5">
+                <ResponsiveImage
+                  src="/assets/products/clarity-essence-festive-scene-v2.jpg"
+                  alt="Clarity Essence™ in its glass bottle on a plinth, framed by a frosted flower and green CHIAREL velvet ribbon"
+                  sizes="(max-width: 768px) 90vw, (max-width: 1024px) 45vw, 30vw"
+                  priority
+                  className="object-cover object-[50%_62%]"
+                />
+              </div>
+              <span
+                aria-hidden="true"
+                className="vert-word absolute -right-10 top-0 hidden text-eyebrow uppercase lg:block"
+              >
+                Clarity Essence™
+              </span>
+            </div>
+            <p className="mt-10 flex justify-between gap-4 border-t border-ink pt-3 text-caption">
+              <span>Clarity Essence™</span>
+              <span>For fine lines and firmness</span>
+            </p>
+          </div>
+        </Grid>
+      </Container>
+    </section>
   );
 }

@@ -105,10 +105,10 @@ export default function AdminAuditPage() {
               <td className={`${tdClass} min-w-[12rem] break-words`}>{e.actorEmail}</td>
               <td className={`${tdClass} min-w-[16rem] break-words`}>
                 <span className="font-medium">{auditLabel(e)}</span>
-                <div className="mt-0.5 break-words text-[11px] uppercase tracking-[0.14em] text-ink/70">{e.action}</div>
+                <div className="mt-0.5 break-words text-[12px] uppercase tracking-[0.14em] text-ink/70">{e.action}</div>
                 {(e.before != null || e.after != null) && (
                   <details className="mt-2">
-                    <summary className="cursor-pointer text-[12px] uppercase tracking-[0.2em] text-redochre underline underline-offset-4">
+                    <summary className="cursor-pointer text-[12px] uppercase tracking-[0.2em] text-ochre underline underline-offset-4">
                       Details
                     </summary>
                     <pre className="mt-2 max-w-full overflow-x-auto whitespace-pre-wrap break-words border border-champagne bg-peachdust/40 p-3 text-[12px] leading-relaxed text-ink">

@@ -110,7 +110,7 @@ export default async function OrderConfirmationPage({
             </div>
             <div className="flex-1 text-sm">
               <p className="leading-tight">{item.product.name}</p>
-              <p className="text-[11px] text-ink/65">
+              <p className="text-[12px] text-ink/65">
                 {modeLabel[item.mode]} · Qty {item.qty}
               </p>
             </div>
@@ -142,7 +142,7 @@ export default async function OrderConfirmationPage({
 
       <Link
         href="/"
-        className="mt-10 inline-block border border-ink px-8 py-3 text-[12px] uppercase tracking-[0.25em] transition hover:border-ochre hover:text-ochre"
+        className="mt-10 inline-block border border-ink px-8 py-3 text-eyebrow uppercase transition hover:border-ochre hover:text-ochre"
       >
         Return to the House
       </Link>

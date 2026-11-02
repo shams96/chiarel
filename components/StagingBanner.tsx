@@ -7,7 +7,7 @@ export default function StagingBanner() {
   return (
     <div
       role="status"
-      className="pointer-events-none fixed inset-x-0 bottom-0 z-[9999] bg-black/85 py-1 text-center text-[11px] font-medium uppercase tracking-widest text-white"
+      className="pointer-events-none fixed inset-x-0 bottom-0 z-[9999] bg-black/85 py-1 text-center text-[12px] font-medium uppercase tracking-widest text-white"
     >
       STAGING — not the live store
     </div>

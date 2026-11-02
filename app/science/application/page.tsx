@@ -39,7 +39,7 @@ const faqJsonLd = {
 
 export default function ApplicationPage() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
+    <div className="mx-auto w-full max-w-3xl px-margin py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
@@ -48,7 +48,7 @@ export default function ApplicationPage() {
       <Link href="/science" className="text-[12px] text-ink/65 hover:text-ochre">
         ← The Science
       </Link>
-      <h1 className="mt-2 font-serif text-4xl leading-tight">
+      <h1 className="mt-2 font-serif text-h1 leading-tight">
         How to Apply CHIAREL
       </h1>
       <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/75">
@@ -116,16 +116,16 @@ export default function ApplicationPage() {
         </div>
       </section>
 
-      <p className="mt-14 max-w-2xl text-[11px] leading-relaxed text-ink/65">
+      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink/65">
         Application guidance reflects general formulation principles and is
         not a guarantee of individual results.
       </p>
 
-      <div className="mt-8 flex flex-wrap gap-6 border-t border-ink/10 pt-8 text-[12px] uppercase tracking-[0.16em]">
+      <div className="mt-8 flex flex-wrap gap-6 border-t border-ink/10 pt-8 text-eyebrow uppercase">
         <Link href="/ritual" className="border-b border-ochre pb-0.5 text-ochre">
           The Ritual →
         </Link>
-        <Link href="/journal/chiarel-ritual-guide" className="border-b border-ink/30 pb-0.5 text-ink/60">
+        <Link href="/journal/chiarel-ritual-guide" className="border-b border-ink/30 pb-0.5 text-ink/70">
           Full Ritual Guide
         </Link>
       </div>

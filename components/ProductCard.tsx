@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import Link from "next/link";
 import { productImageAlt, isPurchasable, studioImage, type Product, productHref } from "@/lib/products";
 import { perDayPrice } from "@/lib/pricing";
@@ -18,25 +18,24 @@ export default function ProductCard({
         className="product-frame aspect-[4/5]"
         style={{ backgroundColor: NEUTRAL_FRAME_BG }}
       >
-        <Image
+        <ResponsiveImage
           src={studioImage(product)}
           alt={productImageAlt(product)}
-          fill
           sizes="(max-width: 768px) 100vw, 33vw"
           className={productHoverClass(product.step)}
         />
         {product.badge && (
-          <span className="absolute left-3 top-3 bg-ivory/90 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-ochre">
+          <span className="absolute left-3 top-3 bg-ivory/90 px-2.5 py-1 text-[12px] uppercase tracking-[0.18em] text-ochre">
             {product.badge}
           </span>
         )}
       </div>
       <div className="mt-4">
         <h3 className="font-serif text-xl">{product.name}</h3>
-        <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-ink/65">
+        <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/65">
           {product.step}
         </p>
-        <p className="mt-1 text-[13px] text-ink/60">{product.descriptor}</p>
+        <p className="mt-1 text-[13px] text-ink/70">{product.descriptor}</p>
         {!hidePrice && (
           <p className="mt-2 text-sm">
             {isPurchasable(product) ? (
