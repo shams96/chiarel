@@ -15,6 +15,16 @@ describe("ambient product video", () => {
     expect(video).not.toMatch(/\bautoPlay\b/);
   });
 
+  it("is placed on the Eye Contour page with its clip and poster present and within 3 MB", () => {
+    expect(page).toContain('p.slug === "eye-contour-concentrate"');
+    expect(page).toContain("clarity-eye-contour-concentrate-ambient.mp4");
+    expect(page).toContain("clarity-eye-contour-concentrate-detail.jpg");
+    const mp4 = "public/assets/products/clarity-eye-contour-concentrate-ambient.mp4";
+    expect(existsSync(mp4)).toBe(true);
+    expect(statSync(mp4).size).toBeLessThanOrEqual(3 * 1024 * 1024);
+    expect(existsSync("public/assets/products/clarity-eye-contour-concentrate-detail.jpg")).toBe(true);
+  });
+
   it("is placed on the N1 page with files present and within 3 MB", () => {
     expect(page).toContain("<AmbientVideo");
     const mp4 = "public/assets/products/n1-neck-decollete-ambient.mp4";

@@ -225,6 +225,19 @@ export default async function ProductPage({
         </section>
       )}
 
+      {p.slug === "eye-contour-concentrate" && (
+        <section className="section-y border-y border-ink/15 bg-ivory">
+          <div className="section-x">
+            <AmbientVideo
+              src="/assets/products/clarity-eye-contour-concentrate-ambient.mp4"
+              poster="/assets/products/clarity-eye-contour-concentrate-detail.jpg"
+              label="Clarity Eye Contour Concentrate, 40 ml, on a pearl-pink satin plinth with frosted peach petals drifting"
+              className="mx-auto aspect-[4/5] max-h-[80vh] w-auto max-w-full bg-cloud object-cover"
+            />
+          </div>
+        </section>
+      )}
+
       {p.slug === "terra-radiance-creme" && (
         <EditorialFeature
           src="/assets/products/clarity-day-creme-editorial.jpg"
