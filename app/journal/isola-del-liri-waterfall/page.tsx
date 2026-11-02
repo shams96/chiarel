@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import ResponsiveImage from "@/components/ResponsiveImage";
 
 export const metadata: Metadata = {
   title: "A Town Built Around a Waterfall",
@@ -19,12 +19,11 @@ export default function WaterfallPage() {
         A Town Built Around a Waterfall
       </h1>
 
-      <div className="relative mt-8 aspect-[4/3] w-full overflow-hidden">
-        <Image
+      <div className="relative mx-auto mt-8 aspect-[3/4] w-full max-w-[28rem] overflow-hidden">
+        <ResponsiveImage
           src="/assets/journal/isola-del-liri-bridge.jpg"
           alt="The bridge over the Liri, with the Cascata Grande and the Boncompagni-Viscogliosi castle behind it"
-          fill
-          sizes="(max-width: 768px) 100vw, 768px"
+          sizes="(max-width: 768px) 100vw, 28rem"
           className="object-cover"
           priority
         />
@@ -60,10 +59,9 @@ export default function WaterfallPage() {
         </p>
         <figure className="not-prose">
           <div className="relative aspect-[16/10] w-full overflow-hidden">
-            <Image
+            <ResponsiveImage
               src="/assets/journal/isola-del-liri-illustration.jpg"
               alt="Illustration of Isola del Liri: the Cascata Grande, the castle above it, and the town's ochre houses"
-              fill
               sizes="(max-width: 768px) 100vw, 768px"
               className="object-cover"
             />
