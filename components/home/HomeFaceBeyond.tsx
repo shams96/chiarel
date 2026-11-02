@@ -17,8 +17,8 @@ const faceProducts = [
     name: "Clarity Day Crème™",
     concern: "For dry skin under daily stress",
     href: "/shop/clarity-day-creme",
-    image: "/assets/products/clarity-day-creme-ribbon-scene-v2.jpg",
-    alt: "Clarity Day Crème™ jar on travertine with a green CHIAREL velvet ribbon",
+    image: "/assets/products/clarity-day-creme-studio-scene.jpg",
+    alt: "Clarity Day Crème™ jar on a pale plinth in a soft peach studio with a green CHIAREL velvet ribbon",
   },
   {
     name: "Clarity Night Crème™",

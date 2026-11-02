@@ -68,6 +68,7 @@ export default function ProductGallery({
 
   return (
     <div
+      className={isMultiple ? "flex flex-col lg:grid lg:grid-cols-[5rem_1fr] lg:items-start lg:gap-gutter" : undefined}
       role={isMultiple ? "group" : undefined}
       aria-roledescription={isMultiple ? "image gallery" : undefined}
       aria-label={isMultiple ? current.alt : undefined}
@@ -89,11 +90,30 @@ export default function ProductGallery({
           : undefined
       }
     >
+      {isMultiple && (
+        <div className="order-2 mt-3 hidden gap-2 overflow-x-auto p-1 [scrollbar-width:none] md:flex lg:order-none lg:mt-0 lg:flex-col lg:overflow-visible lg:p-0 [&::-webkit-scrollbar]:hidden">
+          {images.map((img, i) => (
+            <button
+              key={img.src}
+              type="button"
+              onClick={() => goTo(i)}
+              aria-current={i === active}
+              aria-label={`View image ${i + 1} of ${images.length}: ${img.alt}`}
+              className={`relative aspect-[4/5] w-14 flex-none overflow-hidden border transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ochre lg:w-full ${
+                i === active ? "border-ink" : "border-ink/15 hover:border-ink/50"
+              }`}
+              style={{ backgroundColor: NEUTRAL_FRAME_BG }}
+            >
+              <ResponsiveImage src={img.src} alt="" sizes="(min-width: 1024px) 80px, 56px" className="object-cover" />
+            </button>
+          ))}
+        </div>
+      )}
       {/* Fixed aspect ratio reserves the space before any image loads, so the
           gallery never shifts the buy box (no CLS). tabIndex makes the
           swipe track reachable by keyboard: arrows, Home and End change image. */}
       <div
-        className="relative aspect-[5/4] w-full overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ochre md:aspect-[4/5]"
+        className="relative order-1 aspect-[5/4] w-full overflow-hidden lg:order-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ochre md:aspect-[4/5]"
         style={{ backgroundColor: NEUTRAL_FRAME_BG }}
         tabIndex={isMultiple ? 0 : undefined}
       >
@@ -148,7 +168,8 @@ export default function ProductGallery({
 
         {/* Phones: swipe, with tappable position dots (44px-tall hit areas)
             instead of a thumbnail rail, which would push the buy box below
-            the first screen. md+ uses the thumbnail rail below. */}
+            the first screen. md uses a thumbnail row below the image; lg+
+            uses a vertical rail on the left (Phase 7, image treatment D). */}
         {isMultiple && (
           <div className="absolute inset-x-0 bottom-1 flex justify-center md:hidden">
            <div className="flex rounded-full bg-ivory/85 px-1">
@@ -181,25 +202,6 @@ export default function ProductGallery({
         )}
       </div>
 
-      {isMultiple && (
-        <div className="mt-3 hidden gap-2 overflow-x-auto p-1 [scrollbar-width:none] md:flex [&::-webkit-scrollbar]:hidden">
-          {images.map((img, i) => (
-            <button
-              key={img.src}
-              type="button"
-              onClick={() => goTo(i)}
-              aria-current={i === active}
-              aria-label={`View image ${i + 1} of ${images.length}: ${img.alt}`}
-              className={`relative h-16 w-16 flex-none overflow-hidden border transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ochre ${
-                i === active ? "border-ochre" : "border-ink/15 hover:border-champagne"
-              }`}
-              style={{ backgroundColor: NEUTRAL_FRAME_BG }}
-            >
-              <ResponsiveImage src={img.src} alt="" sizes="64px" className="object-cover" />
-            </button>
-          ))}
-        </div>
-      )}
     </div>
   );
 }

@@ -3,6 +3,8 @@ import Link from "next/link";
 import { getProduct, getProductOrThrow, productImageAlt, productHref, studioImage } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
+import PageHead from "@/components/layout/PageHead";
+import Container from "@/components/layout/Container";
 
 export const metadata = { title: "Shop", alternates: { canonical: "/shop" } };
 
@@ -26,11 +28,9 @@ export default function ShopPage() {
   const n1 = getProductOrThrow("n1-neck-decollete");
 
   return (
-    <div className="mx-auto w-full max-w-container px-margin py-16">
-      <h1 className="font-serif text-h1">Shop</h1>
-      <p className="mt-1 text-eyebrow uppercase text-ink/65">
-        Consumer Collection™
-      </p>
+    <>
+      <PageHead eyebrow="Consumer Collection™" lines={["Shop"]} />
+      <Container className="pb-section pt-6">
 
       {/* Featured category hero — standardized neutral frame, same as every other product tile */}
       <section
@@ -48,7 +48,7 @@ export default function ShopPage() {
           <p className="mt-2 max-w-md text-sm leading-relaxed text-ink/70">{n1.blurb}</p>
           <Link
             href={productHref(n1.slug)}
-            className="btn-press mt-6 inline-block border border-ink px-8 py-3 text-eyebrow uppercase transition hover:border-ochre hover:text-ochre"
+            className="btn-press mt-6 inline-flex min-h-[44px] items-center border border-ink px-8 text-eyebrow uppercase transition hover:border-ochre hover:text-ochre"
           >
             Discover the Crème
           </Link>
@@ -66,6 +66,7 @@ export default function ShopPage() {
         <p className="mt-1 text-eyebrow uppercase text-ink/65">Evening</p>
         <ProductGrid slugs={nightRitual} />
       </section>
-    </div>
+      </Container>
+    </>
   );
 }

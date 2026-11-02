@@ -11,7 +11,7 @@ const fitGuidance = [
     fit: "Clarity Day Crème",
     why: "Ceramides, cholesterol and squalane, formulated for skin that feels comfortable and hydrated through the working day.",
     slug: "terra-radiance-creme",
-    image: "/assets/products/clarity-day-creme-ribbon-scene-v2.jpg",
+    image: "/assets/products/clarity-day-creme-studio-scene.jpg",
     imageAlt: "Clarity Day Crème on a travertine plinth with a green CHIAREL ribbon",
   },
   {

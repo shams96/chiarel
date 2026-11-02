@@ -45,7 +45,9 @@ describe("off-canvas drawers", () => {
     it(`${file} only casts its shadow while open`, () => {
       const src = readFileSync(file, "utf8");
       const panel = src.slice(src.indexOf("cart-panel fixed"), src.indexOf("cart-panel fixed") + 260);
-      expect(panel).toMatch(/\?\s*"translate-x-0 shadow-2xl"\s*:\s*"translate-x-full"/);
+      expect(panel).toMatch(/\?\s*"visible translate-x-0 shadow-2xl"\s*:\s*"invisible translate-x-full"/);
+      // closed panels are invisible, so their links and buttons are not reachable by keyboard or screen reader
+      expect(panel).toContain("transition-[transform,visibility]");
       expect(panel).not.toMatch(/bg-ivory shadow-2xl/);
     });
   }
