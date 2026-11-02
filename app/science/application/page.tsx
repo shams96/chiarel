@@ -45,13 +45,13 @@ export default function ApplicationPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <Link href="/science" className="text-[12px] text-ink/65 hover:text-ochre">
+      <Link href="/science" className="text-[12px] text-ink/70 hover:text-ochre">
         ← The Science
       </Link>
       <h1 className="mt-2 font-serif text-h1 leading-tight">
         How to Apply CHIAREL
       </h1>
-      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/75">
+      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/80">
         A formula feels its best when it is applied with care. Technique is
         part of the formulation story, not a footnote.
       </p>
@@ -73,7 +73,7 @@ export default function ApplicationPage() {
             <li>3. Clarity Night Crème</li>
             <li>4. Clarity Neck &amp; Décolleté Crème</li>
           </ol>
-          <p className="mt-3 text-[12px] text-ink/65">
+          <p className="mt-3 text-[12px] text-ink/70">
             The eye product is made for the evening and may be used morning or
             night.
           </p>
@@ -116,7 +116,7 @@ export default function ApplicationPage() {
         </div>
       </section>
 
-      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink/65">
+      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink/70">
         Application guidance reflects general formulation principles and is
         not a guarantee of individual results.
       </p>

@@ -45,13 +45,13 @@ export default function BifidaPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <Link href="/science" className="text-[12px] text-ink/65 hover:text-ochre">
+      <Link href="/science" className="text-[12px] text-ink/70 hover:text-ochre">
         ← The Science
       </Link>
       <h1 className="mt-2 font-serif text-h1 leading-tight">
         Bifida Ferment Lysate, Explained
       </h1>
-      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/75">
+      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/80">
         A postbiotic ingredient, explained here in the third person as an
         educational reference.
       </p>
@@ -92,7 +92,7 @@ export default function BifidaPage() {
         </div>
       </section>
 
-      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink/65">
+      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink/70">
         Bifida Ferment Lysate is an ingredient name, not a CHIAREL
         trademark. This page is an educational reference and is not a
         guarantee of individual results.

@@ -189,7 +189,7 @@ export default function AdminHomePage() {
               <span className="font-serif text-xl text-garden group-hover:underline group-hover:decoration-champagne group-hover:underline-offset-4">
                 {x.title}
               </span>
-              <span className="mt-1.5 block text-[14px] text-ink/75">{x.text}</span>
+              <span className="mt-1.5 block text-[14px] text-ink/80">{x.text}</span>
             </Link>
           </li>
         ))}
@@ -207,10 +207,10 @@ export default function AdminHomePage() {
               <ul className="divide-y divide-champagne/50">
                 {recent.map((e) => (
                   <li key={e.id} className="flex flex-wrap items-baseline gap-x-4 gap-y-1 px-5 py-3 text-[14px]">
-                    <time dateTime={e.createdAt} className="w-44 shrink-0 text-[12px] text-ink/65">
+                    <time dateTime={e.createdAt} className="w-44 shrink-0 text-[12px] text-ink/70">
                       {new Date(e.createdAt).toLocaleString()}
                     </time>
-                    <span className="text-ink/75">{e.actorEmail}</span>
+                    <span className="text-ink/80">{e.actorEmail}</span>
                     <span className="font-medium text-garden">{auditLabel(e)}</span>
                   </li>
                 ))}

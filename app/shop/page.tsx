@@ -62,13 +62,13 @@ export default function ShopPage() {
 
       <section className="mt-16">
         <h2 className="font-serif text-2xl">The Morning Ritual</h2>
-        <p className="mt-1 text-eyebrow uppercase text-ink/65">Morning</p>
+        <p className="mt-1 text-eyebrow uppercase text-ink/70">Morning</p>
         <ProductGrid slugs={dayRitual} />
       </section>
 
       <section className="mt-16 border-t border-ink/10 pt-12">
         <h2 className="font-serif text-2xl">The Evening Ritual</h2>
-        <p className="mt-1 text-eyebrow uppercase text-ink/65">Evening</p>
+        <p className="mt-1 text-eyebrow uppercase text-ink/70">Evening</p>
         <ProductGrid slugs={nightRitual} />
       </section>
       </Container>

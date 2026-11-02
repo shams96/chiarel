@@ -58,7 +58,7 @@ export default function StickyPurchaseBar({
             </div>
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium">{name}</p>
-              <p className="truncate text-[12px] text-ink/65">
+              <p className="truncate text-[12px] text-ink/70">
                 ${subscriptionPrice} / delivery · subscribe
               </p>
             </div>

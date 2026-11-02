@@ -46,7 +46,7 @@ export default function HomeObservations() {
               >
                 <dt className="text-eyebrow uppercase text-ink/70">{f.label}</dt>
                 <dd className="mt-2 font-serif text-h4 text-ink/70">{PENDING}</dd>
-                <dd className="mt-1 text-caption text-ink/65">{f.note}</dd>
+                <dd className="mt-1 text-caption text-ink/70">{f.note}</dd>
               </div>
             ))}
           </dl>

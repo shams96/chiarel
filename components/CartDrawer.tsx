@@ -49,7 +49,7 @@ export default function CartDrawer() {
           <button
             onClick={close}
             aria-label="Close bag"
-            className="btn-press -mr-3 flex h-11 w-11 items-center justify-center text-xl text-ink/65 hover:text-ink"
+            className="btn-press -mr-3 flex h-11 w-11 items-center justify-center text-xl text-ink/70 hover:text-ink"
           >
             ×
           </button>
@@ -88,7 +88,7 @@ export default function CartDrawer() {
                       <p className="text-sm font-medium leading-tight">
                         {line.product.name}
                       </p>
-                      <p className="mt-0.5 text-[12px] uppercase tracking-[0.14em] text-ink/65">
+                      <p className="mt-0.5 text-[12px] uppercase tracking-[0.14em] text-ink/70">
                         {modeLabel[line.mode]}
                       </p>
                       <div className="mt-2 flex items-center justify-between">
@@ -114,14 +114,14 @@ export default function CartDrawer() {
                               +
                             </button>
                           </div>
-                          <span className="tabular-nums text-sm text-ink/65">
+                          <span className="tabular-nums text-sm text-ink/70">
                             × ${line.unitPrice}
                           </span>
                         </div>
                         <button
                           onClick={() => remove(line.slug)}
                           aria-label={`Remove ${line.product.name}`}
-                          className="tap-area text-[12px] uppercase tracking-[0.14em] text-ink/65 hover:text-ochre"
+                          className="tap-area text-[12px] uppercase tracking-[0.14em] text-ink/70 hover:text-ochre"
                         >
                           <span aria-hidden="true">Remove</span>
                         </button>
@@ -133,7 +133,7 @@ export default function CartDrawer() {
 
               {nextStep && (
                 <div className="mt-6 border-t border-ink/10 pt-5">
-                  <p className="mb-3 text-[12px] uppercase tracking-[0.16em] text-ink/65">
+                  <p className="mb-3 text-[12px] uppercase tracking-[0.16em] text-ink/70">
                     Complete the Ritual
                   </p>
                   <div className="flex flex-wrap items-center gap-3">
@@ -150,7 +150,7 @@ export default function CartDrawer() {
                       <p className="truncate text-sm font-medium leading-tight">
                         {nextStep.name}
                       </p>
-                      <p className="mt-0.5 truncate text-[12px] uppercase tracking-[0.14em] text-ink/65">
+                      <p className="mt-0.5 truncate text-[12px] uppercase tracking-[0.14em] text-ink/70">
                         {nextStep.step}
                       </p>
                       <p className="mt-0.5 text-[12px] text-ink/70">
@@ -189,7 +189,7 @@ export default function CartDrawer() {
                 <span>Estimated total</span>
                 <span className="font-serif text-xl">${estimatedTotal}</span>
               </p>
-              <p className="mb-3 text-center text-[12px] uppercase tracking-[0.14em] text-ink/65">
+              <p className="mb-3 text-center text-[12px] uppercase tracking-[0.14em] text-ink/70">
                 Key ingredients named
               </p>
               <Link
@@ -202,7 +202,7 @@ export default function CartDrawer() {
               <Link
                 href="/terms#guarantee"
                 onClick={close}
-                className="flex min-h-[44px] items-center justify-center text-center text-[12px] uppercase tracking-[0.14em] text-ink/65 underline decoration-ink/20 underline-offset-2 hover:text-ochre"
+                className="flex min-h-[44px] items-center justify-center text-center text-[12px] uppercase tracking-[0.14em] text-ink/70 underline decoration-ink/20 underline-offset-2 hover:text-ochre"
               >
                 90-Day Guarantee on your first order
               </Link>

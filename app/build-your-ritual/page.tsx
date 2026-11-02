@@ -106,13 +106,13 @@ export default function BuildYourRitualPage() {
                 </div>
               </div>
               <div>
-                <p className="text-eyebrow uppercase text-ink/65">
+                <p className="text-eyebrow uppercase text-ink/70">
                   {p.timeOfUse} · {p.descriptor}
                 </p>
                 <p className="mt-1 text-sm font-medium leading-tight">
                   {p.name}
                 </p>
-                <p className="mt-1 text-sm text-ink/65">
+                <p className="mt-1 text-sm text-ink/70">
                   ${p.price.subscription} with subscription
                 </p>
               </div>
@@ -142,13 +142,13 @@ export default function BuildYourRitualPage() {
               </span>
             </div>
             <div>
-              <p className="text-eyebrow uppercase text-ink/65">
+              <p className="text-eyebrow uppercase text-ink/70">
                 {p.timeOfUse} · {p.descriptor}
               </p>
               <p className="mt-1 text-sm font-medium leading-tight">
                 {p.name}
               </p>
-              <p className="mt-1 text-sm text-ink/65">Price to be announced</p>
+              <p className="mt-1 text-sm text-ink/70">Price to be announced</p>
             </div>
           </div>
         ))}
@@ -159,7 +159,7 @@ export default function BuildYourRitualPage() {
           <span className="font-medium">
             {chosen.length} {chosen.length === 1 ? "step" : "steps"} selected
           </span>
-          <span className="ml-2 text-ink/65">
+          <span className="ml-2 text-ink/70">
             · ${subtotal} every 45 days
           </span>
         </p>

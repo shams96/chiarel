@@ -21,7 +21,7 @@ export default function ContactPage() {
 
       <dl className="mt-12 space-y-8 text-sm leading-relaxed text-ink/80">
         <div>
-          <dt className="text-eyebrow uppercase text-ink/65">
+          <dt className="text-eyebrow uppercase text-ink/70">
             General Inquiries
           </dt>
           <dd className="mt-2">
@@ -34,7 +34,7 @@ export default function ContactPage() {
           </dd>
         </div>
         <div>
-          <dt className="text-eyebrow uppercase text-ink/65">
+          <dt className="text-eyebrow uppercase text-ink/70">
             Order Support
           </dt>
           <dd className="mt-2 max-w-md">
@@ -49,7 +49,7 @@ export default function ContactPage() {
           </dd>
         </div>
         <div>
-          <dt className="text-eyebrow uppercase text-ink/65">
+          <dt className="text-eyebrow uppercase text-ink/70">
             Press
           </dt>
           <dd className="mt-2 max-w-md">
@@ -68,7 +68,7 @@ export default function ContactPage() {
           </dd>
         </div>
         <div>
-          <dt className="text-eyebrow uppercase text-ink/65">
+          <dt className="text-eyebrow uppercase text-ink/70">
             Formulation &amp; Manufacturing
           </dt>
           <dd className="mt-2 max-w-md">
@@ -86,7 +86,7 @@ export default function ContactPage() {
         <EmailSignup source="contact" />
       </div>
 
-      <p className="mt-16 max-w-xl text-[12px] leading-relaxed text-ink/65">
+      <p className="mt-16 max-w-xl text-[12px] leading-relaxed text-ink/70">
         CHIAREL™ is operated by 1HubSolutions, LLC. See our{" "}
         <Link href="/privacy" className="border-b border-ink/30 text-ink/70">
           Privacy Policy

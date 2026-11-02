@@ -14,7 +14,7 @@ export default function AccountPage() {
       </p>
 
       <div className="mt-10 border border-ink/15 p-6">
-        <p className="text-[12px] uppercase tracking-[0.16em] text-ink/65">
+        <p className="text-[12px] uppercase tracking-[0.16em] text-ink/70">
           Subscription Care
         </p>
         <p className="mt-3 text-sm leading-relaxed text-ink/80">
@@ -25,7 +25,7 @@ export default function AccountPage() {
             {ORDERS_EMAIL}
           </a>
         </p>
-        <p className="mt-4 text-[13px] leading-relaxed text-ink/65">
+        <p className="mt-4 text-[13px] leading-relaxed text-ink/70">
           There is no commitment. Subscriptions renew every 45 days and can be
           adjusted whenever you ask.
         </p>

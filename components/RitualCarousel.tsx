@@ -40,7 +40,7 @@ export default function RitualCarousel({ products }: { products: Product[] }) {
             />
           </div>
           <p className="mt-4 font-serif text-xl leading-tight">{p.name}</p>
-          <p className="mt-1 text-eyebrow uppercase text-ink/65">
+          <p className="mt-1 text-eyebrow uppercase text-ink/70">
             {p.step}
           </p>
         </Link>

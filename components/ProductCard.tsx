@@ -32,7 +32,7 @@ export default function ProductCard({
       </div>
       <div className="mt-4">
         <h3 className="font-serif text-xl">{product.name}</h3>
-        <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/65">
+        <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/70">
           {product.step}
         </p>
         <p className="mt-1 text-[13px] text-ink/70">{product.descriptor}</p>
@@ -43,13 +43,13 @@ export default function ProductCard({
                 <span className="tabular-nums font-medium">
                   From ${perDayPrice(product.price.subscription)} a day
                 </span>
-                <span className="mt-0.5 block text-[12px] text-ink/65">
+                <span className="mt-0.5 block text-[12px] text-ink/70">
                   ${product.price.subscription} with subscription · $
                   {product.price.oneTime} one-time
                 </span>
               </>
             ) : (
-              <span className="text-[12px] uppercase tracking-[0.14em] text-ink/65">
+              <span className="text-[12px] uppercase tracking-[0.14em] text-ink/70">
                 Price to be announced
               </span>
             )}

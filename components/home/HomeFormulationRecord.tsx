@@ -32,7 +32,7 @@ export default function HomeFormulationRecord() {
             <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 py-6 font-serif text-2xl leading-snug text-garden md:text-3xl">
               <span>
                 See the key ingredients
-                <span className="mt-1 block font-sans text-[13px] leading-relaxed text-ink/75">
+                <span className="mt-1 block font-sans text-[13px] leading-relaxed text-ink/80">
                   Key ingredients by product.
                 </span>
               </span>
@@ -46,7 +46,7 @@ export default function HomeFormulationRecord() {
                   <h2 className="font-serif text-3xl leading-snug">
                     What&rsquo;s Actually in CHIAREL™ Formulas?
                   </h2>
-                  <p className="mt-4 text-sm leading-relaxed text-ink/75">
+                  <p className="mt-4 text-sm leading-relaxed text-ink/80">
                     The key ingredients behind each formula, named. Each product
                     page carries the detail.
                   </p>
@@ -58,13 +58,13 @@ export default function HomeFormulationRecord() {
                 <h2 className="font-serif text-3xl leading-snug">
                   Key Ingredients, by Product
                 </h2>
-                <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink/75">
+                <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">
                   The key ingredients behind each formula across the House.
                 </p>
                 <div className="mt-8 overflow-x-auto">
                   <table className="w-full min-w-[560px] border-collapse text-left text-sm">
                     <thead>
-                      <tr className="border-b border-ink/20 text-[12px] uppercase tracking-[0.16em] text-ink/75">
+                      <tr className="border-b border-ink/20 text-[12px] uppercase tracking-[0.16em] text-ink/80">
                         <th className="py-3 pr-4 font-normal">Product</th>
                         <th className="py-3 font-normal">Key Ingredient</th>
                       </tr>
@@ -76,7 +76,7 @@ export default function HomeFormulationRecord() {
                           className="border-b border-ink/10 transition-colors hover:bg-ivory"
                         >
                           <td className="py-3 pr-4 text-ink/80">{row.product}</td>
-                          <td className="py-3 text-ink/75">{row.ingredient}</td>
+                          <td className="py-3 text-ink/80">{row.ingredient}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -87,10 +87,10 @@ export default function HomeFormulationRecord() {
                     .flatMap((p) => (p.benefits ?? []).map((b) => ({ product: p.name, benefit: b })))
                     .slice(0, 6)
                     .map((row, i) => (
-                      <li key={i} className="flex items-start gap-3 text-[13px] leading-relaxed text-ink/75">
+                      <li key={i} className="flex items-start gap-3 text-[13px] leading-relaxed text-ink/80">
                         <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-ochre" aria-hidden="true" />
                         <span>
-                          <span className="text-ink/75">{row.product}: </span>
+                          <span className="text-ink/80">{row.product}: </span>
                           {row.benefit}
                         </span>
                       </li>

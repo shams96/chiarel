@@ -41,13 +41,13 @@ export default function LOrnithinePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <Link href="/science" className="text-[12px] text-ink/65 hover:text-ochre">
+      <Link href="/science" className="text-[12px] text-ink/70 hover:text-ochre">
         ← The Science
       </Link>
       <h1 className="mt-2 font-serif text-h1 leading-tight">
         L-Ornithine, Explained
       </h1>
-      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/75">
+      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/80">
         An amino acid already native to skin&rsquo;s own moisture system.
         Explained here in the third person, as an educational reference.
       </p>
@@ -88,7 +88,7 @@ export default function LOrnithinePage() {
         </div>
       </section>
 
-      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink/65">
+      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink/70">
         L-Ornithine is an ingredient name, not a CHIAREL trademark. This
         page is an educational reference and is not a guarantee of individual
         results.

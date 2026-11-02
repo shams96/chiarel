@@ -18,7 +18,7 @@ export default function ProductAccordions({ product }: { product: Product }) {
             <span className="ml-4 text-lg text-ink/70 group-open:hidden" aria-hidden="true">+</span>
             <span className="ml-4 hidden text-lg text-ink/70 group-open:inline" aria-hidden="true">−</span>
           </summary>
-          <div className="pb-4 text-[13px] leading-relaxed text-ink/75">
+          <div className="pb-4 text-[13px] leading-relaxed text-ink/80">
             {s.kind === "list" && (
               <ul className="list-disc space-y-1.5 pl-5">
                 {s.items.map((item) => (
