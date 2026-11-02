@@ -136,6 +136,23 @@ describe("Gallery rail (image treatment D)", () => {
     expect(g).toContain("h-11 w-11");
     expect(g).toContain("View image ${i + 1} of ${images.length}");
   });
+  it("the Eye Contour, Neck and Essence galleries include the generated views, each with its responsive copies", () => {
+    const products = JSON.parse(src("data/products.json")) as { path: string; gallery?: { src: string }[] }[];
+    const list = Array.isArray(products) ? products : (products as unknown as { products: typeof products }).products;
+    const want: Record<string, string[]> = {
+      "clarity-eye-contour-concentrate": ["clarity-eye-contour-concentrate-studio.jpg", "clarity-eye-contour-concentrate-detail.jpg"],
+      "clarity-neck-decollete-creme": ["clarity-neck-decollete-creme-studio.jpg"],
+      "clarity-essence": ["clarity-essence-detail.jpg"],
+    };
+    for (const [path, files] of Object.entries(want)) {
+      const g = list.find((p) => p.path === path)?.gallery?.map((i) => i.src) ?? [];
+      for (const f of files) {
+        expect(g, `${path} gallery`).toContain(`/assets/products/${f}`);
+        expect(existsSync(`public/assets/products/${f.replace(".jpg", "-640.jpg")}`), f).toBe(true);
+      }
+    }
+    expect(list.find((p) => p.path === "clarity-eye-contour-concentrate")?.gallery?.length).toBeGreaterThanOrEqual(4);
+  });
   it("every product ships a gallery of two or more published photographs that exist on disk", () => {
     const products = JSON.parse(src("data/products.json")) as { path: string; gallery?: { src: string }[] }[];
     const list = Array.isArray(products) ? products : (products as unknown as { products: typeof products }).products;

@@ -35,6 +35,11 @@
         "src": "/assets/products/clarity-essence-studio.jpg",
         "alt": "Clarity Essence held in soft studio light",
         "role": "application"
+      },
+      {
+        "src": "/assets/products/clarity-essence-detail.jpg",
+        "alt": "Clarity Essence™ bottle resting on a pale stone in clear running water at golden hour",
+        "role": "lifestyle"
       }
     ],
     "blurb": "Peptides with niacinamide and hyaluronic acid, for the look of smoother fine lines and firmer-looking skin. Marine-derived hydrolysed collagen for surface hydration.",
@@ -363,6 +368,11 @@
         "role": "hero"
       },
       {
+        "src": "/assets/products/clarity-neck-decollete-creme-studio.jpg",
+        "alt": "A woman resting her chin on her forearms behind the Clarity Neck & Décolleté Crème™ bottle, in soft studio light",
+        "role": "application"
+      },
+      {
         "src": "/assets/products/clarity-neck-decollete-creme-marble-roses.jpg",
         "alt": "Clarity Neck & Décolleté Crème on a dark marble plinth with dried roses and twigs, the Isola del Liri waterfall and castle behind",
         "role": "lifestyle"
@@ -535,6 +545,16 @@
         "src": "/assets/products/clarity-eye-contour-concentrate-bottle.png",
         "alt": "Clarity Eye Contour Concentrate™",
         "role": "hero"
+      },
+      {
+        "src": "/assets/products/clarity-eye-contour-concentrate-studio.jpg",
+        "alt": "A woman resting her chin on her forearms behind the Clarity Eye Contour Concentrate™ bottle, in soft studio light",
+        "role": "application"
+      },
+      {
+        "src": "/assets/products/clarity-eye-contour-concentrate-detail.jpg",
+        "alt": "Clarity Eye Contour Concentrate™ bottle on a pearl-pink satin plinth with frosted peach petals and droplets",
+        "role": "detail"
       }
     ]
   }

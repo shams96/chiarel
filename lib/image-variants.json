@@ -110,5 +110,33 @@
       640,
       960
     ]
+  },
+  "/assets/products/clarity-eye-contour-concentrate-studio.jpg": {
+    "width": 1400,
+    "widths": [
+      640,
+      960
+    ]
+  },
+  "/assets/products/clarity-eye-contour-concentrate-detail.jpg": {
+    "width": 1024,
+    "widths": [
+      640,
+      960
+    ]
+  },
+  "/assets/products/clarity-neck-decollete-creme-studio.jpg": {
+    "width": 1400,
+    "widths": [
+      640,
+      960
+    ]
+  },
+  "/assets/products/clarity-essence-detail.jpg": {
+    "width": 1024,
+    "widths": [
+      640,
+      960
+    ]
   }
 }
