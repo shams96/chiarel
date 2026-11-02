@@ -105,7 +105,7 @@ export default function LastingHydrationPage() {
         <Link href="/science/barrier-resilience" className="border-b border-ochre pb-0.5 text-ochre">
           Barrier Resilience →
         </Link>
-        <Link href="/shop" className="border-b border-ink/30 pb-0.5 text-ink/60">
+        <Link href="/shop" className="border-b border-ink/30 pb-0.5 text-ink/70">
           Visit The Shop
         </Link>
       </div>

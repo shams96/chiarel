@@ -125,7 +125,7 @@ export default function ApplicationPage() {
         <Link href="/ritual" className="border-b border-ochre pb-0.5 text-ochre">
           The Ritual →
         </Link>
-        <Link href="/journal/chiarel-ritual-guide" className="border-b border-ink/30 pb-0.5 text-ink/60">
+        <Link href="/journal/chiarel-ritual-guide" className="border-b border-ink/30 pb-0.5 text-ink/70">
           Full Ritual Guide
         </Link>
       </div>

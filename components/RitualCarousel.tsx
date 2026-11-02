@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import Link from "next/link";
 import { productImageAlt, studioImage, type Product, productHref } from "@/lib/products";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
@@ -32,10 +32,9 @@ export default function RitualCarousel({ products }: { products: Product[] }) {
             className="product-frame aspect-[4/5]"
             style={{ backgroundColor: NEUTRAL_FRAME_BG }}
           >
-            <Image
+            <ResponsiveImage
               src={studioImage(p)}
               alt={productImageAlt(p)}
-              fill
               sizes="(max-width: 640px) 72vw, (max-width: 1152px) 30vw, 331px"
               className={productHoverClass(p.step)}
             />

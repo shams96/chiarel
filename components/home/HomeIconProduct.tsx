@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
@@ -27,7 +27,7 @@ export default function HomeIconProduct({
     <>
       <section className="grid bg-ivory md:grid-cols-2">
         <div className="relative min-h-[26rem] md:min-h-[48rem]">
-          <Image src={src} alt={alt} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-[50%_22%]" />
+          <ResponsiveImage src={src} alt={alt} sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-[50%_22%]" />
         </div>
         <Reveal className="flex flex-col justify-center px-[clamp(1.5rem,5vw,6rem)] py-16 md:py-24">
           <p className="text-[12px] uppercase tracking-[0.3em] text-ochre">{kicker}</p>

@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/lib/products";
 import { SITE_URL } from "@/lib/seo";
+import PageHead from "@/components/layout/PageHead";
+import Container from "@/components/layout/Container";
 
 export const metadata: Metadata = {
   title: "Press Kit",
@@ -36,15 +38,19 @@ const assets = [
 
 export default function PressPage() {
   return (
-    <div className="mx-auto w-full max-w-4xl px-margin py-16">
-      <h1 className="font-serif text-h1 leading-tight">CHIAREL™ Press Kit</h1>
-      <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink/70">
-        Brand facts, the launch lineup, and downloadable assets for
-        journalists, editors, and press covering the House.
-      </p>
+    <>
+      <PageHead lines={["CHIAREL™", "Press Kit"]}>
+        <p>
+          Brand facts, the launch lineup, and downloadable assets for
+          journalists, editors, and press covering the House.
+        </p>
+      </PageHead>
 
+      <Container className="pb-section pt-6">
+      <div className="grid-12">
+      <div className="col-span-full lg:col-span-8 lg:col-start-5">
       {/* Brand Fact Sheet */}
-      <section className="mt-14">
+      <section>
         <h2 className="font-serif text-2xl text-ink">Brand Fact Sheet</h2>
         <dl className="mt-6 space-y-5 text-sm leading-relaxed text-ink/80">
           <div>
@@ -145,7 +151,7 @@ export default function PressPage() {
                 <p className="font-serif text-lg leading-tight text-ink">
                   {p.name}
                 </p>
-                <p className="mt-1 text-[13px] text-ink/60">{p.descriptor}</p>
+                <p className="mt-1 text-[13px] text-ink/70">{p.descriptor}</p>
                 <p className="mt-1 text-eyebrow uppercase text-ink/65">
                   {p.color.name} · {p.family}
                 </p>
@@ -210,6 +216,9 @@ export default function PressPage() {
           press@chiarel.com
         </a>
       </section>
-    </div>
+      </div>
+      </div>
+      </Container>
+    </>
   );
 }

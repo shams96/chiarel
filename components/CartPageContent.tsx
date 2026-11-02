@@ -83,8 +83,8 @@ function InfoItem({ title, children }: { title: string; children: React.ReactNod
     <details className="group border-t border-ink/10 py-1">
       <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between text-eyebrow uppercase text-ink/80">
         {title}
-        <span className="ml-4 text-lg text-ink/50 group-open:hidden" aria-hidden="true">+</span>
-        <span className="ml-4 hidden text-lg text-ink/50 group-open:inline" aria-hidden="true">−</span>
+        <span className="ml-4 text-lg text-ink/70 group-open:hidden" aria-hidden="true">+</span>
+        <span className="ml-4 hidden text-lg text-ink/70 group-open:inline" aria-hidden="true">−</span>
       </summary>
       <div className="pb-3 text-[13px] leading-relaxed text-ink/70">{children}</div>
     </details>

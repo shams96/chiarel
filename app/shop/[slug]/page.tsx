@@ -172,21 +172,23 @@ export default async function ProductPage({
 
             <ProductAccordions product={p} />
 
-            <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-t border-ink/15 pt-6 text-[12px] text-ink/60">
-              <div className="flex gap-1.5">
-                <dt className="text-ink/65">Step:</dt>
-                <dd>{p.step}</dd>
+            {/* Specification sheet: ruled rows, tracked labels, values at lead size */}
+            <dl className="mt-8 border-t border-ink">
+              <div className="grid grid-cols-[minmax(7.5rem,max-content)_1fr] items-baseline gap-gutter border-b border-ink/25 py-3">
+                <dt className="text-eyebrow uppercase text-ink/70">Step</dt>
+                <dd className="text-lead">{p.step}</dd>
               </div>
-              <div className="flex gap-1.5">
-                <dt className="text-ink/65">Size:</dt>
-                <dd>{p.size}</dd>
+              <div className="grid grid-cols-[minmax(7.5rem,max-content)_1fr] items-baseline gap-gutter border-b border-ink/25 py-3">
+                <dt className="text-eyebrow uppercase text-ink/70">Size</dt>
+                <dd className="text-lead">{p.size}</dd>
               </div>
-              <div className="flex items-center gap-1.5">
-                <dt className="text-ink/65">Glass colour:</dt>
-                <dd className="flex items-center gap-1.5">
+              <div className="grid grid-cols-[minmax(7.5rem,max-content)_1fr] items-baseline gap-gutter border-b border-ink py-3">
+                <dt className="text-eyebrow uppercase text-ink/70">Glass colour</dt>
+                <dd className="flex items-center gap-2 text-lead">
                   <span
-                    className="inline-block h-2.5 w-2.5 rounded-full border border-ink/20"
+                    className="inline-block h-3 w-3 border border-ink/30"
                     style={{ backgroundColor: p.color.hex }}
+                    aria-hidden="true"
                   />
                   {p.color.name}
                 </dd>
@@ -218,6 +220,19 @@ export default async function ProductPage({
               poster="/assets/products/clarity-neck-decollete-creme-honeycomb.jpg"
               label="Clarity Neck & Décolleté Crème, 40 ml, on a reflective surface with water droplets"
               className="mx-auto aspect-[9/16] max-h-[80vh] w-auto max-w-full bg-cloud object-cover"
+            />
+          </div>
+        </section>
+      )}
+
+      {p.slug === "eye-contour-concentrate" && (
+        <section className="section-y border-y border-ink/15 bg-ivory">
+          <div className="section-x">
+            <AmbientVideo
+              src="/assets/products/clarity-eye-contour-concentrate-ambient.mp4"
+              poster="/assets/products/clarity-eye-contour-concentrate-detail.jpg"
+              label="Clarity Eye Contour Concentrate, 40 ml, on a pearl-pink satin plinth with frosted peach petals drifting"
+              className="mx-auto aspect-[4/5] max-h-[80vh] w-auto max-w-full bg-cloud object-cover"
             />
           </div>
         </section>
@@ -315,7 +330,7 @@ function BenefitPills({
           {pills.map((pill) => (
             <li
               key={pill}
-              className="flex items-center gap-2 text-[12px] uppercase tracking-[0.14em] text-ink/60"
+              className="flex items-center gap-2 text-[12px] uppercase tracking-[0.14em] text-ink/70"
             >
               <span className="inline-block h-1 w-1 rounded-full bg-ochre" aria-hidden="true" />
               {pill}
@@ -564,8 +579,8 @@ function FullIngredientList({ inci }: { inci: string[] }) {
       <details className="group max-w-measure">
         <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between text-eyebrow uppercase text-ink/80">
           Show the full list
-          <span className="ml-4 text-xl text-ink/50 group-open:hidden" aria-hidden="true">+</span>
-          <span className="ml-4 hidden text-xl text-ink/50 group-open:inline" aria-hidden="true">−</span>
+          <span className="ml-4 text-xl text-ink/70 group-open:hidden" aria-hidden="true">+</span>
+          <span className="ml-4 hidden text-xl text-ink/70 group-open:inline" aria-hidden="true">−</span>
         </summary>
         <p className="mt-4 text-caption leading-relaxed text-ink/75">{inci.join(", ")}</p>
       </details>
@@ -764,8 +779,8 @@ function UsageGuidance() {
           <details className="group py-5">
             <summary className="flex cursor-pointer list-none items-center justify-between font-serif text-lg text-ink">
               Patch test first
-              <span className="ml-4 text-xl text-ink/50 group-open:hidden" aria-hidden="true">+</span>
-              <span className="ml-4 hidden text-xl text-ink/50 group-open:inline" aria-hidden="true">−</span>
+              <span className="ml-4 text-xl text-ink/70 group-open:hidden" aria-hidden="true">+</span>
+              <span className="ml-4 hidden text-xl text-ink/70 group-open:inline" aria-hidden="true">−</span>
             </summary>
             <p className="mt-3 text-sm leading-relaxed text-ink/70">
               Apply a small amount to the inner forearm and wait 24 hours
@@ -776,8 +791,8 @@ function UsageGuidance() {
           <details className="group py-5">
             <summary className="flex cursor-pointer list-none items-center justify-between font-serif text-lg text-ink">
               Using alongside retinoids or acids
-              <span className="ml-4 text-xl text-ink/50 group-open:hidden" aria-hidden="true">+</span>
-              <span className="ml-4 hidden text-xl text-ink/50 group-open:inline" aria-hidden="true">−</span>
+              <span className="ml-4 text-xl text-ink/70 group-open:hidden" aria-hidden="true">+</span>
+              <span className="ml-4 hidden text-xl text-ink/70 group-open:inline" aria-hidden="true">−</span>
             </summary>
             <p className="mt-3 text-sm leading-relaxed text-ink/70">
               If your routine already includes a retinoid or an exfoliating
