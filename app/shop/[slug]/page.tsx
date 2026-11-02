@@ -174,15 +174,15 @@ export default async function ProductPage({
 
             {/* Specification sheet: ruled rows, tracked labels, values at lead size */}
             <dl className="mt-8 border-t border-ink">
-              <div className="grid grid-cols-[7.5rem_1fr] items-baseline gap-gutter border-b border-ink/25 py-3">
+              <div className="grid grid-cols-[minmax(7.5rem,max-content)_1fr] items-baseline gap-gutter border-b border-ink/25 py-3">
                 <dt className="text-eyebrow uppercase text-ink/70">Step</dt>
                 <dd className="text-lead">{p.step}</dd>
               </div>
-              <div className="grid grid-cols-[7.5rem_1fr] items-baseline gap-gutter border-b border-ink/25 py-3">
+              <div className="grid grid-cols-[minmax(7.5rem,max-content)_1fr] items-baseline gap-gutter border-b border-ink/25 py-3">
                 <dt className="text-eyebrow uppercase text-ink/70">Size</dt>
                 <dd className="text-lead">{p.size}</dd>
               </div>
-              <div className="grid grid-cols-[7.5rem_1fr] items-baseline gap-gutter border-b border-ink py-3">
+              <div className="grid grid-cols-[minmax(7.5rem,max-content)_1fr] items-baseline gap-gutter border-b border-ink py-3">
                 <dt className="text-eyebrow uppercase text-ink/70">Glass colour</dt>
                 <dd className="flex items-center gap-2 text-lead">
                   <span

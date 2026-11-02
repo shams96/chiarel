@@ -6,7 +6,7 @@ export const metadata = { title: "The House", alternates: { canonical: "/house" 
 export default function HousePage() {
   return (
     <>
-      <PageHead eyebrow="CHIAREL™" lines={["The House"]} />
+      <PageHead lines={["The House"]} />
       <Container className="pb-section">
       <div className="grid-12">
 

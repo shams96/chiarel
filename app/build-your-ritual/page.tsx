@@ -60,7 +60,7 @@ export default function BuildYourRitualPage() {
 
   return (
     <>
-      <PageHead eyebrow="The Ritual" lines={["Build Your", "Ritual"]}>
+      <PageHead lines={["Build Your", "Ritual"]}>
         <p>
           Choose exactly the steps your skin needs from the five-product CHIAREL
           ritual. Each is priced and delivered on its own — nothing is bundled
@@ -69,7 +69,7 @@ export default function BuildYourRitualPage() {
       </PageHead>
       <Container className="pb-section pt-6">
 
-      <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {selectableProducts.map((p) => {
           const isSelected = selected.has(p.slug);
           return (

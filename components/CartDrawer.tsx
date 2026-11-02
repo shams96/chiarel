@@ -40,8 +40,8 @@ export default function CartDrawer() {
         role="dialog"
         aria-modal="true"
         aria-label="Your Ritual Bag"
-        className={`cart-panel fixed right-0 top-0 z-[70] flex h-full w-full max-w-md flex-col bg-ivory transition-transform ${
-          isOpen ? "translate-x-0 shadow-2xl" : "translate-x-full"
+        className={`cart-panel fixed right-0 top-0 z-[70] flex h-full w-full max-w-md flex-col bg-ivory transition-[transform,visibility] ${
+          isOpen ? "visible translate-x-0 shadow-2xl" : "invisible translate-x-full"
         }`}
       >
         <div className="flex items-center justify-between border-b border-ink/10 px-6 py-5">

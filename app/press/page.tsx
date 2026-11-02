@@ -39,7 +39,7 @@ const assets = [
 export default function PressPage() {
   return (
     <>
-      <PageHead eyebrow="Press" lines={["CHIAREL™", "Press Kit"]}>
+      <PageHead lines={["CHIAREL™", "Press Kit"]}>
         <p>
           Brand facts, the launch lineup, and downloadable assets for
           journalists, editors, and press covering the House.

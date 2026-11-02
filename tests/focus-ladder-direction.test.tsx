@@ -64,6 +64,7 @@ describe("Statement", () => {
   it("keeps the approved sentence whole while splitting it into staggered lines", () => {
     expect(text(html)).toContain("Advancing Cellular Clarity™ against Modern Biological Stress™.");
     expect(html).toContain("stagger");
+    expect(html).toContain("Advancing Cellular Clarity™ </span><span>against Modern Biological Stress™.");
     expect([...html.matchAll(/<h2/g)]).toHaveLength(1);
   });
 });
@@ -77,6 +78,8 @@ describe("Page heads", () => {
     );
     expect([...html.matchAll(/<h1/g)]).toHaveLength(1);
     expect(text(html.slice(html.indexOf("<h1"), html.indexOf("</h1>")))).toBe("Notes from the House");
+    // the space between lines is real markup, so assistive tech and crawlers read "Notes from the House"
+    expect(html).toContain("Notes from </span><span>the House");
     expect(text(html)).toContain("The Journal");
     expect(text(html)).toContain("Intro");
   });
@@ -122,10 +125,14 @@ describe("Ritual numerals, ochre field and specification sheet", () => {
 
 describe("Gallery rail (image treatment D)", () => {
   const g = src("components/ProductGallery.tsx");
-  it("puts a vertical thumbnail rail on the left from lg, below the image at md", () => {
-    expect(g).toContain("lg:grid lg:grid-cols-[5rem_1fr]");
-    expect(g).toContain("lg:order-first");
+  it("puts a vertical thumbnail rail on the left from lg and below the image at md, with the rail first in the DOM", () => {
+    expect(g).toContain("flex flex-col lg:grid lg:grid-cols-[5rem_1fr]");
+    expect(g).toContain("order-2 mt-3 hidden gap-2");
+    expect(g).toContain("lg:order-none");
     expect(g).toContain("lg:flex-col");
+    // keyboard and screen-reader order: the thumbnail buttons come before the image frame
+    expect(g.indexOf("View image ${i + 1} of ${images.length}")).toBeGreaterThan(-1);
+    expect(g.indexOf("View image ${i + 1} of ${images.length}")).toBeLessThan(g.indexOf("relative order-1 aspect-[5/4]"));
   });
   it("uses one 4:5 module for every thumbnail and an ink border on the active frame", () => {
     expect(g).toContain("aspect-[4/5] w-14 flex-none");
@@ -163,6 +170,57 @@ describe("Gallery rail (image treatment D)", () => {
   });
 });
 
+describe("Outlined display type has a visible stroke (regression: it was transparent)", () => {
+  const css = src("app/globals.css");
+  it(".out sets its own stroke colour and does not fall back to currentColor (the fill is transparent)", () => {
+    const rule = css.match(/\.out \{[^}]*\}/)?.[0] ?? "";
+    expect(rule).toContain("-webkit-text-stroke: 1px var(--out-stroke, rgb(28 26 23))");
+    expect(rule).not.toMatch(/currentColor/i);
+  });
+  it("the ladder hard-codes an opaque ink stroke", () => {
+    expect(css).toMatch(/\.ladder > span \{[^}]*-webkit-text-stroke: 1px rgb\(28 26 23\)/);
+  });
+  it("light-on-ochre outline type overrides the stroke colour", () => {
+    expect(src("components/home/HomeItaly.tsx")).toContain("[--out-stroke:#F8F6F1]");
+  });
+  it("every outlined element is decorative: an aria-hidden ancestor within a few lines", () => {
+    for (const f of ["components/RoutineBand.tsx", "components/home/HomeItaly.tsx"]) {
+      const s2 = src(f);
+      const at = s2.search(/className="[^"]*\bout\b/);
+      expect(at, f).toBeGreaterThan(-1);
+      expect(s2.slice(Math.max(0, at - 260), at + 40), f).toContain('aria-hidden="true"');
+    }
+  });
+});
+
+describe("Closed panels, landmarks and the intro overlay", () => {
+  it("labels the header navigation landmarks", () => {
+    const h = src("components/Header.tsx");
+    expect(h).toContain('aria-label="Primary"');
+    expect(h).toContain('aria-label="Menu" className="flex flex-1 flex-col');
+  });
+  it("the intro overlay is a modal dialog only while it plays", () => {
+    const i = src("components/HeroIntro.tsx");
+    expect(i).toContain('role={showContent ? "dialog" : undefined}');
+    expect(i).toContain("aria-hidden={showContent ? undefined : true}");
+  });
+});
+
+describe("Grid guides gating", () => {
+  it("is available only with ?grid, and ignores key repeat, composition and ARIA text widgets", async () => {
+    const { gridEnabled } = await import("@/components/GridGuides");
+    expect(gridEnabled("?grid")).toBe(true);
+    expect(gridEnabled("?x=1&grid=1")).toBe(true);
+    expect(gridEnabled("")).toBe(false);
+    expect(gridEnabled("?other")).toBe(false);
+    expect(isGridToggle({ key: "g", repeat: true })).toBe(false);
+    expect(isGridToggle({ key: "g", isComposing: true })).toBe(false);
+    expect(isGridToggle({ key: "g", target: { tagName: "DIV", getAttribute: () => "combobox" } })).toBe(false);
+    expect(isGridToggle({ key: "g", target: { tagName: "DIV", getAttribute: () => null } })).toBe(true);
+    expect(src("components/GridGuides.tsx")).toContain("if (!gridEnabled(window.location.search)) return;");
+  });
+});
+
 describe("Grid guides", () => {
   it("toggles on a bare G, ignores modified keys and form fields", () => {
     expect(isGridToggle({ key: "g" })).toBe(true);
@@ -188,7 +246,7 @@ describe("Type rules for the new direction", () => {
   it("defines the poster-scale and numeral tokens", () => {
     const cfg = src("tailwind.config.ts");
     expect(cfg).toContain("mega:");
-    expect(cfg).toContain("numeral:");
+    expect(cfg).not.toContain("      numeral:");
     expect(cfg).toContain('"numeral-sm":');
   });
   it("keeps the 12px floor in every new or rewritten file", () => {

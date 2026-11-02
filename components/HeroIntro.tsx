@@ -247,8 +247,9 @@ export default function HeroIntro() {
 
   return (
     <div
-      role="dialog"
-      aria-modal="true"
+      role={showContent ? "dialog" : undefined}
+      aria-modal={showContent ? "true" : undefined}
+      aria-hidden={showContent ? undefined : true}
       aria-label="Chiarel intro animation"
       onClick={skip}
       // Plain CSS transition rather than Framer Motion's `animate` prop: a

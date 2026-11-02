@@ -18,7 +18,7 @@ export default function HomeItaly() {
       <Grid className="gap-y-10">
         <p
           aria-hidden="true"
-          className="vert-word out col-span-1 self-stretch font-serif text-[clamp(3.25rem,1.2rem+9vw,11rem)] leading-[0.9] tracking-[-0.01em] md:col-span-2"
+          className="vert-word out [--out-stroke:#F8F6F1] col-span-1 self-stretch font-serif text-[clamp(3.25rem,1.2rem+9vw,11rem)] leading-[0.9] tracking-[-0.01em] md:col-span-2"
         >
           Isola del Liri
         </p>
@@ -60,7 +60,7 @@ export default function HomeItaly() {
             </p>
             <Link
               href="/journal/isola-del-liri-waterfall"
-              className="btn-press mt-8 inline-flex min-h-[44px] items-center border-b border-ivory text-eyebrow uppercase text-ivory transition-colors hover:text-champagne"
+              className="btn-press mt-8 inline-flex min-h-[44px] items-center border-b border-ivory text-eyebrow uppercase text-ivory transition-colors hover:text-peachdust"
             >
               Read the Journal
             </Link>

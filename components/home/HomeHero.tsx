@@ -21,7 +21,7 @@ export default function HomeHero() {
         <Grid className="items-baseline border-b border-hairline pb-5">
           <p className="col-span-4 text-eyebrow uppercase md:col-span-4">CHIAREL™ · The House of Clarity™</p>
           <p className="col-span-4 text-eyebrow uppercase md:col-span-4 md:col-start-5 md:text-right lg:col-span-4 lg:col-start-9">
-            Formulated in Isola del Liri, Italy
+            Isola del Liri, Italy
           </p>
         </Grid>
 
@@ -62,7 +62,7 @@ export default function HomeHero() {
 
           <div className="relative col-span-4 md:col-span-5 lg:col-span-4 lg:col-start-9">
             <div className="relative aspect-[4/5] w-full bg-ochre">
-              <div className="absolute -bottom-5 -right-5 left-5 top-5 border border-ink">
+              <div className="absolute -bottom-4 -right-4 left-4 top-4 border border-ink md:-bottom-5 md:-right-5 md:left-5 md:top-5">
                 <ResponsiveImage
                   src="/assets/products/clarity-essence-festive-scene-v2.jpg"
                   alt="Clarity Essence™ in its glass bottle on a plinth, framed by a frosted flower and green CHIAREL velvet ribbon"
@@ -73,7 +73,7 @@ export default function HomeHero() {
               </div>
               <span
                 aria-hidden="true"
-                className="vert-word absolute -right-8 top-0 hidden text-eyebrow uppercase lg:block"
+                className="vert-word absolute -right-10 top-0 hidden text-eyebrow uppercase lg:block"
               >
                 Clarity Essence™
               </span>

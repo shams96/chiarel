@@ -10,7 +10,7 @@ export const metadata = { title: "Journal", alternates: { canonical: "/journal" 
 export default function JournalPage() {
   return (
     <>
-      <PageHead eyebrow="The Journal" lines={["Notes from", "the House"]} />
+      <PageHead lines={["Notes from", "the House"]} />
       <Container className="pb-section">
       <div className="grid-12">
       <div className="col-span-full lg:col-span-8 lg:col-start-5">

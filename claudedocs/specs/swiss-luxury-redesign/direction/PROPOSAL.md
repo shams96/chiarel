@@ -75,7 +75,7 @@ All copy, product names, descriptors, sizes and photographs already exist on chi
 3. **Hairline outlines render differently by browser** (`-webkit-text-stroke`). Fine in Chrome and Safari; Firefox supports it as well, but I checked only Chrome.
 4. **Research is thin.** First screens only, under cookie banners, one competitor unseen, and secondary sources on Swiss Style. It is enough to see the pattern, not to prove the gap.
 5. **Performance.** The ladder is text and CSS; no new fonts or images. A real build adds no weight beyond what exists.
-6. **Brand rules kept:** one typeface, approved colours, no claims, no percentages, footer rules unchanged. The one new piece of copy is none.
+6. **Brand rules kept:** one typeface, approved colours, no claims, no percentages, footer rules unchanged. No new sentences: every visible line is existing site copy (the hero's top strip reuses the existing "Isola del Liri, Italy" label). Navigation-style eyebrow labels that were not on the site were removed after review.
 
 ## 7. If you approve: rollout (each step a PR for review)
 

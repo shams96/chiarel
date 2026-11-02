@@ -46,7 +46,7 @@ export default function Header() {
             className="hidden h-auto w-[210px] shrink-0 lg:block"
           />
         </Link>
-        <nav className="hidden gap-1 xl:flex">
+        <nav aria-label="Primary" className="hidden gap-1 xl:flex">
           {nav.map((n) => (
             <Link
               key={n.href}
@@ -117,8 +117,8 @@ export default function Header() {
         aria-modal="true"
         aria-label="Menu"
         id="mobile-menu"
-        className={`cart-panel fixed right-0 top-0 z-[90] flex h-full w-full max-w-xs flex-col bg-ivory transition-transform xl:hidden ${
-          menuOpen ? "translate-x-0 shadow-2xl" : "translate-x-full"
+        className={`cart-panel fixed right-0 top-0 z-[90] flex h-full w-full max-w-xs flex-col bg-ivory transition-[transform,visibility] xl:hidden ${
+          menuOpen ? "visible translate-x-0 shadow-2xl" : "invisible translate-x-full"
         }`}
       >
         <div className="flex items-center justify-between border-b border-ink/10 px-6 py-5">
@@ -131,7 +131,7 @@ export default function Header() {
             ×
           </button>
         </div>
-        <nav className="flex flex-1 flex-col gap-1 px-6 py-6">
+        <nav aria-label="Menu" className="flex flex-1 flex-col gap-1 px-6 py-6">
           {nav.map((n) => (
             <Link
               key={n.href}

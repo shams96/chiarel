@@ -23,7 +23,7 @@ export default function PageHead({
           {eyebrow && <p className="col-span-full text-eyebrow uppercase text-ochre">{eyebrow}</p>}
           <h1 className="stagger font-serif text-mega">
             {lines.map((l, i) => (
-              <span key={l}>
+              <span key={i}>
                 {l}
                 {i < lines.length - 1 ? " " : ""}
               </span>
