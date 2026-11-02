@@ -1,7 +1,12 @@
 import Link from "next/link";
 import { RoutineBand, morningRoute, eveningRoute } from "@/components/RoutineBand";
 
-export const metadata = { title: "The Ritual", alternates: { canonical: "/ritual" } };
+export const metadata = {
+  title: "The Ritual",
+  description:
+    "Five products, two moments in the day: prepare for it, then let it go. The CHIAREL™ morning and evening ritual, lightest texture first.",
+  alternates: { canonical: "/ritual" },
+};
 
 // Owner copy (site alignment brief, section 3). Wording is verbatim; the
 // home page's HomeRitual mirrors the step labels.

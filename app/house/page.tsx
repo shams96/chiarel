@@ -1,7 +1,12 @@
 import PageHead from "@/components/layout/PageHead";
 import Container from "@/components/layout/Container";
 
-export const metadata = { title: "The House", alternates: { canonical: "/house" } };
+export const metadata = {
+  title: "The House",
+  description:
+    "Isola del Liri, in the Liri valley of central Italy, where CHIAREL™ formulations are crafted with our manufacturing partner Natural You Srl.",
+  alternates: { canonical: "/house" },
+};
 
 export default function HousePage() {
   return (

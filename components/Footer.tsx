@@ -157,7 +157,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <p className="mt-8 text-[12px] text-ink/65">
+        <p className="mt-8 text-[12px] text-ink/80">
           © {new Date().getFullYear()} CHIAREL™ · 1HubSolutions, LLC. All rights
           reserved.
         </p>
