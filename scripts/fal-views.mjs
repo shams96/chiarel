@@ -47,6 +47,13 @@ const PRODUCTS = {
     label:
       'Printed on the front of the glass in cream-gold serif, centred, exactly these lines and nothing else: "CHIAREL" (largest), then "— ITALIA —" with a short rule each side, then a gap, then "CLARITY" / "NECK &" / "DÉCOLLETÉ" / "CRÈME" (four lines, tracked capitals), then a gap, then "For crepey-looking" / "skin on the neck" / "and chest" (three lines, lowercase serif).',
   },
+  day: {
+    pack: "/assets/products/clarity-day-creme-jar.png",
+    look:
+      "a squat square jar with softly rounded corners; the lower glass body shades from deep red at the shoulder to amber and copper at the base; a clear faceted acrylic over-cap with a polished rose-gold disc lid",
+    label:
+      'Printed on the front of the glass in cream-gold serif, centred, exactly these lines and nothing else: "CHIAREL" (largest), "ITALIA" (small, directly beneath), then "CLARITY DAY CRÈME" (one line, tracked capitals), then "For dry skin under daily stress" (one line, lowercase serif), and "50g" in white near the base.',
+  },
   essence: {
     pack: "/assets/products/clarity-essence-bottle.png",
     look:
@@ -88,6 +95,17 @@ const VIEWS = {
       "Edit image 1 into a new campaign photograph. Keep the composition, camera angle, framing, the woman (same face, hair, pose and expression), her crossed forearms, the soft diffused studio light and the pale seamless background exactly as in image 1. Replace only the small bottle in front of her with the product from image 2, standing upright on the same pale surface at the same scale. " +
       PRESERVE(p) +
       " The label must face the camera and be fully legible." + NO,
+  },
+  "day.scene": {
+    aspect: "4:5",
+    refs: ["/assets/products/clarity-essence-ribbon-scene-2-v2.jpg", "/assets/products/clarity-day-creme-jar.png"],
+    prompt: (p) =>
+      "Create a luxury skincare STUDIO campaign still life in the same family as image 1 (a product centred on a plinth, a wide green velvet ribbon looping in big graceful curves around it, a seamless soft pastel backdrop), but for the product in image 2, which is a squat jar. " +
+      "Studio set: a seamless studio backdrop that blends from soft apricot-peach at the horizon to pale ivory above, with no outdoor scenery at all (no trees, no sea, no balustrade, no sky, no walls). A pale matte plaster stepped plinth at the lower centre, the jar standing upright and centred on it, the jar filling about 30 percent of the frame height. " +
+      "Lighting: soft, diffused studio key light from the upper left through a large softbox, a gentle cool-white rim light from behind, even exposure, smooth gradients, a soft contact shadow under the jar and a faint reflection on the plinth, no hard sun, no lens flare. " +
+      "A wide Formal Garden green (#1F5129) velvet ribbon dusted with gold glitter loops in big curves in front of and behind the plinth, printed repeatedly with the word CHIAREL in gold capital letters; a few frosted peach petals and champagne sparkles floating softly out of focus. " +
+      "Do NOT copy image 1's bottle or its flower; match only its softness, pastel palette, lighting quality and ribbon style. Shot on an 85mm lens, shallow depth of field, the jar's label sharp and legible. " +
+      PRESERVE(p) + NO,
   },
   "essence.detail": {
     aspect: "4:5",

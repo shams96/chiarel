@@ -125,8 +125,8 @@
     "image": "/assets/products/clarity-day-creme-jar.png",
     "gallery": [
       {
-        "src": "/assets/products/clarity-day-creme-ribbon-scene-v2.jpg",
-        "alt": "Clarity Day Crème™ jar, scene shot",
+        "src": "/assets/products/clarity-day-creme-studio-scene.jpg",
+        "alt": "Clarity Day Crème™ jar on a pale plinth in a soft peach studio, framed by a green CHIAREL velvet ribbon and drifting petals",
         "role": "studio"
       },
       {
@@ -142,6 +142,11 @@
       {
         "src": "/assets/products/clarity-day-creme-capri.jpg",
         "alt": "Clarity Day Crème on sunlit limestone above the Faraglioni of Capri",
+        "role": "lifestyle"
+      },
+      {
+        "src": "/assets/products/clarity-day-creme-ribbon-scene-v2.jpg",
+        "alt": "Clarity Day Crème™ jar on travertine against a terracotta wall with a green CHIAREL velvet ribbon",
         "role": "lifestyle"
       }
     ],
@@ -212,7 +217,7 @@
       "Follow with SPF."
     ],
     "howToUseSource": "app/science/application/page.tsx; app/journal/chiarel-ritual-guide/page.tsx",
-    "studio": "/assets/products/clarity-day-creme-ribbon-scene-v2.jpg",
+    "studio": "/assets/products/clarity-day-creme-studio-scene.jpg",
     "og": "/assets/products/clarity-day-creme-og.jpg"
   },
   {

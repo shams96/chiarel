@@ -170,6 +170,32 @@ describe("Gallery rail (image treatment D)", () => {
   });
 });
 
+describe("Day Crème studio scene (replaced the terracotta scene as the shared hero image)", () => {
+  const NEW = "/assets/products/clarity-day-creme-studio-scene.jpg";
+  const OLD = "/assets/products/clarity-day-creme-ribbon-scene-v2.jpg";
+  const products = JSON.parse(src("data/products.json")) as { path: string; studio?: string; gallery?: { src: string; alt: string }[] }[];
+  const list = Array.isArray(products) ? products : (products as unknown as { products: typeof products }).products;
+  const day = list.find((p) => p.path === "clarity-day-creme");
+  it("is the product's studio image and its first gallery image; the terracotta scene stays as a later gallery image", () => {
+    expect(day?.studio).toBe(NEW);
+    expect(day?.gallery?.[0].src).toBe(NEW);
+    expect(day?.gallery?.map((g) => g.src)).toContain(OLD);
+    expect(existsSync("public" + NEW)).toBe(true);
+    expect(existsSync("public" + NEW.replace(".jpg", "-640.jpg"))).toBe(true);
+  });
+  it("is used by the home tiles, and the old scene is no longer hard-coded in any component", () => {
+    expect(src("components/home/HomeFaceBeyond.tsx")).toContain(NEW);
+    expect(src("components/home/HomeFitGuidance.tsx")).toContain(NEW);
+    for (const f of ["components/home/HomeFaceBeyond.tsx", "components/home/HomeFitGuidance.tsx", "components/home/HomeClosing.tsx", "components/RoutineBand.tsx"]) {
+      expect(src(f), f).not.toContain(OLD);
+    }
+  });
+  it("has descriptive alt text that implies no results", () => {
+    expect(day?.gallery?.[0].alt).toMatch(/jar on a pale plinth in a soft peach studio/);
+    expect(day?.gallery?.[0].alt).not.toMatch(/before|after|results|younger|wrinkle/i);
+  });
+});
+
 describe("Outlined display type has a visible stroke (regression: it was transparent)", () => {
   const css = src("app/globals.css");
   it(".out sets its own stroke colour and does not fall back to currentColor (the fill is transparent)", () => {

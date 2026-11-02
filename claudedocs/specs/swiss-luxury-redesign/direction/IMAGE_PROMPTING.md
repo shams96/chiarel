@@ -44,6 +44,10 @@ The exact prompts are in `scripts/fal-views.mjs` (run with `--dry` to print one)
 | `clarity-neck-decollete-creme-studio.jpg` | Nano Banana 2 | existing Essence studio shot plus the Neck packshot | Label exact |
 | `clarity-essence-detail.jpg` | GPT Image 2 | Essence packshot plus the existing Isola del Liri spring scene (mood only) | Label exact, glass gradient and "40ml" kept |
 
+| `clarity-day-creme-studio-scene.jpg` | Nano Banana 2 | Essence ribbon scene (mood and lighting only) plus the Day Crème jar packshot | Label exact (zoomed against the packshot); replaced the terracotta scene as the Day Crème studio and first gallery image after the owner found it out of place (colour and style clash) |
+
+Rejected for the Day scene: an outdoor golden-hour version (olive branches, balustrade), because the owner asked for a studio shot with proper lighting and background; two GPT Image 2 studio candidates (smaller, 1024x1280).
+
 Rejected: one Eye Contour detail (dark lettering, pump nozzle), one Eye Contour studio (soft focus), the Nano Banana 2 Essence detail (glass colour wrong), the GPT Image 2 Neck studio (bottle too small to read).
 
 ## Open points for the owner
