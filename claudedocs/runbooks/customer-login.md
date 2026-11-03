@@ -12,7 +12,7 @@ Guest checkout is untouched; an account is never required to buy.
 | Var | Needed | Notes |
 |---|---|---|
 | `CUSTOMER_SESSION_SECRET` | recommended | Signs the cookie and hashes codes. If unset, a different key is derived from `ADMIN_SESSION_SECRET` (label `chiarel-customer-session-v1`). Changing it signs everyone out and voids pending codes. |
-| `ACCOUNTS_SMTP_USER`, `ACCOUNTS_SMTP_PASS` | optional | Mailbox `accounts@chiarel.com`. Both set: the code is sent From that mailbox. Either missing: falls back to `HOSTINGER_SMTP_USER` (order and other mail never uses these). |
+| `ACCOUNTS_SMTP_USER`, `ACCOUNTS_SMTP_PASS` (alias `ACCOUNTS_SMTP_PASSWORD`; PASS wins) | optional | Mailbox `accounts@chiarel.com`. Both set: the code is sent From that mailbox. Either missing: falls back to `HOSTINGER_SMTP_USER` (order and other mail never uses these). |
 | `HOSTINGER_SMTP_HOST`, `HOSTINGER_SMTP_PORT` | yes for mail | Shared by both mailboxes. |
 | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `OAUTH_STATE_SECRET` | for Google | Same client as admin. Authorised redirect URI is the existing `/api/auth/google/callback`. `SOCIAL_LOGIN_ENABLED=0` turns Google off for both admin and customers. |
 
