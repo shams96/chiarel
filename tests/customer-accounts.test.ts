@@ -63,21 +63,25 @@ vi.mock("@/lib/db", async () => {
     db: {
       auditLog: { create: async ({ data }: { data: never }) => (store.audit.push(data), data) },
       loginCode: {
-        deleteMany: async ({ where }: { where: { emailHash: string } }) => {
+        deleteMany: async ({ where }: { where: { emailHash?: string; id?: { in: string[] }; OR?: { expiresAt?: { lte: Date }; consumedAt?: { not: null } }[] } }) => {
           gate();
+          const hit = (c: LC) =>
+            (where.emailHash === undefined || c.emailHash === where.emailHash) &&
+            (where.id === undefined || where.id.in.includes(c.id)) &&
+            (where.OR === undefined ||
+              where.OR.some((o) => (o.expiresAt ? c.expiresAt <= o.expiresAt.lte : false) || (o.consumedAt ? c.consumedAt !== null : false)));
           const before = store.codes.length;
-          store.codes = store.codes.filter((c) => c.emailHash !== where.emailHash);
+          store.codes = store.codes.filter((c) => !hit(c));
           return { count: before - store.codes.length };
+        },
+        findMany: async ({ where }: { where: { emailHash: string } }) => {
+          gate();
+          return store.codes.filter((c) => c.emailHash === where.emailHash).map((c) => ({ ...c }));
         },
         create: async ({ data }: { data: Pick<LC, "emailHash" | "codeHash" | "expiresAt"> }) => {
           const row = { id: id("lc"), createdAt: new Date(), attempts: 0, consumedAt: null, ...data };
           store.codes.push(row);
           return row;
-        },
-        findFirst: async ({ where }: { where: { emailHash: string; consumedAt: null } }) => {
-          gate();
-          const rows = store.codes.filter((c) => c.emailHash === where.emailHash && c.consumedAt === null);
-          return rows.length ? { ...rows[rows.length - 1] } : null;
         },
         update: async ({ where, data }: { where: { id: string }; data: { attempts: { increment: number } } }) => {
           const row = store.codes.find((c) => c.id === where.id)!;
@@ -161,12 +165,13 @@ vi.mock("@/lib/db", async () => {
           return i;
         },
       },
-      order: {
-        updateMany: async ({ where, data }: { where: { customerId: null; email: { equals: string } }; data: { customerId: string } }) => {
-          const hits = store.orders.filter((o) => o.customerId === null && o.email.toLowerCase() === where.email.equals.toLowerCase());
-          hits.forEach((o) => (o.customerId = data.customerId));
-          return { count: hits.length };
-        },
+      // Tagged template: (strings, customerId, email). Exact match on the lower-cased email, like the real SQL.
+      $executeRaw: async (strings: TemplateStringsArray, customerId: string, email: string) => {
+        expect(strings.join("?")).toContain('lower("email") = ?');
+        expect(strings.join("?")).not.toMatch(/like/i);
+        const hits = store.orders.filter((o) => o.customerId === null && o.email.toLowerCase() === email);
+        hits.forEach((o) => (o.customerId = customerId));
+        return hits.length;
       },
       user: {
         findUnique: async ({ where }: { where: { id?: string; email?: string } }) => {
@@ -327,9 +332,9 @@ describe("code start", () => {
     expect(store.mails).toHaveLength(0);
   });
 
-  it("limits to 3 codes per address in the window, with the normal answer and no 4th mail", async () => {
+  it("limits to 3 codes per address from one IP in the window, with the normal answer and no 4th mail", async () => {
     for (let i = 0; i < 4; i++) {
-      const res = await requestCode("rate@chiarel.test");
+      const res = await requestCode("rate@chiarel.test", "5.5.5.5");
       expect(res.status).toBe(200);
       expect(await res.json()).toEqual({ ok: true, message: NEUTRAL_MESSAGE });
     }
@@ -433,16 +438,59 @@ describe("code verify", () => {
     expect((await verifyCode.POST(post("/api/account/code/verify", { email: "a@chiarel.test", code: right }))).status).toBe(200);
   });
 
-  it("a resend invalidates the older code", async () => {
+  it("a resend does NOT kill the older live code (a stranger cannot invalidate the owner code)", async () => {
     await requestCode("a@chiarel.test");
     const first = lastCode();
     await requestCode("a@chiarel.test");
+    expect(store.codes).toHaveLength(2);
+    expect((await verifyCode.POST(post("/api/account/code/verify", { email: "a@chiarel.test", code: first }))).status).toBe(200);
+  });
+
+  it("keeps at most 5 live codes, dropping the oldest; expired and spent ones are cleared on issue", async () => {
+    for (let i = 0; i < 6; i++) await requestCode("a@chiarel.test");
+    expect(store.codes).toHaveLength(5);
+    store.codes[0].expiresAt = new Date(Date.now() - 1000);
+    store.codes[1].consumedAt = new Date();
+    await requestCode("a@chiarel.test");
+    expect(store.codes).toHaveLength(4);
+  });
+
+  it("each live code has its own 5-attempt budget", async () => {
+    await requestCode("a@chiarel.test");
+    const first = lastCode();
+    const wrong = first === "111111" ? "222222" : "111111";
+    for (let i = 0; i < 4; i++) await verifyCode.POST(post("/api/account/code/verify", { email: "a@chiarel.test", code: wrong }));
+    await requestCode("a@chiarel.test");
     const second = lastCode();
-    expect(store.codes).toHaveLength(1);
-    if (first !== second) {
-      expect((await verifyCode.POST(post("/api/account/code/verify", { email: "a@chiarel.test", code: first }))).status).toBe(401);
-    }
+    expect(store.codes.map((c) => c.attempts)).toEqual([4, 0]);
     expect((await verifyCode.POST(post("/api/account/code/verify", { email: "a@chiarel.test", code: second }))).status).toBe(200);
+  });
+
+  it("an attacker flood from one IP cannot lock out or burn the owner on another IP", async () => {
+    await requestCode("victim@chiarel.test", "1.1.1.1");
+    const ownerCode = lastCode();
+    const attacker = "6.6.6.6";
+    for (let i = 0; i < 5; i++) await requestCode("victim@chiarel.test", attacker); // only 3 count, no more mail after that
+    expect(store.mails.length).toBe(1 + 3);
+    for (let i = 0; i < 15; i++) {
+      await verifyCode.POST(post("/api/account/code/verify", { email: "victim@chiarel.test", code: "000000" }, { ip: attacker }));
+    }
+    const owner = await verifyCode.POST(post("/api/account/code/verify", { email: "victim@chiarel.test", code: ownerCode }, { ip: "1.1.1.1" }));
+    expect(owner.status).toBe(200);
+  });
+
+  it("the address-only ceilings still bound a distributed flood (20 starts, 40 verifies)", async () => {
+    for (let i = 0; i < 25; i++) await requestCode("flood@chiarel.test", `3.3.${i}.1`);
+    expect(store.mails.length).toBe(20);
+    const live = store.codes.map((c) => c.id);
+    for (let i = 0; i < 45; i++) {
+      await verifyCode.POST(post("/api/account/code/verify", { email: "flood@chiarel.test", code: "123456" }, { ip: `4.4.${i}.1` }));
+    }
+    // Attempts stop counting once the 40-per-address ceiling is reached.
+    const maxAttempts = Math.max(...store.codes.filter((c) => live.includes(c.id)).map((c) => c.attempts), 0);
+    expect(maxAttempts).toBeLessThanOrEqual(5);
+    const past = await verifyCode.POST(post("/api/account/code/verify", { email: "flood@chiarel.test", code: lastCode() }, { ip: "9.9.9.9" }));
+    expect(past.status).toBe(401);
   });
 
   it("a code for one address does not work for another", async () => {
@@ -451,10 +499,13 @@ describe("code verify", () => {
     expect(res.status).toBe(401);
   });
 
-  it("limits verification attempts per address and per IP", async () => {
-    const results: number[] = [];
-    for (let i = 0; i < 12; i++) results.push((await verifyCode.POST(post("/api/account/code/verify", { email: "limit@chiarel.test", code: "123456" }))).status);
-    expect(results.every((s) => s === 401)).toBe(true);
+  it("limits verification to 4 tries per address+IP (below a code attempt budget) and 30 per IP", async () => {
+    await requestCode("limit@chiarel.test", "2.2.2.2");
+    const right = lastCode();
+    const wrong = right === "123456" ? "654321" : "123456";
+    for (let i = 0; i < 4; i++) await verifyCode.POST(post("/api/account/code/verify", { email: "limit@chiarel.test", code: wrong }, { ip: "2.2.2.2" }));
+    // That IP is now cut off for this address, even with the right code.
+    expect((await verifyCode.POST(post("/api/account/code/verify", { email: "limit@chiarel.test", code: right }, { ip: "2.2.2.2" }))).status).toBe(401);
     const ip = "8.8.8.8";
     const byIp: number[] = [];
     for (let i = 0; i < 32; i++) byIp.push((await verifyCode.POST(post("/api/account/code/verify", { email: `v${i}@chiarel.test`, code: "123456" }, { ip }))).status);
@@ -490,6 +541,44 @@ describe("order back-fill", () => {
     await signInByCode("a@chiarel.test");
     const id = store.customers[0].id;
     expect(store.orders.map((o) => o.customerId)).toEqual([id, id, null, "someone-else"]);
+  });
+});
+
+describe("back-fill is an exact match (no LIKE wildcards)", () => {
+  it("rejects % at normalisation and the start route answers 400; underscore stays valid", async () => {
+    expect(loginCode.normaliseEmail("%@x.test")).toBeNull();
+    expect((await requestCode("%@x.test")).status).toBe(400);
+    expect(loginCode.normaliseEmail("john_doe@x.test")).toBe("john_doe@x.test");
+  });
+
+  it("attaches nothing for a wildcard address; an underscore matches only a literal underscore", async () => {
+    const { attachGuestOrders } = await import("@/lib/customer-auth");
+    store.orders.push({ id: "o1", email: "a@x.test", customerId: null }, { id: "o2", email: "j_e@x.test", customerId: null }, { id: "o3", email: "jxe@x.test", customerId: null });
+    expect(await attachGuestOrders({ id: "c1", email: "%@x.test" })).toBe(0);
+    expect(await attachGuestOrders({ id: "c2", email: "j_e@x.test" })).toBe(1);
+    expect(store.orders.map((o) => o.customerId)).toEqual([null, "c2", null]);
+  });
+});
+
+describe("CSRF guard on the account POSTs", () => {
+  const raw = (url: string, headers: Record<string, string>, body = "{}") =>
+    new NextRequest(`http://localhost${url}`, { method: "POST", headers: { "x-forwarded-for": nextIp(), ...headers }, body });
+
+  it.each(["/api/account/code/start", "/api/account/code/verify", "/api/account/signout"])("%s: text/plain is refused with 403", async (url) => {
+    const route = url.endsWith("start") ? startCode : url.endsWith("verify") ? verifyCode : signoutRoute;
+    const res = await route.POST(raw(url, { "content-type": "text/plain" }, JSON.stringify({ email: "a@chiarel.test" })));
+    expect(res.status).toBe(403);
+    expect(await res.json()).toEqual({ ok: false, code: "forbidden" });
+    expect(store.mails).toHaveLength(0);
+  });
+
+  it("a foreign Origin is refused even with a JSON content type; same-site and no Origin pass", async () => {
+    const body = JSON.stringify({ email: "a@chiarel.test" });
+    const json = { "content-type": "application/json" };
+    expect((await startCode.POST(raw("/api/account/code/start", { ...json, origin: "https://evil.example" }, body))).status).toBe(403);
+    expect((await startCode.POST(raw("/api/account/code/start", { ...json, origin: "http://localhost" }, body))).status).toBe(200);
+    expect((await startCode.POST(raw("/api/account/code/start", { ...json, origin: "https://chiarel.com" }, body))).status).toBe(200);
+    expect((await startCode.POST(raw("/api/account/code/start", json, body))).status).toBe(200);
   });
 });
 

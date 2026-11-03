@@ -26,9 +26,16 @@ Test by sending a code to a Gmail and an Outlook address and checking "Show orig
 ## Behaviour to know
 - The start endpoint always answers "If that address can receive mail, a code is on its way", for known, unknown,
   rate-limited and mail-failed addresses alike. A support report of "no code" is therefore never explained by the response.
-- Limits (in memory, per process): 3 codes / 15 min per address, 10 starts / 15 min per IP, 300 global; 10 verify
-  attempts / 15 min per address, 30 per IP.
-- Signing in attaches past guest orders with the same email (case-insensitive) to the customer.
+- Limits (in memory, per process; reset by a restart). Start: 3 per address+IP and 20 per address (15 min), 10 per IP, 300 global.
+  Verify: 4 tries per address+IP (below a code's 5-attempt budget, so one source cannot burn the owner's code), 40 per address, 30 per IP, 600 global.
+  Google start/callback: 20 per IP (10 min). A limited start still answers normally and sends nothing.
+- Client IP for limits is the rightmost X-Forwarded-For entry (what our proxy appended); leading entries are client-supplied and ignored.
+  If the host stops appending (or the app is exposed without a proxy), every client looks like "unknown": check this first if limits trip for everyone.
+- A new code does not cancel older live ones: up to 5 live codes per address, each with its own 5-attempt budget, 10 minute life; the oldest drops when a sixth is issued.
+  Do not "clean up" LoginCode rows by hand during an incident; they expire on their own.
+- The three account POSTs (start, verify, signout) require `Content-Type: application/json` and, if an Origin header is sent, it must be the site origin
+  (`OAUTH_REDIRECT_ORIGIN` or the canonical site URL, or the host the request was addressed to). Otherwise 403 `forbidden`.
+- Signing in attaches past guest orders whose lower-cased email equals the customer's (exact match, parameterised SQL, index `Order_lower_email_idx` from migration `20261102110000`). Addresses containing `%` are refused.
 - Google identities of customers are stored with provider `google_customer` (admin's stay `google`), so one person can be both.
 - `return_to` only honours internal paths under /account, /shop, /cart, /checkout, /ritual, /order, /build-your-ritual, /assessment.
 
