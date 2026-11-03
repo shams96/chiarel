@@ -30,7 +30,7 @@ export default function HomeJournal() {
                 <h3 className="mt-2 font-serif text-h4 text-ink group-hover:text-ochre md:text-h3">
                   {e.title}
                 </h3>
-                <p className="mt-2 max-w-measure text-caption text-ink/75">
+                <p className="mt-2 max-w-measure text-caption text-ink/80">
                   {e.excerpt}
                 </p>
               </Link>

@@ -34,7 +34,7 @@ function EmailSignupForm({
   const muted = dark ? "text-cloud/75" : "text-ink/70";
   const field = dark
     ? "border-cloud/40 bg-transparent text-cloud placeholder:text-cloud/60 focus:border-champagne"
-    : "border-ink/20 bg-white text-ink placeholder:text-ink/65 focus:border-ochre";
+    : "border-ink/20 bg-white text-ink placeholder:text-ink/70 focus:border-ochre";
   const button = dark
     ? "bg-champagne text-ink hover:bg-cloud"
     : "bg-ink text-ivory hover:bg-ochre";

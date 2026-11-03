@@ -41,13 +41,13 @@ export default function LastingHydrationPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <Link href="/science" className="text-[12px] text-ink/65 hover:text-ochre">
+      <Link href="/science" className="text-[12px] text-ink/70 hover:text-ochre">
         ← The Science
       </Link>
       <h1 className="mt-2 font-serif text-h1 leading-tight">
         Beyond Surface Moisture
       </h1>
-      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/75">
+      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/80">
         Hydration that fades within the hour is a formulation gap, not an
         inevitability. CHIAREL layers water-binding ingredients with
         skin-compatible lipids, for the look and feel of hydrated, comfortable
@@ -94,7 +94,7 @@ export default function LastingHydrationPage() {
         </div>
       </section>
 
-      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink/65">
+      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink/70">
         Hyaluronic acid, ceramides and squalane are established
         ingredients, not CHIAREL trademarks or proprietary technologies. This
         page describes CHIAREL&rsquo;s formulation approach — not a guarantee

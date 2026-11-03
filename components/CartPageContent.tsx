@@ -42,7 +42,7 @@ function PlanSelect({ line }: { line: CartLine }) {
           </option>
         ))}
       </select>
-      <p className="mt-1.5 text-[12px] text-ink/65">
+      <p className="mt-1.5 text-[12px] text-ink/70">
         {options.find((o) => o.mode === line.mode)?.detail}
       </p>
     </div>
@@ -149,7 +149,7 @@ export default function CartPageContent() {
         <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_360px] lg:gap-12">
           <section aria-label="Items in your bag">
             {/* Column heads on desktop only; on phones each row labels itself. */}
-            <div className="hidden grid-cols-[1fr_230px_120px_72px] gap-6 border-b border-ink/15 pb-3 text-eyebrow uppercase text-ink/65 lg:grid">
+            <div className="hidden grid-cols-[1fr_230px_120px_72px] gap-6 border-b border-ink/15 pb-3 text-eyebrow uppercase text-ink/70 lg:grid">
               <span>Product</span>
               <span>Plan</span>
               <span>Quantity</span>
@@ -180,7 +180,7 @@ export default function CartPageContent() {
                       >
                         {line.product.name}
                       </Link>
-                      <p className="mt-1 text-[13px] text-ink/65">{line.product.descriptor}</p>
+                      <p className="mt-1 text-[13px] text-ink/70">{line.product.descriptor}</p>
                       <button
                         type="button"
                         onClick={() => remove(line.slug)}
@@ -216,7 +216,7 @@ export default function CartPageContent() {
             >
               Checkout — ${total}
             </Link>
-            <p className="mt-3 text-center text-[12px] text-ink/65">
+            <p className="mt-3 text-center text-[12px] text-ink/70">
               Secure payment, processed by Stripe.
             </p>
 
@@ -241,7 +241,7 @@ export default function CartPageContent() {
                 <dd className="font-serif text-xl">${total}</dd>
               </div>
             </dl>
-            <p className="mt-3 text-[12px] leading-relaxed text-ink/65">
+            <p className="mt-3 text-[12px] leading-relaxed text-ink/70">
               Taxes are calculated at payment.
             </p>
 

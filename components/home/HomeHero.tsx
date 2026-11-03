@@ -45,7 +45,7 @@ export default function HomeHero() {
                   ${perDayPrice(essence.price.subscription)}
                 </span>{" "}
                 a day
-                <span className="mt-1 block text-ink/75">
+                <span className="mt-1 block text-ink/80">
                   ${essence.price.subscription} every {DELIVERY_DAYS} days with
                   subscription · ${essence.price.oneTime} one-time
                 </span>
@@ -64,7 +64,7 @@ export default function HomeHero() {
           <div className="relative col-span-4 md:col-span-6 lg:col-span-6 lg:col-start-7">
             <div
               className="relative aspect-[4/5] w-full bg-ochre lg:aspect-[100/115]"
-              style={{ backgroundImage: "linear-gradient(155deg, rgb(255 255 255 / 0.06) 0%, rgb(28 26 23 / 0.34) 100%)" }}
+              style={{ backgroundImage: "linear-gradient(155deg, rgb(255 255 255 / 0.06) 0%, rgb(50 49 45 / 0.34) 100%)" }}
             >
               <div className="absolute -bottom-4 -right-4 left-4 top-4 border border-ink md:-bottom-6 md:-right-6 md:left-6 md:top-6 lg:-bottom-8 lg:-right-8 lg:left-12 lg:top-12">
                 <ResponsiveImage

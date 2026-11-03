@@ -109,7 +109,7 @@ export default async function ProductPage({
             actual visitor. Same typographic voice as every other small label
             on the site (11px uppercase tracked, ink/65 -> ochre on hover),
             not a new pattern. */}
-        <nav aria-label="Breadcrumb" className="mb-4 text-[12px] uppercase tracking-[0.14em] text-ink/65 md:mb-6">
+        <nav aria-label="Breadcrumb" className="mb-4 text-[12px] uppercase tracking-[0.14em] text-ink/70 md:mb-6">
           <ol className="flex items-center gap-2">
             <li>
               <Link href="/shop" className="tap-area hover:text-ochre">Shop</Link>
@@ -166,7 +166,7 @@ export default async function ProductPage({
                 {p.role}
               </p>
             )}
-            <p className="mt-4 text-[12px] leading-relaxed text-ink/65">
+            <p className="mt-4 text-[12px] leading-relaxed text-ink/70">
               {productFactSummary(p)}
             </p>
 
@@ -195,7 +195,7 @@ export default async function ProductPage({
               </div>
             </dl>
             {(p.slug === "terra-radiance-creme" || p.slug === "recovery-masque") && (
-              <p className="mt-4 text-[12px] text-ink/65">
+              <p className="mt-4 text-[12px] text-ink/70">
                 Wondering why day and night formulas feel different?{" "}
                 <Link
                   href="/journal/chiarel-ritual-guide"
@@ -218,7 +218,7 @@ export default async function ProductPage({
             <AmbientVideo
               src="/assets/products/n1-neck-decollete-ambient.mp4"
               poster="/assets/products/clarity-neck-decollete-creme-honeycomb.jpg"
-              label="Clarity Neck & Décolleté Crème, 40 ml, on a reflective surface with water droplets"
+              label="Clarity Neck & Décolleté Crème on a reflective surface with a gold honeycomb pattern and water droplets"
               className="mx-auto aspect-[9/16] max-h-[80vh] w-auto max-w-full bg-cloud object-cover"
             />
           </div>
@@ -531,7 +531,7 @@ function N1WhatItsForAndFeel() {
       <div className="mx-auto grid max-w-3xl gap-10 px-6 sm:grid-cols-2">
         <div>
           <h2 className="font-serif text-2xl">What it&rsquo;s for</h2>
-          <ul className="mt-4 space-y-2 text-sm leading-relaxed text-ink/75">
+          <ul className="mt-4 space-y-2 text-sm leading-relaxed text-ink/80">
             <li>· The visible appearance of dryness</li>
             <li>· Crepey-looking texture</li>
             <li>· The appearance of horizontal lines</li>
@@ -540,7 +540,7 @@ function N1WhatItsForAndFeel() {
         </div>
         <div>
           <h2 className="font-serif text-2xl">What it feels like</h2>
-          <ul className="mt-4 space-y-2 text-sm leading-relaxed text-ink/75">
+          <ul className="mt-4 space-y-2 text-sm leading-relaxed text-ink/80">
             <li>· Finished with a delicate CHIAREL accord</li>
             <li>· Cushioning</li>
             <li>· Low drag</li>
@@ -582,7 +582,7 @@ function FullIngredientList({ inci }: { inci: string[] }) {
           <span className="ml-4 text-xl text-ink/70 group-open:hidden" aria-hidden="true">+</span>
           <span className="ml-4 hidden text-xl text-ink/70 group-open:inline" aria-hidden="true">−</span>
         </summary>
-        <p className="mt-4 text-caption leading-relaxed text-ink/75">{inci.join(", ")}</p>
+        <p className="mt-4 text-caption leading-relaxed text-ink/80">{inci.join(", ")}</p>
       </details>
     </PdpBlock>
   );
@@ -634,7 +634,7 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
   function RouteStrip({ label, route }: { label: string; route: string[] }) {
     return (
       <div>
-        <p className="text-[12px] uppercase tracking-[0.16em] text-ink/65">{label}</p>
+        <p className="text-[12px] uppercase tracking-[0.16em] text-ink/70">{label}</p>
         <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-6">
           {route.map((slug, i) => {
             const item = getProduct(slug);
@@ -654,7 +654,7 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
                     {item.name}
                   </Link>
                 )}
-                {i < route.length - 1 && <span className="text-ink/40">→</span>}
+                {i < route.length - 1 && <span className="text-ink/70">→</span>}
               </span>
             );
           })}
@@ -672,7 +672,7 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
       </div>
       {pairs.length > 0 && (
         <div className="mt-10 border-t border-ink/10 pt-8">
-          <p className="text-center text-[12px] uppercase tracking-[0.16em] text-ink/65">
+          <p className="text-center text-[12px] uppercase tracking-[0.16em] text-ink/70">
             Complete your regimen
           </p>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -690,11 +690,11 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
                   </div>
                   <div>
                     <p className="font-serif text-base leading-snug">{item.name}</p>
-                    <p className="mt-0.5 text-[12px] uppercase tracking-[0.16em] text-ink/65">
+                    <p className="mt-0.5 text-[12px] uppercase tracking-[0.16em] text-ink/70">
                       {item.step}
                     </p>
                     {isPurchasable(item) && (
-                      <p className="mt-1 text-[12px] text-ink/65">
+                      <p className="mt-1 text-[12px] text-ink/70">
                         ${item.price.subscription} per delivery, subscribe &amp; save
                       </p>
                     )}
@@ -803,7 +803,7 @@ function UsageGuidance() {
             </p>
           </details>
         </div>
-        <p className="mt-10 text-center text-[12px] leading-relaxed text-ink/65">
+        <p className="mt-10 text-center text-[12px] leading-relaxed text-ink/70">
           Questions about how this fits your routine?{" "}
           <Link href="/contact" className="border-b border-ochre text-ochre">
             Contact us

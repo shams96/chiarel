@@ -99,7 +99,7 @@ h1, h2, h3 {
   padding-block: var(--section-y);
 }
 .section-rule {
-  border-top: 1px solid rgb(28 26 23 / 0.15);
+  border-top: 1px solid rgb(50 49 45 / 0.15);
 }
 .section-x-narrow {
   @apply mx-auto max-w-2xl px-6;
@@ -109,12 +109,12 @@ h1, h2, h3 {
    no drop shadow and no hover lift. The class name is kept so existing
    markup keeps working; the 9 call sites inherit the flat treatment. */
 .card-elevated {
-  border: 1px solid rgb(28 26 23 / 0.15);
+  border: 1px solid rgb(50 49 45 / 0.15);
   box-shadow: none;
   transition: border-color 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .card-elevated:hover {
-  border-color: rgb(28 26 23 / 0.4);
+  border-color: rgb(50 49 45 / 0.4);
 }
 
 /* Film-grain overlay — the one authored texture across the whole site,
@@ -426,7 +426,7 @@ summary:focus-visible {
    Outlined display type is decorative and aria-hidden at every use; the same
    words exist as real text nearby. Outlines only at 48px and above. */
 /* the stroke needs its own colour: currentColor would resolve to the transparent fill. Override --out-stroke on light-on-dark uses. */
-.out { color: transparent; -webkit-text-stroke: 1px var(--out-stroke, rgb(28 26 23)); }
+.out { color: transparent; -webkit-text-stroke: 1px var(--out-stroke, rgb(50 49 45)); }
 /* the ladder: one word at falling sizes, hairline outline to solid. Sizes are
    container-query units of .ladder-wrap so it scales with its own column. */
 .ladder-wrap { container-type: inline-size; }
@@ -435,9 +435,9 @@ summary:focus-visible {
 .ladder { margin: 0; font-weight: 400; line-height: 0.88; letter-spacing: -0.02em; }
 .ladder > span {
   display: block; white-space: nowrap; font-size: var(--s);
-  color: rgb(28 26 23);
-  -webkit-text-fill-color: rgb(28 26 23 / var(--fill));
-  -webkit-text-stroke: 1px rgb(28 26 23);
+  color: rgb(50 49 45);
+  -webkit-text-fill-color: rgb(50 49 45 / var(--fill));
+  -webkit-text-stroke: 1px rgb(50 49 45);
   animation: ladder-rise 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: calc(var(--i) * 90ms);
 }
@@ -480,19 +480,19 @@ summary:focus-visible {
    units so the block scales with its column. */
 .poster {
   container-type: inline-size;
-  background-image: linear-gradient(to right, rgb(28 26 23 / 0.16) 1px, transparent 1px);
+  background-image: linear-gradient(to right, rgb(50 49 45 / 0.16) 1px, transparent 1px);
   background-size: calc(100% / 6) 100%;
-  border-right: 1px solid rgb(28 26 23 / 0.16);
+  border-right: 1px solid rgb(50 49 45 / 0.16);
 }
 .poster > span {
   display: block;
   white-space: nowrap;
   font-weight: 500;
-  color: rgb(28 26 23 / 0.84);
+  color: rgb(50 49 45 / 0.84);
   line-height: 0.9;
   letter-spacing: -0.03em;
-  border-top: 1px solid rgb(28 26 23 / 0.45);
-  border-bottom: 1px solid rgb(28 26 23 / 0.45);
+  border-top: 1px solid rgb(50 49 45 / 0.45);
+  border-bottom: 1px solid rgb(50 49 45 / 0.45);
   padding: 0.04em 0 0.06em;
   width: fit-content;
 }

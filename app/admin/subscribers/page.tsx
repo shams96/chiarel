@@ -120,7 +120,7 @@ export default function AdminSubscribersPage() {
             <Stat label="Total" value={counts.total} tone="peach" />
           </StatGrid>
           {counts.bySource.length > 0 && (
-            <p className="mt-4 text-[14px] text-ink/75">By source: {counts.bySource.map((b) => `${b.source} ${b.count}`).join(", ")}</p>
+            <p className="mt-4 text-[14px] text-ink/80">By source: {counts.bySource.map((b) => `${b.source} ${b.count}`).join(", ")}</p>
           )}
         </div>
       )}
@@ -160,7 +160,7 @@ export default function AdminSubscribersPage() {
             {rows.map((s) => (
               <li key={s.id} className="border border-champagne bg-white p-4">
                 <p className="break-all font-medium">{s.email}</p>
-                <p className="mt-1 text-[13px] text-ink/75">
+                <p className="mt-1 text-[13px] text-ink/80">
                   {s.source} · joined {new Date(s.createdAt).toLocaleDateString()}
                   {!viewer && s.consentAt ? ` · consent ${new Date(s.consentAt).toLocaleDateString()}${s.consentTextVersion ? ` (${s.consentTextVersion})` : ""}` : ""}
                 </p>

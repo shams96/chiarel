@@ -12,7 +12,7 @@ An editorial luxury skincare house, quiet and light. High-key daylight, generous
 | --- | --- | --- |
 | `ivory` | #F8F6F1 | Page background |
 | `cloud` | #F0F2EB | Product image frames (`NEUTRAL_FRAME_BG` in `lib/color.ts`) |
-| `ink` | #1C1A17 | Text |
+| `ink` | #32312D | Text |
 | `ochre` | #9B4722 | Website UI accent only (links, small labels). 5.94:1 contrast |
 | `garden` | #1F5129 | N1's product colour (Formal Garden) |
 | `champagne` | #D6C5A0 | Rules and badges; valid for product and packaging typography |
