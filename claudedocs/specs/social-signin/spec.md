@@ -40,3 +40,7 @@ Google first (OIDC, `email_verified` claim, no review for basic scopes). Faceboo
 
 ## Open questions
 Six, each with a recommended default: plan.md section 9.
+
+## Decision change 2026-11-02
+
+No email confirmation. A verified Google email that matches a pre-existing (admin-created) user binds the Google `sub` to that user and signs in immediately, as in Auth.js/Firebase/Okta; the admin allowlist is the control. The confirm route, link token and pending-link audit action were removed. This supersedes the earlier "never link automatically" default in this spec and plan.md.
