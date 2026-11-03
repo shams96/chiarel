@@ -18,18 +18,18 @@ export function HomeFinalCta() {
     <>
     <section className="section-y bg-cloud text-ink">
       <div className="mx-auto flex max-w-[96rem] flex-col items-center gap-10 px-[clamp(1.5rem,4.5vw,7rem)] md:flex-row md:gap-[clamp(2.5rem,5vw,7rem)]">
-        <Reveal className="grid w-full grid-cols-5 gap-4 md:w-3/5">
+        <Reveal className="grid w-full grid-cols-2 gap-4 md:w-3/5">
           <div
-            className="card-elevated product-frame col-span-3 aspect-[4/5]"
+            className="card-elevated product-frame aspect-[4/5]"
             style={{ backgroundColor: NEUTRAL_FRAME_BG }}
           >
-            <ResponsiveImage src={studioImage(essence)} alt={productImageAlt(essence)} sizes="35vw" />
+            <ResponsiveImage src={studioImage(essence)} alt={productImageAlt(essence)} sizes="(max-width: 768px) 45vw, 30vw" />
           </div>
           <div
-            className="card-elevated product-frame col-span-2 aspect-[4/5] self-end"
+            className="card-elevated product-frame aspect-[4/5]"
             style={{ backgroundColor: NEUTRAL_FRAME_BG }}
           >
-            <ResponsiveImage src={studioImage(day)} alt={productImageAlt(day)} sizes="25vw" />
+            <ResponsiveImage src={studioImage(day)} alt={productImageAlt(day)} sizes="(max-width: 768px) 45vw, 30vw" />
           </div>
         </Reveal>
         <Reveal delay={0.15} className="w-full md:w-2/5">

@@ -16,7 +16,7 @@ const config: Config = {
         ocean: "#0C2D38",
         champagne: "#D6C5A0",
         ivory: "#F8F6F1",
-        ink: "#1C1A17",
+        ink: "#32312D",
         peachdust: "#F0D8CC",
       },
       // One family, site-wide. `sans` is an alias of `serif` so classes that

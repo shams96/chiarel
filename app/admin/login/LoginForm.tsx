@@ -68,7 +68,7 @@ export default function AdminLoginForm({ googleEnabled, notice }: { googleEnable
             <img src="/assets/brand/CHIAREL_Wordmark_RedOchre.svg" alt="CHIAREL" className="h-9 w-auto" />
             <p className="mt-8 text-[12px] uppercase tracking-[0.34em] text-ochre">Admin console</p>
             <h1 className="mt-2 font-serif text-[clamp(2rem,1.4rem+1.6vw,3rem)] leading-tight text-garden">Welcome back.</h1>
-            <p className="mt-2 text-[15px] text-ink/75">Sign in to look after the House.</p>
+            <p className="mt-2 text-[15px] text-ink/80">Sign in to look after the House.</p>
 
             {shown && (
               <div className="mt-6">
@@ -105,7 +105,7 @@ export default function AdminLoginForm({ googleEnabled, notice }: { googleEnable
 
             {googleEnabled && (
               <>
-                <p className="mt-6 text-center text-[12px] uppercase tracking-[0.2em] text-ink/55">or</p>
+                <p className="mt-6 text-center text-[12px] uppercase tracking-[0.2em] text-ink/70">or</p>
                 {/* A plain link, not fetch: the browser must follow the redirect to Google. */}
                 {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
                 <a

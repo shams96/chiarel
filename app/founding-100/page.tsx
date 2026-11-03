@@ -51,7 +51,7 @@ export default async function Founding100Page() {
             <h1 className="mt-5 font-serif text-h1 leading-[0.98] tracking-[-0.01em] md:text-6xl">
               The Founding Members
             </h1>
-            <p className="mt-6 max-w-md text-[15px] leading-relaxed text-ink/75">
+            <p className="mt-6 max-w-md text-[15px] leading-relaxed text-ink/80">
               One hundred places, each one numbered. We are opening the House
               to its first hundred members, and they will meet every new
               formula before anyone else.
@@ -63,7 +63,7 @@ export default async function Founding100Page() {
               <span className="tabular-nums font-serif text-4xl text-ochre">
                 {remaining}
               </span>
-              <span className="text-[12px] uppercase leading-tight tracking-[0.14em] text-ink/65">
+              <span className="text-[12px] uppercase leading-tight tracking-[0.14em] text-ink/70">
                 {full ? (
                   <>places left on the list
                   <br />
@@ -74,7 +74,7 @@ export default async function Founding100Page() {
               </span>
             </div>
 
-            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-1 border-t border-ink/15 pt-5 text-[12px] text-ink/65">
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-1 border-t border-ink/15 pt-5 text-[12px] text-ink/70">
               <span>Formulated by Grazia Savoriti, Pharmacist</span>
               <span>Built around L-Ornithine and Panthenol</span>
             </div>
@@ -100,7 +100,7 @@ export default async function Founding100Page() {
       <section className="space-y-10">
         <div className="border-l-2 border-ochre pl-6">
           <h2 className="font-serif text-2xl">How it works</h2>
-          <ol className="mt-3 max-w-xl space-y-3 text-sm leading-relaxed text-ink/75">
+          <ol className="mt-3 max-w-xl space-y-3 text-sm leading-relaxed text-ink/80">
             <li>
               <strong className="text-ink">1. Join.</strong> Choose your ritual
               at its published price. The 90-day plan, paid once,

@@ -22,7 +22,7 @@ const INPUT = "mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm out
 function Field({ label, id, children }: { label: string; id: string; children: React.ReactNode }) {
   return (
     <div>
-      <label htmlFor={id} className="text-eyebrow uppercase text-ink/65">
+      <label htmlFor={id} className="text-eyebrow uppercase text-ink/70">
         {label}
       </label>
       {children}
@@ -215,7 +215,7 @@ export default function CheckoutPage() {
                 Same zero-JS <details>/<summary> pattern already used in
                 UsageGuidance and the homepage FAQ. See
                 claudedocs/specs/dispute-risk-mitigation/. */}
-            <details className="group border border-ink/15 bg-cloud/20 px-4 py-3 text-[13px] leading-relaxed text-ink/75">
+            <details className="group border border-ink/15 bg-cloud/20 px-4 py-3 text-[13px] leading-relaxed text-ink/80">
               <summary className="flex cursor-pointer list-none items-center justify-between font-medium text-ink">
                 Refund Policy &amp; Terms
                 <span className="ml-4 text-lg text-ink/70 group-open:hidden" aria-hidden="true">+</span>
@@ -226,7 +226,7 @@ export default function CheckoutPage() {
               </div>
             </details>
 
-            <label className="flex min-h-[44px] items-center gap-3 text-[12px] leading-relaxed text-ink/75">
+            <label className="flex min-h-[44px] items-center gap-3 text-[12px] leading-relaxed text-ink/80">
               <input type="checkbox" name="termsAccepted" required className="h-5 w-5 shrink-0" />
               <span>
                 I have read and agree to the{" "}
@@ -250,7 +250,7 @@ export default function CheckoutPage() {
             >
               {submitting ? "Continuing to payment…" : `Continue to Payment — $${total}`}
             </button>
-            <p className="text-center text-[12px] text-ink/65">
+            <p className="text-center text-[12px] text-ink/70">
               You&rsquo;ll enter your card details securely on the next
               screen, processed by Stripe.
             </p>
@@ -259,7 +259,7 @@ export default function CheckoutPage() {
 
         {/* Right: order summary */}
         <aside className="card-elevated h-fit rounded-md bg-white p-6">
-          <p className="text-eyebrow uppercase text-ink/65">
+          <p className="text-eyebrow uppercase text-ink/70">
             Order Summary
           </p>
           <ul className="mt-4 space-y-4">
@@ -276,7 +276,7 @@ export default function CheckoutPage() {
                 </div>
                 <div className="flex-1 text-sm">
                   <p className="leading-tight">{line.product.name}</p>
-                  <p className="text-[12px] text-ink/65">
+                  <p className="text-[12px] text-ink/70">
                     {modeLabel[line.mode]} · Qty {line.qty}
                   </p>
                 </div>

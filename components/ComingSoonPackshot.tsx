@@ -137,7 +137,7 @@ ${shareUrl}`)}`,
       className="card-elevated w-full rounded-md bg-white p-8"
     >
       {referredBy && (
-        <p className="mb-4 text-[12px] text-ink/65">
+        <p className="mb-4 text-[12px] text-ink/70">
           Referred by <span className="text-ochre">{referredBy}</span>
         </p>
       )}
@@ -151,7 +151,7 @@ ${shareUrl}`)}`,
           placeholder="First name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/65 focus:border-ochre focus:outline-none"
+          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/70 focus:border-ochre focus:outline-none"
         />
         <label htmlFor={`founding-email-${uid}`} className="sr-only">Email</label>
         <input
@@ -162,7 +162,7 @@ ${shareUrl}`)}`,
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/65 focus:border-ochre focus:outline-none"
+          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/70 focus:border-ochre focus:outline-none"
         />
         <label htmlFor={`founding-phone-${uid}`} className="sr-only">Phone (optional)</label>
         <input
@@ -172,7 +172,7 @@ ${shareUrl}`)}`,
           placeholder="Phone (optional)"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/65 focus:border-ochre focus:outline-none"
+          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/70 focus:border-ochre focus:outline-none"
         />
       </div>
       <button

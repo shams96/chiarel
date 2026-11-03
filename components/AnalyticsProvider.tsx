@@ -69,7 +69,7 @@ export default function AnalyticsProvider({ measurementId }: { measurementId: st
           className="fixed inset-x-0 bottom-0 z-[9990] border-t border-ink/15 bg-cloud px-4 py-5 shadow-[0_-8px_24px_rgba(0,0,0,0.06)] sm:px-6"
         >
           <div className="mx-auto flex max-w-5xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
-            <p className="text-[13px] leading-relaxed text-ink/75">
+            <p className="text-[13px] leading-relaxed text-ink/80">
               We use analytics cookies to understand how the site is used. They
               stay off unless you accept. Essential cookies (your bag) are always
               on. See our{" "}

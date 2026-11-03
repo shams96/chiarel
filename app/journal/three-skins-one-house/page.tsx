@@ -11,13 +11,13 @@ export const metadata: Metadata = {
 export default function ThreeSkinsPage() {
   return (
     <div className="mx-auto w-full max-w-3xl px-margin py-16">
-      <Link href="/journal" className="text-[12px] text-ink/65 hover:text-ochre">
+      <Link href="/journal" className="text-[12px] text-ink/70 hover:text-ochre">
         ← Journal
       </Link>
       <h1 className="mt-2 font-serif text-h1 leading-tight">
         Three Skins, One House
       </h1>
-      <p className="mt-4 text-[13px] text-ink/65">The CHIAREL Origin Story</p>
+      <p className="mt-4 text-[13px] text-ink/70">The CHIAREL Origin Story</p>
 
       <div className="mt-10 space-y-6 text-sm leading-relaxed text-ink/80">
         <p>

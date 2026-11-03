@@ -31,7 +31,7 @@ export default function GlobalError({
           textAlign: "center",
           padding: "24px",
           background: "#F8F6F1",
-          color: "#1C1A17",
+          color: "#32312D",
           fontFamily: "Georgia, serif",
         }}
       >
@@ -49,14 +49,14 @@ export default function GlobalError({
         <h1 style={{ marginTop: 24, fontSize: 28 }}>
           Something went wrong
         </h1>
-        <p style={{ marginTop: 16, maxWidth: 360, fontSize: 14, lineHeight: 1.6, color: "rgba(28,26,23,0.6)" }}>
+        <p style={{ marginTop: 16, maxWidth: 360, fontSize: 14, lineHeight: 1.6, color: "rgba(50,49,45,0.7)" }}>
           The site hit an unexpected error. Trying again usually resolves it.
         </p>
         <button
           onClick={reset}
           style={{
             marginTop: 32,
-            background: "#1C1A17",
+            background: "#32312D",
             color: "#F8F6F1",
             padding: "12px 32px",
             fontSize: 12,
