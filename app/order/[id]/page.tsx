@@ -5,6 +5,9 @@ import { db } from "@/lib/db";
 import { stripe } from "@/lib/stripe";
 import { getOrCreateCart } from "@/lib/cart-server";
 import TrackPurchase from "@/components/TrackPurchase";
+import { cookies } from "next/headers";
+import SaveRitual from "@/components/account/SaveRitual";
+import { CUSTOMER_COOKIE, resolveCustomerSession } from "@/lib/customer-session";
 
 const modeLabel: Record<string, string> = {
   ninetyDay: "90-day plan",
@@ -60,6 +63,9 @@ export default async function OrderConfirmationPage({
   }
 
   const isPaid = order.status === "paid";
+  // Offer an account only to someone who does not have one open. A failed lookup
+  // (database trouble) just hides the offer; it never blocks the confirmation.
+  const signedIn = await resolveCustomerSession((await cookies()).get(CUSTOMER_COOKIE)?.value).catch(() => null);
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-24 text-center">
@@ -139,6 +145,8 @@ export default async function OrderConfirmationPage({
           <span className="font-serif text-xl">${order.total}</span>
         </div>
       </div>
+
+      {isPaid && !signedIn && <SaveRitual email={order.email} />}
 
       <Link
         href="/"
