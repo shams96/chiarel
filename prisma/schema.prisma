@@ -124,7 +124,7 @@ model Order {
 
   @@index([createdAt])
   @@index([customerId])
-  @@index([email])
+  // Order_lower_email_idx (expression index on lower(email)) lives in SQL only.
 }
 
 model OrderItem {

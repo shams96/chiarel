@@ -36,11 +36,9 @@ export async function findOrCreateCustomerByEmail(email: string): Promise<Custom
 
 /** Guest orders placed with this (verified) address become this customer's. Returns how many. */
 export async function attachGuestOrders(customer: { id: string; email: string }): Promise<number> {
-  const res = await db.order.updateMany({
-    where: { customerId: null, email: { equals: customer.email, mode: "insensitive" } },
-    data: { customerId: customer.id },
-  });
-  return res.count;
+  // Exact match on lower(email), parameterised: no LIKE/ILIKE, so % and _ in an
+  // address are plain characters. Uses the Order_lower_email_idx expression index.
+  return db.$executeRaw`UPDATE "Order" SET "customerId" = ${customer.id} WHERE "customerId" IS NULL AND lower("email") = ${customer.email.toLowerCase()}`;
 }
 
 /**
