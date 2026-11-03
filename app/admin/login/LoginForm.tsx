@@ -15,12 +15,6 @@ import { Alert, Button, Field, inputClass } from "@/components/admin/ui";
 const NOTICES: Record<string, { kind: "error" | "info"; text: string }> = {
   failed: { kind: "error", text: "Google sign-in could not be completed. Please try again, or sign in with your password." },
   rate_limited: { kind: "error", text: "Too many attempts. Please try again in a few minutes." },
-  eligible: {
-    kind: "info",
-    text: "If that Google account belongs to a CHIAREL team member, we have emailed a confirmation link to its address. Open it, then choose Continue with Google again.",
-  },
-  linked: { kind: "info", text: "Google sign-in is linked. Choose Continue with Google to sign in." },
-  link_invalid: { kind: "error", text: "That confirmation link is no longer valid. Start again with Continue with Google." },
 };
 
 export default function AdminLoginForm({ googleEnabled, notice }: { googleEnabled: boolean; notice?: string }) {

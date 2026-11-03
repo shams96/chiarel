@@ -15,22 +15,14 @@ const store = {
   identities: [] as I[],
   sessions: [] as { id: string; userId: string; expiresAt: Date }[],
   audit: [] as { action: string; actorEmail: string; summary?: string }[],
-  mails: [] as { to: string; subject: string; text: string }[],
   limited: [] as string[],
   dbError: null as unknown,
-  mailFails: false,
   nextId: 1,
 };
 
 vi.mock("@/lib/rate-limit", () => ({
   isRateLimited: (key: string) => store.limited.some((p) => key.startsWith(p)),
   clientIp: () => "9.9.9.9",
-}));
-vi.mock("@/lib/mail", () => ({
-  sendMail: async (m: { to: string; subject: string; text: string }) => {
-    if (store.mailFails) throw new Error("smtp down");
-    store.mails.push(m);
-  },
 }));
 vi.mock("@/lib/db", async () => {
   // Like the real proxy, asking for the database while the breaker is open fails at once.
@@ -74,6 +66,11 @@ vi.mock("@/lib/db", async () => {
           const i = store.identities.find((x) => x.provider === k.provider && x.subject === k.subject);
           return i ? { ...i, user: { ...store.users.find((u) => u.id === i.userId)! } } : null;
         },
+        findFirst: async ({ where }: { where: { userId: string; provider: string } }) => {
+          gate();
+          const i = store.identities.find((x) => x.userId === where.userId && x.provider === where.provider);
+          return i ? { ...i } : null;
+        },
         create: async ({ data }: { data: Omit<I, "id"> }) => {
           if (store.identities.some((x) => x.provider === data.provider && x.subject === data.subject)) {
             throw Object.assign(new Error("unique"), { code: "P2002" });
@@ -92,7 +89,6 @@ const { dbBreaker } = await import("@/lib/db-client");
 const auth = await import("@/lib/auth");
 const startRoute = await import("@/app/api/auth/google/start/route");
 const callbackRoute = await import("@/app/api/auth/google/callback/route");
-const confirmRoute = await import("@/app/api/auth/google/confirm/route");
 
 // ---- mock OIDC issuer: token endpoint + JWKS, no network -------------------
 
@@ -189,7 +185,7 @@ function expectNoSignIn(res: Response) {
 }
 
 beforeEach(() => {
-  Object.assign(store, { users: [], identities: [], sessions: [], audit: [], mails: [], limited: [], dbError: null, mailFails: false, nextId: 1 });
+  Object.assign(store, { users: [], identities: [], sessions: [], audit: [], limited: [], dbError: null, nextId: 1 });
   Object.assign(issuer, { codes: new Map(), tokenCalls: 0, jwksCalls: 0, jwksFails: false, lastJwksSignal: undefined });
   process.env.GOOGLE_CLIENT_ID = CLIENT_ID;
   process.env.GOOGLE_CLIENT_SECRET = CLIENT_SECRET;
@@ -215,7 +211,6 @@ describe("feature flag", () => {
     expect(oauthLib.googleSignInEnabled()).toBe(false);
     expect((await startRoute.GET(get("/api/auth/google/start"))).status).toBe(404);
     expect((await callbackRoute.GET(get("/api/auth/google/callback?code=x&state=y"))).status).toBe(404);
-    expect((await confirmRoute.GET(get("/api/auth/google/confirm?token=x"))).status).toBe(404);
   });
 
   it("has a kill switch", () => {
@@ -377,27 +372,63 @@ describe("callback: rejections are neutral and sign nobody in", () => {
   });
 });
 
-describe("callback: no automatic linking", () => {
-  it("a verified email matching an existing user does NOT link or sign in; it emails a confirmation", async () => {
-    addUser("a", "ADMIN", "a@chiarel.test");
+describe("callback: first-time sign-in binds the subject to a pre-existing user", () => {
+  it("links and signs in at once when the verified email matches a pre-created user", async () => {
+    addUser("a", "MEMBER", "a@chiarel.test");
     const { res } = await signInWithGoogle(GOOD);
-    expectNoSignIn(res);
-    expect(loc(res).searchParams.get("notice")).toBe("eligible");
-    expect(store.identities).toHaveLength(0);
-    expect(store.mails).toHaveLength(1);
-    expect(store.mails[0].to).toBe("a@chiarel.test");
-    expect(store.mails[0].text).toContain("/api/auth/google/confirm?token=");
-    expect(store.audit.map((a) => a.action)).toEqual(["auth.social_link_pending"]);
+    expect(res.status).toBe(303);
+    expect(loc(res).pathname).toBe("/admin");
+    expect(store.identities).toEqual([expect.objectContaining({ provider: "google", subject: "g-sub-1", userId: "a" })]);
+    expect(store.sessions).toHaveLength(1);
+    const cookie = res.cookies.get("chiarel_admin_session")!;
+    expect(await auth.getSessionUser(get("/x", `chiarel_admin_session=${cookie.value}`))).toMatchObject({ id: "a", role: "MEMBER" });
+    expect(store.audit.map((a) => a.action)).toEqual(["auth.social_link", "auth.social_login"]);
   });
 
-  it("an unknown email gets the same visible outcome and no email, identity or session", async () => {
-    addUser("a", "ADMIN", "a@chiarel.test");
-    const known = await signInWithGoogle(GOOD);
-    const unknown = await signInWithGoogle({ ...GOOD, sub: "g-sub-2", email: "stranger@gmail.test" });
-    expect(loc(unknown.res).search).toBe(loc(known.res).search);
-    expect(store.mails).toHaveLength(1); // only the known address was mailed
+  it("then signs in by subject on the next visit without creating another identity", async () => {
+    addUser("a");
+    await signInWithGoogle(GOOD);
+    const { res } = await signInWithGoogle({ ...GOOD, email: "renamed@elsewhere.test" });
+    expect(loc(res).pathname).toBe("/admin");
+    expect(store.identities).toHaveLength(1);
+    expect(store.audit.filter((a) => a.action === "auth.social_link")).toHaveLength(1);
+  });
+
+  it("an unknown email fails neutrally: no identity, session or user, audited as unknown_email", async () => {
+    addUser("a");
+    const { res } = await signInWithGoogle({ ...GOOD, sub: "g-sub-2", email: "stranger@gmail.test" });
+    expectNoSignIn(res);
+    expect(loc(res).searchParams.get("notice")).toBe("failed");
     expect(store.identities).toHaveLength(0);
+    expect(store.users).toHaveLength(1);
     expect(failedAudits()[0].summary).toBe("Google sign-in failed (unknown_email)");
+  });
+
+  it("an unverified email never links, even when it matches a user", async () => {
+    addUser("a");
+    const { res } = await signInWithGoogle({ ...GOOD, email_verified: false });
+    expectNoSignIn(res);
+    expect(store.identities).toHaveLength(0);
+  });
+
+  it("a subject already bound to a different user signs in that user, never the email's owner", async () => {
+    addUser("a", "ADMIN", "a@chiarel.test");
+    addUser("b", "MEMBER", "b@chiarel.test");
+    link("b", "g-sub-1");
+    const { res } = await signInWithGoogle(GOOD); // email belongs to a, subject to b
+    expect(loc(res).pathname).toBe("/admin");
+    const cookie = res.cookies.get("chiarel_admin_session")!;
+    expect(await auth.getSessionUser(get("/x", `chiarel_admin_session=${cookie.value}`))).toMatchObject({ id: "b" });
+    expect(store.identities).toHaveLength(1);
+  });
+
+  it("refuses a different Google account for a user who is already bound to one", async () => {
+    addUser("a");
+    link("a", "original-sub");
+    const { res } = await signInWithGoogle({ ...GOOD, sub: "attacker-sub" });
+    expectNoSignIn(res);
+    expect(store.identities).toHaveLength(1);
+    expect(failedAudits()[0].summary).toBe("Google sign-in failed (subject_mismatch)");
   });
 
   it("never creates a user", async () => {
@@ -405,88 +436,12 @@ describe("callback: no automatic linking", () => {
     expect(store.users).toHaveLength(0);
   });
 
-  it("still reports neutrally if the confirmation email cannot be sent", async () => {
+  it("is rate limited per request", async () => {
     addUser("a");
-    store.mailFails = true;
-    const { res } = await signInWithGoogle(GOOD);
-    expect(loc(res).searchParams.get("notice")).toBe("eligible");
-    expect(store.identities).toHaveLength(0);
-  });
-
-  it("caps confirmation emails per user and per request", async () => {
-    addUser("a");
-    store.limited = ["google-link-mail:"];
-    const { res } = await signInWithGoogle(GOOD);
-    expect(loc(res).searchParams.get("notice")).toBe("rate_limited");
-    expect(store.mails).toHaveLength(0);
     store.limited = ["google-cb:"];
     const cb = await signInWithGoogle(GOOD);
     expect(loc(cb.res).searchParams.get("notice")).toBe("rate_limited");
-    expect(issuer.tokenCalls).toBe(1); // the second request never reached the provider
-  });
-});
-
-describe("link confirmation", () => {
-  const cfg = () => oauthLib.googleConfig()!;
-  const tokenFromMail = () => new URL(store.mails[0].text.match(/https:\/\/\S+/)![0]).searchParams.get("token")!;
-  const post = (token: string) =>
-    confirmRoute.POST(
-      new NextRequest("http://localhost/api/auth/google/confirm", {
-        method: "POST",
-        body: new URLSearchParams({ token }),
-        headers: { "content-type": "application/x-www-form-urlencoded" },
-      })
-    );
-
-  it("links only on POST; a GET (link preview, email scanner) changes nothing", async () => {
-    addUser("a");
-    await signInWithGoogle(GOOD);
-    const token = tokenFromMail();
-    const page = await confirmRoute.GET(get(`/api/auth/google/confirm?token=${encodeURIComponent(token)}`));
-    expect(page.status).toBe(200);
-    expect(await page.text()).toContain("<form");
+    expect(issuer.tokenCalls).toBe(0);
     expect(store.identities).toHaveLength(0);
-  });
-
-  it("then lets that Google account sign in, and is harmless if clicked twice", async () => {
-    addUser("a");
-    await signInWithGoogle(GOOD);
-    const token = tokenFromMail();
-    const res = await post(token);
-    expect(loc(res).searchParams.get("notice")).toBe("linked");
-    expect(store.identities).toEqual([expect.objectContaining({ provider: "google", subject: "g-sub-1", userId: "a" })]);
-    expect(store.audit.map((a) => a.action)).toContain("auth.social_link");
-    expect(loc(await post(token)).searchParams.get("notice")).toBe("linked");
-    expect(store.identities).toHaveLength(1);
-
-    const { res: login } = await signInWithGoogle(GOOD);
-    expect(loc(login).pathname).toBe("/admin");
-  });
-
-  it("rejects tampered, expired, wrong-purpose and garbage tokens", async () => {
-    addUser("a");
-    const good = oauthLib.createLinkToken(cfg(), { uid: "a", sub: "s", email: "a@chiarel.test" });
-    const expired = oauthLib.signValue(STATE_SECRET, "link", { uid: "a", sub: "s", email: "a@chiarel.test", exp: Date.now() - 1 });
-    const wrongPurpose = oauthLib.signValue(STATE_SECRET, "oauth", { uid: "a", sub: "s", email: "a@chiarel.test", exp: Date.now() + 60_000 });
-    for (const t of [good + "x", expired, wrongPurpose, "garbage", ""]) {
-      expect(loc(await post(t)).searchParams.get("notice")).toBe("link_invalid");
-    }
-    expect(store.identities).toHaveLength(0);
-  });
-
-  it("rejects a token whose user changed email since it was sent", async () => {
-    addUser("a");
-    const token = oauthLib.createLinkToken(cfg(), { uid: "a", sub: "s", email: "old@chiarel.test" });
-    expect(loc(await post(token)).searchParams.get("notice")).toBe("link_invalid");
-    expect(store.identities).toHaveLength(0);
-  });
-
-  it("refuses to move a Google account that is already linked to someone else", async () => {
-    addUser("a");
-    addUser("b");
-    link("b", "s");
-    const token = oauthLib.createLinkToken(cfg(), { uid: "a", sub: "s", email: "a@chiarel.test" });
-    expect(loc(await post(token)).searchParams.get("notice")).toBe("link_invalid");
-    expect(store.identities.map((i) => i.userId)).toEqual(["b"]);
   });
 });

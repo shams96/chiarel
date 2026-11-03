@@ -12,7 +12,6 @@ export const PROVIDER = "google";
 export const OAUTH_COOKIE = "chiarel_oauth";
 export const OAUTH_COOKIE_PATH = "/api/auth/google";
 export const OAUTH_COOKIE_TTL_S = 10 * 60;
-export const LINK_TOKEN_TTL_MS = 15 * 60 * 1000;
 export const JWKS_TIMEOUT_MS = 3000;
 const TOKEN_TIMEOUT_MS = 5000;
 
@@ -20,7 +19,6 @@ export const AUDIT = {
   login: "auth.social_login",
   failed: "auth.social_login_failed",
   link: "auth.social_link",
-  linkPending: "auth.social_link_pending",
   unlink: "auth.social_unlink", // used by the Phase B profile page
 } as const;
 
@@ -76,7 +74,7 @@ export function redirectUri(): string {
   return `${siteOrigin()}/api/auth/google/callback`;
 }
 
-// ---- signed values (OAuth cookie, link token) ------------------------------
+// ---- signed values (OAuth cookie) ------------------------------
 
 function mac(secret: string, data: string): string {
   return createHmac("sha256", secret).update(data).digest("base64url");
@@ -211,18 +209,4 @@ export async function completeAuthorization(
   if (!claims || !claims.sub || !email) throw new Error("id_token_claims");
   if (claims.email_verified !== true) throw new Error("email_not_verified");
   return { subject: claims.sub, email };
-}
-
-// ---- link-confirmation token ----------------------------------------------
-
-export type LinkToken = { uid: string; sub: string; email: string; exp: number };
-
-export function createLinkToken(cfg: GoogleConfig, t: Omit<LinkToken, "exp">): string {
-  return signValue(cfg.stateSecret, "link", { ...t, exp: Date.now() + LINK_TOKEN_TTL_MS });
-}
-
-export function readLinkToken(cfg: GoogleConfig, value: string | undefined): LinkToken | null {
-  const t = verifyValue<LinkToken>(cfg.stateSecret, "link", value);
-  if (!t || typeof t.uid !== "string" || typeof t.sub !== "string" || typeof t.email !== "string") return null;
-  return t;
 }

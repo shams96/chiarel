@@ -5,7 +5,7 @@ import { safeErrorCode } from "@/lib/api-error";
 // Neutral outcomes for the browser. The login page maps these fixed codes to
 // fixed text; nothing from the provider or the request is ever echoed back, so
 // the page cannot be used to tell an unknown address from a failed sign-in.
-export type LoginNotice = "failed" | "rate_limited" | "eligible" | "linked" | "link_invalid";
+export type LoginNotice = "failed" | "rate_limited";
 
 export function clearOAuthCookieOn(res: NextResponse): void {
   res.cookies.set(OAUTH_COOKIE, "", { path: OAUTH_COOKIE_PATH, maxAge: 0 });
