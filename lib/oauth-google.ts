@@ -108,9 +108,14 @@ export function verifyValue<T extends Record<string, unknown>>(
 
 // ---- authorization request -------------------------------------------------
 
-export type OAuthCookie = { s: string; n: string; v: string; exp: number };
+// i: who the sign-in is for ("admin" when absent, for cookies issued before customers existed);
+// r: customer return_to (re-validated with safeReturnTo before use).
+export type OAuthCookie = { s: string; n: string; v: string; exp: number; i?: "admin" | "customer"; r?: string };
 
-export async function buildAuthorization(cfg: GoogleConfig): Promise<{ url: string; cookie: string }> {
+export async function buildAuthorization(
+  cfg: GoogleConfig,
+  extra: { intent?: "admin" | "customer"; returnTo?: string } = {}
+): Promise<{ url: string; cookie: string }> {
   const state = oauth.generateRandomState();
   const nonce = oauth.generateRandomNonce();
   const verifier = oauth.generateRandomCodeVerifier();
@@ -132,6 +137,8 @@ export async function buildAuthorization(cfg: GoogleConfig): Promise<{ url: stri
     n: nonce,
     v: verifier,
     exp: Date.now() + OAUTH_COOKIE_TTL_S * 1000,
+    i: extra.intent ?? "admin",
+    ...(extra.returnTo ? { r: extra.returnTo } : {}),
   });
   return { url: url.toString(), cookie };
 }
