@@ -5,6 +5,7 @@ import { hashEmail, normaliseEmail, verifyLoginCode } from "@/lib/login-code";
 import { CUSTOMER_AUDIT, completeCustomerSignIn, findOrCreateCustomerByEmail } from "@/lib/customer-auth";
 import { safeReturnTo } from "@/lib/return-to";
 import { recordAuthEvent } from "@/lib/audit";
+import { rejectCrossSite } from "@/lib/request-guard";
 
 const WINDOW_MS = 15 * 60 * 1000;
 
@@ -20,7 +21,12 @@ const handler = withApiErrorHandling(
     if (isRateLimited(`code-verify:ip:${clientIp(req)}`, 30, WINDOW_MS) || isRateLimited("code-verify:all", 600, WINDOW_MS)) {
       return NextResponse.json({ ok: false, code: "rate_limited" }, { status: 429 });
     }
-    if (isRateLimited(`code-verify:email:${hashEmail(email)}`, 10, WINDOW_MS)) return invalid();
+    // Per address AND source first: 4 tries per IP is below the 5-attempt budget of a code, so one IP cannot burn the owner code; the
+    // address-only ceiling is much higher and only bounds a distributed attack.
+    const eh = hashEmail(email);
+    if (isRateLimited(`code-verify:pair:${eh}:${clientIp(req)}`, 4, WINDOW_MS) || isRateLimited(`code-verify:email:${eh}`, 40, WINDOW_MS)) {
+      return invalid();
+    }
 
     if (!(await verifyLoginCode(email, code))) {
       await recordAuthEvent(req, { id: null, email: "unknown" }, {
@@ -40,7 +46,7 @@ const handler = withApiErrorHandling(
 );
 
 export async function POST(req: NextRequest) {
-  const res = await handler(req);
+  const res = rejectCrossSite(req) ?? (await handler(req));
   res.headers.set("Cache-Control", "no-store");
   return res;
 }

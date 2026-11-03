@@ -3,6 +3,7 @@ import { withApiErrorHandling } from "@/lib/api-error";
 import { recordAuthEvent } from "@/lib/audit";
 import { CUSTOMER_AUDIT } from "@/lib/customer-auth";
 import { clearCustomerCookie, destroyCustomerSession, getCustomerSession } from "@/lib/customer-session";
+import { rejectCrossSite } from "@/lib/request-guard";
 
 const handler = withApiErrorHandling(async (req: NextRequest) => {
   const auth = await getCustomerSession(req);
@@ -21,7 +22,7 @@ const handler = withApiErrorHandling(async (req: NextRequest) => {
 });
 
 export async function POST(req: NextRequest) {
-  const res = await handler(req);
+  const res = rejectCrossSite(req) ?? (await handler(req));
   res.headers.set("Cache-Control", "no-store");
   return res;
 }
