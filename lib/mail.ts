@@ -8,11 +8,16 @@ import nodemailer from "nodemailer";
 // Currently used for: the dispute-rate monitor's threshold-warning alert
 // (lib/dispute-monitoring.ts). Written generically enough to reuse for order
 // confirmation emails later if that's ever built — not building that now (YAGNI).
-function getTransport() {
+/** The accounts@ mailbox password: ACCOUNTS_SMTP_PASS, or ACCOUNTS_SMTP_PASSWORD (either name works). */
+export function accountsSmtpPass(): string | undefined {
+  return process.env.ACCOUNTS_SMTP_PASS || process.env.ACCOUNTS_SMTP_PASSWORD || undefined;
+}
+
+function getTransport(useAccounts: boolean) {
   const host = process.env.HOSTINGER_SMTP_HOST;
   const port = process.env.HOSTINGER_SMTP_PORT;
-  const user = process.env.HOSTINGER_SMTP_USER;
-  const pass = process.env.HOSTINGER_SMTP_PASS;
+  const user = useAccounts ? process.env.ACCOUNTS_SMTP_USER : process.env.HOSTINGER_SMTP_USER;
+  const pass = useAccounts ? accountsSmtpPass() : process.env.HOSTINGER_SMTP_PASS;
 
   if (!host || !port || !user || !pass) {
     throw new Error(
@@ -32,8 +37,12 @@ function getTransport() {
   });
 }
 
-export async function sendMail(opts: { to: string; subject: string; text: string }): Promise<void> {
-  const transport = getTransport();
-  const from = process.env.HOSTINGER_SMTP_USER;
+// `fromAccounts`: send as the accounts@ mailbox (sign-in codes) when both
+// ACCOUNTS_SMTP_USER and a password (ACCOUNTS_SMTP_PASS or ACCOUNTS_SMTP_PASSWORD) are set (same host/port as the main
+// mailbox). If either is unset it falls back to HOSTINGER_SMTP_* exactly as before.
+export async function sendMail(opts: { to: string; subject: string; text: string; fromAccounts?: boolean }): Promise<void> {
+  const useAccounts = !!opts.fromAccounts && !!process.env.ACCOUNTS_SMTP_USER && !!accountsSmtpPass();
+  const transport = getTransport(useAccounts);
+  const from = useAccounts ? process.env.ACCOUNTS_SMTP_USER : process.env.HOSTINGER_SMTP_USER;
   await transport.sendMail({ from, to: opts.to, subject: opts.subject, text: opts.text });
 }

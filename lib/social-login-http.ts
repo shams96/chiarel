@@ -11,14 +11,23 @@ export function clearOAuthCookieOn(res: NextResponse): void {
   res.cookies.set(OAUTH_COOKIE, "", { path: OAUTH_COOKIE_PATH, maxAge: 0 });
 }
 
-export function loginRedirect(notice: LoginNotice, clearOAuthCookie = true): NextResponse {
-  const res = NextResponse.redirect(`${siteOrigin()}/admin/login?notice=${notice}`, 303);
+export type Intent = "admin" | "customer";
+
+export function loginRedirect(notice: LoginNotice, clearOAuthCookie = true, intent: Intent = "admin"): NextResponse {
+  const page = intent === "customer" ? "/account/login" : "/admin/login";
+  const res = NextResponse.redirect(`${siteOrigin()}${page}?notice=${notice}`, 303);
   if (clearOAuthCookie) clearOAuthCookieOn(res);
   return res;
 }
 
 export function adminRedirect(): NextResponse {
   const res = NextResponse.redirect(`${siteOrigin()}/admin`, 303);
+  clearOAuthCookieOn(res);
+  return res;
+}
+
+export function customerRedirect(path: string): NextResponse {
+  const res = NextResponse.redirect(`${siteOrigin()}${path}`, 303);
   clearOAuthCookieOn(res);
   return res;
 }
@@ -35,12 +44,12 @@ export function reasonCode(err: unknown): string {
 }
 
 /** Replaces the generic JSON 503 with a page a person can read during a database outage. */
-export function unavailableIfJson503(res: NextResponse): NextResponse {
+export function unavailableIfJson503(res: NextResponse, intent: Intent = "admin"): NextResponse {
   if (res.status !== 503) return res;
   const html =
     '<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><title>Sign-in unavailable</title>' +
     '<p style="font-family:sans-serif;max-width:32rem;margin:4rem auto">Sign-in is temporarily unavailable. ' +
-    'Please try again in a moment. <a href="/admin/login">Back to sign in</a></p>';
+    'Please try again in a moment. <a href="' + (intent === "customer" ? "/account/login" : "/admin/login") + '">Back to sign in</a></p>';
   const out = new NextResponse(html, {
     status: 503,
     headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" },

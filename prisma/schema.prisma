@@ -56,6 +56,10 @@ model CartItem {
 
 model Order {
   id              String      @id @default(cuid())
+  // Set when a verified customer account owns this order (guest orders are
+  // attached by matching email on sign-in). Null for guests.
+  customerId      String?
+  customer        Customer?   @relation(fields: [customerId], references: [id], onDelete: SetNull)
   createdAt       DateTime    @default(now())
   status          String      @default("pending")
   stripeSessionId String?     @unique
@@ -119,6 +123,8 @@ model Order {
   internalNote     String?
 
   @@index([createdAt])
+  @@index([customerId])
+  // Order_lower_email_idx (expression index on lower(email)) lives in SQL only.
 }
 
 model OrderItem {
@@ -172,11 +178,57 @@ model Identity {
   provider  String
   subject   String
   email     String
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // Exactly one of userId / customerId is set (CHECK in the 20261102100000 migration).
+  userId     String?
+  user       User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  customerId String?
+  customer   Customer? @relation(fields: [customerId], references: [id], onDelete: Cascade)
 
   @@unique([provider, subject])
   @@index([userId])
+  @@index([customerId])
+}
+
+// Storefront customer (claudedocs/specs/customer-accounts/). Separate from User
+// (admin) on purpose: own table, own session table, own cookie. email is stored
+// trimmed + lower-cased. Passwordless: a one-time emailed code or Google.
+model Customer {
+  id           String            @id @default(cuid())
+  createdAt    DateTime          @default(now())
+  email        String            @unique
+  name         String?
+  lastSignInAt DateTime?
+  deletedAt    DateTime?
+  sessions     CustomerSession[]
+  identities   Identity[]
+  orders       Order[]
+}
+
+model CustomerSession {
+  id         String   @id @default(cuid())
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  customerId String
+  createdAt  DateTime @default(now())
+  lastSeenAt DateTime @default(now())
+  expiresAt  DateTime
+  userAgent  String?
+
+  @@index([customerId])
+}
+
+// One-time sign-in code. Only hashes are stored (never the email or the code in
+// clear). At most one live row per emailHash: issuing a new code deletes older ones.
+model LoginCode {
+  id         String    @id @default(cuid())
+  createdAt  DateTime  @default(now())
+  emailHash  String
+  codeHash   String
+  expiresAt  DateTime
+  attempts   Int       @default(0)
+  consumedAt DateTime?
+
+  @@index([emailHash])
+  @@index([expiresAt])
 }
 
 // DB-backed rather than a stateless JWT so a role change or account cutoff takes
