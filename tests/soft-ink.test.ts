@@ -16,8 +16,8 @@ const files = [...walk(path.join(root, "app")), ...walk(path.join(root, "compone
 );
 
 describe("soft ink", () => {
-  it("ink token is the softened charcoal", () => {
-    expect(fs.readFileSync(path.join(root, "tailwind.config.ts"), "utf8")).toContain('ink: "#32312D"');
+  it("ink token is the Apple-measured near-black", () => {
+    expect(fs.readFileSync(path.join(root, "tailwind.config.ts"), "utf8")).toContain('ink: "#1D1D1F"');
   });
   it("no hard-coded pure black or the old near-black", () => {
     const bad = /text-black|bg-black|border-black|#000\b(?!0)|#000000|#111\b|#111111|#1C1A17|28[ ,]+26[ ,]+23/i;

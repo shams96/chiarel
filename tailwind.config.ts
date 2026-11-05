@@ -9,14 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        cloud: "#F0F2EB",
+        cloud: "#F5F5F7",
         ochre: "#9B4722",
         garden: "#1F5129",
         peach: "#FAD6C9",
         ocean: "#0C2D38",
         champagne: "#D6C5A0",
-        ivory: "#F8F6F1",
-        ink: "#32312D",
+        ivory: "#FFFFFF",
+        ink: "#1D1D1F",
         peachdust: "#F0D8CC",
       },
       // One family, site-wide. `sans` is an alias of `serif` so classes that
@@ -57,7 +57,7 @@ const config: Config = {
         section: "var(--section-y)",
       },
       borderColor: {
-        hairline: "rgb(28 26 23 / 0.15)",
+        hairline: "rgb(29 29 31 / 0.15)",
       },
     },
   },

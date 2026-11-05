@@ -215,7 +215,7 @@ body::after {
 
 /* Sticky header "glass" chrome — see .site-header reduced-transparency override below */
 .site-header {
-  background-color: rgb(240 242 235 / 0.9);
+  background-color: rgb(245 245 247 / 0.9);
   backdrop-filter: blur(12px);
 }
 
@@ -380,7 +380,7 @@ summary:focus-visible {
 /* Reduced transparency: raise background opacity, drop blur on floating chrome */
 @media (prefers-reduced-transparency: reduce) {
   .site-header {
-    background-color: #f0f2eb;
+    background-color: #f5f5f7;
     backdrop-filter: none;
   }
 }
