@@ -11,6 +11,7 @@ import { getCountry } from "@/lib/countries";
 import { getProductOrThrow } from "@/lib/products";
 import { isRateLimited, clientIp } from "@/lib/rate-limit";
 import { shippingFor } from "@/lib/shipping";
+import { PLAN_DETAIL } from "@/lib/plan-labels";
 import { trustedOrigin } from "@/lib/site-origin";
 
 // Throttle by IP: checkout creates a pending Order row and a Stripe Checkout
@@ -24,11 +25,7 @@ const CHECKOUT_WINDOW_MS = 10 * 60 * 1000;
 // 24 hours; its default of 24 hours leaves a forgotten tab payable all day.
 const SESSION_LIFETIME_MS = 45 * 60 * 1000;
 
-const modeLabel: Record<string, string> = {
-  ninetyDay: "90-day plan · one delivery",
-  subscription: "Subscription · every 45 days",
-  oneTime: "One-time purchase",
-};
+const modeLabel: Record<string, string> = PLAN_DETAIL;
 
 function isNonEmptyString(v: unknown): v is string {
   return typeof v === "string" && v.trim().length > 0;

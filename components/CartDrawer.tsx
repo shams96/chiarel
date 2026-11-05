@@ -1,7 +1,7 @@
 "use client";
 
 import { MAX_LINE_QTY } from "@/lib/cart-limits";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
@@ -9,22 +9,27 @@ import { useDialog } from "@/lib/use-dialog";
 import { ritualProducts } from "@/lib/products";
 import { shippingFor, shippingNote } from "@/lib/shipping";
 import { pickUpsell } from "@/lib/cart-math";
-
-const modeLabel: Record<string, string> = {
-  ninetyDay: "90-day plan · one delivery",
-  subscription: "Subscription · every 45 days",
-  oneTime: "One-time purchase",
-};
+import { computeUnitPrice } from "@/lib/pricing";
+import { PLAN_DETAIL } from "@/lib/plan-labels";
+import PlanSelect from "@/components/PlanSelect";
 
 export default function CartDrawer() {
   const { lines, add, remove, setQty, isOpen, close, subtotal, savings } = useCart();
   const panelRef = useRef<HTMLElement>(null);
+  // One suggestion, and once dismissed it stays away for the rest of the visit.
+  const [upsellDismissed, setUpsellDismissed] = useState(false);
   useDialog(isOpen, panelRef, close);
   const shipping = shippingFor(subtotal, lines);
   const estimatedTotal = subtotal + shipping;
   const savingsPercent =
     savings > 0 ? Math.round((savings / (subtotal + savings)) * 100) : 0;
-  const nextStep = pickUpsell(ritualProducts, lines);
+  const nextStep = upsellDismissed ? undefined : pickUpsell(ritualProducts, lines);
+  // Suggest the next product on the plan the visitor already chose, not always a subscription.
+  const upsellMode = lines[0]?.mode ?? "subscription";
+  const upsellPrice =
+    nextStep?.price != null
+      ? computeUnitPrice(nextStep.price.subscription, nextStep.price.oneTime, upsellMode, nextStep.slug)
+      : 0;
 
   return (
     <>
@@ -88,9 +93,9 @@ export default function CartDrawer() {
                       <p className="text-sm font-medium leading-tight">
                         {line.product.name}
                       </p>
-                      <p className="mt-0.5 text-[12px] uppercase tracking-[0.14em] text-ink/70">
-                        {modeLabel[line.mode]}
-                      </p>
+                      <div className="mt-2">
+                        <PlanSelect line={line} />
+                      </div>
                       <div className="mt-2 flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <div className="flex items-center rounded-sm border border-ink/15">
@@ -98,18 +103,18 @@ export default function CartDrawer() {
                               onClick={() => setQty(line.id, line.qty - 1)}
                               disabled={line.qty <= 1}
                               aria-label={`Decrease quantity of ${line.product.name}`}
-                              className="btn-press tap-area flex h-7 w-7 items-center justify-center text-sm text-ink/70 transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-ink/70"
+                              className="btn-press tap-area flex h-11 w-11 items-center justify-center text-sm text-ink/70 transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-ink/70"
                             >
                               −
                             </button>
-                            <span className="tabular-nums w-6 text-center text-[13px]">
+                            <span className="tabular-nums w-6 text-center text-[13px]" aria-live="polite">
                               {line.qty}
                             </span>
                             <button
                               onClick={() => setQty(line.id, line.qty + 1)}
                               disabled={line.qty >= MAX_LINE_QTY}
                               aria-label={`Increase quantity of ${line.product.name}`}
-                              className="btn-press tap-area flex h-7 w-7 items-center justify-center text-sm text-ink/70 transition hover:text-ochre"
+                              className="btn-press tap-area flex h-11 w-11 items-center justify-center text-sm text-ink/70 transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30"
                             >
                               +
                             </button>
@@ -133,9 +138,18 @@ export default function CartDrawer() {
 
               {nextStep && (
                 <div className="mt-6 border-t border-ink/10 pt-5">
-                  <p className="mb-3 text-[12px] uppercase tracking-[0.16em] text-ink/70">
-                    Complete the Ritual
-                  </p>
+                  <div className="mb-3 flex items-center justify-between">
+                    <p className="text-[12px] uppercase tracking-[0.16em] text-ink/70">
+                      Complete the Ritual
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setUpsellDismissed(true)}
+                      className="tap-area text-[12px] uppercase tracking-[0.14em] text-ink/70 hover:text-ochre"
+                    >
+                      Not now
+                    </button>
+                  </div>
                   <div className="flex flex-wrap items-center gap-3">
                     <div className="relative h-16 w-16 shrink-0 overflow-hidden bg-cloud/50">
                       <Image
@@ -154,14 +168,14 @@ export default function CartDrawer() {
                         {nextStep.step}
                       </p>
                       <p className="mt-0.5 text-[12px] text-ink/70">
-                        Subscription · renews every 45 days
+                        {PLAN_DETAIL[upsellMode]}
                       </p>
                     </div>
                     <button
-                      onClick={() => add(nextStep.slug, "subscription")}
+                      onClick={() => add(nextStep.slug, upsellMode)}
                       className="btn-press min-h-[44px] w-full shrink-0 border border-ink/20 px-3 py-2 text-[12px] uppercase tracking-[0.14em] text-ink/70 transition hover:border-ochre hover:text-ochre sm:w-auto"
                     >
-                      Subscribe · ${nextStep.price!.subscription}
+                      {upsellMode === "subscription" ? "Subscribe" : "Add"} · ${upsellPrice}
                     </button>
                   </div>
                 </div>

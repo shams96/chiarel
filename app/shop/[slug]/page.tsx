@@ -297,6 +297,7 @@ export default async function ProductPage({
           name={p.name}
           image={p.image}
           subscriptionPrice={p.price.subscription}
+          oneTimePrice={p.price.oneTime}
         />
       )}
     </div>

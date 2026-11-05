@@ -5,6 +5,8 @@
 // business-logic risk, not just a data-shape one: the 90-day multiplier
 // could change on one side and not the other with nothing to catch it.
 
+import { PLAN_NAME } from "@/lib/plan-labels";
+
 export type CartMode = "ninetyDay" | "subscription" | "oneTime";
 
 export function computeUnitPrice(
@@ -87,19 +89,19 @@ export function planOptions(slug: string, priceSubscription: number, priceOneTim
   return [
     {
       mode: "ninetyDay",
-      label: "90-day plan",
+      label: PLAN_NAME.ninetyDay,
       detail: "90-day supply, one delivery",
       price: computeUnitPrice(priceSubscription, priceOneTime, "ninetyDay", slug),
     },
     {
       mode: "subscription",
-      label: "Subscription",
+      label: PLAN_NAME.subscription,
       detail: `renews every ${DELIVERY_DAYS} days`,
       price: computeUnitPrice(priceSubscription, priceOneTime, "subscription", slug),
     },
     {
       mode: "oneTime",
-      label: "One-time",
+      label: PLAN_NAME.oneTime,
       detail: "single delivery",
       price: computeUnitPrice(priceSubscription, priceOneTime, "oneTime", slug),
     },

@@ -1,53 +1,17 @@
 "use client";
 
 import { MAX_LINE_QTY } from "@/lib/cart-limits";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart, type CartLine } from "@/lib/cart-context";
-import { getProduct, isPurchasable, productHref } from "@/lib/products";
-import { planOptions } from "@/lib/pricing";
+import { productHref } from "@/lib/products";
 import { shippingFor } from "@/lib/shipping";
+import PlanSelect from "@/components/PlanSelect";
 
 // The bag as its own page: one row per product with a plan selector, and a
 // summary panel beside it. Same numbers as the drawer and /checkout (shared
 // pricing and shipping code); payment itself is still hosted by Stripe.
-
-const MODE_LABEL: Record<CartLine["mode"], string> = {
-  ninetyDay: "90-day plan",
-  subscription: "Subscription",
-  oneTime: "One-time",
-};
-
-function PlanSelect({ line }: { line: CartLine }) {
-  const { changePlan } = useCart();
-  const product = getProduct(line.slug);
-  if (!product || !isPurchasable(product)) {
-    return <p className="text-[13px] text-ink/70">{MODE_LABEL[line.mode]}</p>;
-  }
-  const options = planOptions(line.slug, product.price.subscription, product.price.oneTime);
-  return (
-    <div>
-      <label htmlFor={`plan-${line.id}`} className="sr-only">
-        Plan for {line.product.name}
-      </label>
-      <select
-        id={`plan-${line.id}`}
-        value={line.mode}
-        onChange={(e) => changePlan(line.slug, e.target.value as CartLine["mode"])}
-        className="min-h-[44px] w-full cursor-pointer border border-ink/20 bg-white px-3 py-2 text-[13px] text-ink focus:border-ochre focus:outline-none"
-      >
-        {options.map((o) => (
-          <option key={o.mode} value={o.mode}>
-            {o.label} · ${o.price}
-          </option>
-        ))}
-      </select>
-      <p className="mt-1.5 text-[12px] text-ink/70">
-        {options.find((o) => o.mode === line.mode)?.detail}
-      </p>
-    </div>
-  );
-}
 
 function QuantityStepper({ line }: { line: CartLine }) {
   const { setQty } = useCart();
@@ -95,6 +59,20 @@ export default function CartPageContent() {
   const { lines, remove, subtotal, savings, count, loading } = useCart();
   const shipping = shippingFor(subtotal, lines);
   const total = subtotal + shipping;
+
+  // On a phone the summary sits below every item, which can be a long scroll.
+  // While it is off screen a docked total and Checkout button stay reachable;
+  // once the real summary scrolls into view the dock steps aside.
+  const summaryRef = useRef<HTMLElement>(null);
+  const [summaryInView, setSummaryInView] = useState(true);
+  const hasLines = lines.length > 0;
+  useEffect(() => {
+    const el = summaryRef.current;
+    if (!hasLines || !el || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(([entry]) => setSummaryInView(entry.isIntersecting));
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [hasLines]);
 
   return (
     <div className="mx-auto w-full max-w-container px-margin py-10 md:py-14">
@@ -209,7 +187,11 @@ export default function CartPageContent() {
             </Link>
           </section>
 
-          <aside className="h-fit bg-cloud/40 p-6 lg:sticky lg:top-28" aria-label="Order summary">
+          <aside
+            ref={summaryRef}
+            className="h-fit bg-cloud/40 p-6 lg:sticky lg:top-28"
+            aria-label="Order summary"
+          >
             <Link
               href="/checkout"
               className="btn-press block w-full bg-ink py-4 text-center text-eyebrow uppercase text-ivory transition hover:bg-ochre"
@@ -269,6 +251,26 @@ export default function CartPageContent() {
               </InfoItem>
             </div>
           </aside>
+        </div>
+      )}
+
+      {hasLines && !summaryInView && (
+        <div
+          data-testid="bag-dock"
+          className="fixed inset-x-0 bottom-0 z-40 border-t border-ink/10 bg-ivory/95 px-margin py-3 backdrop-blur lg:hidden"
+        >
+          <div className="mx-auto flex max-w-container items-center gap-4">
+            <p className="tabular-nums min-w-0 flex-1 text-[13px]">
+              <span className="block text-[12px] text-ink/70">Estimated total</span>
+              <span className="font-serif text-xl">${total}</span>
+            </p>
+            <Link
+              href="/checkout"
+              className="btn-press flex min-h-[44px] items-center whitespace-nowrap bg-ink px-8 text-eyebrow uppercase text-ivory transition hover:bg-ochre"
+            >
+              Checkout
+            </Link>
+          </div>
         </div>
       )}
     </div>
