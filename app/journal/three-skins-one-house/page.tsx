@@ -30,8 +30,8 @@ export default function ThreeSkinsPage() {
         <p>
           That question needed a real answer, not a home remedy. It led to
           Isola del Liri, Italy, and to a partnership with Natural You Srl —
-          each formulation developed under the guidance of CHIAREL&rsquo;s
-          pharmacist, Grazia Savoriti, rather than adapted from someone
+          each formulation developed by the House of CHIAREL as a team effort,
+          with CHIAREL&rsquo;s pharmacist, Grazia Savoriti, rather than adapted from someone
           else&rsquo;s default.
         </p>
         <p>

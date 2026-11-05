@@ -24,11 +24,11 @@ export default function HomeFormulator() {
           </p>
           <div className="mt-6 h-px w-24 bg-ink/20" aria-hidden="true" />
           <p className="mt-6 text-eyebrow uppercase text-ink/80">
-            Formulated by CHIAREL&rsquo;s Pharmacist · Cosmetic &amp;
+            CHIAREL&rsquo;s Pharmacist · Cosmetic &amp;
             Nutraceutical Research
           </p>
           <p className="mt-6 max-w-measure text-body text-ink/80">
-            Every CHIAREL™ formulation is developed under her guidance and
+            Every CHIAREL™ formulation is developed by the House of CHIAREL as a team effort and
             produced in small, fresh batches in Isola del Liri — made to
             order rather than held in standing inventory.
           </p>

@@ -358,8 +358,8 @@ function BrandStatement() {
         <p>
           That question needed a real answer. It led to Isola del Liri,
           Italy, and to a partnership with Natural You Srl, where every
-          CHIAREL™ formulation is developed under the guidance of
-          pharmacist Grazia Savoriti.
+          CHIAREL™ formulation is developed by the House of CHIAREL as a
+          team effort, with pharmacist Grazia Savoriti.
         </p>
         <p>
           Skin is not one thing, and a house built to serve it

@@ -73,7 +73,7 @@ const faqs = [
   {
     question: "Who formulates CHIAREL?",
     answer:
-      "CHIAREL is formulated by Grazia Savoriti, a pharmacist specialising in cosmetic and nutraceutical research. She develops every formulation directly, from Clarity Essence's peptides to Clarity Day Crème's ceramides. Each batch is then produced fresh, to order, in Isola del Liri, Italy — never manufactured in bulk ahead of demand.",
+      "Every CHIAREL formulation is developed by the House of CHIAREL as a team effort. The team includes Grazia Savoriti, a pharmacist specialising in cosmetic and nutraceutical research. Its work runs from Clarity Essence's peptides to Clarity Day Crème's ceramides. Each batch is then produced fresh, to order, in Isola del Liri, Italy — never manufactured in bulk ahead of demand.",
   },
   {
     question: "Where can I buy CHIAREL?",
