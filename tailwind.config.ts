@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        cloud: "#FFFFFF",
+        cloud: "#F5F2E9",
         ochre: "#9B4722",
         garden: "#1F5129",
         peach: "#FAD6C9",
