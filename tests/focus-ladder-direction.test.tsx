@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import FocusLadder from "@/components/layout/FocusLadder";
 import PageHead from "@/components/layout/PageHead";
-import HomeHero from "@/components/home/HomeHero";
+import HomeHero, { HERO_PROBLEM_LINE } from "@/components/home/HomeHero";
 import HomeIntro from "@/components/home/HomeIntro";
 import { isGridToggle } from "@/components/GridGuides";
 
@@ -77,6 +77,33 @@ describe("Hero", () => {
   });
   it("does not use the previous full-bleed ochre text panel", () => {
     expect(src("components/home/HomeHero.tsx")).not.toContain("bg-ochre px-margin");
+  });
+  it("leads with the problem line, under the mission h1 and before the action, in wording already on the House page", () => {
+    expect(HERO_PROBLEM_LINE).toBe("For skin under the daily load of screens, dry indoor air and too little sleep.");
+    expect(html.indexOf("</h1>")).toBeGreaterThan(-1);
+    expect(html.indexOf("</h1>")).toBeLessThan(html.indexOf(HERO_PROBLEM_LINE));
+    expect(html.indexOf(HERO_PROBLEM_LINE)).toBeLessThan(html.indexOf("Begin the Ritual"));
+    const house = src("app/house/page.tsx").replace(/\s+/g, " ");
+    expect(house).toContain("screens, commutes, dry indoor air and too little sleep");
+    expect(house).toContain("Modern Biological");
+  });
+  it("names conditions, never an outcome or a comparative ageing claim", () => {
+    expect(HERO_PROBLEM_LINE).not.toMatch(/restor|relief|repair|reverse|ageing|aging|younger|faster|turnover|regenerat/i);
+  });
+  it("puts the photograph first below lg and side by side at lg, with text first in the DOM", () => {
+    expect(html).toMatch(/class="relative order-first col-span-4[^"]*lg:order-none/);
+    expect(html.indexOf("<h1")).toBeLessThan(html.indexOf("clarity-essence-mirror-scene"));
+  });
+  it("uses a landscape frame on phones so the headline shows beside the photograph", () => {
+    expect(html).toContain("aspect-[5/4]");
+    expect(html).toContain("lg:aspect-[100/115]");
+    expect(html).not.toContain("aspect-[4/5]");
+  });
+  it("keeps the staggered entrance covering every child of the text block", () => {
+    const css = src("app/globals.css");
+    for (const n of [1, 2, 3, 4, 5]) {
+      expect(css).toMatch(new RegExp(String.raw`\.hero-in > \*:nth-child\(${n}\) \{ animation-delay`));
+    }
   });
 });
 
