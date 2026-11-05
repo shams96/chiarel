@@ -44,7 +44,7 @@ All wording below is rearranged from copy already in the repo; none adds a claim
 
 | Slot | Option A | Option B |
 |---|---|---|
-| Problem line | "For skin under the daily load of screens, dry air and too little sleep." | "Face and neck, morning and night, treated with the same discipline." |
+| Problem line | "For skin under the daily load of screens, dry indoor air and too little sleep." (owner chose A on 2026-11-05; claim-audit passed with one fix, "dry indoor air" to match the source verbatim; sources also `app/house/page.tsx:54-55`; structure matches the ratified Day Crème descriptor "For dry skin under daily stress") | "Face and neck, morning and night, treated with the same discipline." |
 | Source | `barrier-resilience/page.tsx:14`, `science/page.tsx:9` | `HomeHero.tsx:59-60`, ritual AM/PM |
 | Risk | Names causes, not outcomes; acceptable if kept as "daily load" | Fine; "treated" refers to routine, not a skin result |
 
