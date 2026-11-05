@@ -261,7 +261,7 @@ export default function HeroIntro() {
       onTransitionEnd={(event) => {
         if (event.propertyName === "opacity" && phase === "exiting") setPhase("done");
       }}
-      className="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden bg-ivory"
+      className="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden bg-white"
     >
       {showContent && (
         <>
