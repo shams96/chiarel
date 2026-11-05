@@ -21,3 +21,5 @@ Owner accepted rulings D1-D15 ("YES") in session on 2026-10-31. The ratified Dec
 | D15 | FAQ and email signup retained between Journal and Footer. |
 
 Phase 2 notes: `.card-elevated` is now flat with a hairline (shadow and hover lift removed). The film-grain overlay and Liri Flow pattern were left in place pending an owner call (texture, not shadow). Jost woff2 files remain in `public/fonts` only for `scripts/relabel-eye-treatment.mjs`.
+
+**D10 reversed 2026-11-04 (owner):** the original ~7.3 s HeroIntro timing is restored (session flag v10 so it replays once). The <= 1.5 s ruling above no longer applies.
