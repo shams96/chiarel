@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 import { stripe } from "@/lib/stripe";
 import { getOrCreateCart } from "@/lib/cart-server";
+import { settleCheckoutSession } from "@/lib/order-payment";
 import TrackPurchase from "@/components/TrackPurchase";
 import { cookies } from "next/headers";
 import SaveRitual from "@/components/account/SaveRitual";
@@ -52,17 +53,23 @@ export default async function OrderConfirmationPage({
   if (order.status === "pending" && session_id && session_id === order.stripeSessionId) {
     const session = await stripe.checkout.sessions.retrieve(session_id);
     if (session.payment_status === "paid") {
-      order = await db.order.update({
+      // Same path as the webhook: records the PaymentIntent id and amounts, and
+      // sends the confirmation email only if this call made the transition.
+      await settleCheckoutSession(order.id, session);
+      order = (await db.order.findUnique({
         where: { id: order.id },
-        data: { status: "paid" },
         include: { items: { include: { product: true } } },
-      });
+      })) ?? order;
       const cart = await getOrCreateCart();
       await db.cartItem.deleteMany({ where: { cartId: cart.id } });
     }
   }
 
-  const isPaid = order.status === "paid";
+  // A refunded order was still paid; only the money has gone back since.
+  const isPaid = order.status === "paid" || order.status === "refunded";
+  const taxCents = order.taxCents ?? 0;
+  // What Stripe actually took, tax included; the pre-tax order total until then.
+  const paidCents = order.amountPaidCents ?? order.total * 100;
   // Offer an account only to someone who does not have one open. A failed lookup
   // (database trouble) just hides the offer; it never blocks the confirmation.
   const signedIn = await resolveCustomerSession((await cookies()).get(CUSTOMER_COOKIE)?.value).catch(() => null);
@@ -73,8 +80,8 @@ export default async function OrderConfirmationPage({
         <TrackPurchase
           purchase={{
             transaction_id: order.id,
-            currency: "USD",
-            value: order.total,
+            currency: "USD", // every session is created in usd (app/api/checkout/route.ts)
+            value: paidCents / 100,
             shipping: order.shipping,
             items: order.items.map((i) => ({
               item_id: i.productSlug,
@@ -90,7 +97,8 @@ export default async function OrderConfirmationPage({
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink/70">
           Payment received. Order{" "}
           <span className="font-medium text-ink">#{order.id.slice(-8).toUpperCase()}</span>{" "}
-          is confirmed — a receipt has been sent to {order.email}.
+          is confirmed
+          {order.confirmationEmailAt ? ` — a confirmation has been sent to ${order.email}.` : "."}
         </p>
       ) : (
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink/70">
@@ -140,9 +148,17 @@ export default async function OrderConfirmationPage({
           <span>Shipping</span>
           <span>{order.shipping === 0 ? "Complimentary" : `$${order.shipping}`}</span>
         </div>
+        {isPaid && taxCents > 0 && (
+          <div className="flex justify-between text-ink/70">
+            <span>Tax</span>
+            <span>${(taxCents / 100).toFixed(2)}</span>
+          </div>
+        )}
         <div className="flex justify-between border-t border-ink/10 pt-3 text-base">
-          <span>Total</span>
-          <span className="font-serif text-xl">${order.total}</span>
+          <span>{isPaid && taxCents > 0 ? "Total (incl. tax)" : "Total"}</span>
+          <span className="font-serif text-xl">
+            {isPaid && order.amountPaidCents != null ? `$${(paidCents / 100).toFixed(2)}` : `$${order.total}`}
+          </span>
         </div>
       </div>
 

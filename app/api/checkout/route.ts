@@ -1,4 +1,7 @@
+import { createHash } from "node:crypto";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import { CUSTOMER_COOKIE, resolveCustomerSession } from "@/lib/customer-session";
 import { db } from "@/lib/db";
 import { getCartWithTotals, getOrCreateCart } from "@/lib/cart-server";
 import { stripe } from "@/lib/stripe";
@@ -16,6 +19,10 @@ import { trustedOrigin } from "@/lib/site-origin";
 // placing real orders would ever hit.
 const CHECKOUT_MAX_ATTEMPTS = 20;
 const CHECKOUT_WINDOW_MS = 10 * 60 * 1000;
+
+// How long a Stripe Checkout Session stays payable. Stripe allows 30 minutes to
+// 24 hours; its default of 24 hours leaves a forgotten tab payable all day.
+const SESSION_LIFETIME_MS = 45 * 60 * 1000;
 
 const modeLabel: Record<string, string> = {
   ninetyDay: "90-day plan · one delivery",
@@ -90,6 +97,50 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
 
   const shipping = shippingFor(cart.subtotal, cart.lines);
   const total = cart.subtotal + shipping;
+  const origin = trustedOrigin(req.headers.get("origin"), req.url);
+
+  // The same unpaid checkout (same bag, same buyer details) reuses its open
+  // Stripe session. Two tabs or a double click then land on one payable session
+  // instead of two, so a customer cannot pay twice for one bag. Anything that
+  // changed (a quantity, an address) hashes differently and starts fresh.
+  const fingerprint = createHash("sha256")
+    .update(
+      JSON.stringify({
+        email: String(email).trim().toLowerCase(),
+        lines: cart.lines.map((l) => [l.slug, l.mode, l.qty, l.unitPrice]).sort(),
+        total,
+        address, city, country, state: state ?? null, zip: postalCode,
+      }),
+    )
+    .digest("hex");
+  const reusable = await db.order.findFirst({
+    where: {
+      checkoutFingerprint: fingerprint,
+      status: "pending",
+      stripeSessionId: { not: null },
+      sessionExpiresAt: { gt: new Date() },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+  if (reusable?.stripeSessionId) {
+    try {
+      const open = await stripe.checkout.sessions.retrieve(reusable.stripeSessionId);
+      if (open.status === "open" && open.url) {
+        return NextResponse.json({ orderId: reusable.id, checkoutUrl: open.url }, { status: 200 });
+      }
+    } catch (err) {
+      // Could not confirm the old session is still open: fall through to a new one.
+      console.error("[checkout] could not reuse open session:", err);
+    }
+  }
+
+  // Link the order to the signed-in customer, so it shows in their account
+  // without waiting for the email-match at sign-in. A failed lookup just means
+  // a guest order, as before.
+  const signedIn = await resolveCustomerSession((await cookies()).get(CUSTOMER_COOKIE)?.value).catch(
+    () => null,
+  );
+  const sessionExpiresAt = new Date(Date.now() + SESSION_LIFETIME_MS);
 
   // Order is recorded as pending until Stripe confirms payment — the order
   // page verifies the session server-side and flips this to "paid" itself,
@@ -109,6 +160,9 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
       shipping,
       total,
       status: "pending",
+      customerId: signedIn?.customer.id ?? null,
+      checkoutFingerprint: fingerprint,
+      sessionExpiresAt,
       termsAcceptedAt: new Date(),
       termsVersion,
       items: {
@@ -122,8 +176,6 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
     },
     include: { items: true },
   });
-
-  const origin = trustedOrigin(req.headers.get("origin"), req.url);
 
   const lineItems: Array<{
     price_data: {
@@ -192,18 +244,27 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
   // tax rather than hard-failing the purchase — no tax is collected in that
   // fallback path, same as before automatic_tax was added (see
   // claudedocs/specs/international-launch/SPEC.md's prior no-tax baseline).
+  // Shared by both attempts below. expires_at bounds how long a stale tab can
+  // still be paid; the PaymentIntent metadata is what lets a payment_failed
+  // event find its order; the idempotency key makes a retried request return
+  // the same session instead of opening another.
+  const sessionBase = {
+    mode: "payment" as const,
+    payment_method_types: ["card" as const],
+    customer: customer.id,
+    line_items: lineItems,
+    success_url: `${origin}/order/${order.id}?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${origin}/checkout`,
+    metadata: { orderId: order.id },
+    payment_intent_data: { metadata: { orderId: order.id } },
+    expires_at: Math.floor(sessionExpiresAt.getTime() / 1000),
+  };
   let session;
   try {
-    session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      payment_method_types: ["card"],
-      customer: customer.id,
-      line_items: lineItems,
-      automatic_tax: { enabled: true },
-      success_url: `${origin}/order/${order.id}?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/checkout`,
-      metadata: { orderId: order.id },
-    });
+    session = await stripe.checkout.sessions.create(
+      { ...sessionBase, automatic_tax: { enabled: true } },
+      { idempotencyKey: `checkout-session-${order.id}` },
+    );
   } catch (err) {
     // Stripe doesn't expose a stable error code for this specific
     // misconfiguration (verified against the SDK's error types) — narrowing
@@ -216,18 +277,14 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
       err.message.includes("head office address");
     if (!isKnownTaxConfigError) throw err;
     const message = err.message;
+    // Stable [alert] prefix so a log search or alert rule can find every order
+    // that was charged without tax.
     console.error(
-      "[checkout] automatic_tax rejected by Stripe account config — falling back to no-tax session. Fix: set a head office address at https://dashboard.stripe.com/test/settings/tax",
+      `[alert] checkout.no_tax_fallback order=${order.id} — automatic_tax rejected by Stripe account config, charging without tax. Fix: set a head office address at https://dashboard.stripe.com/test/settings/tax`,
       message
     );
-    session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      payment_method_types: ["card"],
-      customer: customer.id,
-      line_items: lineItems,
-      success_url: `${origin}/order/${order.id}?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/checkout`,
-      metadata: { orderId: order.id },
+    session = await stripe.checkout.sessions.create(sessionBase, {
+      idempotencyKey: `checkout-session-notax-${order.id}`,
     });
   }
 

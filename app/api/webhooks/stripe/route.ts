@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import { db } from "@/lib/db";
+import { settleCheckoutSession } from "@/lib/order-payment";
 
 // Source of truth for order payment status. The order confirmation page
 // (app/order/[id]/page.tsx) already re-verifies the session server-side on
@@ -38,19 +39,11 @@ export async function POST(req: NextRequest) {
 
     if (orderId && session.payment_status === "paid") {
       try {
-        // updateMany + status:"pending" guard makes this idempotent — Stripe
-        // may deliver the same event more than once, and this must not
-        // double-process an order the customer's own return-redirect
-        // already marked paid. Also records the PaymentIntent id, which is
-        // how a later dispute event (below) gets matched back to this order.
-        await db.order.updateMany({
-          where: { id: orderId, status: "pending" },
-          data: {
-            status: "paid",
-            stripePaymentIntentId:
-              typeof session.payment_intent === "string" ? session.payment_intent : null,
-          },
-        });
+        // Shared with the order page: whichever path arrives first makes the
+        // pending->paid move (guarded in the update, so redelivery is a no-op),
+        // records the PaymentIntent id disputes and refunds match on, and sends
+        // the confirmation email once.
+        await settleCheckoutSession(orderId, session);
       } catch (err) {
         // Let this surface as a 500 (not caught/downgraded) so Stripe's
         // automatic retry has a chance to succeed once the DB recovers —
@@ -59,6 +52,68 @@ export async function POST(req: NextRequest) {
         console.error("Failed to reconcile order from Stripe webhook:", err);
         return NextResponse.json({ error: "Reconciliation failed" }, { status: 500 });
       }
+    }
+  }
+
+  // The customer never paid: the session ran out, or the card was declined.
+  // Both only touch orders still pending, so a redelivered event cannot undo a
+  // payment, and a later successful payment on the same session still wins.
+  if (event.type === "checkout.session.expired") {
+    const session = event.data.object as Stripe.Checkout.Session;
+    const orderId = session.metadata?.orderId;
+    if (orderId) {
+      try {
+        await db.order.updateMany({
+          where: { id: orderId, status: "pending" },
+          data: { status: "expired" },
+        });
+      } catch (err) {
+        console.error("Failed to record expired session from Stripe webhook:", err);
+        return NextResponse.json({ error: "Reconciliation failed" }, { status: 500 });
+      }
+    }
+  }
+
+  if (event.type === "payment_intent.payment_failed") {
+    // orderId rides on the PaymentIntent via payment_intent_data.metadata set at
+    // checkout; sessions created before that carry none and are skipped.
+    const intent = event.data.object as Stripe.PaymentIntent;
+    const orderId = intent.metadata?.orderId;
+    if (orderId) {
+      try {
+        await db.order.updateMany({
+          where: { id: orderId, status: "pending" },
+          data: { status: "failed" },
+        });
+      } catch (err) {
+        console.error("Failed to record failed payment from Stripe webhook:", err);
+        return NextResponse.json({ error: "Reconciliation failed" }, { status: 500 });
+      }
+    }
+  }
+
+  // Refunds are issued in the Stripe Dashboard; this only records them against
+  // the order. Setting the same values on redelivery is harmless. A partial
+  // refund records the amount and leaves the status as paid.
+  if (event.type === "charge.refunded") {
+    const charge = event.data.object as Stripe.Charge;
+    const paymentIntentId = typeof charge.payment_intent === "string" ? charge.payment_intent : null;
+    if (paymentIntentId) {
+      try {
+        await db.order.updateMany({
+          where: { stripePaymentIntentId: paymentIntentId },
+          data: {
+            refundedCents: charge.amount_refunded,
+            refundedAt: new Date(event.created * 1000),
+            ...(charge.refunded ? { status: "refunded" } : {}),
+          },
+        });
+      } catch (err) {
+        console.error("Failed to record refund from Stripe webhook:", err);
+        return NextResponse.json({ error: "Reconciliation failed" }, { status: 500 });
+      }
+    } else {
+      console.error(`Refunded charge ${charge.id} has no payment_intent — cannot match to an order`);
     }
   }
 

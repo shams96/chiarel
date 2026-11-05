@@ -19,6 +19,9 @@ const customersList = vi.fn();
 const customersCreate = vi.fn();
 const customersUpdate = vi.fn();
 const sessionsCreate = vi.fn();
+const sessionsRetrieve = vi.fn();
+const orderFindFirst = vi.fn();
+const customerAuth = { current: null as null | { customer: { id: string } } };
 
 vi.mock("@/lib/cart-server", () => ({
   getCartWithTotals: async () => ({ cartId: "cart_1", ...cartState, count: 0 }),
@@ -26,7 +29,20 @@ vi.mock("@/lib/cart-server", () => ({
 }));
 vi.mock("@/lib/rate-limit", () => ({ isRateLimited: () => rate.limited, clientIp: () => "1.2.3.4" }));
 vi.mock("@/lib/products", () => ({ getProductOrThrow: () => ({ price: { subscription: 118 } }) }));
-vi.mock("@/lib/db", () => ({ db: { order: { create: (...a: unknown[]) => orderCreate(...a), update: (...a: unknown[]) => orderUpdate(...a) } } }));
+vi.mock("next/headers", () => ({ cookies: async () => ({ get: () => undefined }) }));
+vi.mock("@/lib/customer-session", () => ({
+  CUSTOMER_COOKIE: "chiarel_session",
+  resolveCustomerSession: async () => customerAuth.current,
+}));
+vi.mock("@/lib/db", () => ({
+  db: {
+    order: {
+      create: (...a: unknown[]) => orderCreate(...a),
+      update: (...a: unknown[]) => orderUpdate(...a),
+      findFirst: (...a: unknown[]) => orderFindFirst(...a),
+    },
+  },
+}));
 vi.mock("@/lib/stripe", () => ({
   stripe: {
     customers: {
@@ -34,7 +50,12 @@ vi.mock("@/lib/stripe", () => ({
       create: (...a: unknown[]) => customersCreate(...a),
       update: (...a: unknown[]) => customersUpdate(...a),
     },
-    checkout: { sessions: { create: (...a: unknown[]) => sessionsCreate(...a) } },
+    checkout: {
+      sessions: {
+        create: (...a: unknown[]) => sessionsCreate(...a),
+        retrieve: (...a: unknown[]) => sessionsRetrieve(...a),
+      },
+    },
   },
 }));
 
@@ -88,6 +109,9 @@ beforeEach(() => {
   customersCreate.mockResolvedValue({ id: "cus_new" });
   customersUpdate.mockResolvedValue({ id: "cus_old" });
   sessionsCreate.mockResolvedValue({ id: "cs_1", url: "https://checkout.stripe.com/c/cs_1" });
+  orderFindFirst.mockResolvedValue(null);
+  sessionsRetrieve.mockReset();
+  customerAuth.current = null;
   vi.spyOn(console, "error").mockImplementation(() => {});
 });
 
@@ -239,6 +263,25 @@ describe("checkout: order and Stripe session", () => {
     expect(args.automatic_tax).toEqual({ enabled: true });
   });
 
+  it("carries the order id on the PaymentIntent so a failed payment can find its order", async () => {
+    await checkout(validBody);
+    expect(sessionsCreate.mock.calls[0][0].payment_intent_data).toEqual({ metadata: { orderId: "order_1" } });
+  });
+
+  it("limits how long the session can be paid, and records the same expiry on the order", async () => {
+    const before = Math.floor(Date.now() / 1000);
+    await checkout(validBody);
+    const expiresAt = sessionsCreate.mock.calls[0][0].expires_at;
+    expect(expiresAt - before).toBeGreaterThanOrEqual(30 * 60);
+    expect(expiresAt - before).toBeLessThanOrEqual(60 * 60);
+    expect(Math.floor(orderCreate.mock.calls[0][0].data.sessionExpiresAt.getTime() / 1000)).toBe(expiresAt);
+  });
+
+  it("passes an idempotency key so a retried request cannot open a second session", async () => {
+    await checkout(validBody);
+    expect(sessionsCreate.mock.calls[0][1]).toEqual({ idempotencyKey: "checkout-session-order_1" });
+  });
+
   it("reuses an existing Stripe customer only when the address on file matches, and never rewrites it", async () => {
     customersList.mockResolvedValue({
       data: [{ id: "cus_old", address: { line1: validBody.address, postal_code: validBody.zip, country: validBody.country } }],
@@ -271,6 +314,68 @@ describe("checkout: order and Stripe session", () => {
   });
 });
 
+describe("checkout: customer link and session reuse", () => {
+  it("links the order to the signed-in customer", async () => {
+    customerAuth.current = { customer: { id: "cust_9" } };
+    await checkout(validBody);
+    expect(orderCreate.mock.calls[0][0].data.customerId).toBe("cust_9");
+  });
+
+  it("leaves a guest order unlinked", async () => {
+    await checkout(validBody);
+    expect(orderCreate.mock.calls[0][0].data.customerId).toBeNull();
+  });
+
+  it("stores a fingerprint of the bag and buyer, the same for the same checkout", async () => {
+    await checkout(validBody);
+    await checkout({ ...validBody, email: "A@B.com" });
+    const [a, b] = orderCreate.mock.calls.map((c) => c[0].data.checkoutFingerprint);
+    expect(a).toMatch(/^[0-9a-f]{64}$/);
+    expect(b).toBe(a);
+  });
+
+  it("changes the fingerprint when the bag or the address changes", async () => {
+    await checkout(validBody);
+    setCart([line({ qty: 2 })]);
+    await checkout(validBody);
+    await checkout({ ...validBody, address: "2 Other St" });
+    const fps = orderCreate.mock.calls.map((c) => c[0].data.checkoutFingerprint);
+    expect(new Set(fps).size).toBe(3);
+  });
+
+  it("returns the still-open session of an identical unpaid checkout instead of creating another", async () => {
+    orderFindFirst.mockResolvedValue({ id: "order_old", stripeSessionId: "cs_old" });
+    sessionsRetrieve.mockResolvedValue({ status: "open", url: "https://checkout.stripe.com/c/cs_old" });
+    const res = await checkout(validBody);
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ orderId: "order_old", checkoutUrl: "https://checkout.stripe.com/c/cs_old" });
+    expect(orderCreate).not.toHaveBeenCalled();
+    expect(sessionsCreate).not.toHaveBeenCalled();
+  });
+
+  it("only looks for pending, unexpired orders with the same fingerprint", async () => {
+    await checkout(validBody);
+    const where = orderFindFirst.mock.calls[0][0].where;
+    expect(where).toMatchObject({ status: "pending", stripeSessionId: { not: null } });
+    expect(where.sessionExpiresAt.gt).toBeInstanceOf(Date);
+    expect(where.checkoutFingerprint).toMatch(/^[0-9a-f]{64}$/);
+  });
+
+  it("starts a fresh session when the old one is no longer open", async () => {
+    orderFindFirst.mockResolvedValue({ id: "order_old", stripeSessionId: "cs_old" });
+    sessionsRetrieve.mockResolvedValue({ status: "expired", url: null });
+    const res = await checkout(validBody);
+    expect(res.status).toBe(201);
+    expect(sessionsCreate).toHaveBeenCalledTimes(1);
+  });
+
+  it("starts a fresh session when Stripe cannot be asked about the old one", async () => {
+    orderFindFirst.mockResolvedValue({ id: "order_old", stripeSessionId: "cs_old" });
+    sessionsRetrieve.mockRejectedValue(new Error("network"));
+    expect((await checkout(validBody)).status).toBe(201);
+  });
+});
+
 describe("checkout: automatic tax fallback", () => {
   it("retries without automatic tax only for the head-office-address error", async () => {
     sessionsCreate
@@ -285,6 +390,24 @@ describe("checkout: automatic tax fallback", () => {
     expect(res.status).toBe(201);
     expect(sessionsCreate).toHaveBeenCalledTimes(2);
     expect(sessionsCreate.mock.calls[1][0].automatic_tax).toBeUndefined();
+  });
+
+  it("logs a searchable alert for every order charged without tax, and keeps the payment protections", async () => {
+    sessionsCreate
+      .mockRejectedValueOnce(
+        new Stripe.errors.StripeInvalidRequestError({
+          type: "invalid_request_error",
+          message: "You must have a valid head office address to enable automatic tax",
+        }),
+      )
+      .mockResolvedValueOnce({ id: "cs_2", url: "https://checkout.stripe.com/c/cs_2" });
+    await checkout(validBody);
+    expect(String((console.error as unknown as ReturnType<typeof vi.fn>).mock.calls[0][0])).toContain(
+      "[alert] checkout.no_tax_fallback order=order_1",
+    );
+    const fallback = sessionsCreate.mock.calls[1][0];
+    expect(fallback.payment_intent_data).toEqual({ metadata: { orderId: "order_1" } });
+    expect(fallback.expires_at).toBeGreaterThan(0);
   });
 
   it("does not swallow other Stripe errors", async () => {
