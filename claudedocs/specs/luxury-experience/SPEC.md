@@ -1,7 +1,7 @@
 # Spec: Luxury experience pass (hero, story, path, cues)
 
 Phase 1 of spec-driven-development (what and why, not how). Governed by `claudedocs/specs/CONSTITUTION.md`.
-Status: DRAFT for owner review. No plan, no code until the owner answers the decisions in section 7.
+Status: D1-D6 answered (section 10). Two points in the emotional reframe need an explicit owner call before hero copy is written (section 10). No plan or code yet.
 
 Evidence tags: **V** verified this session (file or live page read), **I** inferred, **U** unknown / not checked.
 
@@ -83,4 +83,26 @@ How we will know (to be confirmed in the plan, using existing GA4 events, no new
 
 ## 9. Next phase
 
-Plan (how), after D1-D6 are answered, with a written inventory of what the homepage and each PDP currently surface (the U items above) as its first section.
+Plan (how), with a written inventory of what the homepage and each PDP currently surface (the U items above) as its first section.
+
+## 10. Owner answers and the emotional reframe (recorded 2026-11-05)
+
+| # | Answer |
+|---|---|
+| D1 | Hero, then Guided Path, then Story Depth, then Luxury Cues (W1, W3, W2, W4) |
+| D2 | Keep the clinical section visible; soften the line so it does not read as unfinished, e.g. "Clinical observations are being prepared for publication". Do not hide it. |
+| D3 | No limited editions or VIP exist. W4 is real unboxing and packaging reveal only. |
+| D4 | Blocked until the owner supplies real photos or video of the actual carton, ribbon and jar/pump reveal. No placeholders, no AI. |
+| D5 | Leave "From $X a day" as is. |
+| D6 | Real photography only. No AI lifestyle or model images until rights and disclosure are clear. |
+
+**Reframe adopted as the filter for every workstream:** lead with the problem a woman lives with (the daily load on her skin, face and neck, morning and night), then what the products do for her, with provenance, formulator, complexes and packaging as supporting evidence, not the opening argument.
+
+**What already supports it (V):** Modern Biological Stress™ is already defined in the repo as "the daily load on a working woman's body and skin" (`app/science/page.tsx`, `app/house/page.tsx`), and the Science page already lists each product by the problem it answers ("Dry, uncomfortable skin through the working day", "Texture that shows after a long day"). The homepage hero does not use this order; the Science page does. W1 can reuse ratified wording.
+
+**Two points that need an explicit owner call before hero copy is written:**
+
+1. **The mission line.** "Advancing Cellular Clarity™" is the current h1 and the ratified mission (Decision 037, 2026-09-16, `brand_positioning.md`). The reframe moves it from the opening argument to supporting evidence. That reorders ratified positioning, not removes it. Precedent (2026-09-29): a pasted brief to retire these terms was declined and the owner confirmed keeping them; a later paste does not supersede a decision implicitly. Options: (a) keep the mission line as the h1 and put the problem line directly above or below it in the same frame; (b) problem line becomes the h1 and the mission moves to the eyebrow and the House page. Not decided.
+2. **"Neck and décolleté are ageing faster than her face."** This is a comparative claim about skin. Nothing in the repo substantiates it (U), and constitution claims discipline applies. Until the owner supplies a source, hero copy may say what ratified wording already says ("crepey-looking skin on the neck and chest", "the same discipline is rarely applied") and must not state a comparative ageing rate.
+
+Words that also need the claim audit before use: "restore", "relief", "ageing". A 2026 brand note records that a "restoration for dry, tight, stressed skin" framing was never ratified; "restores the feeling of being looked after" is about a feeling, not the skin, and is acceptable only if it stays that way.

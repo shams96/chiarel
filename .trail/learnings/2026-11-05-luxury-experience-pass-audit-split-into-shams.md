@@ -18,4 +18,6 @@ Decided (claudedocs/specs/luxury-experience/SPEC.md, components/home/HomeHero.ts
 Ruled out: the audit's product-naming row. Live /shop and /ritual use only the five Clarity names; old names remain only in comments, internal docs and unserved source files.
 Ruled out: "no assessment flow". /assessment already exists (8 questions, four axes). The gap is visibility and depth, not absence.
 Watch out: this session is isolated to one worktree; writing into a second worktree needs EnterWorktree with path. A relative `git worktree add` from inside a worktree nests the new one inside it; use an absolute sibling path.
+Decided: owner answered D1-D6 (hero, guided path, story, cues; keep clinical section visible, softened; no limited editions; unboxing blocked on real assets; keep "From $X a day"; real photography only). Emotional reframe (problem first) adopted as the filter; app/science/page.tsx already writes it that way.
+Watch out: components/home/HomeHero.tsx h1 "Advancing Cellular Clarity™" is ratified (Decision 037); moving it behind a problem line is an owner call, not an implied one. "Neck ages faster than the face" is an unsubstantiated comparative claim; do not put it in copy.
 Watch out: unboxing, limited editions and VIP need real assets or real business facts; no invented scarcity, reviews or label text.
