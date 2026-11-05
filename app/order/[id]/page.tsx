@@ -7,6 +7,8 @@ import { getOrCreateCart } from "@/lib/cart-server";
 import { settleCheckoutSession } from "@/lib/order-payment";
 import { PLAN_NAME } from "@/lib/plan-labels";
 import TrackPurchase from "@/components/TrackPurchase";
+import RefreshBag from "@/components/RefreshBag";
+import { getProduct } from "@/lib/products";
 import { cookies } from "next/headers";
 import SaveRitual from "@/components/account/SaveRitual";
 import { CUSTOMER_COOKIE, resolveCustomerSession } from "@/lib/customer-session";
@@ -64,6 +66,14 @@ export default async function OrderConfirmationPage({
 
   // A refunded order was still paid; only the money has gone back since.
   const isPaid = order.status === "paid" || order.status === "refunded";
+  // Directions for use, only for products whose steps are already published on
+  // the product page (data/products.json howToUse). Nothing is written here.
+  const usage = isPaid
+    ? order.items.flatMap((i) => {
+        const steps = getProduct(i.productSlug)?.howToUse;
+        return steps && steps.length > 0 ? [{ slug: i.productSlug, name: i.product.name, steps }] : [];
+      })
+    : [];
   const taxCents = order.taxCents ?? 0;
   // What Stripe actually took, tax included; the pre-tax order total until then.
   const paidCents = order.amountPaidCents ?? order.total * 100;
@@ -73,6 +83,7 @@ export default async function OrderConfirmationPage({
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-24 text-center">
+      {isPaid && <RefreshBag />}
       {isPaid && (
         <TrackPurchase
           purchase={{
@@ -89,6 +100,7 @@ export default async function OrderConfirmationPage({
           }}
         />
       )}
+      {isPaid && <p className="mb-3 text-eyebrow uppercase text-ochre">Welcome to the House of Clarity</p>}
       <h1 className="font-serif text-3xl">Thank you, {order.firstName}.</h1>
       {isPaid ? (
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink/70">
@@ -102,7 +114,7 @@ export default async function OrderConfirmationPage({
           We couldn&rsquo;t confirm payment for order{" "}
           <span className="font-medium text-ink">#{order.id.slice(-8).toUpperCase()}</span>{" "}
           yet. If you completed checkout, please{" "}
-          <Link href="/" className="underline">contact us</Link> — otherwise no
+          <Link href="/contact" className="tap-area underline">contact us</Link> — otherwise no
           charge has been made.
         </p>
       )}
@@ -158,6 +170,27 @@ export default async function OrderConfirmationPage({
           </span>
         </div>
       </div>
+
+      {isPaid && usage.length > 0 && (
+        <section className="mt-10 border-t border-ink/10 pt-8 text-left" aria-labelledby="ritual-start">
+          <h2 id="ritual-start" className="font-serif text-xl">
+            Your CHIAREL Ritual
+          </h2>
+          <p className="mt-1 text-[13px] text-ink/70">How to use what you ordered.</p>
+          <div className="mt-4 space-y-5">
+            {usage.map((u) => (
+              <div key={u.slug}>
+                <h3 className="text-sm font-medium">{u.name}</h3>
+                <ol className="mt-1.5 list-decimal space-y-1 pl-5 text-[13px] leading-relaxed text-ink/80">
+                  {u.steps.map((s, i) => (
+                    <li key={i}>{s}</li>
+                  ))}
+                </ol>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {isPaid && !signedIn && <SaveRitual email={order.email} />}
 

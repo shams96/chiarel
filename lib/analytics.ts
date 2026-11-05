@@ -14,7 +14,11 @@ export type AnalyticsItem = {
 export type AnalyticsEvents = {
   view_item: { currency: "USD"; value: number; items: AnalyticsItem[] };
   add_to_cart: { currency: "USD"; value: number; items: AnalyticsItem[] };
+  view_cart: { currency: "USD"; value: number; items: AnalyticsItem[] };
+  remove_from_cart: { currency: "USD"; value: number; items: AnalyticsItem[] };
   begin_checkout: { currency: "USD"; value: number; items: AnalyticsItem[] };
+  /** Details accepted, about to pay. add_payment_info does not exist: the card is entered on Stripe's domain. */
+  add_shipping_info: { currency: "USD"; value: number; items: AnalyticsItem[] };
   purchase: {
     transaction_id: string;
     currency: "USD";

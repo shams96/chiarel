@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useCart, type CartLine } from "@/lib/cart-context";
 import { productHref } from "@/lib/products";
 import { shippingFor } from "@/lib/shipping";
+import { track } from "@/lib/analytics";
 import PlanSelect from "@/components/PlanSelect";
 
 // The bag as its own page: one row per product with a plan selector, and a
@@ -66,6 +67,23 @@ export default function CartPageContent() {
   const summaryRef = useRef<HTMLElement>(null);
   const [summaryInView, setSummaryInView] = useState(true);
   const hasLines = lines.length > 0;
+
+  // view_cart: once per visit to the bag page, when the bag first has items.
+  const viewedCart = useRef(false);
+  useEffect(() => {
+    if (viewedCart.current || !hasLines) return;
+    viewedCart.current = true;
+    track("view_cart", {
+      currency: "USD",
+      value: subtotal,
+      items: lines.map((l) => ({
+        item_id: l.slug,
+        item_name: l.product.name,
+        price: l.unitPrice,
+        quantity: l.qty,
+      })),
+    });
+  }, [hasLines, lines, subtotal]);
   useEffect(() => {
     const el = summaryRef.current;
     if (!hasLines || !el || typeof IntersectionObserver === "undefined") return;

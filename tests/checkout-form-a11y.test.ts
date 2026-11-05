@@ -6,7 +6,7 @@ const src = readFileSync("app/checkout/page.tsx", "utf8");
 // Every shipping field has a visible label bound to it and an autofill hint, so
 // phones can fill the form and screen readers announce each field.
 describe("checkout form labels and autofill", () => {
-  const fields = [...src.matchAll(/<Field label=\{?"?([^"}]+)"?\}? id="([^"]+)">([\s\S]*?)<\/Field>/g)];
+  const fields = [...src.matchAll(/<Field label=\{?"?([^"}]+)"?\}? id="([^"]+)"[^>]*>([\s\S]*?)<\/Field>/g)];
 
   it("has a labelled field for each shipping input", () => {
     expect(fields.map((f) => f[2])).toEqual([

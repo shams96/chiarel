@@ -18,6 +18,7 @@ vi.mock("@/components/TrackPurchase", () => ({
   default: ({ purchase }: any) => <span data-purchase={JSON.stringify(purchase)} />,
 }));
 vi.mock("@/components/account/SaveRitual", () => ({ default: () => null }));
+vi.mock("@/components/RefreshBag", () => ({ default: () => <span data-refresh-bag /> }));
 vi.mock("@/lib/customer-session", () => ({
   CUSTOMER_COOKIE: "chiarel_session",
   resolveCustomerSession: async () => null,
@@ -33,6 +34,7 @@ vi.mock("@/lib/db", () => ({
 }));
 
 const { default: Page } = await import("@/app/order/[id]/page");
+const { getProduct } = await import("@/lib/products");
 
 const base = (over: Order = {}): Order => ({
   id: "cl_abcdefgh12345678",
@@ -140,6 +142,44 @@ describe("order page: confirming payment", () => {
     expect(html).toContain("confirm payment for order");
     expect(html).toContain("no charge has been made");
     expect(html).not.toContain("data-purchase");
+  });
+
+  it("welcomes a paid order, refreshes the bag, and tells the customer how to use what they bought", async () => {
+    state.order = base({
+      status: "paid",
+      items: [
+        { id: "i1", productSlug: "chiarel-essence", mode: "oneTime", qty: 1, unitPrice: 189, product: { name: "Clarity Essence", image: "/e.png" } },
+      ],
+    });
+    const html = await render();
+    expect(html).toContain("Welcome to the House of Clarity");
+    expect(html).toContain("data-refresh-bag");
+    expect(html).toContain("Your CHIAREL Ritual");
+    const steps = getProduct("chiarel-essence")?.howToUse ?? [];
+    expect(steps.length).toBeGreaterThan(0);
+    // Directions come from the published product data, character for character.
+    expect(html).toContain(steps[0].replace(/&/g, "&amp;").replace(/'/g, "&#x27;"));
+  });
+
+  it("shows no directions for a product that has none published", async () => {
+    state.order = base({
+      status: "paid",
+      items: [{ id: "i1", productSlug: "no-such-product", mode: "oneTime", qty: 1, unitPrice: 1, product: { name: "X", image: "/x.png" } }],
+    });
+    expect(await render()).not.toContain("Your CHIAREL Ritual");
+  });
+
+  it("does not welcome, refresh the bag or give directions before payment is confirmed", async () => {
+    retrieve.mockResolvedValue({ payment_status: "unpaid" });
+    const html = await render();
+    expect(html).not.toContain("Welcome to the House of Clarity");
+    expect(html).not.toContain("data-refresh-bag");
+    expect(html).not.toContain("Your CHIAREL Ritual");
+  });
+
+  it("gives an unconfirmed order a real way to reach us", async () => {
+    retrieve.mockResolvedValue({ payment_status: "unpaid" });
+    expect(await render()).toMatch(/href="\/contact"[^>]*>contact us/);
   });
 
   it("keeps showing a refunded order as a paid one", async () => {
