@@ -1,0 +1,380 @@
+- generic [active] [ref=f3e1]:
+  - banner [ref=f3e2]:
+    - link "The Founding 100 is open — the 90-Day Ritual at half price. Complete it and we return the rest. See the terms." [ref=f3e3] [cursor=pointer]:
+      - /url: /founding-100
+      - generic [ref=f3e8]:
+        - generic [ref=f3e9]:
+          - generic [ref=f3e10]:
+            - generic [ref=f3e11]: Hurry
+            - text: — the Founding 100 is closing fast
+            - generic [ref=f3e12]: ·
+          - generic [ref=f3e13]:
+            - text: The 90-Day Ritual, half price. We return the rest.
+            - generic [ref=f3e14]: ·
+          - generic [ref=f3e15]:
+            - text: Only 100 places, then it’s gone
+            - generic [ref=f3e16]: ·
+          - generic [ref=f3e17]:
+            - generic [ref=f3e18]: See the terms →
+            - generic [ref=f3e19]: ·
+        - generic [ref=f3e20]:
+          - generic [ref=f3e21]:
+            - generic [ref=f3e22]: Hurry
+            - text: — the Founding 100 is closing fast
+            - generic [ref=f3e23]: ·
+          - generic [ref=f3e24]:
+            - text: The 90-Day Ritual, half price. We return the rest.
+            - generic [ref=f3e25]: ·
+          - generic [ref=f3e26]:
+            - text: Only 100 places, then it’s gone
+            - generic [ref=f3e27]: ·
+          - generic [ref=f3e28]:
+            - generic [ref=f3e29]: See the terms →
+            - generic [ref=f3e30]: ·
+    - generic [ref=f3e31]:
+      - link "CHIAREL The House of Clarity™" [ref=f3e32] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f3e33]: CHIAREL
+        - generic [ref=f3e34]: The House of Clarity™
+      - generic [ref=f3e35]:
+        - button "Open cart" [ref=f3e36] [cursor=pointer]: Bag
+        - button "Open menu" [ref=f3e37] [cursor=pointer]
+  - complementary [ref=f3e40]:
+    - generic [ref=f3e41]:
+      - generic [ref=f3e42]: MENU
+      - button "Close menu" [ref=f3e43] [cursor=pointer]: ×
+    - navigation [ref=f3e44]:
+      - link "Shop" [ref=f3e45] [cursor=pointer]:
+        - /url: /shop
+      - link "Neck & Décolleté" [ref=f3e46] [cursor=pointer]:
+        - /url: /shop/n1-neck-decollete
+      - link "The Ritual" [ref=f3e47] [cursor=pointer]:
+        - /url: /ritual
+      - link "The Science" [ref=f3e48] [cursor=pointer]:
+        - /url: /science
+      - link "The House" [ref=f3e49] [cursor=pointer]:
+        - /url: /house
+      - link "Journal" [ref=f3e50] [cursor=pointer]:
+        - /url: /journal
+      - link "Account" [ref=f3e51] [cursor=pointer]:
+        - /url: /account
+  - main [ref=f3e52]:
+    - generic [ref=f3e54]:
+      - generic [ref=f3e55]:
+        - paragraph [ref=f3e56]: CHIAREL™ · The House of Clarity™
+        - heading "Skin clarity, made fresh in Isola del Liri." [level=1] [ref=f3e57]
+        - paragraph [ref=f3e58]: A focused morning and evening ritual, built around CHIAREL Essence™. Every active, with its exact percentage.
+        - generic [ref=f3e59]:
+          - link "Begin the Ritual" [ref=f3e60] [cursor=pointer]:
+            - /url: /ritual
+          - link "Shop Essence" [ref=f3e61] [cursor=pointer]:
+            - /url: /shop/chiarel-essence
+        - paragraph [ref=f3e62]:
+          - text: CHIAREL Essence™ from
+          - generic [ref=f3e63]: $151
+          - text: every 45 days with subscription ·
+          - generic [ref=f3e64]: $189
+          - text: one-time
+      - img "CHIAREL Essence™" [ref=f3e68]
+    - generic [ref=f3e70]:
+      - generic [ref=f3e71]:
+        - heading "The CHIAREL Ritual" [level=2] [ref=f3e72]
+        - paragraph [ref=f3e73]: A focused morning and evening practice for hydration, comfort, renewal, and the skin below the jawline.
+      - generic [ref=f3e74]:
+        - generic [ref=f3e75]:
+          - paragraph [ref=f3e76]: Morning
+          - list [ref=f3e77]:
+            - listitem [ref=f3e78]: Step 1 CHIAREL Essence™
+            - listitem [aria-hidden] [ref=f3e79]: →
+            - listitem [ref=f3e80]: Step 2 Terra Radiance Crème™
+        - generic [ref=f3e81]:
+          - paragraph [ref=f3e82]: Evening
+          - list [ref=f3e83]:
+            - listitem [ref=f3e84]: Step 1 CHIAREL Essence™
+            - listitem [aria-hidden] [ref=f3e85]: →
+            - listitem [ref=f3e86]: Step 2 Recovery Masque™
+            - listitem [aria-hidden] [ref=f3e87]: →
+            - listitem [ref=f3e88]: Step 3 N1 Neck & Décolleté Renewal Emulsion™
+      - generic [ref=f3e89]:
+        - link [ref=f3e90] [cursor=pointer]:
+          - /url: /shop/chiarel-essence
+          - img "CHIAREL Essence™" [ref=f3e92]
+          - paragraph [ref=f3e93]: CHIAREL Essence™
+          - paragraph [ref=f3e94]: Serum
+        - link [ref=f3e95] [cursor=pointer]:
+          - /url: /shop/terra-radiance-creme
+          - img "Terra Radiance Crème™" [ref=f3e97]
+          - paragraph [ref=f3e98]: Terra Radiance Crème™
+          - paragraph [ref=f3e99]: Moisturize AM
+        - link [ref=f3e100] [cursor=pointer]:
+          - /url: /shop/recovery-masque
+          - img "Recovery Masque™" [ref=f3e102]
+          - paragraph [ref=f3e103]: Recovery Masque™
+          - paragraph [ref=f3e104]: Moisturize PM
+        - link [ref=f3e105] [cursor=pointer]:
+          - /url: /shop/n1-neck-decollete
+          - img "N1 Neck & Décolleté Renewal Emulsion™" [ref=f3e107]
+          - paragraph [ref=f3e108]: N1 Neck & Décolleté Renewal Emulsion™
+          - paragraph [ref=f3e109]: Renew PM
+      - paragraph [ref=f3e110]:
+        - text: Cellular Cleanser™ and Cellular Mist™ remain available as
+        - link "optional preparation" [ref=f3e111] [cursor=pointer]:
+          - /url: /ritual#optional-preparation
+        - text: ahead of either routine.
+    - generic [ref=f3e113]:
+      - generic [ref=f3e114]:
+        - heading "Which CHIAREL™ Product Is Right for You?" [level=2] [ref=f3e115]
+        - paragraph [ref=f3e116]:
+          - text: Best for matching a product to what your skin is showing you, not the shelf. Not sure? Take the
+          - link "Skin Assessment" [ref=f3e117] [cursor=pointer]:
+            - /url: /assessment
+          - text: .
+      - list [ref=f3e118]:
+        - listitem [ref=f3e119]:
+          - generic [ref=f3e120]:
+            - paragraph [ref=f3e121]: Best for skin that…
+            - paragraph [ref=f3e122]: Barrier feels reactive, tight, or easily irritated
+            - paragraph [ref=f3e123]: Cellular Cleanser™ + Terra Radiance Crème™
+            - paragraph [ref=f3e124]: Ceramide NP and a prebiotic complex are dosed to support barrier function rather than strip it.
+        - listitem [ref=f3e125]:
+          - generic [ref=f3e126]:
+            - paragraph [ref=f3e127]: Best for skin that…
+            - paragraph [ref=f3e128]: Skin looks dull, uneven, or has lost visible firmness
+            - paragraph [ref=f3e129]: CHIAREL Essence™
+            - paragraph [ref=f3e130]: Built around Palmitoyl Pentapeptide-4 (3%), the concentrated treatment layer of the ritual.
+        - listitem [ref=f3e131]:
+          - generic [ref=f3e132]:
+            - paragraph [ref=f3e133]: Best for skin that…
+            - paragraph [ref=f3e134]: Neck, jawline, and décolleté show dryness or crepey-looking texture
+            - paragraph [ref=f3e135]: N1 Neck & Décolleté Renewal Emulsion™
+            - paragraph [ref=f3e136]: Formulated specifically for the skin below the jawline, not repurposed face cream.
+        - listitem [ref=f3e137]:
+          - generic [ref=f3e138]:
+            - paragraph [ref=f3e139]: Best for skin that…
+            - paragraph [ref=f3e140]: Wants overnight recovery without a heavy routine
+            - paragraph [ref=f3e141]: Recovery Masque™
+            - paragraph [ref=f3e142]: L-Ornithine and Panthenol formulated as the ritual's closing facial gesture, before N1.
+    - generic [ref=f3e144]:
+      - img "N1 Neck & Décolleté Renewal Emulsion™" [ref=f3e147]
+      - generic [ref=f3e148]:
+        - paragraph [ref=f3e149]: New
+        - heading "Why the Skin Below the Jawline Needs Its Own Ritual" [level=2] [ref=f3e150]
+        - paragraph [ref=f3e151]: "Most routines stop at the jawline. The neck and décolleté are treated, at best, as an afterthought of whatever face cream is left on the fingertips — not formulated for on their own terms. N1 is CHIAREL’s answer: a dedicated nightly step for the skin most routines forget, finished with a delicate CHIAREL accord."
+        - heading "What N1 Is Designed For" [level=3] [ref=f3e152]
+        - list [ref=f3e153]:
+          - listitem [ref=f3e154]: Dryness
+          - listitem [ref=f3e155]: Crepey-looking texture
+          - listitem [ref=f3e156]: The appearance of horizontal lines
+          - listitem [ref=f3e157]: Reduced visible suppleness
+        - link "Discover N1" [ref=f3e158] [cursor=pointer]:
+          - /url: /shop/n1-neck-decollete
+    - generic [ref=f3e159]:
+      - img "Editorial illustration of the Cascata Grande waterfall running through Isola del Liri, Italy" [ref=f3e160]
+      - generic [ref=f3e162]:
+        - heading "Where Is CHIAREL™ Made?" [level=2] [ref=f3e163]
+        - paragraph [ref=f3e164]: "Before the Liri falls through Isola del Liri as the Cascata Grande, it is met by the Fibreno — a river fed entirely by limestone karst springs, with no surface tributaries of its own. That confluence, water arriving newly filtered rather than run off the surface, is what gives The Cascata Complex™ its name and its place: formulated here, with our manufacturing partner Natural You Srl, rather than sourced from a distance."
+        - link "Read the Journal" [ref=f3e165] [cursor=pointer]:
+          - /url: /journal/isola-del-liri-waterfall
+    - generic [ref=f3e167]:
+      - heading "Who Formulates CHIAREL™?" [level=2] [ref=f3e168]
+      - paragraph [ref=f3e169]: Grazia Savoriti
+      - paragraph [ref=f3e170]: Formulated by CHIAREL’s Pharmacist · Cosmetic & Nutraceutical Research
+      - paragraph [ref=f3e171]: Every CHIAREL™ formulation is developed under her guidance and produced in small, fresh batches in Isola del Liri — made to order rather than held in standing inventory. The Cellular Intelligence Complex™ at the heart of CHIAREL Essence™ is formulated to support the skin’s own regulatory processes.
+      - link "Explore the Science" [ref=f3e172] [cursor=pointer]:
+        - /url: /science
+      - link "Read her full bio →" [ref=f3e173] [cursor=pointer]:
+        - /url: /house
+      - link "Verified profile at Natural You Srl →" [ref=f3e174] [cursor=pointer]:
+        - /url: https://www.naturalyou.it/about-us-detail/
+    - generic [ref=f3e175]:
+      - paragraph [ref=f3e176]: Customer Testing
+      - heading "Real subjects, unretouched" [level=2] [ref=f3e177]
+      - paragraph [ref=f3e178]: Photography from CHIAREL’s product testing. Eyes obscured at the subjects’ request — no names are used. These subjects received complimentary product in exchange for testing and feedback. Individual results vary.
+      - generic [ref=f3e179]:
+        - generic [ref=f3e181]:
+          - generic [ref=f3e182]:
+            - img "Before — subject face, eyes obscured" [ref=f3e184]
+            - paragraph [ref=f3e185]: Before
+          - generic [ref=f3e186]:
+            - img "After — subject face, eyes obscured" [ref=f3e188]
+            - paragraph [ref=f3e189]: After
+        - generic [ref=f3e191]:
+          - generic [ref=f3e192]:
+            - img "Before — subject face, eyes obscured" [ref=f3e194]
+            - paragraph [ref=f3e195]: Before
+          - generic [ref=f3e196]:
+            - img "After — subject face, eyes obscured" [ref=f3e198]
+            - paragraph [ref=f3e199]: After
+    - generic [ref=f3e201]:
+      - generic [ref=f3e202]:
+        - heading "Backed by Published Research" [level=2] [ref=f3e203]
+        - paragraph [ref=f3e204]: CHIAREL formulates with established, clinically studied ingredients — not novel, unstudied compounds. Each mechanism cited below is documented in peer-reviewed clinical and cosmetic-science literature, reviewed by our formulating pharmacist, not brand-authored claims.
+      - list [ref=f3e205]:
+        - listitem [ref=f3e206]:
+          - paragraph [ref=f3e207]: Palmitoyl Pentapeptide-4 (used in CHIAREL Essence™) is studied for its role in visible firmness and texture support.
+          - link "Published research, PubMed (NIH) →" [ref=f3e208] [cursor=pointer]:
+            - /url: https://pubmed.ncbi.nlm.nih.gov/?term=palmitoyl+pentapeptide+skin
+        - listitem [ref=f3e209]:
+          - paragraph [ref=f3e210]: Ceramide NP and Niacinamide (used in Terra Radiance Crème™) are widely studied for barrier support and environmental defense.
+          - link "Published research, PubMed (NIH) →" [ref=f3e211] [cursor=pointer]:
+            - /url: https://pubmed.ncbi.nlm.nih.gov/?term=ceramide+niacinamide+skin+barrier
+        - listitem [ref=f3e212]:
+          - paragraph [ref=f3e213]: Bioactive Ferment Lysate — a postbiotic used across the ritual — is studied for supporting barrier proteins and microbiome balance. See the full mechanism explainer.
+          - link "Read the formulation science →" [ref=f3e214] [cursor=pointer]:
+            - /url: /science/bifida-ferment-lysate
+        - listitem [ref=f3e215]:
+          - paragraph [ref=f3e216]: L-Ornithine (used in Recovery Masque™) is studied for its role in the skin’s Natural Moisturizing Factor and overnight barrier repair.
+          - link "Published research, PubMed (NIH) →" [ref=f3e217] [cursor=pointer]:
+            - /url: https://pubmed.ncbi.nlm.nih.gov/?term=ornithine+skin+barrier
+        - listitem [ref=f3e218]:
+          - paragraph [ref=f3e219]: Low molecular weight Hyaluronic Acid (used in Cellular Mist™) is studied for fast-absorbing surface hydration ahead of treatment.
+          - link "Published research, PubMed (NIH) →" [ref=f3e220] [cursor=pointer]:
+            - /url: https://pubmed.ncbi.nlm.nih.gov/?term=low+molecular+weight+hyaluronic+acid+skin+hydration
+      - paragraph [ref=f3e221]: N1 Neck & Décolleté Renewal Emulsion has no product-specific testing results published yet — see its product page for status.
+    - generic [ref=f3e223]:
+      - heading "The Philosophy" [level=2] [ref=f3e224]
+      - paragraph [ref=f3e225]: “Skin is not one thing. A house built to serve it should not pretend otherwise.”
+      - paragraph [ref=f3e226]: "CHIAREL Intelligence™ began as a question at a kitchen table — the working method still holds: start with the biology in front of you, formulate it properly, and disclose exactly what went in. Advancing Cellular Clarity™ against Modern Biological Stress™ is the mission behind every formula, including N1. It is the same discipline behind La Bella Figura — presenting one’s best self, quietly, without announcement."
+      - generic [ref=f3e227]:
+        - link "Read the Origin Story" [ref=f3e228] [cursor=pointer]:
+          - /url: /journal/three-skins-one-house
+        - link "Discover the House" [ref=f3e229] [cursor=pointer]:
+          - /url: /house
+    - group [ref=f3e232]:
+      - generic "See the full formulation record Every active by product and percentage, and how CHIAREL™ compares with the category norm." [ref=f3e233] [cursor=pointer]:
+        - generic [ref=f3e234]:
+          - text: See the full formulation record
+          - generic [ref=f3e235]: Every active by product and percentage, and how CHIAREL™ compares with the category norm.
+        - generic [aria-hidden] [ref=f3e236]: +
+    - generic [ref=f3e238]:
+      - generic [ref=f3e239]:
+        - generic [ref=f3e240]:
+          - heading "Beyond the Ritual" [level=2] [ref=f3e241]
+          - paragraph [ref=f3e242]: Additional CHIAREL products, available anytime — not part of the core ritual, but never discontinued.
+        - link "See the Full House" [ref=f3e243] [cursor=pointer]:
+          - /url: /shop
+      - generic [ref=f3e244]:
+        - link [ref=f3e246] [cursor=pointer]:
+          - /url: /shop/cellular-cleanser
+          - img "Cellular Cleanser™" [ref=f3e248]
+          - generic [ref=f3e249]:
+            - heading "Cellular Cleanser™" [level=3] [ref=f3e250]
+            - paragraph [ref=f3e251]: Cleanse
+            - paragraph [ref=f3e252]: Adaptive Purifying Cleanser
+        - link "CHIAREL Lip Concentrate™ New CHIAREL Lip Concentrate™ Standalone Dual-Action Volumizing & Radiance Lip Treatment" [ref=f3e254] [cursor=pointer]:
+          - /url: /shop/lip-concentrate
+          - generic [ref=f3e255]:
+            - img "CHIAREL Lip Concentrate™" [ref=f3e256]
+            - generic [ref=f3e257]: New
+          - generic [ref=f3e258]:
+            - heading "CHIAREL Lip Concentrate™" [level=3] [ref=f3e259]
+            - paragraph [ref=f3e260]: Standalone
+            - paragraph [ref=f3e261]: Dual-Action Volumizing & Radiance Lip Treatment
+    - generic [ref=f3e263]:
+      - heading "Frequently Asked Questions" [level=2] [ref=f3e265]
+      - generic [ref=f3e266]:
+        - group [ref=f3e268]:
+          - generic "How much does CHIAREL cost?" [ref=f3e269] [cursor=pointer]:
+            - text: How much does CHIAREL cost?
+            - generic [aria-hidden] [ref=f3e270]: +
+        - group [ref=f3e272]:
+          - generic "What is CHIAREL made of?" [ref=f3e273] [cursor=pointer]:
+            - text: What is CHIAREL made of?
+            - generic [aria-hidden] [ref=f3e274]: +
+        - group [ref=f3e276]:
+          - generic "Who formulates CHIAREL?" [ref=f3e277] [cursor=pointer]:
+            - text: Who formulates CHIAREL?
+            - generic [aria-hidden] [ref=f3e278]: +
+        - group [ref=f3e280]:
+          - generic "Where can I buy CHIAREL?" [ref=f3e281] [cursor=pointer]:
+            - text: Where can I buy CHIAREL?
+            - generic [aria-hidden] [ref=f3e282]: +
+        - group [ref=f3e284]:
+          - generic "How does the CHIAREL subscription work?" [ref=f3e285] [cursor=pointer]:
+            - text: How does the CHIAREL subscription work?
+            - generic [aria-hidden] [ref=f3e286]: +
+        - group [ref=f3e288]:
+          - generic "Where is CHIAREL made?" [ref=f3e289] [cursor=pointer]:
+            - text: Where is CHIAREL made?
+            - generic [aria-hidden] [ref=f3e290]: +
+        - group [ref=f3e292]:
+          - generic "What is the CHIAREL Four-Product Ritual?" [ref=f3e293] [cursor=pointer]:
+            - text: What is the CHIAREL Four-Product Ritual?
+            - generic [aria-hidden] [ref=f3e294]: +
+    - generic [ref=f3e296]:
+      - generic [ref=f3e297]:
+        - img "CHIAREL Essence™" [ref=f3e299]
+        - img "N1 Neck & Décolleté Renewal Emulsion™" [ref=f3e301]
+      - generic [ref=f3e302]:
+        - heading "The Founding Pair" [level=2] [ref=f3e303]
+        - paragraph [ref=f3e304]: The Signature Serum & N1
+        - paragraph [ref=f3e305]: CHIAREL Essence and N1 Neck & Décolleté Renewal Emulsion — face and décolleté, delivered together every 45 days.
+        - paragraph [ref=f3e306]:
+          - generic [ref=f3e307]: $269
+          - generic [ref=f3e308]: every 45 days with subscription · $327 one-time
+        - generic [ref=f3e309]:
+          - link "Begin the Ritual" [ref=f3e310] [cursor=pointer]:
+            - /url: /shop/the-founding-pair
+          - link "The complete set — $372" [ref=f3e311] [cursor=pointer]:
+            - /url: /shop/the-ritual-set
+        - paragraph [ref=f3e312]: Available online only at chiarel.com — not sold in retail stores or through other sellers.
+    - paragraph [ref=f3e313]:
+      - text: Written by
+      - link "Grazia Savoriti" [ref=f3e314] [cursor=pointer]:
+        - /url: https://www.naturalyou.it/about-us-detail/
+      - text: ", CHIAREL’s formulating pharmacist. Published August 7, 2026, last reviewed August 24, 2026."
+  - contentinfo [ref=f3e315]:
+    - generic [ref=f3e316]:
+      - generic [ref=f3e317]:
+        - img "CHIAREL Recovery Masque jar" [ref=f3e320]
+        - generic [ref=f3e321]:
+          - generic [ref=f3e322]:
+            - heading "Contact CHIAREL" [level=2] [ref=f3e323]
+            - link "Reach the House →" [ref=f3e324] [cursor=pointer]:
+              - /url: /contact
+          - navigation [ref=f3e325]:
+            - generic [ref=f3e326]:
+              - paragraph [ref=f3e327]: Shop
+              - link "Shop All" [ref=f3e328] [cursor=pointer]:
+                - /url: /shop
+              - link "Neck & Décolleté" [ref=f3e329] [cursor=pointer]:
+                - /url: /shop/n1-neck-decollete
+              - link "The Ritual" [ref=f3e330] [cursor=pointer]:
+                - /url: /ritual
+              - link "The Science" [ref=f3e331] [cursor=pointer]:
+                - /url: /science
+            - generic [ref=f3e332]:
+              - paragraph [ref=f3e333]: House
+              - link "The House" [ref=f3e334] [cursor=pointer]:
+                - /url: /house
+              - link "Journal" [ref=f3e335] [cursor=pointer]:
+                - /url: /journal
+              - link "Account" [ref=f3e336] [cursor=pointer]:
+                - /url: /account
+              - link "Press" [ref=f3e337] [cursor=pointer]:
+                - /url: /press
+            - generic [ref=f3e338]:
+              - paragraph [ref=f3e339]: Legal
+              - link "Contact" [ref=f3e340] [cursor=pointer]:
+                - /url: /contact
+              - link "Privacy Policy" [ref=f3e341] [cursor=pointer]:
+                - /url: /privacy
+              - link "Terms of Service" [ref=f3e342] [cursor=pointer]:
+                - /url: /terms
+          - list [ref=f3e343]:
+            - listitem [ref=f3e344]: Complimentary shipping at $150
+            - listitem [ref=f3e346]: 90-Day Guarantee on your first order
+            - listitem [ref=f3e348]: Secure checkout via Stripe
+            - listitem [ref=f3e350]: Formulated by a pharmacist
+            - listitem [ref=f3e352]: Made to order in Isola del Liri, Italy
+            - listitem [ref=f3e354]: Every active ingredient disclosed
+      - paragraph [ref=f3e356]: © 2026 CHIAREL™ · 1HubSolutions, LLC. All rights reserved.
+  - complementary [ref=f3e357]:
+    - generic [ref=f3e358]:
+      - paragraph [ref=f3e359]: Your Ritual Bag
+      - button "Close cart" [ref=f3e360] [cursor=pointer]: ×
+    - generic [ref=f3e361]:
+      - paragraph [ref=f3e362]: Your bag is empty.
+      - link "Begin the Ritual" [ref=f3e363] [cursor=pointer]:
+        - /url: /ritual
+  - alert [ref=f3e364]

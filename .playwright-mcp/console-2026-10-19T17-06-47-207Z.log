@@ -1,0 +1,88 @@
+[    5619ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ :25630
+[    9854ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ :25630
+[   12402ms] [ERROR] Failed to load resource: the server responded with a status of 503 (Service Unavailable) @ http://localhost:3111/api/cart:0
+[   29395ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ :25630
+[   34337ms] [ERROR] Failed to load resource: the server responded with a status of 503 (Service Unavailable) @ http://localhost:3111/api/cart:0
+[   52004ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ :25630
+[   54556ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ :25630
+[   56956ms] [ERROR] Failed to load resource: the server responded with a status of 503 (Service Unavailable) @ http://localhost:3111/api/cart:0
+[   63167ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ :25630
+[   68359ms] [ERROR] Failed to load resource: the server responded with a status of 503 (Service Unavailable) @ http://localhost:3111/api/cart:0
+[   89309ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ :25630
+[   94373ms] [ERROR] Failed to load resource: the server responded with a status of 503 (Service Unavailable) @ http://localhost:3111/api/cart:0
+[  142192ms] [LOG] [Fast Refresh] rebuilding @ :196
+[  143493ms] [LOG] [Fast Refresh] rebuilding @ :196
+[  143577ms] [LOG] [Fast Refresh] done in 84ms @ :13
+[  145502ms] [LOG] [Fast Refresh] done in 2009ms @ :13
+[  159586ms] [LOG] [Fast Refresh] rebuilding @ :196
+[  160708ms] [LOG] [Fast Refresh] done in 1122ms @ :13
+[  171420ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ :25630
+[  176188ms] [ERROR] Failed to load resource: the server responded with a status of 503 (Service Unavailable) @ http://localhost:3111/api/cart:0
+[  191817ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ :25630
+[  193296ms] [ERROR] Failed to load resource: the server responded with a status of 503 (Service Unavailable) @ http://localhost:3111/api/cart:0
+[  208391ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ :25630
+[  213160ms] [ERROR] Failed to load resource: the server responded with a status of 503 (Service Unavailable) @ http://localhost:3111/api/cart:0
+[  227937ms] [LOG] [Fast Refresh] rebuilding @ :196
+[  230117ms] [LOG] [Fast Refresh] done in 2180ms @ :13
+[  260448ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ :25630
+[  265352ms] [ERROR] Failed to load resource: the server responded with a status of 503 (Service Unavailable) @ http://localhost:3111/api/cart:0
+[  307509ms] [LOG] [Fast Refresh] rebuilding @ :196
+[  308267ms] [LOG] [Fast Refresh] rebuilding @ :196
+[  308331ms] [LOG] [Fast Refresh] done in 63ms @ :13
+[  309696ms] [LOG] [Fast Refresh] done in 1429ms @ :13
+[  368075ms] [LOG] [Fast Refresh] rebuilding @ :196
+[  370477ms] [LOG] [Fast Refresh] rebuilding @ :196
+[  370889ms] [LOG] [Fast Refresh] done in 412ms @ :13
+[  374693ms] [LOG] [Fast Refresh] done in 4216ms @ :13
+[  496562ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ :25630
+[  502747ms] [ERROR] Failed to load resource: the server responded with a status of 503 (Service Unavailable) @ http://localhost:3111/api/cart:0
+[  509045ms] [LOG] [Fast Refresh] rebuilding @ :196
+[  510066ms] [LOG] [Fast Refresh] done in 1022ms @ :13
+[  514582ms] [LOG] %c%s%c prisma:error background: #e6e6e6;background: light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.25));color: #000000;color: light-dark(#000000, #ffffff);border-radius: 2px  Server   
+Invalid `prisma.foundingSignup.count()` invocation:
+
+
+Can't reach database server at `localhost:5434`
+
+Please make sure your database server is running at `localhost:5434`. @ about://React/Server/webpack-internal:///(rsc)/./app/founding-100/page.tsx?337:30
+[  514607ms] [ERROR] %o
+
+%s PrismaClientInitializationError: 
+Invalid `prisma.foundingSignup.count()` invocation:
+
+
+Can't reach database server at `localhost:5434`
+
+Please make sure your database server is running at `localhost:5434`.
+    at  Founding100Page (about://React/Server/webpack-internal:///(rsc)/./app/founding-100/page.tsx?340:31:21)
+    at resolveErrorDev (eval at (app-pages-browser)/../../../../dev/Chiarel brand/chiarel/node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js (http://localhost:3111/_next/static/chunks/main-app.js?v=1792430102583:1236:1), <anonymous>:2405:46)
+    at processFullStringRow (eval at (app-pages-browser)/../../../../dev/Chiarel brand/chiarel/node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js (http://localhost:3111/_next/static/chunks/main-app.js?v=1792430102583:1236:1), <anonymous>:2891:23)
+    at processFullBinaryRow (eval at (app-pages-browser)/../../../../dev/Chiarel brand/chiarel/node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js (http://localhost:3111/_next/static/chunks/main-app.js?v=1792430102583:1236:1), <anonymous>:2834:7)
+    at processBinaryChunk (eval at (app-pages-browser)/../../../../dev/Chiarel brand/chiarel/node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js (http://localhost:3111/_next/static/chunks/main-app.js?v=1792430102583:1236:1), <anonymous>:3037:15)
+    at progress (eval at (app-pages-browser)/../../../../dev/Chiarel brand/chiarel/node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js (http://localhost:3111/_next/static/chunks/main-app.js?v=1792430102583:1236:1), <anonymous>:3303:13) The above error occurred in the <Founding100Page> component. It was handled by the <ErrorBoundaryHandler> error boundary. @ :67
+[  514616ms] [ERROR] PrismaClientInitializationError: 
+Invalid `prisma.foundingSignup.count()` invocation:
+
+
+Can't reach database server at `localhost:5434`
+
+Please make sure your database server is running at `localhost:5434`.
+    at  Founding100Page (about://React/Server/webpack-internal:///(rsc)/./app/founding-100/page.tsx?340:31:21)
+    at resolveErrorDev (eval at (app-pages-browser)/../../../../dev/Chiarel brand/chiarel/node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js (http://localhost:3111/_next/static/chunks/main-app.js?v=1792430102583:1236:1), <anonymous>:2405:46)
+    at processFullStringRow (eval at (app-pages-browser)/../../../../dev/Chiarel brand/chiarel/node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js (http://localhost:3111/_next/static/chunks/main-app.js?v=1792430102583:1236:1), <anonymous>:2891:23)
+    at processFullBinaryRow (eval at (app-pages-browser)/../../../../dev/Chiarel brand/chiarel/node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js (http://localhost:3111/_next/static/chunks/main-app.js?v=1792430102583:1236:1), <anonymous>:2834:7)
+    at processBinaryChunk (eval at (app-pages-browser)/../../../../dev/Chiarel brand/chiarel/node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js (http://localhost:3111/_next/static/chunks/main-app.js?v=1792430102583:1236:1), <anonymous>:3037:15)
+    at progress (eval at (app-pages-browser)/../../../../dev/Chiarel brand/chiarel/node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js (http://localhost:3111/_next/static/chunks/main-app.js?v=1792430102583:1236:1), <anonymous>:3303:13) @ :56
+[  514617ms] [ERROR] PrismaClientInitializationError: 
+Invalid `prisma.foundingSignup.count()` invocation:
+
+
+Can't reach database server at `localhost:5434`
+
+Please make sure your database server is running at `localhost:5434`.
+    at  Founding100Page (about://React/Server/webpack-internal:///(rsc)/./app/founding-100/page.tsx?340:31:21)
+    at resolveErrorDev (eval at (app-pages-browser)/../../../../dev/Chiarel brand/chiarel/node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js (http://localhost:3111/_next/static/chunks/main-app.js?v=1792430102583:1236:1), <anonymous>:2405:46)
+    at processFullStringRow (eval at (app-pages-browser)/../../../../dev/Chiarel brand/chiarel/node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js (http://localhost:3111/_next/static/chunks/main-app.js?v=1792430102583:1236:1), <anonymous>:2891:23)
+    at processFullBinaryRow (eval at (app-pages-browser)/../../../../dev/Chiarel brand/chiarel/node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js (http://localhost:3111/_next/static/chunks/main-app.js?v=1792430102583:1236:1), <anonymous>:2834:7)
+    at processBinaryChunk (eval at (app-pages-browser)/../../../../dev/Chiarel brand/chiarel/node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js (http://localhost:3111/_next/static/chunks/main-app.js?v=1792430102583:1236:1), <anonymous>:3037:15)
+    at progress (eval at (app-pages-browser)/../../../../dev/Chiarel brand/chiarel/node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js (http://localhost:3111/_next/static/chunks/main-app.js?v=1792430102583:1236:1), <anonymous>:3303:13) @ :56

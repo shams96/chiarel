@@ -1,0 +1,126 @@
+[     368ms] [ERROR] Failed to load resource: the server responded with a status of 503 (Service Unavailable) @ http://localhost:3148/api/cart:0
+[  652419ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/ritual?_rsc=1p-R_iEY6bj0jY31:0
+[  652959ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/assets/products/terra-radiance-creme-jar.png:0
+[  653896ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/shop/chiarel-essence?_rsc=1p-R_iEY6bj0jY31:0
+[  653896ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/shop/chiarel-essence. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[  653896ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/shop/terra-radiance-creme?_rsc=1p-R_iEY6bj0jY31:0
+[  653896ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/shop/terra-radiance-creme. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[  654699ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/assessment?_rsc=1p-R_iEY6bj0jY31:0
+[  654699ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/assessment. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[  656625ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/assets/editorial/isola-del-liri-cascata.png:0
+[  656808ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/shop/recovery-masque?_rsc=1p-R_iEY6bj0jY31:0
+[  656808ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/shop/recovery-masque. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[  657316ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/journal/isola-del-liri-waterfall?_rsc=1p-R_iEY6bj0jY31:0
+[  657316ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/journal/isola-del-liri-waterfall. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[  657664ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/science?_rsc=1p-R_iEY6bj0jY31:0
+[  657664ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/house?_rsc=1p-R_iEY6bj0jY31:0
+[  658183ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/science/bifida-ferment-lysate?_rsc=1p-R_iEY6bj0jY31:0
+[  658183ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/science/bifida-ferment-lysate. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[  658564ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/assets/testimonials/subject-1-before.jpg:0
+[  658564ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/assets/testimonials/subject-1-after.jpg:0
+[  658599ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/assets/testimonials/subject-2-before.jpg:0
+[  658599ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/assets/testimonials/subject-2-after.jpg:0
+[  659615ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/journal/three-skins-one-house?_rsc=1p-R_iEY6bj0jY31:0
+[  659615ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/journal/three-skins-one-house. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[  659946ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/assets/products/cellular-cleanser-bottle.png:0
+[  667971ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/assets/products/lip-gloss-bottle.png:0
+[  667991ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/shop/the-founding-pair?_rsc=1p-R_iEY6bj0jY31:0
+[  667991ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/shop/the-founding-pair. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[  667991ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/shop/the-ritual-set?_rsc=1p-R_iEY6bj0jY31:0
+[  667991ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/shop/the-ritual-set. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[  668057ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/shop?_rsc=1p-R_iEY6bj0jY31:0
+[  668071ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/shop/cellular-cleanser?_rsc=1p-R_iEY6bj0jY31:0
+[  668071ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/shop/cellular-cleanser. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[  668207ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/shop/lip-concentrate?_rsc=1p-R_iEY6bj0jY31:0
+[  668207ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/shop/lip-concentrate. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[  668354ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/contact?_rsc=1p-R_iEY6bj0jY31:0
+[  668354ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/contact. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[  668359ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/shop/n1-neck-decollete?_rsc=1p-R_iEY6bj0jY31:0
+[  668359ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/journal?_rsc=1p-R_iEY6bj0jY31:0
+[  668359ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/account?_rsc=1p-R_iEY6bj0jY31:0
+[  668371ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/press?_rsc=1p-R_iEY6bj0jY31:0
+[  668371ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/press. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[  668371ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/privacy?_rsc=1p-R_iEY6bj0jY31:0
+[  668371ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/privacy. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[  668371ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/terms?_rsc=1p-R_iEY6bj0jY31:0
+[  668371ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/terms. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[ 2354184ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/founding-100?_rsc=1p-R_iEY6bj0jY31:0
+[ 2354184ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/founding-100. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[ 2672920ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/ritual?_rsc=1p-R_iEY6bj0jY31:0
+[ 2672920ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/ritual. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[ 2674677ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/shop?_rsc=1p-R_iEY6bj0jY31:0
+[ 2674677ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/shop. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[ 2674743ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/founding-100?_rsc=1p-R_iEY6bj0jY31:0
+[ 2674743ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/founding-100. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[ 3084843ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/founding-100?_rsc=1p-R_iEY6bj0jY31:0
+[ 3084843ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/founding-100. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[ 5970249ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/founding-100?_rsc=1p-R_iEY6bj0jY31:0
+[ 5970249ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/founding-100. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
+[43327228ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3148/founding-100?_rsc=1p-R_iEY6bj0jY31:0
+[43327228ms] [ERROR] Failed to fetch RSC payload for http://localhost:3148/founding-100. Falling back to browser navigation. TypeError: Failed to fetch
+    at y (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:40385)
+    at async _ (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:39243)
+    at async Object.o [as task] (http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:1:172997) @ http://localhost:3148/_next/static/chunks/1255-5cd2fe06309409a0.js:0
