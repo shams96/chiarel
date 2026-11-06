@@ -26,8 +26,6 @@ import {
   SITE_NAME,
   HOMEPAGE_LAST_UPDATED,
   HOMEPAGE_PUBLISHED,
-  HOMEPAGE_LAST_UPDATED_DISPLAY,
-  HOMEPAGE_PUBLISHED_DISPLAY,
   FORMULATOR_EXTERNAL_URL,
 } from "@/lib/seo";
 
@@ -190,25 +188,16 @@ export default function Home() {
       <HomePhilosophy />
       <HomeJournal />
       <HomeFaq faqs={faqs} />
+      {/* The authorship line closes HomeFinalCta (components/home/HomeClosing.tsx), so
+          nothing sits between that section and the footer. The signup wrapper is only
+          rendered when the signup is on: EmailSignup returns null otherwise, and an
+          empty wrapper left a 40px blank gap above the footer. */}
       <HomeFinalCta />
-      <div className="mx-auto max-w-xl px-6 pb-10">
-        <EmailSignup source="home" />
-      </div>
-
-      <p className="pb-10 pt-6 text-center text-[12px] text-ink/70">
-        Written by{" "}
-        <a
-          href={FORMULATOR_EXTERNAL_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="border-b border-ink/30 hover:border-ochre hover:text-ochre"
-        >
-          Grazia Savoriti
-        </a>
-        , CHIAREL&rsquo;s formulating pharmacist. Published{" "}
-        {HOMEPAGE_PUBLISHED_DISPLAY}, last reviewed{" "}
-        {HOMEPAGE_LAST_UPDATED_DISPLAY}.
-      </p>
+      {process.env.NEXT_PUBLIC_EMAIL_SIGNUP === "on" && (
+        <div className="mx-auto max-w-xl px-6 pb-10">
+          <EmailSignup source="home" />
+        </div>
+      )}
     </>
   );
 }
