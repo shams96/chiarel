@@ -21,5 +21,7 @@ export async function register() {
     startDisputeMonitorSchedule();
     const { startCartPruneSchedule } = await import("@/lib/cart-prune");
     startCartPruneSchedule();
+    const { startOrderSweepSchedule } = await import("@/lib/order-sweep");
+    startOrderSweepSchedule();
   }
 }

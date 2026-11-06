@@ -25,6 +25,26 @@ export const PLAN_DETAIL: Record<PlanMode, string> = {
 /** The product page offers "single" for a subscription; the cart calls it subscription. */
 export type Tier = "ninetyDay" | "single" | "oneTime";
 
+/**
+ * The buying funnel's vocabulary, one phrase per step, so no surface invents a
+ * fourth (the audit found six phrasings for one funnel). Plan:
+ * claudedocs/commerce/CHIAREL_IMPLEMENTATION_PLAN.md, Phase B.
+ *   product page and sticky bar: "Begin the Ritual" (a plan) / "Add to Bag" (one-time)
+ *   drawer and bag page:         "Checkout"
+ *   checkout page:               "Complete Your Order"
+ */
+export const CTA = {
+  begin: "Begin the Ritual",
+  addOneTime: "Add to Bag",
+  bag: "Checkout",
+  pay: "Complete Your Order",
+} as const;
+
+/** The label on the product page button and on the sticky bar, for the chosen tier. */
+export function addCtaLabel(tier: Tier): string {
+  return tier === "oneTime" ? CTA.addOneTime : CTA.begin;
+}
+
 export function tierToMode(tier: Tier): PlanMode {
   return tier === "single" ? "subscription" : tier;
 }

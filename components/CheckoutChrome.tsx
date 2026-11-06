@@ -4,21 +4,35 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-// Checkout is a single-purpose page: the full site header (navigation, search of
-// other pages) pulls people away from paying, so /checkout gets a quiet header
-// of its own. Footer is left as it is. usePathname is available during SSR, so
-// there is no flash of the full header.
+// The bag and checkout are single-purpose pages: the full site header
+// (navigation to every other page) pulls people away from buying, so /cart and
+// /checkout get a quiet header of their own (plan, Phase C: "stripped header ...
+// on cart and checkout"). Footer is left as it is (owner rule). usePathname is
+// available during SSR, so there is no flash of the full header.
 
 function onCheckout(pathname: string | null): boolean {
   return pathname === "/checkout" || !!pathname?.startsWith("/checkout/");
 }
 
+function onBag(pathname: string | null): boolean {
+  return pathname === "/cart";
+}
+
+function quiet(pathname: string | null): boolean {
+  return onCheckout(pathname) || onBag(pathname);
+}
+
 export function HideOnCheckout({ children }: { children: React.ReactNode }) {
-  return onCheckout(usePathname()) ? null : <>{children}</>;
+  return quiet(usePathname()) ? null : <>{children}</>;
 }
 
 export function CheckoutHeader() {
-  if (!onCheckout(usePathname())) return null;
+  const pathname = usePathname();
+  if (!quiet(pathname)) return null;
+  // From the bag the way out is back to the shop; from checkout it is back to the bag.
+  const exit = onBag(pathname)
+    ? { href: "/shop", label: "Continue shopping" }
+    : { href: "/cart", label: "Back to bag" };
   return (
     <header className="border-b border-ink/10">
       <div className="mx-auto flex w-full max-w-container items-center justify-between px-margin py-4">
@@ -33,10 +47,10 @@ export function CheckoutHeader() {
           />
         </Link>
         <Link
-          href="/cart"
+          href={exit.href}
           className="tap-area text-eyebrow uppercase text-ink/70 underline underline-offset-4 hover:text-ochre"
         >
-          Back to bag
+          {exit.label}
         </Link>
       </div>
     </header>

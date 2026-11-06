@@ -18,6 +18,7 @@ import {
   Table,
   tdClass,
 } from "@/components/admin/ui";
+import { orderTotalLabel, orderTotalText } from "@/lib/order-total";
 
 type Row = {
   id: string;
@@ -26,6 +27,8 @@ type Row = {
   email: string;
   country: string;
   total: number;
+  amountPaidCents: number | null;
+  taxCents: number | null;
   status: string;
   fulfilmentStatus: string;
   disputeStatus: string | null;
@@ -164,7 +167,9 @@ export default function AdminOrdersPage() {
                 <span className="text-ink/80">{o.email}</span>
               </td>
               <td className={tdClass}>{o.country}</td>
-              <td className={`${tdClass} font-serif text-[16px] tabular-nums`}>${o.total}</td>
+              <td className={`${tdClass} font-serif text-[16px] tabular-nums`} title={orderTotalLabel(o)}>
+                {orderTotalText(o)}
+              </td>
               <td className={tdClass}>
                 <Badge tone={statusTone(o.status)}>{o.status}</Badge>
               </td>

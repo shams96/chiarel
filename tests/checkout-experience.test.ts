@@ -139,8 +139,10 @@ describe("checkout chrome and analytics", () => {
     expect(layout).toMatch(/<HideOnAdmin>\s*<Footer \/>\s*<\/HideOnAdmin>/);
   });
 
-  it("the quiet header always leads back to the bag", () => {
-    expect(read("components/CheckoutChrome.tsx")).toMatch(/href="\/cart"/);
+  it("the quiet header leads back to the bag from checkout (and to the shop from the bag)", () => {
+    const chrome = read("components/CheckoutChrome.tsx");
+    expect(chrome).toMatch(/href: "\/cart", label: "Back to bag"/);
+    expect(chrome).toMatch(/href: "\/shop", label: "Continue shopping"/);
   });
 
   it("the new commerce events exist and are fired from the bag, the remove button and checkout", () => {
