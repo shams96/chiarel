@@ -1,6 +1,7 @@
 import ResponsiveImage from "@/components/ResponsiveImage";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import SectionHeading from "@/components/layout/SectionHeading";
 import { productHref } from "@/lib/products";
 
 // Each card leads with that product's scene, so the section reads as a way into
@@ -43,19 +44,22 @@ const fitGuidance = [
 export default function HomeFitGuidance() {
   return (
     <section className="section-y-lg bg-cloud">
-      <div className="mx-auto max-w-[84rem] px-[clamp(1.5rem,3vw,3rem)]">
-        <Reveal>
-          <h2 className="font-serif text-[clamp(2rem,1.3rem+2vw,3.4rem)] leading-tight text-garden">
+      <div className="mx-auto w-full max-w-container px-margin">
+        <Reveal className="max-w-2xl">
+          <SectionHeading
+            lead={
+              <>
+                Best for matching a product to what your skin is showing you,
+                not the shelf. Not sure? Take the{" "}
+                <Link href="/assessment" className="border-b border-ochre text-ochre">
+                  Skin Assessment
+                </Link>
+                .
+              </>
+            }
+          >
             Which CHIAREL™ Product Is Right for You?
-          </h2>
-          <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-ink/80">
-            Best for matching a product to what your skin is showing you,
-            not the shelf. Not sure? Take the{" "}
-            <Link href="/assessment" className="border-b border-ochre text-ochre">
-              Skin Assessment
-            </Link>
-            .
-          </p>
+          </SectionHeading>
         </Reveal>
         <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {fitGuidance.map((row, i) => (

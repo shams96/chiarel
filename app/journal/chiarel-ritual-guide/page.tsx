@@ -82,7 +82,7 @@ export default function RitualGuidePage() {
       </section>
 
       <section className="mt-14 border-t border-ink/10 pt-10">
-        <h2 className="font-serif text-2xl">
+        <h2 className="font-serif text-h3 text-ochre">
           Why Day Crème and Night Crème Feel Different
         </h2>
         <div className="mt-5 space-y-5 text-sm leading-relaxed text-ink/80">
@@ -110,7 +110,7 @@ export default function RitualGuidePage() {
       </section>
 
       <section className="mt-14 border-t border-ink/10 pt-10">
-        <h2 className="font-serif text-2xl">
+        <h2 className="font-serif text-h3 text-ochre">
           How to Apply Clarity Night Crème for Best Results
         </h2>
         <ul className="mt-5 space-y-2 text-sm text-ink/80">
@@ -122,7 +122,7 @@ export default function RitualGuidePage() {
       </section>
 
       <section className="mt-14 border-t border-ink/10 pt-10">
-        <h2 className="font-serif text-2xl">Eye Area Guidance</h2>
+        <h2 className="font-serif text-h3 text-ochre">Eye Area Guidance</h2>
         <p className="mt-4 text-sm leading-relaxed text-ink/80">
           Clarity Eye Contour Concentrate is formulated for the delicate eye
           area. It sits in the evening ritual, right after Clarity Essence, and
@@ -132,7 +132,7 @@ export default function RitualGuidePage() {
       </section>
 
       <section className="mt-14 border-t border-ink/10 pt-10">
-        <h2 className="font-serif text-2xl">Frequently Asked</h2>
+        <h2 className="font-serif text-h3 text-ochre">Frequently Asked</h2>
         <dl className="mt-6 space-y-8">
           {faqs.map((f) => (
             <div key={f.q}>

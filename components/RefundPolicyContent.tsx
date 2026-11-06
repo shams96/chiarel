@@ -17,7 +17,7 @@ export default function RefundPolicyContent() {
   return (
     <>
       <section id="guarantee">
-        <h2 className="font-serif text-xl text-ink">The 90-Day Guarantee</h2>
+        <h2 className="font-serif text-h4 text-ink">The 90-Day Guarantee</h2>
         <p className="mt-3">
           A customer&rsquo;s first CHIAREL™ order is covered by a 90-day
           guarantee. If you are not satisfied, contact{" "}
@@ -34,7 +34,7 @@ export default function RefundPolicyContent() {
       </section>
 
       <section className="mt-8">
-        <h2 className="font-serif text-xl text-ink">Returns &amp; exchanges</h2>
+        <h2 className="font-serif text-h4 text-ink">Returns &amp; exchanges</h2>
         <p className="mt-3">
           If something arrives damaged, incorrect, or you are otherwise
           unsatisfied with an order the 90-Day Guarantee above does not cover,

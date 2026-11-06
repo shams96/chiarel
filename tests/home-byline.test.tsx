@@ -32,7 +32,7 @@ describe("the authorship line closes the FAQ section", () => {
     const p = html.slice(html.lastIndexOf("<p", html.indexOf("Written by")), html.indexOf("Written by"));
     expect(p).toContain("border-t border-hairline");
     expect(p).not.toContain("text-center");
-    expect(html).toContain("max-w-[84rem] px-[clamp(1.5rem,3vw,3rem)]");
+    expect(html).toContain("max-w-container px-margin");
   });
 });
 

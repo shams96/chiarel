@@ -1,4 +1,5 @@
 import Reveal from "@/components/Reveal";
+import SectionHeading from "@/components/layout/SectionHeading";
 import { FORMULATOR_EXTERNAL_URL, HOMEPAGE_LAST_UPDATED_DISPLAY, HOMEPAGE_PUBLISHED_DISPLAY } from "@/lib/seo";
 
 // Visible FAQ — must stay in sync with the FAQPage JSON-LD built from the
@@ -7,12 +8,9 @@ import { FORMULATOR_EXTERNAL_URL, HOMEPAGE_LAST_UPDATED_DISPLAY, HOMEPAGE_PUBLIS
 export default function HomeFaq({ faqs }: { faqs: { question: string; answer: string }[] }) {
   return (
     <section id="faq" className="section-y-lg bg-cloud">
-      <div className="mx-auto grid max-w-[84rem] gap-10 px-[clamp(1.5rem,3vw,3rem)] lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+      <div className="mx-auto grid w-full max-w-container gap-10 px-margin lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
         <Reveal className="lg:sticky lg:top-28 lg:self-start">
-          <h2 className="font-serif text-[clamp(2.25rem,1.4rem+2.6vw,4rem)] leading-[1.05] text-garden">
-            Frequently Asked Questions
-          </h2>
-          <div className="mt-6 h-px w-20 bg-ochre" aria-hidden="true" />
+          <SectionHeading>Frequently Asked Questions</SectionHeading>
         </Reveal>
         <div className="divide-y divide-champagne border-y border-champagne">
           {faqs.map((faq, i) => (
@@ -32,7 +30,7 @@ export default function HomeFaq({ faqs }: { faqs: { question: string; answer: st
       {/* The page's authorship line (who wrote it, when published and reviewed).
           It closes the last content section so nothing sits alone above the footer.
           Wording, link and dates are owned by lib/seo.ts. */}
-      <div className="mx-auto mt-14 max-w-[84rem] px-[clamp(1.5rem,3vw,3rem)] md:mt-20">
+      <div className="mx-auto mt-14 w-full max-w-container px-margin md:mt-20">
         <p className="max-w-[44rem] border-t border-hairline pt-5 text-[12px] leading-relaxed text-ink/70">
           Written by{" "}
           <a

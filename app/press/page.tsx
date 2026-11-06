@@ -51,7 +51,7 @@ export default function PressPage() {
       <div className="col-span-full lg:col-span-8 lg:col-start-5">
       {/* Brand Fact Sheet */}
       <section>
-        <h2 className="font-serif text-2xl text-ink">Brand Fact Sheet</h2>
+        <h2 className="font-serif text-h3 text-ochre">Brand Fact Sheet</h2>
         <dl className="mt-6 space-y-5 text-sm leading-relaxed text-ink/80">
           <div>
             <dt className="text-eyebrow uppercase text-ink/70">
@@ -130,7 +130,7 @@ export default function PressPage() {
 
       {/* Product Lineup */}
       <section className="mt-16 border-t border-ink/10 pt-12">
-        <h2 className="font-serif text-2xl text-ink">The Launch Lineup</h2>
+        <h2 className="font-serif text-h3 text-ochre">The Launch Lineup</h2>
         {/* DRAFT — OWNER / REGULATORY APPROVAL REQUIRED */}
         <p className="mt-2 max-w-xl text-sm text-ink/70">
           Five formulations, each made for one purpose and carrying the name
@@ -170,7 +170,7 @@ export default function PressPage() {
 
       {/* Brand Assets */}
       <section className="mt-16 border-t border-ink/10 pt-12">
-        <h2 className="font-serif text-2xl text-ink">Brand Assets</h2>
+        <h2 className="font-serif text-h3 text-ochre">Brand Assets</h2>
         <p className="mt-2 max-w-xl text-sm text-ink/70">
           Approved wordmark and monogram files for editorial use. Please do
           not alter colours, proportions, or the ™ symbol.
@@ -204,7 +204,7 @@ export default function PressPage() {
 
       {/* Contact */}
       <section className="mt-16 border-t border-ink/10 pt-12">
-        <h2 className="font-serif text-2xl text-ink">Press Inquiries</h2>
+        <h2 className="font-serif text-h3 text-ochre">Press Inquiries</h2>
         <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/70">
           For interview requests, high-resolution imagery, or additional
           brand materials, please reach out.

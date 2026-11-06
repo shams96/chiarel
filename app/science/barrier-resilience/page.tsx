@@ -55,7 +55,7 @@ export default function BarrierResiliencePage() {
 
       <section className="mt-12 space-y-10">
         <div className="border-l-2 border-champagne pl-6">
-          <h2 className="font-serif text-2xl">Ceramides</h2>
+          <h2 className="font-serif text-h3 text-ochre">Ceramides</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             Ceramides are lipids found between skin cells. Clarity Day Crème
             carries ceramide NP, AP and EOP, for the look and feel of
@@ -63,7 +63,7 @@ export default function BarrierResiliencePage() {
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
-          <h2 className="font-serif text-2xl">Cholesterol and squalane</h2>
+          <h2 className="font-serif text-h3 text-ochre">Cholesterol and squalane</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             Cholesterol is another of skin&rsquo;s own lipids. Squalane is a
             lightweight, skin-compatible emollient. Together with the
@@ -71,7 +71,7 @@ export default function BarrierResiliencePage() {
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
-          <h2 className="font-serif text-2xl">Niacinamide</h2>
+          <h2 className="font-serif text-h3 text-ochre">Niacinamide</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             Niacinamide is chosen for the look of an even, healthy surface.
             It is in all five products: Clarity Essence, Clarity Day Crème,
@@ -80,7 +80,7 @@ export default function BarrierResiliencePage() {
           </p>
         </div>
         <div className="border-l-2 border-ochre pl-6">
-          <h2 className="font-serif text-2xl">For the neck and chest</h2>
+          <h2 className="font-serif text-h3 text-ochre">For the neck and chest</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             Clarity Neck &amp; Décolleté Crème pairs copper peptide with
             ceramides and squalane, for the look of smoother, more hydrated

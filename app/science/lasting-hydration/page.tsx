@@ -56,7 +56,7 @@ export default function LastingHydrationPage() {
 
       <section className="mt-12 space-y-10">
         <div className="border-l-2 border-champagne pl-6">
-          <h2 className="font-serif text-2xl">The humectant-only gap</h2>
+          <h2 className="font-serif text-h3 text-ochre">The humectant-only gap</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             Humectants draw water to the skin&rsquo;s surface. Without
             something to help hold it there, that water evaporates and skin
@@ -64,7 +64,7 @@ export default function LastingHydrationPage() {
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
-          <h2 className="font-serif text-2xl">Water-binding ingredients</h2>
+          <h2 className="font-serif text-h3 text-ochre">Water-binding ingredients</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             Hyaluronic acid is a well-known water-binding molecule. Clarity
             Essence carries it as sodium hyaluronate, alongside peptides and
@@ -73,7 +73,7 @@ export default function LastingHydrationPage() {
           </p>
         </div>
         <div className="border-l-2 border-ochre pl-6">
-          <h2 className="font-serif text-2xl">Lipids complete the picture</h2>
+          <h2 className="font-serif text-h3 text-ochre">Lipids complete the picture</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             Ceramides, cholesterol and squalane in Clarity Day Crème and
             Clarity Night Crème, and ceramides and squalane in Clarity Neck
@@ -82,7 +82,7 @@ export default function LastingHydrationPage() {
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
-          <h2 className="font-serif text-2xl">What this feels like</h2>
+          <h2 className="font-serif text-h3 text-ochre">What this feels like</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             A cushioned, comfortable finish. See{" "}
             <Link href="/science" className="border-b border-ochre text-ochre">

@@ -1,10 +1,14 @@
 import ResponsiveImage from "@/components/ResponsiveImage";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import Container from "@/components/layout/Container";
+import SectionHeading from "@/components/layout/SectionHeading";
 
 // Two panels under the hero: the face first (four product cards, each a scene
 // photograph), then the neck and décolleté (the festive Neck scene, with the
 // "What It Is Designed For" list). Cosmetic, non-medical language only.
+// Both panels sit inside the shared container so their edges match the header
+// and footer at every width; headings use SectionHeading (type-scale tokens).
 const faceProducts = [
   {
     name: "Clarity Essence™",
@@ -43,100 +47,99 @@ const concerns = [
   "The look of improved suppleness",
 ];
 
-const gutter = "px-[clamp(1.5rem,4.5vw,7rem)]";
-
 export default function HomeFaceBeyond() {
   return (
-    <section className="grid lg:grid-cols-2">
-      <div className={`bg-cloud ${gutter} py-16 text-ink md:py-24`}>
-        <Reveal className="mx-auto max-w-[56rem]">
-          <div className="border-t border-ochre pt-7">
-            <h2 className="font-serif text-[clamp(2rem,1.1rem+2.2vw,3.8rem)] leading-tight text-ochre">
-              The Face, First
-            </h2>
-            <p className="mt-3 font-serif text-[clamp(1.15rem,0.9rem+0.7vw,1.9rem)] italic">
-              We begin where you are most seen.
-            </p>
-            <p className="mt-4 text-[clamp(1rem,0.85rem+0.35vw,1.3rem)] leading-relaxed">
-              Four formulas, each made for one purpose.
-            </p>
+    <section className="bg-cloud">
+      <Container>
+        <div className="grid lg:grid-cols-2">
+          <div className="py-16 text-ink md:py-24 lg:pr-[clamp(2rem,4vw,5rem)]">
+            <Reveal>
+              <SectionHeading
+                subhead="We begin where you are most seen."
+                lead="Four formulas, each made for one purpose."
+              >
+                The Face, First
+              </SectionHeading>
+
+              <ul className="mt-10 grid grid-cols-2 gap-x-[clamp(1rem,2vw,2.5rem)] gap-y-[clamp(1.75rem,3vw,3.5rem)]">
+                {faceProducts.map((p) => (
+                  <li key={p.href}>
+                    <Link href={p.href} className="group block">
+                      <div className="relative aspect-[4/5] overflow-hidden bg-ivory">
+                        <ResponsiveImage
+                          src={p.image}
+                          alt={p.alt}
+                          sizes="(max-width: 1024px) 45vw, 22vw"
+                          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                        />
+                      </div>
+                      <h3 className="mt-4 font-serif text-h4 text-ochre underline decoration-ochre/0 underline-offset-4 transition group-hover:decoration-ochre">
+                        {p.name}
+                      </h3>
+                      <p className="mt-1 text-caption leading-snug">{p.concern}</p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                href="/shop"
+                className="mt-12 inline-block text-eyebrow uppercase tracking-[0.3em] text-ochre underline underline-offset-[6px]"
+              >
+                Shop the face
+              </Link>
+            </Reveal>
           </div>
 
-          <ul className="mt-10 grid grid-cols-2 gap-x-[clamp(1rem,2vw,2.5rem)] gap-y-[clamp(1.75rem,3vw,3.5rem)]">
-            {faceProducts.map((p) => (
-              <li key={p.href}>
-                <Link href={p.href} className="group block">
-                  <div className="relative aspect-[4/5] overflow-hidden bg-ivory">
-                    <ResponsiveImage
-                      src={p.image}
-                      alt={p.alt}
-                      sizes="(max-width: 1024px) 45vw, 22vw"
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                    />
-                  </div>
-                  <h3 className="mt-4 font-serif text-[clamp(1.05rem,0.85rem+0.6vw,1.65rem)] leading-snug text-ochre underline decoration-ochre/0 underline-offset-4 transition group-hover:decoration-ochre">
-                    {p.name}
-                  </h3>
-                  <p className="mt-1 text-[clamp(0.9rem,0.8rem+0.25vw,1.15rem)] leading-snug">{p.concern}</p>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div className="py-16 text-ink md:py-24 lg:border-l lg:border-ink/15 lg:pl-[clamp(2rem,4vw,5rem)]">
+            <Reveal delay={0.1}>
+              <Link href="/shop/clarity-neck-decollete-creme" className="group block">
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-ivory">
+                  <ResponsiveImage
+                    src="/assets/products/clarity-neck-decollete-creme-festive-scene-v2.jpg"
+                    alt="Clarity Neck & Décolleté Crème™ in its green glass bottle, framed by a frosted flower and Red Ochre CHIAREL velvet ribbon"
+                    sizes="(max-width: 1024px) 100vw, 45vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  />
+                </div>
+              </Link>
 
-          <Link
-            href="/shop"
-            className="mt-12 inline-block text-[clamp(12px,0.65rem+0.3vw,15px)] uppercase tracking-[0.3em] text-ochre underline underline-offset-[6px]"
-          >
-            Shop the face
-          </Link>
-        </Reveal>
-      </div>
-
-      <div className={`bg-cloud ${gutter} py-16 text-ink md:py-24 lg:border-l lg:border-ink/15`}>
-        <Reveal delay={0.1} className="mx-auto max-w-[56rem]">
-          <Link href="/shop/clarity-neck-decollete-creme" className="group block">
-            <div className="relative aspect-[4/5] w-full overflow-hidden bg-ivory">
-              <ResponsiveImage
-                src="/assets/products/clarity-neck-decollete-creme-festive-scene-v2.jpg"
-                alt="Clarity Neck & Décolleté Crème™ in its green glass bottle, framed by a frosted flower and Red Ochre CHIAREL velvet ribbon"
-                sizes="(max-width: 1024px) 100vw, 45vw"
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-              />
-            </div>
-          </Link>
-
-          <h2 className="mt-10 font-serif text-[clamp(2rem,1.1rem+2.2vw,3.8rem)] leading-tight">
-            Beyond the Face
-          </h2>
-          <p className="mt-3 font-serif text-[clamp(1.15rem,0.9rem+0.7vw,1.9rem)] italic">
-            The neck and décolleté are the skin most routines forget.
-          </p>
-          <p className="mt-4 text-[clamp(1rem,0.85rem+0.35vw,1.3rem)] leading-relaxed">
-            Clarity Neck &amp; Décolleté Crème™ gives the skin below the jaw the
-            same discipline as the face, for crepey-looking skin on the neck
-            and chest. One ritual, one standard, from the cheekbone to the
-            collarbone.
-          </p>
-
-          <h3 className="mt-10 font-serif text-[clamp(1.25rem,1rem+0.7vw,2rem)]">What It Is Designed For</h3>
-          <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-            {concerns.map((concern) => (
-              <li
-                key={concern}
-                className="border border-ink/20 px-5 py-4 font-serif text-[clamp(1rem,0.85rem+0.35vw,1.3rem)] leading-snug"
+              <SectionHeading
+                className="mt-10"
+                subhead="The neck and décolleté are the skin most routines forget."
+                lead={
+                  <>
+                    Clarity Neck &amp; Décolleté Crème™ gives the skin below the jaw the
+                    same discipline as the face, for crepey-looking skin on the neck
+                    and chest. One ritual, one standard, from the cheekbone to the
+                    collarbone.
+                  </>
+                }
               >
-                {concern}
-              </li>
-            ))}
-          </ul>
-          <Link
-            href="/shop/clarity-neck-decollete-creme"
-            className="btn-press mt-10 inline-block bg-garden px-[clamp(2rem,3vw,3.25rem)] py-[clamp(0.9rem,1.1vw,1.3rem)] text-[clamp(12px,0.6rem+0.3vw,14px)] uppercase tracking-[0.3em] text-ivory"
-          >
-            Shop Clarity Neck &amp; Décolleté Crème™
-          </Link>
-        </Reveal>
-      </div>
+                Beyond the Face
+              </SectionHeading>
+
+              <h3 className="mt-10 font-serif text-h4">What It Is Designed For</h3>
+              <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+                {concerns.map((concern) => (
+                  <li
+                    key={concern}
+                    className="border border-ink/20 px-5 py-4 font-serif text-body leading-snug"
+                  >
+                    {concern}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/shop/clarity-neck-decollete-creme"
+                className="btn-press mt-10 inline-block bg-garden px-[clamp(2rem,3vw,3.25rem)] py-[clamp(0.9rem,1.1vw,1.3rem)] text-eyebrow uppercase tracking-[0.3em] text-ivory"
+              >
+                Shop Clarity Neck &amp; Décolleté Crème™
+              </Link>
+            </Reveal>
+          </div>
+        </div>
+      </Container>
     </section>
   );
 }

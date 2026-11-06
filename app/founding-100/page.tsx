@@ -99,7 +99,7 @@ export default async function Founding100Page() {
       <div className="mx-auto w-full max-w-3xl px-margin py-16">
       <section className="space-y-10">
         <div className="border-l-2 border-ochre pl-6">
-          <h2 className="font-serif text-2xl">How it works</h2>
+          <h2 className="font-serif text-h3 text-ochre">How it works</h2>
           <ol className="mt-3 max-w-xl space-y-3 text-sm leading-relaxed text-ink/80">
             <li>
               <strong className="text-ink">1. Join.</strong> Choose your ritual
@@ -125,7 +125,7 @@ export default async function Founding100Page() {
         </div>
 
         <div className="border-l-2 border-ink/20 pl-6">
-          <h2 className="font-serif text-2xl">Terms</h2>
+          <h2 className="font-serif text-h3 text-ochre">Terms</h2>
           <ul className="mt-3 max-w-xl list-disc space-y-2 pl-5 text-[13px] leading-relaxed text-ink/70">
             <li>
               <strong className="text-ink/80">Founding Members.</strong> Limited

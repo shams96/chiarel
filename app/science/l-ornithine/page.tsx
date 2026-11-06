@@ -54,7 +54,7 @@ export default function LOrnithinePage() {
 
       <section className="mt-12 space-y-10">
         <div className="border-l-2 border-champagne pl-6">
-          <h2 className="font-serif text-2xl">What it is</h2>
+          <h2 className="font-serif text-h3 text-ochre">What it is</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             An amino acid and component of the skin&rsquo;s Natural
             Moisturising Factor (NMF) — the mix of small molecules the
@@ -62,21 +62,21 @@ export default function LOrnithinePage() {
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
-          <h2 className="font-serif text-2xl">How it works</h2>
+          <h2 className="font-serif text-h3 text-ochre">How it works</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             Used in Clarity Night Crème for the look and feel of soft,
             hydrated skin.
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
-          <h2 className="font-serif text-2xl">Associated outcomes</h2>
+          <h2 className="font-serif text-h3 text-ochre">Associated outcomes</h2>
           <ul className="mt-2 max-w-xl list-disc space-y-1 pl-5 text-sm leading-relaxed text-ink/70">
             <li>Hydration feel and softness</li>
             <li>The look of smoother texture</li>
           </ul>
         </div>
         <div className="border-l-2 border-ochre pl-6">
-          <h2 className="font-serif text-2xl">How CHIAREL formulates with it</h2>
+          <h2 className="font-serif text-h3 text-ochre">How CHIAREL formulates with it</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             Found in Clarity Night Crème only, alongside bakuchiol, peptides and
             niacinamide, for the look of smoother texture overnight. See{" "}

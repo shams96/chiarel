@@ -12,7 +12,7 @@ export default function HomeJournal() {
       <Grid className="gap-y-10">
         <div className="col-span-4 md:col-span-3 lg:col-span-3">
           <Eyebrow className="text-ochre">Journal</Eyebrow>
-          <Heading level="h3" as="h2" id="journal-heading" className="mt-4">
+          <Heading level="h2" id="journal-heading" className="mt-4 text-ochre">
             Notes from the House
           </Heading>
           <Link

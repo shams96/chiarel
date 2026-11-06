@@ -462,7 +462,7 @@ function IncludedSpatula() {
           />
         </div>
         <div>
-          <h3 className="font-serif text-2xl">The CHIAREL Spatula</h3>
+          <h3 className="font-serif text-h4 text-ochre">The CHIAREL Spatula</h3>
           <p className="mt-2 text-sm leading-relaxed text-ink/70">
             A Champagne Gold spatula for a hygienic, precise application —
             the ritual&rsquo;s closing gesture, done properly.
@@ -531,7 +531,7 @@ function N1WhatItsForAndFeel() {
     <Reveal className="border-t border-ink/10 bg-ivory py-16">
       <div className="mx-auto grid max-w-3xl gap-10 px-6 sm:grid-cols-2">
         <div>
-          <h2 className="font-serif text-2xl">What it&rsquo;s for</h2>
+          <h2 className="font-serif text-h3 text-ochre">What it&rsquo;s for</h2>
           <ul className="mt-4 space-y-2 text-sm leading-relaxed text-ink/80">
             <li>· The visible appearance of dryness</li>
             <li>· Crepey-looking texture</li>
@@ -540,7 +540,7 @@ function N1WhatItsForAndFeel() {
           </ul>
         </div>
         <div>
-          <h2 className="font-serif text-2xl">What it feels like</h2>
+          <h2 className="font-serif text-h3 text-ochre">What it feels like</h2>
           <ul className="mt-4 space-y-2 text-sm leading-relaxed text-ink/80">
             <li>· Finished with a delicate CHIAREL accord</li>
             <li>· Cushioning</li>
@@ -666,7 +666,7 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
 
   return (
     <div className="mx-auto mt-4 max-w-2xl border-t border-ink/10 px-6 pb-20 pt-14">
-      <h2 className="text-center font-serif text-2xl">Routine Position</h2>
+      <h2 className="text-center font-serif text-h3 text-ochre">Routine Position</h2>
       <div className="mt-8 space-y-6">
         {inAM && <RouteStrip label="Morning" route={LAUNCH_AM_ROUTE} />}
         {inPM && <RouteStrip label="Evening" route={LAUNCH_PM_ROUTE} />}
@@ -773,7 +773,7 @@ function UsageGuidance() {
   return (
     <div className="border-t border-ink/10 bg-cloud/30 py-16">
       <div className="mx-auto max-w-3xl px-6">
-        <h2 className="text-center font-serif text-2xl">
+        <h2 className="text-center font-serif text-h3 text-ochre">
           Introducing a New Product to Your Routine
         </h2>
         <div className="mt-10 divide-y divide-ink/10 border-y border-ink/10">

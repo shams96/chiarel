@@ -21,7 +21,7 @@ export default function PrivacyPage() {
 
       <div className="mt-10 space-y-10 text-sm leading-relaxed text-ink/80">
         <section>
-          <h2 className="font-serif text-xl text-ink">Information we collect</h2>
+          <h2 className="font-serif text-h4 text-ink">Information we collect</h2>
           <p className="mt-3">
             When you place an order, we collect your name, email address,
             shipping address, and order contents in order to fulfill it. When
@@ -38,7 +38,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-xl text-ink">Cookies</h2>
+          <h2 className="font-serif text-h4 text-ink">Cookies</h2>
           <p className="mt-3">
             {SITE_NAME} uses a single first-party cookie to remember the
             contents of your shopping cart between visits. It is functional,
@@ -61,7 +61,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-xl text-ink">How we use your information</h2>
+          <h2 className="font-serif text-h4 text-ink">How we use your information</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5">
             <li>To process and fulfill your order and manage subscriptions.</li>
             <li>To send order confirmations, receipts, and shipping updates.</li>
@@ -71,7 +71,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-xl text-ink">Third parties we work with</h2>
+          <h2 className="font-serif text-h4 text-ink">Third parties we work with</h2>
           <p className="mt-3">
             Payments are processed by Stripe, Inc., which receives and
             secures your card details directly — we never see or store full
@@ -82,7 +82,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-xl text-ink">Your rights</h2>
+          <h2 className="font-serif text-h4 text-ink">Your rights</h2>
           <p className="mt-3">
             You may request a copy of the personal information we hold about
             you, ask us to correct it, or ask us to delete it, subject to
@@ -99,7 +99,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-xl text-ink">
+          <h2 className="font-serif text-h4 text-ink">
             EU/UK Data Subject Rights (GDPR)
           </h2>
           <p className="mt-3">
@@ -133,7 +133,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-xl text-ink">Children&rsquo;s privacy</h2>
+          <h2 className="font-serif text-h4 text-ink">Children&rsquo;s privacy</h2>
           <p className="mt-3">
             {SITE_NAME} is not directed at children, and we do not knowingly
             collect information from anyone under 16.
@@ -141,7 +141,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-xl text-ink">Changes to this policy</h2>
+          <h2 className="font-serif text-h4 text-ink">Changes to this policy</h2>
           <p className="mt-3">
             If this policy changes, we will update the effective date above
             and, for material changes, note it on this page.
@@ -149,7 +149,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-xl text-ink">Contact</h2>
+          <h2 className="font-serif text-h4 text-ink">Contact</h2>
           <p className="mt-3">
             Questions about this policy can be sent to{" "}
             <a

@@ -58,27 +58,27 @@ export default function BifidaPage() {
 
       <section className="mt-12 space-y-10">
         <div className="border-l-2 border-champagne pl-6">
-          <h2 className="font-serif text-2xl">What it is</h2>
+          <h2 className="font-serif text-h3 text-ochre">What it is</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             A postbiotic lysate derived from fermented Bifidobacterium.
             Widely used across cosmetic formulation.
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
-          <h2 className="font-serif text-2xl">How it works</h2>
+          <h2 className="font-serif text-h3 text-ochre">How it works</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             Used here for the look and feel of a comfortable surface.
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
-          <h2 className="font-serif text-2xl">Associated outcomes</h2>
+          <h2 className="font-serif text-h3 text-ochre">Associated outcomes</h2>
           <ul className="mt-2 max-w-xl list-disc space-y-1 pl-5 text-sm leading-relaxed text-ink/70">
             <li>Skin that feels comfortable and balanced</li>
             <li>The look of a healthy, even surface</li>
           </ul>
         </div>
         <div className="border-l-2 border-ochre pl-6">
-          <h2 className="font-serif text-2xl">How CHIAREL formulates with it</h2>
+          <h2 className="font-serif text-h3 text-ochre">How CHIAREL formulates with it</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             Found in four products: Clarity Essence, Clarity Day Crème,
             Clarity Neck &amp; Décolleté Crème and Clarity Eye Contour
