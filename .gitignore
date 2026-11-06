@@ -48,3 +48,8 @@ next-env.d.ts
 # Stray large archive, not a project artifact
 .claude.zip
 /scripts/.scratch/
+
+# Google OAuth client secrets (the JSON Google Cloud lets you download). This repo is
+# public: these must never be committed. Keep them outside the repo or in .env.local.
+client_secret*.json
+*.apps.googleusercontent.com.json
