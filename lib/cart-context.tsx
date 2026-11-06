@@ -146,6 +146,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const remove: CartContextValue["remove"] = async (slug) => {
     const line = data.lines.find((l) => l.slug === slug);
     if (!line) return;
+    track("remove_from_cart", {
+      currency: "USD",
+      value: line.unitPrice * line.qty,
+      items: [{ item_id: line.slug, item_name: line.product.name, price: line.unitPrice, quantity: line.qty }],
+    });
     setData((prev) => removeLine(prev, line.id) ?? prev);
     await runner.run(() => fetch(`/api/cart/${line.id}`, { method: "DELETE" }));
   };
