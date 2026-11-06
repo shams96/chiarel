@@ -33,6 +33,30 @@ const checks = [
       }
     },
   ],
+  [
+    // The site shows prices from data/products.json but charges the database's
+    // (/api/products reads the database for price). If they ever differ, a
+    // customer pays something other than what they saw. (Plan, Phase A.)
+    "GET /api/products prices equal data/products.json prices",
+    async () => {
+      const { readFileSync } = await import("node:fs");
+      const catalog = JSON.parse(readFileSync(new URL("../data/products.json", import.meta.url), "utf8"));
+      const { res, text } = await call("GET", "/api/products");
+      expectStatus(res, 200);
+      const served = JSON.parse(text);
+      const mismatches = [];
+      for (const p of served) {
+        const c = catalog.find((x) => x.slug === p.slug);
+        if (!c) { mismatches.push(`${p.slug}: served but not in the catalog`); continue; }
+        if (c.price.subscription !== p.price.subscription || c.price.oneTime !== p.price.oneTime) {
+          mismatches.push(
+            `${p.slug}: database ${p.price.subscription}/${p.price.oneTime} vs catalog ${c.price.subscription}/${c.price.oneTime} (subscription/one-time)`,
+          );
+        }
+      }
+      if (mismatches.length > 0) throw new Error("price drift: " + mismatches.join("; "));
+    },
+  ],
   ["GET /api/cart -> 200", async () => expectStatus((await call("GET", "/api/cart")).res, 200)],
   ["GET / -> 200", async () => expectStatus((await call("GET", "/")).res, 200)],
   ["GET /shop -> 200", async () => expectStatus((await call("GET", "/shop")).res, 200)],

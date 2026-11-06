@@ -6,7 +6,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useCart } from "@/lib/cart-context";
 import { PURCHASE_CTA_ID } from "@/components/PurchaseOptions";
 import { useSelectedTier } from "@/lib/pdp-plan";
-import { tierToMode } from "@/lib/plan-labels";
+import { addCtaLabel, tierToMode } from "@/lib/plan-labels";
 import { purchaseOptionSummary } from "@/lib/pricing";
 
 export default function StickyPurchaseBar({
@@ -81,7 +81,7 @@ export default function StickyPurchaseBar({
               onClick={() => add(slug, tierToMode(tier))}
               className="btn-press min-h-[44px] whitespace-nowrap bg-ink px-6 text-[12px] uppercase tracking-[0.2em] text-ivory transition hover:bg-ochre"
             >
-              Add to Bag
+              {addCtaLabel(tier)}
             </button>
           </div>
         </motion.div>

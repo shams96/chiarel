@@ -10,7 +10,7 @@ import { ritualProducts } from "@/lib/products";
 import { shippingFor, shippingNote } from "@/lib/shipping";
 import { pickUpsell } from "@/lib/cart-math";
 import { computeUnitPrice } from "@/lib/pricing";
-import { PLAN_DETAIL } from "@/lib/plan-labels";
+import { CTA, PLAN_DETAIL } from "@/lib/plan-labels";
 import PlanSelect from "@/components/PlanSelect";
 
 export default function CartDrawer() {
@@ -225,7 +225,7 @@ export default function CartDrawer() {
                 onClick={close}
                 className="btn-press block w-full bg-ink py-4 text-center text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre"
               >
-                Checkout — ${estimatedTotal}
+                {CTA.bag} — ${estimatedTotal}
               </Link>
             </div>
           </>

@@ -18,8 +18,9 @@ import {
   SectionTitle,
   statusTone,
 } from "@/components/admin/ui";
+import { orderTaxText, orderTotalLabel, orderTotalText } from "@/lib/order-total";
 
-type Item = { id: string; productName: string; mode: string; qty: number; unitPrice: number };
+type Item ={ id: string; productName: string; mode: string; qty: number; unitPrice: number };
 type Order = {
   id: string;
   createdAt: string;
@@ -35,6 +36,8 @@ type Order = {
   savings: number;
   shipping: number;
   total: number;
+  amountPaidCents?: number | null;
+  taxCents?: number | null;
   status: string;
   fulfilmentStatus: string;
   trackingCarrier?: string | null;
@@ -200,9 +203,17 @@ export default function AdminOrderPage() {
                 <dt>Shipping</dt>
                 <dd className="tabular-nums">${order.shipping}</dd>
               </div>
+              {orderTaxText({ taxCents: order.taxCents ?? null }) && (
+                <div className="flex justify-between">
+                  <dt>Tax</dt>
+                  <dd className="tabular-nums">{orderTaxText({ taxCents: order.taxCents ?? null })}</dd>
+                </div>
+              )}
               <div className="flex justify-between pt-2 font-serif text-[1.4rem] text-garden">
-                <dt>Total</dt>
-                <dd className="tabular-nums">${order.total}</dd>
+                <dt>{orderTotalLabel({ amountPaidCents: order.amountPaidCents ?? null, taxCents: order.taxCents ?? null })}</dt>
+                <dd className="tabular-nums">
+                  {orderTotalText({ total: order.total, amountPaidCents: order.amountPaidCents ?? null, taxCents: order.taxCents ?? null })}
+                </dd>
               </div>
             </dl>
             {order.bonusSample && (

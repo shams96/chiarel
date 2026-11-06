@@ -9,6 +9,7 @@ import { productHref } from "@/lib/products";
 import { shippingFor } from "@/lib/shipping";
 import { track } from "@/lib/analytics";
 import PlanSelect from "@/components/PlanSelect";
+import { CTA } from "@/lib/plan-labels";
 
 // The bag as its own page: one row per product with a plan selector, and a
 // summary panel beside it. Same numbers as the drawer and /checkout (shared
@@ -143,7 +144,12 @@ export default function CartPageContent() {
         </div>
       ) : (
         <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_360px] lg:gap-12">
-          <section aria-label="Items in your bag">
+          {/* Below lg the summary and the Checkout button come first (order-1), so
+              they are on the first screen instead of after every item; the
+              guidance blocks follow the items (order-3). DOM order is items,
+              summary, guidance, which is the right keyboard order on desktop
+              where the two columns sit side by side. */}
+          <section aria-label="Items in your bag" className="order-2 lg:order-none">
             {/* Column heads on desktop only; on phones each row labels itself. */}
             <div className="hidden grid-cols-[1fr_230px_120px_72px] gap-6 border-b border-ink/15 pb-3 text-eyebrow uppercase text-ink/70 lg:grid">
               <span>Product</span>
@@ -207,14 +213,14 @@ export default function CartPageContent() {
 
           <aside
             ref={summaryRef}
-            className="h-fit bg-cloud/40 p-6 lg:sticky lg:top-28"
+            className="order-1 h-fit bg-cloud/40 p-6 lg:order-none lg:sticky lg:top-28"
             aria-label="Order summary"
           >
             <Link
               href="/checkout"
               className="btn-press block w-full bg-ink py-4 text-center text-eyebrow uppercase text-ivory transition hover:bg-ochre"
             >
-              Checkout — ${total}
+              {CTA.bag} — ${total}
             </Link>
             <p className="mt-3 text-center text-[12px] text-ink/70">
               Secure payment, processed by Stripe.
@@ -245,30 +251,15 @@ export default function CartPageContent() {
               Taxes are calculated at payment.
             </p>
 
-            <div className="mt-6">
-              <h2 className="sr-only">Additional information</h2>
-              <InfoItem title="Shipping & handling">
-                Made to order in Isola del Liri, Italy. Allow standard processing time before
-                dispatch; shipping options and timing are shown at checkout. Shipping is
-                complimentary on every order.
-              </InfoItem>
-              <InfoItem title="Payment & sales tax">
-                You enter your card details on the next screen, securely processed by Stripe. Sales
-                tax, where it applies, is calculated at payment.
-              </InfoItem>
-              <InfoItem title="Returns">
-                90-Day Guarantee on your first order: if you are not satisfied, we refund the product
-                price in full. No need to return the product; shipping is non-refundable.{" "}
-                <Link
-                  href="/terms#guarantee"
-                  className="tap-area underline decoration-ink/30 hover:text-ochre"
-                >
-                  Read the terms
-                </Link>
-                .
-              </InfoItem>
+            {/* On desktop the guidance sits under the summary; on phones it is
+                rendered after the items instead (below), so only one is shown. */}
+            <div className="mt-6 hidden lg:block">
+              <BagGuidance />
             </div>
           </aside>
+          <div className="order-3 lg:hidden">
+            <BagGuidance />
+          </div>
         </div>
       )}
 
@@ -286,11 +277,39 @@ export default function CartPageContent() {
               href="/checkout"
               className="btn-press flex min-h-[44px] items-center whitespace-nowrap bg-ink px-8 text-eyebrow uppercase text-ivory transition hover:bg-ochre"
             >
-              Checkout
+              {CTA.bag}
             </Link>
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+// Shipping, payment and returns guidance. Rendered once on desktop (inside the
+// summary) and once on phones (after the items); `hidden` removes the other copy
+// from the accessibility tree, so a screen reader meets it once.
+function BagGuidance() {
+  return (
+    <div>
+      <h2 className="sr-only">Additional information</h2>
+      <InfoItem title="Shipping & handling">
+        Made to order in Isola del Liri, Italy. Allow standard processing time before dispatch;
+        shipping options and timing are shown at checkout. Shipping is complimentary on every
+        order.
+      </InfoItem>
+      <InfoItem title="Payment & sales tax">
+        You enter your card details on the next screen, securely processed by Stripe. Sales tax,
+        where it applies, is calculated at payment.
+      </InfoItem>
+      <InfoItem title="Returns">
+        90-Day Guarantee on your first order: if you are not satisfied, we refund the product price
+        in full. No need to return the product; shipping is non-refundable.{" "}
+        <Link href="/terms#guarantee" className="tap-area underline decoration-ink/30 hover:text-ochre">
+          Read the terms
+        </Link>
+        .
+      </InfoItem>
     </div>
   );
 }

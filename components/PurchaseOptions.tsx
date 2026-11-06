@@ -7,7 +7,7 @@ import { useCart } from "@/lib/cart-context";
 import { purchaseOptionSummary, perDayPrice } from "@/lib/pricing";
 import { track } from "@/lib/analytics";
 import { setSelectedTier, useSelectedTier } from "@/lib/pdp-plan";
-import { tierToMode, type Tier } from "@/lib/plan-labels";
+import { addCtaLabel, tierToMode, type Tier } from "@/lib/plan-labels";
 
 /** Id the sticky bar watches: it appears only once this button has scrolled out of view. */
 export const PURCHASE_CTA_ID = "purchase-cta";
@@ -193,7 +193,7 @@ export default function PurchaseOptions({
         onClick={() => add(slug, tierToMode(tier))}
         className="btn-press mt-3 w-full bg-ink py-4 text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre"
       >
-        {tier === "oneTime" ? "Add to Bag" : "Begin the Ritual"}
+        {addCtaLabel(tier)}
       </button>
 
       {/* Delivery and returns at the point of purchase. Every statement here

@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { ORDERS_EMAIL } from "@/lib/seo";
 import { productHref } from "@/lib/products";
+import { orderTotalLabel, orderTotalText } from "@/lib/order-total";
 import { CUSTOMER_COOKIE, resolveCustomerSession } from "@/lib/customer-session";
 import SignOutButton from "@/components/account/SignOutButton";
 import SessionKeepAlive from "@/components/account/SessionKeepAlive";
@@ -96,7 +97,10 @@ export default async function AccountPage() {
                   Order <span className="text-ink">#{o.id.slice(-8).toUpperCase()}</span>
                   <span className="text-ink/70"> · {dateFormat.format(o.createdAt)}</span>
                 </p>
-                <p className="text-sm">${o.total}</p>
+                <p className="text-sm">
+                  {orderTotalText(o)}
+                  {orderTotalLabel(o) !== "Total" && <span className="text-ink/70"> incl. tax</span>}
+                </p>
               </div>
               <p className="mt-2 text-[13px] text-ink/80">
                 {FULFILMENT[o.fulfilmentStatus] ?? o.fulfilmentStatus}

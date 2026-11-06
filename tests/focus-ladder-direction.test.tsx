@@ -221,7 +221,7 @@ describe("Gallery rail (image treatment D)", () => {
 describe("Primary buttons meet the 44px tap-target contract (found by the page matrix)", () => {
   it.each([
     ["app/shop/page.tsx", "Discover the Crème"],
-    ["components/StickyPurchaseBar.tsx", "Add to Bag"],
+    ["components/StickyPurchaseBar.tsx", "addCtaLabel(tier)"],
     ["app/build-your-ritual/page.tsx", "Add to Bag"],
     ["components/home/HomeClosing.tsx", "Begin the Ritual"],
   ])("%s: the %s control is at least 44px tall", (file, label) => {

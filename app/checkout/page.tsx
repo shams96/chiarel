@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { track } from "@/lib/analytics";
 import { shippingFor } from "@/lib/shipping";
-import { PLAN_NAME } from "@/lib/plan-labels";
+import { CTA, PLAN_NAME } from "@/lib/plan-labels";
 import { regionsFor } from "@/lib/regions";
 import {
   firstErrorField,
@@ -246,7 +246,7 @@ export default function CheckoutPage() {
   return (
     <div className="mx-auto w-full max-w-container px-margin py-8 md:py-12">
       <Steps />
-      <h1 className="font-serif text-3xl">Complete your order</h1>
+      <h1 className="font-serif text-3xl">{CTA.pay}</h1>
 
       <div className="mt-8 grid gap-8 lg:mt-10 lg:grid-cols-[1fr_400px] lg:gap-14">
         {/* Left: form. Payment is taken on Stripe's hosted Checkout page. */}
@@ -409,7 +409,7 @@ export default function CheckoutPage() {
               disabled={submitting}
               className="btn-press mt-2 min-h-[44px] w-full bg-ink py-4 text-eyebrow uppercase text-ivory transition hover:bg-ochre disabled:cursor-wait disabled:opacity-60"
             >
-              {submitting ? "Continuing to payment…" : `Continue to Payment — $${total}`}
+              {submitting ? "Continuing to payment…" : `${CTA.pay} — $${total}`}
             </button>
             <p className="text-center text-[12px] text-ink/70">
               You&rsquo;ll enter your card details securely on the next
