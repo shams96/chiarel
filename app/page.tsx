@@ -15,7 +15,7 @@ import HomeFormulator from "@/components/home/HomeFormulator";
 import HomeProof from "@/components/home/HomeProof";
 import HomeFormulationRecord from "@/components/home/HomeFormulationRecord";
 import HomeFaq from "@/components/home/HomeFaq";
-import { HomeFinalCta, HomePhilosophy } from "@/components/home/HomeClosing";
+import { HomePhilosophy } from "@/components/home/HomeClosing";
 import {
   faqJsonLd,
   offerCatalogJsonLd,
@@ -188,11 +188,11 @@ export default function Home() {
       <HomePhilosophy />
       <HomeJournal />
       <HomeFaq faqs={faqs} />
-      {/* The authorship line closes HomeFinalCta (components/home/HomeClosing.tsx), so
-          nothing sits between that section and the footer. The signup wrapper is only
-          rendered when the signup is on: EmailSignup returns null otherwise, and an
-          empty wrapper left a 40px blank gap above the footer. */}
-      <HomeFinalCta />
+      {/* No closing product block: the hero already carries "Begin the Ritual" and the
+          Essence price, and the order flow runs /ritual -> /shop -> product -> bag. The
+          authorship line closes HomeFaq, so nothing sits alone above the footer. The
+          signup wrapper is only rendered when the signup is on: EmailSignup returns
+          null otherwise, and an empty wrapper left a 40px blank gap above the footer. */}
       {process.env.NEXT_PUBLIC_EMAIL_SIGNUP === "on" && (
         <div className="mx-auto max-w-xl px-6 pb-10">
           <EmailSignup source="home" />
