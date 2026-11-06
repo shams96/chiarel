@@ -1,13 +1,13 @@
 "use client";
 
 import { radioTargetIndex } from "@/lib/radio-nav";
-import { useState, type KeyboardEvent } from "react";
+import { type KeyboardEvent } from "react";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { purchaseOptionSummary, perDayPrice } from "@/lib/pricing";
 import { track } from "@/lib/analytics";
-
-type Tier = "ninetyDay" | "single" | "oneTime";
+import { setSelectedTier, useSelectedTier } from "@/lib/pdp-plan";
+import { tierToMode, type Tier } from "@/lib/plan-labels";
 
 /** Id the sticky bar watches: it appears only once this button has scrolled out of view. */
 export const PURCHASE_CTA_ID = "purchase-cta";
@@ -31,10 +31,11 @@ export default function PurchaseOptions({
   subscription: number;
   oneTime: number;
 }) {
-  const [tier, setTier] = useState<Tier>("ninetyDay");
+  // Shared with the sticky purchase bar (lib/pdp-plan.ts), so both add the plan shown here.
+  const tier = useSelectedTier(slug);
   const chooseTier = (next: Tier) => {
     if (next !== tier) track("subscribe_toggle", { item_id: slug, plan: next });
-    setTier(next);
+    setSelectedTier(slug, next);
   };
   const { add } = useCart();
 
@@ -189,7 +190,7 @@ export default function PurchaseOptions({
       <button
         id={PURCHASE_CTA_ID}
         type="button"
-        onClick={() => add(slug, tier === "single" ? "subscription" : tier)}
+        onClick={() => add(slug, tierToMode(tier))}
         className="btn-press mt-3 w-full bg-ink py-4 text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre"
       >
         {tier === "oneTime" ? "Add to Bag" : "Begin the Ritual"}

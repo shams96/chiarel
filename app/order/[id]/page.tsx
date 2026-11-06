@@ -5,16 +5,13 @@ import { db } from "@/lib/db";
 import { stripe } from "@/lib/stripe";
 import { getOrCreateCart } from "@/lib/cart-server";
 import { settleCheckoutSession } from "@/lib/order-payment";
+import { PLAN_NAME } from "@/lib/plan-labels";
 import TrackPurchase from "@/components/TrackPurchase";
 import { cookies } from "next/headers";
 import SaveRitual from "@/components/account/SaveRitual";
 import { CUSTOMER_COOKIE, resolveCustomerSession } from "@/lib/customer-session";
 
-const modeLabel: Record<string, string> = {
-  ninetyDay: "90-day plan",
-  subscription: "Subscription",
-  oneTime: "One-time",
-};
+const modeLabel: Record<string, string> = PLAN_NAME;
 
 export default async function OrderConfirmationPage({
   params,

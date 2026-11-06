@@ -6,14 +6,11 @@ import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { track } from "@/lib/analytics";
 import { shippingFor } from "@/lib/shipping";
+import { PLAN_NAME } from "@/lib/plan-labels";
 import RefundPolicyContent, { REFUND_POLICY_VERSION } from "@/components/RefundPolicyContent";
 import { ENABLED_COUNTRIES, getCountry, approxConverted, type CountryCode } from "@/lib/countries";
 
-const modeLabel: Record<string, string> = {
-  ninetyDay: "90-day plan",
-  subscription: "Subscription",
-  oneTime: "One-time",
-};
+const modeLabel = PLAN_NAME;
 
 const INPUT = "mt-1.5 w-full border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-ochre";
 
