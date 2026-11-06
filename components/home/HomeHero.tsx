@@ -10,6 +10,15 @@ import { getProductOrThrow, isPurchasable } from "@/lib/products";
 // primary action, the price line and the approved supporting copy. The Clarity
 // Essence scene is the large plate at the right: the jar on a mirror, in a
 // hard-edged frame on a deep Red Ochre block. Cloud ground, 12-column grid.
+//
+// Problem first: one line under the mission names what the skin is living with,
+// in wording already on the House and Science pages ("the daily load", screens,
+// dry indoor air, too little sleep). It names conditions, never an outcome.
+// The mission line stays the h1 (Decision 037). Spec and plan:
+// claudedocs/specs/luxury-experience/.
+export const HERO_PROBLEM_LINE =
+  "For skin under the daily load of screens, dry indoor air and too little sleep.";
+
 export default function HomeHero() {
   const essence = getProductOrThrow("chiarel-essence");
 
@@ -23,13 +32,16 @@ export default function HomeHero() {
           </p>
         </Grid>
 
-        <Grid className="mt-8 gap-y-12 md:mt-12">
+        <Grid className="mt-8 gap-y-8 md:mt-12 lg:gap-y-12">
           <div className="hero-in col-span-4 md:col-span-8 lg:col-span-6">
             <h1 className="poster font-serif">
               <span className="poster-a">Advancing</span>{" "}
               <span className="poster-b">Cellular</span>{" "}
               <span className="poster-c">Clarity<span className="poster-tm">™</span>.</span>
             </h1>
+            <p className="mt-6 max-w-measure text-lead text-ink/80 md:mt-8">
+              {HERO_PROBLEM_LINE}
+            </p>
             <div className="mt-8 md:mt-10">
               <Link
                 href="/ritual"
@@ -61,9 +73,12 @@ export default function HomeHero() {
             </p>
           </div>
 
-          <div className="relative col-span-4 md:col-span-6 lg:col-span-6 lg:col-start-7">
+          {/* Below the lg breakpoint the photograph leads, so the product world is
+              the first thing seen on a phone; at lg the two columns sit side by
+              side and the order is unchanged. DOM order stays text first. */}
+          <div className="relative order-first col-span-4 md:col-span-6 lg:order-none lg:col-span-6 lg:col-start-7">
             <div
-              className="relative aspect-[4/5] w-full bg-ochre lg:aspect-[100/115]"
+              className="relative aspect-[5/4] w-full bg-ochre lg:aspect-[100/115]"
               style={{ backgroundImage: "linear-gradient(155deg, rgb(255 255 255 / 0.06) 0%, rgb(50 49 45 / 0.34) 100%)" }}
             >
               <div className="absolute -bottom-4 -right-4 left-4 top-4 border border-ink md:-bottom-6 md:-right-6 md:left-6 md:top-6 lg:-bottom-8 lg:-right-8 lg:left-12 lg:top-12">
