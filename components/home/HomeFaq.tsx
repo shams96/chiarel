@@ -1,4 +1,5 @@
 import Reveal from "@/components/Reveal";
+import { FORMULATOR_EXTERNAL_URL, HOMEPAGE_LAST_UPDATED_DISPLAY, HOMEPAGE_PUBLISHED_DISPLAY } from "@/lib/seo";
 
 // Visible FAQ — must stay in sync with the FAQPage JSON-LD built from the
 // same `faqs` array in app/page.tsx. Two columns on wide screens: the heading
@@ -27,6 +28,24 @@ export default function HomeFaq({ faqs }: { faqs: { question: string; answer: st
             </Reveal>
           ))}
         </div>
+      </div>
+      {/* The page's authorship line (who wrote it, when published and reviewed).
+          It closes the last content section so nothing sits alone above the footer.
+          Wording, link and dates are owned by lib/seo.ts. */}
+      <div className="mx-auto mt-14 max-w-[84rem] px-[clamp(1.5rem,3vw,3rem)] md:mt-20">
+        <p className="max-w-[44rem] border-t border-hairline pt-5 text-[12px] leading-relaxed text-ink/70">
+          Written by{" "}
+          <a
+            href={FORMULATOR_EXTERNAL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="border-b border-ink/30 hover:border-ochre hover:text-ochre"
+          >
+            Grazia Savoriti
+          </a>
+          , CHIAREL&rsquo;s formulating pharmacist. Published {HOMEPAGE_PUBLISHED_DISPLAY}, last
+          reviewed {HOMEPAGE_LAST_UPDATED_DISPLAY}.
+        </p>
       </div>
     </section>
   );
