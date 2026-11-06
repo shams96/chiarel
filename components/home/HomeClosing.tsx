@@ -6,6 +6,7 @@ import Grid from "@/components/layout/Grid";
 import Eyebrow from "@/components/layout/Eyebrow";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { getProductOrThrow, productImageAlt, productHref, studioImage } from "@/lib/products";
+import { FORMULATOR_EXTERNAL_URL, HOMEPAGE_LAST_UPDATED_DISPLAY, HOMEPAGE_PUBLISHED_DISPLAY } from "@/lib/seo";
 
 // Final CTA: begin the ritual with the Essence and the Day Crème, the two morning
 // steps. Slot for an email-signup component: add it directly after this section
@@ -70,8 +71,35 @@ export function HomeFinalCta() {
           </p>
         </Reveal>
       </div>
+      <HomeByline />
     </section>
     </>
+  );
+}
+
+// The page's authorship line (who wrote it, when it was published and last
+// reviewed). It used to be a bare centred <p> after the last section, outside
+// every container, so on wide screens it hung alone above the footer. It now
+// closes the final section: same container as the content above, left-aligned,
+// a hairline above, so it reads as the page's credit and not as a stray line.
+// The wording, the link and both dates are unchanged (lib/seo.ts owns them).
+function HomeByline() {
+  return (
+    <div className="mx-auto mt-14 max-w-[96rem] px-[clamp(1.5rem,4.5vw,7rem)] md:mt-20">
+      <p className="max-w-[44rem] border-t border-hairline pt-5 text-[12px] leading-relaxed text-ink/70">
+        Written by{" "}
+        <a
+          href={FORMULATOR_EXTERNAL_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="border-b border-ink/30 hover:border-ochre hover:text-ochre"
+        >
+          Grazia Savoriti
+        </a>
+        , CHIAREL&rsquo;s formulating pharmacist. Published {HOMEPAGE_PUBLISHED_DISPLAY}, last
+        reviewed {HOMEPAGE_LAST_UPDATED_DISPLAY}.
+      </p>
+    </div>
   );
 }
 
