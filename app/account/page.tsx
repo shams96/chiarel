@@ -66,7 +66,7 @@ export default async function AccountPage() {
   if (!auth) redirect("/account/login");
 
   const orders = await db.order.findMany({
-    where: { customerId: auth.customer.id, status: { not: "pending" } },
+    where: { customerId: auth.customer.id, status: { in: ["paid", "refunded"] } },
     orderBy: { createdAt: "desc" },
     include: { items: { include: { product: true } } },
   });

@@ -7,6 +7,7 @@ import { isFulfilmentStatus } from "@/lib/order-fulfilment";
 import { maskEmail } from "@/lib/admin-orders";
 
 const MAX_TAKE = 100;
+const PAYMENT_STATUSES = ["paid", "pending", "failed", "expired", "refunded"];
 
 const parseDate = (v: string | null, endOfDay = false) => {
   if (!v || !/^\d{4}-\d{2}-\d{2}$/.test(v)) return undefined;
@@ -17,7 +18,7 @@ const parseDate = (v: string | null, endOfDay = false) => {
 // Order list for the console. All roles may read it; a Viewer gets a redacted
 // shape (masked email, no name) and can search by order id only, so the search
 // box cannot be used to probe which customer emails exist.
-//   ?fulfilment=packed  ?payment=paid|pending  ?country=US  ?from=YYYY-MM-DD  ?to=YYYY-MM-DD
+//   ?fulfilment=packed  ?payment=paid|pending|failed|expired|refunded  ?country=US  ?from=YYYY-MM-DD  ?to=YYYY-MM-DD
 //   ?q=<order id | email | surname | tracking number>  ?take=50  ?cursor=<id>
 export const GET = withApiErrorHandling(
   withRole(["ADMIN", "MEMBER", "VIEWER"], async (req: NextRequest, user) => {
@@ -34,7 +35,7 @@ export const GET = withApiErrorHandling(
 
     const where: Prisma.OrderWhereInput = {
       ...(isFulfilmentStatus(fulfilment) ? { fulfilmentStatus: fulfilment } : {}),
-      ...(payment === "paid" || payment === "pending" ? { status: payment } : {}),
+      ...(payment && PAYMENT_STATUSES.includes(payment) ? { status: payment } : {}),
       ...(country ? { country } : {}),
       ...(from || to ? { createdAt: { ...(from ? { gte: from } : {}), ...(to ? { lte: to } : {}) } } : {}),
       ...(search

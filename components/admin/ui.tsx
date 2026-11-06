@@ -236,6 +236,8 @@ export function statusTone(status: string): keyof typeof BADGE {
     case "under_review":
       return "warn";
     case "cancelled":
+    case "failed":
+    case "refunded":
     case "unsubscribed":
     case "lost":
       return "danger";

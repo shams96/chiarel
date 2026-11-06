@@ -53,7 +53,7 @@ export default function AdminOrdersPage() {
     const f = params.get("fulfilment");
     if (f && FULFILMENT.includes(f)) setFulfilment(f);
     const pay = params.get("payment");
-    if (pay === "paid" || pay === "pending") setPayment(pay);
+    if (pay && ["paid", "pending", "failed", "expired", "refunded"].includes(pay)) setPayment(pay);
     setReady(true);
   }, []);
 
@@ -120,6 +120,9 @@ export default function AdminOrdersPage() {
             <option value="">All</option>
             <option value="paid">Paid</option>
             <option value="pending">Pending</option>
+            <option value="failed">Failed</option>
+            <option value="expired">Expired</option>
+            <option value="refunded">Refunded</option>
           </select>
         </Field>
         <Field label="From">

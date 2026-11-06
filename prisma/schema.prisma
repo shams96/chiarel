@@ -104,6 +104,26 @@ model Order {
   // PaymentIntent id, not charge id — Stripe's Dispute object exposes
   // `payment_intent` directly, so matching on that avoids an extra charge lookup.
   stripePaymentIntentId String?
+
+  // Payment record, written by markOrderPaid (lib/order-payment.ts) from the
+  // verified Stripe session. Amounts are in minor units (cents) because tax and
+  // refunds are not whole dollars; `total` above stays whole dollars and is the
+  // pre-tax figure we asked Stripe to charge. status: pending | paid | failed |
+  // expired | refunded.
+  amountPaidCents     Int?
+  taxCents            Int?
+  currency            String?
+  paidAt              DateTime?
+  refundedCents       Int?
+  refundedAt          DateTime?
+  // When the Stripe Checkout Session stops being payable.
+  sessionExpiresAt    DateTime?
+  // Hash of the cart lines + buyer details, so the same unpaid checkout reuses
+  // its open Stripe session instead of opening a second one in another tab.
+  checkoutFingerprint String?
+  // Set only when the confirmation email was actually sent.
+  confirmationEmailAt DateTime?
+
   disputeId       String?   @unique
   disputeStatus   String?
   disputeReason   String?
@@ -124,6 +144,7 @@ model Order {
 
   @@index([createdAt])
   @@index([customerId])
+  @@index([checkoutFingerprint])
   // Order_lower_email_idx (expression index on lower(email)) lives in SQL only.
 }
 
