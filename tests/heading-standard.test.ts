@@ -72,6 +72,18 @@ describe("public inner pages use tokens for section headings", () => {
   });
 });
 
+describe("page titles and card names follow the standard", () => {
+  it("PageHead titles use text-h1 (one title size), not the poster size", () => {
+    const head = read("components/layout/PageHead.tsx");
+    expect(head).toMatch(/<h1 className="stagger font-serif text-h1">/);
+    expect(head).not.toContain("text-mega");
+  });
+
+  it("product card names are text-h4 ochre", () => {
+    expect(read("components/ProductCard.tsx")).toMatch(/<h3 className="font-serif text-h4 text-ochre/);
+  });
+});
+
 describe("SectionHeading is the homepage standard", () => {
   it.each(["HomeFaceBeyond", "HomeIconProduct", "HomeFitGuidance", "HomeProof", "HomeFaq", "HomeRitual", "HomeFormulationRecord"])(
     "%s uses it",
