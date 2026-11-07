@@ -13,12 +13,12 @@ export default function ProductAccordions({ product }: { product: Product }) {
     <div className="mt-6 border-b border-ink/10">
       {sections.map((s) => (
         <details key={s.id} className="group border-t border-ink/10">
-          <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between text-[12px] uppercase tracking-[0.16em] text-ink/80">
+          <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between text-[12px] uppercase tracking-[0.16em] text-ink">
             {s.title}
-            <span className="ml-4 text-lg text-ink/70 group-open:hidden" aria-hidden="true">+</span>
-            <span className="ml-4 hidden text-lg text-ink/70 group-open:inline" aria-hidden="true">−</span>
+            <span className="ml-4 text-lg text-ink group-open:hidden" aria-hidden="true">+</span>
+            <span className="ml-4 hidden text-lg text-ink group-open:inline" aria-hidden="true">−</span>
           </summary>
-          <div className="pb-4 text-[13px] leading-relaxed text-ink/80">
+          <div className="pb-4 text-[13px] leading-relaxed text-ink">
             {s.kind === "list" && (
               <ul className="list-disc space-y-1.5 pl-5">
                 {s.items.map((item) => (

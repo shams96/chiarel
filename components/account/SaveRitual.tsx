@@ -11,7 +11,7 @@ export default function SaveRitual({ email }: { email: string }) {
       <h2 id="save-ritual" className="font-serif text-2xl">
         Save your ritual
       </h2>
-      <p className="mt-2 mb-5 text-[14px] leading-relaxed text-ink/80">
+      <p className="mt-2 mb-5 text-[14px] leading-relaxed text-ink">
         See this order and reorder in one place. We will send a code to {email}.
       </p>
       <CodeLogin compact initialEmail={email} cta="Save your ritual" returnTo="/account" />

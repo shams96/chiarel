@@ -32,7 +32,7 @@ export function HomePhilosophy() {
             &ldquo;Skin is not one thing. A house built to serve it should not
             pretend otherwise.&rdquo;
           </p>
-          <p className="mt-8 max-w-measure text-body text-ink/80">
+          <p className="mt-8 max-w-measure text-body text-ink">
             CHIAREL Intelligence™ began as a question at a kitchen table —
             the working method still holds: start with the biology in front
             of you, formulate it properly, and name the ingredients that

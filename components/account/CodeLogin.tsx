@@ -156,7 +156,7 @@ export default function CodeLogin({ googleEnabled = false, returnTo = "/account"
     <div className={compact ? "" : "w-full max-w-md"}>
       {step === "email" ? (
         <form onSubmit={sendCode} className="flex flex-col gap-4" noValidate>
-          <label htmlFor="account-email" className="text-[12px] uppercase tracking-[0.16em] text-ink/70">
+          <label htmlFor="account-email" className="text-[12px] uppercase tracking-[0.16em] text-ink">
             Email
           </label>
           <input
@@ -184,7 +184,7 @@ export default function CodeLogin({ googleEnabled = false, returnTo = "/account"
           </button>
           {googleEnabled && (
             <>
-              <p className="text-center text-[12px] uppercase tracking-[0.2em] text-ink/70" aria-hidden="true">
+              <p className="text-center text-[12px] uppercase tracking-[0.2em] text-ink" aria-hidden="true">
                 or
               </p>
               {/* A plain link: the browser must follow the redirect to Google. */}
@@ -200,7 +200,7 @@ export default function CodeLogin({ googleEnabled = false, returnTo = "/account"
         </form>
       ) : (
         <div className="flex flex-col gap-4">
-          <p role="status" className="text-[15px] leading-relaxed text-ink/80">
+          <p role="status" className="text-[15px] leading-relaxed text-ink">
             We sent a code to <span className="break-all text-ink">{email.trim().toLowerCase()}</span>.
           </p>
           <div role="group" aria-label="Six digit sign-in code" className="flex gap-2">
@@ -224,7 +224,7 @@ export default function CodeLogin({ googleEnabled = false, returnTo = "/account"
             ))}
           </div>
           <div aria-live="polite" className="min-h-[1.5rem]">
-            {busy && <p className="text-[14px] text-ink/70">Checking…</p>}
+            {busy && <p className="text-[14px] text-ink">Checking…</p>}
             {error && (
               <p role="alert" className="text-[14px] text-ochre">
                 {error}
@@ -252,7 +252,7 @@ export default function CodeLogin({ googleEnabled = false, returnTo = "/account"
               Use a different email
             </button>
           </div>
-          <p className="text-[13px] leading-relaxed text-ink/70">
+          <p className="text-[13px] leading-relaxed text-ink">
             It can take a minute, and it may land in your spam folder.
           </p>
         </div>

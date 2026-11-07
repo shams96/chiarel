@@ -38,7 +38,7 @@ export default function AssessmentPage() {
     return (
       <div className="mx-auto w-full max-w-3xl px-margin py-16">
         <h1 className="font-serif text-h1">Your Results</h1>
-        <p className="mt-3 max-w-xl text-sm text-ink/70">
+        <p className="mt-3 max-w-xl text-sm text-ink">
           Based on a four-axis dermatological framework (barrier &amp; sebum,
           reactivity, pigment tendency, structural resilience), here is what
           your answers indicate.
@@ -47,7 +47,7 @@ export default function AssessmentPage() {
         <dl className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
           {axisScores.map((a) => (
             <div key={a.axis} className="card-elevated rounded-md bg-white p-3 text-center">
-              <dt className="text-eyebrow uppercase text-ink/70">
+              <dt className="text-eyebrow uppercase text-ink">
                 {a.axis}
               </dt>
               <dd className="mt-1 font-serif text-lg">{a.pole}</dd>
@@ -70,7 +70,7 @@ export default function AssessmentPage() {
                 </div>
                 <div className="flex-1">
                   <p className="font-serif text-xl">{p.name}</p>
-                  <p className="mt-1 max-w-md text-sm text-ink/70">{r.reason}</p>
+                  <p className="mt-1 max-w-md text-sm text-ink">{r.reason}</p>
                   <div className="mt-3 flex items-center gap-4">
                     <Link
                       href={productHref(p.slug)}
@@ -96,12 +96,12 @@ export default function AssessmentPage() {
             setAnswers({});
             setStep(0);
           }}
-          className="mt-12 text-eyebrow uppercase text-ink/70 hover:text-ink"
+          className="mt-12 text-eyebrow uppercase text-ink hover:text-ink"
         >
           Retake the Assessment
         </button>
 
-        <p className="mt-10 text-[12px] text-ink/70">
+        <p className="mt-10 text-[12px] text-ink">
           This assessment is adapted from the Baumann Skin Type Indicator, a
           published dermatological framework, for educational and product-fit
           purposes. It does not diagnose skin conditions.
@@ -112,7 +112,7 @@ export default function AssessmentPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-16">
-      <p className="text-sm text-ink/70">CHIAREL Skin Assessment™</p>
+      <p className="text-sm text-ink">CHIAREL Skin Assessment™</p>
       <div className="mt-2 flex items-center gap-3">
         <div className="h-px flex-1 bg-ink/10">
           <div
@@ -120,13 +120,13 @@ export default function AssessmentPage() {
             style={{ width: `${(step / QUESTIONS.length) * 100}%` }}
           />
         </div>
-        <span className="text-[12px] text-ink/70">
+        <span className="text-[12px] text-ink">
           {step + 1} / {QUESTIONS.length}
         </span>
       </div>
 
       <h1 className="mt-8 font-serif text-3xl leading-snug">{q.prompt}</h1>
-      <p className="mt-2 text-[12px] italic text-ink/70">Why we ask: {q.why}</p>
+      <p className="mt-2 text-[12px] italic text-ink">Why we ask: {q.why}</p>
 
       <div className="mt-8 space-y-3">
         {q.options.map((opt) => (

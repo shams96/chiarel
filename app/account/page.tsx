@@ -26,13 +26,13 @@ const dateFormat = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "lo
 function SubscriptionCare() {
   return (
     <div className="mt-10 border border-ink/15 p-6">
-      <p className="text-[12px] uppercase tracking-[0.16em] text-ink/70">Subscription Care</p>
-      <p className="mt-3 text-sm leading-relaxed text-ink/80">
+      <p className="text-[12px] uppercase tracking-[0.16em] text-ink">Subscription Care</p>
+      <p className="mt-3 text-sm leading-relaxed text-ink">
         <a href={`mailto:${ORDERS_EMAIL}`} className="border-b border-ochre pb-0.5 text-ochre">
           {ORDERS_EMAIL}
         </a>
       </p>
-      <p className="mt-4 text-[13px] leading-relaxed text-ink/70">
+      <p className="mt-4 text-[13px] leading-relaxed text-ink">
         There is no commitment. Subscriptions renew every 45 days and can be adjusted whenever you ask.
       </p>
       <Link
@@ -54,7 +54,7 @@ export default async function AccountPage() {
     return (
       <div className="mx-auto max-w-3xl px-6 py-16 md:py-24">
         <h1 className="font-serif text-4xl">Your Ritual</h1>
-        <p className="mt-5 max-w-xl text-sm leading-relaxed text-ink/80">
+        <p className="mt-5 max-w-xl text-sm leading-relaxed text-ink">
           Your account is temporarily unavailable. Please try again in a moment. You can still{" "}
           <Link href="/shop" className="text-ink underline underline-offset-4">
             order as a guest
@@ -76,13 +76,13 @@ export default async function AccountPage() {
     <div className="mx-auto max-w-3xl px-6 py-16 md:py-24">
       <SessionKeepAlive />
       <h1 className="font-serif text-4xl">Your Ritual</h1>
-      <p className="mt-5 max-w-xl text-sm leading-relaxed text-ink/80">
+      <p className="mt-5 max-w-xl text-sm leading-relaxed text-ink">
         Signed in as <span className="break-all text-ink">{auth.customer.email}</span>. <SignOutButton />
       </p>
 
-      <h2 className="mt-12 text-[12px] uppercase tracking-[0.16em] text-ink/70">Orders</h2>
+      <h2 className="mt-12 text-[12px] uppercase tracking-[0.16em] text-ink">Orders</h2>
       {orders.length === 0 ? (
-        <p className="mt-4 text-sm leading-relaxed text-ink/80">
+        <p className="mt-4 text-sm leading-relaxed text-ink">
           No orders on this address yet.{" "}
           <Link href="/shop" className="text-ink underline underline-offset-4">
             Visit the shop
@@ -95,17 +95,17 @@ export default async function AccountPage() {
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <p className="text-sm">
                   Order <span className="text-ink">#{o.id.slice(-8).toUpperCase()}</span>
-                  <span className="text-ink/70"> · {dateFormat.format(o.createdAt)}</span>
+                  <span className="text-ink"> · {dateFormat.format(o.createdAt)}</span>
                 </p>
                 <p className="text-sm">
                   {orderTotalText(o)}
-                  {orderTotalLabel(o) !== "Total" && <span className="text-ink/70"> incl. tax</span>}
+                  {orderTotalLabel(o) !== "Total" && <span className="text-ink"> incl. tax</span>}
                 </p>
               </div>
-              <p className="mt-2 text-[13px] text-ink/80">
+              <p className="mt-2 text-[13px] text-ink">
                 {FULFILMENT[o.fulfilmentStatus] ?? o.fulfilmentStatus}
                 {o.trackingNumber && (
-                  <span className="text-ink/70">
+                  <span className="text-ink">
                     {" "}
                     · {o.trackingCarrier ? `${o.trackingCarrier} ` : ""}tracking {o.trackingNumber}
                   </span>
@@ -116,7 +116,7 @@ export default async function AccountPage() {
                   <li key={i.id} className="flex items-baseline justify-between gap-3 text-sm">
                     <span>
                       {i.product.name}
-                      <span className="text-ink/70"> · Qty {i.qty}</span>
+                      <span className="text-ink"> · Qty {i.qty}</span>
                     </span>
                     <Link
                       href={productHref(i.productSlug)}

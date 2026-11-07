@@ -18,7 +18,7 @@ export default async function UnsubscribedPage({
       <h1 className="font-serif text-h1 leading-tight">
         {ok ? "You are unsubscribed" : "That link did not work"}
       </h1>
-      <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink/70">
+      <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink">
         {ok
           ? "You will not receive further email from the CHIAREL list."
           : "The unsubscribe link is invalid or incomplete. Write to us from the Contact page and we will remove you."}

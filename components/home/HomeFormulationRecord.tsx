@@ -26,14 +26,14 @@ export default function HomeFormulationRecord() {
     <section className="section-y bg-cloud" id="formulation-record">
       <div className="section-x">
         <div className="border border-champagne border-l-4 border-l-ochre bg-white px-6 py-8 md:px-10 md:py-10">
-          <p className="mb-8 max-w-2xl text-[15px] leading-relaxed text-ink/80" data-formulation-statement>
+          <p className="mb-8 max-w-2xl text-[15px] leading-relaxed text-ink" data-formulation-statement>
             {formulationLine()} {FREE_FROM_SENTENCE}
           </p>
           <details className="group border-y border-champagne">
             <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 py-6 font-serif text-h3 text-ochre">
               <span>
                 See the key ingredients
-                <span className="mt-1 block font-sans text-[13px] leading-relaxed text-ink/80">
+                <span className="mt-1 block font-sans text-[13px] leading-relaxed text-ink">
                   Key ingredients by product.
                 </span>
               </span>
@@ -65,7 +65,7 @@ export default function HomeFormulationRecord() {
                 <div className="mt-8 overflow-x-auto">
                   <table className="w-full min-w-[560px] border-collapse text-left text-sm">
                     <thead>
-                      <tr className="border-b border-ink/20 text-[12px] uppercase tracking-[0.16em] text-ink/80">
+                      <tr className="border-b border-ink/20 text-[12px] uppercase tracking-[0.16em] text-ink">
                         <th className="py-3 pr-4 font-normal">Product</th>
                         <th className="py-3 font-normal">Key Ingredient</th>
                       </tr>
@@ -76,8 +76,8 @@ export default function HomeFormulationRecord() {
                           key={`${row.product}-${row.ingredient}-${i}`}
                           className="border-b border-ink/10 transition-colors hover:bg-ivory"
                         >
-                          <td className="py-3 pr-4 text-ink/80">{row.product}</td>
-                          <td className="py-3 text-ink/80">{row.ingredient}</td>
+                          <td className="py-3 pr-4 text-ink">{row.product}</td>
+                          <td className="py-3 text-ink">{row.ingredient}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -88,10 +88,10 @@ export default function HomeFormulationRecord() {
                     .flatMap((p) => (p.benefits ?? []).map((b) => ({ product: p.name, benefit: b })))
                     .slice(0, 6)
                     .map((row, i) => (
-                      <li key={i} className="flex items-start gap-3 text-[13px] leading-relaxed text-ink/80">
+                      <li key={i} className="flex items-start gap-3 text-[13px] leading-relaxed text-ink">
                         <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-ochre" aria-hidden="true" />
                         <span>
-                          <span className="text-ink/80">{row.product}: </span>
+                          <span className="text-ink">{row.product}: </span>
                           {row.benefit}
                         </span>
                       </li>

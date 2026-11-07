@@ -491,7 +491,7 @@ export default function HeroIntro() {
               initial={{ y: 12, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: WORDMARK_AT + 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-6 font-serif text-xl tracking-[-0.01em] text-ink/80 md:text-2xl"
+              className="mt-6 font-serif text-xl tracking-[-0.01em] text-ink md:text-2xl"
             >
               Advancing Cellular Clarity™
             </motion.p>
@@ -500,7 +500,7 @@ export default function HeroIntro() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.7, delay: WORDMARK_AT + 0.55 }}
-              className="mt-4 max-w-xs text-[12px] leading-relaxed text-ink/70"
+              className="mt-4 max-w-xs text-[12px] leading-relaxed text-ink"
             >
               Intelligent formulations, precision-made in Isola del Liri, Italy.
             </motion.p>
@@ -517,7 +517,7 @@ export default function HeroIntro() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.3 }}
             aria-label="Skip intro animation"
-            className="absolute bottom-3 right-3 flex min-h-[44px] min-w-[44px] items-center justify-center px-3 text-[12px] uppercase tracking-[0.3em] text-ink/70 transition hover:text-ochre focus:text-ochre focus:outline focus:outline-1 focus:outline-offset-4 focus:outline-ochre"
+            className="absolute bottom-3 right-3 flex min-h-[44px] min-w-[44px] items-center justify-center px-3 text-[12px] uppercase tracking-[0.3em] text-ink transition hover:text-ochre focus:text-ochre focus:outline focus:outline-1 focus:outline-offset-4 focus:outline-ochre"
           >
             Skip
           </motion.button>

@@ -83,8 +83,8 @@ export function MoonMark() {
 }
 
 function RoutineRow({ entries, steps }: { entries: Entry[]; steps: Step[] }) {
-  const body = "text-ink/80";
-  const sub = "text-ink/70";
+  const body = "text-ink";
+  const sub = "text-ink";
   const cta = "border border-ink hover:border-ochre hover:text-ochre";
   return (
     <div className="mt-12 space-y-16">
@@ -169,7 +169,7 @@ function tileSpan(time: "Morning" | "Evening", lead: boolean, i: number, last: b
 }
 
 function CompactRow({ entries, time }: { entries: Entry[]; time: "Morning" | "Evening" }) {
-  const sub = "text-ink/70";
+  const sub = "text-ink";
   const tag = "text-ochre";
   const spans = mobileSpans(entries);
   return (
@@ -258,10 +258,10 @@ export function RoutineBand({
         <Heading id={`${id}-title`} className={`mt-4 font-serif leading-tight ${compact ? "text-h2" : "text-4xl md:text-5xl"}`}>
           {title}
         </Heading>
-        <ol className={`mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 font-serif text-xl ${"text-ink/80"}`}>
+        <ol className={`mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 font-serif text-xl ${"text-ink"}`}>
           {steps.map((st, i) => (
             <li key={st.n} className="flex items-center gap-3">
-              {i > 0 && <span aria-hidden="true" className={"text-ink/70"}>→</span>}
+              {i > 0 && <span aria-hidden="true" className={"text-ink"}>→</span>}
               <span>
                 <span className={"text-ochre"}>Step {st.n}</span> {st.label}
               </span>

@@ -45,13 +45,13 @@ export default function ApplicationPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <Link href="/science" className="text-[12px] text-ink/70 hover:text-ochre">
+      <Link href="/science" className="text-[12px] text-ink hover:text-ochre">
         ← The Science
       </Link>
       <h1 className="mt-2 font-serif text-h1 leading-tight">
         How to Apply CHIAREL
       </h1>
-      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/80">
+      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink">
         A formula feels its best when it is applied with care. Technique is
         part of the formulation story, not a footnote.
       </p>
@@ -59,7 +59,7 @@ export default function ApplicationPage() {
       <section className="mt-12 grid gap-10 sm:grid-cols-2">
         <div>
           <h2 className="font-serif text-h3 text-ochre">Morning</h2>
-          <ol className="mt-3 space-y-2 text-sm text-ink/80">
+          <ol className="mt-3 space-y-2 text-sm text-ink">
             <li>1. Clarity Essence</li>
             <li>2. Clarity Day Crème</li>
             <li>3. SPF</li>
@@ -67,13 +67,13 @@ export default function ApplicationPage() {
         </div>
         <div>
           <h2 className="font-serif text-h3 text-ochre">Evening</h2>
-          <ol className="mt-3 space-y-2 text-sm text-ink/80">
+          <ol className="mt-3 space-y-2 text-sm text-ink">
             <li>1. Clarity Essence</li>
             <li>2. Clarity Eye Contour Concentrate</li>
             <li>3. Clarity Night Crème</li>
             <li>4. Clarity Neck &amp; Décolleté Crème</li>
           </ol>
-          <p className="mt-3 text-[12px] text-ink/70">
+          <p className="mt-3 text-[12px] text-ink">
             The eye product is made for the evening and may be used morning or
             night.
           </p>
@@ -83,13 +83,13 @@ export default function ApplicationPage() {
       <section className="mt-12 space-y-8">
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">Apply to damp skin</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
             Damp skin helps the formula spread evenly and feel comfortable.
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">Warm before applying</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
             Warm Clarity Day Crème, Clarity Night Crème or Clarity Neck
             &amp; Décolleté Crème between fingertips before pressing into
             skin — this softens the texture for smoother, more even
@@ -98,14 +98,14 @@ export default function ApplicationPage() {
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">Press, don&rsquo;t rub</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
             Pressing helps the formula settle into place without tugging at
             skin.
           </p>
         </div>
         <div className="border-l-2 border-ochre pl-6">
           <h2 className="font-serif text-h3 text-ochre">Let each step set</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
             A brief pause between the{" "}
             <Link href="/shop/clarity-essence" className="border-b border-ochre text-ochre">
               Essence
@@ -116,7 +116,7 @@ export default function ApplicationPage() {
         </div>
       </section>
 
-      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink/70">
+      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink">
         Application guidance reflects general formulation principles and is
         not a guarantee of individual results.
       </p>
@@ -125,7 +125,7 @@ export default function ApplicationPage() {
         <Link href="/ritual" className="border-b border-ochre pb-0.5 text-ochre">
           The Ritual →
         </Link>
-        <Link href="/journal/chiarel-ritual-guide" className="border-b border-ink/30 pb-0.5 text-ink/70">
+        <Link href="/journal/chiarel-ritual-guide" className="border-b border-ink/30 pb-0.5 text-ink">
           Full Ritual Guide
         </Link>
       </div>

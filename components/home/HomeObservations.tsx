@@ -34,7 +34,7 @@ export default function HomeObservations() {
           delay={0.08}
           className="col-span-4 md:col-span-5 lg:col-span-8 lg:col-start-5"
         >
-          <p className="max-w-measure text-body text-ink/80">
+          <p className="max-w-measure text-body text-ink">
             Information about CHIAREL&rsquo;s testing will be published here
             once it has been reviewed.
           </p>
@@ -44,9 +44,9 @@ export default function HomeObservations() {
                 key={f.label}
                 className={`py-5 sm:px-0 ${i % 2 === 1 ? "sm:border-l sm:border-ink/15 sm:pl-6" : "sm:pr-6"} ${i > 1 ? "border-t border-ink/15" : ""} ${i === 1 ? "border-t border-ink/15 sm:border-t-0" : ""}`}
               >
-                <dt className="text-eyebrow uppercase text-ink/70">{f.label}</dt>
-                <dd className="mt-2 font-serif text-h4 text-ink/70">{PENDING}</dd>
-                <dd className="mt-1 text-caption text-ink/70">{f.note}</dd>
+                <dt className="text-eyebrow uppercase text-ink">{f.label}</dt>
+                <dd className="mt-2 font-serif text-h4 text-ink">{PENDING}</dd>
+                <dd className="mt-1 text-caption text-ink">{f.note}</dd>
               </div>
             ))}
           </dl>

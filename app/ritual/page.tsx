@@ -18,7 +18,7 @@ export default function RitualPage() {
       <h1 className="max-w-2xl font-serif text-h1 leading-tight">
         Five products, two moments in the day: prepare for it, then let it go.
       </h1>
-      <p className="mt-4 max-w-xl text-sm text-ink/70">
+      <p className="mt-4 max-w-xl text-sm text-ink">
         Order follows the texture, lightest first. Each moment answers part of
         the day described on{" "}
         <Link href="/house" className="border-b border-ochre text-ochre">
@@ -42,8 +42,8 @@ export default function RitualPage() {
       </div>
 
       <nav aria-label="Jump to a routine" className="mt-8 flex gap-3">
-        <a href="#morning" className="inline-flex min-h-[44px] items-center border border-ink/30 px-5 text-eyebrow uppercase text-ink/80 transition hover:border-ochre hover:text-ochre">Morning</a>
-        <a href="#evening" className="inline-flex min-h-[44px] items-center border border-ink/30 px-5 text-eyebrow uppercase text-ink/80 transition hover:border-ochre hover:text-ochre">Evening</a>
+        <a href="#morning" className="inline-flex min-h-[44px] items-center border border-ink/30 px-5 text-eyebrow uppercase text-ink transition hover:border-ochre hover:text-ochre">Morning</a>
+        <a href="#evening" className="inline-flex min-h-[44px] items-center border border-ink/30 px-5 text-eyebrow uppercase text-ink transition hover:border-ochre hover:text-ochre">Evening</a>
       </nav>
     </div>
 

@@ -104,7 +104,7 @@ ${shareUrl}`)}`,
         <p className="font-serif text-xl text-ink">
           You&rsquo;re on the list — welcome to the House.
         </p>
-        <p className="max-w-xs text-[13px] leading-relaxed text-ink/70">
+        <p className="max-w-xs text-[13px] leading-relaxed text-ink">
           Know someone who&rsquo;d love this? Send them your link.
         </p>
         <div className="grid w-full max-w-xs grid-cols-2 gap-2">
@@ -137,7 +137,7 @@ ${shareUrl}`)}`,
       className="card-elevated w-full rounded-md bg-white p-8"
     >
       {referredBy && (
-        <p className="mb-4 text-[12px] text-ink/70">
+        <p className="mb-4 text-[12px] text-ink">
           Referred by <span className="text-ochre">{referredBy}</span>
         </p>
       )}

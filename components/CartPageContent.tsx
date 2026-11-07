@@ -24,7 +24,7 @@ function QuantityStepper({ line }: { line: CartLine }) {
         onClick={() => setQty(line.id, line.qty - 1)}
         disabled={line.qty <= 1}
         aria-label={`Decrease quantity of ${line.product.name}`}
-        className="btn-press flex h-11 w-11 items-center justify-center text-base text-ink/70 transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-ink/70"
+        className="btn-press flex h-11 w-11 items-center justify-center text-base text-ink transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-ink/70"
       >
         −
       </button>
@@ -36,7 +36,7 @@ function QuantityStepper({ line }: { line: CartLine }) {
         onClick={() => setQty(line.id, line.qty + 1)}
                               disabled={line.qty >= MAX_LINE_QTY}
         aria-label={`Increase quantity of ${line.product.name}`}
-        className="btn-press flex h-11 w-11 items-center justify-center text-base text-ink/70 transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30"
+        className="btn-press flex h-11 w-11 items-center justify-center text-base text-ink transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30"
       >
         +
       </button>
@@ -47,12 +47,12 @@ function QuantityStepper({ line }: { line: CartLine }) {
 function InfoItem({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <details className="group border-t border-ink/10 py-1">
-      <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between text-eyebrow uppercase text-ink/80">
+      <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between text-eyebrow uppercase text-ink">
         {title}
-        <span className="ml-4 text-lg text-ink/70 group-open:hidden" aria-hidden="true">+</span>
-        <span className="ml-4 hidden text-lg text-ink/70 group-open:inline" aria-hidden="true">−</span>
+        <span className="ml-4 text-lg text-ink group-open:hidden" aria-hidden="true">+</span>
+        <span className="ml-4 hidden text-lg text-ink group-open:inline" aria-hidden="true">−</span>
       </summary>
-      <div className="pb-3 text-[13px] leading-relaxed text-ink/70">{children}</div>
+      <div className="pb-3 text-[13px] leading-relaxed text-ink">{children}</div>
     </details>
   );
 }
@@ -128,7 +128,7 @@ export default function CartPageContent() {
         </div>
       ) : lines.length === 0 ? (
         <div className="mt-16 flex flex-col items-center gap-4 text-center">
-          <p className="text-sm text-ink/70">Your bag is empty.</p>
+          <p className="text-sm text-ink">Your bag is empty.</p>
           <Link
             href="/ritual"
             className="btn-press inline-block bg-ink px-8 py-3.5 text-eyebrow uppercase text-ivory transition hover:bg-ochre"
@@ -151,7 +151,7 @@ export default function CartPageContent() {
               where the two columns sit side by side. */}
           <section aria-label="Items in your bag" className="order-2 lg:order-none">
             {/* Column heads on desktop only; on phones each row labels itself. */}
-            <div className="hidden grid-cols-[1fr_230px_120px_72px] gap-6 border-b border-ink/15 pb-3 text-eyebrow uppercase text-ink/70 lg:grid">
+            <div className="hidden grid-cols-[1fr_230px_120px_72px] gap-6 border-b border-ink/15 pb-3 text-eyebrow uppercase text-ink lg:grid">
               <span>Product</span>
               <span>Plan</span>
               <span>Quantity</span>
@@ -182,12 +182,12 @@ export default function CartPageContent() {
                       >
                         {line.product.name}
                       </Link>
-                      <p className="mt-1 text-[13px] text-ink/70">{line.product.descriptor}</p>
+                      <p className="mt-1 text-[13px] text-ink">{line.product.descriptor}</p>
                       <button
                         type="button"
                         onClick={() => remove(line.slug)}
                         aria-label={`Remove ${line.product.name}`}
-                        className="tap-area mt-2 text-eyebrow uppercase text-ink/70 underline underline-offset-4 hover:text-ochre"
+                        className="tap-area mt-2 text-eyebrow uppercase text-ink underline underline-offset-4 hover:text-ochre"
                       >
                         <span aria-hidden="true">Remove</span>
                       </button>
@@ -205,7 +205,7 @@ export default function CartPageContent() {
             </ul>
             <Link
               href="/shop"
-              className="tap-area mt-6 inline-block text-eyebrow uppercase text-ink/70 underline underline-offset-4 hover:text-ochre"
+              className="tap-area mt-6 inline-block text-eyebrow uppercase text-ink underline underline-offset-4 hover:text-ochre"
             >
               Continue shopping
             </Link>
@@ -222,7 +222,7 @@ export default function CartPageContent() {
             >
               {CTA.bag} — ${total}
             </Link>
-            <p className="mt-3 text-center text-[12px] text-ink/70">
+            <p className="mt-3 text-center text-[12px] text-ink">
               Secure payment, processed by Stripe.
             </p>
 
@@ -247,7 +247,7 @@ export default function CartPageContent() {
                 <dd className="font-serif text-xl">${total}</dd>
               </div>
             </dl>
-            <p className="mt-3 text-[12px] leading-relaxed text-ink/70">
+            <p className="mt-3 text-[12px] leading-relaxed text-ink">
               Taxes are calculated at payment.
             </p>
 
@@ -270,7 +270,7 @@ export default function CartPageContent() {
         >
           <div className="mx-auto flex max-w-container items-center gap-4">
             <p className="tabular-nums min-w-0 flex-1 text-[13px]">
-              <span className="block text-[12px] text-ink/70">Estimated total</span>
+              <span className="block text-[12px] text-ink">Estimated total</span>
               <span className="font-serif text-xl">${total}</span>
             </p>
             <Link

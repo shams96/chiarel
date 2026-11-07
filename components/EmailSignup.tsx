@@ -31,7 +31,7 @@ function EmailSignupForm({
 
   const dark = variant === "footer";
   const text = dark ? "text-cloud" : "text-ink";
-  const muted = dark ? "text-cloud/75" : "text-ink/70";
+  const muted = dark ? "text-cloud/75" : "text-ink";
   const field = dark
     ? "border-cloud/40 bg-transparent text-cloud placeholder:text-cloud/60 focus:border-champagne"
     : "border-ink/20 bg-white text-ink placeholder:text-ink/70 focus:border-ochre";

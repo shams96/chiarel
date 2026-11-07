@@ -26,7 +26,7 @@ export default async function AccountLoginPage({
   return (
     <div className="mx-auto flex max-w-md flex-col px-6 py-16 md:py-24">
       <h1 className="font-serif text-4xl">Your Ritual</h1>
-      <p className="mt-4 text-[15px] leading-relaxed text-ink/80">
+      <p className="mt-4 text-[15px] leading-relaxed text-ink">
         Enter your email and we will send you a code. No password needed.
       </p>
       <div className="mt-8">
@@ -36,7 +36,7 @@ export default async function AccountLoginPage({
           notice={typeof sp.notice === "string" ? sp.notice : undefined}
         />
       </div>
-      <p className="mt-10 text-[13px] leading-relaxed text-ink/70">
+      <p className="mt-10 text-[13px] leading-relaxed text-ink">
         You never need an account to order.{" "}
         <Link href="/shop" className="text-ink underline underline-offset-4">
           Continue as a guest

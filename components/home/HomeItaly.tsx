@@ -36,7 +36,7 @@ export default function HomeItaly() {
                   className="h-full w-full object-cover"
                 />
               </div>
-              <figcaption className="mt-3 text-caption text-ivory/90">
+              <figcaption className="mt-3 text-caption text-ivory">
                 Brand scene, not a photograph of the spring. Photography of the
                 Natural You laboratory to follow.
               </figcaption>

@@ -41,13 +41,13 @@ export default function LastingHydrationPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <Link href="/science" className="text-[12px] text-ink/70 hover:text-ochre">
+      <Link href="/science" className="text-[12px] text-ink hover:text-ochre">
         ← The Science
       </Link>
       <h1 className="mt-2 font-serif text-h1 leading-tight">
         Beyond Surface Moisture
       </h1>
-      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/80">
+      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink">
         Hydration that fades within the hour is a formulation gap, not an
         inevitability. CHIAREL layers water-binding ingredients with
         skin-compatible lipids, for the look and feel of hydrated, comfortable
@@ -57,7 +57,7 @@ export default function LastingHydrationPage() {
       <section className="mt-12 space-y-10">
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">The humectant-only gap</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
             Humectants draw water to the skin&rsquo;s surface. Without
             something to help hold it there, that water evaporates and skin
             can feel tighter than before application.
@@ -65,7 +65,7 @@ export default function LastingHydrationPage() {
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">Water-binding ingredients</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
             Hyaluronic acid is a well-known water-binding molecule. Clarity
             Essence carries it as sodium hyaluronate, alongside peptides and
             niacinamide, and Clarity Eye Contour Concentrate carries it for
@@ -74,7 +74,7 @@ export default function LastingHydrationPage() {
         </div>
         <div className="border-l-2 border-ochre pl-6">
           <h2 className="font-serif text-h3 text-ochre">Lipids complete the picture</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
             Ceramides, cholesterol and squalane in Clarity Day Crème and
             Clarity Night Crème, and ceramides and squalane in Clarity Neck
             &amp; Décolleté Crème, give the look and feel of hydrated,
@@ -83,7 +83,7 @@ export default function LastingHydrationPage() {
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">What this feels like</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
             A cushioned, comfortable finish. See{" "}
             <Link href="/science" className="border-b border-ochre text-ochre">
               The Science
@@ -94,7 +94,7 @@ export default function LastingHydrationPage() {
         </div>
       </section>
 
-      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink/70">
+      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink">
         Hyaluronic acid, ceramides and squalane are established
         ingredients, not CHIAREL trademarks or proprietary technologies. This
         page describes CHIAREL&rsquo;s formulation approach — not a guarantee
@@ -105,7 +105,7 @@ export default function LastingHydrationPage() {
         <Link href="/science/barrier-resilience" className="border-b border-ochre pb-0.5 text-ochre">
           Barrier Resilience →
         </Link>
-        <Link href="/shop" className="border-b border-ink/30 pb-0.5 text-ink/70">
+        <Link href="/shop" className="border-b border-ink/30 pb-0.5 text-ink">
           Visit The Shop
         </Link>
       </div>

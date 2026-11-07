@@ -46,7 +46,7 @@ export default function HomeProof() {
                 <span aria-hidden="true" className="font-serif text-[13px] tracking-[0.2em] text-ochre">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <p className="mt-6 text-[14px] leading-relaxed text-ink/80">
+                <p className="mt-6 text-[14px] leading-relaxed text-ink">
                   <span className="mb-3 block font-serif text-h4 text-ochre">
                     {item.name}
                   </span>

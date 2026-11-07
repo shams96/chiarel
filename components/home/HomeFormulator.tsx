@@ -23,11 +23,11 @@ export default function HomeFormulator() {
             Grazia Savoriti
           </p>
           <div className="mt-6 h-px w-24 bg-ink/20" aria-hidden="true" />
-          <p className="mt-6 text-eyebrow uppercase text-ink/80">
+          <p className="mt-6 text-eyebrow uppercase text-ink">
             CHIAREL&rsquo;s Pharmacist · Cosmetic &amp;
             Nutraceutical Research
           </p>
-          <p className="mt-6 max-w-measure text-body text-ink/80">
+          <p className="mt-6 max-w-measure text-body text-ink">
             Every CHIAREL™ formulation is developed by the House of CHIAREL as a team effort and
             produced in small, fresh batches in Isola del Liri — made to
             order rather than held in standing inventory.
@@ -40,7 +40,7 @@ export default function HomeFormulator() {
           </Link>
           <Link
             href="/house"
-            className="mt-3 flex min-h-[44px] items-center text-[12px] uppercase tracking-[0.16em] text-ink/80 hover:text-ochre"
+            className="mt-3 flex min-h-[44px] items-center text-[12px] uppercase tracking-[0.16em] text-ink hover:text-ochre"
           >
             Read her full bio →
           </Link>
@@ -48,7 +48,7 @@ export default function HomeFormulator() {
             href={FORMULATOR_EXTERNAL_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex min-h-[44px] items-center text-[12px] uppercase tracking-[0.16em] text-ink/80 hover:text-ochre"
+            className="flex min-h-[44px] items-center text-[12px] uppercase tracking-[0.16em] text-ink hover:text-ochre"
           >
             Verified profile at Natural You Srl →
           </a>

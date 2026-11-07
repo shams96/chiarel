@@ -78,10 +78,10 @@ export default function HomeFitGuidance() {
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-6">
-                    <p className="text-[12px] uppercase tracking-[0.16em] text-ink/80">Best for skin that…</p>
+                    <p className="text-[12px] uppercase tracking-[0.16em] text-ink">Best for skin that…</p>
                     <p className="mt-2 font-serif text-xl italic leading-snug text-ink">{row.concern}</p>
                     <p className="mt-5 text-[12px] uppercase tracking-[0.16em] text-ochre">{row.fit}</p>
-                    <p className="mt-2 text-[14px] leading-relaxed text-ink/80">{row.why}</p>
+                    <p className="mt-2 text-[14px] leading-relaxed text-ink">{row.why}</p>
                   </div>
                 </Link>
               </Reveal>

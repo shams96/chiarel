@@ -39,7 +39,7 @@ export default function HomeHero() {
               <span className="poster-b">Cellular</span>{" "}
               <span className="poster-c">Clarity<span className="poster-tm">™</span>.</span>
             </h1>
-            <p className="mt-6 max-w-measure text-lead text-ink/80 md:mt-8">
+            <p className="mt-6 max-w-measure text-lead text-ink md:mt-8">
               {HERO_PROBLEM_LINE}
             </p>
             <div className="mt-8 md:mt-10">
@@ -57,13 +57,13 @@ export default function HomeHero() {
                   ${perDayPrice(essence.price.subscription)}
                 </span>{" "}
                 a day
-                <span className="mt-1 block text-ink/80">
+                <span className="mt-1 block text-ink">
                   ${essence.price.subscription} every {DELIVERY_DAYS} days with
                   subscription · ${essence.price.oneTime} one-time
                 </span>
               </p>
             )}
-            <p className="mt-10 max-w-measure text-body text-ink/80">
+            <p className="mt-10 max-w-measure text-body text-ink">
               Exceptional skin discipline recognises no boundaries. Formulated in
               Isola del Liri under pharmacist guidance, CHIAREL™ begins with the
               face, where Clarity Essence™ brings peptide and postbiotic
