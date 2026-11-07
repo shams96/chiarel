@@ -433,7 +433,7 @@ summary:focus-visible {
    Outlined display type is decorative and aria-hidden at every use; the same
    words exist as real text nearby. Outlines only at 48px and above. */
 /* the stroke needs its own colour: currentColor would resolve to the transparent fill. Override --out-stroke on light-on-dark uses. */
-.out { color: transparent; -webkit-text-stroke: 1px var(--out-stroke, rgb(50 49 45)); }
+.out { color: transparent; -webkit-text-stroke: 1px var(--out-stroke, rgb(29 29 31)); }
 /* the ladder: one word at falling sizes, hairline outline to solid. Sizes are
    container-query units of .ladder-wrap so it scales with its own column. */
 .ladder-wrap { container-type: inline-size; }
@@ -442,9 +442,9 @@ summary:focus-visible {
 .ladder { margin: 0; font-weight: 400; line-height: 0.88; letter-spacing: -0.02em; }
 .ladder > span {
   display: block; white-space: nowrap; font-size: var(--s);
-  color: rgb(50 49 45);
-  -webkit-text-fill-color: rgb(50 49 45 / var(--fill));
-  -webkit-text-stroke: 1px rgb(50 49 45);
+  color: rgb(29 29 31);
+  -webkit-text-fill-color: rgb(29 29 31 / var(--fill));
+  -webkit-text-stroke: 1px rgb(29 29 31);
   animation: ladder-rise 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: calc(var(--i) * 90ms);
 }
@@ -495,7 +495,7 @@ summary:focus-visible {
   display: block;
   white-space: nowrap;
   font-weight: 500;
-  color: rgb(50 49 45 / 0.84);
+  color: #1d1d1f;
   line-height: 0.9;
   letter-spacing: -0.03em;
   border-top: 1px solid rgb(50 49 45 / 0.45);

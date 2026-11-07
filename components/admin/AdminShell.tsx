@@ -108,7 +108,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
       </header>
       <RibbonBand tone="redochre" />
       <main>{children}</main>
-      <footer className="mt-16 border-t border-champagne px-6 py-8 text-center text-[12px] uppercase tracking-[0.3em] text-ink/70">
+      <footer className="mt-16 border-t border-champagne px-6 py-8 text-center text-[12px] uppercase tracking-[0.3em] text-ink">
         CHIAREL™ · The House of Clarity™ · Admin
       </footer>
     </div>

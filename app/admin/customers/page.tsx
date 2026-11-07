@@ -179,7 +179,7 @@ export default function AdminCustomersPage() {
                           <span className="font-serif tabular-nums">${o.total}</span>
                           <Badge tone={statusTone(o.status)}>{o.status}</Badge>
                           <Badge tone={statusTone(o.fulfilmentStatus)}>{o.fulfilmentStatus}</Badge>
-                          <span className="text-ink/80">{o.itemCount} item(s)</span>
+                          <span className="text-ink">{o.itemCount} item(s)</span>
                         </li>
                       ))}
                     </ul>

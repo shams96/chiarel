@@ -184,7 +184,7 @@ export default function AdminOrderPage() {
                     {i.qty} x {i.productName}
                   </span>
                   <span className="flex items-baseline gap-4 text-[14px]">
-                    <span className="text-ink/80">{i.mode}</span>
+                    <span className="text-ink">{i.mode}</span>
                     <span className="font-serif text-[17px] tabular-nums">${i.unitPrice}</span>
                   </span>
                 </li>
