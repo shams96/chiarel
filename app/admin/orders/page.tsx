@@ -164,7 +164,7 @@ export default function AdminOrdersPage() {
               <td className={`${tdClass} whitespace-nowrap`}>{new Date(o.createdAt).toLocaleDateString()}</td>
               <td className={tdClass}>
                 {o.name ? `${o.name} ` : ""}
-                <span className="text-ink/80">{o.email}</span>
+                <span className="text-ink">{o.email}</span>
               </td>
               <td className={tdClass}>{o.country}</td>
               <td className={`${tdClass} font-serif text-[16px] tabular-nums`} title={orderTotalLabel(o)}>

@@ -120,7 +120,7 @@ export default function AdminSubscribersPage() {
             <Stat label="Total" value={counts.total} tone="peach" />
           </StatGrid>
           {counts.bySource.length > 0 && (
-            <p className="mt-4 text-[14px] text-ink/80">By source: {counts.bySource.map((b) => `${b.source} ${b.count}`).join(", ")}</p>
+            <p className="mt-4 text-[14px] text-ink">By source: {counts.bySource.map((b) => `${b.source} ${b.count}`).join(", ")}</p>
           )}
         </div>
       )}
@@ -160,14 +160,14 @@ export default function AdminSubscribersPage() {
             {rows.map((s) => (
               <li key={s.id} className="border border-champagne bg-white p-4">
                 <p className="break-all font-medium">{s.email}</p>
-                <p className="mt-1 text-[13px] text-ink/80">
+                <p className="mt-1 text-[13px] text-ink">
                   {s.source} · joined {new Date(s.createdAt).toLocaleDateString()}
                   {!viewer && s.consentAt ? ` · consent ${new Date(s.consentAt).toLocaleDateString()}${s.consentTextVersion ? ` (${s.consentTextVersion})` : ""}` : ""}
                 </p>
                 <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
                   <span>
                     <Badge tone={statusTone(s.status)}>{s.status}</Badge>
-                    {s.unsubscribedAt && <span className="ml-2 text-[13px] text-ink/70">{new Date(s.unsubscribedAt).toLocaleDateString()}</span>}
+                    {s.unsubscribedAt && <span className="ml-2 text-[13px] text-ink">{new Date(s.unsubscribedAt).toLocaleDateString()}</span>}
                   </span>
                   {canEdit && s.status === "active" && (
                     <Button variant="secondary" small onClick={() => unsubscribe(s)}>
@@ -192,7 +192,7 @@ export default function AdminSubscribersPage() {
                   )}
                   <td className={tdClass}>
                     <Badge tone={statusTone(s.status)}>{s.status}</Badge>
-                    {s.unsubscribedAt && <span className="ml-2 text-ink/70">{new Date(s.unsubscribedAt).toLocaleDateString()}</span>}
+                    {s.unsubscribedAt && <span className="ml-2 text-ink">{new Date(s.unsubscribedAt).toLocaleDateString()}</span>}
                   </td>
                   {canEdit && (
                     <td className={`${tdClass} text-right`}>

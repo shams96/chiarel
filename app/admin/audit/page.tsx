@@ -101,11 +101,11 @@ export default function AdminAuditPage() {
         <Table head={["When", "Who", "What", "IP"]}>
           {entries.map((e) => (
             <tr key={e.id}>
-              <td className={`${tdClass} whitespace-nowrap text-ink/80`}>{new Date(e.createdAt).toLocaleString()}</td>
+              <td className={`${tdClass} whitespace-nowrap text-ink`}>{new Date(e.createdAt).toLocaleString()}</td>
               <td className={`${tdClass} min-w-[12rem] break-words`}>{e.actorEmail}</td>
               <td className={`${tdClass} min-w-[16rem] break-words`}>
                 <span className="font-medium">{auditLabel(e)}</span>
-                <div className="mt-0.5 break-words text-[12px] uppercase tracking-[0.14em] text-ink/70">{e.action}</div>
+                <div className="mt-0.5 break-words text-[12px] uppercase tracking-[0.14em] text-ink">{e.action}</div>
                 {(e.before != null || e.after != null) && (
                   <details className="mt-2">
                     <summary className="cursor-pointer text-[12px] uppercase tracking-[0.2em] text-ochre underline underline-offset-4">
@@ -117,7 +117,7 @@ export default function AdminAuditPage() {
                   </details>
                 )}
               </td>
-              <td className={`${tdClass} whitespace-nowrap text-ink/80`}>{e.ip ?? ""}</td>
+              <td className={`${tdClass} whitespace-nowrap text-ink`}>{e.ip ?? ""}</td>
             </tr>
           ))}
         </Table>

@@ -177,14 +177,14 @@ export default function AdminDisputesPage() {
                   </Link>
                   <span className="font-serif text-lg">{d.amount != null ? `$${d.amount}` : ""}</span>
                 </div>
-                <p className="mt-1 [overflow-wrap:anywhere] text-[13px] text-ink/80">
+                <p className="mt-1 [overflow-wrap:anywhere] text-[13px] text-ink">
                   {d.customer} {d.email}
                   {d.openedAt ? ` · opened ${new Date(d.openedAt).toLocaleDateString()}` : ""}
                 </p>
                 <div className="mt-3 flex flex-wrap items-center gap-2">
                   <Badge tone={statusTone(d.status ?? "")}>{words(d.status ?? "unknown")}</Badge>
                   <Badge tone={d.open ? "danger" : "muted"}>{d.open ? "open" : "closed"}</Badge>
-                  {d.reason ? <span className="text-[13px] text-ink/70">{words(d.reason)}</span> : null}
+                  {d.reason ? <span className="text-[13px] text-ink">{words(d.reason)}</span> : null}
                 </div>
                 <div className="mt-3">
                   <EvidenceDetails d={d} />
@@ -203,7 +203,7 @@ export default function AdminDisputesPage() {
                   </td>
                   <td className={`${tdClass} whitespace-nowrap`}>{d.openedAt ? new Date(d.openedAt).toLocaleDateString() : ""}</td>
                   <td className={tdClass}>
-                    {d.customer} <span className="text-ink/70">{d.email}</span>
+                    {d.customer} <span className="text-ink">{d.email}</span>
                   </td>
                   <td className={tdClass}>{d.amount != null ? `$${d.amount}` : ""}</td>
                   <td className={tdClass}>
@@ -211,7 +211,7 @@ export default function AdminDisputesPage() {
                       <Badge tone={statusTone(d.status ?? "")}>{words(d.status ?? "unknown")}</Badge>
                       <Badge tone={d.open ? "danger" : "muted"}>{d.open ? "open" : "closed"}</Badge>
                     </div>
-                    {d.reason ? <div className="mt-1 text-ink/70">{words(d.reason)}</div> : null}
+                    {d.reason ? <div className="mt-1 text-ink">{words(d.reason)}</div> : null}
                   </td>
                   <td className={`${tdClass} min-w-[14rem]`}>
                     <EvidenceDetails d={d} />

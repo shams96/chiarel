@@ -49,7 +49,7 @@ export default function GlobalError({
         <h1 style={{ marginTop: 24, fontSize: 28 }}>
           Something went wrong
         </h1>
-        <p style={{ marginTop: 16, maxWidth: 360, fontSize: 14, lineHeight: 1.6, color: "rgba(29,29,31,0.7)" }}>
+        <p style={{ marginTop: 16, maxWidth: 360, fontSize: 14, lineHeight: 1.6, color: "#1D1D1F" }}>
           The site hit an unexpected error. Trying again usually resolves it.
         </p>
         <button

@@ -36,7 +36,7 @@ export function PageHeader({
       <div className="max-w-3xl">
         {eyebrow && <p className="text-[12px] uppercase tracking-[0.34em] text-ochre">{eyebrow}</p>}
         <h1 className="mt-2 font-serif text-[clamp(1.9rem,1.2rem+2vw,3rem)] leading-tight text-garden">{title}</h1>
-        {subtitle && <p className="mt-2 text-[15px] leading-relaxed text-ink/80">{subtitle}</p>}
+        {subtitle && <p className="mt-2 text-[15px] leading-relaxed text-ink">{subtitle}</p>}
       </div>
       {actions && <div className="flex flex-wrap items-center gap-3">{actions}</div>}
     </header>
@@ -62,7 +62,7 @@ export function SectionTitle({ children, hint }: { children: ReactNode; hint?: R
   return (
     <div className="mb-4 mt-10 flex flex-wrap items-baseline justify-between gap-2">
       <h2 className="font-serif text-[clamp(1.2rem,1rem+0.8vw,1.7rem)] text-garden">{children}</h2>
-      {hint && <p className="text-[13px] text-ink/70">{hint}</p>}
+      {hint && <p className="text-[13px] text-ink">{hint}</p>}
     </div>
   );
 }
@@ -84,9 +84,9 @@ export function Stat({
   const dark = tone === "garden" || tone === "redochre";
   const body = (
     <>
-      <p className={cx("text-[12px] uppercase tracking-[0.28em]", dark ? "text-ivory/85" : "text-ink/70")}>{label}</p>
+      <p className={cx("text-[12px] uppercase tracking-[0.28em]", dark ? "text-ivory/85" : "text-ink")}>{label}</p>
       <p className="mt-3 font-serif text-[clamp(1.9rem,1.3rem+1.6vw,3rem)] leading-none tabular-nums">{value}</p>
-      {sub && <p className={cx("mt-3 text-[13px] leading-snug", dark ? "text-ivory/90" : "text-ink/80")}>{sub}</p>}
+      {sub && <p className={cx("mt-3 text-[13px] leading-snug", dark ? "text-ivory/90" : "text-ink")}>{sub}</p>}
     </>
   );
   const cls = cx(TONES[tone], "block p-5 md:p-6 transition-transform duration-300 ease-out", href && "hover:-translate-y-0.5");
@@ -152,7 +152,7 @@ export const inputClass =
 
 export function Field({ label, children, className }: { label: string; children: ReactNode; className?: string }) {
   return (
-    <label className={cx("block text-[12px] uppercase tracking-[0.24em] text-ink/80", className)}>
+    <label className={cx("block text-[12px] uppercase tracking-[0.24em] text-ink", className)}>
       {label}
       <span className="mt-1.5 block normal-case tracking-normal">{children}</span>
     </label>
@@ -211,13 +211,13 @@ export function EmptyState({ title, text, image = "/assets/products/clarity-esse
     <div className="flex flex-col items-center gap-4 border border-dashed border-champagne bg-peachdust/30 px-6 py-12 text-center">
       <Image src={image} alt="" width={120} height={120} className="h-24 w-24 object-contain" />
       <p className="font-serif text-xl text-garden">{title}</p>
-      {text && <p className="max-w-md text-[14px] text-ink/80">{text}</p>}
+      {text && <p className="max-w-md text-[14px] text-ink">{text}</p>}
     </div>
   );
 }
 
 export function Loading({ children = "Loading…" }: { children?: ReactNode }) {
-  return <p className="py-8 text-[14px] text-ink/70">{children}</p>;
+  return <p className="py-8 text-[14px] text-ink">{children}</p>;
 }
 
 /** Status words to badge tones, shared by orders, disputes and subscribers. */

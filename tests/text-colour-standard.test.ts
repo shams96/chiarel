@@ -59,3 +59,24 @@ describe("the footer sits on the shared container", () => {
     expect(footer).toContain("h-[280px]");
   });
 });
+
+// Owner, 2026-11-07: "light black" text is #1d1d1f (the logo ink) everywhere, admin and the
+// hero poster included. Only the black is covered here; other colours are untouched.
+describe("black text is exactly the logo ink", () => {
+  const ALL = [...walk("app"), ...walk("components")];
+  it("no text-ink at reduced opacity anywhere, admin included (placeholder/disabled variants exempt)", () => {
+    const bad = ALL.flatMap((f) =>
+      (read(f).match(/(?<![:\w-])text-ink\/\d+\b/g) ?? []).map((m) => `${f}: ${m}`),
+    );
+    expect(bad).toEqual([]);
+  });
+  it("the hero poster text and ladder/outline type use #1d1d1f, not the old 50 49 45 grey-black", () => {
+    const css = read("app/globals.css");
+    expect(css).not.toMatch(/rgb\(50 49 45\)/);
+    expect(css).not.toMatch(/(?<![-\w])color:\s*rgb\(50 49 45/);
+    expect(css).toMatch(/\.poster > span \{[^}]*color:\s*#1d1d1f;/);
+  });
+  it("the global error page text is the logo ink", () => {
+    expect(read("app/global-error.tsx")).not.toContain("rgba(29,29,31,0.7)");
+  });
+});
