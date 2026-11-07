@@ -265,16 +265,16 @@ describe("Outlined display type has a visible stroke (regression: it was transpa
   const css = src("app/globals.css");
   it(".out sets its own stroke colour and does not fall back to currentColor (the fill is transparent)", () => {
     const rule = css.match(/\.out \{[^}]*\}/)?.[0] ?? "";
-    expect(rule).toContain("-webkit-text-stroke: 1px var(--out-stroke, rgb(50 49 45))");
+    expect(rule).toContain("-webkit-text-stroke: 1px var(--out-stroke, rgb(29 29 31))");
     expect(rule).not.toMatch(/currentColor/i);
   });
   it("the ladder keeps an opaque text colour and paints its faint fill with text-fill-color", () => {
     const rule = css.match(/\.ladder > span \{[^}]*\}/)?.[0] ?? "";
-    expect(rule).toContain("color: rgb(50 49 45);");
-    expect(rule).toContain("-webkit-text-fill-color: rgb(50 49 45 / var(--fill))");
+    expect(rule).toContain("color: rgb(29 29 31);");
+    expect(rule).toContain("-webkit-text-fill-color: rgb(29 29 31 / var(--fill))");
   });
   it("the ladder hard-codes an opaque ink stroke", () => {
-    expect(css).toMatch(/\.ladder > span \{[^}]*-webkit-text-stroke: 1px rgb\(50 49 45\)/);
+    expect(css).toMatch(/\.ladder > span \{[^}]*-webkit-text-stroke: 1px rgb\(29 29 31\)/);
   });
   it("light-on-ochre outline type overrides the stroke colour", () => {
     expect(src("components/home/HomeItaly.tsx")).toContain("[--out-stroke:#F8F6F1]");
