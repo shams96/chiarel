@@ -51,7 +51,7 @@ export default function Header() {
             <Link
               key={n.href}
               href={n.href}
-              className="inline-flex min-h-[44px] items-center whitespace-nowrap px-2 text-eyebrow uppercase text-ink/80 transition hover:text-ochre"
+              className="inline-flex min-h-[44px] items-center whitespace-nowrap px-2 text-eyebrow uppercase text-ink transition hover:text-ochre"
             >
               {n.label}
             </Link>
@@ -61,14 +61,14 @@ export default function Header() {
           {/* Mobile: direct path to Shop without opening the menu */}
           <Link
             href="/shop"
-            className="btn-press inline-flex min-h-[44px] items-center px-2 text-[12px] uppercase tracking-[0.18em] text-ink/80 transition hover:text-ochre xl:hidden"
+            className="btn-press inline-flex min-h-[44px] items-center px-2 text-[12px] uppercase tracking-[0.18em] text-ink transition hover:text-ochre xl:hidden"
           >
             Shop
           </Link>
           <button
             onClick={open}
             aria-label={count > 0 ? `Open bag, ${count} items` : "Open bag"}
-            className="btn-press relative inline-flex min-h-[44px] items-center px-2 text-[12px] uppercase tracking-[0.18em] text-ink/80 transition hover:text-ochre"
+            className="btn-press relative inline-flex min-h-[44px] items-center px-2 text-[12px] uppercase tracking-[0.18em] text-ink transition hover:text-ochre"
           >
             Bag
             {count > 0 && (
@@ -126,7 +126,7 @@ export default function Header() {
           <button
             onClick={() => setMenuOpen(false)}
             aria-label="Close menu"
-            className="btn-press flex h-11 w-11 items-center justify-center text-xl text-ink/70 transition-colors hover:text-ink"
+            className="btn-press flex h-11 w-11 items-center justify-center text-xl text-ink transition-colors hover:text-ink"
           >
             ×
           </button>
@@ -137,7 +137,7 @@ export default function Header() {
               key={n.href}
               href={n.href}
               onClick={() => setMenuOpen(false)}
-              className="border-b border-ink/10 py-4 text-[13px] uppercase tracking-[0.18em] text-ink/80 transition hover:text-ochre"
+              className="border-b border-ink/10 py-4 text-[13px] uppercase tracking-[0.18em] text-ink transition hover:text-ochre"
             >
               {n.label}
             </Link>

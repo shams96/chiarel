@@ -89,11 +89,11 @@ export default function PurchaseOptions({
       <div aria-live="polite">
         <p className="flex flex-wrap items-baseline gap-x-2">
           <span className="font-serif text-4xl leading-none">${primary.perDay}</span>
-          <span className="text-[13px] text-ink/70">a day</span>
+          <span className="text-[13px] text-ink">a day</span>
         </p>
         {tier !== "ninetyDay" && (
           <>
-            <p className="mt-1.5 text-[13px] text-ink/70">
+            <p className="mt-1.5 text-[13px] text-ink">
               ${primary.price} · {primary.label}
             </p>
             <p className="mt-1.5 min-h-[1.25rem] text-[13px] text-ochre">
@@ -120,17 +120,17 @@ export default function PurchaseOptions({
           className={optionClass(tier === "single")}
         >
           <span className="min-w-0">
-            <span className="block text-[12px] uppercase tracking-[0.16em] text-ink/80">
+            <span className="block text-[12px] uppercase tracking-[0.16em] text-ink">
               Subscribe &amp; save
             </span>
-            <span className="mt-0.5 block text-[13px] leading-snug text-ink/70">
+            <span className="mt-0.5 block text-[13px] leading-snug text-ink">
               Renews every 45 days
             </span>
           </span>
           <span className="shrink-0 text-right">
             <span className="block font-serif text-xl leading-tight">
               ${summary.subscription.perDelivery}
-              <span className="ml-1 font-sans text-[12px] text-ink/70">/ delivery</span>
+              <span className="ml-1 font-sans text-[12px] text-ink">/ delivery</span>
             </span>
             {summary.subscription.saving > 0 && (
               <span className="block text-[12px] text-ochre">
@@ -153,7 +153,7 @@ export default function PurchaseOptions({
             <span className="block text-[12px] uppercase tracking-[0.16em] text-ochre">
               The 90-Day Plan
             </span>
-            <span className="mt-0.5 block text-[13px] leading-snug text-ink/70">
+            <span className="mt-0.5 block text-[13px] leading-snug text-ink">
               90 days, paid once: ${summary.ritual.total} (2 × ${summary.subscription.perDelivery})
             </span>
           </span>
@@ -174,10 +174,10 @@ export default function PurchaseOptions({
           className={optionClass(tier === "oneTime")}
         >
           <span className="min-w-0">
-            <span className="block text-[12px] uppercase tracking-[0.16em] text-ink/80">
+            <span className="block text-[12px] uppercase tracking-[0.16em] text-ink">
               One-time purchase
             </span>
-            <span className="mt-0.5 block text-[13px] leading-snug text-ink/70">
+            <span className="mt-0.5 block text-[13px] leading-snug text-ink">
               Single delivery
             </span>
           </span>
@@ -198,7 +198,7 @@ export default function PurchaseOptions({
 
       {/* Delivery and returns at the point of purchase. Every statement here
           is taken from /terms (Subscriptions, Shipping, The 90-Day Guarantee). */}
-      <ul className="mt-4 space-y-2 text-[12px] leading-relaxed text-ink/70">
+      <ul className="mt-4 space-y-2 text-[12px] leading-relaxed text-ink">
         <li>
           <span className="text-ink">Made to order</span> in Isola del Liri, Italy. Allow
           standard processing time before dispatch; shipping options and timing are shown at
@@ -228,7 +228,7 @@ export default function PurchaseOptions({
           </Link>
         </li>
       </ul>
-      <p className="mt-3 text-[12px] text-ink/70">
+      <p className="mt-3 text-[12px] text-ink">
         Formulated under pharmacist guidance at Natural You Srl, Isola del Liri.
       </p>
     </div>

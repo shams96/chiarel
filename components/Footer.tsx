@@ -49,7 +49,7 @@ const navColumns = [
 export default function Footer() {
   return (
     <footer className="border-t border-ink/10 bg-cloud">
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
+      <div className="mx-auto max-w-container px-margin py-10 sm:py-14">
         <div className="relative grid grid-cols-1 gap-1 [container-type:inline-size] md:grid-cols-[1fr_2fr] md:gap-5">
           {/* Left card — Formal Garden, product shot */}
           <div className="relative h-[280px] overflow-hidden rounded-[1.5rem] bg-garden md:h-auto md:min-h-[460px]">
@@ -80,7 +80,7 @@ export default function Footer() {
             <nav className="relative z-10 mt-10 grid grid-cols-2 gap-x-8 gap-y-8 pb-6 text-[13px] sm:grid-cols-3">
               {navColumns.map((col) => (
                 <div key={col.heading} className="flex flex-col">
-                  <p className="mb-1 text-[12px] uppercase tracking-[0.14em] text-cloud/70">
+                  <p className="mb-1 text-[12px] uppercase tracking-[0.14em] text-cloud">
                     {col.heading}
                   </p>
                   {col.links.map((link) => (
@@ -97,7 +97,7 @@ export default function Footer() {
               <EmailSignup variant="footer" source="footer" />
             </div>
 
-            <ul className="relative z-10 mt-10 flex flex-wrap gap-x-6 gap-y-2 border-t border-cloud/15 pt-6 text-[12px] uppercase tracking-[0.12em] text-cloud/75">
+            <ul className="relative z-10 mt-10 flex flex-wrap gap-x-6 gap-y-2 border-t border-cloud/15 pt-6 text-[12px] uppercase tracking-[0.12em] text-cloud">
               {trustBadges.map((badge) => (
                 <li key={badge} className="flex items-center gap-2">
                   <span className="inline-block h-1 w-1 rounded-full bg-champagne" aria-hidden="true" />
@@ -157,7 +157,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <p className="mt-8 text-[12px] text-ink/80">
+        <p className="mt-8 text-[12px] text-ink">
           © {new Date().getFullYear()} CHIAREL™ · 1HubSolutions, LLC. All rights
           reserved.
         </p>

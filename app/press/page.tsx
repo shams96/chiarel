@@ -52,21 +52,21 @@ export default function PressPage() {
       {/* Brand Fact Sheet */}
       <section>
         <h2 className="font-serif text-h3 text-ochre">Brand Fact Sheet</h2>
-        <dl className="mt-6 space-y-5 text-sm leading-relaxed text-ink/80">
+        <dl className="mt-6 space-y-5 text-sm leading-relaxed text-ink">
           <div>
-            <dt className="text-eyebrow uppercase text-ink/70">
+            <dt className="text-eyebrow uppercase text-ink">
               Name
             </dt>
             <dd className="mt-1">CHIAREL™</dd>
           </div>
           <div>
-            <dt className="text-eyebrow uppercase text-ink/70">
+            <dt className="text-eyebrow uppercase text-ink">
               Tagline
             </dt>
             <dd className="mt-1">The House of Clarity™</dd>
           </div>
           <div>
-            <dt className="text-eyebrow uppercase text-ink/70">
+            <dt className="text-eyebrow uppercase text-ink">
               Mission
             </dt>
             <dd className="mt-1 max-w-xl">
@@ -76,7 +76,7 @@ export default function PressPage() {
             </dd>
           </div>
           <div>
-            <dt className="text-eyebrow uppercase text-ink/70">
+            <dt className="text-eyebrow uppercase text-ink">
               Founding Story
             </dt>
             <dd className="mt-1 max-w-xl">
@@ -95,7 +95,7 @@ export default function PressPage() {
             </dd>
           </div>
           <div>
-            <dt className="text-eyebrow uppercase text-ink/70">
+            <dt className="text-eyebrow uppercase text-ink">
               Provenance
             </dt>
             <dd className="mt-1 max-w-xl">
@@ -110,13 +110,13 @@ export default function PressPage() {
             </dd>
           </div>
           <div>
-            <dt className="text-eyebrow uppercase text-ink/70">
+            <dt className="text-eyebrow uppercase text-ink">
               Parent Company
             </dt>
             <dd className="mt-1">1HubSolutions, LLC</dd>
           </div>
           <div>
-            <dt className="text-eyebrow uppercase text-ink/70">
+            <dt className="text-eyebrow uppercase text-ink">
               Website
             </dt>
             <dd className="mt-1">
@@ -132,7 +132,7 @@ export default function PressPage() {
       <section className="mt-16 border-t border-ink/10 pt-12">
         <h2 className="font-serif text-h3 text-ochre">The Launch Lineup</h2>
         {/* DRAFT — OWNER / REGULATORY APPROVAL REQUIRED */}
-        <p className="mt-2 max-w-xl text-sm text-ink/70">
+        <p className="mt-2 max-w-xl text-sm text-ink">
           Five formulations, each made for one purpose and carrying the name
           of our mission: Clarity.
         </p>
@@ -151,8 +151,8 @@ export default function PressPage() {
                 <p className="font-serif text-lg leading-tight text-ink">
                   {p.name}
                 </p>
-                <p className="mt-1 text-[13px] text-ink/70">{p.descriptor}</p>
-                <p className="mt-1 text-eyebrow uppercase text-ink/70">
+                <p className="mt-1 text-[13px] text-ink">{p.descriptor}</p>
+                <p className="mt-1 text-eyebrow uppercase text-ink">
                   {p.color.name} · {p.family}
                 </p>
               </div>
@@ -171,7 +171,7 @@ export default function PressPage() {
       {/* Brand Assets */}
       <section className="mt-16 border-t border-ink/10 pt-12">
         <h2 className="font-serif text-h3 text-ochre">Brand Assets</h2>
-        <p className="mt-2 max-w-xl text-sm text-ink/70">
+        <p className="mt-2 max-w-xl text-sm text-ink">
           Approved wordmark and monogram files for editorial use. Please do
           not alter colours, proportions, or the ™ symbol.
         </p>
@@ -189,7 +189,7 @@ export default function PressPage() {
                   className="h-auto max-h-16 w-auto"
                 />
               </div>
-              <p className="mt-3 text-[13px] text-ink/70">{a.label}</p>
+              <p className="mt-3 text-[13px] text-ink">{a.label}</p>
               <a
                 href={`/assets/brand/${a.file}`}
                 download
@@ -205,7 +205,7 @@ export default function PressPage() {
       {/* Contact */}
       <section className="mt-16 border-t border-ink/10 pt-12">
         <h2 className="font-serif text-h3 text-ochre">Press Inquiries</h2>
-        <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/70">
+        <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink">
           For interview requests, high-resolution imagery, or additional
           brand materials, please reach out.
         </p>

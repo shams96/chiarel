@@ -34,10 +34,10 @@ export default function ProductCard({
         <h3 className="font-serif text-h4 text-ochre underline decoration-ochre/0 underline-offset-4 transition group-hover:decoration-ochre">
           {product.name}
         </h3>
-        <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/70">
+        <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink">
           {product.step}
         </p>
-        <p className="mt-1 text-[13px] text-ink/70">{product.descriptor}</p>
+        <p className="mt-1 text-[13px] text-ink">{product.descriptor}</p>
         {!hidePrice && (
           <p className="mt-2 text-sm">
             {isPurchasable(product) ? (
@@ -45,13 +45,13 @@ export default function ProductCard({
                 <span className="tabular-nums font-medium">
                   From ${perDayPrice(product.price.subscription)} a day
                 </span>
-                <span className="mt-0.5 block text-[12px] text-ink/70">
+                <span className="mt-0.5 block text-[12px] text-ink">
                   ${product.price.subscription} with subscription · $
                   {product.price.oneTime} one-time
                 </span>
               </>
             ) : (
-              <span className="text-[12px] uppercase tracking-[0.14em] text-ink/70">
+              <span className="text-[12px] uppercase tracking-[0.14em] text-ink">
                 Price to be announced
               </span>
             )}

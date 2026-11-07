@@ -54,7 +54,7 @@ export default function CartDrawer() {
           <button
             onClick={close}
             aria-label="Close bag"
-            className="btn-press -mr-3 flex h-11 w-11 items-center justify-center text-xl text-ink/70 hover:text-ink"
+            className="btn-press -mr-3 flex h-11 w-11 items-center justify-center text-xl text-ink hover:text-ink"
           >
             ×
           </button>
@@ -62,7 +62,7 @@ export default function CartDrawer() {
 
         {lines.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-3 px-6 text-center">
-            <p className="text-sm text-ink/70">Your bag is empty.</p>
+            <p className="text-sm text-ink">Your bag is empty.</p>
             <Link
               href="/ritual"
               onClick={close}
@@ -74,7 +74,7 @@ export default function CartDrawer() {
         ) : (
           <>
             <div className="flex-1 overflow-y-auto px-6 py-4">
-              <p className={`mb-4 text-[12px] ${shipping === 0 ? "text-ochre" : "text-ink/70"}`}>
+              <p className={`mb-4 text-[12px] ${shipping === 0 ? "text-ochre" : "text-ink"}`}>
                 {shippingNote(subtotal, lines)}
               </p>
               <ul className="space-y-5">
@@ -103,7 +103,7 @@ export default function CartDrawer() {
                               onClick={() => setQty(line.id, line.qty - 1)}
                               disabled={line.qty <= 1}
                               aria-label={`Decrease quantity of ${line.product.name}`}
-                              className="btn-press tap-area flex h-11 w-11 items-center justify-center text-sm text-ink/70 transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-ink/70"
+                              className="btn-press tap-area flex h-11 w-11 items-center justify-center text-sm text-ink transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-ink/70"
                             >
                               −
                             </button>
@@ -114,19 +114,19 @@ export default function CartDrawer() {
                               onClick={() => setQty(line.id, line.qty + 1)}
                               disabled={line.qty >= MAX_LINE_QTY}
                               aria-label={`Increase quantity of ${line.product.name}`}
-                              className="btn-press tap-area flex h-11 w-11 items-center justify-center text-sm text-ink/70 transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30"
+                              className="btn-press tap-area flex h-11 w-11 items-center justify-center text-sm text-ink transition hover:text-ochre disabled:cursor-not-allowed disabled:opacity-30"
                             >
                               +
                             </button>
                           </div>
-                          <span className="tabular-nums text-sm text-ink/70">
+                          <span className="tabular-nums text-sm text-ink">
                             × ${line.unitPrice}
                           </span>
                         </div>
                         <button
                           onClick={() => remove(line.slug)}
                           aria-label={`Remove ${line.product.name}`}
-                          className="tap-area text-[12px] uppercase tracking-[0.14em] text-ink/70 hover:text-ochre"
+                          className="tap-area text-[12px] uppercase tracking-[0.14em] text-ink hover:text-ochre"
                         >
                           <span aria-hidden="true">Remove</span>
                         </button>
@@ -139,13 +139,13 @@ export default function CartDrawer() {
               {nextStep && (
                 <div className="mt-6 border-t border-ink/10 pt-5">
                   <div className="mb-3 flex items-center justify-between">
-                    <p className="text-[12px] uppercase tracking-[0.16em] text-ink/70">
+                    <p className="text-[12px] uppercase tracking-[0.16em] text-ink">
                       Complete the Ritual
                     </p>
                     <button
                       type="button"
                       onClick={() => setUpsellDismissed(true)}
-                      className="tap-area text-[12px] uppercase tracking-[0.14em] text-ink/70 hover:text-ochre"
+                      className="tap-area text-[12px] uppercase tracking-[0.14em] text-ink hover:text-ochre"
                     >
                       Not now
                     </button>
@@ -164,16 +164,16 @@ export default function CartDrawer() {
                       <p className="truncate text-sm font-medium leading-tight">
                         {nextStep.name}
                       </p>
-                      <p className="mt-0.5 truncate text-[12px] uppercase tracking-[0.14em] text-ink/70">
+                      <p className="mt-0.5 truncate text-[12px] uppercase tracking-[0.14em] text-ink">
                         {nextStep.step}
                       </p>
-                      <p className="mt-0.5 text-[12px] text-ink/70">
+                      <p className="mt-0.5 text-[12px] text-ink">
                         {PLAN_DETAIL[upsellMode]}
                       </p>
                     </div>
                     <button
                       onClick={() => add(nextStep.slug, upsellMode)}
-                      className="btn-press min-h-[44px] w-full shrink-0 border border-ink/20 px-3 py-2 text-[12px] uppercase tracking-[0.14em] text-ink/70 transition hover:border-ochre hover:text-ochre sm:w-auto"
+                      className="btn-press min-h-[44px] w-full shrink-0 border border-ink/20 px-3 py-2 text-[12px] uppercase tracking-[0.14em] text-ink transition hover:border-ochre hover:text-ochre sm:w-auto"
                     >
                       {upsellMode === "subscription" ? "Subscribe" : "Add"} · ${upsellPrice}
                     </button>
@@ -203,20 +203,20 @@ export default function CartDrawer() {
                 <span>Estimated total</span>
                 <span className="font-serif text-xl">${estimatedTotal}</span>
               </p>
-              <p className="mb-3 text-center text-[12px] uppercase tracking-[0.14em] text-ink/70">
+              <p className="mb-3 text-center text-[12px] uppercase tracking-[0.14em] text-ink">
                 Key ingredients named
               </p>
               <Link
                 href="/cart"
                 onClick={close}
-                className="flex min-h-[44px] items-center justify-center text-center text-[12px] uppercase tracking-[0.14em] text-ink/80 underline decoration-ink/30 underline-offset-2 hover:text-ochre"
+                className="flex min-h-[44px] items-center justify-center text-center text-[12px] uppercase tracking-[0.14em] text-ink underline decoration-ink/30 underline-offset-2 hover:text-ochre"
               >
                 View bag
               </Link>
               <Link
                 href="/terms#guarantee"
                 onClick={close}
-                className="flex min-h-[44px] items-center justify-center text-center text-[12px] uppercase tracking-[0.14em] text-ink/70 underline decoration-ink/20 underline-offset-2 hover:text-ochre"
+                className="flex min-h-[44px] items-center justify-center text-center text-[12px] uppercase tracking-[0.14em] text-ink underline decoration-ink/20 underline-offset-2 hover:text-ochre"
               >
                 90-Day Guarantee on your first order
               </Link>

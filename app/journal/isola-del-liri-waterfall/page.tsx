@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function WaterfallPage() {
   return (
     <div className="mx-auto w-full max-w-3xl px-margin py-16">
-      <Link href="/journal" className="text-[12px] text-ink/70 hover:text-ochre">
+      <Link href="/journal" className="text-[12px] text-ink hover:text-ochre">
         ← Journal
       </Link>
       <h1 className="mt-2 font-serif text-h1 leading-tight">
@@ -29,7 +29,7 @@ export default function WaterfallPage() {
         />
       </div>
 
-      <div className="mt-10 space-y-6 text-sm leading-relaxed text-ink/80">
+      <div className="mt-10 space-y-6 text-sm leading-relaxed text-ink">
         <p>
           An hour and a half from Rome, in the Liri valley of central Italy,
           sits a town almost no other in Europe can claim to resemble: Isola
@@ -66,7 +66,7 @@ export default function WaterfallPage() {
               className="object-cover"
             />
           </div>
-          <figcaption className="mt-2 text-eyebrow uppercase text-ink/70">
+          <figcaption className="mt-2 text-eyebrow uppercase text-ink">
             Illustration, not a photograph — the town CHIAREL formulates in
           </figcaption>
         </figure>

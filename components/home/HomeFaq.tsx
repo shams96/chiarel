@@ -21,7 +21,7 @@ export default function HomeFaq({ faqs }: { faqs: { question: string; answer: st
                   <span className="ml-4 shrink-0 text-xl text-ochre group-open:hidden" aria-hidden="true">+</span>
                   <span className="ml-4 hidden shrink-0 text-xl text-ochre group-open:inline" aria-hidden="true">−</span>
                 </summary>
-                <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-ink/80">{faq.answer}</p>
+                <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-ink">{faq.answer}</p>
               </details>
             </Reveal>
           ))}
@@ -31,7 +31,7 @@ export default function HomeFaq({ faqs }: { faqs: { question: string; answer: st
           It closes the last content section so nothing sits alone above the footer.
           Wording, link and dates are owned by lib/seo.ts. */}
       <div className="mx-auto mt-14 w-full max-w-container px-margin md:mt-20">
-        <p className="max-w-[44rem] border-t border-hairline pt-5 text-[12px] leading-relaxed text-ink/70">
+        <p className="max-w-[44rem] border-t border-hairline pt-5 text-[12px] leading-relaxed text-ink">
           Written by{" "}
           <a
             href={FORMULATOR_EXTERNAL_URL}

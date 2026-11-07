@@ -50,7 +50,7 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="text-eyebrow uppercase text-ink/70">
+      <label htmlFor={id} className="text-eyebrow uppercase text-ink">
         {label}
       </label>
       {children}
@@ -68,17 +68,17 @@ function Steps() {
   const step = "text-eyebrow uppercase";
   return (
     <ol aria-label="Checkout progress" className="mb-8 flex flex-wrap items-center gap-x-3 gap-y-1">
-      <li className={`${step} text-ink/70`}>
+      <li className={`${step} text-ink`}>
         <Link href="/cart" className="tap-area underline underline-offset-4 hover:text-ochre">
           Bag
         </Link>
       </li>
-      <li aria-hidden="true" className="text-ink/70">/</li>
+      <li aria-hidden="true" className="text-ink">/</li>
       <li className={`${step} text-ink`} aria-current="step">
         Details
       </li>
-      <li aria-hidden="true" className="text-ink/70">/</li>
-      <li className={`${step} text-ink/70`}>Payment</li>
+      <li aria-hidden="true" className="text-ink">/</li>
+      <li className={`${step} text-ink`}>Payment</li>
     </ol>
   );
 }
@@ -218,7 +218,7 @@ export default function CheckoutPage() {
       <div className="mx-auto w-full max-w-container px-margin py-12 md:py-14">
         <h1 className="text-center font-serif text-3xl md:text-h1">Your Ritual Bag</h1>
         <div className="mt-16 flex flex-col items-center gap-4 text-center">
-          <p className="text-sm text-ink/70">Your bag is empty.</p>
+          <p className="text-sm text-ink">Your bag is empty.</p>
           <Link
             href="/ritual"
             className="btn-press inline-block bg-ink px-8 py-3.5 text-eyebrow uppercase text-ivory transition hover:bg-ochre"
@@ -356,7 +356,7 @@ export default function CheckoutPage() {
             </div>
 
             {hasSubscription && (
-              <div className="border border-champagne/60 bg-champagne/10 p-4 text-[12px] leading-relaxed text-ink/70">
+              <div className="border border-champagne/60 bg-champagne/10 p-4 text-[12px] leading-relaxed text-ink">
                 Subscription items renew and ship every 45 days at the price
                 shown, until paused or cancelled. No commitment — write to
                 orders@chiarel.com to adjust anytime.
@@ -369,11 +369,11 @@ export default function CheckoutPage() {
                 A <details> keeps it on this page (no navigation away from a
                 half-filled form) and needs no JS. See
                 claudedocs/specs/dispute-risk-mitigation/. */}
-            <details className="group border border-ink/15 bg-cloud/20 px-4 py-3 text-[13px] leading-relaxed text-ink/80">
+            <details className="group border border-ink/15 bg-cloud/20 px-4 py-3 text-[13px] leading-relaxed text-ink">
               <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between font-medium text-ink">
                 Refund Policy &amp; Terms
-                <span className="ml-4 text-lg text-ink/70 group-open:hidden" aria-hidden="true">+</span>
-                <span className="ml-4 hidden text-lg text-ink/70 group-open:inline" aria-hidden="true">−</span>
+                <span className="ml-4 text-lg text-ink group-open:hidden" aria-hidden="true">+</span>
+                <span className="ml-4 hidden text-lg text-ink group-open:inline" aria-hidden="true">−</span>
               </summary>
               <div className="mt-3 space-y-3">
                 <RefundPolicyContent />
@@ -381,7 +381,7 @@ export default function CheckoutPage() {
             </details>
 
             <div>
-              <label className="flex min-h-[44px] items-center gap-3 text-[12px] leading-relaxed text-ink/80">
+              <label className="flex min-h-[44px] items-center gap-3 text-[12px] leading-relaxed text-ink">
                 <input type="checkbox" name="termsAccepted" id="co-terms" className="h-5 w-5 shrink-0" {...a11y("termsAccepted")} />
                 <span>
                   I have read and agree to the{" "}
@@ -411,7 +411,7 @@ export default function CheckoutPage() {
             >
               {submitting ? "Continuing to payment…" : `${CTA.pay} — $${total}`}
             </button>
-            <p className="text-center text-[12px] text-ink/70">
+            <p className="text-center text-[12px] text-ink">
               You&rsquo;ll enter your card details securely on the next
               screen, processed by Stripe.
             </p>
@@ -428,12 +428,12 @@ export default function CheckoutPage() {
             aria-controls="co-summary"
             className="flex min-h-[44px] w-full items-center justify-between text-left lg:hidden"
           >
-            <span className="text-eyebrow uppercase text-ink/70">
+            <span className="text-eyebrow uppercase text-ink">
               Order Summary {summaryOpen ? "−" : "+"}
             </span>
             <span className="tabular-nums font-serif text-xl">${total}</span>
           </button>
-          <p className="hidden text-eyebrow uppercase text-ink/70 lg:block">Order Summary</p>
+          <p className="hidden text-eyebrow uppercase text-ink lg:block">Order Summary</p>
 
           <div id="co-summary" className={`${summaryOpen ? "block" : "hidden"} lg:block`}>
             <ul className="mt-4 space-y-4">
@@ -450,7 +450,7 @@ export default function CheckoutPage() {
                   </div>
                   <div className="flex-1 text-sm">
                     <p className="leading-tight">{line.product.name}</p>
-                    <p className="text-[12px] text-ink/70">
+                    <p className="text-[12px] text-ink">
                       {modeLabel[line.mode]} · Qty {line.qty}
                     </p>
                   </div>
@@ -462,7 +462,7 @@ export default function CheckoutPage() {
             </ul>
 
             <div className="mt-6 space-y-2 border-t border-ink/10 pt-4 text-sm tabular-nums">
-              <div className="flex justify-between text-ink/70">
+              <div className="flex justify-between text-ink">
                 <span>Subtotal</span>
                 <span>${subtotal}</span>
               </div>
@@ -472,7 +472,7 @@ export default function CheckoutPage() {
                   <span>−${savings}</span>
                 </div>
               )}
-              <div className="flex justify-between text-ink/70">
+              <div className="flex justify-between text-ink">
                 <span>Shipping</span>
                 <span>{shipping === 0 ? "Complimentary" : `$${shipping}`}</span>
               </div>
@@ -480,9 +480,9 @@ export default function CheckoutPage() {
                 <span>Estimated total</span>
                 <span className="font-serif text-xl">${total}</span>
               </div>
-              <p className="text-right text-[12px] text-ink/70">Taxes are calculated at payment.</p>
+              <p className="text-right text-[12px] text-ink">Taxes are calculated at payment.</p>
               {country.currency !== "USD" && (
-                <p className="text-right text-[12px] text-ink/70">
+                <p className="text-right text-[12px] text-ink">
                   {approxConverted(total, country)} — charged in USD, see Terms
                 </p>
               )}

@@ -41,13 +41,13 @@ export default function BarrierResiliencePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <Link href="/science" className="text-[12px] text-ink/70 hover:text-ochre">
+      <Link href="/science" className="text-[12px] text-ink hover:text-ochre">
         ← The Science
       </Link>
       <h1 className="mt-2 font-serif text-h1 leading-tight">
         Building a More Resilient Skin Barrier
       </h1>
-      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/80">
+      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink">
         A working woman&rsquo;s day asks a great deal of her skin. CHIAREL
         formulates for the look of comfortable, cushioned skin through it,
         using the lipids skin already knows.
@@ -56,7 +56,7 @@ export default function BarrierResiliencePage() {
       <section className="mt-12 space-y-10">
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">Ceramides</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
             Ceramides are lipids found between skin cells. Clarity Day Crème
             carries ceramide NP, AP and EOP, for the look and feel of
             comfortable, hydrated skin. Clarity Night Crème carries ceramide NP.
@@ -64,7 +64,7 @@ export default function BarrierResiliencePage() {
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">Cholesterol and squalane</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
             Cholesterol is another of skin&rsquo;s own lipids. Squalane is a
             lightweight, skin-compatible emollient. Together with the
             ceramides they give the crèmes a cushioned, comfortable finish.
@@ -72,7 +72,7 @@ export default function BarrierResiliencePage() {
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">Niacinamide</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
             Niacinamide is chosen for the look of an even, healthy surface.
             It is in all five products: Clarity Essence, Clarity Day Crème,
             Clarity Night Crème, Clarity Neck &amp; Décolleté Crème and
@@ -81,7 +81,7 @@ export default function BarrierResiliencePage() {
         </div>
         <div className="border-l-2 border-ochre pl-6">
           <h2 className="font-serif text-h3 text-ochre">For the neck and chest</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
             Clarity Neck &amp; Décolleté Crème pairs copper peptide with
             ceramides and squalane, for the look of smoother, more hydrated
             skin on the neck and chest.
@@ -89,7 +89,7 @@ export default function BarrierResiliencePage() {
         </div>
       </section>
 
-      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink/70">
+      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink">
         Ceramides, cholesterol and squalane are established ingredients, not
         CHIAREL trademarks or proprietary technologies. This page
         describes how CHIAREL formulates and is not a guarantee of individual
@@ -100,7 +100,7 @@ export default function BarrierResiliencePage() {
         <Link href="/science/lasting-hydration" className="border-b border-ochre pb-0.5 text-ochre">
           Lasting Hydration →
         </Link>
-        <Link href="/shop" className="border-b border-ink/30 pb-0.5 text-ink/70">
+        <Link href="/shop" className="border-b border-ink/30 pb-0.5 text-ink">
           Visit The Shop
         </Link>
       </div>

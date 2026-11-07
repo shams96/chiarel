@@ -51,7 +51,7 @@ export default async function Founding100Page() {
             <h1 className="mt-5 font-serif text-h1 leading-[0.98] tracking-[-0.01em] md:text-6xl">
               The Founding Members
             </h1>
-            <p className="mt-6 max-w-md text-[15px] leading-relaxed text-ink/80">
+            <p className="mt-6 max-w-md text-[15px] leading-relaxed text-ink">
               One hundred places, each one numbered. We are opening the House
               to its first hundred members, and they will meet every new
               formula before anyone else.
@@ -63,7 +63,7 @@ export default async function Founding100Page() {
               <span className="tabular-nums font-serif text-4xl text-ochre">
                 {remaining}
               </span>
-              <span className="text-[12px] uppercase leading-tight tracking-[0.14em] text-ink/70">
+              <span className="text-[12px] uppercase leading-tight tracking-[0.14em] text-ink">
                 {full ? (
                   <>places left on the list
                   <br />
@@ -74,14 +74,14 @@ export default async function Founding100Page() {
               </span>
             </div>
 
-            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-1 border-t border-ink/15 pt-5 text-[12px] text-ink/70">
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-1 border-t border-ink/15 pt-5 text-[12px] text-ink">
               <span>Formulated by the House of CHIAREL, with Grazia Savoriti, Pharmacist</span>
               <span>Built around L-Ornithine and Panthenol</span>
             </div>
 
             <div className="mt-8">
               {full ? (
-                <p className="card-elevated rounded-md bg-cloud p-6 text-sm leading-relaxed text-ink/80">
+                <p className="card-elevated rounded-md bg-cloud p-6 text-sm leading-relaxed text-ink">
                   The Founding Members are complete.{" "}
                   <Link href={productHref("recovery-masque")} className="border-b border-ochre text-ochre">
                     Begin the 90-Day Ritual
@@ -100,7 +100,7 @@ export default async function Founding100Page() {
       <section className="space-y-10">
         <div className="border-l-2 border-ochre pl-6">
           <h2 className="font-serif text-h3 text-ochre">How it works</h2>
-          <ol className="mt-3 max-w-xl space-y-3 text-sm leading-relaxed text-ink/80">
+          <ol className="mt-3 max-w-xl space-y-3 text-sm leading-relaxed text-ink">
             <li>
               <strong className="text-ink">1. Join.</strong> Choose your ritual
               at its published price. The 90-day plan, paid once,
@@ -126,9 +126,9 @@ export default async function Founding100Page() {
 
         <div className="border-l-2 border-ink/20 pl-6">
           <h2 className="font-serif text-h3 text-ochre">Terms</h2>
-          <ul className="mt-3 max-w-xl list-disc space-y-2 pl-5 text-[13px] leading-relaxed text-ink/70">
+          <ul className="mt-3 max-w-xl list-disc space-y-2 pl-5 text-[13px] leading-relaxed text-ink">
             <li>
-              <strong className="text-ink/80">Founding Members.</strong> Limited
+              <strong className="text-ink">Founding Members.</strong> Limited
               to the first 100 qualifying orders. A qualifying order is one
               90-day plan purchase of an enrolled product at its
               published price. Limit one enrolment per household. The benefits
@@ -136,13 +136,13 @@ export default async function Founding100Page() {
               members without affecting existing members.
             </li>
             <li>
-              <strong className="text-ink/80">No payment for content.</strong>{" "}
+              <strong className="text-ink">No payment for content.</strong>{" "}
               Members are never required to submit content and receive nothing
               in exchange for it. Anything a member chooses to share must be an
               honest account of their experience.
             </li>
             <li>
-              <strong className="text-ink/80">Content rights.</strong> For
+              <strong className="text-ink">Content rights.</strong> For
               content a member voluntarily submits, the member grants CHIAREL
               (a division of 1HubSolutions, LLC) a non-exclusive, worldwide
               licence to display it on CHIAREL&rsquo;s channels with the
@@ -161,7 +161,7 @@ export default async function Founding100Page() {
         <Link href={productHref("recovery-masque")} className="border-b border-ochre pb-0.5 text-ochre">
           Begin the 90-Day Ritual
         </Link>
-        <Link href="/science" className="border-b border-ink/30 pb-0.5 text-ink/70">
+        <Link href="/science" className="border-b border-ink/30 pb-0.5 text-ink">
           The Science
         </Link>
       </div>

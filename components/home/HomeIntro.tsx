@@ -25,7 +25,7 @@ export default function HomeIntro() {
           </h2>
         </Reveal>
         <Reveal delay={0.16} className="col-span-full mt-4 lg:col-span-4 lg:col-start-9 lg:mt-6">
-          <p className="max-w-measure text-lead text-ink/80">{formulationLine()}</p>
+          <p className="max-w-measure text-lead text-ink">{formulationLine()}</p>
         </Reveal>
       </Grid>
     </Section>

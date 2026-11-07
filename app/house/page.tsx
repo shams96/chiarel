@@ -19,7 +19,7 @@ export default function HousePage() {
           image here ("hero.png") was a mislabeled product-jar mockup, not a place
           photo. Deliberately text-only until real location photography exists. */}
 
-      <div className="space-y-10 text-body text-ink/80 col-span-full lg:col-span-8 lg:col-start-5">
+      <div className="space-y-10 text-body text-ink col-span-full lg:col-span-8 lg:col-start-5">
         <section>
           <h2 className="font-serif text-h3 text-ochre">Isola del Liri</h2>
           <p className="mt-2 max-w-2xl">

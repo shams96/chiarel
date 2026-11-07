@@ -41,13 +41,13 @@ export default function LOrnithinePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <Link href="/science" className="text-[12px] text-ink/70 hover:text-ochre">
+      <Link href="/science" className="text-[12px] text-ink hover:text-ochre">
         ← The Science
       </Link>
       <h1 className="mt-2 font-serif text-h1 leading-tight">
         L-Ornithine, Explained
       </h1>
-      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink/80">
+      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink">
         An amino acid already native to skin&rsquo;s own moisture system.
         Explained here in the third person, as an educational reference.
       </p>
@@ -55,7 +55,7 @@ export default function LOrnithinePage() {
       <section className="mt-12 space-y-10">
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">What it is</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
             An amino acid and component of the skin&rsquo;s Natural
             Moisturising Factor (NMF) — the mix of small molecules the
             skin itself produces.
@@ -63,21 +63,21 @@ export default function LOrnithinePage() {
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">How it works</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
             Used in Clarity Night Crème for the look and feel of soft,
             hydrated skin.
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">Associated outcomes</h2>
-          <ul className="mt-2 max-w-xl list-disc space-y-1 pl-5 text-sm leading-relaxed text-ink/70">
+          <ul className="mt-2 max-w-xl list-disc space-y-1 pl-5 text-sm leading-relaxed text-ink">
             <li>Hydration feel and softness</li>
             <li>The look of smoother texture</li>
           </ul>
         </div>
         <div className="border-l-2 border-ochre pl-6">
           <h2 className="font-serif text-h3 text-ochre">How CHIAREL formulates with it</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
             Found in Clarity Night Crème only, alongside bakuchiol, peptides and
             niacinamide, for the look of smoother texture overnight. See{" "}
             <Link href="/science" className="border-b border-ochre text-ochre">
@@ -88,7 +88,7 @@ export default function LOrnithinePage() {
         </div>
       </section>
 
-      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink/70">
+      <p className="mt-14 max-w-2xl text-[12px] leading-relaxed text-ink">
         L-Ornithine is an ingredient name, not a CHIAREL trademark. This
         page is an educational reference and is not a guarantee of individual
         results.
@@ -98,7 +98,7 @@ export default function LOrnithinePage() {
         <Link href="/science/bifida-ferment-lysate" className="border-b border-ochre pb-0.5 text-ochre">
           Bifida Ferment Lysate, Explained →
         </Link>
-        <Link href="/shop/clarity-night-creme" className="border-b border-ink/30 pb-0.5 text-ink/70">
+        <Link href="/shop/clarity-night-creme" className="border-b border-ink/30 pb-0.5 text-ink">
           Shop Clarity Night Crème
         </Link>
       </div>

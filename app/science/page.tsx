@@ -66,10 +66,10 @@ export default function SciencePage() {
         {entries.map((e) => (
           <div key={e.slug} className="border-l-2 border-champagne pl-6">
             <h2 className="font-serif text-h3 text-ochre">{e.name}</h2>
-            <p className="mt-1 text-eyebrow uppercase text-ink/70">
+            <p className="mt-1 text-eyebrow uppercase text-ink">
               {e.answers}
             </p>
-            <p className="mt-2 max-w-xl text-sm text-ink/70">{e.science}</p>
+            <p className="mt-2 max-w-xl text-sm text-ink">{e.science}</p>
             <Link
               href={productHref(e.slug)}
               className="mt-3 inline-block border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
@@ -87,13 +87,13 @@ export default function SciencePage() {
         <Link href="/science/lasting-hydration" className="border-b border-ochre pb-0.5 text-ochre">
           Lasting Hydration →
         </Link>
-        <Link href="/science/application" className="border-b border-ink/30 pb-0.5 text-ink/70">
+        <Link href="/science/application" className="border-b border-ink/30 pb-0.5 text-ink">
           Application Guide
         </Link>
-        <Link href="/science/bifida-ferment-lysate" className="border-b border-ink/30 pb-0.5 text-ink/70">
+        <Link href="/science/bifida-ferment-lysate" className="border-b border-ink/30 pb-0.5 text-ink">
           Bifida Ferment Lysate
         </Link>
-        <Link href="/science/l-ornithine" className="border-b border-ink/30 pb-0.5 text-ink/70">
+        <Link href="/science/l-ornithine" className="border-b border-ink/30 pb-0.5 text-ink">
           L-Ornithine
         </Link>
       </div>

@@ -21,14 +21,14 @@ const retired = [
 export default function ReadingLabelPage() {
   return (
     <div className="mx-auto w-full max-w-3xl px-margin py-16">
-      <Link href="/journal" className="text-[12px] text-ink/70 hover:text-ochre">
+      <Link href="/journal" className="text-[12px] text-ink hover:text-ochre">
         ← Journal
       </Link>
       <h1 className="mt-2 font-serif text-h1 leading-tight">
         Reading a Label Like the House Does
       </h1>
 
-      <div className="mt-8 space-y-6 text-sm leading-relaxed text-ink/80">
+      <div className="mt-8 space-y-6 text-sm leading-relaxed text-ink">
         <p>
           Most skincare copy is written to be believed quickly. CHIAREL™
           copy is written to be checked. The distinction is a single
@@ -54,10 +54,10 @@ export default function ReadingLabelPage() {
         </p>
 
         <div className="border border-ink/10 bg-white/60 p-5">
-          <p className="text-eyebrow uppercase text-ink/70">
+          <p className="text-eyebrow uppercase text-ink">
             Words you will not find on a CHIAREL label
           </p>
-          <p className="mt-2 text-sm text-ink/70">{retired.join(" · ")}</p>
+          <p className="mt-2 text-sm text-ink">{retired.join(" · ")}</p>
         </div>
 
         <p>

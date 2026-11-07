@@ -53,6 +53,12 @@ body {
      luxury site, applied on top of the ratified Jost/Libre Bodoni pairing, not a
      wholesale adoption of Apple's numeric scale. */
   font-size: 17px;
+  /* One crisp rendering rule for every word: kerning and ligatures on, and never a
+     browser-faked bold or italic (Libre Bodoni's real 400-600 axis is loaded), so
+     Bodoni's hairlines stay true at every size. Rendering only; the family is locked. */
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+  font-synthesis: none;
 }
 
 /* Balanced heading wraps — prevents a single orphaned word sitting alone

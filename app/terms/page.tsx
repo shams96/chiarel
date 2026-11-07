@@ -14,11 +14,11 @@ export default function TermsPage() {
   return (
     <div className="mx-auto max-w-2xl px-6 py-16">
       <h1 className="font-serif text-h1 leading-tight">Terms of Service</h1>
-      <p className="mt-3 text-eyebrow uppercase text-ink/70">
+      <p className="mt-3 text-eyebrow uppercase text-ink">
         Effective {EFFECTIVE_DATE}
       </p>
 
-      <div className="mt-10 space-y-10 text-sm leading-relaxed text-ink/80">
+      <div className="mt-10 space-y-10 text-sm leading-relaxed text-ink">
         <section>
           <h2 className="font-serif text-h4 text-ink">Orders &amp; pricing</h2>
           <p className="mt-3">

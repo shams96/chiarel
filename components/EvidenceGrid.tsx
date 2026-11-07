@@ -31,7 +31,7 @@ export default function EvidenceGrid({ products }: { products: Product[] }) {
           <p className="font-serif text-2xl leading-snug text-ochre transition group-hover:text-ink">
             {e.activeName}
           </p>
-          <p className="mt-1 text-[12px] uppercase tracking-[0.18em] text-ink/70">
+          <p className="mt-1 text-[12px] uppercase tracking-[0.18em] text-ink">
             {e.productName}
           </p>
         </Link>

@@ -109,7 +109,7 @@ export default async function ProductPage({
             actual visitor. Same typographic voice as every other small label
             on the site (11px uppercase tracked, ink/65 -> ochre on hover),
             not a new pattern. */}
-        <nav aria-label="Breadcrumb" className="mb-4 text-[12px] uppercase tracking-[0.14em] text-ink/70 md:mb-6">
+        <nav aria-label="Breadcrumb" className="mb-4 text-[12px] uppercase tracking-[0.14em] text-ink md:mb-6">
           <ol className="flex items-center gap-2">
             <li>
               <Link href="/shop" className="tap-area hover:text-ochre">Shop</Link>
@@ -138,7 +138,7 @@ export default async function ProductPage({
             <h1 className="font-serif text-h3 md:text-h2">
               {p.name}
             </h1>
-            <p className="mt-2 text-caption text-ink/70">{p.descriptor}</p>
+            <p className="mt-2 text-caption text-ink">{p.descriptor}</p>
             {/* Slot: star rating / review count summary. Renders nothing
                 until a real review source exists (never fabricated). */}
             <ProductRatingSlot slug={p.slug} />
@@ -158,7 +158,7 @@ export default async function ProductPage({
               )}
             </div>
 
-            <p className="mt-6 max-w-measure text-body text-ink/80 md:mt-8">
+            <p className="mt-6 max-w-measure text-body text-ink md:mt-8">
               {p.blurb}
             </p>
             {p.role && (
@@ -166,7 +166,7 @@ export default async function ProductPage({
                 {p.role}
               </p>
             )}
-            <p className="mt-4 text-[12px] leading-relaxed text-ink/70">
+            <p className="mt-4 text-[12px] leading-relaxed text-ink">
               {productFactSummary(p)}
             </p>
 
@@ -175,15 +175,15 @@ export default async function ProductPage({
             {/* Specification sheet: ruled rows, tracked labels, values at lead size */}
             <dl className="mt-8 border-t border-ink">
               <div className="grid grid-cols-[minmax(7.5rem,max-content)_1fr] items-baseline gap-gutter border-b border-ink/25 py-3">
-                <dt className="text-eyebrow uppercase text-ink/70">Step</dt>
+                <dt className="text-eyebrow uppercase text-ink">Step</dt>
                 <dd className="text-lead">{p.step}</dd>
               </div>
               <div className="grid grid-cols-[minmax(7.5rem,max-content)_1fr] items-baseline gap-gutter border-b border-ink/25 py-3">
-                <dt className="text-eyebrow uppercase text-ink/70">Size</dt>
+                <dt className="text-eyebrow uppercase text-ink">Size</dt>
                 <dd className="text-lead">{p.size}</dd>
               </div>
               <div className="grid grid-cols-[minmax(7.5rem,max-content)_1fr] items-baseline gap-gutter border-b border-ink py-3">
-                <dt className="text-eyebrow uppercase text-ink/70">Glass colour</dt>
+                <dt className="text-eyebrow uppercase text-ink">Glass colour</dt>
                 <dd className="flex items-center gap-2 text-lead">
                   <span
                     className="inline-block h-3 w-3 border border-ink/30"
@@ -195,7 +195,7 @@ export default async function ProductPage({
               </div>
             </dl>
             {(p.slug === "terra-radiance-creme" || p.slug === "recovery-masque") && (
-              <p className="mt-4 text-[12px] text-ink/70">
+              <p className="mt-4 text-[12px] text-ink">
                 Wondering why day and night formulas feel different?{" "}
                 <Link
                   href="/journal/chiarel-ritual-guide"
@@ -331,7 +331,7 @@ function BenefitPills({
           {pills.map((pill) => (
             <li
               key={pill}
-              className="flex items-center gap-2 text-[12px] uppercase tracking-[0.14em] text-ink/70"
+              className="flex items-center gap-2 text-[12px] uppercase tracking-[0.14em] text-ink"
             >
               <span className="inline-block h-1 w-1 rounded-full bg-ochre" aria-hidden="true" />
               {pill}
@@ -350,7 +350,7 @@ function BenefitPills({
 function BrandStatement() {
   return (
     <PdpBlock id="house" title="A House Built on One Rule">
-      <div className="max-w-measure space-y-5 text-body text-ink/80">
+      <div className="max-w-measure space-y-5 text-body text-ink">
         <p>
           The question started at a kitchen table, not a lab — one
           household, three different skin types, and a bathroom cabinet
@@ -424,7 +424,7 @@ function PdpBlock({
 function Formulation() {
   return (
     <PdpBlock id="formulation" title="Formulation">
-      <p data-formulation-statement className="max-w-measure text-body text-ink/80">
+      <p data-formulation-statement className="max-w-measure text-body text-ink">
         {formulationLine()} {FREE_FROM_SENTENCE}
       </p>
     </PdpBlock>
@@ -436,7 +436,7 @@ function KeyBenefits({ benefits }: { benefits: string[] }) {
     <PdpBlock id="key-benefits" title="Key benefits">
       <ul className="grid gap-x-[var(--gutter)] gap-y-8 sm:grid-cols-3">
         {benefits.map((b, i) => (
-          <li key={b} className="border-t border-ink/20 pt-4 text-body text-ink/80">
+          <li key={b} className="border-t border-ink/20 pt-4 text-body text-ink">
             <span className="font-serif text-h4 text-ochre">
               {String(i + 1).padStart(2, "0")}
             </span>
@@ -463,7 +463,7 @@ function IncludedSpatula() {
         </div>
         <div>
           <h3 className="font-serif text-h4 text-ochre">The CHIAREL Spatula</h3>
-          <p className="mt-2 text-sm leading-relaxed text-ink/70">
+          <p className="mt-2 text-sm leading-relaxed text-ink">
             A Champagne Gold spatula for a hygienic, precise application —
             the ritual&rsquo;s closing gesture, done properly.
           </p>
@@ -484,7 +484,7 @@ function KeyIngredients({
 
   return (
     <PdpBlock id="key-ingredients" title="Key ingredients">
-      <p className="max-w-measure text-body text-ink/80">
+      <p className="max-w-measure text-body text-ink">
         The ingredients this formula is built around, named plainly.
       </p>
       <ul className="mt-6 grid gap-x-[var(--gutter)] gap-y-5 sm:grid-cols-2">
@@ -507,7 +507,7 @@ function PriceToBeAnnounced() {
       <p className="text-[12px] uppercase tracking-[0.18em] text-ochre">
         Price to be announced
       </p>
-      <p className="mt-2 text-sm leading-relaxed text-ink/70">
+      <p className="mt-2 text-sm leading-relaxed text-ink">
         Not yet available for purchase. In the meantime,{" "}
         <Link href="/contact" className="border-b border-ochre text-ochre">
           contact us
@@ -532,7 +532,7 @@ function N1WhatItsForAndFeel() {
       <div className="mx-auto grid max-w-3xl gap-10 px-6 sm:grid-cols-2">
         <div>
           <h2 className="font-serif text-h3 text-ochre">What it&rsquo;s for</h2>
-          <ul className="mt-4 space-y-2 text-sm leading-relaxed text-ink/80">
+          <ul className="mt-4 space-y-2 text-sm leading-relaxed text-ink">
             <li>· The visible appearance of dryness</li>
             <li>· Crepey-looking texture</li>
             <li>· The appearance of horizontal lines</li>
@@ -541,7 +541,7 @@ function N1WhatItsForAndFeel() {
         </div>
         <div>
           <h2 className="font-serif text-h3 text-ochre">What it feels like</h2>
-          <ul className="mt-4 space-y-2 text-sm leading-relaxed text-ink/80">
+          <ul className="mt-4 space-y-2 text-sm leading-relaxed text-ink">
             <li>· Finished with a delicate CHIAREL accord</li>
             <li>· Cushioning</li>
             <li>· Low drag</li>
@@ -559,7 +559,7 @@ function N1WhatItsForAndFeel() {
 function HowToUse({ steps }: { steps: string[] }) {
   return (
     <PdpBlock id="how-to-use" title="How to use">
-      <ol className="max-w-measure space-y-3 text-body text-ink/80">
+      <ol className="max-w-measure space-y-3 text-body text-ink">
         {steps.map((step, i) => (
           <li key={step} className="flex gap-4 border-t border-ink/15 pt-3">
             <span className="font-serif text-ochre" aria-hidden="true">{i + 1}.</span>
@@ -578,12 +578,12 @@ function FullIngredientList({ inci }: { inci: string[] }) {
   return (
     <PdpBlock id="full-ingredients" title="Full ingredient list">
       <details className="group max-w-measure">
-        <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between text-eyebrow uppercase text-ink/80">
+        <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between text-eyebrow uppercase text-ink">
           Show the full list
-          <span className="ml-4 text-xl text-ink/70 group-open:hidden" aria-hidden="true">+</span>
-          <span className="ml-4 hidden text-xl text-ink/70 group-open:inline" aria-hidden="true">−</span>
+          <span className="ml-4 text-xl text-ink group-open:hidden" aria-hidden="true">+</span>
+          <span className="ml-4 hidden text-xl text-ink group-open:inline" aria-hidden="true">−</span>
         </summary>
-        <p className="mt-4 text-caption leading-relaxed text-ink/80">{inci.join(", ")}</p>
+        <p className="mt-4 text-caption leading-relaxed text-ink">{inci.join(", ")}</p>
       </details>
     </PdpBlock>
   );
@@ -635,7 +635,7 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
   function RouteStrip({ label, route }: { label: string; route: string[] }) {
     return (
       <div>
-        <p className="text-[12px] uppercase tracking-[0.16em] text-ink/70">{label}</p>
+        <p className="text-[12px] uppercase tracking-[0.16em] text-ink">{label}</p>
         <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-6">
           {route.map((slug, i) => {
             const item = getProduct(slug);
@@ -650,12 +650,12 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
                 ) : (
                   <Link
                     href={productHref(slug)}
-                    className="tap-area text-sm text-ink/70 hover:text-ochre"
+                    className="tap-area text-sm text-ink hover:text-ochre"
                   >
                     {item.name}
                   </Link>
                 )}
-                {i < route.length - 1 && <span className="text-ink/70">→</span>}
+                {i < route.length - 1 && <span className="text-ink">→</span>}
               </span>
             );
           })}
@@ -673,7 +673,7 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
       </div>
       {pairs.length > 0 && (
         <div className="mt-10 border-t border-ink/10 pt-8">
-          <p className="text-center text-[12px] uppercase tracking-[0.16em] text-ink/70">
+          <p className="text-center text-[12px] uppercase tracking-[0.16em] text-ink">
             Complete your regimen
           </p>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -691,11 +691,11 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
                   </div>
                   <div>
                     <p className="font-serif text-base leading-snug">{item.name}</p>
-                    <p className="mt-0.5 text-[12px] uppercase tracking-[0.16em] text-ink/70">
+                    <p className="mt-0.5 text-[12px] uppercase tracking-[0.16em] text-ink">
                       {item.step}
                     </p>
                     {isPurchasable(item) && (
-                      <p className="mt-1 text-[12px] text-ink/70">
+                      <p className="mt-1 text-[12px] text-ink">
                         ${item.price.subscription} per delivery, subscribe &amp; save
                       </p>
                     )}
@@ -733,7 +733,7 @@ function IngredientNotes({ slug }: { slug: string }) {
   if (!links) return null;
   return (
     <PdpBlock id="ingredient-notes" title="Ingredient notes">
-      <p className="max-w-measure text-body text-ink/80">
+      <p className="max-w-measure text-body text-ink">
         Plain-language explainers for ingredients in this formula. They
         describe the ingredients, not test results for this product.
       </p>
@@ -780,10 +780,10 @@ function UsageGuidance() {
           <details className="group py-5">
             <summary className="flex cursor-pointer list-none items-center justify-between font-serif text-lg text-ink">
               Patch test first
-              <span className="ml-4 text-xl text-ink/70 group-open:hidden" aria-hidden="true">+</span>
-              <span className="ml-4 hidden text-xl text-ink/70 group-open:inline" aria-hidden="true">−</span>
+              <span className="ml-4 text-xl text-ink group-open:hidden" aria-hidden="true">+</span>
+              <span className="ml-4 hidden text-xl text-ink group-open:inline" aria-hidden="true">−</span>
             </summary>
-            <p className="mt-3 text-sm leading-relaxed text-ink/70">
+            <p className="mt-3 text-sm leading-relaxed text-ink">
               Apply a small amount to the inner forearm and wait 24 hours
               before using on the face. This is standard practice for any
               new skincare product, regardless of formulation.
@@ -792,10 +792,10 @@ function UsageGuidance() {
           <details className="group py-5">
             <summary className="flex cursor-pointer list-none items-center justify-between font-serif text-lg text-ink">
               Using alongside retinoids or acids
-              <span className="ml-4 text-xl text-ink/70 group-open:hidden" aria-hidden="true">+</span>
-              <span className="ml-4 hidden text-xl text-ink/70 group-open:inline" aria-hidden="true">−</span>
+              <span className="ml-4 text-xl text-ink group-open:hidden" aria-hidden="true">+</span>
+              <span className="ml-4 hidden text-xl text-ink group-open:inline" aria-hidden="true">−</span>
             </summary>
-            <p className="mt-3 text-sm leading-relaxed text-ink/70">
+            <p className="mt-3 text-sm leading-relaxed text-ink">
               If your routine already includes a retinoid or an exfoliating
               acid (AHA/BHA), introduce this product gradually — for
               example, on alternating nights — and reduce frequency if you
@@ -804,7 +804,7 @@ function UsageGuidance() {
             </p>
           </details>
         </div>
-        <p className="mt-10 text-center text-[12px] leading-relaxed text-ink/70">
+        <p className="mt-10 text-center text-[12px] leading-relaxed text-ink">
           Questions about how this fits your routine?{" "}
           <Link href="/contact" className="border-b border-ochre text-ochre">
             Contact us

@@ -30,7 +30,7 @@ export default function PageHead({
             ))}
           </h1>
           {children && (
-            <div className="col-span-full mt-4 max-w-measure text-lead text-ink/80 lg:col-span-5 lg:col-start-1">
+            <div className="col-span-full mt-4 max-w-measure text-lead text-ink lg:col-span-5 lg:col-start-1">
               {children}
             </div>
           )}

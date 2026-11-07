@@ -48,7 +48,7 @@ export function CheckoutHeader() {
         </Link>
         <Link
           href={exit.href}
-          className="tap-area text-eyebrow uppercase text-ink/70 underline underline-offset-4 hover:text-ochre"
+          className="tap-area text-eyebrow uppercase text-ink underline underline-offset-4 hover:text-ochre"
         >
           {exit.label}
         </Link>

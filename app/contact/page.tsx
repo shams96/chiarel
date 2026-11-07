@@ -14,14 +14,14 @@ export default function ContactPage() {
   return (
     <div className="mx-auto max-w-2xl px-6 py-16">
       <h1 className="font-serif text-h1 leading-tight">Contact</h1>
-      <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink/70">
+      <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink">
         CHIAREL™ is a small house — every message reaches a real person, not
         a queue.
       </p>
 
-      <dl className="mt-12 space-y-8 text-sm leading-relaxed text-ink/80">
+      <dl className="mt-12 space-y-8 text-sm leading-relaxed text-ink">
         <div>
-          <dt className="text-eyebrow uppercase text-ink/70">
+          <dt className="text-eyebrow uppercase text-ink">
             General Inquiries
           </dt>
           <dd className="mt-2">
@@ -34,7 +34,7 @@ export default function ContactPage() {
           </dd>
         </div>
         <div>
-          <dt className="text-eyebrow uppercase text-ink/70">
+          <dt className="text-eyebrow uppercase text-ink">
             Order Support
           </dt>
           <dd className="mt-2 max-w-md">
@@ -49,7 +49,7 @@ export default function ContactPage() {
           </dd>
         </div>
         <div>
-          <dt className="text-eyebrow uppercase text-ink/70">
+          <dt className="text-eyebrow uppercase text-ink">
             Press
           </dt>
           <dd className="mt-2 max-w-md">
@@ -68,7 +68,7 @@ export default function ContactPage() {
           </dd>
         </div>
         <div>
-          <dt className="text-eyebrow uppercase text-ink/70">
+          <dt className="text-eyebrow uppercase text-ink">
             Formulation &amp; Manufacturing
           </dt>
           <dd className="mt-2 max-w-md">
@@ -86,13 +86,13 @@ export default function ContactPage() {
         <EmailSignup source="contact" />
       </div>
 
-      <p className="mt-16 max-w-xl text-[12px] leading-relaxed text-ink/70">
+      <p className="mt-16 max-w-xl text-[12px] leading-relaxed text-ink">
         CHIAREL™ is operated by 1HubSolutions, LLC. See our{" "}
-        <Link href="/privacy" className="border-b border-ink/30 text-ink/70">
+        <Link href="/privacy" className="border-b border-ink/30 text-ink">
           Privacy Policy
         </Link>{" "}
         and{" "}
-        <Link href="/terms" className="border-b border-ink/30 text-ink/70">
+        <Link href="/terms" className="border-b border-ink/30 text-ink">
           Terms of Service
         </Link>
         .

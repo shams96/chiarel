@@ -42,6 +42,6 @@ describe("targeted tap-target fixes", () => {
 
   it("bag and routine product links have a hit area", () => {
     expect(read("components/CartPageContent.tsx")).toMatch(/tap-area font-serif text-lg/);
-    expect(read("app/shop/[slug]/page.tsx")).toMatch(/tap-area text-sm text-ink\/70/);
+    expect(read("app/shop/[slug]/page.tsx")).toMatch(/tap-area text-sm text-ink\b/);
   });
 });

@@ -30,7 +30,7 @@ export default function JournalPage() {
                 {e.title}
               </h2>
             </Link>
-            <p className="mt-2 max-w-xl text-sm text-ink/70">{e.excerpt}</p>
+            <p className="mt-2 max-w-xl text-sm text-ink">{e.excerpt}</p>
             <Link
               href={`/journal/${e.slug}`}
               className="mt-3 inline-block border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"

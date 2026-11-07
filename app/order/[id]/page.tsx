@@ -103,14 +103,14 @@ export default async function OrderConfirmationPage({
       {isPaid && <p className="mb-3 text-eyebrow uppercase text-ochre">Welcome to the House of Clarity</p>}
       <h1 className="font-serif text-3xl">Thank you, {order.firstName}.</h1>
       {isPaid ? (
-        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink/70">
+        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink">
           Payment received. Order{" "}
           <span className="font-medium text-ink">#{order.id.slice(-8).toUpperCase()}</span>{" "}
           is confirmed
           {order.confirmationEmailAt ? ` — a confirmation has been sent to ${order.email}.` : "."}
         </p>
       ) : (
-        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink/70">
+        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink">
           We couldn&rsquo;t confirm payment for order{" "}
           <span className="font-medium text-ink">#{order.id.slice(-8).toUpperCase()}</span>{" "}
           yet. If you completed checkout, please{" "}
@@ -133,7 +133,7 @@ export default async function OrderConfirmationPage({
             </div>
             <div className="flex-1 text-sm">
               <p className="leading-tight">{item.product.name}</p>
-              <p className="text-[12px] text-ink/70">
+              <p className="text-[12px] text-ink">
                 {modeLabel[item.mode]} · Qty {item.qty}
               </p>
             </div>
@@ -143,7 +143,7 @@ export default async function OrderConfirmationPage({
       </ul>
 
       <div className="mt-6 space-y-2 border-t border-ink/10 pt-4 text-left text-sm">
-        <div className="flex justify-between text-ink/70">
+        <div className="flex justify-between text-ink">
           <span>Subtotal</span>
           <span>${order.subtotal}</span>
         </div>
@@ -153,12 +153,12 @@ export default async function OrderConfirmationPage({
             <span>−${order.savings}</span>
           </div>
         )}
-        <div className="flex justify-between text-ink/70">
+        <div className="flex justify-between text-ink">
           <span>Shipping</span>
           <span>{order.shipping === 0 ? "Complimentary" : `$${order.shipping}`}</span>
         </div>
         {isPaid && taxCents > 0 && (
-          <div className="flex justify-between text-ink/70">
+          <div className="flex justify-between text-ink">
             <span>Tax</span>
             <span>${(taxCents / 100).toFixed(2)}</span>
           </div>
@@ -176,12 +176,12 @@ export default async function OrderConfirmationPage({
           <h2 id="ritual-start" className="font-serif text-xl">
             Your CHIAREL Ritual
           </h2>
-          <p className="mt-1 text-[13px] text-ink/70">How to use what you ordered.</p>
+          <p className="mt-1 text-[13px] text-ink">How to use what you ordered.</p>
           <div className="mt-4 space-y-5">
             {usage.map((u) => (
               <div key={u.slug}>
                 <h3 className="text-sm font-medium">{u.name}</h3>
-                <ol className="mt-1.5 list-decimal space-y-1 pl-5 text-[13px] leading-relaxed text-ink/80">
+                <ol className="mt-1.5 list-decimal space-y-1 pl-5 text-[13px] leading-relaxed text-ink">
                   {u.steps.map((s, i) => (
                     <li key={i}>{s}</li>
                   ))}

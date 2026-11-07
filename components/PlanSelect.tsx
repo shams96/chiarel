@@ -12,7 +12,7 @@ export default function PlanSelect({ line }: { line: CartLine }) {
   const { changePlan } = useCart();
   const product = getProduct(line.slug);
   if (!product || !isPurchasable(product)) {
-    return <p className="text-[13px] text-ink/70">{PLAN_NAME[line.mode]}</p>;
+    return <p className="text-[13px] text-ink">{PLAN_NAME[line.mode]}</p>;
   }
   const options = planOptions(line.slug, product.price.subscription, product.price.oneTime);
   return (
@@ -32,7 +32,7 @@ export default function PlanSelect({ line }: { line: CartLine }) {
           </option>
         ))}
       </select>
-      <p className="mt-1.5 text-[12px] text-ink/70">
+      <p className="mt-1.5 text-[12px] text-ink">
         {options.find((o) => o.mode === line.mode)?.detail}
       </p>
     </div>

@@ -106,13 +106,13 @@ export default function BuildYourRitualPage() {
                 </div>
               </div>
               <div>
-                <p className="text-eyebrow uppercase text-ink/70">
+                <p className="text-eyebrow uppercase text-ink">
                   {p.timeOfUse} · {p.descriptor}
                 </p>
                 <p className="mt-1 text-sm font-medium leading-tight">
                   {p.name}
                 </p>
-                <p className="mt-1 text-sm text-ink/70">
+                <p className="mt-1 text-sm text-ink">
                   ${p.price.subscription} with subscription
                 </p>
               </div>
@@ -137,18 +137,18 @@ export default function BuildYourRitualPage() {
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 className="object-cover"
               />
-              <span className="absolute left-2 top-2 bg-ivory/90 px-2 py-1 text-eyebrow uppercase text-ink/70">
+              <span className="absolute left-2 top-2 bg-ivory/90 px-2 py-1 text-eyebrow uppercase text-ink">
                 Coming Soon
               </span>
             </div>
             <div>
-              <p className="text-eyebrow uppercase text-ink/70">
+              <p className="text-eyebrow uppercase text-ink">
                 {p.timeOfUse} · {p.descriptor}
               </p>
               <p className="mt-1 text-sm font-medium leading-tight">
                 {p.name}
               </p>
-              <p className="mt-1 text-sm text-ink/70">Price to be announced</p>
+              <p className="mt-1 text-sm text-ink">Price to be announced</p>
             </div>
           </div>
         ))}
@@ -159,7 +159,7 @@ export default function BuildYourRitualPage() {
           <span className="font-medium">
             {chosen.length} {chosen.length === 1 ? "step" : "steps"} selected
           </span>
-          <span className="ml-2 text-ink/70">
+          <span className="ml-2 text-ink">
             · ${subtotal} every 45 days
           </span>
         </p>
