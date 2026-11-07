@@ -119,7 +119,7 @@ export default function HomeFaceBeyond() {
                 Beyond the Face
               </SectionHeading>
 
-              <h3 className="mt-10 font-serif text-h4">What It Is Designed For</h3>
+              <h3 className="mt-10 font-serif text-h4 text-ochre">What It Is Designed For</h3>
               <ul className="mt-5 grid gap-3 sm:grid-cols-2">
                 {concerns.map((concern) => (
                   <li

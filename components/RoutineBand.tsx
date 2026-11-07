@@ -255,7 +255,7 @@ export function RoutineBand({
           {!compact && (dark ? <MoonMark /> : <SunMark />)}
           <p className="text-eyebrow uppercase">{time}</p>
         </div>
-        <Heading id={`${id}-title`} className={`mt-4 font-serif leading-tight ${compact ? "text-h2" : "text-4xl md:text-5xl"}`}>
+        <Heading id={`${id}-title`} className={`mt-4 font-serif leading-tight ${compact ? "text-h2 text-ochre" : "text-4xl md:text-5xl"}`}>
           {title}
         </Heading>
         <ol className={`mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 font-serif text-xl ${"text-ink"}`}>
