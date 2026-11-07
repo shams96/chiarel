@@ -65,7 +65,7 @@ export default function SciencePage() {
       <div className="space-y-8">
         {entries.map((e) => (
           <div key={e.slug} className="border-l-2 border-champagne pl-6">
-            <h2 className="font-serif text-2xl">{e.name}</h2>
+            <h2 className="font-serif text-h3 text-ochre">{e.name}</h2>
             <p className="mt-1 text-eyebrow uppercase text-ink/70">
               {e.answers}
             </p>

@@ -20,7 +20,7 @@ export default function TermsPage() {
 
       <div className="mt-10 space-y-10 text-sm leading-relaxed text-ink/80">
         <section>
-          <h2 className="font-serif text-xl text-ink">Orders &amp; pricing</h2>
+          <h2 className="font-serif text-h4 text-ink">Orders &amp; pricing</h2>
           <p className="mt-3">
             All prices are charged in USD and are current at the time of
             purchase, regardless of your shipping destination. Any price
@@ -34,7 +34,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-xl text-ink">Payment</h2>
+          <h2 className="font-serif text-h4 text-ink">Payment</h2>
           <p className="mt-3">
             Payment is processed securely by Stripe. Your order is confirmed
             once payment is successfully captured; you will receive an
@@ -43,7 +43,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-xl text-ink">Subscriptions</h2>
+          <h2 className="font-serif text-h4 text-ink">Subscriptions</h2>
           <p className="mt-3">
             Choosing subscription pricing sets a recurring delivery on a
             45-day cadence at the discounted rate. Self-service subscription
@@ -61,7 +61,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-xl text-ink">Shipping</h2>
+          <h2 className="font-serif text-h4 text-ink">Shipping</h2>
           <p className="mt-3">
             Because each order is formulated and produced to order in Isola
             del Liri, Italy, please allow standard processing time before
@@ -73,7 +73,7 @@ export default function TermsPage() {
         <RefundPolicyContent />
 
         <section>
-          <h2 className="font-serif text-xl text-ink">
+          <h2 className="font-serif text-h4 text-ink">
             Your Right to Cancel (EU Customers)
           </h2>
           <p className="mt-3">
@@ -101,7 +101,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-xl text-ink">Intellectual property</h2>
+          <h2 className="font-serif text-h4 text-ink">Intellectual property</h2>
           <p className="mt-3">
             {SITE_NAME}, its formulation names, and all site content are the
             property of 1HubSolutions, LLC or its licensors, and may not be
@@ -110,7 +110,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-xl text-ink">Limitation of liability</h2>
+          <h2 className="font-serif text-h4 text-ink">Limitation of liability</h2>
           <p className="mt-3">
             Products are intended for cosmetic use as described on each
             product page. Statements on this site have not been evaluated by
@@ -123,7 +123,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-xl text-ink">Governing law</h2>
+          <h2 className="font-serif text-h4 text-ink">Governing law</h2>
           <p className="mt-3">
             These terms are governed by the laws applicable to 1HubSolutions,
             LLC, without regard to conflict-of-law principles. If you are a
@@ -135,7 +135,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-xl text-ink">Contact</h2>
+          <h2 className="font-serif text-h4 text-ink">Contact</h2>
           <p className="mt-3">
             Questions about these terms can be sent to{" "}
             <a

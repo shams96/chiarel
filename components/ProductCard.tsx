@@ -31,7 +31,9 @@ export default function ProductCard({
         )}
       </div>
       <div className="mt-4">
-        <h3 className="font-serif text-xl">{product.name}</h3>
+        <h3 className="font-serif text-h4 text-ochre underline decoration-ochre/0 underline-offset-4 transition group-hover:decoration-ochre">
+          {product.name}
+        </h3>
         <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-ink/70">
           {product.step}
         </p>

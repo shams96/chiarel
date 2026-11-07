@@ -1,4 +1,5 @@
 import EvidenceGrid from "@/components/EvidenceGrid";
+import SectionHeading from "@/components/layout/SectionHeading";
 import { products } from "@/lib/products";
 
 import { FREE_FROM_SENTENCE, formulationLine } from "@/lib/formulation-line";
@@ -29,7 +30,7 @@ export default function HomeFormulationRecord() {
             {formulationLine()} {FREE_FROM_SENTENCE}
           </p>
           <details className="group border-y border-champagne">
-            <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 py-6 font-serif text-2xl leading-snug text-garden md:text-3xl">
+            <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 py-6 font-serif text-h3 text-ochre">
               <span>
                 See the key ingredients
                 <span className="mt-1 block font-sans text-[13px] leading-relaxed text-ink/80">
@@ -43,24 +44,24 @@ export default function HomeFormulationRecord() {
             <div className="pb-12 pt-4">
               <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-16">
                 <div>
-                  <h2 className="font-serif text-3xl leading-snug">
+                  <SectionHeading
+                    rule={false}
+                    lead="The key ingredients behind each formula, named. Each product page carries the detail."
+                  >
                     What&rsquo;s Actually in CHIAREL™ Formulas?
-                  </h2>
-                  <p className="mt-4 text-sm leading-relaxed text-ink/80">
-                    The key ingredients behind each formula, named. Each product
-                    page carries the detail.
-                  </p>
+                  </SectionHeading>
                 </div>
                 <EvidenceGrid products={evidenceProducts} />
               </div>
 
               <div className="mt-16">
-                <h2 className="font-serif text-3xl leading-snug">
+                <SectionHeading
+                  rule={false}
+                  className="max-w-2xl"
+                  lead="The key ingredients behind each formula across the House."
+                >
                   Key Ingredients, by Product
-                </h2>
-                <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">
-                  The key ingredients behind each formula across the House.
-                </p>
+                </SectionHeading>
                 <div className="mt-8 overflow-x-auto">
                   <table className="w-full min-w-[560px] border-collapse text-left text-sm">
                     <thead>

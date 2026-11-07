@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import SectionHeading from "@/components/layout/SectionHeading";
 
 // Proof, second: the ingredient families behind the formulas, described in
 // "the look of" terms. No external citation links: no specific, checked study
@@ -30,16 +31,13 @@ const ingredients = [
 export default function HomeProof() {
   return (
     <section className="section-y-lg bg-cloud">
-      <div className="mx-auto max-w-[84rem] px-[clamp(1.5rem,3vw,3rem)]">
+      <div className="mx-auto w-full max-w-container px-margin">
         <Reveal className="max-w-2xl">
-          <h2 className="font-serif text-[clamp(2rem,1.3rem+2vw,3.4rem)] leading-tight text-ink">
+          <SectionHeading
+            lead="CHIAREL formulates with established, well-known ingredients rather than novel, unstudied compounds. Here is what each one is there for."
+          >
             The Ingredients Behind the Formulas
-          </h2>
-          <p className="mt-4 text-[15px] leading-relaxed text-ink/80">
-            CHIAREL formulates with established, well-known ingredients rather
-            than novel, unstudied compounds. Here is what each one is there
-            for.
-          </p>
+          </SectionHeading>
         </Reveal>
         <ul className="mt-12 grid gap-px border border-champagne bg-champagne sm:grid-cols-2 lg:grid-cols-4">
           {ingredients.map((item, i) => (
@@ -49,7 +47,7 @@ export default function HomeProof() {
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <p className="mt-6 text-[14px] leading-relaxed text-ink/80">
-                  <span className="mb-3 block font-serif text-[clamp(1.5rem,1.2rem+0.8vw,2rem)] leading-tight text-garden">
+                  <span className="mb-3 block font-serif text-h4 text-ochre">
                     {item.name}
                   </span>
                   {item.rest.startsWith(", ") ? (

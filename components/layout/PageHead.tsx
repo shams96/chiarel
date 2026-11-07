@@ -21,7 +21,7 @@ export default function PageHead({
       <Container>
         <div className="grid-12 gap-y-6">
           {eyebrow && <p className="col-span-full text-eyebrow uppercase text-ochre">{eyebrow}</p>}
-          <h1 className="stagger font-serif text-mega">
+          <h1 className="stagger font-serif text-h1">
             {lines.map((l, i) => (
               <span key={i}>
                 {l}

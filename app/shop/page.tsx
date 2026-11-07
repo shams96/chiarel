@@ -49,7 +49,7 @@ export default function ShopPage() {
           <p className="text-eyebrow uppercase text-ochre">
             Neck &amp; Décolleté Crème
           </p>
-          <h2 className="mt-2 font-serif text-3xl leading-snug">{n1.name}</h2>
+          <h2 className="mt-2 font-serif text-h3 text-ochre">{n1.name}</h2>
           <p className="mt-2 max-w-md text-sm leading-relaxed text-ink/70">{n1.blurb}</p>
           <Link
             href={productHref(n1.slug)}
@@ -61,13 +61,13 @@ export default function ShopPage() {
       </section>
 
       <section className="mt-16">
-        <h2 className="font-serif text-2xl">The Morning Ritual</h2>
+        <h2 className="font-serif text-h3 text-ochre">The Morning Ritual</h2>
         <p className="mt-1 text-eyebrow uppercase text-ink/70">Morning</p>
         <ProductGrid slugs={dayRitual} />
       </section>
 
       <section className="mt-16 border-t border-ink/10 pt-12">
-        <h2 className="font-serif text-2xl">The Evening Ritual</h2>
+        <h2 className="font-serif text-h3 text-ochre">The Evening Ritual</h2>
         <p className="mt-1 text-eyebrow uppercase text-ink/70">Evening</p>
         <ProductGrid slugs={nightRitual} />
       </section>

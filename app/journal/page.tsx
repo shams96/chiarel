@@ -26,7 +26,7 @@ export default function JournalPage() {
               {e.tag}
             </p>
             <Link href={`/journal/${e.slug}`}>
-              <h2 className="mt-1 font-serif text-2xl hover:text-ochre">
+              <h2 className="mt-1 font-serif text-h4 text-ochre underline decoration-ochre/0 underline-offset-4 transition hover:decoration-ochre">
                 {e.title}
               </h2>
             </Link>

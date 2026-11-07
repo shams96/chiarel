@@ -1,6 +1,8 @@
 import ResponsiveImage from "@/components/ResponsiveImage";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import Container from "@/components/layout/Container";
+import SectionHeading from "@/components/layout/SectionHeading";
 
 // The Home "icon product" moment: a full-bleed Peach Dust panel with the
 // photograph running to the edge of the page and an oversized headline, so it
@@ -25,25 +27,28 @@ export default function HomeIconProduct({
 }) {
   return (
     <>
-      <section className="grid bg-cloud md:grid-cols-2">
-        <div className="flex items-center justify-center px-6 py-12 md:px-[clamp(1.5rem,4vw,5rem)] md:py-24">
-          <div className="relative aspect-[2/3] w-full max-w-[30rem] overflow-hidden">
-            <ResponsiveImage src={src} alt={alt} sizes="(max-width: 768px) 90vw, 480px" className="object-cover" />
+      <section className="bg-cloud">
+        <Container>
+          <div className="grid items-center md:grid-cols-2 md:gap-x-[clamp(2rem,5vw,6rem)]">
+            <div className="flex items-center justify-center py-12 md:py-24">
+              <div className="relative aspect-[2/3] w-full max-w-[30rem] overflow-hidden">
+                <ResponsiveImage src={src} alt={alt} sizes="(max-width: 768px) 90vw, 480px" className="object-cover" />
+              </div>
+            </div>
+            <Reveal className="flex flex-col justify-center pb-16 md:py-24">
+              <p className="text-eyebrow uppercase tracking-[0.3em] text-ochre">{kicker}</p>
+              <SectionHeading className="mt-4" lead={body}>
+                {headline}
+              </SectionHeading>
+              <Link
+                href={href}
+                className="btn-press mt-10 inline-flex min-h-[48px] items-center self-start bg-garden px-8 py-3 text-eyebrow uppercase tracking-[0.28em] text-ivory transition hover:bg-ochre"
+              >
+                {cta}
+              </Link>
+            </Reveal>
           </div>
-        </div>
-        <Reveal className="flex flex-col justify-center px-[clamp(1.5rem,5vw,6rem)] py-16 md:py-24">
-          <p className="text-[12px] uppercase tracking-[0.3em] text-ochre">{kicker}</p>
-          <h2 className="mt-4 font-serif text-[clamp(2.25rem,1.2rem+3.2vw,4.5rem)] leading-[1.05] text-garden">
-            {headline}
-          </h2>
-          <p className="mt-6 max-w-md text-[clamp(1rem,0.9rem+0.3vw,1.15rem)] leading-relaxed text-ink/80">{body}</p>
-          <Link
-            href={href}
-            className="btn-press mt-10 inline-flex min-h-[48px] items-center self-start bg-garden px-8 py-3 text-[12px] uppercase tracking-[0.28em] text-ivory transition hover:bg-ochre"
-          >
-            {cta}
-          </Link>
-        </Reveal>
+        </Container>
       </section>
     </>
   );

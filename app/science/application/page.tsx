@@ -58,7 +58,7 @@ export default function ApplicationPage() {
 
       <section className="mt-12 grid gap-10 sm:grid-cols-2">
         <div>
-          <h2 className="font-serif text-2xl">Morning</h2>
+          <h2 className="font-serif text-h3 text-ochre">Morning</h2>
           <ol className="mt-3 space-y-2 text-sm text-ink/80">
             <li>1. Clarity Essence</li>
             <li>2. Clarity Day Crème</li>
@@ -66,7 +66,7 @@ export default function ApplicationPage() {
           </ol>
         </div>
         <div>
-          <h2 className="font-serif text-2xl">Evening</h2>
+          <h2 className="font-serif text-h3 text-ochre">Evening</h2>
           <ol className="mt-3 space-y-2 text-sm text-ink/80">
             <li>1. Clarity Essence</li>
             <li>2. Clarity Eye Contour Concentrate</li>
@@ -82,13 +82,13 @@ export default function ApplicationPage() {
 
       <section className="mt-12 space-y-8">
         <div className="border-l-2 border-champagne pl-6">
-          <h2 className="font-serif text-2xl">Apply to damp skin</h2>
+          <h2 className="font-serif text-h3 text-ochre">Apply to damp skin</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             Damp skin helps the formula spread evenly and feel comfortable.
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
-          <h2 className="font-serif text-2xl">Warm before applying</h2>
+          <h2 className="font-serif text-h3 text-ochre">Warm before applying</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             Warm Clarity Day Crème, Clarity Night Crème or Clarity Neck
             &amp; Décolleté Crème between fingertips before pressing into
@@ -97,14 +97,14 @@ export default function ApplicationPage() {
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
-          <h2 className="font-serif text-2xl">Press, don&rsquo;t rub</h2>
+          <h2 className="font-serif text-h3 text-ochre">Press, don&rsquo;t rub</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             Pressing helps the formula settle into place without tugging at
             skin.
           </p>
         </div>
         <div className="border-l-2 border-ochre pl-6">
-          <h2 className="font-serif text-2xl">Let each step set</h2>
+          <h2 className="font-serif text-h3 text-ochre">Let each step set</h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
             A brief pause between the{" "}
             <Link href="/shop/clarity-essence" className="border-b border-ochre text-ochre">
