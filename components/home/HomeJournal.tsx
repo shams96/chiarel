@@ -27,7 +27,7 @@ export default function HomeJournal() {
             <li key={e.slug}>
               <Link href={`/journal/${e.slug}`} className="group block py-6 md:py-7">
                 <p className="text-eyebrow uppercase text-ink">{e.tag}</p>
-                <h3 className="mt-2 font-serif text-h4 text-ochre underline decoration-ochre/0 underline-offset-4 transition group-hover:decoration-ochre">
+                <h3 className="mt-2 font-serif text-h4 text-ochre md:text-h3 underline decoration-ochre/0 underline-offset-4 transition group-hover:decoration-ochre">
                   {e.title}
                 </h3>
                 <p className="mt-2 max-w-measure text-caption text-ink">
