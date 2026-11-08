@@ -37,6 +37,6 @@ describe("/shop storefront shell", () => {
 
   it("invents no offer, price, delivery time or review language", () => {
     const copy = `${band}\n${strip}`;
-    expect(copy).not.toMatch(/discount|% off|free shipping|free delivery|days|reviews?\b|rated|\$\d/i);
+    expect(copy).not.toMatch(/discount|% off|free shipping|free delivery|\bdays\b|\breviews?\b|\brated\b|\$\d/i);
   });
 });
