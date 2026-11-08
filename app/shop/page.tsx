@@ -5,6 +5,8 @@ import ProductCard from "@/components/ProductCard";
 import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import PageHead from "@/components/layout/PageHead";
 import Container from "@/components/layout/Container";
+import FindYourRitual from "@/components/shop/FindYourRitual";
+import ShopServiceStrip from "@/components/shop/ShopServiceStrip";
 
 export const metadata = {
   title: "Shop",
@@ -34,7 +36,19 @@ export default function ShopPage() {
 
   return (
     <>
+      <Container className="pt-4 md:pt-8">
+        <nav aria-label="Breadcrumb" className="text-[12px] uppercase tracking-[0.14em] text-ink">
+          <ol className="flex items-center gap-2">
+            <li>
+              <Link href="/" className="tap-area hover:text-ochre">Home</Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li aria-current="page">Shop</li>
+          </ol>
+        </nav>
+      </Container>
       <PageHead eyebrow="Consumer Collection™" lines={["Shop"]} />
+      <FindYourRitual />
       <Container className="pb-section pt-6">
 
       {/* Featured category hero — standardized neutral frame, same as every other product tile */}
@@ -72,6 +86,7 @@ export default function ShopPage() {
         <ProductGrid slugs={nightRitual} />
       </section>
       </Container>
+      <ShopServiceStrip />
     </>
   );
 }
