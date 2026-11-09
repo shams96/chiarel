@@ -19,7 +19,7 @@ export default function HomeIntro() {
           </Eyebrow>
         </Reveal>
         <Reveal delay={0.08} className="grid-12 col-span-full">
-          <h2 className="stagger font-serif text-h2 text-ochre">
+          <h2 className="stagger font-serif text-mega text-ochre">
             <span>Advancing Cellular Clarity™ </span>
             <span>against Modern Biological Stress™.</span>
           </h2>

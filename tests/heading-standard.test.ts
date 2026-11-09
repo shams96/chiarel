@@ -94,14 +94,15 @@ describe("SectionHeading is the homepage standard", () => {
 });
 
 describe("the last landing-page headings follow the standard", () => {
-  it("the statement, formulator, and routine titles are ochre at the section size", () => {
-    expect(read("components/home/HomeIntro.tsx")).toContain('<h2 className="stagger font-serif text-h2 text-ochre">');
-    expect(read("components/home/HomeFormulator.tsx")).toMatch(/<Heading level="h2" id="formulator-heading" className="mt-4 text-ochre">/);
+  // Owner, 2026-11-07: colour only. These three keep their original sizes; only the colour changed.
+  it("the statement, formulator, and routine titles are ochre at their original sizes", () => {
+    expect(read("components/home/HomeIntro.tsx")).toContain('<h2 className="stagger font-serif text-mega text-ochre">');
+    expect(read("components/home/HomeFormulator.tsx")).toMatch(/<Heading level="h4" as="h2" id="formulator-heading" className="mt-4 text-ochre">/);
     expect(read("components/RoutineBand.tsx")).toContain('compact ? "text-h2 text-ochre"');
   });
 
   it("sub-headings and journal card titles are ochre text-h4", () => {
     expect(read("components/home/HomeFaceBeyond.tsx")).toContain('<h3 className="mt-10 font-serif text-h4 text-ochre">');
-    expect(read("components/home/HomeJournal.tsx")).toMatch(/font-serif text-h4 text-ochre underline/);
+    expect(read("components/home/HomeJournal.tsx")).toMatch(/font-serif text-h4 text-ochre md:text-h3 underline/);
   });
 });

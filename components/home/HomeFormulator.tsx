@@ -16,7 +16,7 @@ export default function HomeFormulator() {
       <Grid className="items-end gap-y-10">
         <Reveal className="col-span-4 md:col-span-5 lg:col-span-6">
           <Eyebrow className="text-ochre">The Formulator</Eyebrow>
-          <Heading level="h2" id="formulator-heading" className="mt-4 text-ochre">
+          <Heading level="h4" as="h2" id="formulator-heading" className="mt-4 text-ochre">
             Who Formulates CHIAREL™?
           </Heading>
           <p className="mt-4 font-serif text-display italic text-ink">
