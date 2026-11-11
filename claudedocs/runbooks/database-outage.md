@@ -30,6 +30,13 @@ curl -s "https://chiarel.com/api/health?db=1"
 Also check the database from a laptop (pooled URL, `select 1`) and Supabase connection count. If those are fine, the fault is on the Hostinger side.
 Hostinger: **Websites, 1hubsolutions.com, Hosting Plan, Resources usage**. "Max Processes" pinned at 120 with Faults means the plan's process cap is the cause.
 
+## Whole app not answering (seen 2026-11-09)
+Different from the database outage above: every route fails, including `/api/health`, and the page is **Hostinger's own** ("503 Service Unavailable, The server is temporarily busy", `Server: hcdn`) or the request times out with no response. The app's own 503 is JSON with `Retry-After`; if you see that, use the sections above instead. A finished deploy does not rule this out (on 2026-11-09 the build had completed and the host reported a restart, yet the process did not answer).
+1. **Restart without rebuilding.** hPanel, chiarel.com, Node.js app, Restart; or Claude with Hostinger access: `hosting_nodejs_restart-application` (username `u727712424`, domain `chiarel.com`). It recovered the site in under 12 s on 2026-11-09. Do not use Redeploy first: a build adds about 4 minutes of load on the shared plan.
+2. Check `https://www.chiarel.com/api/health`: `{"ok":true,"uptimeSeconds":N}` with a small N confirms the restart took.
+3. Capture evidence before it is lost: hPanel Resources usage (Max Processes, Faults, memory) and the Node.js runtime logs. The logs endpoint returned HTTP 500 on 2026-11-09, so screenshot hPanel if the API fails.
+4. If it recurs, that is the evidence for ADR-0001 and `claudedocs/specs/hosting-move/SPEC-AND-PLAN.md`; do not keep restarting.
+
 ## Tier 3: restore (human action)
 1. Hostinger hPanel, chiarel.com, **Redeploy**. (Or merge any PR to `main`; auto-deploy restarts the app.)
 2. Wait about 3 minutes, re-run the health check, then sign in to `/admin`.

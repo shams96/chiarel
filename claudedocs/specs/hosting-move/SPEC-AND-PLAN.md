@@ -106,6 +106,9 @@ This is a recommendation with an unverified premise (the cap). It is not a predi
 - **H3** An uptime monitor account and an alert address or number.
 - **H4** Budget: roughly $120 for the first year on A or B, about $312 or $204 a year after (catalogue prices, subject to change at checkout).
 
+### Decision log
+- 2026-11-11, **H2 = Option A (Hostinger Cloud plan)**, chosen by the owner. Still open: H1 (hPanel resource usage; there is no API for it on the shared plan, only on Agency plans), H3 (monitor), H4 (purchase, a billing action only the owner places). Phase 1 (runbook) is done in this PR; Phase 2 starts when the plan exists.
+
 ## 7. Risks and unknowns
 
 - Process, memory and CPU limits of Hostinger's Cloud plans are **unknown** (the catalogue returns no limits). Read them in hPanel before buying.
