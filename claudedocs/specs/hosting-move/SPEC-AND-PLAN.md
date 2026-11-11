@@ -106,8 +106,19 @@ This is a recommendation with an unverified premise (the cap). It is not a predi
 - **H3** An uptime monitor account and an alert address or number.
 - **H4** Budget: roughly $120 for the first year on A or B, about $312 or $204 a year after (catalogue prices, subject to change at checkout).
 
+### Option D: stay on the current plan and harden (owner constraint, 2026-11-11)
+The owner cannot spend on a new plan now, so Option A is shelved, not rejected. Current plan (verified via billing API): **Business Web Hosting, $203.88 per year, auto-renewing, next billing 2027-02-17**. The CDN is already on (verified: `cdn.is_enabled` true; the 503 page came from the CDN edge, `Server: hcdn`, because the origin was unreachable). Server-side cache is off (verified); do not turn it on without a test, because cart and sign-in pages are per-visitor.
+
+What costs nothing and reduces the pain:
+1. **Auto-recovery heartbeat.** A scheduled GitHub Actions workflow (free on this public repo) calls `/api/health` every 5 minutes; after 2 consecutive failures it restarts the app through Hostinger's API and opens an issue so the owner is told. Needs a Hostinger API token created by the owner in hPanel and stored as a GitHub secret. Unverified: that the token can call the restart operation, and GitHub's schedule can run late (minutes).
+2. **Deploy discipline.** One merge at a time; wait for the Hostinger build to report `completed` and `/api/health` to answer before the next merge (a build is about 4 minutes of load on the shared plan). Doc-only PRs also deploy, so batch them.
+3. **Evidence.** hPanel Resources usage for the last 7 days (H1) and, if the logs endpoint works again, the runtime logs after the next failure. Without them the cause stays inferred.
+4. **Decision point.** The plan renews 2027-02-17. If the outages recur before then, the evidence above supports moving (Option A or B) at renewal rather than guessing now.
+
+Not a fix: none of this lifts the plan's process limit. It shortens detection and recovery from "someone notices" to about 10 minutes, and says so honestly.
+
 ### Decision log
-- 2026-11-11, **H2 = Option A (Hostinger Cloud plan)**, chosen by the owner. Still open: H1 (hPanel resource usage; there is no API for it on the shared plan, only on Agency plans), H3 (monitor), H4 (purchase, a billing action only the owner places). Phase 1 (runbook) is done in this PR; Phase 2 starts when the plan exists.
+- 2026-11-11, owner first chose **Option A** (Hostinger Cloud plan), then said a purchase is not possible now and asked to consider the current tier only. **Active choice: Option D.** Still open: H1 (hPanel resource usage; no API for it on the shared plan), H3 (alerting address), and a Hostinger API token for the heartbeat. Phase 1 (runbook) is done in this PR; Phase 2 (new host) is on hold until spend is possible.
 
 ## 7. Risks and unknowns
 
