@@ -25,10 +25,29 @@ export default async function OrderConfirmationPage({
   const { id } = await params;
   const { session_id } = await searchParams;
 
-  let order = await db.order.findUnique({
-    where: { id },
-    include: { items: { include: { product: true } } },
-  });
+  // A database failure is not "order not found": say so, and let them retry.
+  let lookupFailed = false;
+  let order = await db.order
+    .findUnique({
+      where: { id },
+      include: { items: { include: { product: true } } },
+    })
+    .catch(() => {
+      lookupFailed = true;
+      return null;
+    });
+
+  if (lookupFailed) {
+    return (
+      <div className="mx-auto max-w-2xl px-6 py-24 text-center">
+        <h1 className="font-serif text-3xl">We can&rsquo;t load your order just now</h1>
+        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink">
+          This is a brief connection issue on our side. Your order is not affected. Please refresh
+          in a moment, or <Link href="/contact" className="tap-area underline">contact us</Link>.
+        </p>
+      </div>
+    );
+  }
 
   // This page has no auth system to check against, and order ids appear in
   // URLs (redirect, browser history, anything pasted into a support ticket)
