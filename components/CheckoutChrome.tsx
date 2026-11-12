@@ -37,14 +37,25 @@ export function CheckoutHeader() {
     <header className="border-b border-ink/10">
       <div className="mx-auto flex w-full max-w-container items-center justify-between px-margin py-4">
         <Link href="/" className="flex min-h-[44px] shrink-0 items-center" aria-label="CHIAREL, The House of Clarity">
-          <Image
-            src="/assets/brand/logo/chiarel-header-wordmark-ink-v2.png"
-            alt="CHIAREL"
-            width={450}
-            height={72}
-            priority
-            className="h-auto w-[150px] shrink-0"
-          />
+          <span className="logo-day contents">
+            <Image
+              src="/assets/brand/logo/chiarel-header-wordmark-ink-v2.png"
+              alt="CHIAREL"
+              width={450}
+              height={72}
+              priority
+              className="h-auto w-[150px] shrink-0"
+            />
+          </span>
+          <span className="logo-evening">
+            <Image
+              src="/assets/brand/logo/chiarel-header-wordmark-cloud-v2.png"
+              alt="CHIAREL"
+              width={450}
+              height={72}
+              className="h-auto w-[150px] shrink-0"
+            />
+          </span>
         </Link>
         <Link
           href={exit.href}

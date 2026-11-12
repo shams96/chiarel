@@ -2,6 +2,101 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Colour tokens, Day and Evening (docs: claudedocs/specs/day-evening-theme).
+   RGB triplets so Tailwind's opacity utilities work. Day is the default and is
+   the brand palette exactly. Evening is the same palette inverted: the page is
+   brand ink, text is cloud, and the accents are lightened to keep AA contrast
+   (ochre 5.98:1 and garden 5.98:1 on the Evening page). Pairs invert together
+   (dark text on a light fill becomes light text on a dark fill), so components
+   need no theme classes. The admin console is pinned to Day with data-theme="light". */
+:root,
+[data-theme="light"],
+/* Opulence rule: a solid terracotta or green fill is a jewel, not a pastel. In Evening it keeps
+   its Day palette (deep fill, light text) wherever it appears, including Footer.tsx, which is
+   untouched. Pairs stay AA because the whole Day set applies inside the fill. */
+[data-theme="dark"] .bg-ochre,
+[data-theme="dark"] .bg-garden {
+  --c-ink: 29 29 31;
+  --c-soft: 50 49 45;
+  --c-cloud: 245 245 247;
+  --c-ochre: 155 71 34;
+  --c-garden: 31 81 41;
+  --c-peach: 250 214 201;
+  --c-ocean: 12 45 56;
+  --c-champagne: 214 197 160;
+  --c-ivory: 255 255 255;
+  --c-white: 255 255 255;
+  --c-peachdust: 240 216 204;
+  --c-scrim: 29 29 31;
+  color-scheme: light;
+}
+/* An explicit Day wrapper (data-theme="light" below the root) also resets text colour, which
+   would otherwise be inherited from the Evening page. */
+[data-theme="light"]:not(:root) { color: rgb(var(--c-ink)); }
+[data-theme="dark"] {
+  --c-ink: 245 240 232;
+  --c-soft: 214 197 160;
+  --c-cloud: 24 20 18;
+  --c-ochre: 217 133 94;
+  --c-garden: 122 164 130;
+  --c-peach: 74 54 48;
+  --c-ocean: 12 45 56;
+  --c-champagne: 214 197 160;
+  --c-ivory: 37 32 29;
+  --c-white: 37 32 29;
+  --c-peachdust: 46 38 34;
+  --c-scrim: 0 0 0;
+  color-scheme: dark;
+}
+/* The Morning Ritual band is a champagne tint in Day; over espresso that tint turns olive-grey,
+   so Evening uses a warm umber instead. */
+[data-theme="dark"] .bg-champagne\/25 { background-color: rgb(var(--c-peachdust)); }
+/* Evening hairlines are champagne gold, the house's metal, instead of grey. */
+[data-theme="dark"] .border-ink\/10,
+[data-theme="dark"] .border-ink\/15,
+[data-theme="dark"] .border-ink\/20 { border-color: rgb(var(--c-champagne) / 0.28); }
+[data-theme="dark"] .divide-ink\/10 > :not([hidden]) ~ :not([hidden]),
+[data-theme="dark"] .divide-ink\/15 > :not([hidden]) ~ :not([hidden]) { border-color: rgb(var(--c-champagne) / 0.28); }
+
+/* Theme change: one 650ms crossfade (cubic-bezier(0.4,0,0.2,1), the MotionSites
+   3D Collectible Hero background-crossfade values). The class is on <html> only
+   while the theme is switching, so nothing animates on first paint. */
+html.theme-fade,
+html.theme-fade *,
+html.theme-fade *::before,
+html.theme-fade *::after {
+  transition:
+    background-color 650ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 650ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 650ms cubic-bezier(0.4, 0, 0.2, 1),
+    fill 650ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke 650ms cubic-bezier(0.4, 0, 0.2, 1),
+    -webkit-text-fill-color 650ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.theme-fade,
+  html.theme-fade *,
+  html.theme-fade *::before,
+  html.theme-fade *::after {
+    transition: none !important;
+  }
+}
+/* Theme reveal (progressive enhancement): the new theme opens as a circle from the toggle.
+   Where View Transitions are unavailable the 650ms crossfade above runs instead. */
+::view-transition-old(root),
+::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-old(root) { z-index: 1; }
+::view-transition-new(root) { z-index: 2; }
+::selection {
+  background-color: rgb(var(--c-ochre) / 0.25);
+}
+/* The header logo exists in an ink file (Day) and a cloud file (Evening). */
+.logo-evening { display: none; }
+[data-theme="dark"] .logo-day { display: none; }
+[data-theme="dark"] .logo-evening { display: contents; }
+/* Footer.tsx is untouched; this keeps its hover accent readable on the Evening terracotta card. */
+[data-theme="dark"] footer a:hover { color: rgb(var(--c-white)); }
+
 /* Layout tokens (brief section 4). One container, one margin and gutter
    system for every page: 4 columns on phones, 8 from md (768), 12 from lg
    (1024). Header, footer and sections share these so left edges align at
@@ -105,7 +200,7 @@ h1, h2, h3 {
   padding-block: var(--section-y);
 }
 .section-rule {
-  border-top: 1px solid rgb(50 49 45 / 0.15);
+  border-top: 1px solid rgb(var(--c-soft) / 0.15);
 }
 .section-x-narrow {
   @apply mx-auto max-w-2xl px-6;
@@ -115,12 +210,12 @@ h1, h2, h3 {
    no drop shadow and no hover lift. The class name is kept so existing
    markup keeps working; the 9 call sites inherit the flat treatment. */
 .card-elevated {
-  border: 1px solid rgb(50 49 45 / 0.15);
+  border: 1px solid rgb(var(--c-soft) / 0.15);
   box-shadow: none;
   transition: border-color 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .card-elevated:hover {
-  border-color: rgb(50 49 45 / 0.4);
+  border-color: rgb(var(--c-soft) / 0.4);
 }
 
 /* Film-grain overlay — the one authored texture across the whole site,
@@ -222,7 +317,7 @@ body::after {
 
 /* Sticky header "glass" chrome — see .site-header reduced-transparency override below */
 .site-header {
-  background-color: rgb(245 245 247 / 0.9);
+  background-color: rgb(var(--c-cloud) / 0.9);
   backdrop-filter: blur(12px);
 }
 
@@ -387,7 +482,7 @@ summary:focus-visible {
 /* Reduced transparency: raise background opacity, drop blur on floating chrome */
 @media (prefers-reduced-transparency: reduce) {
   .site-header {
-    background-color: #f5f5f7;
+    background-color: rgb(var(--c-cloud));
     backdrop-filter: none;
   }
 }
@@ -433,7 +528,7 @@ summary:focus-visible {
    Outlined display type is decorative and aria-hidden at every use; the same
    words exist as real text nearby. Outlines only at 48px and above. */
 /* the stroke needs its own colour: currentColor would resolve to the transparent fill. Override --out-stroke on light-on-dark uses. */
-.out { color: transparent; -webkit-text-stroke: 1px var(--out-stroke, rgb(29 29 31)); }
+.out { color: transparent; -webkit-text-stroke: 1px var(--out-stroke, rgb(var(--c-ink))); }
 /* the ladder: one word at falling sizes, hairline outline to solid. Sizes are
    container-query units of .ladder-wrap so it scales with its own column. */
 .ladder-wrap { container-type: inline-size; }
@@ -442,9 +537,9 @@ summary:focus-visible {
 .ladder { margin: 0; font-weight: 400; line-height: 0.88; letter-spacing: -0.02em; }
 .ladder > span {
   display: block; white-space: nowrap; font-size: var(--s);
-  color: rgb(29 29 31);
-  -webkit-text-fill-color: rgb(29 29 31 / var(--fill));
-  -webkit-text-stroke: 1px rgb(29 29 31);
+  color: rgb(var(--c-ink));
+  -webkit-text-fill-color: rgb(var(--c-ink) / var(--fill));
+  -webkit-text-stroke: 1px rgb(var(--c-ink));
   animation: ladder-rise 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: calc(var(--i) * 90ms);
 }
@@ -476,7 +571,7 @@ summary:focus-visible {
 }
 /* visible grid guides, toggled with the G key (components/GridGuides.tsx) */
 .grid-guides { position: fixed; inset: 0; z-index: 60; pointer-events: none; }
-.grid-guides i { border-inline: 1px solid rgb(155 71 34 / 0.18); display: none; }
+.grid-guides i { border-inline: 1px solid rgb(var(--c-ochre) / 0.18); display: none; }
 .grid-guides i:nth-child(-n + 4) { display: block; }
 @media (min-width: 768px) { .grid-guides i:nth-child(-n + 8) { display: block; } }
 @media (min-width: 1024px) { .grid-guides i:nth-child(-n + 12) { display: block; } }
@@ -487,19 +582,19 @@ summary:focus-visible {
    units so the block scales with its column. */
 .poster {
   container-type: inline-size;
-  background-image: linear-gradient(to right, rgb(50 49 45 / 0.16) 1px, transparent 1px);
+  background-image: linear-gradient(to right, rgb(var(--c-soft) / 0.16) 1px, transparent 1px);
   background-size: calc(100% / 6) 100%;
-  border-right: 1px solid rgb(50 49 45 / 0.16);
+  border-right: 1px solid rgb(var(--c-soft) / 0.16);
 }
 .poster > span {
   display: block;
   white-space: nowrap;
   font-weight: 500;
-  color: #1d1d1f;
+  color: rgb(var(--c-ink));
   line-height: 0.9;
   letter-spacing: -0.03em;
-  border-top: 1px solid rgb(50 49 45 / 0.45);
-  border-bottom: 1px solid rgb(50 49 45 / 0.45);
+  border-top: 1px solid rgb(var(--c-soft) / 0.45);
+  border-bottom: 1px solid rgb(var(--c-soft) / 0.45);
   padding: 0.04em 0 0.06em;
   width: fit-content;
 }
