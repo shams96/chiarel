@@ -25,7 +25,7 @@ export default function ProductCard({
           className={productHoverClass(product.step)}
         />
         {product.badge && (
-          <span className="absolute left-3 top-3 bg-ivory/90 px-2.5 py-1 text-[12px] uppercase tracking-[0.18em] text-ochre">
+          <span className="absolute left-3 top-3 bg-ivory px-2.5 py-1 text-[12px] uppercase tracking-[0.18em] text-ochre">
             {product.badge}
           </span>
         )}

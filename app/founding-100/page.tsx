@@ -23,8 +23,11 @@ export const dynamic = "force-dynamic";
 
 export default async function Founding100Page() {
   const masque = getProductOrThrow("recovery-masque");
-  const claimed = await db.foundingSignup.count();
-  const remaining = Math.max(0, 100 - claimed);
+  // The count is the only database read on this page. If it fails, the page
+  // still renders and simply leaves the number out: a made-up figure would be
+  // a false scarcity claim.
+  const claimed = await db.foundingSignup.count().catch(() => null);
+  const remaining = claimed === null ? null : Math.max(0, 100 - claimed);
   const full = remaining === 0;
 
   return (
@@ -59,20 +62,26 @@ export default async function Founding100Page() {
 
             {/* Real scarcity, not decoration — this number is the actual
                 count of saved signups, not a fabricated countdown. */}
-            <div className="mt-8 flex items-baseline gap-3">
-              <span className="tabular-nums font-serif text-4xl text-ochre">
-                {remaining}
-              </span>
-              <span className="text-[12px] uppercase leading-tight tracking-[0.14em] text-ink">
-                {full ? (
-                  <>places left on the list
-                  <br />
-                  the Founding Members are complete</>
-                ) : (
-                  <>of 100 places left on the list<br />no more once they&rsquo;re taken</>
-                )}
-              </span>
-            </div>
+            {remaining === null ? (
+              <p className="mt-8 text-[12px] uppercase leading-tight tracking-[0.14em] text-ink">
+                One hundred places in all<br />no more once they&rsquo;re taken
+              </p>
+            ) : (
+              <div className="mt-8 flex items-baseline gap-3">
+                <span className="tabular-nums font-serif text-4xl text-ochre">
+                  {remaining}
+                </span>
+                <span className="text-[12px] uppercase leading-tight tracking-[0.14em] text-ink">
+                  {full ? (
+                    <>places left on the list
+                    <br />
+                    the Founding Members are complete</>
+                  ) : (
+                    <>of 100 places left on the list<br />no more once they&rsquo;re taken</>
+                  )}
+                </span>
+              </div>
+            )}
 
             <div className="mt-6 flex flex-wrap gap-x-6 gap-y-1 border-t border-ink/15 pt-5 text-[12px] text-ink">
               <span>Formulated by the House of CHIAREL, with Grazia Savoriti, Pharmacist</span>

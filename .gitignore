@@ -53,3 +53,6 @@ next-env.d.ts
 # public: these must never be committed. Keep them outside the repo or in .env.local.
 client_secret*.json
 *.apps.googleusercontent.com.json
+
+# audit output (screenshots, JSON)
+/scripts/audit/out/
