@@ -12,6 +12,7 @@ import StagingBanner from "@/components/StagingBanner";
 import Analytics from "@/components/Analytics";
 import { rootRobotsMetadata } from "@/lib/app-env";
 import { SITE_URL, SITE_NAME, organizationJsonLd } from "@/lib/seo";
+import { THEME_INIT_SCRIPT } from "@/lib/theme";
 
 // Next's default static-page cache header (s-maxage=31536000, one year) is
 // safe on Vercel because deploys auto-purge that cache. On Hostinger's CDN
@@ -74,8 +75,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Sets data-theme before first paint (Day unless the visitor chose Evening). */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}

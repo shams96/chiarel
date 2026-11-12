@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { useDialog } from "@/lib/use-dialog";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const nav = [
   { href: "/shop", label: "Shop" },
@@ -28,23 +29,42 @@ export default function Header() {
       <div className="mx-auto flex w-full max-w-container items-center justify-between px-margin py-4">
         <Link href="/" className="flex min-h-[44px] shrink-0 items-center" aria-label="CHIAREL, The House of Clarity">
           {/* The wordmark with the House line needs about 210px to stay legible, so
-              anything narrower than a desktop header gets the wordmark alone. Files: public/assets/brand/logo. */}
-          <Image
-            src="/assets/brand/logo/chiarel-header-wordmark-ink-v2.png"
-            alt="CHIAREL"
-            width={450}
-            height={72}
-            priority
-            className="h-auto w-[150px] shrink-0 lg:hidden"
-          />
-          <Image
-            src="/assets/brand/logo/chiarel-header-house-ink-v2.png"
-            alt="CHIAREL, The House of Clarity"
-            width={630}
-            height={157}
-            priority
-            className="hidden h-auto w-[210px] shrink-0 lg:block"
-          />
+              anything narrower than a desktop header gets the wordmark alone. Files: public/assets/brand/logo.
+              Day uses the ink files, Evening the cloud files (same artwork, recoloured). */}
+          <span className="logo-day contents">
+            <Image
+              src="/assets/brand/logo/chiarel-header-wordmark-ink-v2.png"
+              alt="CHIAREL"
+              width={450}
+              height={72}
+              priority
+              className="h-auto w-[150px] shrink-0 lg:hidden"
+            />
+            <Image
+              src="/assets/brand/logo/chiarel-header-house-ink-v2.png"
+              alt="CHIAREL, The House of Clarity"
+              width={630}
+              height={157}
+              priority
+              className="hidden h-auto w-[210px] shrink-0 lg:block"
+            />
+          </span>
+          <span className="logo-evening">
+            <Image
+              src="/assets/brand/logo/chiarel-header-wordmark-cloud-v2.png"
+              alt="CHIAREL"
+              width={450}
+              height={72}
+              className="h-auto w-[150px] shrink-0 lg:hidden"
+            />
+            <Image
+              src="/assets/brand/logo/chiarel-header-house-cloud-v2.png"
+              alt="CHIAREL, The House of Clarity"
+              width={630}
+              height={157}
+              className="hidden h-auto w-[210px] shrink-0 lg:block"
+            />
+          </span>
         </Link>
         <nav aria-label="Primary" className="hidden gap-1 xl:flex">
           {nav.map((n) => (
@@ -65,6 +85,7 @@ export default function Header() {
           >
             Shop
           </Link>
+          <ThemeToggle />
           <button
             onClick={open}
             aria-label={count > 0 ? `Open bag, ${count} items` : "Open bag"}
@@ -105,7 +126,7 @@ export default function Header() {
           own box instead of the viewport, collapsing the overlay into a
           small box pinned near the top instead of a full-height panel. */}
       <div
-        className={`fixed inset-0 z-[80] bg-ink/40 transition-opacity xl:hidden ${
+        className={`fixed inset-0 z-[80] bg-scrim/40 transition-opacity xl:hidden ${
           menuOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
         onClick={() => setMenuOpen(false)}

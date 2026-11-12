@@ -8,16 +8,22 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // Colours are CSS variables (RGB triplets, values in globals.css) so Day and
+      // Evening share every class; `<alpha-value>` keeps opacity utilities (ink/15) working.
+      // Day values are the brand hexes: ink #1D1D1F, cloud #F5F5F7, ochre #9B4722, garden #1F5129.
       colors: {
-        cloud: "#F5F5F7",
-        ochre: "#9B4722",
-        garden: "#1F5129",
-        peach: "#FAD6C9",
-        ocean: "#0C2D38",
-        champagne: "#D6C5A0",
-        ivory: "#FFFFFF",
-        ink: "#1D1D1F",
-        peachdust: "#F0D8CC",
+        cloud: "rgb(var(--c-cloud) / <alpha-value>)",
+        ochre: "rgb(var(--c-ochre) / <alpha-value>)",
+        garden: "rgb(var(--c-garden) / <alpha-value>)",
+        peach: "rgb(var(--c-peach) / <alpha-value>)",
+        ocean: "rgb(var(--c-ocean) / <alpha-value>)",
+        champagne: "rgb(var(--c-champagne) / <alpha-value>)",
+        ivory: "rgb(var(--c-ivory) / <alpha-value>)",
+        white: "rgb(var(--c-white) / <alpha-value>)",
+        ink: "rgb(var(--c-ink) / <alpha-value>)",
+        peachdust: "rgb(var(--c-peachdust) / <alpha-value>)",
+        // Overlay veils behind drawers and menus: stay dark in both themes.
+        scrim: "rgb(var(--c-scrim) / <alpha-value>)",
       },
       // One family, site-wide. `sans` is an alias of `serif` so classes that
       // name either resolve to Libre Bodoni.
@@ -57,7 +63,7 @@ const config: Config = {
         section: "var(--section-y)",
       },
       borderColor: {
-        hairline: "rgb(29 29 31 / 0.15)",
+        hairline: "rgb(var(--c-ink) / 0.15)",
       },
     },
   },

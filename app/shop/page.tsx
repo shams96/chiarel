@@ -53,6 +53,7 @@ export default function ShopPage() {
 
       {/* Featured category hero — standardized neutral frame, same as every other product tile */}
       <section
+        data-theme="light"
         className="mt-10 flex flex-col items-center gap-8 overflow-hidden rounded-md border border-ink/10 md:flex-row md:gap-12 md:pr-12"
         style={{ backgroundColor: NEUTRAL_FRAME_BG }}
       >

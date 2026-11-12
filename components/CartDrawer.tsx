@@ -34,7 +34,7 @@ export default function CartDrawer() {
   return (
     <>
       <div
-        className={`fixed inset-0 z-[60] bg-ink/40 transition-opacity ${
+        className={`fixed inset-0 z-[60] bg-scrim/40 transition-opacity ${
           isOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
         onClick={close}

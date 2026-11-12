@@ -74,7 +74,9 @@ describe("black text is exactly the logo ink", () => {
     const css = read("app/globals.css");
     expect(css).not.toMatch(/rgb\(50 49 45\)/);
     expect(css).not.toMatch(/(?<![-\w])color:\s*rgb\(50 49 45/);
-    expect(css).toMatch(/\.poster > span \{[^}]*color:\s*#1d1d1f;/);
+    expect(css).toMatch(/\.poster > span \{[^}]*color:\s*rgb\(var\(--c-ink\)\);/);
+    // and Day ink resolves to the logo ink #1d1d1f (29 29 31)
+    expect(css).toMatch(/:root,\s*\[data-theme="light"\][\s\S]*?--c-ink: 29 29 31;/);
   });
   it("the global error page text is the logo ink", () => {
     expect(read("app/global-error.tsx")).not.toContain("rgba(29,29,31,0.7)");
