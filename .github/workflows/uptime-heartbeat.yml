@@ -1,6 +1,6 @@
 name: Uptime heartbeat
 
-# Every 5 minutes: probe chiarel.com /api/health; if it is down, open one issue and ask Hostinger to
+# Every 5 minutes: probe chiarel.com /api/health?db=1 (app + database); if it is down, open one issue and ask Hostinger to
 # restart the Node app (at most once per 30 minutes). Logic lives in scripts/uptime-heartbeat.sh.
 # GitHub may start scheduled runs a few minutes late, and disables scheduled workflows after 60 days
 # without repository activity.
