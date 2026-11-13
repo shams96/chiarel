@@ -2,7 +2,9 @@
 # Uptime heartbeat for chiarel.com, run every 5 minutes by
 # .github/workflows/uptime-heartbeat.yml (see claudedocs/specs/hosting-move/SPEC-AND-PLAN.md, Option D).
 #
-# 1. Probe /api/health (it answers without touching the database).
+# 1. Probe /api/health?db=1: the app answers AND `select 1` succeeds. The plain /api/health never
+#    touches the database, so it stayed green through the 2026-11-12 engine panic. The ?db=1 probe is
+#    also the app's repair path (a failure replaces the Prisma client), so polling it nudges recovery.
 # 2. Healthy: close any open "site-down" issue and stop.
 # 3. Down: open or reuse one "site-down" issue, and, at most once per 30 minutes, ask Hostinger to
 #    restart the Node app (POST .../nodejs/server/restart; it does not rebuild or redeploy).
@@ -28,7 +30,12 @@ say() { printf '%s\n' "$*"; }
 
 probe_once() {
   local code
-  code="$(curl -sS -m 20 -o "$BODY_FILE" -w '%{http_code}' "$SITE/api/health" 2>/dev/null || true)"
+  code="$(curl -sS -m 20 -o "$BODY_FILE" -w '%{http_code}' "$SITE/api/health?db=1" 2>/dev/null || true)"
+  # 429: the db probe is rate limited per IP. That says nothing about health, so fall back to the
+  # database-free probe rather than raising a false alarm.
+  if [ "$code" = "429" ]; then
+    code="$(curl -sS -m 20 -o "$BODY_FILE" -w '%{http_code}' "$SITE/api/health" 2>/dev/null || true)"
+  fi
   [ "$code" = "200" ] && grep -q '"ok":true' "$BODY_FILE"
 }
 
@@ -50,7 +57,7 @@ comment() { # $1 issue number, $2 text
 }
 
 if probe; then
-  say "healthy: $SITE/api/health answered 200 ok"
+  say "healthy: $SITE/api/health?db=1 answered 200 ok"
   if [ "$DRY" != "1" ]; then
     n="$(open_issue_number)"
     if [ -n "$n" ]; then
@@ -62,18 +69,18 @@ if probe; then
   exit 0
 fi
 
-say "DOWN: $SITE/api/health did not answer 200 ok after $PROBE_TRIES tries"
+say "DOWN: $SITE/api/health?db=1 did not answer 200 ok after $PROBE_TRIES tries"
 if [ "$DRY" = "1" ]; then
   say "dry run: would open or reuse the '$LABEL' issue and, past the cooldown, POST the Hostinger restart"
   exit 1
 fi
 
-gh label create "$LABEL" --color B60205 --description "chiarel.com is not answering /api/health" --force >/dev/null 2>&1 || true
+gh label create "$LABEL" --color B60205 --description "chiarel.com is not answering /api/health?db=1 (app or database down)" --force >/dev/null 2>&1 || true
 n="$(open_issue_number)"
 if [ -z "$n" ]; then
   url="$(gh issue create --label "$LABEL" \
-    --title "Site down: chiarel.com is not answering /api/health" \
-    --body "The heartbeat could not get a healthy answer from $SITE/api/health at $(date -u +%FT%TZ). It will try one restart per 30 minutes and update this issue. Runbook: claudedocs/runbooks/database-outage.md (whole app not answering)." 2>/dev/null)"
+    --title "Site down: chiarel.com failed its health check (app or database)" \
+    --body "The heartbeat could not get a healthy answer from $SITE/api/health?db=1 at $(date -u +%FT%TZ). It will try one restart per 30 minutes and update this issue. Check the body at $SITE/api/health?db=1: db.ok false means the database path (runbook claudedocs/runbooks/database-outage.md, Tier 2); no answer at all means the whole app (same file, "Whole app not answering")." 2>/dev/null)"
   n="${url##*/}"
   say "opened issue #$n"
 fi

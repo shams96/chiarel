@@ -25,10 +25,15 @@ describe("uptime heartbeat workflow", () => {
 });
 
 describe("uptime heartbeat script", () => {
-  it("probes the database-free health endpoint on the live site", () => {
+  it("probes the app and the database on the live site", () => {
     expect(sh).toContain('SITE="${SITE:-https://www.chiarel.com}"');
-    expect(sh).toContain('"$SITE/api/health"');
+    // plain /api/health never touches the database and stayed green through the 2026-11-12 outage
+    expect(sh).toContain('"$SITE/api/health?db=1"');
     expect(sh).toContain(`'"ok":true'`);
+  });
+
+  it("does not raise a false alarm when the db probe is rate limited", () => {
+    expect(sh).toMatch(/"\$code" = "429"[\s\S]*"\$SITE\/api\/health"/);
   });
 
   it("restarts only via Hostinger's documented endpoint, with a bearer token", () => {
