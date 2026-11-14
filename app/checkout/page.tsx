@@ -382,11 +382,11 @@ export default function CheckoutPage() {
 
             <div>
               <label className="flex min-h-[44px] items-center gap-3 text-[12px] leading-relaxed text-ink">
-                <input type="checkbox" name="termsAccepted" id="co-terms" className="h-5 w-5 shrink-0" {...a11y("termsAccepted")} />
+                <input type="checkbox" name="termsAccepted" id="co-terms" className="h-6 w-6 shrink-0" {...a11y("termsAccepted")} />
                 <span>
                   I have read and agree to the{" "}
                   <Link href="/terms" target="_blank" className="border-b border-ochre text-ochre">
-                    Refund Policy and Terms of Service
+                    Refund Policy and Terms of Service<span className="sr-only"> (opens in a new tab)</span>
                   </Link>
                   .
                 </span>

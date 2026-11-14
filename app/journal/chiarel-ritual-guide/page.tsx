@@ -59,7 +59,7 @@ export default function RitualGuidePage() {
 
       <section className="mt-16 grid gap-10 sm:grid-cols-2">
         <div>
-          <h3 className="font-serif text-lg">Morning ritual</h3>
+          <h2 className="font-serif text-lg">Morning ritual</h2>
           <ol className="mt-3 space-y-2 text-base text-ink md:text-[1.0625rem]">
             <li>1. Clarity Essence</li>
             <li>2. Clarity Day Crème</li>
@@ -67,7 +67,7 @@ export default function RitualGuidePage() {
           </ol>
         </div>
         <div>
-          <h3 className="font-serif text-lg">Evening ritual</h3>
+          <h2 className="font-serif text-lg">Evening ritual</h2>
           <ol className="mt-3 space-y-2 text-base text-ink md:text-[1.0625rem]">
             <li>1. Clarity Essence</li>
             <li>2. Clarity Eye Contour Concentrate</li>

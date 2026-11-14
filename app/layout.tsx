@@ -86,13 +86,19 @@ export default function RootLayout({
       </head>
       <body className={serif.variable}>
         <CartProvider>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-ink focus:px-4 focus:py-3 focus:text-[12px] focus:uppercase focus:tracking-[0.18em] focus:text-ivory focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ochre"
+        >
+          Skip to content
+        </a>
           <HideOnAdmin>
             <HideOnCheckout>
               <Header />
             </HideOnCheckout>
             <CheckoutHeader />
           </HideOnAdmin>
-          <main className="min-h-screen">{children}</main>
+          <main id="main" tabIndex={-1} className="min-h-screen focus:outline-none">{children}</main>
           <HideOnAdmin>
             <Footer />
           </HideOnAdmin>

@@ -102,7 +102,7 @@ export default function HousePage() {
               rel="noopener noreferrer"
               className="border-b border-ochre text-ochre"
             >
-              See her profile at Natural You Srl
+              See her profile at Natural You Srl<span className="sr-only"> (opens in a new tab)</span>
             </a>
             .
           </p>
