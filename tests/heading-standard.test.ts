@@ -75,7 +75,7 @@ describe("public inner pages use tokens for section headings", () => {
 describe("page titles and card names follow the standard", () => {
   it("PageHead titles use text-h1 (one title size), not the poster size", () => {
     const head = read("components/layout/PageHead.tsx");
-    expect(head).toMatch(/<h1 className="stagger font-serif text-h1">/);
+    expect(head).toMatch(/<h1 className="stagger font-serif text-h1[ "]/);
     expect(head).not.toContain("text-mega");
   });
 

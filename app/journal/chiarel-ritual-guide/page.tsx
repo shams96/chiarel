@@ -51,16 +51,16 @@ export default function RitualGuidePage() {
       <h1 className="mt-2 font-serif text-h1 leading-tight">
         How to Use the CHIAREL Daily Ritual
       </h1>
-      <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink">
+      <p className="mt-4 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
         The CHIAREL ritual is five products across two moments in the day:
         prepare for it, then let it go. Order follows the texture, lightest
         first.
       </p>
 
-      <section className="mt-12 grid gap-10 sm:grid-cols-2">
+      <section className="mt-16 grid gap-10 sm:grid-cols-2">
         <div>
           <h3 className="font-serif text-lg">Morning ritual</h3>
-          <ol className="mt-3 space-y-2 text-sm text-ink">
+          <ol className="mt-3 space-y-2 text-base text-ink md:text-[1.0625rem]">
             <li>1. Clarity Essence</li>
             <li>2. Clarity Day Crème</li>
             <li>3. SPF</li>
@@ -68,7 +68,7 @@ export default function RitualGuidePage() {
         </div>
         <div>
           <h3 className="font-serif text-lg">Evening ritual</h3>
-          <ol className="mt-3 space-y-2 text-sm text-ink">
+          <ol className="mt-3 space-y-2 text-base text-ink md:text-[1.0625rem]">
             <li>1. Clarity Essence</li>
             <li>2. Clarity Eye Contour Concentrate</li>
             <li>3. Clarity Night Crème</li>
@@ -81,13 +81,13 @@ export default function RitualGuidePage() {
         </div>
       </section>
 
-      <section className="mt-14 border-t border-ink/10 pt-10">
+      <section className="mt-16 border-t border-ink/10 pt-10">
         <h2 className="font-serif text-h3 text-ochre">
           Why Day Crème and Night Crème Feel Different
         </h2>
-        <div className="mt-5 space-y-5 text-sm leading-relaxed text-ink">
+        <div className="mt-5 max-w-none space-y-5 text-base leading-[1.65] text-ink md:text-[1.0625rem]">
           <p>
-            <strong className="text-ink">
+            <strong className="font-semibold text-ink">
               Clarity Day Crème (Day):
             </strong>{" "}
             a lighter daily crème, for the look of comfortable, hydrated skin.
@@ -95,7 +95,7 @@ export default function RitualGuidePage() {
             sunscreen and makeup.
           </p>
           <p>
-            <strong className="text-ink">Clarity Night Crème (Night):</strong>{" "}
+            <strong className="font-semibold text-ink">Clarity Night Crème (Night):</strong>{" "}
             an evening crème with a richer texture. The cushion or subtle
             sheen you feel is the texture of the crème itself, made for the
             look of smoother, more hydrated skin by morning.
@@ -109,11 +109,11 @@ export default function RitualGuidePage() {
         </div>
       </section>
 
-      <section className="mt-14 border-t border-ink/10 pt-10">
+      <section className="mt-16 border-t border-ink/10 pt-10">
         <h2 className="font-serif text-h3 text-ochre">
           How to Apply Clarity Night Crème for Best Results
         </h2>
-        <ul className="mt-5 space-y-2 text-sm text-ink">
+        <ul className="mt-5 space-y-2 text-base text-ink md:text-[1.0625rem]">
           <li>· Use a small amount for the full face</li>
           <li>· Warm it between fingertips to improve spread</li>
           <li>· Press and smooth onto slightly damp skin, after Clarity Essence and Clarity Eye Contour Concentrate</li>
@@ -121,9 +121,9 @@ export default function RitualGuidePage() {
         </ul>
       </section>
 
-      <section className="mt-14 border-t border-ink/10 pt-10">
+      <section className="mt-16 border-t border-ink/10 pt-10">
         <h2 className="font-serif text-h3 text-ochre">Eye Area Guidance</h2>
-        <p className="mt-4 text-sm leading-relaxed text-ink">
+        <p className="mt-4 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
           Clarity Eye Contour Concentrate is formulated for the delicate eye
           area. It sits in the evening ritual, right after Clarity Essence, and
           may be used morning or night. Use a light touch around the orbital
@@ -131,13 +131,13 @@ export default function RitualGuidePage() {
         </p>
       </section>
 
-      <section className="mt-14 border-t border-ink/10 pt-10">
+      <section className="mt-16 border-t border-ink/10 pt-10">
         <h2 className="font-serif text-h3 text-ochre">Frequently Asked</h2>
         <dl className="mt-6 space-y-8">
           {faqs.map((f) => (
             <div key={f.q}>
               <dt className="font-serif text-lg">{f.q}</dt>
-              <dd className="mt-2 text-sm leading-relaxed text-ink">
+              <dd className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
                 {f.a}
               </dd>
             </div>

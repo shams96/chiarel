@@ -19,17 +19,17 @@ export default function WaterfallPage() {
         A Town Built Around a Waterfall
       </h1>
 
-      <div className="relative mx-auto mt-8 aspect-[3/4] w-full max-w-[28rem] overflow-hidden">
+      <div className="relative mt-8 aspect-[4/3] w-full overflow-hidden md:aspect-[16/10]">
         <ResponsiveImage
           src="/assets/journal/isola-del-liri-bridge.jpg"
           alt="The bridge over the Liri, with the Cascata Grande and the Boncompagni-Viscogliosi castle behind it"
-          sizes="(max-width: 768px) 100vw, 28rem"
+          sizes="(max-width: 768px) 100vw, 768px"
           className="object-cover"
           priority
         />
       </div>
 
-      <div className="mt-10 space-y-6 text-sm leading-relaxed text-ink">
+      <div className="mt-10 space-y-6 text-base leading-[1.65] text-ink md:text-[1.0625rem] [&>p]:max-w-none">
         <p>
           An hour and a half from Rome, in the Liri valley of central Italy,
           sits a town almost no other in Europe can claim to resemble: Isola

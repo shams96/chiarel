@@ -19,7 +19,7 @@ export default function ThreeSkinsPage() {
       </h1>
       <p className="mt-4 text-[13px] text-ink">The CHIAREL Origin Story</p>
 
-      <div className="mt-10 space-y-6 text-sm leading-relaxed text-ink">
+      <div className="mt-10 space-y-6 text-base leading-[1.65] text-ink md:text-[1.0625rem] [&>p]:max-w-none">
         <p>
           The question started at a kitchen table, not a lab: one household,
           three different skin types — reactive, combination, mature — and a

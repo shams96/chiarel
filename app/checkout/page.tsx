@@ -217,7 +217,7 @@ export default function CheckoutPage() {
     return (
       <div className="mx-auto w-full max-w-container px-margin py-12 md:py-14">
         <h1 className="text-center font-serif text-3xl md:text-h1">Your Ritual Bag</h1>
-        <div className="mt-16 flex flex-col items-center gap-4 text-center">
+        <div className="mx-auto mt-8 flex min-h-[50vh] max-w-md flex-col items-center justify-center gap-6 text-center">
           <p className="text-sm text-ink">Your bag is empty.</p>
           <Link
             href="/ritual"

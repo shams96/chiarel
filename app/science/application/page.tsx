@@ -51,15 +51,15 @@ export default function ApplicationPage() {
       <h1 className="mt-2 font-serif text-h1 leading-tight">
         How to Apply CHIAREL
       </h1>
-      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink">
+      <p className="mt-5 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
         A formula feels its best when it is applied with care. Technique is
         part of the formulation story, not a footnote.
       </p>
 
-      <section className="mt-12 grid gap-10 sm:grid-cols-2">
+      <section className="mt-16 grid gap-10 sm:grid-cols-2">
         <div>
           <h2 className="font-serif text-h3 text-ochre">Morning</h2>
-          <ol className="mt-3 space-y-2 text-sm text-ink">
+          <ol className="mt-3 space-y-2 text-base text-ink md:text-[1.0625rem]">
             <li>1. Clarity Essence</li>
             <li>2. Clarity Day Crème</li>
             <li>3. SPF</li>
@@ -67,7 +67,7 @@ export default function ApplicationPage() {
         </div>
         <div>
           <h2 className="font-serif text-h3 text-ochre">Evening</h2>
-          <ol className="mt-3 space-y-2 text-sm text-ink">
+          <ol className="mt-3 space-y-2 text-base text-ink md:text-[1.0625rem]">
             <li>1. Clarity Essence</li>
             <li>2. Clarity Eye Contour Concentrate</li>
             <li>3. Clarity Night Crème</li>
@@ -80,16 +80,16 @@ export default function ApplicationPage() {
         </div>
       </section>
 
-      <section className="mt-12 space-y-8">
+      <section className="mt-16 space-y-16">
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">Apply to damp skin</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
+          <p className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             Damp skin helps the formula spread evenly and feel comfortable.
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">Warm before applying</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
+          <p className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             Warm Clarity Day Crème, Clarity Night Crème or Clarity Neck
             &amp; Décolleté Crème between fingertips before pressing into
             skin — this softens the texture for smoother, more even
@@ -98,14 +98,14 @@ export default function ApplicationPage() {
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">Press, don&rsquo;t rub</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
+          <p className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             Pressing helps the formula settle into place without tugging at
             skin.
           </p>
         </div>
         <div className="border-l-2 border-ochre pl-6">
           <h2 className="font-serif text-h3 text-ochre">Let each step set</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
+          <p className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             A brief pause between the{" "}
             <Link href="/shop/clarity-essence" className="border-b border-ochre text-ochre">
               Essence

@@ -12,7 +12,7 @@ import type { ProductGalleryImage } from "@/lib/products";
 // rail and swipe track only mount once a product actually has more than one
 // gallery image.
 // Studio shots are 4:5 with the product in the middle band. On phones the
-// frame is 5:4, so anchor the crop high enough to keep the whole product.
+// frame is square, so anchor the crop high enough to keep the whole product.
 const studioFit = (img: ProductGalleryImage) =>
   img.role === "studio" ? "object-[50%_95%] md:object-center" : "";
 
@@ -104,7 +104,7 @@ export default function ProductGallery({
               }`}
               style={{ backgroundColor: NEUTRAL_FRAME_BG }}
             >
-              <ResponsiveImage src={img.src} alt="" sizes="(min-width: 1024px) 80px, 56px" className="object-cover" />
+              <ResponsiveImage src={img.src} alt="" priority sizes="(min-width: 1024px) 80px, 56px" className="object-cover" />
             </button>
           ))}
         </div>
@@ -113,14 +113,16 @@ export default function ProductGallery({
           gallery never shifts the buy box (no CLS). tabIndex makes the
           swipe track reachable by keyboard: arrows, Home and End change image. */}
       <div
-        className="relative order-1 aspect-[5/4] w-full overflow-hidden lg:order-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ochre md:aspect-[4/5]"
+        className="relative order-1 aspect-[5/4] max-md:aspect-square w-full overflow-hidden lg:order-none focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ochre md:aspect-[4/5]"
         style={{ backgroundColor: NEUTRAL_FRAME_BG }}
-        tabIndex={isMultiple ? 0 : undefined}
       >
         {isMultiple ? (
           <div
             ref={trackRef}
-            className="flex h-full w-full snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            tabIndex={0}
+            role="region"
+            aria-label="Product images"
+            className="flex h-full w-full focus:outline-none snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
           >
             {images.map((img, i) => (
               <div

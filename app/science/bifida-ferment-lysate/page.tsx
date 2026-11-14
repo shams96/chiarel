@@ -51,35 +51,35 @@ export default function BifidaPage() {
       <h1 className="mt-2 font-serif text-h1 leading-tight">
         Bifida Ferment Lysate, Explained
       </h1>
-      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink">
+      <p className="mt-5 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
         A postbiotic ingredient, explained here in the third person as an
         educational reference.
       </p>
 
-      <section className="mt-12 space-y-10">
+      <section className="mt-16 space-y-16">
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">What it is</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
+          <p className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             A postbiotic lysate derived from fermented Bifidobacterium.
             Widely used across cosmetic formulation.
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">How it works</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
+          <p className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             Used here for the look and feel of a comfortable surface.
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">Associated outcomes</h2>
-          <ul className="mt-2 max-w-xl list-disc space-y-1 pl-5 text-sm leading-relaxed text-ink">
+          <ul className="mt-2 max-w-none list-disc space-y-1 pl-5 text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             <li>Skin that feels comfortable and balanced</li>
             <li>The look of a healthy, even surface</li>
           </ul>
         </div>
         <div className="border-l-2 border-ochre pl-6">
           <h2 className="font-serif text-h3 text-ochre">How CHIAREL formulates with it</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
+          <p className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             Found in four products: Clarity Essence, Clarity Day Crème,
             Clarity Neck &amp; Décolleté Crème and Clarity Eye Contour
             Concentrate, alongside the ingredients that define each one. It is

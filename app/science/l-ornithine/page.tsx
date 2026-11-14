@@ -47,15 +47,15 @@ export default function LOrnithinePage() {
       <h1 className="mt-2 font-serif text-h1 leading-tight">
         L-Ornithine, Explained
       </h1>
-      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink">
+      <p className="mt-5 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
         An amino acid already native to skin&rsquo;s own moisture system.
         Explained here in the third person, as an educational reference.
       </p>
 
-      <section className="mt-12 space-y-10">
+      <section className="mt-16 space-y-16">
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">What it is</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
+          <p className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             An amino acid and component of the skin&rsquo;s Natural
             Moisturising Factor (NMF) — the mix of small molecules the
             skin itself produces.
@@ -63,21 +63,21 @@ export default function LOrnithinePage() {
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">How it works</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
+          <p className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             Used in Clarity Night Crème for the look and feel of soft,
             hydrated skin.
           </p>
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">Associated outcomes</h2>
-          <ul className="mt-2 max-w-xl list-disc space-y-1 pl-5 text-sm leading-relaxed text-ink">
+          <ul className="mt-2 max-w-none list-disc space-y-1 pl-5 text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             <li>Hydration feel and softness</li>
             <li>The look of smoother texture</li>
           </ul>
         </div>
         <div className="border-l-2 border-ochre pl-6">
           <h2 className="font-serif text-h3 text-ochre">How CHIAREL formulates with it</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
+          <p className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             Found in Clarity Night Crème only, alongside bakuchiol, peptides and
             niacinamide, for the look of smoother texture overnight. See{" "}
             <Link href="/science" className="border-b border-ochre text-ochre">

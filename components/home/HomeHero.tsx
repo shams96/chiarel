@@ -23,7 +23,7 @@ export default function HomeHero() {
   const essence = getProductOrThrow("chiarel-essence");
 
   return (
-    <section className="pb-section pt-5 md:pt-6">
+    <section className="pb-12 pt-5 md:pb-16 md:pt-6 lg:pb-20">
       <Container>
         <Grid className="items-baseline border-b border-hairline pb-5">
           <p className="col-span-4 text-eyebrow uppercase md:col-span-4">CHIAREL™ · The House of Clarity™</p>
@@ -39,7 +39,7 @@ export default function HomeHero() {
               <span className="poster-b">Cellular</span>{" "}
               <span className="poster-c">Clarity<span className="poster-tm">™</span>.</span>
             </h1>
-            <p className="mt-6 max-w-measure text-lead text-ink md:mt-8">
+            <p className="mt-6 max-w-[40rem] text-lead text-ink md:mt-8 lg:text-[1.375rem]">
               {HERO_PROBLEM_LINE}
             </p>
             <div className="mt-8 md:mt-10">
@@ -63,7 +63,7 @@ export default function HomeHero() {
                 </span>
               </p>
             )}
-            <p className="mt-10 max-w-measure text-body text-ink">
+            <p className="mt-10 max-w-[40rem] text-[1.125rem] leading-[1.65] text-ink lg:text-lead">
               Exceptional skin discipline recognises no boundaries. Formulated in
               Isola del Liri under pharmacist guidance, CHIAREL™ begins with the
               face, where Clarity Essence™ brings peptide and postbiotic

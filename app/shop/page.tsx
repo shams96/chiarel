@@ -23,7 +23,11 @@ const nightRitual = ["chiarel-essence", "eye-contour-concentrate", "recovery-mas
 function ProductGrid({ slugs }: { slugs: string[] }) {
   const items = slugs.map((slug) => getProduct(slug)).filter((p) => p !== undefined);
   return (
-    <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+    <div
+      className={`mt-8 grid gap-10 sm:grid-cols-2 ${
+        items.length >= 4 ? "lg:grid-cols-4" : "lg:mx-auto lg:max-w-3xl"
+      }`}
+    >
       {items.map((p) => (
         <ProductCard key={p!.slug} product={p!} />
       ))}
@@ -53,11 +57,12 @@ export default function ShopPage() {
 
       {/* Featured category hero — standardized neutral frame, same as every other product tile */}
       <section
-        data-theme="light"
         className="mt-10 flex flex-col items-center gap-8 overflow-hidden rounded-md border border-ink/10 md:flex-row md:gap-12 md:pr-12"
-        style={{ backgroundColor: NEUTRAL_FRAME_BG }}
       >
-        <div className="relative aspect-[4/5] w-full shrink-0 overflow-hidden md:w-[44%]">
+        <div
+          className="relative aspect-[4/5] w-full shrink-0 overflow-hidden md:w-[44%]"
+          style={{ backgroundColor: NEUTRAL_FRAME_BG }}
+        >
           <ResponsiveImage src={studioImage(n1)} alt={productImageAlt(n1)} sizes="(min-width: 768px) 44vw, 100vw" className="object-cover" />
         </div>
         <div className="px-8 pb-10 md:p-0">

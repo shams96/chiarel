@@ -17,7 +17,6 @@ import { FREE_FROM_SENTENCE, formulationLine, isLaunchFormula } from "@/lib/form
 import EditorialFeature from "@/components/EditorialFeature";
 import AmbientVideo from "@/components/AmbientVideo";
 import { productJsonLd, productPageTitle, breadcrumbJsonLd } from "@/lib/seo";
-import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { productHoverClass } from "@/lib/motion";
 
 // A compact, purely factual summary near the top of the page — GEO guidance
@@ -67,7 +66,7 @@ export default async function ProductPage({
   if (!p) notFound();
 
   return (
-    <div>
+    <div className={isPurchasable(p) ? "pb-24 lg:pb-0" : undefined}>
       {isPurchasable(p) && (
         <TrackViewItem slug={p.slug} name={p.name} price={p.price.oneTime} />
       )}
@@ -665,7 +664,7 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
   }
 
   return (
-    <div className="mx-auto mt-4 max-w-2xl border-t border-ink/10 px-6 pb-20 pt-14">
+    <div className="mx-auto mt-4 max-w-3xl border-t border-ink/10 px-6 pb-20 pt-14">
       <h2 className="text-center font-serif text-h3 text-ochre">Routine Position</h2>
       <div className="mt-8 space-y-6">
         {inAM && <RouteStrip label="Morning" route={LAUNCH_AM_ROUTE} />}
@@ -680,12 +679,11 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
             {pairs.map((item) => (
               <div
                 key={item.slug}
-                className="flex flex-col gap-3 rounded-sm border border-ink/10 p-4 transition hover:border-ochre"
+                className="flex h-full flex-col gap-3 rounded-sm border border-ink/10 p-4 transition hover:border-ochre"
               >
                 <Link href={productHref(item.slug)} className="flex items-center gap-4">
                   <div
-                    className="relative h-16 w-16 shrink-0 overflow-hidden"
-                    style={{ backgroundColor: NEUTRAL_FRAME_BG }}
+                    className="relative h-16 w-16 shrink-0 overflow-hidden bg-cloud"
                   >
                     <Image src={item.image} alt={productImageAlt(item)} fill sizes="64px" className="object-cover" />
                   </div>
@@ -701,7 +699,11 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
                     )}
                   </div>
                 </Link>
-                {isPurchasable(item) && <AddPairButton slug={item.slug} name={item.name} />}
+                {isPurchasable(item) && (
+                  <div className="mt-auto">
+                    <AddPairButton slug={item.slug} name={item.name} />
+                  </div>
+                )}
               </div>
             ))}
           </div>

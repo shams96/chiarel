@@ -28,7 +28,7 @@ export default function ReadingLabelPage() {
         Reading a Label Like the House Does
       </h1>
 
-      <div className="mt-8 space-y-6 text-sm leading-relaxed text-ink">
+      <div className="mt-8 space-y-6 text-base leading-[1.65] text-ink md:text-[1.0625rem] [&>p]:max-w-none">
         <p>
           Most skincare copy is written to be believed quickly. CHIAREL™
           copy is written to be checked. The distinction is a single
@@ -37,10 +37,10 @@ export default function ReadingLabelPage() {
           the formulation cannot guarantee?
         </p>
         <p>
-          <strong className="text-ink">Outcome language</strong> describes{" "}
+          <strong className="font-semibold text-ink">Outcome language</strong> describes{" "}
           <em>the look of</em> something — smoother texture, an even
           surface, comfortable skin.{" "}
-          <strong className="text-ink">Promise language</strong> says a
+          <strong className="font-semibold text-ink">Promise language</strong> says a
           product <em>fixes</em>, <em>repairs</em>, or performs a{" "}
           <em>miracle</em> — it claims a guaranteed result no formulation,
           however well made, can ethically promise. We only use the first
