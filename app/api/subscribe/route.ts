@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { isRateLimited, clientIp } from "@/lib/rate-limit";
 import { sendMail } from "@/lib/mail";
 import { SITE_URL } from "@/lib/seo";
+import { ageGate } from "@/lib/age-gate";
 import { CONSENT_TEXT_VERSION } from "@/lib/email-consent";
 import { forwardToKlaviyo } from "@/lib/klaviyo";
 import { isMissingTableError, normalizeEmail, normalizeSource, unsubscribeUrl } from "@/lib/subscribers";
@@ -37,6 +38,9 @@ export async function POST(req: NextRequest) {
 
   // Honeypot: real visitors never see or fill this field.
   if (typeof body?.website === "string" && body.website !== "") return OK();
+
+  const blocked = ageGate(req, body?.dateOfBirth);
+  if (blocked) return blocked;
 
   const email = normalizeEmail(body?.email);
   if (!email) return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });

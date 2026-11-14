@@ -50,7 +50,7 @@ const { forwardToKlaviyo } = await import("@/lib/klaviyo");
 
 const post = (body: unknown) =>
   POST(new NextRequest("http://localhost/api/subscribe", { method: "POST", body: JSON.stringify(body) }));
-const good = { email: "Ada@Example.com ", consent: true, source: "journal", website: "" };
+const good = { email: "Ada@Example.com ", consent: true, source: "journal", website: "", dateOfBirth: "1990-05-20" };
 
 beforeEach(() => {
   store.subs = [];
@@ -64,6 +64,35 @@ beforeEach(() => {
   vi.spyOn(console, "error").mockImplementation(() => {});
 });
 afterEach(() => vi.unstubAllGlobals());
+
+describe("POST /api/subscribe age gate", () => {
+  it("blocks an under-13 date of birth, stores nothing and sets the block cookie", async () => {
+    const y = new Date().getUTCFullYear() - 10;
+    const res = await post({ ...good, dateOfBirth: `${y}-06-15` });
+    expect(res.status).toBe(403);
+    expect(store.subs).toHaveLength(0);
+    expect(res.headers.get("set-cookie")).toContain("chiarel_age_block=1");
+  });
+  it("refuses a retry with a different date once blocked", async () => {
+    const y = new Date().getUTCFullYear() - 10;
+    const first = await post({ ...good, dateOfBirth: `${y}-06-15` });
+    const cookie = first.headers.get("set-cookie")!.split(";")[0];
+    const retry = await POST(
+      new NextRequest("http://localhost/api/subscribe", {
+        method: "POST",
+        headers: { cookie },
+        body: JSON.stringify(good),
+      })
+    );
+    expect(retry.status).toBe(403);
+    expect(store.subs).toHaveLength(0);
+  });
+  it("rejects a missing or invalid date of birth", async () => {
+    expect((await post({ ...good, dateOfBirth: undefined })).status).toBe(400);
+    expect((await post({ ...good, dateOfBirth: "2999-01-01" })).status).toBe(400);
+    expect(store.subs).toHaveLength(0);
+  });
+});
 
 describe("POST /api/subscribe", () => {
   it("stores a normalized email with consent metadata", async () => {

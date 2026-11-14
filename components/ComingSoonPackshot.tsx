@@ -2,7 +2,9 @@
 
 import { Suspense, useId, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { track } from "@/lib/analytics";
+import { SMS_CONSENT_TEXT } from "@/lib/sms-consent-text";
 
 /**
  * The Founding 100 capture card. Deliberately plain — no product color tint,
@@ -36,6 +38,9 @@ function ComingSoonPackshotInner({
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [smsConsent, setSmsConsent] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">(
     "idle"
   );
@@ -45,13 +50,18 @@ function ComingSoonPackshotInner({
     e.preventDefault();
     if (!name || !email) return;
     setStatus("loading");
+    setErrorMessage("");
     try {
       const res = await fetch("/api/founding-list", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone, referredBy, source }),
+        body: JSON.stringify({ name, email, phone, smsConsent, dateOfBirth, referredBy, source }),
       });
       if (res.ok) track("email_signup", { source });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setErrorMessage(typeof data.error === "string" ? data.error : "");
+      }
       setStatus(res.ok ? "done" : "error");
     } catch {
       setStatus("error");
@@ -164,17 +174,44 @@ ${shareUrl}`)}`,
           onChange={(e) => setEmail(e.target.value)}
           className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/70 focus:border-ochre focus:outline-none"
         />
-        <label htmlFor={`founding-phone-${uid}`} className="sr-only">Phone (optional)</label>
+        <label htmlFor={`founding-phone-${uid}`} className="sr-only">Mobile number for text updates (optional)</label>
         <input
           id={`founding-phone-${uid}`}
           type="tel"
           autoComplete="tel"
-          placeholder="Phone (optional)"
+          placeholder="Mobile for text updates (optional)"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/70 focus:border-ochre focus:outline-none"
         />
+        <label htmlFor={`founding-dob-${uid}`} className="sr-only">Date of birth</label>
+        <input
+          id={`founding-dob-${uid}`}
+          type="date"
+          autoComplete="bday"
+          required
+          aria-label="Date of birth"
+          value={dateOfBirth}
+          onChange={(e) => setDateOfBirth(e.target.value)}
+          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink focus:border-ochre focus:outline-none sm:col-span-2"
+        />
       </div>
+      <label className="mt-3 flex cursor-pointer items-start gap-3 text-[12px] leading-snug text-ink">
+        <input
+          type="checkbox"
+          checked={smsConsent}
+          onChange={(e) => setSmsConsent(e.target.checked)}
+          required={phone.trim() !== ""}
+          className="mt-0.5 h-6 w-6 shrink-0 accent-ochre"
+        />
+        <span>
+          {SMS_CONSENT_TEXT}{" "}
+          <Link href="/sms-terms" className="border-b border-ochre pb-0.5 text-ochre">SMS Terms</Link>{" "}
+          and{" "}
+          <Link href="/privacy" className="border-b border-ochre pb-0.5 text-ochre">Privacy Policy</Link>.
+          Tick only if you entered a mobile number above.
+        </span>
+      </label>
       <button
         type="submit"
         disabled={status === "loading"}
@@ -184,7 +221,7 @@ ${shareUrl}`)}`,
       </button>
       {status === "error" && (
         <p className="mt-2 text-[12px] text-ochre" role="alert">
-          Something went wrong — please try again.
+          {errorMessage || "Something went wrong — please try again."}
         </p>
       )}
     </form>
