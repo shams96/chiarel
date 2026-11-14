@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CONTACT_EMAIL } from "@/lib/seo";
-import { SMS_CONSENT_TEXT } from "@/lib/sms-consent";
+import { SMS_CONSENT_TEXT } from "@/lib/sms-consent-text";
 
 export const metadata: Metadata = {
   title: "SMS Terms",

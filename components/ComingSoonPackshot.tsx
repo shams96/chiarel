@@ -4,7 +4,7 @@ import { Suspense, useId, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
-import { SMS_CONSENT_TEXT } from "@/lib/sms-consent";
+import { SMS_CONSENT_TEXT } from "@/lib/sms-consent-text";
 
 /**
  * The Founding 100 capture card. Deliberately plain — no product color tint,

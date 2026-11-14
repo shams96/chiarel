@@ -1,12 +1,11 @@
 import { db } from "@/lib/db";
+import { SMS_CONSENT_VERSION, SMS_CONSENT_TEXT } from "@/lib/sms-consent-text";
 
 // Shared by the signup form (client) and the API route (server) so the text a
 // person ticks is exactly the text version we store. Bump the version
 // whenever the wording changes. Nothing sends text messages yet; any sender
 // must call hasLiveSmsConsent() first and honour revokeSmsConsent().
-export const SMS_CONSENT_VERSION = "2026-11-v1";
-export const SMS_CONSENT_TEXT =
-  "I agree to receive recurring automated marketing text messages from CHIAREL at the mobile number I entered. Consent is not a condition of any purchase. Message and data rates may apply. Message frequency varies. Reply STOP to cancel or HELP for help.";
+export { SMS_CONSENT_VERSION, SMS_CONSENT_TEXT };
 
 /** US/Canada (NANP) mobile numbers only, stored as +1XXXXXXXXXX. */
 export function normalizeNanpPhone(value: unknown): string | null {
