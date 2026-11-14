@@ -47,16 +47,16 @@ export default function BarrierResiliencePage() {
       <h1 className="mt-2 font-serif text-h1 leading-tight">
         Building a More Resilient Skin Barrier
       </h1>
-      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink">
+      <p className="mt-5 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
         A working woman&rsquo;s day asks a great deal of her skin. CHIAREL
         formulates for the look of comfortable, cushioned skin through it,
         using the lipids skin already knows.
       </p>
 
-      <section className="mt-12 space-y-10">
+      <section className="mt-16 space-y-16">
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">Ceramides</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
+          <p className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             Ceramides are lipids found between skin cells. Clarity Day Crème
             carries ceramide NP, AP and EOP, for the look and feel of
             comfortable, hydrated skin. Clarity Night Crème carries ceramide NP.
@@ -64,7 +64,7 @@ export default function BarrierResiliencePage() {
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">Cholesterol and squalane</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
+          <p className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             Cholesterol is another of skin&rsquo;s own lipids. Squalane is a
             lightweight, skin-compatible emollient. Together with the
             ceramides they give the crèmes a cushioned, comfortable finish.
@@ -72,7 +72,7 @@ export default function BarrierResiliencePage() {
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">Niacinamide</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
+          <p className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             Niacinamide is chosen for the look of an even, healthy surface.
             It is in all five products: Clarity Essence, Clarity Day Crème,
             Clarity Night Crème, Clarity Neck &amp; Décolleté Crème and
@@ -81,7 +81,7 @@ export default function BarrierResiliencePage() {
         </div>
         <div className="border-l-2 border-ochre pl-6">
           <h2 className="font-serif text-h3 text-ochre">For the neck and chest</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
+          <p className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             Clarity Neck &amp; Décolleté Crème pairs copper peptide with
             ceramides and squalane, for the look of smoother, more hydrated
             skin on the neck and chest.

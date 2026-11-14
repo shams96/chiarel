@@ -21,7 +21,7 @@ export default function ContactPage() {
 
       <dl className="mt-12 space-y-8 text-sm leading-relaxed text-ink">
         <div>
-          <dt className="text-eyebrow uppercase text-ink">
+          <dt className="text-eyebrow uppercase text-ink before:mb-3 before:block before:h-px before:w-8 before:bg-ochre before:content-['']">
             General Inquiries
           </dt>
           <dd className="mt-2">
@@ -34,7 +34,7 @@ export default function ContactPage() {
           </dd>
         </div>
         <div>
-          <dt className="text-eyebrow uppercase text-ink">
+          <dt className="text-eyebrow uppercase text-ink before:mb-3 before:block before:h-px before:w-8 before:bg-ochre before:content-['']">
             Order Support
           </dt>
           <dd className="mt-2 max-w-md">
@@ -49,7 +49,7 @@ export default function ContactPage() {
           </dd>
         </div>
         <div>
-          <dt className="text-eyebrow uppercase text-ink">
+          <dt className="text-eyebrow uppercase text-ink before:mb-3 before:block before:h-px before:w-8 before:bg-ochre before:content-['']">
             Press
           </dt>
           <dd className="mt-2 max-w-md">
@@ -68,7 +68,7 @@ export default function ContactPage() {
           </dd>
         </div>
         <div>
-          <dt className="text-eyebrow uppercase text-ink">
+          <dt className="text-eyebrow uppercase text-ink before:mb-3 before:block before:h-px before:w-8 before:bg-ochre before:content-['']">
             Formulation &amp; Manufacturing
           </dt>
           <dd className="mt-2 max-w-md">

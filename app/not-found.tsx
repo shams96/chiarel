@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-[70vh] flex-col items-center justify-center bg-ivory px-6 text-center">
+    <div className="flex min-h-[50vh] flex-col items-center justify-center px-6 py-16 text-center">
       <p className="text-[12px] uppercase tracking-[0.3em] text-ochre">
         CHIAREL™
       </p>
@@ -10,16 +10,16 @@ export default function NotFound() {
       <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink">
         The page you&rsquo;re looking for doesn&rsquo;t exist, or may have moved.
       </p>
-      <div className="mt-8 flex items-center gap-6">
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
         <Link
           href="/shop"
-          className="btn-press bg-ink px-8 py-3 text-[12px] uppercase tracking-[0.25em] text-ivory transition hover:bg-ochre"
+          className="btn-press bg-ink whitespace-nowrap px-6 py-3 text-[12px] uppercase tracking-[0.2em] sm:px-8 sm:tracking-[0.25em] text-ivory transition hover:bg-ochre"
         >
           Shop the House
         </Link>
         <Link
           href="/"
-          className="border-b border-ochre pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
+          className="border-b border-ochre whitespace-nowrap pb-0.5 text-[12px] uppercase tracking-[0.18em] text-ochre"
         >
           Return home
         </Link>

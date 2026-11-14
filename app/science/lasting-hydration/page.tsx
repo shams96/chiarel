@@ -47,17 +47,17 @@ export default function LastingHydrationPage() {
       <h1 className="mt-2 font-serif text-h1 leading-tight">
         Beyond Surface Moisture
       </h1>
-      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink">
+      <p className="mt-5 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
         Hydration that fades within the hour is a formulation gap, not an
         inevitability. CHIAREL layers water-binding ingredients with
         skin-compatible lipids, for the look and feel of hydrated, comfortable
         skin through the day.
       </p>
 
-      <section className="mt-12 space-y-10">
+      <section className="mt-16 space-y-16">
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">The humectant-only gap</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
+          <p className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             Humectants draw water to the skin&rsquo;s surface. Without
             something to help hold it there, that water evaporates and skin
             can feel tighter than before application.
@@ -65,7 +65,7 @@ export default function LastingHydrationPage() {
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">Water-binding ingredients</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
+          <p className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             Hyaluronic acid is a well-known water-binding molecule. Clarity
             Essence carries it as sodium hyaluronate, alongside peptides and
             niacinamide, and Clarity Eye Contour Concentrate carries it for
@@ -74,7 +74,7 @@ export default function LastingHydrationPage() {
         </div>
         <div className="border-l-2 border-ochre pl-6">
           <h2 className="font-serif text-h3 text-ochre">Lipids complete the picture</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
+          <p className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             Ceramides, cholesterol and squalane in Clarity Day Crème and
             Clarity Night Crème, and ceramides and squalane in Clarity Neck
             &amp; Décolleté Crème, give the look and feel of hydrated,
@@ -83,7 +83,7 @@ export default function LastingHydrationPage() {
         </div>
         <div className="border-l-2 border-champagne pl-6">
           <h2 className="font-serif text-h3 text-ochre">What this feels like</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink">
+          <p className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
             A cushioned, comfortable finish. See{" "}
             <Link href="/science" className="border-b border-ochre text-ochre">
               The Science

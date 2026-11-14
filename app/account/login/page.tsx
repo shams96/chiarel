@@ -24,7 +24,7 @@ export default async function AccountLoginPage({
   if (signedIn) redirect(returnTo);
 
   return (
-    <div className="mx-auto flex max-w-md flex-col px-6 py-16 md:py-24">
+    <div className="mx-auto flex min-h-[60vh] max-w-md flex-col justify-center px-6 py-16">
       <h1 className="font-serif text-4xl">Your Ritual</h1>
       <p className="mt-4 text-[15px] leading-relaxed text-ink">
         Enter your email and we will send you a code. No password needed.

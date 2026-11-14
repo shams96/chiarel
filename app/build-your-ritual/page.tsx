@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import { getProduct, productImageAlt, isPurchasable, type Product } from "@/lib/products";
-import { NEUTRAL_FRAME_BG } from "@/lib/color";
 import { useCart, unitPrice } from "@/lib/cart-context";
 import PageHead from "@/components/layout/PageHead";
 import Container from "@/components/layout/Container";
@@ -16,6 +15,10 @@ const RITUAL_SLUGS = [
   "recovery-masque",
   "n1-neck-decollete",
 ];
+
+// Six-column grid at lg, each tile two columns wide: the fourth tile starts at
+// column 2 so a final row of two sits centred under the row of three.
+const tileStart = (i: number) => (i === 3 ? "lg:col-start-2" : "");
 
 export default function BuildYourRitualPage() {
   const { add } = useCart();
@@ -69,30 +72,29 @@ export default function BuildYourRitualPage() {
       </PageHead>
       <Container className="pb-section pt-6">
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {selectableProducts.map((p) => {
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
+        {selectableProducts.map((p, i) => {
           const isSelected = selected.has(p.slug);
           return (
             <button
               key={p.slug}
               onClick={() => toggle(p.slug)}
               aria-pressed={isSelected}
-              className={`btn-press flex flex-col items-start gap-3 rounded-sm border p-4 text-left transition ${
+              className={`btn-press flex flex-col items-start gap-3 rounded-sm border p-4 text-left transition lg:col-span-2 ${tileStart(i)} ${
                 isSelected
                   ? "border-ochre bg-ochre/5"
                   : "border-ink/15 hover:border-ink/30"
               }`}
             >
               <div
-                className="relative aspect-square w-full overflow-hidden"
-                style={{ backgroundColor: NEUTRAL_FRAME_BG }}
+                className="relative aspect-square w-full overflow-hidden bg-cloud [[data-theme=dark]_&]:bg-ivory"
               >
                 <Image
                   src={p.image}
                   alt={productImageAlt(p)}
                   fill
                   sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  className="object-cover"
+                  className="object-contain p-4"
                 />
                 <div
                   className={`absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full border text-[12px] ${
@@ -107,7 +109,7 @@ export default function BuildYourRitualPage() {
               </div>
               <div>
                 <p className="text-eyebrow uppercase text-ink">
-                  {p.timeOfUse} · {p.descriptor}
+                  {[p.timeOfUse, p.descriptor].filter(Boolean).join(" · ")}
                 </p>
                 <p className="mt-1 text-sm font-medium leading-tight">
                   {p.name}
@@ -120,22 +122,21 @@ export default function BuildYourRitualPage() {
           );
         })}
 
-        {comingSoonProducts.map((p) => (
+        {comingSoonProducts.map((p, j) => (
           <div
             key={p.slug}
             aria-disabled="true"
-            className="flex flex-col items-start gap-3 rounded-sm border border-ink/10 bg-cloud/20 p-4 text-left opacity-70"
+            className={`flex flex-col items-start gap-3 rounded-sm border border-ink/10 bg-cloud/20 p-4 text-left opacity-70 lg:col-span-2 ${tileStart(selectableProducts.length + j)}`}
           >
             <div
-              className="relative aspect-square w-full overflow-hidden"
-              style={{ backgroundColor: NEUTRAL_FRAME_BG }}
+              className="relative aspect-square w-full overflow-hidden bg-cloud [[data-theme=dark]_&]:bg-ivory"
             >
               <Image
                 src={p.image}
                 alt={productImageAlt(p)}
                 fill
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className="object-cover"
+                className="object-contain p-4"
               />
               <span className="absolute left-2 top-2 bg-ivory/90 px-2 py-1 text-eyebrow uppercase text-ink">
                 Coming Soon
@@ -143,7 +144,7 @@ export default function BuildYourRitualPage() {
             </div>
             <div>
               <p className="text-eyebrow uppercase text-ink">
-                {p.timeOfUse} · {p.descriptor}
+                {[p.timeOfUse, p.descriptor].filter(Boolean).join(" · ")}
               </p>
               <p className="mt-1 text-sm font-medium leading-tight">
                 {p.name}

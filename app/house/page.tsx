@@ -1,4 +1,5 @@
 import PageHead from "@/components/layout/PageHead";
+import Image from "next/image";
 import Container from "@/components/layout/Container";
 
 export const metadata = {
@@ -15,12 +16,25 @@ export default function HousePage() {
       <Container className="pb-section">
       <div className="grid-12">
 
-      {/* No real photo of Isola del Liri exists in the asset library — the prior
-          image here ("hero.png") was a mislabeled product-jar mockup, not a place
-          photo. Deliberately text-only until real location photography exists. */}
+      {/* Rail image is the Isola del Liri brand scene already used on the home page;
+          it is a brand scene, not a photograph of the town (see its caption). */}
+      <aside className="col-span-full mb-6 lg:col-span-3 lg:mb-0 lg:sticky lg:top-24 lg:self-start">
+        <figure>
+          <div className="relative aspect-square w-full overflow-hidden lg:aspect-[4/5] border border-ink/10 bg-cloud">
+            <Image
+              src="/assets/editorial/isola-spring-essence-square-1400.jpg"
+              alt="CHIAREL Clarity Essence bottle resting on a flat stone in clear running water"
+              width={1400}
+              height={1400}
+              sizes="(max-width: 1024px) 100vw, 25vw"
+              className="h-full w-full object-cover"
+            />
+          </div>
+        </figure>
+      </aside>
 
-      <div className="space-y-10 text-body text-ink col-span-full lg:col-span-8 lg:col-start-5">
-        <section>
+      <div className="text-body text-ink col-span-full lg:col-span-8 lg:col-start-5">
+        <section className="border-t border-ink/10 pt-10 first:border-t-0 first:pt-0 [&:not(:first-child)]:mt-10">
           <h2 className="font-serif text-h3 text-ochre">Isola del Liri</h2>
           <p className="mt-2 max-w-2xl">
             An hour and a half from Rome, in the Liri valley of central Italy,
@@ -29,7 +43,7 @@ export default function HousePage() {
             partner Natural You Srl, that CHIAREL™ formulations are crafted.
           </p>
         </section>
-        <section>
+        <section className="border-t border-ink/10 pt-10 first:border-t-0 first:pt-0 [&:not(:first-child)]:mt-10">
           <h2 className="font-serif text-h3 text-ochre">A Red Drawn From the Land</h2>
           <p className="mt-2 max-w-2xl">
             Red Ochre is not a packaging colour chosen from a swatch book. It is
@@ -39,7 +53,7 @@ export default function HousePage() {
             green. Only the red is CHIAREL&rsquo;s.
           </p>
         </section>
-        <section>
+        <section className="border-t border-ink/10 pt-10 first:border-t-0 first:pt-0 [&:not(:first-child)]:mt-10">
           <h2 className="font-serif text-h3 text-ochre">Mission</h2>
           <p className="mt-2 max-w-2xl">
             Advancing Cellular Clarity™ — supporting the skin&rsquo;s own
@@ -47,7 +61,7 @@ export default function HousePage() {
             precision, and respect for the skin&rsquo;s biology.
           </p>
         </section>
-        <section>
+        <section className="border-t border-ink/10 pt-10 first:border-t-0 first:pt-0 [&:not(:first-child)]:mt-10">
           <h2 className="font-serif text-h3 text-ochre">Modern Biological Stress™</h2>
           <p className="mt-2 max-w-2xl">
             A working woman&rsquo;s day asks a great deal of her body and her
@@ -59,14 +73,14 @@ export default function HousePage() {
             mission, Advancing Cellular Clarity™.
           </p>
         </section>
-        <section>
+        <section className="border-t border-ink/10 pt-10 first:border-t-0 first:pt-0 [&:not(:first-child)]:mt-10">
           <h2 className="font-serif text-h3 text-ochre">Clarity</h2>
           <p className="mt-2 max-w-2xl">
             Five formulations, each made for one purpose. Each carries the name
             of our mission: Clarity.
           </p>
         </section>
-        <section>
+        <section className="border-t border-ink/10 pt-10 first:border-t-0 first:pt-0 [&:not(:first-child)]:mt-10">
           <h2 className="font-serif text-h3 text-ochre">La Bella Figura</h2>
           <p className="mt-2 max-w-2xl">
             The Italian art of presenting one&rsquo;s best self — not vanity,
@@ -75,7 +89,7 @@ export default function HousePage() {
             performance.
           </p>
         </section>
-        <section className="border-t border-ink/10 pt-10">
+        <section className="border-t border-ink/10 pt-10 first:border-t-0 first:pt-0 [&:not(:first-child)]:mt-10">
           <h2 className="font-serif text-h3 text-ochre">Formulated By</h2>
           <p className="mt-2 max-w-2xl">
             Natural You Srl is guided by Grazia Savoriti, a pharmacist with
@@ -88,12 +102,12 @@ export default function HousePage() {
               rel="noopener noreferrer"
               className="border-b border-ochre text-ochre"
             >
-              See her profile at Natural You Srl
+              See her profile at Natural You Srl<span className="sr-only"> (opens in a new tab)</span>
             </a>
             .
           </p>
         </section>
-        <section className="border-t border-ink/10 pt-10">
+        <section className="border-t border-ink/10 pt-10 first:border-t-0 first:pt-0 [&:not(:first-child)]:mt-10">
           <h2 className="font-serif text-h3 text-ochre">A Considered Practice</h2>
           <p className="mt-2 max-w-2xl">
             Small, made-to-order batches. Glass bottles and jars. Every active

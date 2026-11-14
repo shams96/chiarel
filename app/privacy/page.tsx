@@ -21,6 +21,7 @@ export default function PrivacyPage() {
 
       <div className="mt-10 space-y-10 text-sm leading-relaxed text-ink">
         <section>
+          <span aria-hidden="true" className="mb-3 block h-px w-8 bg-ochre" />
           <h2 className="font-serif text-h4 text-ink">Information we collect</h2>
           <p className="mt-3">
             When you place an order, we collect your name, email address,
@@ -38,6 +39,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
+          <span aria-hidden="true" className="mb-3 block h-px w-8 bg-ochre" />
           <h2 className="font-serif text-h4 text-ink">Cookies</h2>
           <p className="mt-3">
             {SITE_NAME} uses a single first-party cookie to remember the
@@ -61,6 +63,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
+          <span aria-hidden="true" className="mb-3 block h-px w-8 bg-ochre" />
           <h2 className="font-serif text-h4 text-ink">How we use your information</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5">
             <li>To process and fulfill your order and manage subscriptions.</li>
@@ -71,6 +74,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
+          <span aria-hidden="true" className="mb-3 block h-px w-8 bg-ochre" />
           <h2 className="font-serif text-h4 text-ink">Third parties we work with</h2>
           <p className="mt-3">
             Payments are processed by Stripe, Inc., which receives and
@@ -82,6 +86,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
+          <span aria-hidden="true" className="mb-3 block h-px w-8 bg-ochre" />
           <h2 className="font-serif text-h4 text-ink">Your rights</h2>
           <p className="mt-3">
             You may request a copy of the personal information we hold about
@@ -99,6 +104,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
+          <span aria-hidden="true" className="mb-3 block h-px w-8 bg-ochre" />
           <h2 className="font-serif text-h4 text-ink">
             EU/UK Data Subject Rights (GDPR)
           </h2>
@@ -133,6 +139,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
+          <span aria-hidden="true" className="mb-3 block h-px w-8 bg-ochre" />
           <h2 className="font-serif text-h4 text-ink">Children&rsquo;s privacy</h2>
           <p className="mt-3">
             {SITE_NAME} is not directed at children, and we do not knowingly
@@ -141,6 +148,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
+          <span aria-hidden="true" className="mb-3 block h-px w-8 bg-ochre" />
           <h2 className="font-serif text-h4 text-ink">Changes to this policy</h2>
           <p className="mt-3">
             If this policy changes, we will update the effective date above
@@ -149,6 +157,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
+          <span aria-hidden="true" className="mb-3 block h-px w-8 bg-ochre" />
           <h2 className="font-serif text-h4 text-ink">Contact</h2>
           <p className="mt-3">
             Questions about this policy can be sent to{" "}

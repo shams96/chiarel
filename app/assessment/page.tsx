@@ -111,7 +111,7 @@ export default function AssessmentPage() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl px-6 py-16">
+    <div className="mx-auto flex min-h-[60vh] max-w-2xl flex-col justify-center px-6 py-16">
       <p className="text-sm text-ink">CHIAREL Skin Assessment™</p>
       <div className="mt-2 flex items-center gap-3">
         <div className="h-px flex-1 bg-ink/10">

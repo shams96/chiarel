@@ -15,10 +15,10 @@ export default function RitualPage() {
   return (
     <>
     <div className="mx-auto w-full max-w-container px-margin pt-16">
-      <h1 className="max-w-2xl font-serif text-h1 leading-tight">
+      <h1 className="max-w-4xl font-serif text-[clamp(2.5rem,1.4rem+4.6vw,4.5rem)] font-medium leading-[1.06] tracking-[-0.015em]">
         Five products, two moments in the day: prepare for it, then let it go.
       </h1>
-      <p className="mt-4 max-w-xl text-sm text-ink">
+      <p className="mt-6 max-w-measure text-lead text-ink">
         Order follows the texture, lightest first. Each moment answers part of
         the day described on{" "}
         <Link href="/house" className="border-b border-ochre text-ochre">
@@ -26,7 +26,7 @@ export default function RitualPage() {
         </Link>
         , the daily load we call Modern Biological Stress&trade;.
       </p>
-      <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+      <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
         <Link
           href="/assessment"
           className="inline-block border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
@@ -48,11 +48,11 @@ export default function RitualPage() {
     </div>
 
     <div className="mx-auto mt-12 w-full max-w-container px-margin">
-      <div className="relative mx-auto aspect-square w-full max-w-2xl overflow-hidden">
+      <div className="relative mx-auto aspect-square w-full max-w-4xl overflow-hidden lg:aspect-[16/10]">
         <ResponsiveImage
           src="/assets/products/clarity-ritual-group.jpg"
           alt="The five Clarity products in a row on a travertine plinth: Essence, Day Crème, Night Crème, Neck & Décolleté Crème and Eye Contour Concentrate"
-          sizes="(max-width: 768px) 92vw, 672px"
+          sizes="(max-width: 768px) 92vw, 896px"
           className="object-cover"
         />
       </div>

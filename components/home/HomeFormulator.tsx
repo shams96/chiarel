@@ -50,7 +50,7 @@ export default function HomeFormulator() {
             rel="noopener noreferrer"
             className="flex min-h-[44px] items-center text-[12px] uppercase tracking-[0.16em] text-ink hover:text-ochre"
           >
-            Verified profile at Natural You Srl →
+            Verified profile at Natural You Srl →<span className="sr-only"> (opens in a new tab)</span>
           </a>
         </Reveal>
 

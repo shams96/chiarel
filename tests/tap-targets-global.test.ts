@@ -29,7 +29,7 @@ describe("targeted tap-target fixes", () => {
 
   it("the terms checkbox sits in a 44px-tall label and is larger than the default", () => {
     const src = read("app/checkout/page.tsx");
-    expect(src).toMatch(/<label className="flex min-h-\[44px\] items-center[^"]*">\s*<input type="checkbox" name="termsAccepted"[^>]*h-5 w-5/);
+    expect(src).toMatch(/<label className="flex min-h-\[44px\] items-center[^"]*">\s*<input type="checkbox" name="termsAccepted"[^>]*h-6 w-6/);
   });
 
   it("stacked small links keep their tap zones from overlapping (gap of at least 24px between boxes)", () => {

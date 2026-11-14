@@ -116,7 +116,7 @@ ${shareUrl}`)}`,
               rel="noopener noreferrer"
               className="btn-press flex min-h-[44px] items-center justify-center border border-ochre px-3 py-3 text-[12px] uppercase tracking-[0.2em] text-ochre transition hover:bg-ochre hover:text-white"
             >
-              {l.label}
+              {l.label}<span className="sr-only"> (opens in a new tab)</span>
             </a>
           ))}
           <button

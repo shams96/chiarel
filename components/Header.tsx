@@ -66,7 +66,7 @@ export default function Header() {
             />
           </span>
         </Link>
-        <nav aria-label="Primary" className="hidden gap-1 xl:flex">
+        <nav aria-label="Primary" className="hidden gap-1 xl:ml-8 xl:flex">
           {nav.map((n) => (
             <Link
               key={n.href}

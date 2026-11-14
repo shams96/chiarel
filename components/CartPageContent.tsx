@@ -127,7 +127,7 @@ export default function CartPageContent() {
           </div>
         </div>
       ) : lines.length === 0 ? (
-        <div className="mt-16 flex flex-col items-center gap-4 text-center">
+        <div className="mx-auto mt-8 flex max-w-md py-12 flex-col items-center justify-center gap-6 text-center">
           <p className="text-sm text-ink">Your bag is empty.</p>
           <Link
             href="/ritual"

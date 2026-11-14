@@ -217,7 +217,7 @@ export default function CheckoutPage() {
     return (
       <div className="mx-auto w-full max-w-container px-margin py-12 md:py-14">
         <h1 className="text-center font-serif text-3xl md:text-h1">Your Ritual Bag</h1>
-        <div className="mt-16 flex flex-col items-center gap-4 text-center">
+        <div className="mx-auto mt-8 flex min-h-[50vh] max-w-md flex-col items-center justify-center gap-6 text-center">
           <p className="text-sm text-ink">Your bag is empty.</p>
           <Link
             href="/ritual"
@@ -382,11 +382,11 @@ export default function CheckoutPage() {
 
             <div>
               <label className="flex min-h-[44px] items-center gap-3 text-[12px] leading-relaxed text-ink">
-                <input type="checkbox" name="termsAccepted" id="co-terms" className="h-5 w-5 shrink-0" {...a11y("termsAccepted")} />
+                <input type="checkbox" name="termsAccepted" id="co-terms" className="h-6 w-6 shrink-0" {...a11y("termsAccepted")} />
                 <span>
                   I have read and agree to the{" "}
                   <Link href="/terms" target="_blank" className="border-b border-ochre text-ochre">
-                    Refund Policy and Terms of Service
+                    Refund Policy and Terms of Service<span className="sr-only"> (opens in a new tab)</span>
                   </Link>
                   .
                 </span>

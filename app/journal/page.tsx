@@ -13,12 +13,14 @@ export const metadata = {
 
 
 export default function JournalPage() {
+  // EmailSignup renders nothing unless the flag is on; only reserve the left band when it will show.
+  const signupOn = process.env.NEXT_PUBLIC_EMAIL_SIGNUP === "on";
   return (
     <>
       <PageHead lines={["Notes from", "the House"]} />
       <Container className="pb-section">
       <div className="grid-12">
-      <div className="col-span-full lg:col-span-8 lg:col-start-5">
+      <div className={`col-span-full lg:col-span-8 lg:row-start-1 ${signupOn ? "lg:col-start-5" : "lg:col-start-3"}`}>
       <div className="divide-y divide-ink/10">
         {entries.map((e) => (
           <article key={e.slug} className="py-8">
@@ -30,7 +32,7 @@ export default function JournalPage() {
                 {e.title}
               </h2>
             </Link>
-            <p className="mt-2 max-w-xl text-sm text-ink">{e.excerpt}</p>
+            <p className="mt-2 max-w-[60ch] text-base text-ink md:text-[1.0625rem]">{e.excerpt}</p>
             <Link
               href={`/journal/${e.slug}`}
               className="mt-3 inline-block border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
@@ -40,10 +42,14 @@ export default function JournalPage() {
           </article>
         ))}
       </div>
-      <div className="mt-6 border-t border-ink/10 pt-12">
+      </div>
+
+      {/* Left band: the signup stays in view beside the list at lg. */}
+      {signupOn && (
+      <div className="col-span-full mt-6 border-t border-ink/10 pt-12 lg:sticky lg:top-24 lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:self-start lg:border-t-0 lg:pt-0">
         <EmailSignup source="journal" />
       </div>
-      </div>
+      )}
       </div>
       </Container>
     </>

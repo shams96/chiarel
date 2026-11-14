@@ -20,6 +20,7 @@ export default function TermsPage() {
 
       <div className="mt-10 space-y-10 text-sm leading-relaxed text-ink">
         <section>
+          <span aria-hidden="true" className="mb-3 block h-px w-8 bg-ochre" />
           <h2 className="font-serif text-h4 text-ink">Orders &amp; pricing</h2>
           <p className="mt-3">
             All prices are charged in USD and are current at the time of
@@ -34,6 +35,7 @@ export default function TermsPage() {
         </section>
 
         <section>
+          <span aria-hidden="true" className="mb-3 block h-px w-8 bg-ochre" />
           <h2 className="font-serif text-h4 text-ink">Payment</h2>
           <p className="mt-3">
             Payment is processed securely by Stripe. Your order is confirmed
@@ -43,6 +45,7 @@ export default function TermsPage() {
         </section>
 
         <section>
+          <span aria-hidden="true" className="mb-3 block h-px w-8 bg-ochre" />
           <h2 className="font-serif text-h4 text-ink">Subscriptions</h2>
           <p className="mt-3">
             Choosing subscription pricing sets a recurring delivery on a
@@ -61,6 +64,7 @@ export default function TermsPage() {
         </section>
 
         <section>
+          <span aria-hidden="true" className="mb-3 block h-px w-8 bg-ochre" />
           <h2 className="font-serif text-h4 text-ink">Shipping</h2>
           <p className="mt-3">
             Because each order is formulated and produced to order in Isola
@@ -73,6 +77,7 @@ export default function TermsPage() {
         <RefundPolicyContent />
 
         <section>
+          <span aria-hidden="true" className="mb-3 block h-px w-8 bg-ochre" />
           <h2 className="font-serif text-h4 text-ink">
             Your Right to Cancel (EU Customers)
           </h2>
@@ -101,6 +106,7 @@ export default function TermsPage() {
         </section>
 
         <section>
+          <span aria-hidden="true" className="mb-3 block h-px w-8 bg-ochre" />
           <h2 className="font-serif text-h4 text-ink">Intellectual property</h2>
           <p className="mt-3">
             {SITE_NAME}, its formulation names, and all site content are the
@@ -110,6 +116,7 @@ export default function TermsPage() {
         </section>
 
         <section>
+          <span aria-hidden="true" className="mb-3 block h-px w-8 bg-ochre" />
           <h2 className="font-serif text-h4 text-ink">Limitation of liability</h2>
           <p className="mt-3">
             Products are intended for cosmetic use as described on each
@@ -123,6 +130,7 @@ export default function TermsPage() {
         </section>
 
         <section>
+          <span aria-hidden="true" className="mb-3 block h-px w-8 bg-ochre" />
           <h2 className="font-serif text-h4 text-ink">Governing law</h2>
           <p className="mt-3">
             These terms are governed by the laws applicable to 1HubSolutions,
@@ -135,6 +143,7 @@ export default function TermsPage() {
         </section>
 
         <section>
+          <span aria-hidden="true" className="mb-3 block h-px w-8 bg-ochre" />
           <h2 className="font-serif text-h4 text-ink">Contact</h2>
           <p className="mt-3">
             Questions about these terms can be sent to{" "}

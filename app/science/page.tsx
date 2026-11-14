@@ -61,7 +61,7 @@ export default function SciencePage() {
 
       <Container className="pb-section pt-6">
       <div className="grid-12">
-      <div className="col-span-full lg:col-span-8 lg:col-start-5">
+      <div className="col-span-full lg:col-span-8 lg:col-start-5 lg:row-start-1">
       <div className="space-y-8">
         {entries.map((e) => (
           <div key={e.slug} className="border-l-2 border-champagne pl-6">
@@ -69,7 +69,7 @@ export default function SciencePage() {
             <p className="mt-1 text-eyebrow uppercase text-ink">
               {e.answers}
             </p>
-            <p className="mt-2 max-w-xl text-sm text-ink">{e.science}</p>
+            <p className="mt-2 max-w-[60ch] text-base text-ink md:text-[1.0625rem]">{e.science}</p>
             <Link
               href={productHref(e.slug)}
               className="mt-3 inline-block border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
@@ -79,8 +79,10 @@ export default function SciencePage() {
           </div>
         ))}
       </div>
+      </div>
 
-      <div className="mt-14 flex flex-wrap gap-6 border-t border-ink/10 pt-8 text-eyebrow uppercase">
+      {/* Left band: the related-reading links stay in view beside the list at lg. */}
+      <div className="col-span-full mt-14 flex flex-wrap gap-6 border-t border-ink/10 pt-8 text-eyebrow uppercase lg:sticky lg:top-24 lg:col-span-3 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:gap-4 lg:self-start lg:border-t-0 lg:pt-0">
         <Link href="/science/barrier-resilience" className="border-b border-ochre pb-0.5 text-ochre">
           Barrier Resilience →
         </Link>
@@ -96,7 +98,6 @@ export default function SciencePage() {
         <Link href="/science/l-ornithine" className="border-b border-ink/30 pb-0.5 text-ink">
           L-Ornithine
         </Link>
-      </div>
       </div>
       </div>
       </Container>

@@ -67,11 +67,11 @@ export default async function Founding100Page() {
                 One hundred places in all<br />no more once they&rsquo;re taken
               </p>
             ) : (
-              <div className="mt-8 flex items-baseline gap-3">
-                <span className="tabular-nums font-serif text-4xl text-ochre">
+              <div className="mt-8 flex items-center gap-4">
+                <span className="tabular-nums font-serif text-5xl leading-none text-ochre">
                   {remaining}
                 </span>
-                <span className="text-[12px] uppercase leading-tight tracking-[0.14em] text-ink">
+                <span className="border-l border-ink/20 pl-4 text-[12px] uppercase leading-snug tracking-[0.14em] text-ink">
                   {full ? (
                     <>places left on the list
                     <br />
