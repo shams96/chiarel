@@ -25,6 +25,7 @@ function EmailSignupForm({
   const id = useId();
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
+  const [dateOfBirth, setDateOfBirth] = useState("");
   const [website, setWebsite] = useState(""); // honeypot
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
@@ -49,7 +50,7 @@ function EmailSignupForm({
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, consent, website, source }),
+        body: JSON.stringify({ email, consent, website, source, dateOfBirth }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
@@ -103,6 +104,20 @@ function EmailSignupForm({
               {status === "loading" ? "Joining…" : "Join"}
             </button>
           </div>
+
+          <label htmlFor={`${id}-dob`} className={`mt-4 block text-eyebrow uppercase ${muted}`}>
+            Date of birth
+          </label>
+          <input
+            id={`${id}-dob`}
+            type="date"
+            name="dateOfBirth"
+            required
+            autoComplete="bday"
+            value={dateOfBirth}
+            onChange={(e) => setDateOfBirth(e.target.value)}
+            className={`mt-2 min-h-[44px] w-full border px-4 py-3 text-sm focus:outline-none ${field}`}
+          />
 
           {/* Honeypot: hidden from people and assistive tech, bots fill it. */}
           <div aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 overflow-hidden">

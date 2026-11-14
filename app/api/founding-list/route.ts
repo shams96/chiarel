@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { withApiErrorHandling } from "@/lib/api-error";
 import { isRateLimited, clientIp } from "@/lib/rate-limit";
+import { ageGate } from "@/lib/age-gate";
+import { normalizeNanpPhone, smsConsentRow } from "@/lib/sms-consent";
 
 const FOUNDING_CAP = 100;
 // Unauthenticated public signup endpoint with no CAPTCHA — throttle by IP so
@@ -24,7 +26,11 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
   }
 
   const body = await req.json().catch(() => null);
-  const { name, email, phone, social, referredBy, source } = body ?? {};
+  const { name, email, phone, social, referredBy, source, dateOfBirth, smsConsent } = body ?? {};
+
+  // Age screen first: an under-13 answer must store nothing at all.
+  const blocked = ageGate(req, dateOfBirth);
+  if (blocked) return blocked;
 
   if (!name || typeof name !== "string") {
     return NextResponse.json({ error: "Name is required" }, { status: 400 });
@@ -33,19 +39,43 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
   }
 
+  // A phone number is kept only with a saved yes to marketing texts (TCPA).
+  // Without the tick it is discarded, not stored and not sent to the CRM.
+  let smsPhone: string | null = null;
+  if (typeof phone === "string" && phone.trim() !== "" && smsConsent === true) {
+    smsPhone = normalizeNanpPhone(phone);
+    if (!smsPhone) {
+      return NextResponse.json({ error: "Please enter a valid US or Canadian mobile number." }, { status: 400 });
+    }
+  }
+
   // The local row is the source of truth for the live "N of 100" counter on
   // the page — save it first so the count is accurate even if the CRM
   // webhook below is slow, misconfigured, or down.
-  await db.foundingSignup.create({
+  const signup = db.foundingSignup.create({
     data: {
       name,
       email,
-      phone: phone || null,
+      phone: smsPhone,
       social: social || null,
       referredBy: referredBy || null,
       source: source ?? "Unknown",
     },
   });
+  if (smsPhone) {
+    // Signup and consent evidence are saved together or not at all.
+    await db.$transaction([
+      signup,
+      smsConsentRow({
+        phone: smsPhone,
+        source: String(source ?? "Unknown").slice(0, 60),
+        ip: clientIp(req) === "unknown" ? null : clientIp(req),
+        userAgent: req.headers.get("user-agent"),
+      }),
+    ]);
+  } else {
+    await signup;
+  }
 
   const webhookUrl = process.env.FOUNDING_LIST_WEBHOOK_URL;
   if (webhookUrl) {
@@ -56,7 +86,7 @@ export const POST = withApiErrorHandling(async (req: NextRequest) => {
         body: JSON.stringify({
           name,
           email,
-          phone: phone || "",
+          phone: smsPhone ?? "",
           social: social || "",
           referredBy: referredBy || "",
           source: source ?? "Unknown",

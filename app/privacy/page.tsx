@@ -26,8 +26,13 @@ export default function PrivacyPage() {
           <p className="mt-3">
             When you place an order, we collect your name, email address,
             shipping address, and order contents in order to fulfill it. When
-            you join our founding list, we collect your name, email, and any
-            phone or social handle you choose to provide. If you join our
+            you join our founding list, we collect your name and email. If you
+            also give a mobile number and tick the text-message box, we keep
+            the number together with a record of your consent (the wording you
+            agreed to, the time, your IP address and browser). Without the tick
+            we do not keep the number. At signup we ask for your date of birth
+            only to check your age; we do not store it, and we do not sign up
+            anyone under 13. See our <Link href="/sms-terms" className="border-b border-ochre pb-0.5 text-ochre">SMS Terms</Link>. If you join our
             email list, we collect your email address, the date you agreed,
             and the page you signed up on. We only email you if you tick the
             consent box, and every message includes an unsubscribe link. If

@@ -170,6 +170,24 @@ model FoundingSignup {
   source     String?
 }
 
+// One row per "yes" to marketing texts (TCPA prior express written consent).
+// A number may be texted only while its newest row has revokedAt null. See
+// claudedocs/specs/age-gate-tcpa/SPEC.md.
+model SmsConsent {
+  id                 String    @id @default(cuid())
+  createdAt          DateTime  @default(now())
+  phone              String
+  consentText        String
+  consentTextVersion String
+  source             String
+  ip                 String?
+  userAgent          String?
+  revokedAt          DateTime?
+  revokedVia         String?
+
+  @@index([phone])
+}
+
 // Internal/admin RBAC — see claudedocs/specs/admin-rbac/. Distinct from customer
 // orders above: these are accounts for people operating the business (Admin/Member/
 // Viewer), not customers, who never authenticate at all (guest checkout only).
