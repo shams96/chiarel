@@ -17,6 +17,7 @@ export function HomePhilosophy() {
               src="/assets/journal/isola-del-liri-bridge.jpg"
               alt="A woman in white on the old bridge at Isola del Liri, with the Cascata Grande and the castle behind her"
               sizes="(max-width: 768px) 90vw, 26rem"
+              eager
               className="object-cover"
             />
           </div>
