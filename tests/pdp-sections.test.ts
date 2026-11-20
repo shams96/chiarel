@@ -22,7 +22,7 @@ describe("pdpSections (accordions beside the buy box)", () => {
 
   it("Neck & Décolleté and Eye Contour name their key ingredients, and the hidden draft INCI never renders", () => {
     const named = {
-      "n1-neck-decollete": ["Copper Peptide", "Ceramides", "Squalane"],
+      "n1-neck-decollete": ["Ceramides", "Cholesterol", "Squalane"],
       "eye-contour-concentrate": ["Caffeine", "Peptides", "Hyaluronic Acid"],
     };
     for (const [slug, names] of Object.entries(named)) {

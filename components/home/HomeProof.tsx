@@ -22,10 +22,6 @@ const ingredients = [
     rest: ", a postbiotic used in Clarity Essence, Day Crème, Neck & Décolleté Crème and Eye Contour Concentrate, is chosen for the look of calm, even-looking skin. See the explainer.",
     link: { href: "/science/bifida-ferment-lysate", label: "Read the formulation science →" },
   },
-  {
-    name: "L-Ornithine",
-    rest: " (used in Clarity Night Crème) is chosen for skin that looks and feels hydrated.",
-  },
 ];
 
 export default function HomeProof() {

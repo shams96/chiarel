@@ -19,7 +19,7 @@ const faqs = [
   },
   {
     q: "Which CHIAREL products use them?",
-    a: "Clarity Day Crème pairs ceramides with cholesterol and squalane. Clarity Night Crème carries ceramide NP, cholesterol and squalane. Clarity Neck & Décolleté Crème pairs copper peptide with ceramides and squalane.",
+    a: "Clarity Day Crème pairs ceramides with cholesterol and squalane. Clarity Night Crème carries ceramide NP, cholesterol and squalane. Clarity Neck & Décolleté Crème pairs ceramides with cholesterol and squalane.",
   },
 ];
 
@@ -82,8 +82,8 @@ export default function BarrierResiliencePage() {
         <div className="border-l-2 border-ochre pl-6">
           <h2 className="font-serif text-h3 text-ochre">For the neck and chest</h2>
           <p className="mt-2 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
-            Clarity Neck &amp; Décolleté Crème pairs copper peptide with
-            ceramides and squalane, for the look of smoother, more hydrated
+            Clarity Neck &amp; Décolleté Crème pairs ceramides with
+            cholesterol and squalane, for the look of smoother, more hydrated
             skin on the neck and chest.
           </p>
         </div>

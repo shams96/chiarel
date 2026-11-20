@@ -37,7 +37,7 @@ const entries = [
     slug: "n1-neck-decollete",
     answers: "Crepey texture on the neck and chest",
     science:
-      "Copper peptide with ceramides and squalane, for the look of smoother, more hydrated skin on the neck and chest.",
+      "Ceramides with cholesterol and squalane, for the look of smoother, more hydrated skin on the neck and chest.",
   },
   {
     name: "Clarity Eye Contour Concentrate",
@@ -51,7 +51,7 @@ const entries = [
 export default function SciencePage() {
   return (
     <>
-      <PageHead eyebrow="CHIAREL Intelligence™" lines={["The Science"]}>
+      <PageHead eyebrow="The House of Clarity™" lines={["The Science"]}>
         <p>
           Modern Biological Stress™ is the daily load on a working
           woman&rsquo;s body and skin. Each CHIAREL formulation answers one part
@@ -94,9 +94,6 @@ export default function SciencePage() {
         </Link>
         <Link href="/science/bifida-ferment-lysate" className="border-b border-ink/30 pb-0.5 text-ink">
           Bifida Ferment Lysate
-        </Link>
-        <Link href="/science/l-ornithine" className="border-b border-ink/30 pb-0.5 text-ink">
-          L-Ornithine
         </Link>
       </div>
       </div>

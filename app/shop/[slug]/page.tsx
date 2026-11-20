@@ -372,7 +372,7 @@ function BrandStatement() {
           inventory.
         </p>
         <p>
-          That is CHIAREL Intelligence™: start with the biology in front
+          That is the working method: start with the biology in front
           of you, formulate it properly, and name the ingredients the
           formula is built around.
         </p>
@@ -541,7 +541,6 @@ function N1WhatItsForAndFeel() {
         <div>
           <h2 className="font-serif text-h3 text-ochre">What it feels like</h2>
           <ul className="mt-4 space-y-2 text-sm leading-relaxed text-ink">
-            <li>· Finished with a delicate CHIAREL accord</li>
             <li>· Cushioning</li>
             <li>· Low drag</li>
             <li>· A satin finish</li>
@@ -714,17 +713,17 @@ function LaunchRoutinePosition({ currentSlug }: { currentSlug: string }) {
 }
 
 // Science links follow ingredient scoping: Bifida Ferment Lysate is in Essence,
-// Day, Neck & Décolleté and Eye (not Night); L-Ornithine is in Night only.
+// Day, Neck & Décolleté and Eye (not Night). No L-Ornithine link: it left the
+// formulas in the v4 workbook (Oct 30, 2026).
 // No Ectoine link anywhere (Ectoine is in none of the five formulas).
 const BARRIER = { label: "Building a More Resilient Skin Barrier", href: "/science/barrier-resilience" };
 const BIFIDA = { label: "Bifida Ferment Lysate, Explained", href: "/science/bifida-ferment-lysate" };
-const ORNITHINE = { label: "L-Ornithine, Explained", href: "/science/l-ornithine" };
 const scienceLinksBySlug: Record<string, { label: string; href: string }[]> = {
   "chiarel-essence": [BIFIDA, BARRIER],
   "terra-radiance-creme": [BIFIDA, BARRIER],
   "n1-neck-decollete": [BIFIDA],
   "eye-contour-concentrate": [BIFIDA],
-  "recovery-masque": [ORNITHINE, BARRIER],
+  "recovery-masque": [BARRIER],
 };
 
 // Ingredient notes: links to the existing /science explainers for ingredients in

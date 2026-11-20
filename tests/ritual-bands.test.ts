@@ -43,7 +43,7 @@ describe("ritual page: Morning and Evening are distinct bands", () => {
       "Caffeine · Peptides · Hyaluronic Acid.",
       "Made for the evening, and it may be used morning or night.",
       "Bakuchiol · Peptides · Niacinamide.",
-      "Copper Peptide · Ceramides · Squalane.",
+      "Ceramides · Cholesterol · Squalane.",
       "Order follows the texture, lightest first.",
       "Modern Biological Stress",
     ]) {

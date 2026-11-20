@@ -72,10 +72,9 @@ describe("ritual order", () => {
     }
   });
 
-  it("lists exactly the four Bifida products and Night Crème only for L-Ornithine", () => {
+  it("lists exactly the four Bifida products, and L-Ornithine has no page (left the formulas in v4)", () => {
     const bifida = read("app/science/bifida-ferment-lysate/page.tsx");
     expect(bifida).toMatch(/not in Clarity Night Crème/);
-    const orn = read("app/science/l-ornithine/page.tsx");
-    expect(orn).toMatch(/Clarity Night Crème only/);
+    expect(existsSync("app/science/l-ornithine/page.tsx")).toBe(false);
   });
 });

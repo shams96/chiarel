@@ -41,8 +41,7 @@ export default function ThreeSkinsPage() {
           serve it shouldn&rsquo;t pretend otherwise.
         </p>
         <p>
-          That premise is CHIAREL Intelligence™ — not a marketing concept,
-          but the working method the House still holds: start with the
+          That premise is the working method the House still holds: start with the
           biology in front of you, formulate it properly, and name the
           ingredients that matter.
         </p>

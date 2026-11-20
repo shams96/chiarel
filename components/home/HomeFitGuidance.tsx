@@ -26,7 +26,7 @@ const fitGuidance = [
   {
     concern: "Neck, jawline, and décolleté show dryness or crepey-looking texture",
     fit: "Clarity Neck & Décolleté Crème",
-    why: "Copper peptide with ceramides and squalane, formulated specifically for the skin below the jawline.",
+    why: "Ceramides with cholesterol and squalane, formulated specifically for the skin below the jawline.",
     slug: "n1-neck-decollete",
     image: "/assets/products/clarity-neck-decollete-creme-scene-v2.jpg",
     imageAlt: "Clarity Neck & Décolleté Crème under a frosted flower with a Red Ochre CHIAREL ribbon",

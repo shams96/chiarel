@@ -65,7 +65,7 @@ describe("PDP data strings match FIX2.md", () => {
     "chiarel-essence": { size: /^40 ml\b/, colour: "Red Ochre", ingredients: ["Peptides", "Niacinamide", "Hyaluronic Acid"] },
     "terra-radiance-creme": { size: /^50 g\b/, colour: "Red Ochre", ingredients: ["Ceramides", "Cholesterol", "Squalane"] },
     "recovery-masque": { size: /^50 g\b/, colour: "Formal Garden", ingredients: ["Bakuchiol", "Peptides", "Niacinamide"] },
-    "n1-neck-decollete": { size: /^40 ml\b/, colour: "Formal Garden", ingredients: ["Copper Peptide", "Ceramides", "Squalane"] },
+    "n1-neck-decollete": { size: /^40 ml\b/, colour: "Formal Garden", ingredients: ["Ceramides", "Cholesterol", "Squalane"] },
     "eye-contour-concentrate": { size: /^40 ml\b/, colour: "Peach Dust", ingredients: ["Caffeine", "Peptides", "Hyaluronic Acid"] },
   };
   for (const [slug, want] of Object.entries(expected)) {
