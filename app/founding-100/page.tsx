@@ -85,7 +85,7 @@ export default async function Founding100Page() {
 
             <div className="mt-6 flex flex-wrap gap-x-6 gap-y-1 border-t border-ink/15 pt-5 text-[12px] text-ink">
               <span>Formulated by the House of CHIAREL, with Grazia Savoriti, Pharmacist</span>
-              <span>Built around L-Ornithine and Panthenol</span>
+              <span>Built around Bakuchiol and Peptides</span>
             </div>
 
             <div className="mt-8">

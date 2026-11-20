@@ -105,7 +105,7 @@ export type Product = {
    * Publication gate for `ingredientsInci`. 'draft-v2' = chemist-review draft,
    * NOT shown anywhere on the site. The owner flips a product to 'final' only
    * after Grazia / the suppliers confirm the consumer INCI (peptide premix
-   * carriers, CHIAREL accord fragrance allergen declaration, IFRA). Use
+   * carriers, rose water preservative grade and micro COA). Use
    * `publishedInci()` to read it so the gate cannot be bypassed.
    */
   ingredientsInciStatus?: InciStatus;

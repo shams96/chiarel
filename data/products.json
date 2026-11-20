@@ -68,6 +68,7 @@
     "timeOfUse": "AM/PM",
     "ingredientsInci": [
       "Aqua",
+      "Rosa Damascena Flower Water",
       "Glycerin",
       "Niacinamide",
       "Acetyl Hexapeptide-8",
@@ -81,14 +82,12 @@
       "Sodium PCA",
       "Bifida Ferment Lysate",
       "Sodium Hyaluronate (high MW)",
-      "Decapeptide-52",
       "Sodium Hyaluronate (low MW)",
       "Beta-Glucan",
       "Disodium EDTA",
       "Sodium Citrate",
       "Xanthan Gum",
-      "Citric Acid",
-      "Parfum (CHIAREL accord)"
+      "Citric Acid"
     ],
     "ingredientsInciStatus": "draft-v2",
     "launchStatus": "launch",
@@ -167,6 +166,7 @@
     "ingredientsInci": [
       "Aqua",
       "Squalane",
+      "Rosa Damascena Flower Water",
       "Glycerin",
       "Niacinamide",
       "Caprylic/Capric Triglyceride",
@@ -175,13 +175,12 @@
       "Panthenol",
       "Glyceryl Stearate SE",
       "Butyrospermum Parkii Butter",
-      "Ascorbyl Glucoside",
+      "Ascorbyl Palmitate",
       "Cetyl Palmitate",
       "Ceramide NP",
       "Phenoxyethanol (and) Ethylhexylglycerin",
       "Cholesterol",
       "Phytosphingosine",
-      "Copper Tripeptide-1",
       "Lecithin",
       "Tocopherol",
       "Ceramide AP",
@@ -191,11 +190,9 @@
       "Alpha-Glucan Oligosaccharide",
       "Sclerotium Gum",
       "Xanthan Gum",
-      "Sh-Oligopeptide-1",
       "Sodium Citrate",
       "Citric Acid",
-      "Palmitoyl Tripeptide-38",
-      "Parfum (CHIAREL accord)"
+      "Palmitoyl Tripeptide-38"
     ],
     "ingredientsInciStatus": "draft-v2",
     "launchStatus": "launch",
@@ -274,6 +271,7 @@
     "timeOfUse": "PM",
     "ingredientsInci": [
       "Aqua",
+      "Rosa Damascena Flower Water",
       "Glycerin",
       "Niacinamide",
       "Squalane",
@@ -281,23 +279,19 @@
       "Caprylic/Capric Triglyceride",
       "Palmitoyl Tetrapeptide-7",
       "Aloe Barbadensis Leaf Juice",
-      "Bakuchiol",
       "Acetyl Hexapeptide-8",
       "Palmitoyl Tripeptide-38",
       "Propanediol",
-      "Ornithine",
       "Cetearyl Alcohol",
       "Glyceryl Stearate SE",
       "Palmitoyl Tripeptide-1",
-      "Copper Tripeptide-1",
       "Panthenol",
       "Cetyl Palmitate",
+      "Bakuchiol",
       "Phenoxyethanol (and) Ethylhexylglycerin",
-      "Nicotinamide Mononucleotide",
       "Adenosine",
       "Lecithin",
       "Tocopherol",
-      "Decapeptide-52",
       "Sodium Hyaluronate (high MW)",
       "Sclerotium Gum",
       "Ceramide NP",
@@ -306,8 +300,7 @@
       "Xanthan Gum",
       "Disodium EDTA",
       "Sodium Citrate",
-      "Citric Acid",
-      "Parfum (CHIAREL accord)"
+      "Citric Acid"
     ],
     "ingredientsInciStatus": "draft-v2",
     "launchStatus": "launch",
@@ -383,11 +376,11 @@
         "role": "detail"
       }
     ],
-    "blurb": "Copper peptide with ceramides and squalane, for the look of smoother, less crepey texture and hydration for the neck and chest.",
+    "blurb": "Ceramides with cholesterol and squalane, for the look of smoother, less crepey texture and hydration for the neck and chest.",
     "benefits": [
       "The look of smoother, less crepey texture on the neck and chest",
       "Hydration for the neck and chest",
-      "Copper peptide with ceramides and squalane"
+      "Ceramides with cholesterol and squalane"
     ],
     "icon": true,
     "launchRitual": true,
@@ -397,6 +390,7 @@
     "ingredientsInci": [
       "Aqua",
       "Squalane",
+      "Rosa Damascena Flower Water",
       "Glycerin",
       "Niacinamide",
       "Caprylic/Capric Triglyceride",
@@ -405,14 +399,13 @@
       "Panthenol",
       "Glyceryl Stearate SE",
       "Butyrospermum Parkii Butter",
-      "Ascorbyl Glucoside",
+      "Ascorbyl Palmitate",
       "Cetyl Palmitate",
       "Ceramide NP",
       "Phenoxyethanol (and) Ethylhexylglycerin",
       "Alpha-Glucan Oligosaccharide",
       "Cholesterol",
       "Phytosphingosine",
-      "Copper Tripeptide-1",
       "Lecithin",
       "Tocopherol",
       "Ceramide AP",
@@ -421,11 +414,9 @@
       "Sodium Hyaluronate",
       "Sclerotium Gum",
       "Xanthan Gum",
-      "Sh-Oligopeptide-1",
       "Sodium Citrate",
       "Citric Acid",
-      "Palmitoyl Tripeptide-38",
-      "Parfum (CHIAREL accord)"
+      "Palmitoyl Tripeptide-38"
     ],
     "ingredientsInciStatus": "draft-v2",
     "launchStatus": "launch",
@@ -438,10 +429,10 @@
     "howToUseSource": "app/shop/[slug]/page.tsx (N1HowToUse, pre-existing)",
     "actives": [
       {
-        "name": "Copper Peptide"
+        "name": "Ceramides"
       },
       {
-        "name": "Ceramides"
+        "name": "Cholesterol"
       },
       {
         "name": "Squalane"
@@ -484,6 +475,7 @@
     "launchRole": "standalone",
     "ingredientsInci": [
       "Aqua",
+      "Rosa Damascena Flower Water",
       "Glycerin",
       "Niacinamide",
       "Propanediol",
@@ -496,7 +488,6 @@
       "Palmitoyl Tripeptide-1",
       "Phenoxyethanol (and) Ethylhexylglycerin",
       "Sodium PCA",
-      "Phytonadione",
       "Boron Nitride",
       "Sodium Hyaluronate (high MW)",
       "Sodium Hyaluronate (low MW)",
@@ -506,8 +497,7 @@
       "Xanthan Gum",
       "Sodium Citrate",
       "Disodium EDTA",
-      "Citric Acid",
-      "Parfum (CHIAREL accord)"
+      "Citric Acid"
     ],
     "ingredientsInciStatus": "draft-v2",
     "launchStatus": "launch",

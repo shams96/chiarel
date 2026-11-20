@@ -99,9 +99,6 @@ export default function BifidaPage() {
       </p>
 
       <div className="mt-8 flex flex-wrap gap-6 border-t border-ink/10 pt-8 text-eyebrow uppercase">
-        <Link href="/science/l-ornithine" className="border-b border-ochre pb-0.5 text-ochre">
-          L-Ornithine, Explained →
-        </Link>
         <Link href="/shop/clarity-essence" className="border-b border-ink/30 pb-0.5 text-ink">
           Shop Clarity Essence
         </Link>

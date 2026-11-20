@@ -14,7 +14,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/science/lasting-hydration",
     "/science/application",
     "/science/bifida-ferment-lysate",
-    "/science/l-ornithine",
     "/house",
     "/journal",
     "/journal/chiarel-ritual-guide",

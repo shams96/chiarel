@@ -109,7 +109,7 @@ export default function RitualPage() {
             label: "Clarity Neck & Décolleté Crème",
             slug: "n1-neck-decollete",
             purpose: "For crepey-looking skin on the neck and chest.",
-            ingredients: "Copper Peptide · Ceramides · Squalane.",
+            ingredients: "Ceramides · Cholesterol · Squalane.",
           },
         ]}
         slugs={eveningRoute}

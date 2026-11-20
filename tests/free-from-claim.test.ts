@@ -9,13 +9,13 @@ import {
   formulationLine,
 } from "@/lib/formulation-line";
 
-// Checked against the v2 draft INCI lists (CHIAREL_Launch_Formulas_v2_Natural_You.xlsx,
-// tab "INCI Order (draft)", 1A / 2A / N1 / 4A / 7A) on 2026-10-16. Every category
+// Checked against the v4 formula sheets (CHIAREL_Launch_Formulas_v4_Natural_You.xlsx,
+// tabs 1A / 2A / N1 / 4A / 7A, Grazia Savoriti, Oct 30 2026) on 2026-11-19. Every category
 // below is ABSENT from all five lists, so a "formulated without" claim may name it.
 // Not claimed: "colorants" (7A contains Mica, CI 77019) or "alcohol-free" (all
 // creams contain Cetearyl Alcohol, a fatty alcohol, not denatured alcohol).
-// Caveat: "Parfum (CHIAREL accord)" is in every list and its composition is not
-// in the workbook; the supplier declaration is still pending.
+// Caveat: v4 replaced Parfum with Rosa Damascena Flower Water (5%); its preservative
+// grade and micro COA are still to be confirmed, so no "fragrance-free" claim.
 const VERIFIED_ABSENT: Record<string, RegExp> = {
   parabens: /paraben/i,
   sulfates: /sulfate|sulphate/i,
@@ -25,18 +25,18 @@ const VERIFIED_ABSENT: Record<string, RegExp> = {
   "PEG compounds": /\bpeg-|\bppg-|polyethylene glycol/i,
 };
 
-// INCI lists copied from the v2 draft tab (order and names as in the workbook).
-const V2_DRAFT_INCI: Record<string, string[]> = {
-  "1A": ["Aqua", "Glycerin", "Niacinamide", "Acetyl Hexapeptide-8", "Propanediol", "Pentylene Glycol", "Palmitoyl Tripeptide-1", "Palmitoyl Tetrapeptide-7", "Panthenol", "Hydrolyzed Collagen", "Phenoxyethanol (and) Ethylhexylglycerin", "Sodium PCA", "Bifida Ferment Lysate", "Sodium Hyaluronate (high MW)", "Decapeptide-52", "Sodium Hyaluronate (low MW)", "Beta-Glucan", "Disodium EDTA", "Sodium Citrate", "Xanthan Gum", "Citric Acid", "Parfum (CHIAREL accord)"],
-  "2A": ["Aqua", "Squalane", "Glycerin", "Niacinamide", "Caprylic/Capric Triglyceride", "Cetearyl Alcohol", "Simmondsia Chinensis Seed Oil", "Panthenol", "Glyceryl Stearate SE", "Butyrospermum Parkii Butter", "Ascorbyl Glucoside", "Cetyl Palmitate", "Ceramide NP", "Phenoxyethanol (and) Ethylhexylglycerin", "Cholesterol", "Phytosphingosine", "Copper Tripeptide-1", "Lecithin", "Tocopherol", "Ceramide AP", "Ceramide EOP", "Bifida Ferment Lysate", "Sodium Hyaluronate", "Alpha-Glucan Oligosaccharide", "Sclerotium Gum", "Xanthan Gum", "Sh-Oligopeptide-1", "Sodium Citrate", "Citric Acid", "Palmitoyl Tripeptide-38", "Parfum (CHIAREL accord)"],
-  N1: ["Aqua", "Squalane", "Glycerin", "Niacinamide", "Caprylic/Capric Triglyceride", "Cetearyl Alcohol", "Simmondsia Chinensis Seed Oil", "Panthenol", "Glyceryl Stearate SE", "Butyrospermum Parkii Butter", "Ascorbyl Glucoside", "Cetyl Palmitate", "Ceramide NP", "Phenoxyethanol (and) Ethylhexylglycerin", "Alpha-Glucan Oligosaccharide", "Cholesterol", "Phytosphingosine", "Copper Tripeptide-1", "Lecithin", "Tocopherol", "Ceramide AP", "Ceramide EOP", "Bifida Ferment Lysate", "Sodium Hyaluronate", "Sclerotium Gum", "Xanthan Gum", "Sh-Oligopeptide-1", "Sodium Citrate", "Citric Acid", "Palmitoyl Tripeptide-38", "Parfum (CHIAREL accord)"],
-  "4A": ["Aqua", "Glycerin", "Niacinamide", "Squalane", "Simmondsia Chinensis Seed Oil", "Caprylic/Capric Triglyceride", "Palmitoyl Tetrapeptide-7", "Aloe Barbadensis Leaf Juice", "Bakuchiol", "Acetyl Hexapeptide-8", "Palmitoyl Tripeptide-38", "Propanediol", "Ornithine", "Cetearyl Alcohol", "Glyceryl Stearate SE", "Palmitoyl Tripeptide-1", "Copper Tripeptide-1", "Panthenol", "Cetyl Palmitate", "Phenoxyethanol (and) Ethylhexylglycerin", "Nicotinamide Mononucleotide", "Adenosine", "Lecithin", "Tocopherol", "Decapeptide-52", "Sodium Hyaluronate (high MW)", "Sclerotium Gum", "Ceramide NP", "Sodium Hyaluronate (low MW)", "Cholesterol", "Xanthan Gum", "Disodium EDTA", "Sodium Citrate", "Citric Acid", "Parfum (CHIAREL accord)"],
-  "7A": ["Aqua", "Glycerin", "Niacinamide", "Propanediol", "Caffeine", "Acetyl Tetrapeptide-5", "Palmitoyl Tetrapeptide-7", "Dipeptide-2", "Panthenol", "Mica (CI 77019)", "Palmitoyl Tripeptide-1", "Phenoxyethanol (and) Ethylhexylglycerin", "Sodium PCA", "Phytonadione", "Boron Nitride", "Sodium Hyaluronate (high MW)", "Sodium Hyaluronate (low MW)", "Bisabolol", "Sodium Hyaluronate", "Bifida Ferment Lysate", "Xanthan Gum", "Sodium Citrate", "Disodium EDTA", "Citric Acid", "Parfum (CHIAREL accord)"],
+// INCI lists from the v4 formula tabs, sorted by % w/w (names only).
+const V4_INCI: Record<string, string[]> = {
+  "1A": ["Aqua", "Rosa Damascena Flower Water", "Glycerin", "Niacinamide", "Acetyl Hexapeptide-8", "Propanediol", "Pentylene Glycol", "Palmitoyl Tripeptide-1", "Palmitoyl Tetrapeptide-7", "Panthenol", "Hydrolyzed Collagen", "Phenoxyethanol (and) Ethylhexylglycerin", "Sodium PCA", "Bifida Ferment Lysate", "Sodium Hyaluronate (high MW)", "Sodium Hyaluronate (low MW)", "Beta-Glucan", "Disodium EDTA", "Sodium Citrate", "Xanthan Gum", "Citric Acid"],
+  "2A": ["Aqua", "Squalane", "Rosa Damascena Flower Water", "Glycerin", "Niacinamide", "Caprylic/Capric Triglyceride", "Cetearyl Alcohol", "Simmondsia Chinensis Seed Oil", "Panthenol", "Glyceryl Stearate SE", "Butyrospermum Parkii Butter", "Ascorbyl Palmitate", "Cetyl Palmitate", "Ceramide NP", "Phenoxyethanol (and) Ethylhexylglycerin", "Cholesterol", "Phytosphingosine", "Lecithin", "Tocopherol", "Ceramide AP", "Ceramide EOP", "Bifida Ferment Lysate", "Sodium Hyaluronate", "Alpha-Glucan Oligosaccharide", "Sclerotium Gum", "Xanthan Gum", "Sodium Citrate", "Citric Acid", "Palmitoyl Tripeptide-38"],
+  N1: ["Aqua", "Squalane", "Rosa Damascena Flower Water", "Glycerin", "Niacinamide", "Caprylic/Capric Triglyceride", "Cetearyl Alcohol", "Simmondsia Chinensis Seed Oil", "Panthenol", "Glyceryl Stearate SE", "Butyrospermum Parkii Butter", "Ascorbyl Palmitate", "Cetyl Palmitate", "Ceramide NP", "Phenoxyethanol (and) Ethylhexylglycerin", "Alpha-Glucan Oligosaccharide", "Cholesterol", "Phytosphingosine", "Lecithin", "Tocopherol", "Ceramide AP", "Ceramide EOP", "Bifida Ferment Lysate", "Sodium Hyaluronate", "Sclerotium Gum", "Xanthan Gum", "Sodium Citrate", "Citric Acid", "Palmitoyl Tripeptide-38"],
+  "4A": ["Aqua", "Rosa Damascena Flower Water", "Glycerin", "Niacinamide", "Squalane", "Simmondsia Chinensis Seed Oil", "Caprylic/Capric Triglyceride", "Palmitoyl Tetrapeptide-7", "Aloe Barbadensis Leaf Juice", "Acetyl Hexapeptide-8", "Palmitoyl Tripeptide-38", "Propanediol", "Cetearyl Alcohol", "Glyceryl Stearate SE", "Palmitoyl Tripeptide-1", "Panthenol", "Cetyl Palmitate", "Bakuchiol", "Phenoxyethanol (and) Ethylhexylglycerin", "Adenosine", "Lecithin", "Tocopherol", "Sodium Hyaluronate (high MW)", "Sclerotium Gum", "Ceramide NP", "Sodium Hyaluronate (low MW)", "Cholesterol", "Xanthan Gum", "Disodium EDTA", "Sodium Citrate", "Citric Acid"],
+  "7A": ["Aqua", "Rosa Damascena Flower Water", "Glycerin", "Niacinamide", "Propanediol", "Caffeine", "Acetyl Tetrapeptide-5", "Palmitoyl Tetrapeptide-7", "Dipeptide-2", "Panthenol", "Mica (CI 77019)", "Palmitoyl Tripeptide-1", "Phenoxyethanol (and) Ethylhexylglycerin", "Sodium PCA", "Boron Nitride", "Sodium Hyaluronate (high MW)", "Sodium Hyaluronate (low MW)", "Bisabolol", "Sodium Hyaluronate", "Bifida Ferment Lysate", "Xanthan Gum", "Sodium Citrate", "Disodium EDTA", "Citric Acid"],
 };
 
 describe("free-from claim", () => {
-  it("every category absent from all five v2 draft INCI lists", () => {
-    for (const [sku, list] of Object.entries(V2_DRAFT_INCI)) {
+  it("every category absent from all five v4 INCI lists", () => {
+    for (const [sku, list] of Object.entries(V4_INCI)) {
       for (const [category, re] of Object.entries(VERIFIED_ABSENT)) {
         const hit = list.find((i) => re.test(i));
         expect(hit, `${sku} contains ${category}: ${hit}`).toBeUndefined();
@@ -48,7 +48,7 @@ describe("free-from claim", () => {
     const bySku: Record<string, string> = { "1A": "chiarel-essence", "2A": "terra-radiance-creme", N1: "n1-neck-decollete", "4A": "recovery-masque", "7A": "eye-contour-concentrate" };
     for (const [sku, slug] of Object.entries(bySku)) {
       const p = products.find((x) => x.slug === slug)!;
-      expect(p.ingredientsInci, sku).toEqual(V2_DRAFT_INCI[sku]);
+      expect(p.ingredientsInci, sku).toEqual(V4_INCI[sku]);
     }
   });
 

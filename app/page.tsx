@@ -66,7 +66,7 @@ const faqs = [
   {
     question: "What is CHIAREL made of?",
     answer:
-      "Each product page names its key ingredients. Clarity Essence pairs peptides with niacinamide and hyaluronic acid; Clarity Day Crème carries ceramides, cholesterol and squalane; Clarity Night Crème is built around bakuchiol, peptides and niacinamide; Clarity Neck & Décolleté Crème pairs copper peptide with ceramides and squalane; Clarity Eye Contour Concentrate combines caffeine, peptides and hyaluronic acid.",
+      "Each product page names its key ingredients. Clarity Essence pairs peptides with niacinamide and hyaluronic acid; Clarity Day Crème carries ceramides, cholesterol and squalane; Clarity Night Crème is built around bakuchiol, peptides and niacinamide; Clarity Neck & Décolleté Crème pairs ceramides with cholesterol and squalane; Clarity Eye Contour Concentrate combines caffeine, peptides and hyaluronic acid.",
   },
   {
     question: "Who formulates CHIAREL?",
