@@ -27,6 +27,7 @@ export default function ResponsiveImage({
   sizes,
   className = "",
   priority = false,
+  eager = false,
   onLoad,
 }: {
   src: string;
@@ -34,6 +35,9 @@ export default function ResponsiveImage({
   sizes?: string;
   className?: string;
   priority?: boolean;
+  // Load now without the high fetch priority: for an image below the fold that
+  // sits inside a fade-in wrapper, where lazy loading left it blank for seconds.
+  eager?: boolean;
   onLoad?: () => void;
 }) {
   // A cached image can finish loading before React attaches onLoad; check on mount (as next/image does).
@@ -52,7 +56,7 @@ export default function ResponsiveImage({
       srcSet={srcSetFor(src)}
       sizes={srcSetFor(src) ? sizes : undefined}
       alt={alt}
-      loading={priority ? "eager" : "lazy"}
+      loading={priority || eager ? "eager" : "lazy"}
       fetchPriority={priority ? "high" : undefined}
       decoding="async"
       onLoad={onLoad}
