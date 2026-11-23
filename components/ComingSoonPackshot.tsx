@@ -161,7 +161,7 @@ ${shareUrl}`)}`,
           placeholder="First name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/70 focus:border-ochre focus:outline-none"
+          className="border border-ink/20 bg-white px-4 py-3 text-[16px] text-ink sm:text-sm placeholder:text-ink/70 focus:border-ochre focus:outline-none"
         />
         <label htmlFor={`founding-email-${uid}`} className="sr-only">Email</label>
         <input
@@ -172,7 +172,7 @@ ${shareUrl}`)}`,
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/70 focus:border-ochre focus:outline-none"
+          className="border border-ink/20 bg-white px-4 py-3 text-[16px] text-ink sm:text-sm placeholder:text-ink/70 focus:border-ochre focus:outline-none"
         />
         <label htmlFor={`founding-phone-${uid}`} className="sr-only">Mobile number for text updates (optional)</label>
         <input
@@ -182,7 +182,7 @@ ${shareUrl}`)}`,
           placeholder="Mobile for text updates (optional)"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/70 focus:border-ochre focus:outline-none"
+          className="border border-ink/20 bg-white px-4 py-3 text-[16px] text-ink sm:text-sm placeholder:text-ink/70 focus:border-ochre focus:outline-none"
         />
         <label htmlFor={`founding-dob-${uid}`} className="sr-only">Date of birth</label>
         <input
@@ -193,7 +193,7 @@ ${shareUrl}`)}`,
           aria-label="Date of birth"
           value={dateOfBirth}
           onChange={(e) => setDateOfBirth(e.target.value)}
-          className="border border-ink/20 bg-white px-4 py-3 text-sm text-ink focus:border-ochre focus:outline-none sm:col-span-2"
+          className="border border-ink/20 bg-white px-4 py-3 text-[16px] text-ink sm:text-sm focus:border-ochre focus:outline-none sm:col-span-2"
         />
       </div>
       <label className="mt-3 flex cursor-pointer items-start gap-3 text-[12px] leading-snug text-ink">
