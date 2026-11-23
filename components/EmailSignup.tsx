@@ -94,7 +94,7 @@ function EmailSignupForm({
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className={`min-h-[44px] flex-1 border px-4 py-3 text-sm focus:outline-none ${field}`}
+              className={`min-h-[44px] flex-1 border px-4 py-3 text-[16px] focus:outline-none sm:text-sm ${field}`}
             />
             <button
               type="submit"
@@ -116,7 +116,7 @@ function EmailSignupForm({
             autoComplete="bday"
             value={dateOfBirth}
             onChange={(e) => setDateOfBirth(e.target.value)}
-            className={`mt-2 min-h-[44px] w-full border px-4 py-3 text-sm focus:outline-none ${field}`}
+            className={`mt-2 min-h-[44px] w-full border px-4 py-3 text-[16px] focus:outline-none sm:text-sm ${field}`}
           />
 
           {/* Honeypot: hidden from people and assistive tech, bots fill it. */}

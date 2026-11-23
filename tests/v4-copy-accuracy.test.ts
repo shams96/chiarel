@@ -79,3 +79,17 @@ describe("v4 copy accuracy", () => {
     }
   });
 });
+
+// iOS Safari zooms the page when a focused field is under 16px. The signup
+// fields must be 16px on phones (desktop may stay smaller).
+describe("signup fields on phones", () => {
+  it("every input class in the signup forms sets a 16px base", () => {
+    for (const f of ["components/ComingSoonPackshot.tsx", "components/EmailSignup.tsx"]) {
+      const src = readFileSync(f, "utf8");
+      const classes = [...src.matchAll(/<input[\s\S]*?className=(?:\{`([^`]*)`\}|"([^"]*)")/g)].map((m) => m[1] ?? m[2]);
+      for (const c of classes.filter((c) => /border/.test(c) && !/h-[56] w-[56]/.test(c))) {
+        expect(c, `${f}: ${c.slice(0, 50)}`).toMatch(/text-\[16px\]/);
+      }
+    }
+  });
+});
