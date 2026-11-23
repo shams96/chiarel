@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { products } from "@/lib/products";
+import { quietNote } from "@/lib/quiet-notes";
 
 // Every key ingredient named on a product, and every copy claim about its form,
 // must be backed by that product's v4 INCI list (CHIAREL_Launch_Formulas_v4,
@@ -62,6 +63,19 @@ describe("v4 copy accuracy", () => {
     for (const p of products) {
       const copy = JSON.stringify({ ...p, ingredientsInci: undefined });
       expect(copy, p.slug).not.toMatch(/milky|non-?comedogenic|non-?greasy|hypoallergenic|copper|lightweight/i);
+    }
+  });
+
+  it("a quiet Oil-free note is only ever on a formula with no oil-like INCI line", () => {
+    for (const p of products) {
+      const note = quietNote(p.slug);
+      if (note && /oil-free/i.test(note)) {
+        expect((p.ingredientsInci ?? []).filter((i) => OIL_LIKE.test(i)), p.slug).toEqual([]);
+      }
+    }
+    expect(quietNote("chiarel-essence")).toBe("Oil-free formula");
+    for (const slug of ["terra-radiance-creme", "recovery-masque", "n1-neck-decollete", "eye-contour-concentrate"]) {
+      expect(quietNote(slug), slug).toBeUndefined();
     }
   });
 });

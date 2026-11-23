@@ -18,6 +18,7 @@ import EditorialFeature from "@/components/EditorialFeature";
 import AmbientVideo from "@/components/AmbientVideo";
 import { productJsonLd, productPageTitle, breadcrumbJsonLd } from "@/lib/seo";
 import { productHoverClass } from "@/lib/motion";
+import { quietNote } from "@/lib/quiet-notes";
 
 // A compact, purely factual summary near the top of the page — GEO guidance
 // calls for a short extractable block AI answer engines can lift directly,
@@ -138,6 +139,9 @@ export default async function ProductPage({
               {p.name}
             </h1>
             <p className="mt-2 text-caption text-ink">{p.descriptor}</p>
+            {quietNote(p.slug) && (
+              <p className="mt-1 text-caption text-ink">{quietNote(p.slug)}</p>
+            )}
             {/* Slot: star rating / review count summary. Renders nothing
                 until a real review source exists (never fabricated). */}
             <ProductRatingSlot slug={p.slug} />
