@@ -18,7 +18,7 @@ const fitGuidance = [
   {
     concern: "Skin looks dull, uneven, or has lost visible firmness",
     fit: "Clarity Essence",
-    why: "Four peptides with niacinamide and hyaluronic acid, the concentrated layer of the ritual.",
+    why: "Peptides with niacinamide and hyaluronic acid, the concentrated layer of the ritual.",
     slug: "chiarel-essence",
     image: "/assets/products/clarity-essence-scene-v2.jpg",
     imageAlt: "Clarity Essence beside a frosted flower with a green CHIAREL ribbon",
