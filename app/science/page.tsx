@@ -57,6 +57,12 @@ export default function SciencePage() {
           woman&rsquo;s body and skin. Each CHIAREL formulation answers one part
           of it.
         </p>
+        <p>
+          The ingredients named on this site are those in the formulas as made.
+          Clarity Essence is oil-free; the crèmes are lipid-based, built on
+          ceramides, cholesterol and squalane. All five are finished with rose
+          water.
+        </p>
       </PageHead>
 
       <Container className="pb-section pt-6">

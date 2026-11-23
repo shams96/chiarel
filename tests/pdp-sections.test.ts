@@ -16,14 +16,16 @@ describe("pdpSections (accordions beside the buy box)", () => {
       { name: "Peptides" },
       { name: "Niacinamide" },
       { name: "Hyaluronic Acid" },
+      { name: "Marine-derived Hydrolysed Collagen" },
+      { name: "Bifida Ferment Lysate" },
     ]);
     expect(actives && "title" in actives && actives.title).toBe("Key ingredients");
   });
 
   it("Neck & Décolleté and Eye Contour name their key ingredients, and the hidden draft INCI never renders", () => {
     const named = {
-      "n1-neck-decollete": ["Ceramides", "Cholesterol", "Squalane"],
-      "eye-contour-concentrate": ["Caffeine", "Peptides", "Hyaluronic Acid"],
+      "n1-neck-decollete": ["Ceramides", "Cholesterol", "Squalane", "Niacinamide", "Bifida Ferment Lysate"],
+      "eye-contour-concentrate": ["Caffeine", "Peptides", "Hyaluronic Acid", "Niacinamide", "Bifida Ferment Lysate"],
     };
     for (const [slug, names] of Object.entries(named)) {
       const s = pdpSections(bySlug(slug));

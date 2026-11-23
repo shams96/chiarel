@@ -64,12 +64,12 @@ export default function HomeHero() {
               </p>
             )}
             <p className="mt-10 max-w-[40rem] text-[1.125rem] leading-[1.65] text-ink lg:text-lead">
-              Exceptional skin discipline recognises no boundaries. Formulated in
-              Isola del Liri under pharmacist guidance, CHIAREL™ begins with the
-              face, where Clarity Essence™ brings peptide and postbiotic
-              precision to the look of firmer, smoother skin, and continues to
-              the neck and décolleté, where the same discipline is rarely
-              applied.
+              Formulated in Isola del Liri under pharmacist guidance, CHIAREL™
+              begins with the face. Clarity Essence™ is an oil-free essence of
+              peptides, niacinamide and hyaluronic acid, with the postbiotic
+              Bifida Ferment Lysate, for the look of firmer, smoother skin. The
+              same discipline continues to the neck and décolleté, where it is
+              rarely applied.
             </p>
           </div>
 
