@@ -42,13 +42,14 @@
         "role": "lifestyle"
       }
     ],
-    "blurb": "Peptides with niacinamide and hyaluronic acid, for the look of smoother fine lines and firmer-looking skin. Marine-derived hydrolysed collagen for surface hydration.",
+    "blurb": "An oil-free essence of peptides, niacinamide and hyaluronic acid, for the look of smoother fine lines and firmer-looking skin. Marine-derived hydrolysed collagen for surface hydration, and Bifida Ferment Lysate for a calm, even look. Finished with rose water.",
     "role": "Signature Essence of the House",
     "badge": "Signature Essence",
     "benefits": [
       "The look of smoother fine lines",
       "The look of firmer skin",
-      "Marine-derived hydrolysed collagen for surface hydration"
+      "Marine-derived hydrolysed collagen for surface hydration",
+      "Bifida Ferment Lysate for a calm, even look"
     ],
     "icon": true,
     "actives": [
@@ -60,6 +61,12 @@
       },
       {
         "name": "Hyaluronic Acid"
+      },
+      {
+        "name": "Marine-derived Hydrolysed Collagen"
+      },
+      {
+        "name": "Bifida Ferment Lysate"
       }
     ],
     "launchRitual": true,
@@ -139,13 +146,14 @@
         "role": "application"
       }
     ],
-    "blurb": "Ceramides with cholesterol and squalane, for skin that feels comfortable and hydrated. Niacinamide for the look of an even surface.",
+    "blurb": "Ceramides with cholesterol and squalane, for skin that feels comfortable and hydrated through the working day. Niacinamide for the look of an even surface, and Bifida Ferment Lysate for a calm look. Finished with rose water.",
     "role": "Day Crème",
     "badge": "Day Crème",
     "benefits": [
       "Skin that feels comfortable and hydrated through the working day",
       "Ceramides with cholesterol and squalane",
-      "Niacinamide for the look of an even surface"
+      "Niacinamide for the look of an even surface",
+      "Bifida Ferment Lysate for a calm look"
     ],
     "icon": true,
     "actives": [
@@ -157,6 +165,12 @@
       },
       {
         "name": "Squalane"
+      },
+      {
+        "name": "Niacinamide"
+      },
+      {
+        "name": "Bifida Ferment Lysate"
       }
     ],
     "launchRitual": true,
@@ -245,7 +259,7 @@
         "role": "application"
       }
     ],
-    "blurb": "Bakuchiol with peptides and niacinamide, for the look of smoother texture overnight.",
+    "blurb": "Bakuchiol with peptides and niacinamide, for the look of smoother texture overnight. Finished with rose water.",
     "role": "Night Crème",
     "badge": "Night Crème",
     "benefits": [
@@ -376,11 +390,12 @@
         "role": "detail"
       }
     ],
-    "blurb": "Ceramides with cholesterol and squalane, for the look of smoother, less crepey texture and hydration for the neck and chest.",
+    "blurb": "Ceramides with cholesterol and squalane, for the look of smoother, less crepey texture and hydration for the neck and chest. Niacinamide for an even look, and Bifida Ferment Lysate for a calm look. Finished with rose water.",
     "benefits": [
       "The look of smoother, less crepey texture on the neck and chest",
       "Hydration for the neck and chest",
-      "Ceramides with cholesterol and squalane"
+      "Ceramides with cholesterol and squalane",
+      "Bifida Ferment Lysate for a calm look"
     ],
     "icon": true,
     "launchRitual": true,
@@ -436,6 +451,12 @@
       },
       {
         "name": "Squalane"
+      },
+      {
+        "name": "Niacinamide"
+      },
+      {
+        "name": "Bifida Ferment Lysate"
       }
     ],
     "studio": "/assets/products/clarity-neck-decollete-creme-scene-v2.jpg",
@@ -463,7 +484,7 @@
     },
     "image": "/assets/products/clarity-eye-contour-concentrate-bottle.png",
     "imageIsPlaceholder": false,
-    "blurb": "Caffeine and peptides, for the look of less puffiness and dark circles. Hyaluronic acid for hydration, and light-reflecting mica for a brighter-looking eye area.",
+    "blurb": "Caffeine with a complex of eye-area peptides, for the look of less puffiness and dark circles. Hyaluronic acid for hydration, and light-reflecting mica for a brighter-looking eye area. Finished with rose water.",
     "benefits": [
       "The look of less puffiness and dark circles",
       "Hyaluronic acid for hydration",
@@ -516,6 +537,12 @@
       },
       {
         "name": "Hyaluronic Acid"
+      },
+      {
+        "name": "Niacinamide"
+      },
+      {
+        "name": "Bifida Ferment Lysate"
       }
     ],
     "studio": "/assets/products/clarity-eye-contour-concentrate-detail.jpg",

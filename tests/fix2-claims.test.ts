@@ -62,11 +62,11 @@ describe("PDP data strings match FIX2.md", () => {
     descriptor: string;
   }[];
   const expected: Record<string, { size: RegExp; colour: string; ingredients: string[] }> = {
-    "chiarel-essence": { size: /^40 ml\b/, colour: "Red Ochre", ingredients: ["Peptides", "Niacinamide", "Hyaluronic Acid"] },
-    "terra-radiance-creme": { size: /^50 g\b/, colour: "Red Ochre", ingredients: ["Ceramides", "Cholesterol", "Squalane"] },
+    "chiarel-essence": { size: /^40 ml\b/, colour: "Red Ochre", ingredients: ["Peptides", "Niacinamide", "Hyaluronic Acid", "Marine-derived Hydrolysed Collagen", "Bifida Ferment Lysate"] },
+    "terra-radiance-creme": { size: /^50 g\b/, colour: "Red Ochre", ingredients: ["Ceramides", "Cholesterol", "Squalane", "Niacinamide", "Bifida Ferment Lysate"] },
     "recovery-masque": { size: /^50 g\b/, colour: "Formal Garden", ingredients: ["Bakuchiol", "Peptides", "Niacinamide"] },
-    "n1-neck-decollete": { size: /^40 ml\b/, colour: "Formal Garden", ingredients: ["Ceramides", "Cholesterol", "Squalane"] },
-    "eye-contour-concentrate": { size: /^40 ml\b/, colour: "Peach Dust", ingredients: ["Caffeine", "Peptides", "Hyaluronic Acid"] },
+    "n1-neck-decollete": { size: /^40 ml\b/, colour: "Formal Garden", ingredients: ["Ceramides", "Cholesterol", "Squalane", "Niacinamide", "Bifida Ferment Lysate"] },
+    "eye-contour-concentrate": { size: /^40 ml\b/, colour: "Peach Dust", ingredients: ["Caffeine", "Peptides", "Hyaluronic Acid", "Niacinamide", "Bifida Ferment Lysate"] },
   };
   for (const [slug, want] of Object.entries(expected)) {
     it(`${slug}: size, glass colour and key ingredients`, () => {
