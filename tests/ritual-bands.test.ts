@@ -29,7 +29,7 @@ describe("ritual page: Morning and Evening are distinct bands", () => {
   });
   it("carries the owner ritual copy verbatim", () => {
     for (const line of [
-      "Five products, two moments in the day: prepare for it, then let it go.",
+      "Five formulations, two daily gestures: shield for the day, replenish for the night.",
       "Morning: prepare the skin for the day",
       "Evening: let the day go",
       "Clarity Essence",

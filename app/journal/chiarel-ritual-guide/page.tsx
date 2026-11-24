@@ -52,9 +52,9 @@ export default function RitualGuidePage() {
         How to Use the CHIAREL Daily Ritual
       </h1>
       <p className="mt-4 max-w-none text-base leading-[1.65] text-ink md:text-[1.0625rem]">
-        The CHIAREL ritual is five products across two moments in the day:
-        prepare for it, then let it go. Order follows the texture, lightest
-        first.
+        The CHIAREL ritual is five formulations across two daily gestures:
+        shield for the day, replenish for the night. Order follows the texture,
+        lightest first.
       </p>
 
       <section className="mt-16 grid gap-10 sm:grid-cols-2">
