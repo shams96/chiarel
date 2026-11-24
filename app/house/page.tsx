@@ -54,11 +54,15 @@ export default function HousePage() {
           </p>
         </section>
         <section className="border-t border-ink/10 pt-10 first:border-t-0 first:pt-0 [&:not(:first-child)]:mt-10">
-          <h2 className="font-serif text-h3 text-ochre">Mission</h2>
+          <h2 className="font-serif text-h3 text-ochre">Where It Began</h2>
           <p className="mt-2 max-w-2xl">
-            Advancing Cellular Clarity™ — supporting the skin&rsquo;s own
-            intelligence against Modern Biological Stress™, with restraint,
-            precision, and respect for the skin&rsquo;s biology.
+            The question started at a kitchen table, not a lab: one household,
+            three different skin types (reactive, combination, mature), and a
+            bathroom cabinet that could not keep up with any of them. The
+            answer led to Isola del Liri, to Natural You Srl, guided by
+            pharmacist Grazia Savoriti, and to five formulations made to order
+            in small batches. Skin is not one thing, and a house built to
+            serve it should not pretend otherwise.
           </p>
         </section>
         <section className="border-t border-ink/10 pt-10 first:border-t-0 first:pt-0 [&:not(:first-child)]:mt-10">
