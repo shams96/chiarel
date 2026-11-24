@@ -5,7 +5,7 @@ import { RoutineBand, morningRoute, eveningRoute } from "@/components/RoutineBan
 export const metadata = {
   title: "The Ritual",
   description:
-    "Five products, two moments in the day: prepare for it, then let it go. The CHIAREL™ morning and evening ritual, lightest texture first.",
+    "Five formulations, two daily gestures: shield for the day, replenish for the night. The CHIAREL™ morning and evening ritual, lightest texture first.",
   alternates: { canonical: "/ritual" },
 };
 
@@ -16,7 +16,7 @@ export default function RitualPage() {
     <>
     <div className="mx-auto w-full max-w-container px-margin pt-16">
       <h1 className="max-w-4xl font-serif text-[clamp(2.5rem,1.4rem+4.6vw,4.5rem)] font-medium leading-[1.06] tracking-[-0.015em]">
-        Five products, two moments in the day: prepare for it, then let it go.
+        Five formulations, two daily gestures: shield for the day, replenish for the night.
       </h1>
       <p className="mt-6 max-w-measure text-lead text-ink">
         Order follows the texture, lightest first. Each moment answers part of

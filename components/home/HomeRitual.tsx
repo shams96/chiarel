@@ -9,7 +9,7 @@ export default function HomeRitual() {
     <section id="five-product-ritual" className="bg-cloud">
       <div className="section-x pb-10 pt-20 md:pb-12 md:pt-24">
         <Reveal className="max-w-2xl">
-          <SectionHeading lead="Five products, two moments in the day: prepare for it, then let it go.">
+          <SectionHeading lead="Five formulations, two daily gestures: shield for the day, replenish for the night.">
             The CHIAREL Ritual
           </SectionHeading>
         </Reveal>
