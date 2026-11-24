@@ -5,19 +5,20 @@ import Grid from "@/components/layout/Grid";
 import { perDayPrice, DELIVERY_DAYS } from "@/lib/pricing";
 import { getProductOrThrow, isPurchasable } from "@/lib/products";
 
-// Section 01, Hero: the mission line is the h1, set as a poster (big / small /
+// Section 01, Hero: a situation line is the h1, set as a poster (big / small /
 // big on a visible column grid, each word in a hairline band), then the one
 // primary action, the price line and the approved supporting copy. The Clarity
 // Essence scene is the large plate at the right: the jar on a mirror, in a
 // hard-edged frame on a deep Red Ochre block. Cloud ground, 12-column grid.
 //
-// Problem first: one line under the mission names what the skin is living with,
-// in wording already on the House and Science pages ("the daily load", screens,
-// dry indoor air, too little sleep). It names conditions, never an outcome.
-// The mission line stays the h1 (Decision 037). Spec and plan:
-// claudedocs/specs/luxury-experience/.
+// Situation first (owner copy brief, 2026-11-24): the h1 and the line under it
+// name the moment skin carries the day (screens, dry indoor air, too little
+// sleep, by mid-afternoon), then the two-step morning ritual answers it. The
+// mission line (Advancing Cellular Clarity) is the h2 in HomeIntro just below,
+// as supporting copy. Names conditions and sensations, never a structural
+// outcome. Spec and plan: claudedocs/specs/luxury-experience/.
 export const HERO_PROBLEM_LINE =
-  "For skin under the daily load of screens, dry indoor air and too little sleep.";
+  "Screens, dry indoor air and too little sleep: skin carries all of it by mid-afternoon. Two steps each morning: Clarity Essence™, an oil-free essence of peptides, niacinamide and hyaluronic acid, then Clarity Day Crème™, with ceramides and squalane, for skin that feels comfortable and hydrated through the working day.";
 
 export default function HomeHero() {
   const essence = getProductOrThrow("chiarel-essence");
@@ -26,7 +27,7 @@ export default function HomeHero() {
     <section className="pb-12 pt-5 md:pb-16 md:pt-6 lg:pb-20">
       <Container>
         <Grid className="items-baseline border-b border-hairline pb-5">
-          <p className="col-span-4 text-eyebrow uppercase md:col-span-4">CHIAREL™ · The House of Clarity™</p>
+          <p className="col-span-4 text-eyebrow uppercase md:col-span-4">CHIAREL™ · The two-step morning ritual</p>
           <p className="col-span-4 text-eyebrow uppercase md:col-span-4 md:col-start-5 md:text-right lg:col-span-4 lg:col-start-9">
             Isola del Liri, Italy
           </p>
@@ -35,9 +36,9 @@ export default function HomeHero() {
         <Grid className="mt-8 gap-y-8 md:mt-12 lg:gap-y-12">
           <div className="hero-in col-span-4 md:col-span-8 lg:col-span-6">
             <h1 className="poster font-serif">
-              <span className="poster-a">Advancing</span>{" "}
-              <span className="poster-b">Cellular</span>{" "}
-              <span className="poster-c">Clarity<span className="poster-tm">™</span>.</span>
+              <span className="poster-a">By three,</span>{" "}
+              <span className="poster-b">the day</span>{" "}
+              <span className="poster-c">shows.</span>
             </h1>
             <p className="mt-6 max-w-[40rem] text-lead text-ink md:mt-8 lg:text-[1.375rem]">
               {HERO_PROBLEM_LINE}
@@ -64,12 +65,11 @@ export default function HomeHero() {
               </p>
             )}
             <p className="mt-10 max-w-[40rem] text-[1.125rem] leading-[1.65] text-ink lg:text-lead">
-              Formulated in Isola del Liri under pharmacist guidance, CHIAREL™
-              begins with the face. Clarity Essence™ is an oil-free essence of
-              peptides, niacinamide and hyaluronic acid, with the postbiotic
-              Bifida Ferment Lysate, for the look of firmer, smoother skin. The
-              same discipline continues to the neck and décolleté, where it is
-              rarely applied.
+              Made to order in small batches in Isola del Liri, with Natural
+              You Srl, guided by pharmacist Grazia Savoriti. Five formulations
+              make one ritual, from the face to the neck and décolleté, where
+              skin is rarely given a step of its own. A first order carries the
+              90-Day Guarantee.
             </p>
           </div>
 
@@ -99,7 +99,7 @@ export default function HomeHero() {
             </div>
             <p className="mt-10 flex justify-between gap-4 border-t border-ink pt-3 text-caption">
               <span>Clarity Essence™</span>
-              <span>For fine lines and firmness</span>
+              <span>Step one, every morning</span>
             </p>
           </div>
         </Grid>

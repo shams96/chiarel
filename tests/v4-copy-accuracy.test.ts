@@ -93,3 +93,28 @@ describe("signup fields on phones", () => {
     }
   });
 });
+
+// Owner copy brief (2026-11-24): the hero and shop entry open with a situation,
+// not a trademark. Abstract brand terms may support the copy, never lead it.
+describe("situation-first hero and shop entry", () => {
+  const strip = (f: string) => readFileSync(f, "utf8").replace(/\s+/g, " ");
+  it("keeps brand abstractions out of the hero headline and eyebrow", () => {
+    const hero = strip("components/home/HomeHero.tsx");
+    const h1 = hero.slice(hero.indexOf("<h1"), hero.indexOf("</h1>"));
+    expect(h1).not.toMatch(/Advancing|Cellular|Clarity|House of/);
+    expect(hero).not.toContain("The House of Clarity");
+  });
+  it("keeps Consumer Collection out of the shop's customer-facing copy", () => {
+    expect(strip("app/shop/page.tsx")).not.toContain("Consumer Collection");
+  });
+  it("never claims firmness in the hero or shop entry, and shows no bare Discover CTA there", () => {
+    for (const f of ["components/home/HomeHero.tsx", "app/shop/page.tsx"]) {
+      expect(strip(f), f).not.toMatch(/firm|Discover the/i);
+    }
+  });
+  it("ties the guarantee near the shop CTA to its terms", () => {
+    const shop = strip("app/shop/page.tsx");
+    expect(shop).toContain("first order is covered by the 90-Day Guarantee");
+    expect(shop).toContain('href="/terms#guarantee"');
+  });
+});
