@@ -6,7 +6,7 @@ import Container from "@/components/layout/Container";
 export const metadata = {
   title: "The Science",
   description:
-    "Modern Biological Stress™ is the daily load on a working woman’s body and skin. Each CHIAREL™ formulation answers one part of it.",
+    "Screens, dry indoor air and too little sleep: skin shows the load of a working day first. Each CHIAREL™ formulation answers one part of it, and this page says what each ingredient is there to do.",
   alternates: { canonical: "/science" },
 };
 
@@ -53,9 +53,10 @@ export default function SciencePage() {
     <>
       <PageHead eyebrow="The House of Clarity™" lines={["The Science"]}>
         <p>
-          Modern Biological Stress™ is the daily load on a working
-          woman&rsquo;s body and skin. Each CHIAREL formulation answers one part
-          of it.
+          Screens, dry indoor air, early starts and too little sleep: skin
+          shows the load of a working day first. We call it Modern Biological
+          Stress™. Each CHIAREL formulation answers one part of it, and this
+          page says what each ingredient is there to do.
         </p>
         <p>
           The ingredients named on this site are those in the formulas as made.

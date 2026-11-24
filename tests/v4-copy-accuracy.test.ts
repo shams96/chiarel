@@ -118,3 +118,31 @@ describe("situation-first hero and shop entry", () => {
     expect(shop).toContain('href="/terms#guarantee"');
   });
 });
+
+// Same brief, second pass: Day Crème, Science and House open with the customer's
+// day, and only claims already on the site (kitchen-table origin, Natural You Srl,
+// pharmacist Savoriti, small batches, the Day Crème's approved benefit lines).
+describe("situation-first Day Crème, Science and House", () => {
+  const strip = (f: string) => readFileSync(f, "utf8").replace(/\s+/g, " ");
+  const day = products.find((p) => p.slug === "terra-radiance-creme")!;
+  it("opens the Day Crème blurb with the situation, keeping the approved benefit lines", () => {
+    expect(day.blurb.startsWith("Dry indoor air and long hours at a screen")).toBe(true);
+    expect(day.blurb).toContain("ceramides with cholesterol and squalane, for skin that feels comfortable and hydrated through the working day");
+    expect(day.blurb).toContain("Niacinamide for the look of an even surface");
+    expect(day.blurb).not.toMatch(/flak|firm|repair|treat|cure|dull/i);
+  });
+  it("opens the Science page with the customer's day, before naming Modern Biological Stress", () => {
+    const sci = strip("app/science/page.tsx");
+    const lead = sci.slice(sci.indexOf("<PageHead"));
+    expect(lead.indexOf("Screens, dry indoor air")).toBeGreaterThan(-1);
+    expect(lead.indexOf("Screens, dry indoor air")).toBeLessThan(lead.indexOf("Modern Biological Stress"));
+  });
+  it("replaces the House mission adjectives with the verified origin and proof", () => {
+    const house = strip("app/house/page.tsx");
+    expect(house).not.toContain("supporting the skin&rsquo;s own intelligence");
+    expect(house).not.toMatch(/restraint,\s*precision/);
+    expect(house).toContain("The question started at a kitchen table, not a lab");
+    expect(house).toContain("guided by pharmacist Grazia Savoriti");
+    expect(house).toContain("made to order in small batches");
+  });
+});
