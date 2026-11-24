@@ -43,16 +43,16 @@ describe("Focus Ladder component", () => {
 
 describe("Hero", () => {
   const html = renderToStaticMarkup(<HomeHero />);
-  it("keeps one h1 with the mission line, the single primary action and the price line", () => {
+  it("keeps one h1 with the situation line, the single primary action and the price line", () => {
     expect([...html.matchAll(/<h1/g)]).toHaveLength(1);
-    expect(html.replace(/<[^>]+>/g, "")).toContain("Advancing Cellular Clarity™.");
+    expect(html.replace(/<[^>]+>/g, "")).toContain("By three, the day shows.");
     expect(html).toContain('href="/ritual"');
     expect(text(html)).toContain("Begin the Ritual");
     expect(text(html)).toMatch(/From \$[\d.]+ a day/);
     expect(text(html)).toContain("every 45 days with subscription");
   });
   it("sets the h1 as a three-word poster (big / small / big) on the column grid, with no ladder", () => {
-    expect(html).toMatch(/<h1 class="poster font-serif"><span class="poster-a">Advancing<\/span> <span class="poster-b">Cellular<\/span> <span class="poster-c">Clarity<span class="poster-tm">™<\/span>\.<\/span><\/h1>/);
+    expect(html).toMatch(/<h1 class="poster font-serif"><span class="poster-a">By three,<\/span> <span class="poster-b">the day<\/span> <span class="poster-c">shows\.<\/span><\/h1>/);
     expect(html).not.toContain("ladder-wrap");
     const css = src("app/globals.css");
     expect(css).toMatch(/\.poster \{[^}]*container-type: inline-size/);
@@ -78,8 +78,10 @@ describe("Hero", () => {
   it("does not use the previous full-bleed ochre text panel", () => {
     expect(src("components/home/HomeHero.tsx")).not.toContain("bg-ochre px-margin");
   });
-  it("leads with the problem line, under the mission h1 and before the action, in wording already on the House page", () => {
-    expect(HERO_PROBLEM_LINE).toBe("For skin under the daily load of screens, dry indoor air and too little sleep.");
+  it("leads with the situation line, under the h1 and before the action, in wording already on the House page", () => {
+    expect(HERO_PROBLEM_LINE).toBe(
+      "Screens, dry indoor air and too little sleep: skin carries all of it by mid-afternoon. Two steps each morning: Clarity Essence™, an oil-free essence of peptides, niacinamide and hyaluronic acid, then Clarity Day Crème™, with ceramides and squalane, for skin that feels comfortable and hydrated through the working day.",
+    );
     expect(html.indexOf("</h1>")).toBeGreaterThan(-1);
     expect(html.indexOf("</h1>")).toBeLessThan(html.indexOf(HERO_PROBLEM_LINE));
     expect(html.indexOf(HERO_PROBLEM_LINE)).toBeLessThan(html.indexOf("Begin the Ritual"));
@@ -87,7 +89,7 @@ describe("Hero", () => {
     expect(house).toContain("screens, commutes, dry indoor air and too little sleep");
     expect(house).toContain("Modern Biological");
   });
-  it("names conditions, never an outcome or a comparative ageing claim", () => {
+  it("names conditions and sensations, never an outcome or a comparative ageing claim", () => {
     expect(HERO_PROBLEM_LINE).not.toMatch(/restor|relief|repair|reverse|ageing|aging|younger|faster|turnover|regenerat/i);
   });
   it("puts the photograph first below lg and side by side at lg, with text first in the DOM", () => {
@@ -220,7 +222,7 @@ describe("Gallery rail (image treatment D)", () => {
 
 describe("Primary buttons meet the 44px tap-target contract (found by the page matrix)", () => {
   it.each([
-    ["app/shop/page.tsx", "Discover the Crème"],
+    ["app/shop/page.tsx", "Shop the Neck &amp; Décolleté Crème"],
     ["components/StickyPurchaseBar.tsx", "addCtaLabel(tier)"],
     ["app/build-your-ritual/page.tsx", "Add to Bag"],
   ])("%s: the %s control is at least 44px tall", (file, label) => {

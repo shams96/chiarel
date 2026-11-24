@@ -11,7 +11,7 @@ import ShopServiceStrip from "@/components/shop/ShopServiceStrip";
 export const metadata = {
   title: "Shop",
   description:
-    "The CHIAREL™ Consumer Collection™: formulations for the morning and evening ritual, crafted in Isola del Liri, Italy.",
+    "Five formulations for morning and evening, made to order in small batches in Isola del Liri. A first order carries our 90-Day Guarantee.",
   alternates: { canonical: "/shop" },
 };
 
@@ -51,7 +51,14 @@ export default function ShopPage() {
           </ol>
         </nav>
       </Container>
-      <PageHead eyebrow="Consumer Collection™" lines={["Shop"]} />
+      <PageHead eyebrow="Five formulations, one ritual" lines={["Shop"]}>
+        <p>
+          Five formulations, from the two-step morning ritual to a crème for
+          the neck, jawline and décolleté, where skin is rarely given a step of
+          its own. Each is made to order in small batches in Isola del Liri,
+          with Natural You Srl, guided by pharmacist Grazia Savoriti.
+        </p>
+      </PageHead>
       <FindYourRitual />
       <Container className="pb-section pt-6">
 
@@ -67,16 +74,28 @@ export default function ShopPage() {
         </div>
         <div className="px-8 pb-10 md:p-0">
           <p className="text-eyebrow uppercase text-ochre">
-            Neck &amp; Décolleté Crème
+            For the neck and chest, in the evening
           </p>
           <h2 className="mt-2 font-serif text-h3 text-ochre">{n1.name}</h2>
-          <p className="mt-2 max-w-md text-sm leading-relaxed text-ink">{n1.blurb}</p>
+          <p className="mt-2 max-w-md text-sm leading-relaxed text-ink">
+            Applied last in the evening, in upward, sweeping movements across
+            the neck, jawline, décolleté and upper chest. Ceramides with
+            cholesterol and squalane, for the look of smoother, less crepey
+            texture and hydration. Niacinamide for an even look, and Bifida
+            Ferment Lysate for a calm look. Finished with rose water.
+          </p>
           <Link
             href={productHref(n1.slug)}
             className="btn-press mt-6 inline-flex min-h-[44px] items-center border border-ink px-8 text-eyebrow uppercase transition hover:border-ochre hover:text-ochre"
           >
-            Discover the Crème
+            Shop the Neck &amp; Décolleté Crème
           </Link>
+          <p className="mt-3 text-caption text-ink">
+            Your first order is covered by the 90-Day Guarantee.{" "}
+            <Link href="/terms#guarantee" className="tap-area underline decoration-ink/30 hover:text-ochre">
+              Terms apply.
+            </Link>
+          </p>
         </div>
       </section>
 
