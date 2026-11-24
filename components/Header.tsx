@@ -85,7 +85,11 @@ export default function Header() {
           >
             Shop
           </Link>
-          <ThemeToggle />
+          {/* On phones the toggle lives in the menu panel: with it here the row
+              ran past the screen edge and Shop touched the wordmark. */}
+          <span className="hidden sm:contents">
+            <ThemeToggle />
+          </span>
           <button
             onClick={open}
             aria-label={count > 0 ? `Open bag, ${count} items` : "Open bag"}
@@ -144,13 +148,18 @@ export default function Header() {
       >
         <div className="flex items-center justify-between border-b border-ink/10 px-6 py-5">
           <span className="font-serif text-xl tracking-[0.25em]">MENU</span>
-          <button
-            onClick={() => setMenuOpen(false)}
-            aria-label="Close menu"
-            className="btn-press flex h-11 w-11 items-center justify-center text-xl text-ink transition-colors hover:text-ink"
-          >
-            ×
-          </button>
+          <div className="flex items-center gap-1">
+            <span className="sm:hidden">
+              <ThemeToggle />
+            </span>
+            <button
+              onClick={() => setMenuOpen(false)}
+              aria-label="Close menu"
+              className="btn-press flex h-11 w-11 items-center justify-center text-xl text-ink transition-colors hover:text-ink"
+            >
+              ×
+            </button>
+          </div>
         </div>
         <nav aria-label="Menu" className="flex flex-1 flex-col gap-1 px-6 py-6">
           {nav.map((n) => (
