@@ -188,7 +188,7 @@ export default function Home() {
       <HomePhilosophy />
       <HomeJournal />
       <HomeFaq faqs={faqs} />
-      {/* No closing product block: the hero already carries "Begin the Ritual" and the
+      {/* No closing product block: the hero already carries "See the two-step morning ritual" and the
           Essence price, and the order flow runs /ritual -> /shop -> product -> bag. The
           authorship line closes HomeFaq, so nothing sits alone above the footer. The
           signup wrapper is only rendered when the signup is on: EmailSignup returns

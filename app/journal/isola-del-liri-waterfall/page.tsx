@@ -91,7 +91,7 @@ export default function WaterfallPage() {
           href="/house"
           className="border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
         >
-          Discover the House
+          See who makes CHIAREL
         </Link>
         <Link
           href="/journal/three-skins-one-house"

@@ -146,3 +146,19 @@ describe("situation-first Day Crème, Science and House", () => {
     expect(house).toContain("made to order in small batches");
   });
 });
+
+// Owner copy brief: a CTA carries a reason, never a bare "Discover". The hero link
+// names its destination (the /ritual page) and the House links say what the page holds.
+describe("CTAs that carry a reason", () => {
+  const read = (f: string) => readFileSync(f, "utf8").replace(/\s+/g, " ");
+  it("hero link names the two-step morning ritual", () => {
+    expect(read("components/home/HomeHero.tsx")).toContain("See the two-step morning ritual");
+  });
+  it("House links say who makes CHIAREL, not 'Discover the House'", () => {
+    for (const f of ["components/home/HomeClosing.tsx", "app/journal/isola-del-liri-waterfall/page.tsx", "app/journal/three-skins-one-house/page.tsx"]) {
+      const src = read(f);
+      expect(src, f).toContain("See who makes CHIAREL");
+      expect(src, f).not.toContain("Discover the House");
+    }
+  });
+});

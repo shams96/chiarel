@@ -44,9 +44,9 @@ describe("the page leaves nothing between the FAQ and the footer", () => {
     expect(page).not.toContain("HomeFinalCta");
   });
 
-  it("the closing product block is gone; the hero keeps the single 'Begin the Ritual' action", () => {
-    expect(readFileSync("components/home/HomeClosing.tsx", "utf8")).not.toContain("Begin the Ritual");
-    expect(readFileSync("components/home/HomeHero.tsx", "utf8")).toContain("Begin the Ritual");
+  it("the closing product block is gone; the hero keeps the single 'See the two-step morning ritual' action", () => {
+    expect(readFileSync("components/home/HomeClosing.tsx", "utf8")).not.toContain("See the two-step morning ritual");
+    expect(readFileSync("components/home/HomeHero.tsx", "utf8")).toContain("See the two-step morning ritual");
   });
 
   it("renders the email-signup wrapper only when the signup is switched on", () => {
