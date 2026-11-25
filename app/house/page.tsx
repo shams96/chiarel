@@ -71,8 +71,8 @@ export default function HousePage() {
             A working woman&rsquo;s day asks a great deal of her body and her
             skin. Early starts, deadlines, screens, commutes, dry indoor air
             and too little sleep add up. We call this Modern Biological
-            Stress™. Skin shows it first: it feels tighter, looks duller and
-            lines look more defined. CHIAREL™ is made to help skin look and
+            Stress™. Skin shows it first, and by the end of the day it can feel
+            dry and uncomfortable. CHIAREL™ is made to help skin look and
             feel clear, comfortable and rested through that day. This is our
             mission, Advancing Cellular Clarity™.
           </p>

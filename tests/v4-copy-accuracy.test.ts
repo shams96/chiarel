@@ -145,6 +145,8 @@ describe("situation-first Day Crème, Science and House", () => {
     expect(house).toContain("The question started at a kitchen table, not a lab");
     expect(house).toContain("guided by pharmacist Grazia Savoriti");
     expect(house).toContain("made to order in small batches");
+    expect(house).not.toMatch(/duller|feels tighter|more defined/i);
+    expect(house).toContain("it can feel dry and uncomfortable");
   });
 });
 
