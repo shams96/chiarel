@@ -162,7 +162,7 @@ export default function RitualGuidePage() {
           href="/shop/clarity-neck-decollete-creme"
           className="border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
         >
-          Discover Clarity Neck &amp; Décolleté Crème
+          Shop Clarity Neck &amp; Décolleté Crème
         </Link>
         <Link
           href="/shop/clarity-eye-contour-concentrate"

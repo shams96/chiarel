@@ -1,4 +1,5 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { products } from "@/lib/products";
 import { quietNote } from "@/lib/quiet-notes";
@@ -160,5 +161,21 @@ describe("CTAs that carry a reason", () => {
       expect(src, f).toContain("See who makes CHIAREL");
       expect(src, f).not.toContain("Discover the House");
     }
+  });
+});
+
+describe("no bare Discover CTA in served pages", () => {
+  it("app and components carry no 'Discover …' link text", () => {
+    const hits: string[] = [];
+    const walk = (d: string) => {
+      for (const n of readdirSync(d, { withFileTypes: true })) {
+        const f = join(d, n.name);
+        if (n.isDirectory()) walk(f);
+        else if (/\.tsx$/.test(n.name) && /(?:>|cta=")\s*Discover\b/.test(readFileSync(f, "utf8"))) hits.push(f);
+      }
+    };
+    walk("app");
+    walk("components");
+    expect(hits).toEqual([]);
   });
 });

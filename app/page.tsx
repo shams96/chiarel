@@ -177,7 +177,7 @@ export default function Home() {
         headline="The daily crème of the morning ritual."
         body="Clarity Day Crème: the moisturising step of the AM ritual, finished in Italian light."
         href={productHref("terra-radiance-creme")}
-        cta="Discover Clarity Day Crème"
+        cta="Shop Clarity Day Crème"
       />
       <HomeFitGuidance />
       <HomeProof />
