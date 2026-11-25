@@ -47,7 +47,7 @@ describe("Hero", () => {
     expect([...html.matchAll(/<h1/g)]).toHaveLength(1);
     expect(html.replace(/<[^>]+>/g, "")).toContain("By three, the day shows.");
     expect(html).toContain('href="/ritual"');
-    expect(text(html)).toContain("Begin the Ritual");
+    expect(text(html)).toContain("See the two-step morning ritual");
     expect(text(html)).toMatch(/From \$[\d.]+ a day/);
     expect(text(html)).toContain("every 45 days with subscription");
   });
@@ -84,7 +84,7 @@ describe("Hero", () => {
     );
     expect(html.indexOf("</h1>")).toBeGreaterThan(-1);
     expect(html.indexOf("</h1>")).toBeLessThan(html.indexOf(HERO_PROBLEM_LINE));
-    expect(html.indexOf(HERO_PROBLEM_LINE)).toBeLessThan(html.indexOf("Begin the Ritual"));
+    expect(html.indexOf(HERO_PROBLEM_LINE)).toBeLessThan(html.indexOf("See the two-step morning ritual"));
     const house = src("app/house/page.tsx").replace(/\s+/g, " ");
     expect(house).toContain("screens, commutes, dry indoor air and too little sleep");
     expect(house).toContain("Modern Biological");

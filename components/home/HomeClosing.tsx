@@ -53,7 +53,7 @@ export function HomePhilosophy() {
               href="/house"
               className="btn-press inline-block border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
             >
-              Discover the House
+              See who makes CHIAREL
             </Link>
           </div>
         </Reveal>

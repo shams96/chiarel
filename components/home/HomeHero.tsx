@@ -48,7 +48,7 @@ export default function HomeHero() {
                 href="/ritual"
                 className="btn-press inline-flex min-h-[48px] items-center bg-ink px-10 text-eyebrow uppercase text-ivory transition hover:bg-ochre"
               >
-                Begin the Ritual
+                See the two-step morning ritual
               </Link>
             </div>
             {isPurchasable(essence) && (

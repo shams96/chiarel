@@ -52,7 +52,7 @@ export default function ThreeSkinsPage() {
           href="/house"
           className="border-b border-ochre pb-0.5 text-eyebrow uppercase text-ochre"
         >
-          Discover the House
+          See who makes CHIAREL
         </Link>
       </div>
     </div>
