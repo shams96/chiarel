@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
-import robots from "@/app/robots";
+import { robots } from "@/lib/robots";
 import { products, isPurchasable } from "@/lib/products";
 import { productJsonLd, productPageTitle, SITE_URL } from "@/lib/seo";
 

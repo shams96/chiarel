@@ -8,7 +8,7 @@ vi.mock("@/lib/dispute-monitoring", () => ({ computeDisputeRateReport }));
 vi.mock("@/lib/mail", () => ({ sendMail }));
 
 import { isStaging, rootRobotsMetadata } from "@/lib/app-env";
-import robots from "@/app/robots";
+import { robots } from "@/lib/robots";
 import sitemap from "@/app/sitemap";
 import { GET as llmsGet } from "@/app/llms.txt/route";
 import StagingBanner from "@/components/StagingBanner";

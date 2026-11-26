@@ -19,6 +19,7 @@ import { HomePhilosophy } from "@/components/home/HomeClosing";
 import {
   faqJsonLd,
   offerCatalogJsonLd,
+  productListJsonLd,
   webPageJsonLd,
   researchArticleJsonLd,
   howToJsonLd,
@@ -147,6 +148,12 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(offerCatalogJsonLd(products.filter(isPurchasable))),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(productListJsonLd(products.filter(isPurchasable))),
         }}
       />
       <script
