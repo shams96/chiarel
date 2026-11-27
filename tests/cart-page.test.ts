@@ -51,7 +51,7 @@ describe("cart page wiring", () => {
 
   it("/cart is kept out of search results and crawlers", () => {
     expect(read("app/cart/page.tsx")).toMatch(/index:\s*false/);
-    expect(read("app/robots.ts")).toMatch(/"\/cart"/);
+    expect(read("lib/robots.ts")).toMatch(/"\/cart"/);
   });
 
   it("the drawer links to the bag page", () => {

@@ -26,6 +26,23 @@ export const HOMEPAGE_PUBLISHED = "2026-08-07T00:00:00Z";
 export const HOMEPAGE_LAST_UPDATED_DISPLAY = "October 25, 2026";
 export const HOMEPAGE_PUBLISHED_DISPLAY = "August 7, 2026";
 
+// Public profiles that confirm CHIAREL is the same entity (social, directory
+// listings). Left empty until the owner supplies real, live profile URLs; the
+// schema only emits sameAs once there is at least one. Never add a guessed URL.
+export const SAME_AS: string[] = [];
+
+// Public business phone and postal address for the Organization node. Empty
+// until the owner publishes them; the fields are omitted rather than guessed.
+export const BUSINESS_PHONE = "";
+type BusinessAddress = {
+  streetAddress: string;
+  addressLocality: string;
+  addressRegion?: string;
+  postalCode: string;
+  addressCountry: string;
+};
+export const BUSINESS_ADDRESS = null as BusinessAddress | null;
+
 export const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -44,7 +61,11 @@ export const organizationJsonLd = {
     "@type": "ContactPoint",
     email: CONTACT_EMAIL,
     contactType: "customer service",
+    ...(BUSINESS_PHONE ? { telephone: BUSINESS_PHONE } : {}),
   },
+  ...(BUSINESS_PHONE ? { telephone: BUSINESS_PHONE } : {}),
+  ...(BUSINESS_ADDRESS ? { address: { "@type": "PostalAddress", ...BUSINESS_ADDRESS } } : {}),
+  ...(SAME_AS.length ? { sameAs: SAME_AS } : {}),
 };
 
 export const formulatorJsonLd = {
@@ -167,6 +188,36 @@ export function offerCatalogJsonLd(
       areaServed: "US",
       seller: { "@type": "Organization", name: "CHIAREL", url: SITE_URL },
       itemOffered: { "@type": "Product", name: p.name },
+    })),
+  };
+}
+
+/** Products with priced Offers, for pages that show prices (the homepage). */
+export function productListJsonLd(
+  products: { slug: string; name: string; descriptor: string; price: { oneTime: number } }[]
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "CHIAREL products",
+    itemListElement: products.map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "Product",
+        name: p.name,
+        description: p.descriptor,
+        url: `${SITE_URL}${productHref(p.slug)}`,
+        brand: { "@type": "Brand", name: "CHIAREL" },
+        offers: {
+          "@type": "Offer",
+          url: `${SITE_URL}${productHref(p.slug)}`,
+          priceCurrency: "USD",
+          price: p.price.oneTime,
+          availability: "https://schema.org/InStock",
+          itemCondition: "https://schema.org/NewCondition",
+        },
+      },
     })),
   };
 }

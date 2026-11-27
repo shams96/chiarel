@@ -13,6 +13,8 @@ import Analytics from "@/components/Analytics";
 import { rootRobotsMetadata } from "@/lib/app-env";
 import { SITE_URL, SITE_NAME, organizationJsonLd } from "@/lib/seo";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
+import WebMcpTools from "@/components/WebMcpTools";
+import { listAgentProducts } from "@/lib/agent-catalog";
 
 // Next's default static-page cache header (s-maxage=31536000, one year) is
 // safe on Vercel because deploys auto-purge that cache. On Hostinger's CDN
@@ -85,6 +87,7 @@ export default function RootLayout({
         />
       </head>
       <body className={serif.variable}>
+        <WebMcpTools catalog={listAgentProducts()} />
         <CartProvider>
         <a
           href="#main"

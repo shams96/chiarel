@@ -9,12 +9,42 @@ const CART_COOKIE = "chiarel_cart_id";
 // code running in the same request, so the first add-to-cart used to create an
 // orphan cart nothing pointed at. The new id is also placed on the forwarded
 // request so the route handler sees the very cookie the browser will receive.
+// RFC 8288 Link header on the homepage: the Markdown alternate and the sitemap.
+const HOME_LINK_HEADER =
+  '</llms.txt>; rel="alternate"; type="text/markdown", </sitemap.xml>; rel="sitemap"';
+
+function prefersMarkdown(accept: string | null): boolean {
+  if (!accept) return false;
+  const q = (type: string) => {
+    const m = accept.split(",").map((s) => s.trim()).find((s) => s.split(";")[0].trim().toLowerCase() === type);
+    if (!m) return -1;
+    const qv = /;\s*q=([0-9.]+)/i.exec(m);
+    return qv ? parseFloat(qv[1]) : 1;
+  };
+  const md = q("text/markdown");
+  return md > 0 && md >= q("text/html");
+}
+
 export function middleware(request: NextRequest) {
   const mintsCartCookie =
     !request.cookies.get(CART_COOKIE) &&
     request.method === "POST" &&
     request.nextUrl.pathname === "/api/cart";
   const newCartId = mintsCartCookie ? crypto.randomUUID() : null;
+
+  // Agents that ask for Markdown get the site overview instead of the HTML
+  // homepage. Only an explicit text/markdown preference counts, so browsers
+  // (which send text/html first) are unaffected.
+  if (
+    request.nextUrl.pathname === "/" &&
+    (request.method === "GET" || request.method === "HEAD") &&
+    prefersMarkdown(request.headers.get("accept"))
+  ) {
+    const md = NextResponse.rewrite(new URL("/api/markdown", request.url));
+    md.headers.set("Vary", "Accept");
+    md.headers.set("Link", HOME_LINK_HEADER);
+    return md;
+  }
 
   const requestHeaders = new Headers(request.headers);
   if (newCartId) {
@@ -72,6 +102,12 @@ export function middleware(request: NextRequest) {
       "Strict-Transport-Security",
       "max-age=63072000; includeSubDomains"
     );
+  }
+
+  if (request.nextUrl.pathname === "/") {
+    response.headers.set("Link", HOME_LINK_HEADER);
+    // The homepage has two representations (HTML, Markdown); caches must key on Accept.
+    response.headers.set("Vary", "Accept");
   }
 
   if (newCartId) {
